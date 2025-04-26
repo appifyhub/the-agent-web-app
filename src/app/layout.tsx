@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { ThemeProvider } from "@/components/providers/theme-provider";
 
 const playfairDisplay = localFont({
   src: "./fonts/PlayfairDisplay-Variable.woff2",
@@ -32,9 +31,7 @@ export default function RootLayout({
         className={`${heebo.variable} ${playfairDisplay.variable} antialiased`}
         suppressHydrationWarning
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {children}
-        </ThemeProvider>
+        {children}
       </body>
     </html>
   );
