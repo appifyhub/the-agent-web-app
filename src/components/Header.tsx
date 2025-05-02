@@ -1,4 +1,5 @@
 import React from "react";
+import "./header.css";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,7 +8,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { ChevronDownIcon, CheckIcon } from "lucide-react";
-import { Language } from "@/lib/utils";
+import { cn, Language } from "@/lib/utils";
+
 interface HeaderProps {
   boldSectionContent: string;
   regularSectionContent: string;
@@ -26,56 +28,67 @@ const Header: React.FC<HeaderProps> = ({
   onLangChange = () => {},
 }) => {
   return (
-    <header className="flex items-center justify-between p-4 bg-background border-b sticky top-0 z-10">
-      <div className="flex items-center">
-        <img
-          src={iconUrl}
-          alt="Page icon"
-          className="h-8 w-8 rounded-full mr-3"
-        />
-        <h1
-          className="text-lg font-semibold truncate"
-          title={`${boldSectionContent} · ${regularSectionContent}`}
-        >
-          <span className="font-bold mr-2">{boldSectionContent}</span>
-          <span className="mr-2">·</span>
-          {regularSectionContent}
-        </h1>
+    <div className="header-gradient w-screen relative">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-10 pt-9 pb-20 md:pb-30 text-white">
+        <div className="flex items-center overflow-hidden">
+          <img src={iconUrl} alt="Page icon" className="h-8 w-8" />
+          <h1
+            className="flex items-baseline px-4 space-x-4 overflow-hidden"
+            title={`${boldSectionContent} // ${regularSectionContent}`}
+          >
+            <span className="font-playfair font-bold text-2xl text-accent-strong whitespace-nowrap flex-shrink-0">
+              {boldSectionContent}
+            </span>
+            <span className="text-muted-foreground font-playfair text-xl whitespace-nowrap flex-shrink-0">
+              //
+            </span>
+            <span className="text-pink-100 font-light text-xl min-w-0 truncate">
+              {regularSectionContent}
+            </span>
+          </h1>
+        </div>
+        <div className="flex items-center space-x-4">
+          <DropdownMenu>
+            <DropdownMenuTrigger
+              asChild
+              className="w-auto px-3 rounded-full text-xl cursor-pointer"
+            >
+              <Button variant="outline" size="icon" className="glass">
+                {currentLanguage.flagEmoji}
+                <ChevronDownIcon className="h-4 w-4 ml-1" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              align="end"
+              className="p-4 glass-dark-static rounded-2xl"
+            >
+              {supportedLanguages.map((lang) => (
+                <DropdownMenuItem
+                  key={lang.isoCode}
+                  onClick={() => onLangChange?.(lang.isoCode)}
+                  className={cn(
+                    "cursor-pointer py-4 px-4",
+                    lang.isoCode === currentLanguage.isoCode
+                      ? "bg-accent/70"
+                      : ""
+                  )}
+                  disabled={lang.isoCode === currentLanguage.isoCode}
+                >
+                  {lang.flagEmoji}
+                  <span className="font-semibold">{lang.localizedName}</span>
+                  <span className="ml-2 text-xs text-muted-foreground">
+                    ({lang.defaultName})
+                  </span>
+                  {lang.isoCode === currentLanguage.isoCode && (
+                    <CheckIcon className="ml-2 h-4 w-4" />
+                  )}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
-      <div className="flex items-center space-x-4">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild className="w-auto px-3 rounded-full">
-            <Button variant="outline" size="icon">
-              {currentLanguage.flagEmoji}
-              <ChevronDownIcon className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="p-4">
-            {supportedLanguages.map((lang) => (
-              <DropdownMenuItem
-                key={lang.isoCode}
-                onClick={() => onLangChange?.(lang.isoCode)}
-                className={
-                  lang.isoCode === currentLanguage.isoCode
-                    ? "bg-accent/70 py-4 px-4"
-                    : "py-4 px-4"
-                }
-                disabled={lang.isoCode === currentLanguage.isoCode}
-              >
-                {lang.flagEmoji}
-                <span className="font-semibold">{lang.defaultName}</span>{" "}
-                <span className="ml-2 text-xs text-muted-foreground">
-                  ({lang.localizedName})
-                </span>
-                {lang.isoCode === currentLanguage.isoCode && (
-                  <CheckIcon className="ml-2 h-4 w-4" />
-                )}
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
-    </header>
+    </div>
   );
 };
 
