@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Timer } from "lucide-react"; // Assuming lucide-react is installed
-import { cn } from "@/lib/utils"; // For conditional classes
+import { cn } from "@/lib/utils";
 
 interface CountdownTimerProps {
-  expiryTimestamp: number; // Unix timestamp in seconds
-  onExpire?: () => void; // Optional callback when timer reaches zero
+  expiryTimestamp: number;
+  onExpire?: () => void;
 }
 
 const CountdownTimer: React.FC<CountdownTimerProps> = ({
@@ -12,31 +11,35 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({
   onExpire,
 }) => {
   const calculateTimeLeft = useCallback(() => {
-    const now = Math.floor(Date.now() / 1000); // Current time in seconds
-    const difference = expiryTimestamp - now;
-    let timeLeft = { minutes: 0, seconds: 0 };
+    const now = Math.floor(Date.now() / 1000);
+    const deltaSeconds = expiryTimestamp - now;
+    let timeLeft = { days: 0, hours: 0, minutes: 0, seconds: 0 };
 
-    if (difference > 0) {
+    if (deltaSeconds > 0) {
       timeLeft = {
-        minutes: Math.floor(difference / 60),
-        seconds: Math.floor(difference % 60),
+        days: Math.floor(deltaSeconds / (60 * 60 * 24)),
+        hours: Math.floor((deltaSeconds % (60 * 60 * 24)) / (60 * 60)),
+        minutes: Math.floor((deltaSeconds % (60 * 60)) / 60),
+        seconds: Math.floor(deltaSeconds % 60),
       };
     }
-    return { timeLeft, difference };
-  }, [expiryTimestamp]); // Dependency is expiryTimestamp
+    return { timeLeft, deltaSeconds };
+  }, [expiryTimestamp]);
 
-  const [{ timeLeft, difference }, setTimeLeft] = useState(calculateTimeLeft());
-  const [isExpired, setIsExpired] = useState(difference <= 0);
+  const [{ timeLeft, deltaSeconds }, setTimeLeft] = useState(
+    calculateTimeLeft()
+  );
+  const [isExpired, setIsExpired] = useState(deltaSeconds <= 0);
 
   useEffect(() => {
-    if (isExpired) return; // Don't start interval if already expired
+    if (isExpired) return;
 
     const timer = setInterval(() => {
-      const { timeLeft: newTimeLeft, difference: newDifference } =
+      const { timeLeft: newTimeLeft, deltaSeconds: newDeltaSeconds } =
         calculateTimeLeft();
-      setTimeLeft({ timeLeft: newTimeLeft, difference: newDifference });
+      setTimeLeft({ timeLeft: newTimeLeft, deltaSeconds: newDeltaSeconds });
 
-      if (newDifference <= 0) {
+      if (newDeltaSeconds <= 0) {
         clearInterval(timer);
         setIsExpired(true);
         if (onExpire) {
@@ -45,31 +48,48 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({
       }
     }, 1000);
 
-    // Clear interval on component unmount
     return () => clearInterval(timer);
-  }, [expiryTimestamp, onExpire, isExpired, calculateTimeLeft]); // Rerun effect if expiry or callback changes, or if expired status changes
+  }, [expiryTimestamp, onExpire, isExpired, calculateTimeLeft]);
 
-  const formatTime = (time: number): string => {
-    return String(time).padStart(2, "0");
+  const formatCountdown = () => {
+    const formatTime = (time: number): string => {
+      return String(time).padStart(2, "0");
+    };
+
+    const { days, hours, minutes, seconds } = timeLeft;
+    const parts = [];
+    if (days > 0) {
+      parts.push(`☀️${days}\u00A0`);
+    }
+    parts.push("⏱️");
+    if (hours > 0) {
+      parts.push(formatTime(hours));
+    }
+    if (minutes > 0) {
+      if (hours > 0) {
+        parts.push(":");
+      }
+      parts.push(formatTime(minutes));
+    }
+    if ((hours > 0 || minutes > 0) && seconds >= 0) {
+      parts.push(":");
+    }
+    parts.push(formatTime(seconds));
+    return parts.join(" ").replace(/ : /g, ":");
   };
-
-  const timeColor = difference < 60 ? "text-destructive" : "text-foreground"; // Red if less than 1 min left
 
   return (
     <div
       className={cn(
-        "flex items-center space-x-2 text-sm font-medium",
-        timeColor
+        "flex items-center justify-center px-6 py-3 text-[1.05rem] border-[0.5px] rounded-full",
+        deltaSeconds <= 60
+          ? "border-destructive text-destructive"
+          : deltaSeconds <= 180
+          ? "border-orange-300 text-orange-300"
+          : "border-muted text-muted-f  "
       )}
     >
-      <Timer className="h-4 w-4" />
-      {isExpired ? (
-        <span>Expired</span>
-      ) : (
-        <span>
-          {formatTime(timeLeft.minutes)}:{formatTime(timeLeft.seconds)}
-        </span>
-      )}
+      {isExpired ? <span>⛓️‍💥</span> : <span>{formatCountdown()}</span>}
     </div>
   );
 };

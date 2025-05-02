@@ -1,0 +1,10 @@
+.header-gradient {
+  background: linear-gradient(
+    to bottom,
+    oklch(0.29 0.0641 294.35) 0%,
+    transparent 100%
+  );
+  width: 100%;
+  position: relative;
+  z-index: 10;
+}

@@ -192,7 +192,7 @@
   background: linear-gradient(
     to bottom right,
     oklch(0.2 0.0543 262.66) 0%,
-    oklch(0.3 0.0543 262.66) 100%
+    oklch(0.25 0.0543 262.66) 100%
   );
 }
 
@@ -203,7 +203,7 @@
   background: linear-gradient(
     to bottom right,
     oklch(0.2 0.0543 262.66) 0%,
-    oklch(0.3 0.0543 262.66) 100%
+    oklch(0.25 0.0543 262.66) 100%
   ) !important;
 }
 
