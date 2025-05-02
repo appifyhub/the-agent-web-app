@@ -1,7 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@100..900&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+@tailwind utilities;
+
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -21,6 +25,7 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-border: var(--border);
@@ -42,6 +47,8 @@
 }
 
 :root {
+  --font-heebo: "Heebo", "SF Pro Display", "Arial", sans-serif;
+  --font-playfair: "Playfair Display", "Georgia", "Times New Roman", serif;
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.13 0.028 261.692);
@@ -55,7 +62,8 @@
   --secondary-foreground: oklch(0.21 0.034 264.665);
   --muted: oklch(0.967 0.003 264.542);
   --muted-foreground: oklch(0.551 0.027 264.364);
-  --accent: oklch(0.967 0.003 264.542);
+  --accent: oklch(0.4 0.1258 14.29);
+  --accent-strong: oklch(0.66 0.2174 17.05);
   --accent-foreground: oklch(0.21 0.034 264.665);
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.928 0.006 264.531);
@@ -77,11 +85,11 @@
 }
 
 .dark {
-  --background: oklch(0.13 0.028 261.692);
+  --background: oklch(0.15 0.0337 258.28);
   --foreground: oklch(0.985 0.002 247.839);
-  --card: oklch(0.21 0.034 264.665);
+  --card: oklch(0.2 0.0337 258.28);
   --card-foreground: oklch(0.985 0.002 247.839);
-  --popover: oklch(0.21 0.034 264.665);
+  --popover: oklch(0.2 0.0337 258.28);
   --popover-foreground: oklch(0.985 0.002 247.839);
   --primary: oklch(0.928 0.006 264.531);
   --primary-foreground: oklch(0.21 0.034 264.665);
@@ -89,7 +97,8 @@
   --secondary-foreground: oklch(0.985 0.002 247.839);
   --muted: oklch(0.278 0.033 256.848);
   --muted-foreground: oklch(0.707 0.022 261.325);
-  --accent: oklch(0.278 0.033 256.848);
+  --accent: oklch(0.4 0.2174 17.05 / 30%);
+  --accent-strong: oklch(0.7 0.2174 17.05);
   --accent-foreground: oklch(0.985 0.002 247.839);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
@@ -110,12 +119,100 @@
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
 
+@layer typography {
+  .font-playfair {
+    font-family: var(--font-playfair);
+  }
+
+  .font-heebo {
+    font-family: var(--font-heebo);
+  }
+}
+
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground text-lg;
+
+    background: linear-gradient(
+      to bottom right,
+      var(--background) 0%,
+      oklch(0.3 0.0641 271.06) 100%
+    );
   }
+}
+
+#root {
+  @apply p-0 m-0 w-full h-full;
+
+  font-family: var(--font-heebo);
+}
+
+.text-accent-strong {
+  color: var(--color-accent-strong);
+}
+
+.glass {
+  @apply transition-all duration-200 ease-in-out;
+
+  border-color: rgb(255 255 255 / 7%);
+  background: linear-gradient(
+    to bottom right,
+    rgb(255 255 255 / 4%) 0%,
+    rgb(255 255 255 / 8%) 100%
+  );
+}
+
+.glass-static {
+  @apply transition-all duration-200 ease-in-out;
+
+  border-color: rgb(255 255 255 / 7%) !important;
+  background: linear-gradient(
+    to bottom right,
+    rgb(255 255 255 / 4%) 0%,
+    rgb(255 255 255 / 8%) 100%
+  ) !important;
+}
+
+.glass:hover {
+  background: linear-gradient(
+    to bottom right,
+    rgb(255 255 255 / 5%) 0%,
+    rgb(255 255 255 / 10%) 100%
+  );
+}
+
+.glass-dark {
+  @apply transition-all duration-200 ease-in-out;
+
+  border-color: rgb(255 255 255 / 7%);
+  background: linear-gradient(
+    to bottom right,
+    oklch(0.2 0.0543 262.66) 0%,
+    oklch(0.3 0.0543 262.66) 100%
+  );
+}
+
+.glass-dark-static {
+  @apply transition-all duration-200 ease-in-out;
+
+  border-color: rgb(255 255 255 / 9%) !important;
+  background: linear-gradient(
+    to bottom right,
+    oklch(0.2 0.0543 262.66) 0%,
+    oklch(0.3 0.0543 262.66) 100%
+  ) !important;
+}
+
+.glass-dark:hover {
+  @apply transition-all duration-200 ease-in-out;
+
+  background: linear-gradient(
+    to bottom right,
+    oklch(0.22 0.0543 262.66) 0%,
+    oklch(0.33 0.0543 262.66) 100%
+  );
 }
