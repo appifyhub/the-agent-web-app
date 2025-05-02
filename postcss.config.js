@@ -9,7 +9,7 @@ import postcssCustomProperties from "postcss-custom-properties";
 
 export default {
   plugins: [
-    tailwindcssPlugin,
+    tailwindcssPlugin({ config: "./tailwind.config.mjs" }),
     autoprefixer,
     postcssImport,
     postcssNesting,

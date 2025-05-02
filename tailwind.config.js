@@ -1,15 +1,14 @@
-/** @type {import('tailwindcss').Config} */
+import twAnimate from "tw-animate-css";
 export default {
   darkMode: "class",
   content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
   theme: {
     extend: {
-      fontSize: {
-        base: "1.2rem",
-        lg: "1.25rem",
-        xl: "1.5rem",
+      fontFamily: {
+        playfair: ["Playfair Display", "serif"],
+        heebo: ["Heebo", "sans-serif"],
       },
     },
   },
-  plugins: [],
+  plugins: [twAnimate],
 };
