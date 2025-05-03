@@ -13,7 +13,7 @@ export const LLM_LANGUAGES: Language[] = [
     flagEmoji: "🇷🇸",
   },
   {
-    isoCode: "sq",
+    isoCode: "al",
     defaultName: "Albanian",
     localizedName: "Shqip",
     flagEmoji: "🇦🇱",
@@ -49,13 +49,13 @@ export const LLM_LANGUAGES: Language[] = [
     flagEmoji: "🇧🇩",
   },
   {
-    isoCode: "bs",
+    isoCode: "ba",
     defaultName: "Bosnian",
     localizedName: "Bosanski",
     flagEmoji: "🇧🇦",
   },
   {
-    isoCode: "pt-BR",
+    isoCode: "br",
     defaultName: "Brazilian Portuguese",
     localizedName: "Português do Brasil",
     flagEmoji: "🇧🇷",
@@ -107,12 +107,6 @@ export const LLM_LANGUAGES: Language[] = [
     defaultName: "Estonian",
     localizedName: "Eesti",
     flagEmoji: "🇪🇪",
-  },
-  {
-    isoCode: "fo",
-    defaultName: "Faroese",
-    localizedName: "Føroyskt",
-    flagEmoji: "🇫🇴",
   },
   {
     isoCode: "fi",
@@ -229,7 +223,7 @@ export const LLM_LANGUAGES: Language[] = [
     flagEmoji: "🇲🇹",
   },
   {
-    isoCode: "mo",
+    isoCode: "md",
     defaultName: "Moldovan",
     localizedName: "Moldovenească",
     flagEmoji: "🇲🇩",
@@ -241,7 +235,7 @@ export const LLM_LANGUAGES: Language[] = [
     flagEmoji: "🇲🇳",
   },
   {
-    isoCode: "cnr",
+    isoCode: "me",
     defaultName: "Montenegrin",
     localizedName: "Crnogorski",
     flagEmoji: "🇲🇪",

@@ -18,6 +18,12 @@ import {
   INTERFACE_LANGUAGES,
   LLM_LANGUAGES,
 } from "@/lib/languages";
+import { toast } from "sonner";
+import {
+  fetchChatSettings,
+  saveChatSettings,
+  ChatSettings,
+} from "@/services/ChatSettingsService";
 
 interface DecodedToken {
   aud: string; // display name
@@ -37,14 +43,15 @@ const ChatSettingsPage: React.FC = () => {
     chat_id: string;
   }>();
 
+  const [error, setError] = useState<string | null>(null);
   const [searchParams] = useSearchParams();
   const [rawToken, setRawToken] = useState<string | null>(null);
   const [decodedToken, setDecodedToken] = useState<DecodedToken | null>(null);
   const [isLoadingState, setIsLoadingState] = useState<boolean>(false);
-  const [llmLang, setLlmLang] = useState<string | undefined>(undefined);
-  const [responseChance, setResponseChance] = useState<number | string>("");
-  const [isPrivate, setIsPrivate] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  const [chatSettings, setChatSettings] = useState<ChatSettings | null>(null);
+  const [remoteSettings, setRemoteSettings] = useState<ChatSettings | null>(
+    null
+  );
 
   const handleTokenExpired = () => {
     console.warn("Settings token expired");
@@ -108,29 +115,14 @@ const ChatSettingsPage: React.FC = () => {
       setError(null);
       try {
         const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
-        const headers = {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${rawToken}`,
-        };
-        const response = await fetch(`${apiBaseUrl}/settings/chat/${chat_id}`, {
-          headers: headers,
+        const data = await fetchChatSettings({
+          apiBaseUrl,
+          chat_id,
+          rawToken,
         });
-
-        if (!response.ok) {
-          console.error("Response was not ok!", response);
-          throw new Error(
-            "Network error!" +
-              `\n\tStatus: ${response.status}` +
-              `\n\tError: ${response.statusText}`
-          );
-        }
-
-        const data = await response.json();
         console.info("Fetched settings!", data);
-
-        setLlmLang(data.language_iso_code || undefined);
-        setResponseChance(String(data.reply_chance_percent));
-        setIsPrivate(data.is_private);
+        setChatSettings(data);
+        setRemoteSettings(data);
       } catch (fetchError) {
         console.error("Error fetching settings!", fetchError);
         setError("Failed to load the settings.");
@@ -138,9 +130,39 @@ const ChatSettingsPage: React.FC = () => {
         setIsLoadingState(false);
       }
     };
-
     fetchSettings();
-  }, [decodedToken, chat_id, rawToken]);
+  }, [decodedToken, rawToken, chat_id]);
+
+  const isSettingsChanged = !!(
+    chatSettings &&
+    remoteSettings &&
+    (chatSettings.language_name !== remoteSettings.language_name ||
+      chatSettings.language_iso_code !== remoteSettings.language_iso_code ||
+      chatSettings.reply_chance_percent !== remoteSettings.reply_chance_percent)
+  );
+
+  const handleSave = async () => {
+    if (!chatSettings || !remoteSettings) return;
+    if (!chat_id || !rawToken) return;
+    setIsLoadingState(true);
+    setError(null);
+    try {
+      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+      await saveChatSettings({
+        apiBaseUrl,
+        chat_id,
+        rawToken,
+        chatSettings,
+      });
+      setRemoteSettings(chatSettings);
+      toast("Saved!");
+    } catch (saveError) {
+      console.error("Error saving settings!", saveError);
+      setError("Failed to save settings.");
+    } finally {
+      setIsLoadingState(false);
+    }
+  };
 
   if (!decodedToken) {
     console.info("Rendering the loading state!");
@@ -160,8 +182,7 @@ const ChatSettingsPage: React.FC = () => {
   const currentInterfaceLanguage =
     INTERFACE_LANGUAGES.find((lang) => lang.isoCode === lang_iso_code) ||
     DEFAULT_LANGUAGE;
-  const currentLanguage =
-    LLM_LANGUAGES.find((lang) => lang.isoCode === llmLang) || undefined;
+
   const itemizedToken = [
     { label: "Chat role", value: decodedToken.role, icon: User },
     decodedToken.telegram_username && {
@@ -213,11 +234,12 @@ const ChatSettingsPage: React.FC = () => {
               />
               {/* TODO: Add form handling logic to Button onClick */}
               <Button
-                disabled={!!error}
                 className={cn(
                   "bg-primary hover:bg-purple-200 text-primary-foreground hover:text-zinc-900",
                   "px-6 py-6 text-[1.05rem] rounded-full cursor-pointer"
                 )}
+                disabled={!isSettingsChanged || isLoadingState || !!error}
+                onClick={handleSave}
               >
                 Save
               </Button>
@@ -238,10 +260,22 @@ const ChatSettingsPage: React.FC = () => {
                     {/* The Preferred Language Dropdown */}
                     <SettingSelector
                       label={`${botName} tries to reply using:`}
-                      value={currentLanguage?.isoCode || undefined}
-                      onChange={(val) =>
-                        setLlmLang(val === "" ? undefined : val)
-                      }
+                      value={chatSettings?.language_iso_code || undefined}
+                      onChange={(val) => {
+                        const newLanguageIsoCode = val;
+                        const newLanguageName = LLM_LANGUAGES.find(
+                          (lang) => lang.isoCode === newLanguageIsoCode
+                        )?.defaultName as string;
+                        setChatSettings((prev) =>
+                          prev
+                            ? {
+                                ...prev,
+                                language_iso_code: newLanguageIsoCode,
+                                language_name: newLanguageName,
+                              }
+                            : prev
+                        );
+                      }}
                       options={LLM_LANGUAGES.map((lang) => ({
                         value: lang.isoCode,
                         label: (
@@ -253,7 +287,8 @@ const ChatSettingsPage: React.FC = () => {
                             </span>
                           </div>
                         ),
-                        disabled: lang.isoCode === currentLanguage?.isoCode,
+                        disabled:
+                          lang.isoCode === chatSettings?.language_iso_code,
                       }))}
                       disabled={!!error}
                       placeholder={error ? "—" : "Select Language"}
@@ -261,9 +296,18 @@ const ChatSettingsPage: React.FC = () => {
 
                     {/* The Spontaneous Interaction Chance Dropdown */}
                     <SettingSelector
-                      label={`${botName} replies without being asked:`}
-                      value={String(responseChance) || undefined}
-                      onChange={setResponseChance}
+                      label={`${botName} replies without being tagged:`}
+                      value={
+                        String(chatSettings?.reply_chance_percent ?? "") ||
+                        undefined
+                      }
+                      onChange={(val) =>
+                        setChatSettings((prev) =>
+                          prev
+                            ? { ...prev, reply_chance_percent: Number(val) }
+                            : prev
+                        )
+                      }
                       options={Array.from({ length: 11 }, (_, i) => ({
                         value: String(i * 10),
                         label:
@@ -272,9 +316,11 @@ const ChatSettingsPage: React.FC = () => {
                             : i === 10
                             ? "Always"
                             : `${i * 10}% of the time`,
-                        disabled: String(i * 10) === String(responseChance),
+                        disabled:
+                          String(i * 10) ===
+                          String(chatSettings?.reply_chance_percent ?? ""),
                       }))}
-                      disabled={!!error || isPrivate}
+                      disabled={!!error || chatSettings?.is_private}
                       placeholder={error ? "—" : "Select Chance"}
                       className="mt-9"
                     />
