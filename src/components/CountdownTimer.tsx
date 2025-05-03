@@ -59,7 +59,7 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({
     const { days, hours, minutes, seconds } = timeLeft;
     const parts = [];
     if (days > 0) {
-      parts.push(`☀️${days}\u00A0`);
+      parts.push(`☀️ ${days}\u00A0`);
     }
     parts.push("⏱️");
     if (hours > 0) {
@@ -86,7 +86,7 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({
           ? "border-destructive text-destructive"
           : deltaSeconds <= 180
           ? "border-orange-300 text-orange-300"
-          : "border-muted text-muted-f  "
+          : "border-muted-foreground text-foreground"
       )}
     >
       {isExpired ? <span>⛓️‍💥</span> : <span>{formatCountdown()}</span>}

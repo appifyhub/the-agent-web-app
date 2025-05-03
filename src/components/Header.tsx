@@ -33,7 +33,7 @@ const Header: React.FC<HeaderProps> = ({
         <div className="flex items-center overflow-hidden">
           <img src={iconUrl} alt="Page icon" className="h-8 w-8" />
           <h1
-            className="flex items-baseline px-4 space-x-4 overflow-hidden"
+            className="flex items-baseline px-2 md:px-4 space-x-2 md:space-x-4 overflow-hidden"
             title={`${boldSectionContent} // ${regularSectionContent}`}
           >
             <span className="font-playfair font-bold text-2xl text-accent-strong whitespace-nowrap flex-shrink-0">

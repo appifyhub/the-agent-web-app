@@ -1,7 +1,7 @@
 .header-gradient {
   background: linear-gradient(
     to bottom,
-    oklch(0.29 0.0641 294.35) 0%,
+    oklch(0.25 0.0641 294.35) 0%,
     transparent 100%
   );
   width: 100%;
