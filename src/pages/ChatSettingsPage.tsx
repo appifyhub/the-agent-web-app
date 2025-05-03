@@ -3,38 +3,32 @@ import { useParams, useSearchParams } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { cn, TokenExpiredError, TokenMissingError } from "@/lib/utils";
+import { User, Hash, AtSign } from "lucide-react";
+import logoVector from "@/assets/logo-vector.svg";
+import Header from "@/components/Header";
+import CountdownTimer from "@/components/CountdownTimer";
+import TokenDataSheet from "@/components/TokenDataSheet";
+import SettingSelector from "@/components/SettingSelector";
 import {
   DEFAULT_LANGUAGE,
   INTERFACE_LANGUAGES,
   LLM_LANGUAGES,
 } from "@/lib/languages";
-import logoVector from "@/assets/logo-vector.svg";
-import Header from "@/components/Header";
-import CountdownTimer from "@/components/CountdownTimer";
 
-// Define the expected structure of the decoded JWT payload
 interface DecodedToken {
-  iss: string;
-  sub: string;
-  aud: string;
-  role: string;
-  chat_id: number | string;
-  telegram_user_id: number | string;
-  telegram_username?: string;
-  exp: number;
-  iat: number;
+  aud: string; // display name
+  iss: string; // bot name
+  sub: string; // profile ID
+  role: string; // chat role
+  chat_id: number | string; // chat ID
+  telegram_user_id: number | string; // TID
+  telegram_username?: string; // TUN
+  exp: number; // expiry timestamp
+  iat: number; // issue timestamp
 }
 
 const ChatSettingsPage: React.FC = () => {
@@ -47,10 +41,9 @@ const ChatSettingsPage: React.FC = () => {
   const [rawToken, setRawToken] = useState<string | null>(null);
   const [decodedToken, setDecodedToken] = useState<DecodedToken | null>(null);
   const [isLoadingState, setIsLoadingState] = useState<boolean>(false);
-  const [languageChoice, setLanguageChoice] = useState<string | undefined>(
-    undefined
-  );
+  const [llmLang, setLlmLang] = useState<string | undefined>(undefined);
   const [responseChance, setResponseChance] = useState<number | string>("");
+  const [isPrivate, setIsPrivate] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   const handleTokenExpired = () => {
@@ -135,8 +128,9 @@ const ChatSettingsPage: React.FC = () => {
         const data = await response.json();
         console.info("Fetched settings!", data);
 
-        setLanguageChoice(data.language_iso_code || undefined);
+        setLlmLang(data.language_iso_code || undefined);
         setResponseChance(String(data.reply_chance_percent));
+        setIsPrivate(data.is_private);
       } catch (fetchError) {
         console.error("Error fetching settings!", fetchError);
         setError("Failed to load the settings.");
@@ -167,7 +161,25 @@ const ChatSettingsPage: React.FC = () => {
     INTERFACE_LANGUAGES.find((lang) => lang.isoCode === lang_iso_code) ||
     DEFAULT_LANGUAGE;
   const currentLanguage =
-    LLM_LANGUAGES.find((lang) => lang.isoCode === languageChoice) || undefined;
+    LLM_LANGUAGES.find((lang) => lang.isoCode === llmLang) || undefined;
+  const itemizedToken = [
+    { label: "Chat role", value: decodedToken.role, icon: User },
+    decodedToken.telegram_username && {
+      label: "Telegram Username",
+      value: decodedToken.telegram_username,
+      icon: AtSign,
+    },
+    {
+      label: "Telegram User ID",
+      value: decodedToken.telegram_user_id,
+      icon: Hash,
+    },
+    { label: "Profile ID", value: decodedToken.sub, icon: Hash },
+    { label: "Chat ID", value: decodedToken.chat_id, icon: Hash },
+  ].filter(
+    (item): item is import("@/components/TokenDataSheet").TokenDataSheetItem =>
+      !!item
+  );
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -212,7 +224,7 @@ const ChatSettingsPage: React.FC = () => {
             </div>
 
             {/* The Settings card */}
-            <Card className="mt-3.5 mb-4.5 md:px-6 px-2 md:py-12 py-8 glass-static rounded-3xl">
+            <Card className="mt-4.5 mb-4.5 md:px-6 px-2 md:py-12 py-8 glass-static rounded-3xl">
               <CardContent className="space-y-4">
                 {isLoadingState ? (
                   <div className="space-y-4">
@@ -224,117 +236,62 @@ const ChatSettingsPage: React.FC = () => {
                 ) : (
                   <>
                     {/* The Preferred Language Dropdown */}
-                    <div className="space-y-4">
-                      <Label
-                        htmlFor="language-select"
-                        className="text-base font-light"
-                      >
-                        {botName} tries to reply using:
-                      </Label>
-                      <Select
-                        value={currentLanguage?.isoCode || undefined}
-                        disabled={!!error}
-                        onValueChange={(val) =>
-                          setLanguageChoice(val === "" ? undefined : val)
-                        }
-                      >
-                        <SelectTrigger
-                          id="language-select"
-                          className="py-6 px-6 w-full sm:w-xs text-[1.05rem] glass overflow-hidden rounded-full cursor-pointer"
-                        >
-                          <SelectValue
-                            placeholder={error ? "—" : "Select Language"}
-                          />
-                        </SelectTrigger>
-                        <SelectContent className="p-4 glass-dark-static rounded-2xl">
-                          {LLM_LANGUAGES.map((lang) => (
-                            <SelectItem
-                              key={lang.isoCode}
-                              value={lang.isoCode}
-                              disabled={
-                                lang.isoCode === currentLanguage?.isoCode
-                              }
-                              className={cn(
-                                "py-4 px-4 cursor-pointer",
-                                lang.isoCode === currentLanguage?.isoCode
-                                  ? "bg-accent/70"
-                                  : ""
-                              )}
-                            >
-                              <div className="flex items-center gap-2">
-                                <span>{lang.flagEmoji}</span>
-                                <span>{lang.localizedName}</span>
-                                <span className="text-muted-foreground">
-                                  ({lang.defaultName})
-                                </span>
-                              </div>
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
+                    <SettingSelector
+                      label={`${botName} tries to reply using:`}
+                      value={currentLanguage?.isoCode || undefined}
+                      onChange={(val) =>
+                        setLlmLang(val === "" ? undefined : val)
+                      }
+                      options={LLM_LANGUAGES.map((lang) => ({
+                        value: lang.isoCode,
+                        label: (
+                          <div className="flex items-center gap-2">
+                            <span>{lang.flagEmoji}</span>
+                            <span>{lang.localizedName}</span>
+                            <span className="text-muted-foreground">
+                              ({lang.defaultName})
+                            </span>
+                          </div>
+                        ),
+                        disabled: lang.isoCode === currentLanguage?.isoCode,
+                      }))}
+                      disabled={!!error}
+                      placeholder={error ? "—" : "Select Language"}
+                    />
 
                     {/* The Spontaneous Interaction Chance Dropdown */}
-                    <div className="space-y-4 mt-9">
-                      <Label
-                        htmlFor="interaction-chance-select"
-                        className="text-base font-light"
-                      >
-                        {botName} replies without being asked:
-                      </Label>
-                      <Select
-                        value={String(responseChance) || undefined}
-                        disabled={!!error}
-                        onValueChange={(value) => setResponseChance(value)}
-                      >
-                        <SelectTrigger
-                          id="interaction-chance-select"
-                          className="py-6 px-6 w-full sm:w-xs text-[1.05rem] glass overflow-hidden rounded-full cursor-pointer"
-                        >
-                          <SelectValue
-                            placeholder={error ? "—" : "Select Chance"}
-                          />
-                        </SelectTrigger>
-                        <SelectContent className="p-4 glass-dark-static rounded-2xl">
-                          {[...Array(11)].map((_, i) => (
-                            <SelectItem
-                              key={i * 10}
-                              value={String(i * 10)}
-                              disabled={String(i * 10) === responseChance}
-                              className={cn(
-                                "py-4 px-4 cursor-pointer",
-                                String(i * 10) === responseChance
-                                  ? "bg-accent/70"
-                                  : ""
-                              )}
-                            >
-                              {i === 0
-                                ? "Never"
-                                : i === 10
-                                ? "Always"
-                                : `${i * 10}% of the time`}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
+                    <SettingSelector
+                      label={`${botName} replies without being asked:`}
+                      value={String(responseChance) || undefined}
+                      onChange={setResponseChance}
+                      options={Array.from({ length: 11 }, (_, i) => ({
+                        value: String(i * 10),
+                        label:
+                          i === 0
+                            ? "Never"
+                            : i === 10
+                            ? "Always"
+                            : `${i * 10}% of the time`,
+                        disabled: String(i * 10) === String(responseChance),
+                      }))}
+                      disabled={!!error || isPrivate}
+                      placeholder={error ? "—" : "Select Chance"}
+                      className="mt-9"
+                    />
                   </>
                 )}
               </CardContent>
             </Card>
 
-            <footer className="mt-6 text-sm text-muted-foreground">
-              <div>Role: {decodedToken.role}</div>
-              <div>Chat ID: {decodedToken.chat_id}</div>
-              <div>User ID (Hex): {decodedToken.sub}</div>
-              <div>Telegram User ID: {decodedToken.telegram_user_id}</div>
-              {decodedToken.telegram_username && (
-                <div>Telegram Username: {decodedToken.telegram_username}</div>
+            {/* Token Information */}
+            <footer className="mt-6 text-xs mb-9 text-blue-300/30">
+              {decodedToken && (
+                <TokenDataSheet
+                  iconClassName="w-4 h-4 text-blue-300/30"
+                  items={itemizedToken}
+                  copiedMessage="Copied!"
+                />
               )}
-              <hr className="my-2" />
-              <div>
-                Raw Params: lang={lang_iso_code}, type={"Chat"}, id={chat_id}
-              </div>
             </footer>
           </main>
         </div>
@@ -344,7 +301,7 @@ const ChatSettingsPage: React.FC = () => {
         <div className="max-w-md mx-auto fixed bottom-12 inset-x-0 px-6 z-50">
           <Alert
             variant="destructive"
-            className="space-y-2 bg-gray-50 border-red-300 border-4"
+            className="space-y-2 bg-gray-50 border-red-400 border-4"
           >
             <AlertCircle className="h-6 w-6" />
             <AlertTitle className="font-mono">Oh no!</AlertTitle>

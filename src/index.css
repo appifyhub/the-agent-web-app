@@ -216,3 +216,13 @@
     oklch(0.33 0.0543 262.66) 100%
   );
 }
+
+.copy-dotted-underline {
+  /* stylelint-disable declaration-block-no-redundant-longhand-properties */
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: #93c5fd50;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  /* stylelint-enable declaration-block-no-redundant-longhand-properties */
+}
