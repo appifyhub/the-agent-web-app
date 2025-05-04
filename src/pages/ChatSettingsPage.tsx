@@ -3,8 +3,6 @@ import { useParams, useSearchParams } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { AlertCircle } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn, TokenExpiredError, TokenMissingError } from "@/lib/utils";
 import { User, Hash, AtSign } from "lucide-react";
@@ -13,6 +11,7 @@ import Header from "@/components/Header";
 import CountdownTimer from "@/components/CountdownTimer";
 import TokenDataSheet from "@/components/TokenDataSheet";
 import SettingSelector from "@/components/SettingSelector";
+import ErrorMessage from "@/components/ErrorMessage";
 import { toast } from "sonner";
 import {
   fetchChatSettings,
@@ -347,20 +346,11 @@ const ChatSettingsPage: React.FC = () => {
       </div>
 
       {error && (
-        <div className="max-w-md mx-auto fixed bottom-12 lg:top-12 inset-x-0 px-6 z-50">
-          <Alert
-            variant="destructive"
-            className="space-y-2 bg-gray-50 border-red-400 border-4"
-          >
-            <AlertCircle className="h-6 w-6" />
-            <AlertTitle className="font-mono">Oh no!</AlertTitle>
-            <AlertDescription>
-              {error}
-              <br />
-              Double-check your access link and try again.
-            </AlertDescription>
-          </Alert>
-        </div>
+        <ErrorMessage
+          title={"Oh no!"}
+          description={error}
+          genericMessage={"Double-check your access link and try again."}
+        />
       )}
     </div>
   );
