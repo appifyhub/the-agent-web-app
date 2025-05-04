@@ -1,31 +1,49 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/sonner";
 import { Routes, Route } from "react-router-dom";
 import ChatSettingsPage from "./pages/ChatSettingsPage";
+import UserSettingsPage from "./pages/UserSettingsPage";
+import logoVector from "@/assets/logo-vector.svg";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
       <Routes>
-        {/* Define the main settings route */}
+        {/* The settings pages */}
         <Route
           path="/:lang_iso_code/chat/:chat_id/settings"
           element={<ChatSettingsPage />}
         />
-        {/* Add other routes here if needed */}
-        <Route path="*" element={<div>404 Not Found</div>} /> {/* Basic 404 */}
         <Route
-          path="/"
+          path="/:lang_iso_code/user/:user_id/settings"
+          element={<UserSettingsPage />}
+        />
+        {/* Edge-cases */}
+        <Route
+          path="*"
           element={
-            <div className="flex flex-col items-center justify-center min-h-svh">
-              <Button onClick={() => setCount((count) => count + 1)}>
-                I've been clicked {count} times!
-              </Button>
+            <div className="flex flex-col gap-10 items-center justify-center h-screen glass-dark-static">
+              <img src={logoVector} alt="Logo" className="w-32 h-32" />
+              <h1 className="text-4xl font-extralight text-center mb-12">
+                {import.meta.env.VITE_APP_NAME}
+              </h1>
+              <span className="text-5xl font-bold text-center text-accent-strong">
+                404 💥
+              </span>
             </div>
           }
+        />
+        <Route
+          path="/"
+          element={(() => {
+            console.log(
+              "Reached the root path! Path: ",
+              window.location.pathname
+            );
+            if (window.location.pathname === "/") {
+              window.location.href = import.meta.env.VITE_LANDING_PAGE_URL;
+            }
+            return null;
+          })()}
         />
       </Routes>
       <Toaster />
