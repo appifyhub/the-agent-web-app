@@ -217,12 +217,12 @@
   );
 }
 
-.copy-dotted-underline {
+.dotted-underline {
   /* stylelint-disable declaration-block-no-redundant-longhand-properties */
   text-decoration-line: underline;
   text-decoration-style: dotted;
   text-decoration-color: #93c5fd50;
   text-decoration-thickness: 2px;
-  text-underline-offset: 3px;
+  text-underline-offset: 4px;
   /* stylelint-enable declaration-block-no-redundant-longhand-properties */
 }

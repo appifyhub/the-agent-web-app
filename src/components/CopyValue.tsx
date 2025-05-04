@@ -43,7 +43,7 @@ const CopyValue: React.FC<CopyValueProps> = ({ value, copiedMessage }) => {
       title={fullValue}
       ref={spanRef}
     >
-      <span className="copy-dotted-underline text-blue-300/40 font-mono font-light">
+      <span className="dotted-underline text-blue-300/40 font-mono font-light">
         {displayValue}
       </span>
     </span>

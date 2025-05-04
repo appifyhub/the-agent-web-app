@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -13,17 +13,17 @@ import Header from "@/components/Header";
 import CountdownTimer from "@/components/CountdownTimer";
 import TokenDataSheet from "@/components/TokenDataSheet";
 import SettingSelector from "@/components/SettingSelector";
-import {
-  DEFAULT_LANGUAGE,
-  INTERFACE_LANGUAGES,
-  LLM_LANGUAGES,
-} from "@/lib/languages";
 import { toast } from "sonner";
 import {
   fetchChatSettings,
   saveChatSettings,
   ChatSettings,
 } from "@/services/ChatSettingsService";
+import {
+  DEFAULT_LANGUAGE,
+  INTERFACE_LANGUAGES,
+  LLM_LANGUAGES,
+} from "@/lib/languages";
 
 interface DecodedToken {
   aud: string; // display name
@@ -232,7 +232,6 @@ const ChatSettingsPage: React.FC = () => {
                 expiryTimestamp={decodedToken.exp}
                 onExpire={handleTokenExpired}
               />
-              {/* TODO: Add form handling logic to Button onClick */}
               <Button
                 className={cn(
                   "bg-primary hover:bg-purple-200 text-primary-foreground hover:text-zinc-900",
@@ -257,6 +256,10 @@ const ChatSettingsPage: React.FC = () => {
                   </div>
                 ) : (
                   <>
+                    <CardTitle className="text-center mx-auto">
+                      Configure {botName}'s Behavior
+                    </CardTitle>
+                    <div className="h-4" />
                     {/* The Preferred Language Dropdown */}
                     <SettingSelector
                       label={`${botName} tries to reply using:`}
@@ -344,7 +347,7 @@ const ChatSettingsPage: React.FC = () => {
       </div>
 
       {error && (
-        <div className="max-w-md mx-auto fixed bottom-12 inset-x-0 px-6 z-50">
+        <div className="max-w-md mx-auto fixed bottom-12 lg:top-12 inset-x-0 px-6 z-50">
           <Alert
             variant="destructive"
             className="space-y-2 bg-gray-50 border-red-400 border-4"
