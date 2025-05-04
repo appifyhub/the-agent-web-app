@@ -1,4 +1,22 @@
-import { Language } from "./utils";
+export class Language {
+  isoCode: string;
+  defaultName: string;
+  localizedName: string;
+  flagEmoji: string;
+
+  constructor(
+    isoCode: string,
+    defaultName: string,
+    localizedName: string,
+    flagEmoji: string
+  ) {
+    this.isoCode = isoCode;
+    this.defaultName = defaultName;
+    this.localizedName = localizedName;
+    this.flagEmoji = flagEmoji;
+  }
+}
+
 export const LLM_LANGUAGES: Language[] = [
   {
     isoCode: "en",

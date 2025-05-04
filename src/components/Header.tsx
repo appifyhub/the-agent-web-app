@@ -1,14 +1,15 @@
 import React from "react";
 import "./header.css";
+import { Button } from "@/components/ui/button";
+import { ChevronDownIcon, CheckIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Language } from "@/lib/languages";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { ChevronDownIcon, CheckIcon } from "lucide-react";
-import { cn, Language } from "@/lib/utils";
 
 interface HeaderProps {
   boldSectionContent: string;
@@ -29,7 +30,7 @@ const Header: React.FC<HeaderProps> = ({
 }) => {
   return (
     <div className="header-gradient w-screen relative">
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-10 pt-9 pb-20 md:pb-30 text-white">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-10 pt-9 pb-10 md:pb-30 text-white">
         <div className="flex items-center overflow-hidden">
           <img src={iconUrl} alt="Page icon" className="h-8 w-8" />
           <h1
