@@ -332,8 +332,11 @@ const UserSettingsPage: React.FC = () => {
                             </Label>
                             <Input
                               id={`token-${provider.id}`}
-                              type="password"
                               className="py-6 px-6 w-full sm:w-xs text-[1.05rem] glass rounded-xl font-mono"
+                              type="none"
+                              autoComplete="off"
+                              spellCheck={false}
+                              aria-autocomplete="none"
                               placeholder={error ? "—" : provider.placeholder}
                               disabled={!!error}
                               value={
