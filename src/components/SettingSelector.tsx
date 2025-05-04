@@ -62,7 +62,10 @@ const SettingSelector: React.FC<SettingSelectorProps> = ({
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent
-          className={cn("p-4 glass-dark-static rounded-2xl", contentClassName)}
+          className={cn(
+            "p-4 glass-dark-static rounded-2xl  text-foreground",
+            contentClassName
+          )}
         >
           {options.map((opt) => (
             <SelectItem
@@ -70,7 +73,7 @@ const SettingSelector: React.FC<SettingSelectorProps> = ({
               value={opt.value}
               disabled={opt.disabled || opt.value === value}
               className={cn(
-                "py-4 px-4 cursor-pointer",
+                "py-4 px-4 cursor-pointer text-foreground",
                 opt.value === value ? "bg-accent/70" : ""
               )}
             >

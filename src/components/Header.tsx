@@ -68,7 +68,7 @@ const Header: React.FC<HeaderProps> = ({
                   key={lang.isoCode}
                   onClick={() => onLangChange?.(lang.isoCode)}
                   className={cn(
-                    "cursor-pointer py-4 px-4",
+                    "cursor-pointer py-4 px-4 text-foreground",
                     lang.isoCode === currentLanguage.isoCode
                       ? "bg-accent/70"
                       : ""
