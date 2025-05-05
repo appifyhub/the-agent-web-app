@@ -6,14 +6,14 @@ export enum ServiceProviderType {
 }
 
 export class ServiceProvider {
-  id: string;
-  name: string;
-  type: ServiceProviderType;
-  token_management_url: string;
-  placeholder: string;
-  tools: string;
+  public readonly id: string;
+  public readonly name: string;
+  public readonly type: ServiceProviderType;
+  public readonly token_management_url: string;
+  public readonly placeholder: string;
+  public readonly tools: string;
 
-  constructor(
+  public constructor(
     id: string,
     name: string,
     type: ServiceProviderType,

@@ -81,12 +81,12 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({
   return (
     <div
       className={cn(
-        "flex items-center justify-center px-6 py-3 text-[1.05rem] border-[0.5px] rounded-full",
+        "flex items-center justify-center px-6 py-3 text-[1.05rem] border rounded-full",
         deltaSeconds <= 60
           ? "border-destructive text-destructive"
           : deltaSeconds <= 180
           ? "border-orange-300 text-orange-300"
-          : "border-muted-foreground text-foreground"
+          : "border-foreground/20 text-foreground"
       )}
     >
       {isExpired ? <span>⛓️‍💥</span> : <span>{formatCountdown()}</span>}

@@ -1,5 +1,5 @@
+import "@/components/header.css";
 import React from "react";
-import "./header.css";
 import { Button } from "@/components/ui/button";
 import { ChevronDownIcon, CheckIcon } from "lucide-react";
 import { cn } from "@/lib/utils";

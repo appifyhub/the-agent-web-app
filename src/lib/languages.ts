@@ -1,10 +1,10 @@
 export class Language {
-  isoCode: string;
-  defaultName: string;
-  localizedName: string;
-  flagEmoji: string;
+  public readonly isoCode: string;
+  public readonly defaultName: string;
+  public readonly localizedName: string;
+  public readonly flagEmoji: string;
 
-  constructor(
+  public constructor(
     isoCode: string,
     defaultName: string,
     localizedName: string,

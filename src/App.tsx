@@ -1,7 +1,7 @@
 import { Toaster } from "@/components/ui/sonner";
 import { Routes, Route } from "react-router-dom";
-import ChatSettingsPage from "./pages/ChatSettingsPage";
-import UserSettingsPage from "./pages/UserSettingsPage";
+import ChatSettingsPage from "@/pages/ChatSettingsPage";
+import UserSettingsPage from "@/pages/UserSettingsPage";
 import logoVector from "@/assets/logo-vector.svg";
 
 function App() {
