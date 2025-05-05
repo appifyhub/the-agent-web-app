@@ -1,51 +1,41 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
-import { jwtDecode } from "jwt-decode";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
-import { cn, TokenExpiredError, TokenMissingError } from "@/lib/utils";
-import { User, Hash, AtSign } from "lucide-react";
 import logoVector from "@/assets/logo-vector.svg";
 import Header from "@/components/Header";
-import CountdownTimer from "@/components/CountdownTimer";
+import SettingControls from "@/components/SettingControls";
 import TokenDataSheet from "@/components/TokenDataSheet";
 import SettingSelector from "@/components/SettingSelector";
 import ErrorMessage from "@/components/ErrorMessage";
 import { toast } from "sonner";
+import { PageError } from "@/lib/utils";
+import SettingsPageSkeleton from "@/components/SettingsPageSkeleton";
+import GenericPageSkeleton from "@/components/GenericPageSkeleton";
 import {
   fetchChatSettings,
   saveChatSettings,
   ChatSettings,
 } from "@/services/ChatSettingsService";
 import {
+  AccessToken,
+  TokenExpiredError,
+  TokenMissingError,
+} from "@/lib/AccessToken";
+import {
   DEFAULT_LANGUAGE,
   INTERFACE_LANGUAGES,
   LLM_LANGUAGES,
 } from "@/lib/languages";
 
-interface DecodedToken {
-  aud: string; // display name
-  iss: string; // bot name
-  sub: string; // profile ID
-  role: string; // chat role
-  chat_id: number | string; // chat ID
-  telegram_user_id: number | string; // TID
-  telegram_username?: string; // TUN
-  exp: number; // expiry timestamp
-  iat: number; // issue timestamp
-}
-
 const ChatSettingsPage: React.FC = () => {
+  const [searchParams] = useSearchParams();
   const { lang_iso_code, chat_id } = useParams<{
     lang_iso_code: string;
     chat_id: string;
   }>();
 
-  const [error, setError] = useState<string | null>(null);
-  const [searchParams] = useSearchParams();
-  const [rawToken, setRawToken] = useState<string | null>(null);
-  const [decodedToken, setDecodedToken] = useState<DecodedToken | null>(null);
+  const [error, setError] = useState<PageError | null>(null);
+  const [accessToken, setAccessToken] = useState<AccessToken | null>(null);
   const [isLoadingState, setIsLoadingState] = useState<boolean>(false);
   const [chatSettings, setChatSettings] = useState<ChatSettings | null>(null);
   const [remoteSettings, setRemoteSettings] = useState<ChatSettings | null>(
@@ -54,61 +44,45 @@ const ChatSettingsPage: React.FC = () => {
 
   const handleTokenExpired = () => {
     console.warn("Settings token expired");
-    setError("Your session has expired.");
-  };
-
-  const isExpired = (decodedToken: DecodedToken | null) => {
-    // let's enforce: if there is no expiry time, the token is expired
-    if (!decodedToken || !decodedToken.exp) return true;
-    const nowInSeconds = Date.now() / 1000;
-    return decodedToken.exp < nowInSeconds;
+    setError(PageError.blocker("Your session has expired."));
   };
 
   useEffect(() => {
     try {
-      const token = searchParams.get("token");
-      if (!token) throw new TokenMissingError();
-      console.info("Found a raw token!", token);
-      setRawToken(token);
-
-      const decoded = jwtDecode<DecodedToken>(token);
-      console.info("Decoded a JWT token!", decoded);
-      setDecodedToken(decoded);
-      if (isExpired(decoded)) throw new TokenExpiredError();
-
-      console.info("Token is valid!");
+      const rawToken = searchParams.get("token");
+      const token = rawToken ? new AccessToken(rawToken) : null;
+      setAccessToken(token);
       setError(null);
     } catch (err) {
       if (err instanceof TokenExpiredError) {
         handleTokenExpired();
       } else if (err instanceof TokenMissingError) {
         console.warn("No token found in the URL.");
-        setError("Your session is not found.");
+        setError(PageError.blocker("Your session is not found."));
       } else {
         console.warn("Error decoding token:", err);
-        setError("Your session is not valid.");
+        setError(PageError.blocker("Your session is not valid."));
       }
     }
   }, [searchParams]);
 
   useEffect(() => {
-    if (!decodedToken || !rawToken || !chat_id) {
+    if (!accessToken || !chat_id) {
       console.warn(
         "Missing session parameters." +
-          `\n\tDecoded Token: ${decodedToken}` +
-          `\n\tRaw Token: ${rawToken}` +
+          `\n\tAccessToken: ${accessToken}` +
           `\n\tChat ID: ${chat_id}`
       );
-      setError("Your session is misconfigured.");
+      setError(PageError.blocker("Your session is misconfigured."));
       return;
     }
 
-    console.info("Session parameters are available!");
-    if (isExpired(decodedToken)) {
+    if (accessToken.isExpired()) {
       handleTokenExpired();
       return;
     }
 
+    console.info("Session parameters are available!");
     const fetchSettings = async () => {
       setIsLoadingState(true);
       setError(null);
@@ -117,22 +91,22 @@ const ChatSettingsPage: React.FC = () => {
         const data = await fetchChatSettings({
           apiBaseUrl,
           chat_id,
-          rawToken,
+          rawToken: accessToken.raw,
         });
         console.info("Fetched settings!", data);
         setChatSettings(data);
         setRemoteSettings(data);
       } catch (fetchError) {
         console.error("Error fetching settings!", fetchError);
-        setError("Failed to load the settings.");
+        setError(PageError.blocker("Failed to load the settings."));
       } finally {
         setIsLoadingState(false);
       }
     };
     fetchSettings();
-  }, [decodedToken, rawToken, chat_id]);
+  }, [accessToken, chat_id]);
 
-  const isSettingsChanged = !!(
+  const areSettingsChanged = !!(
     chatSettings &&
     remoteSettings &&
     (chatSettings.language_name !== remoteSettings.language_name ||
@@ -142,7 +116,7 @@ const ChatSettingsPage: React.FC = () => {
 
   const handleSave = async () => {
     if (!chatSettings || !remoteSettings) return;
-    if (!chat_id || !rawToken) return;
+    if (!chat_id || !accessToken) return;
     setIsLoadingState(true);
     setError(null);
     try {
@@ -150,28 +124,25 @@ const ChatSettingsPage: React.FC = () => {
       await saveChatSettings({
         apiBaseUrl,
         chat_id,
-        rawToken,
+        rawToken: accessToken.raw,
         chatSettings,
       });
       setRemoteSettings(chatSettings);
       toast("Saved!");
     } catch (saveError) {
       console.error("Error saving settings!", saveError);
-      setError("Failed to save settings.");
+      setError(PageError.simple("Failed to save settings."));
     } finally {
       setIsLoadingState(false);
     }
   };
 
-  if (!decodedToken) {
+  if (!accessToken) {
     console.info("Rendering the loading state!");
     return (
       <div className="container mx-auto p-4 h-screen">
         <div className="flex flex-col items-center space-y-6 h-full justify-center p-9">
-          <Skeleton className="h-[70px]" />
-          <Skeleton className="h-[200px]" />
-          <Skeleton className="h-[40px]" />
-          <Skeleton className="h-[40px]" />
+          <GenericPageSkeleton />
         </div>
       </div>
     );
@@ -182,31 +153,12 @@ const ChatSettingsPage: React.FC = () => {
     INTERFACE_LANGUAGES.find((lang) => lang.isoCode === lang_iso_code) ||
     DEFAULT_LANGUAGE;
 
-  const itemizedToken = [
-    { label: "Chat role", value: decodedToken.role, icon: User },
-    decodedToken.telegram_username && {
-      label: "Telegram Username",
-      value: decodedToken.telegram_username,
-      icon: AtSign,
-    },
-    {
-      label: "Telegram User ID",
-      value: decodedToken.telegram_user_id,
-      icon: Hash,
-    },
-    { label: "Profile ID", value: decodedToken.sub, icon: Hash },
-    { label: "Chat ID", value: decodedToken.chat_id, icon: Hash },
-  ].filter(
-    (item): item is import("@/components/TokenDataSheet").TokenDataSheetItem =>
-      !!item
-  );
-
   return (
     <div className="flex flex-col min-h-screen">
       {/* The Header section */}
       <Header
         boldSectionContent={"Chat"}
-        regularSectionContent={decodedToken.aud}
+        regularSectionContent={accessToken.decoded.aud}
         currentLanguage={currentInterfaceLanguage}
         supportedLanguages={INTERFACE_LANGUAGES}
         iconUrl={logoVector}
@@ -225,34 +177,22 @@ const ChatSettingsPage: React.FC = () => {
       <div className="mx-auto w-full max-w-3xl">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex-grow">
           <main>
-            {/* Timer and Save Button Section */}
-            <div className="flex justify-between items-center">
-              <CountdownTimer
-                expiryTimestamp={decodedToken.exp}
-                onExpire={handleTokenExpired}
-              />
-              <Button
-                className={cn(
-                  "bg-primary hover:bg-purple-200 text-primary-foreground hover:text-zinc-900",
-                  "px-6 py-6 text-[1.05rem] rounded-full cursor-pointer"
-                )}
-                disabled={!isSettingsChanged || isLoadingState || !!error}
-                onClick={handleSave}
-              >
-                Save
-              </Button>
-            </div>
+            {/* The Session Expiry timer and Save button */}
+            <SettingControls
+              expiryTimestamp={accessToken.decoded.exp}
+              onTokenExpired={handleTokenExpired}
+              onSaveClicked={handleSave}
+              saveLabel={"Save"}
+              disabled={
+                !areSettingsChanged || isLoadingState || !!error?.isBlocker
+              }
+            />
 
             {/* The Settings card */}
             <Card className="mt-4.5 mb-4.5 md:px-6 px-2 md:py-12 py-8 glass-static rounded-3xl">
               <CardContent className="space-y-4">
                 {isLoadingState ? (
-                  <div className="space-y-4">
-                    <Skeleton className="h-10" />
-                    <Skeleton className="h-20" />
-                    <Skeleton className="h-10" />
-                    <Skeleton className="h-20" />
-                  </div>
+                  <SettingsPageSkeleton />
                 ) : (
                   <>
                     <CardTitle className="text-center mx-auto">
@@ -292,8 +232,8 @@ const ChatSettingsPage: React.FC = () => {
                         disabled:
                           lang.isoCode === chatSettings?.language_iso_code,
                       }))}
-                      disabled={!!error}
-                      placeholder={error ? "—" : "Select Language"}
+                      disabled={!!error?.isBlocker}
+                      placeholder={error?.isBlocker ? "—" : "Select Language"}
                     />
 
                     {/* The Spontaneous Interaction Chance Dropdown */}
@@ -322,8 +262,8 @@ const ChatSettingsPage: React.FC = () => {
                           String(i * 10) ===
                           String(chatSettings?.reply_chance_percent ?? ""),
                       }))}
-                      disabled={!!error || chatSettings?.is_private}
-                      placeholder={error ? "—" : "Select Chance"}
+                      disabled={!!error?.isBlocker || chatSettings?.is_private}
+                      placeholder={error?.isBlocker ? "—" : "Select Frequency"}
                       className="mt-9"
                     />
                   </>
@@ -333,11 +273,18 @@ const ChatSettingsPage: React.FC = () => {
 
             {/* Token Information */}
             <footer className="mt-6 text-xs mb-9 text-blue-300/30">
-              {decodedToken && (
+              {accessToken && (
                 <TokenDataSheet
+                  decoded={accessToken.decoded}
+                  labels={{
+                    chatRole: "Chat role",
+                    telegramUsername: "Telegram Username",
+                    telegramUserId: "Telegram User ID",
+                    profileId: "Profile ID",
+                    chatId: "Chat ID",
+                  }}
+                  copiedMessage={"Copied!"}
                   iconClassName="w-4 h-4 text-blue-300/30"
-                  items={itemizedToken}
-                  copiedMessage="Copied!"
                 />
               )}
             </footer>
@@ -348,8 +295,8 @@ const ChatSettingsPage: React.FC = () => {
       {error && (
         <ErrorMessage
           title={"Oh no!"}
-          description={error}
-          genericMessage={"Double-check your access link and try again."}
+          description={error?.text}
+          genericMessage={"Check your access link and try again."}
         />
       )}
     </div>

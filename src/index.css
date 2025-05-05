@@ -142,9 +142,9 @@
 
     background: linear-gradient(
       to bottom right,
-      var(--background) 0%,
+      oklch(0.15 0.0337 258.28) 0%,
       oklch(0.3 0.0641 271.06) 100%
-    );
+    ) !important;
   }
 }
 
