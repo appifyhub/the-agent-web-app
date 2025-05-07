@@ -1,17 +1,5 @@
 import { jwtDecode } from "jwt-decode";
 
-export interface DecodedToken {
-  aud: string; // display name
-  iss: string; // bot name
-  sub: string; // internal profile ID
-  role: string; // chat role (member, manager, creator...)
-  chat_id: number | string; // CID
-  telegram_user_id: number | string; // TID
-  telegram_username?: string; // TUN
-  exp: number; // expiry timestamp
-  iat: number; // issue timestamp
-}
-
 export class TokenExpiredError extends Error {
   public constructor() {
     super("Token expired");
@@ -24,6 +12,18 @@ export class TokenMissingError extends Error {
     super("Token missing");
     this.name = "TokenMissingError";
   }
+}
+
+export interface DecodedToken {
+  aud: string; // display name
+  iss: string; // bot name
+  sub: string; // internal profile ID
+  role: string; // chat role (member, manager, creator...)
+  chat_id: number | string; // CID
+  telegram_user_id: number | string; // TID
+  telegram_username?: string; // TUN
+  exp: number; // expiry timestamp
+  iat: number; // issue timestamp
 }
 
 export class AccessToken {

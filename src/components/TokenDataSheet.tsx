@@ -3,7 +3,7 @@ import CopyValue from "@/components/CopyValue";
 import { cn } from "@/lib/utils";
 import type { LucideIcon } from "lucide-react";
 import { User, AtSign, Hash } from "lucide-react";
-import type { DecodedToken } from "@/lib/AccessToken";
+import type { DecodedToken } from "@/lib/tokens";
 
 export interface TokenDataSheetItem {
   icon: LucideIcon;
