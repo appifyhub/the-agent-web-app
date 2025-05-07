@@ -1,0 +1,35 @@
+{
+  "chat": "Discussion",
+  "profile": "Profil",
+  "configure_title": "Configurer le comportement de {botName}",
+  "configure_keys_title": "Configurer les clés d'accès de {botName}",
+  "preferred_language_label": "{botName} essaie de répondre en utilisant :",
+  "preferred_language_placeholder": "Sélectionner une langue",
+  "spontaneous_label": "{botName} répond sans être mentionné :",
+  "spontaneous_placeholder": "Sélectionner la fréquence",
+  "never": "Jamais",
+  "always": "Toujours",
+  "reply_frequency": "{percent}% du temps",
+  "save": "Enregistrer",
+  "saved": "Enregistré !",
+  "copied": "Copié !",
+  "token_info": {
+    "chat_role": "Discussion role",
+    "telegram_username": "Nom d'utilisateur Telegram",
+    "telegram_user_id": "ID utilisateur Telegram",
+    "profile_id": "Profil ID",
+    "chat_id": "Discussion ID"
+  },
+  "provider_needed_for": "{botName} a besoin de ceci pour {tools}",
+  "where_is_my_key": "Où est ma clé {providerName} ?",
+  "errors": {
+    "oh_no": "Oh non !",
+    "expired": "Votre session a expiré.",
+    "not_found": "Votre session est introuvable.",
+    "not_valid": "Votre session n'est pas valide.",
+    "misconfigured": "Votre session est mal configurée.",
+    "fetch_failed": "Échec du chargement des paramètres.",
+    "save_failed": "Échec de l'enregistrement des paramètres.",
+    "check_link": "Vérifiez votre lien d'accès et réessayez."
+  }
+}

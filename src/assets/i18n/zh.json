@@ -1,0 +1,35 @@
+{
+  "chat": "聊天",
+  "profile": "个人资料",
+  "configure_title": "配置{botName}的行为",
+  "configure_keys_title": "配置{botName}的访问密钥",
+  "preferred_language_label": "{botName} 尝试使用以下语言回复：",
+  "preferred_language_placeholder": "请选择您的首选语言",
+  "spontaneous_label": "{botName} 在未被提及时回复：",
+  "spontaneous_placeholder": "请选择回复频率",
+  "never": "从不",
+  "always": "总是",
+  "reply_frequency": "{percent}% 的时间",
+  "save": "保存",
+  "saved": "已保存！",
+  "copied": "已复制！",
+  "token_info": {
+    "chat_role": "聊天角色",
+    "telegram_username": "Telegram 用户名",
+    "telegram_user_id": "Telegram 用户ID",
+    "profile_id": "个人资料ID",
+    "chat_id": "聊天ID"
+  },
+  "provider_needed_for": "{botName} 需要此用于 {tools}",
+  "where_is_my_key": "我的 {providerName} 密钥在哪里？",
+  "errors": {
+    "oh_no": "哦不！",
+    "expired": "您的会话已过期。",
+    "not_found": "未找到您的会话。",
+    "not_valid": "您的会话无效。",
+    "misconfigured": "您的会话配置错误。",
+    "fetch_failed": "加载设置失败。",
+    "save_failed": "保存设置失败。",
+    "check_link": "请检查您的访问链接并重试。"
+  }
+}

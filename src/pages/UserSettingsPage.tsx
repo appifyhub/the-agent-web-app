@@ -16,6 +16,7 @@ import { cn, maskSecret, PageError } from "@/lib/utils";
 import SettingControls from "@/components/SettingControls";
 import SettingsPageSkeleton from "@/components/SettingsPageSkeleton";
 import GenericPageSkeleton from "@/components/GenericPageSkeleton";
+import { t } from "@/lib/translations";
 import {
   fetchUserSettings,
   saveUserSettings,
@@ -45,7 +46,7 @@ const UserSettingsPage: React.FC = () => {
 
   const handleTokenExpired = () => {
     console.warn("Settings token expired");
-    setError(PageError.blocker("Your session has expired."));
+    setError(PageError.blocker(t("errors.expired")));
   };
 
   useEffect(() => {
@@ -59,10 +60,10 @@ const UserSettingsPage: React.FC = () => {
         handleTokenExpired();
       } else if (err instanceof TokenMissingError) {
         console.warn("No token found in the URL.");
-        setError(PageError.blocker("Your session is not found."));
+        setError(PageError.blocker(t("errors.not_found")));
       } else {
         console.warn("Error decoding token:", err);
-        setError(PageError.blocker("Your session is not valid."));
+        setError(PageError.blocker(t("errors.not_valid")));
       }
     }
   }, [searchParams]);
@@ -74,7 +75,7 @@ const UserSettingsPage: React.FC = () => {
           `\n\tAccessToken: ${accessToken}` +
           `\n\tUser ID: ${user_id}`
       );
-      setError(PageError.blocker("Your session is misconfigured."));
+      setError(PageError.blocker(t("errors.misconfigured")));
       return;
     }
 
@@ -99,7 +100,7 @@ const UserSettingsPage: React.FC = () => {
         setRemoteSettings(data);
       } catch (fetchError) {
         console.error("Error fetching settings!", fetchError);
-        setError(PageError.blocker("Failed to load the settings."));
+        setError(PageError.blocker(t("errors.fetch_failed")));
       } finally {
         setIsLoadingState(false);
       }
@@ -156,16 +157,16 @@ const UserSettingsPage: React.FC = () => {
         coin_api_key: userSettings.coin_api_key ?? "",
       });
       setRemoteSettings(userSettings);
-      toast("Saved!");
+      toast(t("saved"));
     } catch (saveError) {
       console.error("Error saving settings!", saveError);
-      setError(PageError.simple("Failed to save settings."));
+      setError(PageError.simple(t("errors.save_failed")));
     } finally {
       setIsLoadingState(false);
     }
   };
 
-  if (!accessToken) {
+  if (!accessToken && !error) {
     console.info("Rendering the loading state!");
     return (
       <div className="container mx-auto p-4 h-screen">
@@ -185,8 +186,8 @@ const UserSettingsPage: React.FC = () => {
     <div className="flex flex-col min-h-screen">
       {/* The Header section */}
       <Header
-        boldSectionContent={"Profile"}
-        regularSectionContent={accessToken.decoded.aud}
+        boldSectionContent={t("profile")}
+        regularSectionContent={accessToken?.decoded?.aud || ""}
         currentLanguage={currentInterfaceLanguage}
         supportedLanguages={INTERFACE_LANGUAGES}
         iconUrl={logoVector}
@@ -207,7 +208,7 @@ const UserSettingsPage: React.FC = () => {
           <main>
             {/* The Session Expiry timer and Save button */}
             <SettingControls
-              expiryTimestamp={accessToken.decoded.exp}
+              expiryTimestamp={accessToken?.decoded?.exp || 0}
               onTokenExpired={handleTokenExpired}
               onSaveClicked={handleSave}
               saveLabel={"Save"}
@@ -224,7 +225,7 @@ const UserSettingsPage: React.FC = () => {
                   <>
                     <div className="h-2" />
                     <CardTitle className="text-center mx-auto">
-                      Configure {botName}'s Access Keys
+                      {t("configure_keys_title", { botName })}
                     </CardTitle>
                     <div className="h-10" />
                     <Tabs
@@ -256,7 +257,10 @@ const UserSettingsPage: React.FC = () => {
                                   : ""
                               )}
                             >
-                              {botName} needs this for {provider.tools}
+                              {t("provider_needed_for", {
+                                botName,
+                                tools: provider.tools,
+                              })}
                             </Label>
                             <Input
                               id={`token-${provider.id}`}
@@ -299,7 +303,9 @@ const UserSettingsPage: React.FC = () => {
                               rel="noopener noreferrer"
                               className="dotted-underline text-blue-300/50"
                             >
-                              Where is my {provider.name} key?
+                              {t("where_is_my_key", {
+                                providerName: provider.name,
+                              })}
                             </a>
                           </div>
                         </TabsContent>
@@ -316,13 +322,13 @@ const UserSettingsPage: React.FC = () => {
                 <TokenDataSheet
                   decoded={accessToken.decoded}
                   labels={{
-                    chatRole: "Chat role",
-                    telegramUsername: "Telegram Username",
-                    telegramUserId: "Telegram User ID",
-                    profileId: "Profile ID",
-                    chatId: "Chat ID",
+                    chatRole: t("token_info.chat_role"),
+                    telegramUsername: t("token_info.telegram_username"),
+                    telegramUserId: t("token_info.telegram_user_id"),
+                    profileId: t("token_info.profile_id"),
+                    chatId: t("token_info.chat_id"),
                   }}
-                  copiedMessage={"Copied!"}
+                  copiedMessage={t("copied")}
                   iconClassName="w-4 h-4 text-blue-300/30"
                 />
               )}
@@ -333,9 +339,9 @@ const UserSettingsPage: React.FC = () => {
 
       {error && (
         <ErrorMessage
-          title={"Oh no!"}
+          title={t("errors.oh_no")}
           description={error?.text}
-          genericMessage={"Check your access link and try again."}
+          genericMessage={t("errors.check_link")}
         />
       )}
     </div>

@@ -40,6 +40,9 @@ const SettingSelector: React.FC<SettingSelectorProps> = ({
   triggerClassName = "",
   contentClassName = "",
 }) => {
+  const validOption = options.find((opt) => opt.value === value);
+  const selectValue = validOption ? value : undefined;
+
   return (
     <div className={cn("space-y-4", className)}>
       <Label
@@ -51,7 +54,7 @@ const SettingSelector: React.FC<SettingSelectorProps> = ({
       >
         {label}
       </Label>
-      <Select value={value} disabled={disabled} onValueChange={onChange}>
+      <Select value={selectValue} disabled={disabled} onValueChange={onChange}>
         <SelectTrigger
           className={cn(
             "py-6 px-6 w-full sm:w-xs text-[1.05rem] overflow-hidden rounded-full cursor-pointer",

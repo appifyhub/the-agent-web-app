@@ -1,0 +1,35 @@
+{
+  "chat": "Chat",
+  "profile": "Profile",
+  "configure_title": "Configure {botName}'s Behavior",
+  "configure_keys_title": "Configure {botName}'s Access Keys",
+  "preferred_language_label": "{botName} tries to reply using:",
+  "preferred_language_placeholder": "Select a language",
+  "spontaneous_label": "{botName} replies without being tagged:",
+  "spontaneous_placeholder": "Select how often",
+  "never": "Never",
+  "always": "Always",
+  "reply_frequency": "{percent}% of the time",
+  "save": "Save",
+  "saved": "Saved!",
+  "copied": "Copied!",
+  "token_info": {
+    "chat_role": "Chat role",
+    "telegram_username": "Telegram Username",
+    "telegram_user_id": "Telegram User ID",
+    "profile_id": "Profile ID",
+    "chat_id": "Chat ID"
+  },
+  "provider_needed_for": "{botName} needs this for {tools}",
+  "where_is_my_key": "Where is my {providerName} key?",
+  "errors": {
+    "oh_no": "Oh no!",
+    "expired": "Your session has expired.",
+    "not_found": "Your session is not found.",
+    "not_valid": "Your session is not valid.",
+    "misconfigured": "Your session is misconfigured.",
+    "fetch_failed": "Failed to load the settings.",
+    "save_failed": "Failed to save settings.",
+    "check_link": "Check your access link and try again."
+  }
+}
