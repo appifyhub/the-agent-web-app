@@ -1,0 +1,35 @@
+{
+  "chat": "Chat",
+  "profile": "Profil",
+  "configure_title": "{botName}s Verhalten konfigurieren",
+  "configure_keys_title": "Zugangsschlüssel von {botName} konfigurieren",
+  "preferred_language_label": "{botName} versucht zu antworten mit:",
+  "preferred_language_placeholder": "Sprache auswählen",
+  "spontaneous_label": "{botName} antwortet ohne Markierung:",
+  "spontaneous_placeholder": "Häufigkeit auswählen",
+  "never": "Nie",
+  "always": "Immer",
+  "reply_frequency": "{percent}% der Zeit",
+  "save": "Speichern",
+  "saved": "Gespeichert!",
+  "copied": "Kopiert!",
+  "token_info": {
+    "chat_role": "Chat role",
+    "telegram_username": "Telegram-Benutzername",
+    "telegram_user_id": "Telegram-Benutzer-ID",
+    "profile_id": "Profil ID",
+    "chat_id": "Chat ID"
+  },
+  "provider_needed_for": "{botName} benötigt dies für {tools}",
+  "where_is_my_key": "Wo ist mein {providerName}-Schlüssel?",
+  "errors": {
+    "oh_no": "Oh nein!",
+    "expired": "Ihre Sitzung ist abgelaufen.",
+    "not_found": "Ihre Sitzung wurde nicht gefunden.",
+    "not_valid": "Ihre Sitzung ist ungültig.",
+    "misconfigured": "Ihre Sitzung ist falsch konfiguriert.",
+    "fetch_failed": "Laden der Einstellungen fehlgeschlagen.",
+    "save_failed": "Speichern der Einstellungen fehlgeschlagen.",
+    "check_link": "Überprüfen Sie Ihren Zugangslink und versuchen Sie es erneut."
+  }
+}

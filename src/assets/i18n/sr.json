@@ -1,0 +1,35 @@
+{
+  "chat": "Čet",
+  "profile": "Profil",
+  "configure_title": "Podesite ponašanje {botName}a",
+  "configure_keys_title": "Podesite pristupne ključeve za {botName}a",
+  "preferred_language_label": "{botName} će pokušati da odgovori koristeći:",
+  "preferred_language_placeholder": "Izaberite jezik",
+  "spontaneous_label": "{botName} će odgovarati bez taga:",
+  "spontaneous_placeholder": "Izaberite učestalost",
+  "never": "Nikada",
+  "always": "Uvek",
+  "reply_frequency": "{percent}% vremena",
+  "save": "Sačuvaj",
+  "saved": "Sačuvano!",
+  "copied": "Kopirano!",
+  "token_info": {
+    "chat_role": "Uloga u četu",
+    "telegram_username": "Telegram korisničko ime",
+    "telegram_user_id": "Telegram korisnički ID",
+    "profile_id": "ID profila",
+    "chat_id": "ID četa"
+  },
+  "provider_needed_for": "{botName} ovo koristi za {tools}",
+  "where_is_my_key": "Gde je moj {providerName} ključ?",
+  "errors": {
+    "oh_no": "Oh ne!",
+    "expired": "Vaša sesija je istekla.",
+    "not_found": "Vaša sesija nije pronađena.",
+    "not_valid": "Vaša sesija nije validna.",
+    "misconfigured": "Vaša sesija je pogrešno podešena.",
+    "fetch_failed": "Neuspešno učitavanje podešavanja.",
+    "save_failed": "Neuspešno čuvanje podešavanja.",
+    "check_link": "Proverite svoj pristupni link i pokušajte ponovo."
+  }
+}

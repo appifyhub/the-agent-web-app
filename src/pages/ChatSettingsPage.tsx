@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import { PageError } from "@/lib/utils";
 import SettingsPageSkeleton from "@/components/SettingsPageSkeleton";
 import GenericPageSkeleton from "@/components/GenericPageSkeleton";
+import { t } from "@/lib/translations";
 import {
   fetchChatSettings,
   saveChatSettings,
@@ -43,8 +44,8 @@ const ChatSettingsPage: React.FC = () => {
   );
 
   const handleTokenExpired = () => {
-    console.warn("Settings token expired");
-    setError(PageError.blocker("Your session has expired."));
+    console.error("Settings token expired");
+    setError(PageError.blocker(t("errors.expired")));
   };
 
   useEffect(() => {
@@ -58,10 +59,10 @@ const ChatSettingsPage: React.FC = () => {
         handleTokenExpired();
       } else if (err instanceof TokenMissingError) {
         console.warn("No token found in the URL.");
-        setError(PageError.blocker("Your session is not found."));
+        setError(PageError.blocker(t("errors.not_found")));
       } else {
         console.warn("Error decoding token:", err);
-        setError(PageError.blocker("Your session is not valid."));
+        setError(PageError.blocker(t("errors.not_valid")));
       }
     }
   }, [searchParams]);
@@ -73,7 +74,7 @@ const ChatSettingsPage: React.FC = () => {
           `\n\tAccessToken: ${accessToken}` +
           `\n\tChat ID: ${chat_id}`
       );
-      setError(PageError.blocker("Your session is misconfigured."));
+      setError(PageError.blocker(t("errors.misconfigured")));
       return;
     }
 
@@ -98,7 +99,7 @@ const ChatSettingsPage: React.FC = () => {
         setRemoteSettings(data);
       } catch (fetchError) {
         console.error("Error fetching settings!", fetchError);
-        setError(PageError.blocker("Failed to load the settings."));
+        setError(PageError.blocker(t("errors.fetch_failed")));
       } finally {
         setIsLoadingState(false);
       }
@@ -128,16 +129,16 @@ const ChatSettingsPage: React.FC = () => {
         chatSettings,
       });
       setRemoteSettings(chatSettings);
-      toast("Saved!");
+      toast(t("saved"));
     } catch (saveError) {
       console.error("Error saving settings!", saveError);
-      setError(PageError.simple("Failed to save settings."));
+      setError(PageError.simple(t("errors.save_failed")));
     } finally {
       setIsLoadingState(false);
     }
   };
 
-  if (!accessToken) {
+  if (!accessToken && !error) {
     console.info("Rendering the loading state!");
     return (
       <div className="container mx-auto p-4 h-screen">
@@ -157,8 +158,8 @@ const ChatSettingsPage: React.FC = () => {
     <div className="flex flex-col min-h-screen">
       {/* The Header section */}
       <Header
-        boldSectionContent={"Chat"}
-        regularSectionContent={accessToken.decoded.aud}
+        boldSectionContent={t("chat")}
+        regularSectionContent={accessToken?.decoded?.aud || ""}
         currentLanguage={currentInterfaceLanguage}
         supportedLanguages={INTERFACE_LANGUAGES}
         iconUrl={logoVector}
@@ -179,10 +180,10 @@ const ChatSettingsPage: React.FC = () => {
           <main>
             {/* The Session Expiry timer and Save button */}
             <SettingControls
-              expiryTimestamp={accessToken.decoded.exp}
+              expiryTimestamp={accessToken?.decoded?.exp || 0}
               onTokenExpired={handleTokenExpired}
               onSaveClicked={handleSave}
-              saveLabel={"Save"}
+              saveLabel={t("save")}
               disabled={
                 !areSettingsChanged || isLoadingState || !!error?.isBlocker
               }
@@ -196,12 +197,12 @@ const ChatSettingsPage: React.FC = () => {
                 ) : (
                   <>
                     <CardTitle className="text-center mx-auto">
-                      Configure {botName}'s Behavior
+                      {t("configure_title", { botName })}
                     </CardTitle>
                     <div className="h-4" />
                     {/* The Preferred Language Dropdown */}
                     <SettingSelector
-                      label={`${botName} tries to reply using:`}
+                      label={t("preferred_language_label", { botName })}
                       value={chatSettings?.language_iso_code || undefined}
                       onChange={(val) => {
                         const newLanguageIsoCode = val;
@@ -233,12 +234,16 @@ const ChatSettingsPage: React.FC = () => {
                           lang.isoCode === chatSettings?.language_iso_code,
                       }))}
                       disabled={!!error?.isBlocker}
-                      placeholder={error?.isBlocker ? "—" : "Select Language"}
+                      placeholder={
+                        error?.isBlocker
+                          ? "—"
+                          : t("preferred_language_placeholder")
+                      }
                     />
 
                     {/* The Spontaneous Interaction Chance Dropdown */}
                     <SettingSelector
-                      label={`${botName} replies without being tagged:`}
+                      label={t("spontaneous_label", { botName })}
                       value={
                         String(chatSettings?.reply_chance_percent ?? "") ||
                         undefined
@@ -254,16 +259,18 @@ const ChatSettingsPage: React.FC = () => {
                         value: String(i * 10),
                         label:
                           i === 0
-                            ? "Never"
+                            ? t("never")
                             : i === 10
-                            ? "Always"
-                            : `${i * 10}% of the time`,
+                            ? t("always")
+                            : t("reply_frequency", { percent: i * 10 }),
                         disabled:
                           String(i * 10) ===
                           String(chatSettings?.reply_chance_percent ?? ""),
                       }))}
                       disabled={!!error?.isBlocker || chatSettings?.is_private}
-                      placeholder={error?.isBlocker ? "—" : "Select Frequency"}
+                      placeholder={
+                        error?.isBlocker ? "—" : t("spontaneous_placeholder")
+                      }
                       className="mt-9"
                     />
                   </>
@@ -277,13 +284,13 @@ const ChatSettingsPage: React.FC = () => {
                 <TokenDataSheet
                   decoded={accessToken.decoded}
                   labels={{
-                    chatRole: "Chat role",
-                    telegramUsername: "Telegram Username",
-                    telegramUserId: "Telegram User ID",
-                    profileId: "Profile ID",
-                    chatId: "Chat ID",
+                    chatRole: t("token_info.chat_role"),
+                    telegramUsername: t("token_info.telegram_username"),
+                    telegramUserId: t("token_info.telegram_user_id"),
+                    profileId: t("token_info.profile_id"),
+                    chatId: t("token_info.chat_id"),
                   }}
-                  copiedMessage={"Copied!"}
+                  copiedMessage={t("copied")}
                   iconClassName="w-4 h-4 text-blue-300/30"
                 />
               )}
@@ -294,9 +301,9 @@ const ChatSettingsPage: React.FC = () => {
 
       {error && (
         <ErrorMessage
-          title={"Oh no!"}
+          title={t("errors.oh_no")}
           description={error?.text}
-          genericMessage={"Check your access link and try again."}
+          genericMessage={t("errors.check_link")}
         />
       )}
     </div>

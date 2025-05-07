@@ -25,7 +25,7 @@ export const LLM_LANGUAGES: Language[] = [
     flagEmoji: "🇬🇧",
   },
   {
-    isoCode: "rs",
+    isoCode: "sr",
     defaultName: "Serbian",
     localizedName: "Srpski",
     flagEmoji: "🇷🇸",
@@ -370,7 +370,7 @@ export const INTERFACE_LANGUAGES: Language[] = [
     flagEmoji: "🇬🇧",
   },
   {
-    isoCode: "rs",
+    isoCode: "sr",
     defaultName: "Serbian",
     localizedName: "Srpski",
     flagEmoji: "🇷🇸",

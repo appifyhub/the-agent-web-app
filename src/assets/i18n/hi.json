@@ -1,0 +1,35 @@
+{
+  "chat": "चैट",
+  "profile": "प्रोफ़ाइल",
+  "configure_title": "{botName} का व्यवहार कॉन्फ़िगर करें",
+  "configure_keys_title": "{botName} की एक्सेस कुंजियाँ कॉन्फ़िगर करें",
+  "preferred_language_label": "{botName} निम्न भाषा में उत्तर देने का प्रयास करता है:",
+  "preferred_language_placeholder": "भाषा चुनें",
+  "spontaneous_label": "{botName} बिना टैग किए उत्तर देता है:",
+  "spontaneous_placeholder": "आवृत्ति चुनें",
+  "never": "कभी नहीं",
+  "always": "हमेशा",
+  "reply_frequency": "{percent}% समय",
+  "save": "सहेजें",
+  "saved": "सहेजा गया!",
+  "copied": "कॉपी किया गया!",
+  "token_info": {
+    "chat_role": "चैट role",
+    "telegram_username": "टेलीग्राम उपयोगकर्ता नाम",
+    "telegram_user_id": "टेलीग्राम उपयोगकर्ता आईडी",
+    "profile_id": "प्रोफ़ाइल ID",
+    "chat_id": "चैट ID"
+  },
+  "provider_needed_for": "{botName} को इसके लिए {tools} चाहिए",
+  "where_is_my_key": "मेरा {providerName} कुंजी कहाँ है?",
+  "errors": {
+    "oh_no": "ओह नहीं!",
+    "expired": "आपका सत्र समाप्त हो गया है।",
+    "not_found": "आपका सत्र नहीं मिला।",
+    "not_valid": "आपका सत्र मान्य नहीं है।",
+    "misconfigured": "आपका सत्र गलत कॉन्फ़िगर किया गया है।",
+    "fetch_failed": "सेटिंग्स लोड करने में विफल।",
+    "save_failed": "सेटिंग्स सहेजने में विफल।",
+    "check_link": "अपना एक्सेस लिंक जांचें और पुनः प्रयास करें।"
+  }
+}

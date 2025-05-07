@@ -35,10 +35,6 @@ function App() {
         <Route
           path="/"
           element={(() => {
-            console.log(
-              "Reached the root path! Path: ",
-              window.location.pathname
-            );
             if (window.location.pathname === "/") {
               window.location.href = import.meta.env.VITE_LANDING_PAGE_URL;
             }

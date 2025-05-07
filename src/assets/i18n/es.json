@@ -1,0 +1,35 @@
+{
+  "chat": "Chat",
+  "profile": "Perfil",
+  "configure_title": "Configurar el comportamiento de {botName}",
+  "configure_keys_title": "Configurar las claves de acceso de {botName}",
+  "preferred_language_label": "{botName} intenta responder usando:",
+  "preferred_language_placeholder": "Selecciona un idioma",
+  "spontaneous_label": "{botName} responde sin ser etiquetado:",
+  "spontaneous_placeholder": "Selecciona la frecuencia",
+  "never": "Nunca",
+  "always": "Siempre",
+  "reply_frequency": "{percent}% del tiempo",
+  "save": "Guardar",
+  "saved": "¡Guardado!",
+  "copied": "¡Copiado!",
+  "token_info": {
+    "chat_role": "Chat role",
+    "telegram_username": "Nombre de usuario de Telegram",
+    "telegram_user_id": "ID de usuario de Telegram",
+    "profile_id": "Perfil ID",
+    "chat_id": "Chat ID"
+  },
+  "provider_needed_for": "{botName} necesita esto para {tools}",
+  "where_is_my_key": "¿Dónde está mi clave de {providerName}?",
+  "errors": {
+    "oh_no": "¡Oh no!",
+    "expired": "Tu sesión ha expirado.",
+    "not_found": "Tu sesión no se encuentra.",
+    "not_valid": "Tu sesión no es válida.",
+    "misconfigured": "Tu sesión está mal configurada.",
+    "fetch_failed": "Error al cargar la configuración.",
+    "save_failed": "Error al guardar la configuración.",
+    "check_link": "Verifica tu enlace de acceso e inténtalo de nuevo."
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "chat": "دردشة",
+  "profile": "الملف الشخصي",
+  "configure_title": "تكوين سلوك {botName}",
+  "configure_keys_title": "تكوين مفاتيح الوصول لـ {botName}",
+  "preferred_language_label": "يحاول {botName} الرد باستخدام:",
+  "preferred_language_placeholder": "اختر لغة",
+  "spontaneous_label": "يرد {botName} دون أن يتم وضع علامة عليه:",
+  "spontaneous_placeholder": "اختر التكرار",
+  "never": "أبدًا",
+  "always": "دائمًا",
+  "reply_frequency": "{percent}% من الوقت",
+  "save": "حفظ",
+  "saved": "تم الحفظ!",
+  "copied": "تم النسخ!",
+  "token_info": {
+    "chat_role": "دردشة role",
+    "telegram_username": "اسم مستخدم تيليجرام",
+    "telegram_user_id": "معرّف مستخدم تيليجرام",
+    "profile_id": "الملف الشخصي ID",
+    "chat_id": "دردشة ID"
+  },
+  "provider_needed_for": "{botName} يحتاج هذا لـ {tools}",
+  "where_is_my_key": "أين مفتاح {providerName} الخاص بي؟",
+  "errors": {
+    "oh_no": "أوه لا!",
+    "expired": "انتهت صلاحية جلستك.",
+    "not_found": "لم يتم العثور على جلستك.",
+    "not_valid": "جلستك غير صالحة.",
+    "misconfigured": "تم تكوين جلستك بشكل غير صحيح.",
+    "fetch_failed": "فشل في تحميل الإعدادات.",
+    "save_failed": "فشل في حفظ الإعدادات.",
+    "check_link": "تحقق من رابط الوصول الخاص بك وحاول مرة أخرى."
+  }
+}
