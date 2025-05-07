@@ -26,7 +26,7 @@ import {
   AccessToken,
   TokenExpiredError,
   TokenMissingError,
-} from "@/lib/AccessToken";
+} from "@/lib/tokens";
 
 const UserSettingsPage: React.FC = () => {
   const [searchParams] = useSearchParams();

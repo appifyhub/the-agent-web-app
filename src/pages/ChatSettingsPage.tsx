@@ -20,7 +20,7 @@ import {
   AccessToken,
   TokenExpiredError,
   TokenMissingError,
-} from "@/lib/AccessToken";
+} from "@/lib/tokens";
 import {
   DEFAULT_LANGUAGE,
   INTERFACE_LANGUAGES,
