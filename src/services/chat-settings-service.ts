@@ -1,3 +1,5 @@
+import { request } from "@/services/networking";
+
 export interface ChatSettings {
   chat_id: string;
   title: string;
@@ -21,7 +23,7 @@ export async function fetchChatSettings({
     "Content-Type": "application/json",
     Authorization: `Bearer ${rawToken}`,
   };
-  const response = await fetch(`${apiBaseUrl}/settings/chat/${chat_id}`, {
+  const response = await request(`${apiBaseUrl}/settings/chat/${chat_id}`, {
     method: "GET",
     headers: headers,
   });
@@ -53,7 +55,7 @@ export async function saveChatSettings({
     language_iso_code: chatSettings.language_iso_code,
     reply_chance_percent: chatSettings.reply_chance_percent,
   };
-  const response = await fetch(`${apiBaseUrl}/settings/chat/${chat_id}`, {
+  const response = await request(`${apiBaseUrl}/settings/chat/${chat_id}`, {
     method: "PATCH",
     headers: headers,
     body: JSON.stringify(payload),

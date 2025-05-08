@@ -22,7 +22,7 @@ import {
   saveUserSettings,
   UserSettings,
   PROVIDER_KEY_MAP,
-} from "@/services/UserSettingsService";
+} from "@/services/user-settings-service";
 import {
   AccessToken,
   TokenExpiredError,
