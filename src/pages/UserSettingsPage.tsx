@@ -211,7 +211,7 @@ const UserSettingsPage: React.FC = () => {
               expiryTimestamp={accessToken?.decoded?.exp || 0}
               onTokenExpired={handleTokenExpired}
               onSaveClicked={handleSave}
-              saveLabel={"Save"}
+              saveLabel={t("save")}
               disabled={
                 !areSettingsChanged || isLoadingState || !!error?.isBlocker
               }
