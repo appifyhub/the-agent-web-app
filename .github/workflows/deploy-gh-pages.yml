@@ -26,6 +26,12 @@ jobs:
         run: bun install
 
       - name: Build
+        env:
+          VITE_APP_BASE_URL: ${{ vars.VITE_APP_BASE_URL }}
+          VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL }}
+          VITE_LANDING_PAGE_URL: ${{ vars.VITE_LANDING_PAGE_URL }}
+          VITE_APP_NAME: ${{ vars.VITE_APP_NAME }}
+          VITE_APP_NAME_SHORT: ${{ vars.VITE_APP_NAME_SHORT }}
         run: bun run build
 
       - name: Upload artifact
