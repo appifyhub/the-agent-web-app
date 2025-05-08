@@ -1,3 +1,5 @@
+import { request } from "@/services/networking";
+
 export interface UserSettings {
   id: string;
   full_name?: string;
@@ -33,7 +35,7 @@ export async function fetchUserSettings({
     "Content-Type": "application/json",
     Authorization: `Bearer ${rawToken}`,
   };
-  const response = await fetch(`${apiBaseUrl}/settings/user/${user_id}`, {
+  const response = await request(`${apiBaseUrl}/settings/user/${user_id}`, {
     method: "GET",
     headers: headers,
   });
@@ -67,7 +69,7 @@ export async function saveUserSettings({
     Authorization: `Bearer ${rawToken}`,
   };
   const payload = { open_ai_key, anthropic_key, rapid_api_key, coin_api_key };
-  const response = await fetch(`${apiBaseUrl}/settings/user/${user_id}`, {
+  const response = await request(`${apiBaseUrl}/settings/user/${user_id}`, {
     method: "PATCH",
     headers: headers,
     body: JSON.stringify(payload),

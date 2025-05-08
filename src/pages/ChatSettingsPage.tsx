@@ -16,7 +16,7 @@ import {
   fetchChatSettings,
   saveChatSettings,
   ChatSettings,
-} from "@/services/ChatSettingsService";
+} from "@/services/chat-settings-service";
 import {
   AccessToken,
   TokenExpiredError,
