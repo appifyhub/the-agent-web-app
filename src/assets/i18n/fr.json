@@ -14,11 +14,12 @@
   "saved": "Enregistré !",
   "copied": "Copié !",
   "token_info": {
-    "chat_role": "Discussion role",
-    "telegram_username": "Nom d'utilisateur Telegram",
-    "telegram_user_id": "ID utilisateur Telegram",
     "profile_id": "Profil ID",
-    "chat_id": "Discussion ID"
+    "chat_id": "Discussion ID",
+    "telegram_user_id": "ID utilisateur Telegram",
+    "telegram_username": "Nom d'utilisateur Telegram",
+    "chat_role": "Rôle dans la discussion",
+    "version": "Version"
   },
   "provider_needed_for": "{botName} a besoin de ceci pour {tools}",
   "where_is_my_key": "Où est ma clé {providerName} ?",

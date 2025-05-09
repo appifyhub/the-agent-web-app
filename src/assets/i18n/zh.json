@@ -14,11 +14,12 @@
   "saved": "已保存！",
   "copied": "已复制！",
   "token_info": {
-    "chat_role": "聊天角色",
-    "telegram_username": "Telegram 用户名",
-    "telegram_user_id": "Telegram 用户ID",
     "profile_id": "个人资料ID",
-    "chat_id": "聊天ID"
+    "chat_id": "聊天ID",
+    "telegram_user_id": "Telegram 用户ID",
+    "telegram_username": "Telegram 用户名",
+    "chat_role": "聊天角色",
+    "version": "版本"
   },
   "provider_needed_for": "{botName} 需要此用于 {tools}",
   "where_is_my_key": "我的 {providerName} 密钥在哪里？",

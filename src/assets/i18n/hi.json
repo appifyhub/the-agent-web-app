@@ -14,11 +14,12 @@
   "saved": "सहेजा गया!",
   "copied": "कॉपी किया गया!",
   "token_info": {
-    "chat_role": "चैट role",
-    "telegram_username": "टेलीग्राम उपयोगकर्ता नाम",
-    "telegram_user_id": "टेलीग्राम उपयोगकर्ता आईडी",
     "profile_id": "प्रोफ़ाइल ID",
-    "chat_id": "चैट ID"
+    "chat_id": "चैट ID",
+    "telegram_user_id": "टेलीग्राम उपयोगकर्ता आईडी",
+    "telegram_username": "टेलीग्राम उपयोगकर्ता नाम",
+    "chat_role": "चैट भूमिका",
+    "version": "संस्करण"
   },
   "provider_needed_for": "{botName} को इसके लिए {tools} चाहिए",
   "where_is_my_key": "मेरा {providerName} कुंजी कहाँ है?",

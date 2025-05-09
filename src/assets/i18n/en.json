@@ -14,11 +14,12 @@
   "saved": "Saved!",
   "copied": "Copied!",
   "token_info": {
-    "chat_role": "Chat role",
-    "telegram_username": "Telegram Username",
-    "telegram_user_id": "Telegram User ID",
     "profile_id": "Profile ID",
-    "chat_id": "Chat ID"
+    "chat_id": "Chat ID",
+    "telegram_user_id": "Telegram User ID",
+    "telegram_username": "Telegram Username",
+    "chat_role": "Chat role",
+    "version": "Version"
   },
   "provider_needed_for": "{botName} needs this for {tools}",
   "where_is_my_key": "Where is my {providerName} key?",
