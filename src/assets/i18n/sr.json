@@ -14,11 +14,12 @@
   "saved": "Sačuvano!",
   "copied": "Kopirano!",
   "token_info": {
-    "chat_role": "Uloga u četu",
-    "telegram_username": "Telegram korisničko ime",
-    "telegram_user_id": "Telegram korisnički ID",
     "profile_id": "ID profila",
-    "chat_id": "ID četa"
+    "chat_id": "ID četa",
+    "telegram_user_id": "Telegram korisnički ID",
+    "telegram_username": "Telegram korisničko ime",
+    "chat_role": "Uloga u četu",
+    "version": "Verzija"
   },
   "provider_needed_for": "{botName} ovo koristi za {tools}",
   "where_is_my_key": "Gde je moj {providerName} ključ?",

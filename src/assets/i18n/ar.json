@@ -14,11 +14,12 @@
   "saved": "تم الحفظ!",
   "copied": "تم النسخ!",
   "token_info": {
-    "chat_role": "دردشة role",
-    "telegram_username": "اسم مستخدم تيليجرام",
-    "telegram_user_id": "معرّف مستخدم تيليجرام",
     "profile_id": "الملف الشخصي ID",
-    "chat_id": "دردشة ID"
+    "chat_id": "دردشة ID",
+    "telegram_user_id": "معرّف مستخدم تيليجرام",
+    "telegram_username": "اسم مستخدم تيليجرام",
+    "chat_role": "دور الدردشة",
+    "version": "الإصدار"
   },
   "provider_needed_for": "{botName} يحتاج هذا لـ {tools}",
   "where_is_my_key": "أين مفتاح {providerName} الخاص بي؟",
