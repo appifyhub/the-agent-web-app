@@ -5,6 +5,14 @@
   "configure_keys_title": "تكوين مفاتيح الوصول لـ {botName}",
   "preferred_language_label": "يحاول {botName} الرد باستخدام:",
   "preferred_language_placeholder": "اختر لغة",
+  "notifications": {
+    "releases_label": "يجب أن يُخطِرني {botName} بالإصدارات:",
+    "releases_placeholder": "اختر مستوى",
+    "releases_choice_none": "أبدًا",
+    "releases_choice_major": "فقط الهامة",
+    "releases_choice_minor": "كل الميزات الجديدة",
+    "releases_choice_all": "جميع التغييرات"
+  },
   "spontaneous_label": "يرد {botName} دون أن يتم وضع علامة عليه:",
   "spontaneous_placeholder": "اختر التكرار",
   "never": "أبدًا",
