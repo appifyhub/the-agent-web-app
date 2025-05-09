@@ -5,6 +5,14 @@
   "configure_keys_title": "Podesite pristupne ključeve za {botName}a",
   "preferred_language_label": "{botName} će pokušati da odgovori koristeći:",
   "preferred_language_placeholder": "Izaberite jezik",
+  "notifications": {
+    "releases_label": "{botName} treba da me obavesti o izdanjima:",
+    "releases_placeholder": "Izaberite nivo",
+    "releases_choice_none": "Nikada",
+    "releases_choice_major": "Samo važno",
+    "releases_choice_minor": "Sve nove funkcije",
+    "releases_choice_all": "Sve promene"
+  },
   "spontaneous_label": "{botName} će odgovarati bez taga:",
   "spontaneous_placeholder": "Izaberite učestalost",
   "never": "Nikada",

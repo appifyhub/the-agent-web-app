@@ -5,6 +5,14 @@
   "configure_keys_title": "Configure {botName}'s Access Keys",
   "preferred_language_label": "{botName} tries to reply using:",
   "preferred_language_placeholder": "Select a language",
+  "notifications": {
+    "releases_label": "{botName} should notify me of releases:",
+    "releases_placeholder": "Select a level",
+    "releases_choice_none": "Never",
+    "releases_choice_major": "Only important",
+    "releases_choice_minor": "All new features",
+    "releases_choice_all": "All changes"
+  },
   "spontaneous_label": "{botName} replies without being tagged:",
   "spontaneous_placeholder": "Select how often",
   "never": "Never",

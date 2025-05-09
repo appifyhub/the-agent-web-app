@@ -5,6 +5,14 @@
   "configure_keys_title": "Zugangsschlüssel von {botName} konfigurieren",
   "preferred_language_label": "{botName} versucht zu antworten mit:",
   "preferred_language_placeholder": "Sprache auswählen",
+  "notifications": {
+    "releases_label": "{botName} soll mich über Releases benachrichtigen:",
+    "releases_placeholder": "Niveau auswählen",
+    "releases_choice_none": "Nie",
+    "releases_choice_major": "Nur Wichtiges",
+    "releases_choice_minor": "Alle neuen Funktionen",
+    "releases_choice_all": "Alle Änderungen"
+  },
   "spontaneous_label": "{botName} antwortet ohne Markierung:",
   "spontaneous_placeholder": "Häufigkeit auswählen",
   "never": "Nie",
