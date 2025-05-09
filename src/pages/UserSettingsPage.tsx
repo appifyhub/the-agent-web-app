@@ -84,7 +84,7 @@ const UserSettingsPage: React.FC = () => {
       return;
     }
 
-    console.info("Session parameters are available!");
+    console.info("Session parameters are available!", accessToken.decoded);
     const fetchSettings = async () => {
       setIsLoadingState(true);
       setError(null);
@@ -321,13 +321,6 @@ const UserSettingsPage: React.FC = () => {
               {accessToken && (
                 <TokenDataSheet
                   decoded={accessToken.decoded}
-                  labels={{
-                    chatRole: t("token_info.chat_role"),
-                    telegramUsername: t("token_info.telegram_username"),
-                    telegramUserId: t("token_info.telegram_user_id"),
-                    profileId: t("token_info.profile_id"),
-                    chatId: t("token_info.chat_id"),
-                  }}
                   copiedMessage={t("copied")}
                   iconClassName="w-4 h-4 text-blue-300/30"
                 />

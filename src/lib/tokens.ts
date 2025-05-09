@@ -24,6 +24,7 @@ export interface DecodedToken {
   telegram_username?: string; // TUN
   exp: number; // expiry timestamp
   iat: number; // issue timestamp
+  version: string; // service version
 }
 
 export class AccessToken {
