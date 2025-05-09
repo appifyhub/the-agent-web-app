@@ -3,6 +3,7 @@ import { useParams, useSearchParams } from "react-router-dom";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import logoVector from "@/assets/logo-vector.svg";
 import Header from "@/components/Header";
+import type { ReleaseNotificationsSetting } from "@/services/chat-settings-service";
 import SettingControls from "@/components/SettingControls";
 import TokenDataSheet from "@/components/TokenDataSheet";
 import SettingSelector from "@/components/SettingSelector";
@@ -112,7 +113,10 @@ const ChatSettingsPage: React.FC = () => {
     remoteSettings &&
     (chatSettings.language_name !== remoteSettings.language_name ||
       chatSettings.language_iso_code !== remoteSettings.language_iso_code ||
-      chatSettings.reply_chance_percent !== remoteSettings.reply_chance_percent)
+      chatSettings.reply_chance_percent !==
+        remoteSettings.reply_chance_percent ||
+      chatSettings.release_notifications !==
+        remoteSettings.release_notifications)
   );
 
   const handleSave = async () => {
@@ -200,6 +204,7 @@ const ChatSettingsPage: React.FC = () => {
                       {t("configure_title", { botName })}
                     </CardTitle>
                     <div className="h-4" />
+
                     {/* The Preferred Language Dropdown */}
                     <SettingSelector
                       label={t("preferred_language_label", { botName })}
@@ -241,12 +246,63 @@ const ChatSettingsPage: React.FC = () => {
                       }
                     />
 
+                    {/* Release Notifications Dropdown */}
+                    <SettingSelector
+                      label={t("notifications.releases_label", { botName })}
+                      value={chatSettings?.release_notifications || undefined}
+                      onChange={(val) =>
+                        setChatSettings((prev) =>
+                          prev
+                            ? {
+                                ...prev,
+                                release_notifications:
+                                  val as ReleaseNotificationsSetting,
+                              }
+                            : prev
+                        )
+                      }
+                      options={[
+                        {
+                          value: "none",
+                          label: t("notifications.releases_choice_none"),
+                          disabled:
+                            chatSettings?.release_notifications === "none",
+                        },
+                        {
+                          value: "major",
+                          label: t("notifications.releases_choice_major"),
+                          disabled:
+                            chatSettings?.release_notifications === "major",
+                        },
+                        {
+                          value: "minor",
+                          label: t("notifications.releases_choice_minor"),
+                          disabled:
+                            chatSettings?.release_notifications === "minor",
+                        },
+                        {
+                          value: "all",
+                          label: t("notifications.releases_choice_all"),
+                          disabled:
+                            chatSettings?.release_notifications === "all",
+                        },
+                      ]}
+                      disabled={!!error?.isBlocker}
+                      placeholder={
+                        error?.isBlocker
+                          ? "—"
+                          : t("notifications.releases_placeholder")
+                      }
+                      className="mt-9"
+                    />
+
                     {/* The Spontaneous Interaction Chance Dropdown */}
                     <SettingSelector
                       label={t("spontaneous_label", { botName })}
                       value={
-                        String(chatSettings?.reply_chance_percent ?? "") ||
-                        undefined
+                        chatSettings?.reply_chance_percent
+                          ? String(chatSettings.reply_chance_percent)
+                          : undefined
                       }
                       onChange={(val) =>
                         setChatSettings((prev) =>
