@@ -5,6 +5,14 @@
   "configure_keys_title": "{botName} की एक्सेस कुंजियाँ कॉन्फ़िगर करें",
   "preferred_language_label": "{botName} निम्न भाषा में उत्तर देने का प्रयास करता है:",
   "preferred_language_placeholder": "भाषा चुनें",
+  "notifications": {
+    "releases_label": "{botName} मुझे रिलीज़ के बारे में सूचित करे:",
+    "releases_placeholder": "स्तर चुनें",
+    "releases_choice_none": "कभी नहीं",
+    "releases_choice_major": "केवल महत्वपूर्ण",
+    "releases_choice_minor": "सभी नई सुविधाएँ",
+    "releases_choice_all": "सभी बदलाव"
+  },
   "spontaneous_label": "{botName} बिना टैग किए उत्तर देता है:",
   "spontaneous_placeholder": "आवृत्ति चुनें",
   "never": "कभी नहीं",
