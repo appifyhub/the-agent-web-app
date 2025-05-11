@@ -5,6 +5,7 @@ on:
     types: [opened, synchronize, reopened]
     branches:
       - "dependabot/**"
+  workflow_dispatch:
 
 jobs:
   update-lockfiles:
