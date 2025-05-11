@@ -1,0 +1,50 @@
+name: "Dependabot Lockfile Updates"
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - "dependabot/**"
+
+jobs:
+  update-lockfiles:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies with npm
+        run: npm install
+
+      - name: Install dependencies with Bun
+        run: bun install
+
+      - name: Check for lockfile changes
+        id: git-diff
+        run: |
+          git add package-lock.json bun.lock || true
+          if ! git diff --cached --quiet; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit and push lockfile updates
+        if: steps.git-diff.outputs.changed == 'true'
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -am "ci: update lockfiles (bun & npm) [auto]"
+          git push
