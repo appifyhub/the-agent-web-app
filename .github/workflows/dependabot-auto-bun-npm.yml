@@ -2,13 +2,12 @@ name: "Dependabot Lockfile Updates"
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
     branches:
-      - "dependabot/**"
-  workflow_dispatch:
+      - main
 
 jobs:
   update-lockfiles:
+    if: github.actor == 'dependabot[bot]'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -16,7 +15,7 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
-      - name: Set up Node.js
+      - name: Set up NodeJS
         uses: actions/setup-node@v4
         with:
           node-version: "20"
@@ -29,7 +28,7 @@ jobs:
       - name: Install dependencies with npm
         run: npm install
 
-      - name: Install dependencies with Bun
+      - name: Install dependencies with bun
         run: bun install
 
       - name: Check for lockfile changes
@@ -47,5 +46,5 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git commit -am "ci: update lockfiles (bun & npm) [auto]"
+          git commit -am "CI [Automated]: Update lockfiles"
           git push
