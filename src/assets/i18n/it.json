@@ -5,6 +5,7 @@
   "configure_keys_title": "Configura le chiavi di accesso di {botName}",
   "preferred_language_label": "{botName} cerca di rispondere usando:",
   "preferred_language_placeholder": "Seleziona una lingua",
+  "loading_placeholder": "Caricamento…",
   "notifications": {
     "releases_label": "{botName} dovrebbe avvisarmi delle release:",
     "releases_placeholder": "Seleziona un livello",
@@ -23,7 +24,6 @@
   "copied": "Copiato!",
   "token_info": {
     "profile_id": "Profilo ID",
-    "chat_id": "Chat ID",
     "telegram_user_id": "ID utente Telegram",
     "telegram_username": "Nome utente Telegram",
     "chat_role": "Ruolo nella chat",

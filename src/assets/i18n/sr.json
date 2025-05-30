@@ -5,6 +5,7 @@
   "configure_keys_title": "Podesite pristupne ključeve za {botName}a",
   "preferred_language_label": "{botName} će pokušati da odgovori koristeći:",
   "preferred_language_placeholder": "Izaberite jezik",
+  "loading_placeholder": "Učitavanje…",
   "notifications": {
     "releases_label": "{botName} treba da me obavesti o izdanjima:",
     "releases_placeholder": "Izaberite nivo",
@@ -23,7 +24,6 @@
   "copied": "Kopirano!",
   "token_info": {
     "profile_id": "ID profila",
-    "chat_id": "ID četa",
     "telegram_user_id": "Telegram korisnički ID",
     "telegram_username": "Telegram korisničko ime",
     "chat_role": "Uloga u četu",
