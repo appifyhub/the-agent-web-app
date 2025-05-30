@@ -326,7 +326,7 @@ const ChatSettingsPage: React.FC = () => {
                     <SettingSelector
                       label={t("spontaneous_label", { botName })}
                       value={
-                        chatSettings?.reply_chance_percent
+                        typeof chatSettings?.reply_chance_percent === "number"
                           ? String(chatSettings.reply_chance_percent)
                           : undefined
                       }
