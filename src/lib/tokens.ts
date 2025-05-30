@@ -15,11 +15,9 @@ export class TokenMissingError extends Error {
 }
 
 export interface DecodedToken {
-  aud: string; // display name
   iss: string; // bot name
   sub: string; // internal profile ID
   role: string; // chat role (member, manager, creator...)
-  chat_id: number | string; // CID
   telegram_user_id: number | string; // TID
   telegram_username?: string; // TUN
   exp: number; // expiry timestamp
