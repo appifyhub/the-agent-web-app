@@ -22,6 +22,8 @@ import {
   saveUserSettings,
   UserSettings,
   PROVIDER_KEY_MAP,
+  fetchUserChats,
+  ChatInfo,
 } from "@/services/user-settings-service";
 import {
   AccessToken,
@@ -43,6 +45,7 @@ const UserSettingsPage: React.FC = () => {
   const [remoteSettings, setRemoteSettings] = useState<UserSettings | null>(
     null
   );
+  const [chats, setChats] = useState<ChatInfo[]>([]);
 
   const handleTokenExpired = () => {
     console.warn("Settings token expired");
@@ -90,16 +93,16 @@ const UserSettingsPage: React.FC = () => {
       setError(null);
       try {
         const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
-        const data = await fetchUserSettings({
-          apiBaseUrl,
-          user_id,
-          rawToken: accessToken.raw,
-        });
-        console.info("Fetched settings!", data);
-        setUserSettings(data);
-        setRemoteSettings(data);
-      } catch (fetchError) {
-        console.error("Error fetching settings!", fetchError);
+        const [settings, chats] = await Promise.all([
+          fetchUserSettings({ apiBaseUrl, user_id, rawToken: accessToken.raw }),
+          fetchUserChats({ apiBaseUrl, user_id, rawToken: accessToken.raw }),
+        ]);
+        console.info("Fetched settings!", settings);
+        setUserSettings(settings);
+        setRemoteSettings(settings);
+        setChats(chats);
+      } catch (err) {
+        console.error("Error fetching settings or chats!", err);
         setError(PageError.blocker(t("errors.fetch_failed")));
       } finally {
         setIsLoadingState(false);
@@ -186,16 +189,30 @@ const UserSettingsPage: React.FC = () => {
     <div className="flex flex-col min-h-screen">
       {/* The Header section */}
       <Header
-        boldSectionContent={t("profile")}
-        regularSectionContent={accessToken?.decoded?.aud || ""}
-        currentLanguage={currentInterfaceLanguage}
-        supportedLanguages={INTERFACE_LANGUAGES}
         iconUrl={logoVector}
+        pageTitle={t("profile")}
+        chats={chats}
+        selectedChat={undefined}
+        languages={INTERFACE_LANGUAGES}
+        selectedLanguage={currentInterfaceLanguage}
+        loadingPlaceholder={t("loading_placeholder")}
         onLangChange={(isoCode) => {
           console.info("Interface language changed to:", isoCode);
           const replacedHref = window.location.href.replace(
             `/${lang_iso_code}/`,
             `/${isoCode}/`
+          );
+          console.info("Replaced href:", replacedHref);
+          window.location.href = replacedHref;
+        }}
+        onChatChange={(chatId) => {
+          if (!chatId) {
+            console.log("Chat deselected in Header (User Settings)");
+            return;
+          }
+          const replacedHref = window.location.href.replace(
+            `/user/${user_id}/settings`,
+            `/chat/${chatId}/settings`
           );
           console.info("Replaced href:", replacedHref);
           window.location.href = replacedHref;
