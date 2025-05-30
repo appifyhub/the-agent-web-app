@@ -5,6 +5,7 @@
   "configure_keys_title": "Configure {botName}'s Access Keys",
   "preferred_language_label": "{botName} tries to reply using:",
   "preferred_language_placeholder": "Select a language",
+  "loading_placeholder": "Loading…",
   "notifications": {
     "releases_label": "{botName} should notify me of releases:",
     "releases_placeholder": "Select a level",
@@ -23,7 +24,6 @@
   "copied": "Copied!",
   "token_info": {
     "profile_id": "Profile ID",
-    "chat_id": "Chat ID",
     "telegram_user_id": "Telegram User ID",
     "telegram_username": "Telegram Username",
     "chat_role": "Chat role",
