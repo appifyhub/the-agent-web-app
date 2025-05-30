@@ -157,6 +157,11 @@
   letter-spacing: 0.01em;
 }
 
+::selection {
+  background-color: oklch(0.4632 0.1554 360);
+  color: oklch(0.8574 0.0913 360);
+}
+
 .text-accent-strong {
   color: var(--color-accent-strong);
 }
