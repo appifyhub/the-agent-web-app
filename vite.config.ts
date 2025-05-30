@@ -11,4 +11,16 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  server: {
+    allowedHosts: [
+      "localhost",
+      "localhost:5173",
+      "127.0.0.1",
+      "127.0.0.1:5173",
+      "localhost.nip.io",
+      "localhost.nip.io:5173",
+      "127.0.0.1.nip.io",
+      "127.0.0.1.nip.io:5173",
+    ],
+  },
 });

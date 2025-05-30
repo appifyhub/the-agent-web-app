@@ -5,6 +5,7 @@
   "configure_keys_title": "تكوين مفاتيح الوصول لـ {botName}",
   "preferred_language_label": "يحاول {botName} الرد باستخدام:",
   "preferred_language_placeholder": "اختر لغة",
+  "loading_placeholder": "جاري التحميل…",
   "notifications": {
     "releases_label": "يجب أن يُخطِرني {botName} بالإصدارات:",
     "releases_placeholder": "اختر مستوى",
@@ -23,7 +24,6 @@
   "copied": "تم النسخ!",
   "token_info": {
     "profile_id": "الملف الشخصي ID",
-    "chat_id": "دردشة ID",
     "telegram_user_id": "معرّف مستخدم تيليجرام",
     "telegram_username": "اسم مستخدم تيليجرام",
     "chat_role": "دور الدردشة",

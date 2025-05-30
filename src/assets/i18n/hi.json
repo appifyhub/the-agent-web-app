@@ -5,6 +5,7 @@
   "configure_keys_title": "{botName} की एक्सेस कुंजियाँ कॉन्फ़िगर करें",
   "preferred_language_label": "{botName} निम्न भाषा में उत्तर देने का प्रयास करता है:",
   "preferred_language_placeholder": "भाषा चुनें",
+  "loading_placeholder": "लोड हो रहा है...",
   "notifications": {
     "releases_label": "{botName} मुझे रिलीज़ के बारे में सूचित करे:",
     "releases_placeholder": "स्तर चुनें",
@@ -23,7 +24,6 @@
   "copied": "कॉपी किया गया!",
   "token_info": {
     "profile_id": "प्रोफ़ाइल ID",
-    "chat_id": "चैट ID",
     "telegram_user_id": "टेलीग्राम उपयोगकर्ता आईडी",
     "telegram_username": "टेलीग्राम उपयोगकर्ता नाम",
     "chat_role": "चैट भूमिका",

@@ -18,6 +18,7 @@ import {
   saveChatSettings,
   ChatSettings,
 } from "@/services/chat-settings-service";
+import { fetchUserChats, ChatInfo } from "@/services/user-settings-service";
 import {
   AccessToken,
   TokenExpiredError,
@@ -43,6 +44,7 @@ const ChatSettingsPage: React.FC = () => {
   const [remoteSettings, setRemoteSettings] = useState<ChatSettings | null>(
     null
   );
+  const [chats, setChats] = useState<ChatInfo[]>([]);
 
   const handleTokenExpired = () => {
     console.error("Settings token expired");
@@ -90,16 +92,21 @@ const ChatSettingsPage: React.FC = () => {
       setError(null);
       try {
         const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
-        const data = await fetchChatSettings({
-          apiBaseUrl,
-          chat_id,
-          rawToken: accessToken.raw,
-        });
-        console.info("Fetched settings!", data);
-        setChatSettings(data);
-        setRemoteSettings(data);
-      } catch (fetchError) {
-        console.error("Error fetching settings!", fetchError);
+        const userId = accessToken.decoded.sub;
+        const [settings, chats] = await Promise.all([
+          fetchChatSettings({ apiBaseUrl, chat_id, rawToken: accessToken.raw }),
+          fetchUserChats({
+            apiBaseUrl,
+            user_id: userId,
+            rawToken: accessToken.raw,
+          }),
+        ]);
+        console.info("Fetched settings!", settings);
+        setChatSettings(settings);
+        setRemoteSettings(settings);
+        setChats(chats);
+      } catch (err) {
+        console.error("Error fetching settings or chats!", err);
         setError(PageError.blocker(t("errors.fetch_failed")));
       } finally {
         setIsLoadingState(false);
@@ -162,16 +169,35 @@ const ChatSettingsPage: React.FC = () => {
     <div className="flex flex-col min-h-screen">
       {/* The Header section */}
       <Header
-        boldSectionContent={t("chat")}
-        regularSectionContent={accessToken?.decoded?.aud || ""}
-        currentLanguage={currentInterfaceLanguage}
-        supportedLanguages={INTERFACE_LANGUAGES}
         iconUrl={logoVector}
+        pageTitle={t("chat")}
+        chats={chats}
+        selectedChat={chats.find((chat) => chat.chat_id === chat_id)}
+        languages={INTERFACE_LANGUAGES}
+        selectedLanguage={currentInterfaceLanguage}
+        loadingPlaceholder={t("loading_placeholder")}
         onLangChange={(isoCode) => {
           console.info("Interface language changed to:", isoCode);
           const replacedHref = window.location.href.replace(
             `/${lang_iso_code}/`,
             `/${isoCode}/`
+          );
+          console.info("Replaced href:", replacedHref);
+          window.location.href = replacedHref;
+        }}
+        onChatChange={(chatId) => {
+          if (!chatId) {
+            const replacedHref = window.location.href.replace(
+              `/chat/${chat_id}/settings`,
+              `/user/${accessToken!.decoded.sub}/settings`
+            );
+            console.info("Replaced href:", replacedHref);
+            window.location.href = replacedHref;
+            return;
+          }
+          const replacedHref = window.location.href.replace(
+            `/chat/${chat_id}/settings`,
+            `/chat/${chatId}/settings`
           );
           console.info("Replaced href:", replacedHref);
           window.location.href = replacedHref;
@@ -300,7 +326,7 @@ const ChatSettingsPage: React.FC = () => {
                     <SettingSelector
                       label={t("spontaneous_label", { botName })}
                       value={
-                        chatSettings?.reply_chance_percent
+                        typeof chatSettings?.reply_chance_percent === "number"
                           ? String(chatSettings.reply_chance_percent)
                           : undefined
                       }

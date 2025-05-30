@@ -36,7 +36,6 @@ const TokenDataSheet: React.FC<TokenDataSheetProps> = ({
 }) => {
   const items: TokenDataSheetItem[] = [
     { label: t("token_info.profile_id"), value: decoded.sub, icon: Hash },
-    { label: t("token_info.chat_id"), value: decoded.chat_id, icon: Hash },
     {
       label: t("token_info.telegram_user_id"),
       value: decoded.telegram_user_id,
