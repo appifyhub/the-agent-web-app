@@ -14,6 +14,38 @@ export interface UserSettings {
   created_at?: string;
 }
 
+export interface ChatInfo {
+  chat_id: string;
+  title: string;
+  is_own: boolean;
+}
+
+export async function fetchUserChats({
+  apiBaseUrl,
+  user_id,
+  rawToken,
+}: {
+  apiBaseUrl: string;
+  user_id: string;
+  rawToken: string;
+}): Promise<ChatInfo[]> {
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${rawToken}`,
+  };
+  const response = await request(`${apiBaseUrl}/user/${user_id}/chats`, {
+    method: "GET",
+    headers: headers,
+  });
+  if (!response.ok) {
+    throw new Error(
+      `Network error!\n\tStatus: ${response.status}\n\tError: ${response.statusText}`
+    );
+  }
+  return response.json();
+}
+
+
 // Mapping of `SERVICE_PROVIDER.id` to `UserSettings` keys
 export const PROVIDER_KEY_MAP: Record<string, keyof UserSettings> = {
   "open-ai": "open_ai_key",
