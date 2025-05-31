@@ -1,4 +1,4 @@
-name: "Dependabot Lockfile Updates"
+name: "Dependabot / Lockfile Automation"
 
 on:
   pull_request:
@@ -9,6 +9,8 @@ jobs:
   update-lockfiles:
     if: github.actor == 'dependabot[bot]'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -43,8 +45,10 @@ jobs:
 
       - name: Commit and push lockfile updates
         if: steps.git-diff.outputs.changed == 'true'
+        env:
+          CI_TOKEN_ABOT: ${{ secrets.CI_TOKEN_ABOT }}
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git commit -am "CI [Automated]: Update lockfiles"
-          git push
+          git push https://x-access-token:${CI_TOKEN_ABOT}@github.com/${{ github.repository }} HEAD:${{ github.head_ref }}

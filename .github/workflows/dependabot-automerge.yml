@@ -1,0 +1,36 @@
+name: "Dependabot / Automerge"
+
+on:
+  pull_request:
+    types: [labeled]
+    branches:
+      - main
+
+jobs:
+  automerge:
+    if: github.event.pull_request.user.login == 'dependabot[bot]' && contains(github.event.pull_request.labels.*.name, 'Verified')
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: write
+    steps:
+      - name: Enable automerge for Dependabot PR
+        id: enable_automerge
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
+        run: |
+          gh pr merge -R "${{ github.repository }}" --merge --auto "${{ github.event.pull_request.number }}"
+
+      - name: Remove Verified label on failure
+        if: steps.enable_automerge.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr edit -R "${{ github.repository }}" "${{ github.event.pull_request.number }}" --remove-label Verified
+
+      - name: Fail on automerge failure
+        if: steps.enable_automerge.outcome == 'failure'
+        run: |
+          echo "Automerge failed; Verified label removed" >&2
+          exit 1
