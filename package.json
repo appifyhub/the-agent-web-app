@@ -50,7 +50,7 @@
     "globals": "^16.0.0",
     "postcss-custom-media": "^11.0.5",
     "postcss-custom-properties": "^14.0.5",
-    "postcss-custom-selectors": "^8.0.4",
+    "postcss-custom-selectors": "^8.0.5",
     "postcss-import": "^16.1.0",
     "postcss-nesting": "^13.0.1",
     "postcss-theme-ui": "^0.10.0",
