@@ -27,8 +27,8 @@
     "profile_id": "ID profila",
     "telegram_user_id": "Telegram korisnički ID",
     "telegram_username": "Telegram korisničko ime",
-    "chat_role": "Uloga u četu",
-    "version": "Verzija"
+    "version": "Verzija",
+    "reveal_placeholder": "Informacije koje prikupljamo o vama"
   },
   "provider_needed_for": "{botName} ovo koristi za {tools}",
   "where_is_my_key": "Gde je moj {providerName} ključ?",

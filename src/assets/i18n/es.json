@@ -27,8 +27,8 @@
     "profile_id": "Perfil ID",
     "telegram_user_id": "ID de usuario de Telegram",
     "telegram_username": "Nombre de usuario de Telegram",
-    "chat_role": "Rol en el chat",
-    "version": "Versión"
+    "version": "Versión",
+    "reveal_placeholder": "Información que recopilamos sobre ti"
   },
   "provider_needed_for": "{botName} necesita esto para {tools}",
   "where_is_my_key": "¿Dónde está mi clave de {providerName}?",

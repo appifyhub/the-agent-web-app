@@ -27,8 +27,8 @@
     "profile_id": "प्रोफ़ाइल ID",
     "telegram_user_id": "टेलीग्राम उपयोगकर्ता आईडी",
     "telegram_username": "टेलीग्राम उपयोगकर्ता नाम",
-    "chat_role": "चैट भूमिका",
-    "version": "संस्करण"
+    "version": "संस्करण",
+    "reveal_placeholder": "आपके बारे में हमारे द्वारा एकत्रित जानकारी"
   },
   "provider_needed_for": "{botName} को इसके लिए {tools} चाहिए",
   "where_is_my_key": "मेरा {providerName} कुंजी कहाँ है?",
