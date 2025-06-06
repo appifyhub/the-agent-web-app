@@ -27,8 +27,8 @@
     "profile_id": "Profile ID",
     "telegram_user_id": "Telegram User ID",
     "telegram_username": "Telegram Username",
-    "chat_role": "Chat role",
-    "version": "Version"
+    "version": "Version",
+    "reveal_placeholder": "Information we collect about you"
   },
   "provider_needed_for": "{botName} needs this for {tools}",
   "where_is_my_key": "Where is my {providerName} key?",
