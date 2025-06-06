@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import CopyValue from "@/components/CopyValue";
 import { cn } from "@/lib/utils";
 import type { LucideIcon } from "lucide-react";
-import { User, AtSign, Hash, Rocket } from "lucide-react";
+import { AtSign, Hash, Rocket, ChevronDown, ChevronRight } from "lucide-react";
 import type { DecodedToken } from "@/lib/tokens";
 import { t } from "@/lib/translations";
 
@@ -17,7 +17,6 @@ export interface TokenDataSheetLabels {
   chatId: string;
   telegramUserId: string;
   telegramUsername: string;
-  chatRole: string;
   version: string;
 }
 
@@ -34,6 +33,8 @@ const TokenDataSheet: React.FC<TokenDataSheetProps> = ({
   iconClassName = "w-4 h-4 text-blue-300/30",
   copiedMessage,
 }) => {
+  const [isRevealed, setIsRevealed] = useState(false);
+
   const items: TokenDataSheetItem[] = [
     { label: t("token_info.profile_id"), value: decoded.sub, icon: Hash },
     {
@@ -46,7 +47,6 @@ const TokenDataSheet: React.FC<TokenDataSheetProps> = ({
       value: decoded.telegram_username,
       icon: AtSign,
     },
-    { label: t("token_info.chat_role"), value: decoded.role, icon: User },
     { label: t("token_info.version"), value: decoded.version, icon: Rocket },
   ].filter(Boolean) as TokenDataSheetItem[];
 
@@ -57,18 +57,34 @@ const TokenDataSheet: React.FC<TokenDataSheetProps> = ({
         className
       )}
     >
-      {items.map((item, idx) => (
-        <div
-          key={item.label + item.value + idx}
-          className="flex items-center justify-between gap-1"
-        >
-          {React.createElement(item.icon, { className: iconClassName })}
-          <div className="flex items-baseline gap-1">
-            <span className="font-light">{item.label}:</span>
-            <CopyValue value={item.value} copiedMessage={copiedMessage} />
-          </div>
+      {/* Reveal button */}
+      <button
+        onClick={() => setIsRevealed(!isRevealed)}
+        className="flex items-center gap-1 hover:text-blue-300/50 transition-colors cursor-pointer text-left"
+      >
+        {React.createElement(isRevealed ? ChevronDown : ChevronRight, {
+          className: iconClassName,
+        })}
+        <span className="font-light">{t("token_info.reveal_placeholder")}</span>
+      </button>
+
+      {/* Token details (shown when revealed) */}
+      {isRevealed && (
+        <div className="flex flex-col gap-y-1 w-full pl-6">
+          {items.map((item, idx) => (
+            <div
+              key={item.label + item.value + idx}
+              className="flex items-center gap-1"
+            >
+              {React.createElement(item.icon, { className: iconClassName })}
+              <div className="flex items-baseline gap-1">
+                <span className="font-light">{item.label}:</span>
+                <CopyValue value={item.value} copiedMessage={copiedMessage} />
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
+      )}
     </div>
   );
 };

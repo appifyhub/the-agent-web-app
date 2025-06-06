@@ -5,6 +5,7 @@
   "configure_keys_title": "{botName} की एक्सेस कुंजियाँ कॉन्फ़िगर करें",
   "preferred_language_label": "{botName} निम्न भाषा में उत्तर देने का प्रयास करता है:",
   "preferred_language_placeholder": "भाषा चुनें",
+  "your_chats": "आपकी चैट",
   "loading_placeholder": "लोड हो रहा है...",
   "notifications": {
     "releases_label": "{botName} मुझे रिलीज़ के बारे में सूचित करे:",
@@ -26,8 +27,8 @@
     "profile_id": "प्रोफ़ाइल ID",
     "telegram_user_id": "टेलीग्राम उपयोगकर्ता आईडी",
     "telegram_username": "टेलीग्राम उपयोगकर्ता नाम",
-    "chat_role": "चैट भूमिका",
-    "version": "संस्करण"
+    "version": "संस्करण",
+    "reveal_placeholder": "आपके बारे में हमारे द्वारा एकत्रित जानकारी"
   },
   "provider_needed_for": "{botName} को इसके लिए {tools} चाहिए",
   "where_is_my_key": "मेरा {providerName} कुंजी कहाँ है?",

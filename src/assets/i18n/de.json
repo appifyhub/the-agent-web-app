@@ -5,6 +5,7 @@
   "configure_keys_title": "Zugangsschlüssel von {botName} konfigurieren",
   "preferred_language_label": "{botName} versucht zu antworten mit:",
   "preferred_language_placeholder": "Sprache auswählen",
+  "your_chats": "Ihre Chats",
   "loading_placeholder": "Wird geladen...",
   "notifications": {
     "releases_label": "{botName} soll mich über Releases benachrichtigen:",
@@ -26,8 +27,8 @@
     "profile_id": "Profil ID",
     "telegram_user_id": "Telegram-Benutzer-ID",
     "telegram_username": "Telegram-Benutzername",
-    "chat_role": "Chat-Rolle",
-    "version": "Version"
+    "version": "Version",
+    "reveal_placeholder": "Informationen, die wir über Sie sammeln"
   },
   "provider_needed_for": "{botName} benötigt dies für {tools}",
   "where_is_my_key": "Wo ist mein {providerName}-Schlüssel?",

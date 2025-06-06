@@ -5,6 +5,7 @@
   "configure_keys_title": "تكوين مفاتيح الوصول لـ {botName}",
   "preferred_language_label": "يحاول {botName} الرد باستخدام:",
   "preferred_language_placeholder": "اختر لغة",
+  "your_chats": "محادثاتك",
   "loading_placeholder": "جاري التحميل…",
   "notifications": {
     "releases_label": "يجب أن يُخطِرني {botName} بالإصدارات:",
@@ -26,8 +27,8 @@
     "profile_id": "الملف الشخصي ID",
     "telegram_user_id": "معرّف مستخدم تيليجرام",
     "telegram_username": "اسم مستخدم تيليجرام",
-    "chat_role": "دور الدردشة",
-    "version": "الإصدار"
+    "version": "الإصدار",
+    "reveal_placeholder": "المعلومات التي نجمعها عنك"
   },
   "provider_needed_for": "{botName} يحتاج هذا لـ {tools}",
   "where_is_my_key": "أين مفتاح {providerName} الخاص بي؟",
