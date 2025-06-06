@@ -12,6 +12,7 @@ export type TranslationKey =
   | "configure_keys_title"
   | "preferred_language_label"
   | "preferred_language_placeholder"
+  | "your_chats"
   | "loading_placeholder"
   | "notifications.releases_label"
   | "notifications.releases_placeholder"

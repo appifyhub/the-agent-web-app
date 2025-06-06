@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
-import logoVector from "@/assets/logo-vector.svg";
 import Header from "@/components/Header";
 import type { ReleaseNotificationsSetting } from "@/services/chat-settings-service";
 import SettingControls from "@/components/SettingControls";
@@ -169,13 +168,11 @@ const ChatSettingsPage: React.FC = () => {
     <div className="flex flex-col min-h-screen">
       {/* The Header section */}
       <Header
-        iconUrl={logoVector}
         pageTitle={t("chat")}
         chats={chats}
         selectedChat={chats.find((chat) => chat.chat_id === chat_id)}
-        languages={INTERFACE_LANGUAGES}
         selectedLanguage={currentInterfaceLanguage}
-        loadingPlaceholder={t("loading_placeholder")}
+        disabled={!!error?.isBlocker}
         onLangChange={(isoCode) => {
           console.info("Interface language changed to:", isoCode);
           const replacedHref = window.location.href.replace(

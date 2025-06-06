@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Info } from "lucide-react";
-import logoVector from "@/assets/logo-vector.svg";
 import Header from "@/components/Header";
 import TokenDataSheet from "@/components/TokenDataSheet";
 import { toast } from "sonner";
@@ -189,13 +188,11 @@ const UserSettingsPage: React.FC = () => {
     <div className="flex flex-col min-h-screen">
       {/* The Header section */}
       <Header
-        iconUrl={logoVector}
         pageTitle={t("profile")}
         chats={chats}
         selectedChat={undefined}
-        languages={INTERFACE_LANGUAGES}
         selectedLanguage={currentInterfaceLanguage}
-        loadingPlaceholder={t("loading_placeholder")}
+        disabled={!!error?.isBlocker}
         onLangChange={(isoCode) => {
           console.info("Interface language changed to:", isoCode);
           const replacedHref = window.location.href.replace(
