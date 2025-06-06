@@ -1,73 +1,50 @@
 import "@/components/header.css";
 import React from "react";
 import { Button } from "@/components/ui/button";
-import {
-  ChevronDownIcon,
-  CheckIcon,
-  UsersRound,
-  MessageCircle,
-  Lock,
-  X as CloseIcon,
-} from "lucide-react";
+import { X as CloseIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Language } from "@/lib/languages";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { ChatInfo } from "@/services/user-settings-service";
+import LanguageDropdown from "@/components/LanguageDropdown";
+import ChatsDropdown from "@/components/ChatsDropdown";
+import logoVector from "@/assets/logo-vector.svg";
 
 interface HeaderProps {
-  iconUrl: string;
   pageTitle: string;
   chats: ChatInfo[];
   selectedChat?: ChatInfo;
-  languages: Language[];
   selectedLanguage: Language;
-  loadingPlaceholder: string;
+  disabled?: boolean;
   onLangChange?: (lang: string) => void;
   onChatChange?: (chatId: string | null) => void;
 }
 
 const Header: React.FC<HeaderProps> = ({
-  iconUrl,
   pageTitle,
   chats,
   selectedChat,
-  languages,
   selectedLanguage,
-  loadingPlaceholder,
+  disabled = false,
   onLangChange = () => {},
   onChatChange = () => {},
 }) => {
-  const resolveChatLabel = () => {
-    if (chats.length === 0) {
-      return loadingPlaceholder;
-    }
-    const isValidChatSelected =
-      selectedChat &&
-      chats.some((chat) => chat.chat_id === selectedChat.chat_id);
-    if (isValidChatSelected) {
-      return selectedChat.title;
-    }
-
-    return (
-      <span className="flex items-center text-foreground">
-        <MessageCircle className="h-6 w-6" />
-      </span>
-    );
-  };
-
   return (
     <div className="header-gradient w-screen relative">
+      {/* Small-screen language dropdown */}
+      <div className="absolute top-4 right-4 z-10 md:hidden">
+        <LanguageDropdown
+          selectedLanguage={selectedLanguage}
+          onLangChange={onLangChange}
+        />
+      </div>
+
+      {/* Header content */}
       <div
         className={cn(
           "flex flex-col items-center space-y-6",
           "md:flex-row md:justify-between md:items-center md:space-y-0",
-          "px-4 pt-9 pb-16",
-          "md:px-10 md:pb-30",
+          "px-4 pt-20 pb-16",
+          "md:px-10 md:pt-9 md:pb-30",
           "max-w-7xl mx-auto text-white"
         )}
       >
@@ -79,8 +56,8 @@ const Header: React.FC<HeaderProps> = ({
           )}
         >
           <img
-            src={iconUrl}
-            alt="Page icon"
+            src={logoVector}
+            alt="App logo"
             className={cn("h-16 w-16", "md:h-12 md:w-12")}
           />
           <h1
@@ -94,54 +71,13 @@ const Header: React.FC<HeaderProps> = ({
         {/* Dropdowns & Menus */}
         <div className="flex items-center justify-center space-x-2 w-full md:w-auto">
           {/* Chats dropdown */}
-          <DropdownMenu>
-            <DropdownMenuTrigger
-              asChild
-              className="flex-initial md:flex-none md:max-w-md min-w-0 px-4 rounded-full cursor-pointer"
-            >
-              <Button
-                variant="outline"
-                size="icon"
-                className={cn(
-                  chats.length === 0 ? "glass-dark-static" : "glass",
-                  "w-auto min-w-0 whitespace-nowrap overflow-hidden md:w-auto md:max-w-md font-light text-base"
-                )}
-                disabled={chats.length === 0}
-              >
-                <span className="flex-1 min-w-0 text-left truncate">
-                  {resolveChatLabel()}
-                </span>
-                <ChevronDownIcon className="h-4 w-4 ml-1" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-              align="end"
-              className="p-2 glass-dark-static rounded-2xl max-w-xs md:max-w-md"
-            >
-              {chats.map((chat) => (
-                <DropdownMenuItem
-                  key={chat.chat_id}
-                  onClick={() => onChatChange?.(chat.chat_id)}
-                  className={cn(
-                    "cursor-pointer py-4 px-6 text-foreground flex items-center min-w-0 overflow-hidden",
-                    chat.chat_id === selectedChat?.chat_id ? "bg-accent/70" : ""
-                  )}
-                  disabled={chat.chat_id === selectedChat?.chat_id}
-                >
-                  {chat.is_own ? (
-                    <Lock className="h-4 w-4 flex-shrink-0 text-foreground" />
-                  ) : (
-                    <UsersRound className="h-4 w-4 flex-shrink-0 text-muted-foreground" />
-                  )}
-                  <div className="mx-2 h-4 w-px bg-muted-foreground opacity-50" />
-                  <span className="flex-1 truncate">{chat.title}</span>
-                  {chat.chat_id === selectedChat?.chat_id && (
-                    <CheckIcon className="ml-auto h-4 w-4 flex-shrink-0" />
-                  )}
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <ChatsDropdown
+            chats={chats}
+            selectedChat={selectedChat}
+            disabled={disabled}
+            onChatChange={onChatChange}
+          />
+
           {/* Close button */}
           {selectedChat && (
             <Button
@@ -154,48 +90,16 @@ const Header: React.FC<HeaderProps> = ({
             </Button>
           )}
 
-          {/* Spacer */}
-          {selectedChat && <div className="flex-none w-0 md:w-4" />}
+          {/* Large-screen Spacer */}
+          {selectedChat && <div className="hidden md:block flex-none w-4" />}
 
-          {/* Languages dropdown */}
-          <DropdownMenu>
-            <DropdownMenuTrigger
-              asChild
-              className="w-auto px-4 rounded-full text-xl cursor-pointer"
-            >
-              <Button variant="outline" size="icon" className="glass">
-                {selectedLanguage.flagEmoji}
-                <ChevronDownIcon className="h-4 w-4 ml-1" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-              align="end"
-              className="p-6 glass-dark-static rounded-2xl"
-            >
-              {languages.map((lang) => (
-                <DropdownMenuItem
-                  key={lang.isoCode}
-                  onClick={() => onLangChange?.(lang.isoCode)}
-                  className={cn(
-                    "cursor-pointer py-4 px-6 text-foreground",
-                    lang.isoCode === selectedLanguage.isoCode
-                      ? "bg-accent/70"
-                      : ""
-                  )}
-                  disabled={lang.isoCode === selectedLanguage.isoCode}
-                >
-                  {lang.flagEmoji}
-                  <span className="font-semibold">{lang.localizedName}</span>
-                  <span className="ml-2 text-xs text-muted-foreground">
-                    ({lang.defaultName})
-                  </span>
-                  {lang.isoCode === selectedLanguage.isoCode && (
-                    <CheckIcon className="ml-2 h-4 w-4" />
-                  )}
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
+          {/* Large-screen Languages dropdown */}
+          <div className="hidden md:block">
+            <LanguageDropdown
+              selectedLanguage={selectedLanguage}
+              onLangChange={onLangChange}
+            />
+          </div>
         </div>
       </div>
     </div>
