@@ -25,7 +25,8 @@
     "users_you_sponsor": "您赞助的用户：",
     "no_sponsorships_found": "未找到赞助",
     "incognito": "匿名",
-    "add_sponsorship": "赞助"
+    "add_sponsorship": "赞助",
+    "telegram_username_label": "您想赞助的用户的Telegram用户名"
   },
   "save": "保存",
   "saved": "已保存！",

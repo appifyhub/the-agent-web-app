@@ -25,7 +25,8 @@
     "users_you_sponsor": "Utilisateurs que vous parrainez :",
     "no_sponsorships_found": "Aucun parrainage trouvé",
     "incognito": "Incognito",
-    "add_sponsorship": "Parrainer"
+    "add_sponsorship": "Parrainer",
+    "telegram_username_label": "Nom d'utilisateur Telegram de l'utilisateur que vous souhaitez parrainer"
   },
   "save": "Enregistrer",
   "saved": "Enregistré !",

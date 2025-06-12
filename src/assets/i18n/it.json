@@ -25,7 +25,8 @@
     "users_you_sponsor": "Utenti che sponsorizzi:",
     "no_sponsorships_found": "Nessuna sponsorizzazione trovata",
     "incognito": "Incognito",
-    "add_sponsorship": "Sponsorizza"
+    "add_sponsorship": "Sponsorizza",
+    "telegram_username_label": "Nome utente Telegram dell'utente che vuoi sponsorizzare"
   },
   "save": "Salva",
   "saved": "Salvato!",

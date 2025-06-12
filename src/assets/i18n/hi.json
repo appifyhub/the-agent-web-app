@@ -25,7 +25,8 @@
     "users_you_sponsor": "आपके द्वारा प्रायोजित उपयोगकर्ता:",
     "no_sponsorships_found": "कोई प्रायोजन नहीं मिला",
     "incognito": "गुप्त",
-    "add_sponsorship": "प्रायोजित करें"
+    "add_sponsorship": "प्रायोजित करें",
+    "telegram_username_label": "उस उपयोगकर्ता का टेलीग्राम उपयोगकर्ता नाम जिसे आप प्रायोजित करना चाहते हैं"
   },
   "save": "सहेजें",
   "saved": "सहेजा गया!",
