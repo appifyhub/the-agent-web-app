@@ -2,6 +2,7 @@
   "chat": "चैट",
   "profile": "प्रोफ़ाइल",
   "sponsorships": "प्रायोजन",
+  "close": "बंद करें",
   "configure_title": "{botName} का व्यवहार कॉन्फ़िगर करें",
   "configure_keys_title": "{botName} की एक्सेस कुंजियाँ कॉन्फ़िगर करें",
   "preferred_language_label": "{botName} निम्न भाषा में उत्तर देने का प्रयास करता है:",

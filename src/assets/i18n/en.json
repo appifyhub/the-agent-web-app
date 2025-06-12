@@ -2,6 +2,7 @@
   "chat": "Chat",
   "profile": "Profile",
   "sponsorships": "Sponsorships",
+  "close": "Close",
   "configure_title": "Configure {botName}'s Behavior",
   "configure_keys_title": "Configure {botName}'s Access Keys",
   "preferred_language_label": "{botName} tries to reply using:",

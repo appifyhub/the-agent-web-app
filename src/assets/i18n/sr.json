@@ -2,6 +2,7 @@
   "chat": "Čet",
   "profile": "Profil",
   "sponsorships": "Sponzorstva",
+  "close": "Zatvori",
   "configure_title": "Podesite ponašanje {botName}a",
   "configure_keys_title": "Podesite pristupne ključeve za {botName}a",
   "preferred_language_label": "{botName} će pokušati da odgovori koristeći:",

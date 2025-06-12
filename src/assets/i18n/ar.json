@@ -2,6 +2,7 @@
   "chat": "دردشة",
   "profile": "الملف الشخصي",
   "sponsorships": "الرعايات",
+  "close": "إغلاق",
   "configure_title": "تكوين سلوك {botName}",
   "configure_keys_title": "تكوين مفاتيح الوصول لـ {botName}",
   "preferred_language_label": "يحاول {botName} الرد باستخدام:",
