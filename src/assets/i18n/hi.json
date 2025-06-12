@@ -1,6 +1,7 @@
 {
   "chat": "चैट",
   "profile": "प्रोफ़ाइल",
+  "sponsorships": "प्रायोजन",
   "configure_title": "{botName} का व्यवहार कॉन्फ़िगर करें",
   "configure_keys_title": "{botName} की एक्सेस कुंजियाँ कॉन्फ़िगर करें",
   "preferred_language_label": "{botName} निम्न भाषा में उत्तर देने का प्रयास करता है:",
@@ -20,6 +21,12 @@
   "never": "कभी नहीं",
   "always": "हमेशा",
   "reply_frequency": "{percent}% समय",
+  "sponsorship": {
+    "users_you_sponsor": "आपके द्वारा प्रायोजित उपयोगकर्ता:",
+    "no_sponsorships_found": "कोई प्रायोजन नहीं मिला",
+    "incognito": "गुप्त",
+    "add_sponsorship": "प्रायोजित करें"
+  },
   "save": "सहेजें",
   "saved": "सहेजा गया!",
   "copied": "कॉपी किया गया!",
@@ -27,7 +34,7 @@
     "profile_id": "प्रोफ़ाइल ID",
     "telegram_user_id": "टेलीग्राम उपयोगकर्ता आईडी",
     "telegram_username": "टेलीग्राम उपयोगकर्ता नाम",
-    "version": "संस्करण",
+    "version": "AI संस्करण",
     "reveal_placeholder": "आपके बारे में हमारे द्वारा एकत्रित जानकारी"
   },
   "provider_needed_for": "{botName} को इसके लिए {tools} चाहिए",

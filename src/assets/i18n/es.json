@@ -1,6 +1,7 @@
 {
   "chat": "Chat",
   "profile": "Perfil",
+  "sponsorships": "Patrocinios",
   "configure_title": "Configurar el comportamiento de {botName}",
   "configure_keys_title": "Configurar las claves de acceso de {botName}",
   "preferred_language_label": "{botName} intenta responder usando:",
@@ -20,6 +21,12 @@
   "never": "Nunca",
   "always": "Siempre",
   "reply_frequency": "{percent}% del tiempo",
+  "sponsorship": {
+    "users_you_sponsor": "Usuarios que patrocinas:",
+    "no_sponsorships_found": "No se encontraron patrocinios",
+    "incognito": "Incógnito",
+    "add_sponsorship": "Patrocinar"
+  },
   "save": "Guardar",
   "saved": "¡Guardado!",
   "copied": "¡Copiado!",
@@ -27,7 +34,7 @@
     "profile_id": "Perfil ID",
     "telegram_user_id": "ID de usuario de Telegram",
     "telegram_username": "Nombre de usuario de Telegram",
-    "version": "Versión",
+    "version": "Versión de IA",
     "reveal_placeholder": "Información que recopilamos sobre ti"
   },
   "provider_needed_for": "{botName} necesita esto para {tools}",

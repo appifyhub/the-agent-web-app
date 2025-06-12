@@ -1,6 +1,7 @@
 {
   "chat": "دردشة",
   "profile": "الملف الشخصي",
+  "sponsorships": "الرعايات",
   "configure_title": "تكوين سلوك {botName}",
   "configure_keys_title": "تكوين مفاتيح الوصول لـ {botName}",
   "preferred_language_label": "يحاول {botName} الرد باستخدام:",
@@ -20,6 +21,12 @@
   "never": "أبدًا",
   "always": "دائمًا",
   "reply_frequency": "{percent}% من الوقت",
+  "sponsorship": {
+    "users_you_sponsor": "المستخدمون الذين ترعاهم:",
+    "no_sponsorships_found": "لم يتم العثور على رعايات",
+    "incognito": "متخفي",
+    "add_sponsorship": "ارعَ"
+  },
   "save": "حفظ",
   "saved": "تم الحفظ!",
   "copied": "تم النسخ!",
@@ -27,7 +34,7 @@
     "profile_id": "الملف الشخصي ID",
     "telegram_user_id": "معرّف مستخدم تيليجرام",
     "telegram_username": "اسم مستخدم تيليجرام",
-    "version": "الإصدار",
+    "version": "إصدار الذكاء الاصطناعي",
     "reveal_placeholder": "المعلومات التي نجمعها عنك"
   },
   "provider_needed_for": "{botName} يحتاج هذا لـ {tools}",
