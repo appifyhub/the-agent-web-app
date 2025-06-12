@@ -80,16 +80,16 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({
       );
 
     return (
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 min-w-0 overflow-hidden">
         {days > 0 && (
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1 flex-shrink-0">
             {sunIcon}
             <span className="leading-none">{days}</span>
           </div>
         )}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 min-w-0 overflow-hidden">
           {clockIcon}
-          <span className="leading-none">{timeString}</span>
+          <span className="leading-none truncate">{timeString}</span>
         </div>
       </div>
     );
@@ -98,7 +98,7 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({
   return (
     <div
       className={cn(
-        "flex items-center justify-center px-6 py-3 text-[1.05rem] border rounded-full",
+        "flex items-center justify-center px-6 py-3 text-[1.05rem] border rounded-full min-w-0 overflow-hidden",
         deltaSeconds <= 60
           ? "border-destructive text-destructive"
           : deltaSeconds <= 180

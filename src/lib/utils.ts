@@ -53,13 +53,20 @@ export function formatDate(dateString: string, locale: string = "en"): string {
 }
 
 export function truncateMiddle(
-  text: string, 
-  maxLength: number = 32, 
-  startChars: number = 12, 
+  text: string,
+  maxLength: number = 32,
+  startChars: number = 12,
   endChars: number = 8
 ): string {
   if (text.length <= maxLength) {
     return text;
   }
   return `${text.slice(0, startChars)}...${text.slice(-endChars)}`;
+}
+
+export function cleanUsername(username: string): string {
+  return username
+    .replace(/\s+/g, "") // remove all spaces
+    .replace(/^@+/, "") // remove leading @ signs
+    .trim(); // remove any remaining leading/trailing whitespace
 }
