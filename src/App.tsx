@@ -2,6 +2,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { Routes, Route } from "react-router-dom";
 import ChatSettingsPage from "@/pages/ChatSettingsPage";
 import UserSettingsPage from "@/pages/UserSettingsPage";
+import SponsorshipsPage from "@/pages/SponsorshipsPage";
 import logoVector from "@/assets/logo-vector.svg";
 
 function App() {
@@ -16,6 +17,10 @@ function App() {
         <Route
           path="/:lang_iso_code/user/:user_id/settings"
           element={<UserSettingsPage />}
+        />
+        <Route
+          path="/:lang_iso_code/user/:user_id/sponsorships"
+          element={<SponsorshipsPage />}
         />
         {/* Edge-cases */}
         <Route
