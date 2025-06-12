@@ -4,14 +4,13 @@ import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Info } from "lucide-react";
 import Header from "@/components/Header";
 import TokenDataSheet from "@/components/TokenDataSheet";
+import SettingInput from "@/components/SettingInput";
 import { toast } from "sonner";
 import { DEFAULT_LANGUAGE, INTERFACE_LANGUAGES } from "@/lib/languages";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { SERVICE_PROVIDERS } from "@/lib/service-providers";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import ErrorMessage from "@/components/ErrorMessage";
-import { cn, maskSecret, PageError } from "@/lib/utils";
+import { maskSecret, PageError } from "@/lib/utils";
 import SettingControls from "@/components/SettingControls";
 import SettingsPageSkeleton from "@/components/SettingsPageSkeleton";
 import GenericPageSkeleton from "@/components/GenericPageSkeleton";
@@ -225,7 +224,7 @@ const UserSettingsPage: React.FC = () => {
               expiryTimestamp={accessToken?.decoded?.exp || 0}
               onTokenExpired={handleTokenExpired}
               onActionClicked={handleSave}
-              disabled={
+              actionDisabled={
                 !areSettingsChanged || isLoadingState || !!error?.isBlocker
               }
             />
@@ -260,53 +259,38 @@ const UserSettingsPage: React.FC = () => {
                       <div className="h-6" />
                       {SERVICE_PROVIDERS.map((provider) => (
                         <TabsContent key={provider.id} value={provider.id}>
-                          <div className="space-y-4">
-                            <Label
-                              htmlFor={`token-${provider.id}`}
-                              className={cn(
-                                "ps-2 text-[1.05rem] font-light",
-                                error?.isBlocker
-                                  ? "text-muted-foreground/50"
-                                  : ""
-                              )}
-                            >
-                              {t("provider_needed_for", {
-                                botName,
-                                tools: provider.tools,
-                              })}
-                            </Label>
-                            <Input
-                              id={`token-${provider.id}`}
-                              className="py-6 px-6 w-full sm:w-sm text-[1.05rem] glass rounded-xl font-mono"
-                              type="none"
-                              autoComplete="off"
-                              spellCheck={false}
-                              aria-autocomplete="none"
-                              placeholder={
-                                error?.isBlocker ? "—" : provider.placeholder
-                              }
-                              disabled={!!error?.isBlocker}
-                              value={
-                                userSettings?.[
-                                  PROVIDER_KEY_MAP[
-                                    provider.id
-                                  ] as keyof typeof userSettings
-                                ] || ""
-                              }
-                              onChange={(e) => {
-                                const key = PROVIDER_KEY_MAP[provider.id];
-                                if (!key) return;
-                                setUserSettings((prev) =>
-                                  prev
-                                    ? {
-                                        ...prev,
-                                        [key]: e.target.value,
-                                      }
-                                    : prev
-                                );
-                              }}
-                            />
-                          </div>
+                          <SettingInput
+                            id={`token-${provider.id}`}
+                            label={t("provider_needed_for", {
+                              botName,
+                              tools: provider.tools,
+                            })}
+                            value={
+                              (userSettings?.[
+                                PROVIDER_KEY_MAP[
+                                  provider.id
+                                ] as keyof typeof userSettings
+                              ] as string) || ""
+                            }
+                            onChange={(value) => {
+                              const key = PROVIDER_KEY_MAP[provider.id];
+                              if (!key) return;
+                              setUserSettings((prev) =>
+                                prev
+                                  ? {
+                                      ...prev,
+                                      [key]: value,
+                                    }
+                                  : prev
+                              );
+                            }}
+                            disabled={!!error?.isBlocker}
+                            placeholder={provider.placeholder}
+                            type="text"
+                            autoComplete="off"
+                            spellCheck={false}
+                            inputClassName="font-mono"
+                          />
                           <div className="h-2" />
                           <div className="flex items-center space-x-2 ps-2 text-sm text-muted-foreground">
                             <Info className="h-4 w-4 text-blue-300/50" />

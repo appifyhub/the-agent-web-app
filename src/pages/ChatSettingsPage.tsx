@@ -210,7 +210,7 @@ const ChatSettingsPage: React.FC = () => {
               expiryTimestamp={accessToken?.decoded?.exp || 0}
               onTokenExpired={handleTokenExpired}
               onActionClicked={handleSave}
-              disabled={
+              actionDisabled={
                 !areSettingsChanged || isLoadingState || !!error?.isBlocker
               }
             />
