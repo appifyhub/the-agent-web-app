@@ -209,8 +209,7 @@ const ChatSettingsPage: React.FC = () => {
             <SettingControls
               expiryTimestamp={accessToken?.decoded?.exp || 0}
               onTokenExpired={handleTokenExpired}
-              onSaveClicked={handleSave}
-              saveLabel={t("save")}
+              onActionClicked={handleSave}
               disabled={
                 !areSettingsChanged || isLoadingState || !!error?.isBlocker
               }
@@ -359,13 +358,7 @@ const ChatSettingsPage: React.FC = () => {
 
             {/* Token Information */}
             <footer className="mt-6 text-xs mb-9 text-blue-300/30">
-              {accessToken && (
-                <TokenDataSheet
-                  decoded={accessToken.decoded}
-                  copiedMessage={t("copied")}
-                  iconClassName="w-4 h-4 text-blue-300/30"
-                />
-              )}
+              {accessToken && <TokenDataSheet decoded={accessToken.decoded} />}
             </footer>
           </main>
         </div>
