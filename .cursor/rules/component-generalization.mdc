@@ -1,0 +1,47 @@
+---
+description: 
+globs: *.tsx
+alwaysApply: false
+---
+# Component Guidelines
+
+## Making Components Generic and Reusable
+
+### Prop Naming Conventions
+
+- Use generic prop names instead of specific ones (e.g., `onActionClicked` instead of `onSaveClicked`)
+- Use generic boolean flags (e.g., `showActionButton` instead of `showSaveButton`)
+- Add configurable text props with sensible defaults (e.g., `actionButtonText` with default `t("save")`)
+
+#### Example Pattern from
+
+```typescript
+interface GenericControlsProps {
+  onActionClicked: () => void;
+  showActionButton?: boolean;
+  actionButtonText?: string; // Defaults to t("save")
+}
+```
+
+### Using Translations
+
+1. **Update all translations** - Look at the i18n folder to find all editable translation files
+2. **Check the keys** - Update translation keys using the translation keys task from `package.json`
+3. **Never hard-code strings** - Always use translated versions of strings!
+
+### When Changing Existing Component Interfaces
+
+1. **Update the component interface** - Change prop names and add new optional props
+2. **Search for all usages** - Use grep/search to find all files using the component
+3. **Update all usages systematically** - Update each usage site with new prop names
+4. **Maintain backward compatibility** - Use sensible defaults for new props
+
+### File Update Pattern
+
+Key files that commonly use shared components:
+
+- [UserSettingsPage.tsx](mdc:src/pages/UserSettingsPage.tsx)
+- [ChatSettingsPage.tsx](mdc:src/pages/ChatSettingsPage.tsx)
+- [SponsorshipsPage.tsx](mdc:src/pages/SponsorshipsPage.tsx)
+
+Always search the entire codebase when changing shared component interfaces.

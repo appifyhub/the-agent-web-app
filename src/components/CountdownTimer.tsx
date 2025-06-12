@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { cn } from "@/lib/utils";
+import { Sun, ClockFading, ClockAlert, Link2Off } from "lucide-react";
 
 interface CountdownTimerProps {
   expiryTimestamp: number;
@@ -57,31 +58,47 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({
     };
 
     const { days, hours, minutes, seconds } = timeLeft;
-    const parts = [];
-    if (days > 0) {
-      parts.push(`☀️ ${days}\u00A0`);
-    }
-    parts.push("⏱️");
+    const iconClassName = "w-4 h-4 flex-shrink-0 -translate-y-0.25";
+
+    // Build time string
+    let timeString = "";
     if (hours > 0) {
-      parts.push(formatTime(hours));
+      timeString += `${formatTime(hours)}:`;
     }
-    if (minutes > 0) {
-      if (hours > 0) {
-        parts.push(":");
-      }
-      parts.push(formatTime(minutes));
+    if (minutes > 0 || hours > 0) {
+      timeString += `${formatTime(minutes)}:`;
     }
-    if ((hours > 0 || minutes > 0) && seconds >= 0) {
-      parts.push(":");
-    }
-    parts.push(formatTime(seconds));
-    return parts.join(" ").replace(/ : /g, ":");
+    timeString += formatTime(seconds);
+
+    // Icon elements
+    const sunIcon = <Sun className={iconClassName} />;
+    const clockIcon =
+      deltaSeconds <= 180 ? (
+        <ClockAlert className={iconClassName} />
+      ) : (
+        <ClockFading className={iconClassName} />
+      );
+
+    return (
+      <div className="flex items-center gap-2 min-w-0 overflow-hidden">
+        {days > 0 && (
+          <div className="flex items-center gap-1 flex-shrink-0">
+            {sunIcon}
+            <span className="leading-none">{days}</span>
+          </div>
+        )}
+        <div className="flex items-center gap-2 min-w-0 overflow-hidden">
+          {clockIcon}
+          <span className="leading-none truncate">{timeString}</span>
+        </div>
+      </div>
+    );
   };
 
   return (
     <div
       className={cn(
-        "flex items-center justify-center px-6 py-3 text-[1.05rem] border rounded-full",
+        "flex items-center justify-center px-6 py-3 text-[1.05rem] border rounded-full min-w-0 overflow-hidden",
         deltaSeconds <= 60
           ? "border-destructive text-destructive"
           : deltaSeconds <= 180
@@ -89,7 +106,11 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({
           : "border-foreground/20 text-foreground"
       )}
     >
-      {isExpired ? <span>⛓️‍💥</span> : <span>{formatCountdown()}</span>}
+      {isExpired ? (
+        <Link2Off className="w-4 h-4 flex-shrink-0 -translate-y-0.25" />
+      ) : (
+        formatCountdown()
+      )}
     </div>
   );
 };

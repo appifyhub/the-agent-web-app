@@ -42,3 +42,31 @@ export function maskSecret(
   // long strings: show 3 chars on each end with 5 masks in the middle
   return secret.slice(0, 3) + mask.repeat(5) + secret.slice(-3);
 }
+
+export function formatDate(dateString: string, locale: string = "en"): string {
+  const date = new Date(dateString);
+  try {
+    return date.toLocaleDateString(locale);
+  } catch {
+    return date.toLocaleDateString();
+  }
+}
+
+export function truncateMiddle(
+  text: string,
+  maxLength: number = 32,
+  startChars: number = 12,
+  endChars: number = 8
+): string {
+  if (text.length <= maxLength) {
+    return text;
+  }
+  return `${text.slice(0, startChars)}...${text.slice(-endChars)}`;
+}
+
+export function cleanUsername(username: string): string {
+  return username
+    .replace(/\s+/g, "") // remove all spaces
+    .replace(/^@+/, "") // remove leading @ signs
+    .trim(); // remove any remaining leading/trailing whitespace
+}

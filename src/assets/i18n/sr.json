@@ -1,6 +1,8 @@
 {
   "chat": "Čet",
   "profile": "Profil",
+  "sponsorships": "Sponzorstva",
+  "close": "Zatvori",
   "configure_title": "Podesite ponašanje {botName}a",
   "configure_keys_title": "Podesite pristupne ključeve za {botName}a",
   "preferred_language_label": "{botName} će pokušati da odgovori koristeći:",
@@ -20,6 +22,13 @@
   "never": "Nikada",
   "always": "Uvek",
   "reply_frequency": "{percent}% vremena",
+  "sponsorship": {
+    "users_you_sponsor": "Korisnici koje sponzorišete:",
+    "no_sponsorships_found": "Nisu pronađena sponzorstva",
+    "incognito": "Inkognito",
+    "add_sponsorship": "Sponzoriši",
+    "telegram_username_label": "Telegram korisničko ime korisnika kojeg želite da sponzorišete"
+  },
   "save": "Sačuvaj",
   "saved": "Sačuvano!",
   "copied": "Kopirano!",
@@ -27,7 +36,7 @@
     "profile_id": "ID profila",
     "telegram_user_id": "Telegram korisnički ID",
     "telegram_username": "Telegram korisničko ime",
-    "version": "Verzija",
+    "version": "AI Verzija",
     "reveal_placeholder": "Informacije koje prikupljamo o vama"
   },
   "provider_needed_for": "{botName} ovo koristi za {tools}",
