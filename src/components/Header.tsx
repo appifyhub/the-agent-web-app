@@ -78,12 +78,17 @@ const Header: React.FC<HeaderProps> = ({
             onChatChange={onChatChange}
           />
 
-          {/* Close button */}
+          {/* Close chat button */}
           {selectedChat && (
             <Button
               variant="outline"
               size="icon"
-              className="glass rounded-full cursor-pointer"
+              className={cn(
+                disabled ? "glass-dark-static" : "glass",
+                "rounded-full",
+                disabled ? "cursor-not-allowed" : "cursor-pointer"
+              )}
+              disabled={disabled}
               onClick={() => onChatChange?.(null)}
             >
               <CloseIcon className="h-6 w-6" />

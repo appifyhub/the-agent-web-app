@@ -1,14 +1,14 @@
 import React from "react";
 import { toast } from "sonner";
+import { t } from "@/lib/translations";
 
 interface CopyValueProps {
   value: string | number;
-  copiedMessage: string;
 }
 
 // We'll use dynamic import to avoid SSR issues or circular deps
 // and to keep this component decoupled from toast provider location
-const CopyValue: React.FC<CopyValueProps> = ({ value, copiedMessage }) => {
+const CopyValue: React.FC<CopyValueProps> = ({ value }) => {
   const fullValue = String(value);
   const displayValue =
     fullValue.length > 16
@@ -23,7 +23,7 @@ const CopyValue: React.FC<CopyValueProps> = ({ value, copiedMessage }) => {
 
     if (window.navigator && window.navigator.clipboard) {
       await window.navigator.clipboard.writeText(fullValue);
-      toast(copiedMessage);
+      toast(t("copied"));
     } else {
       if (spanRef.current) {
         const range = document.createRange();

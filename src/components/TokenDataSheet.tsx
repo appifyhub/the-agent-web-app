@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import CopyValue from "@/components/CopyValue";
-import { cn } from "@/lib/utils";
 import type { LucideIcon } from "lucide-react";
 import { AtSign, Hash, Rocket, ChevronDown, ChevronRight } from "lucide-react";
 import type { DecodedToken } from "@/lib/tokens";
@@ -22,17 +21,9 @@ export interface TokenDataSheetLabels {
 
 interface TokenDataSheetProps {
   decoded: DecodedToken;
-  className?: string;
-  iconClassName?: string;
-  copiedMessage: string;
 }
 
-const TokenDataSheet: React.FC<TokenDataSheetProps> = ({
-  decoded,
-  className,
-  iconClassName = "w-4 h-4 text-blue-300/30",
-  copiedMessage,
-}) => {
+const TokenDataSheet: React.FC<TokenDataSheetProps> = ({ decoded }) => {
   const [isRevealed, setIsRevealed] = useState(false);
 
   const items: TokenDataSheetItem[] = [
@@ -51,19 +42,14 @@ const TokenDataSheet: React.FC<TokenDataSheetProps> = ({
   ].filter(Boolean) as TokenDataSheetItem[];
 
   return (
-    <div
-      className={cn(
-        `flex flex-col gap-x-4 gap-y-1 items-baseline px-2`,
-        className
-      )}
-    >
+    <div className="flex flex-col gap-x-4 gap-y-1 items-baseline px-2">
       {/* Reveal button */}
       <button
         onClick={() => setIsRevealed(!isRevealed)}
         className="flex items-center gap-1 hover:text-blue-300/50 transition-colors cursor-pointer text-left"
       >
         {React.createElement(isRevealed ? ChevronDown : ChevronRight, {
-          className: iconClassName,
+          className: "w-4 h-4 text-blue-300/30",
         })}
         <span className="font-light">{t("token_info.reveal_placeholder")}</span>
       </button>
@@ -76,10 +62,12 @@ const TokenDataSheet: React.FC<TokenDataSheetProps> = ({
               key={item.label + item.value + idx}
               className="flex items-center gap-1"
             >
-              {React.createElement(item.icon, { className: iconClassName })}
+              {React.createElement(item.icon, {
+                className: "w-4 h-4 text-blue-300/30",
+              })}
               <div className="flex items-baseline gap-1">
                 <span className="font-light">{item.label}:</span>
-                <CopyValue value={item.value} copiedMessage={copiedMessage} />
+                <CopyValue value={item.value} />
               </div>
             </div>
           ))}
