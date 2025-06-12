@@ -2,6 +2,7 @@
   "chat": "聊天",
   "profile": "个人资料",
   "sponsorships": "赞助",
+  "close": "关闭",
   "configure_title": "配置{botName}的行为",
   "configure_keys_title": "配置{botName}的访问密钥",
   "preferred_language_label": "{botName} 尝试使用以下语言回复：",

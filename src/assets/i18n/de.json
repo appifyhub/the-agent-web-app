@@ -2,6 +2,7 @@
   "chat": "Chat",
   "profile": "Profil",
   "sponsorships": "Sponsoring",
+  "close": "Schließen",
   "configure_title": "{botName}s Verhalten konfigurieren",
   "configure_keys_title": "Zugangsschlüssel von {botName} konfigurieren",
   "preferred_language_label": "{botName} versucht zu antworten mit:",

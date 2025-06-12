@@ -9,6 +9,7 @@ export type TranslationKey =
   | "chat"
   | "profile"
   | "sponsorships"
+  | "close"
   | "configure_title"
   | "configure_keys_title"
   | "preferred_language_label"
