@@ -168,37 +168,12 @@ const ChatSettingsPage: React.FC = () => {
     <div className="flex flex-col min-h-screen">
       {/* The Header section */}
       <Header
-        pageTitle={t("chat")}
+        page="chat"
         chats={chats}
         selectedChat={chats.find((chat) => chat.chat_id === chat_id)}
         selectedLanguage={currentInterfaceLanguage}
         disabled={!!error?.isBlocker}
-        onLangChange={(isoCode) => {
-          console.info("Interface language changed to:", isoCode);
-          const replacedHref = window.location.href.replace(
-            `/${lang_iso_code}/`,
-            `/${isoCode}/`
-          );
-          console.info("Replaced href:", replacedHref);
-          window.location.href = replacedHref;
-        }}
-        onChatChange={(chatId) => {
-          if (!chatId) {
-            const replacedHref = window.location.href.replace(
-              `/chat/${chat_id}/settings`,
-              `/user/${accessToken!.decoded.sub}/settings`
-            );
-            console.info("Replaced href:", replacedHref);
-            window.location.href = replacedHref;
-            return;
-          }
-          const replacedHref = window.location.href.replace(
-            `/chat/${chat_id}/settings`,
-            `/chat/${chatId}/settings`
-          );
-          console.info("Replaced href:", replacedHref);
-          window.location.href = replacedHref;
-        }}
+        userId={accessToken?.decoded?.sub}
       />
 
       {/* The Main content section */}

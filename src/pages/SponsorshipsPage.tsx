@@ -244,9 +244,9 @@ const SponsorshipsPage: React.FC = () => {
           )}
         >
           {showAtSign ? (
-            <AtSign className="h-5 w-5 text-blue-300 flex-shrink-0" />
+            <AtSign className="h-5 w-5 text-sky-300 flex-shrink-0" />
           ) : (
-            <CircleUserRound className="h-5 w-5 text-blue-300 translate-y-0.5 flex-shrink-0" />
+            <CircleUserRound className="h-5 w-5 text-sky-300 translate-y-0.5 flex-shrink-0" />
           )}
           <span className="font-normal truncate overflow-hidden whitespace-nowrap">
             {full_name || telegram_username}
@@ -256,7 +256,7 @@ const SponsorshipsPage: React.FC = () => {
     }
     return (
       <div className="flex items-center justify-center space-x-2 truncate overflow-hidden whitespace-nowrap">
-        <VenetianMask className="h-5 w-5 text-blue-300 flex-shrink-0" />
+        <VenetianMask className="h-5 w-5 text-sky-300 flex-shrink-0" />
         <span className="font-normal truncate overflow-hidden whitespace-nowrap">
           {t("sponsorship.incognito")}
         </span>
@@ -272,32 +272,11 @@ const SponsorshipsPage: React.FC = () => {
     <div className="flex flex-col min-h-screen">
       {/* The Header section */}
       <Header
-        pageTitle={t("sponsorships")}
+        page="sponsorships"
         chats={chats}
-        selectedChat={undefined}
         selectedLanguage={currentInterfaceLanguage}
         disabled={!!error?.isBlocker}
-        onLangChange={(isoCode) => {
-          console.info("Interface language changed to:", isoCode);
-          const replacedHref = window.location.href.replace(
-            `/${lang_iso_code}/`,
-            `/${isoCode}/`
-          );
-          console.info("Replaced href:", replacedHref);
-          window.location.href = replacedHref;
-        }}
-        onChatChange={(chatId) => {
-          if (!chatId) {
-            console.log("Chat deselected in Header (Sponsorships)");
-            return;
-          }
-          const replacedHref = window.location.href.replace(
-            `/user/${user_id}/sponsorships`,
-            `/chat/${chatId}/settings`
-          );
-          console.info("Replaced href:", replacedHref);
-          window.location.href = replacedHref;
-        }}
+        userId={accessToken?.decoded?.sub}
       />
 
       {/* The Main content section */}
@@ -405,7 +384,7 @@ const SponsorshipsPage: React.FC = () => {
                               {/* Expanded sponsorship stack (vertical) - display name row and dates */}
                               <div
                                 className={cn(
-                                  "flex flex-col px-5 py-4 items-start justify-center border glass cursor-pointer w-full min-w-0",
+                                  "flex flex-col px-5 py-3 items-start justify-center border glass cursor-pointer w-full min-w-0",
                                   isExpanded ? "space-y-2" : "space-y-0",
                                   roundedClasses,
                                   borderClasses

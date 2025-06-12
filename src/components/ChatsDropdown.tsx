@@ -20,7 +20,7 @@ import { t } from "@/lib/translations";
 interface ChatsDropdownProps {
   chats: ChatInfo[];
   selectedChat?: ChatInfo;
-  onChatChange?: (chatId: string | null) => void;
+  onChatChange?: (chatId: string) => void;
   disabled?: boolean;
   className?: string;
 }
@@ -32,13 +32,13 @@ const ChatsDropdown: React.FC<ChatsDropdownProps> = ({
   disabled = false,
   className,
 }) => {
+  const isValidChatSelected =
+    selectedChat && chats.some((chat) => chat.chat_id === selectedChat.chat_id);
+
   const resolveChatLabel = () => {
     if (chats.length === 0 && !disabled) {
       return t("loading_placeholder");
     }
-    const isValidChatSelected =
-      selectedChat &&
-      chats.some((chat) => chat.chat_id === selectedChat.chat_id);
     if (isValidChatSelected) {
       return selectedChat.title;
     }
@@ -64,8 +64,12 @@ const ChatsDropdown: React.FC<ChatsDropdownProps> = ({
           variant="outline"
           size="icon"
           className={cn(
-            chats.length === 0 || disabled ? "glass-dark-static" : "glass",
-            "w-auto min-w-0 whitespace-nowrap overflow-hidden md:w-auto md:max-w-md font-light text-base"
+            chats.length === 0 || disabled
+              ? "glass-dark-static"
+              : isValidChatSelected
+              ? "glass-active text-amber-100 font-normal"
+              : "glass font-light",
+            "w-auto min-w-0 whitespace-nowrap overflow-hidden md:w-auto md:max-w-md text-base"
           )}
           disabled={chats.length === 0 || disabled}
         >

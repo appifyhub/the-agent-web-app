@@ -1,6 +1,11 @@
 import React from "react";
 import CountdownTimer from "@/components/CountdownTimer";
 import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+} from "@/components/ui/tooltip";
 import { X as CloseIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { t } from "@/lib/translations";
@@ -49,19 +54,24 @@ const SettingControls: React.FC<SettingControlsProps> = ({
         </Button>
       )}
       {showCancelButton && (
-        <Button
-          variant={cancelDisabled ? "default" : "outline"}
-          size="icon"
-          className={cn(
-            cancelDisabled
-              ? "text-muted-foreground bg-foreground/20 border border-foreground/20 h-10 w-10 rounded-full cursor-pointer"
-              : "glass rounded-full cursor-pointer h-10 w-10"
-          )}
-          disabled={cancelDisabled}
-          onClick={onCancelClicked}
-        >
-          <CloseIcon className="h-6 w-6" />
-        </Button>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              variant={cancelDisabled ? "default" : "outline"}
+              size="icon"
+              className={cn(
+                cancelDisabled
+                  ? "text-muted-foreground bg-foreground/20 border border-foreground/20 h-10 w-10 rounded-full cursor-pointer"
+                  : "glass rounded-full cursor-pointer h-10 w-10"
+              )}
+              disabled={cancelDisabled}
+              onClick={onCancelClicked}
+            >
+              <CloseIcon className="h-6 w-6" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>{t("close")}</TooltipContent>
+        </Tooltip>
       )}
     </div>
   </div>
