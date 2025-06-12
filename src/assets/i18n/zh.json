@@ -1,6 +1,7 @@
 {
   "chat": "聊天",
   "profile": "个人资料",
+  "sponsorships": "赞助",
   "configure_title": "配置{botName}的行为",
   "configure_keys_title": "配置{botName}的访问密钥",
   "preferred_language_label": "{botName} 尝试使用以下语言回复：",
@@ -20,6 +21,12 @@
   "never": "从不",
   "always": "总是",
   "reply_frequency": "{percent}% 的时间",
+  "sponsorship": {
+    "users_you_sponsor": "您赞助的用户：",
+    "no_sponsorships_found": "未找到赞助",
+    "incognito": "匿名",
+    "add_sponsorship": "赞助"
+  },
   "save": "保存",
   "saved": "已保存！",
   "copied": "已复制！",
@@ -27,7 +34,7 @@
     "profile_id": "个人资料ID",
     "telegram_user_id": "Telegram 用户ID",
     "telegram_username": "Telegram 用户名",
-    "version": "版本",
+    "version": "AI 版本",
     "reveal_placeholder": "我们收集的关于您的信息"
   },
   "provider_needed_for": "{botName} 需要此用于 {tools}",
