@@ -25,7 +25,8 @@
     "users_you_sponsor": "Usuarios que patrocinas:",
     "no_sponsorships_found": "No se encontraron patrocinios",
     "incognito": "Incógnito",
-    "add_sponsorship": "Patrocinar"
+    "add_sponsorship": "Patrocinar",
+    "telegram_username_label": "Nombre de usuario de Telegram del usuario que quieres patrocinar"
   },
   "save": "Guardar",
   "saved": "¡Guardado!",

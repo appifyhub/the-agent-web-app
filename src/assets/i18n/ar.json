@@ -25,7 +25,8 @@
     "users_you_sponsor": "المستخدمون الذين ترعاهم:",
     "no_sponsorships_found": "لم يتم العثور على رعايات",
     "incognito": "متخفي",
-    "add_sponsorship": "ارعَ"
+    "add_sponsorship": "ارعَ",
+    "telegram_username_label": "اسم مستخدم تيليجرام للمستخدم الذي تريد رعايته"
   },
   "save": "حفظ",
   "saved": "تم الحفظ!",

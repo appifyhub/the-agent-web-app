@@ -25,7 +25,8 @@
     "users_you_sponsor": "Korisnici koje sponzorišete:",
     "no_sponsorships_found": "Nisu pronađena sponzorstva",
     "incognito": "Inkognito",
-    "add_sponsorship": "Sponzoriši"
+    "add_sponsorship": "Sponzoriši",
+    "telegram_username_label": "Telegram korisničko ime korisnika kojeg želite da sponzorišete"
   },
   "save": "Sačuvaj",
   "saved": "Sačuvano!",

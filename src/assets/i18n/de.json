@@ -25,7 +25,8 @@
     "users_you_sponsor": "Benutzer, die Sie sponsern:",
     "no_sponsorships_found": "Keine Sponsorenschaften gefunden",
     "incognito": "Inkognito",
-    "add_sponsorship": "Sponsern"
+    "add_sponsorship": "Sponsern",
+    "telegram_username_label": "Telegram-Benutzername des Benutzers, den Sie sponsern möchten"
   },
   "save": "Speichern",
   "saved": "Gespeichert!",
