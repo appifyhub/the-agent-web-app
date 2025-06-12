@@ -187,32 +187,11 @@ const UserSettingsPage: React.FC = () => {
     <div className="flex flex-col min-h-screen">
       {/* The Header section */}
       <Header
-        pageTitle={t("profile")}
+        page="profile"
         chats={chats}
-        selectedChat={undefined}
         selectedLanguage={currentInterfaceLanguage}
         disabled={!!error?.isBlocker}
-        onLangChange={(isoCode) => {
-          console.info("Interface language changed to:", isoCode);
-          const replacedHref = window.location.href.replace(
-            `/${lang_iso_code}/`,
-            `/${isoCode}/`
-          );
-          console.info("Replaced href:", replacedHref);
-          window.location.href = replacedHref;
-        }}
-        onChatChange={(chatId) => {
-          if (!chatId) {
-            console.log("Chat deselected in Header (User Settings)");
-            return;
-          }
-          const replacedHref = window.location.href.replace(
-            `/user/${user_id}/settings`,
-            `/chat/${chatId}/settings`
-          );
-          console.info("Replaced href:", replacedHref);
-          window.location.href = replacedHref;
-        }}
+        userId={accessToken?.decoded?.sub}
       />
 
       {/* The Main content section */}
