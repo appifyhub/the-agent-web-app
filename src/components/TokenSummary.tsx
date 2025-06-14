@@ -1,17 +1,24 @@
 import React, { useState } from "react";
 import CopyValue from "@/components/CopyValue";
 import type { LucideIcon } from "lucide-react";
-import { AtSign, Hash, Rocket, ChevronDown, ChevronRight } from "lucide-react";
+import {
+  AtSign,
+  Hash,
+  Rocket,
+  ChevronDown,
+  ChevronRight,
+  Gift,
+} from "lucide-react";
 import type { DecodedToken } from "@/lib/tokens";
 import { t } from "@/lib/translations";
 
-export interface TokenDataSheetItem {
+export interface TokenSummaryItem {
   icon: LucideIcon;
   label: string;
   value: string | number;
 }
 
-export interface TokenDataSheetLabels {
+export interface TokenSummaryLabels {
   profileId: string;
   chatId: string;
   telegramUserId: string;
@@ -19,16 +26,16 @@ export interface TokenDataSheetLabels {
   version: string;
 }
 
-interface TokenDataSheetProps {
+interface TokenSummaryProps {
   decoded: DecodedToken;
 }
 
-const TokenDataSheet: React.FC<TokenDataSheetProps> = ({ decoded }) => {
+const TokenSummary: React.FC<TokenSummaryProps> = ({ decoded }) => {
   const [isRevealed, setIsRevealed] = useState(false);
 
-  const items: TokenDataSheetItem[] = [
+  const items: TokenSummaryItem[] = [
     { label: t("token_info.profile_id"), value: decoded.sub, icon: Hash },
-    {
+    decoded.telegram_user_id && {
       label: t("token_info.telegram_user_id"),
       value: decoded.telegram_user_id,
       icon: Hash,
@@ -38,8 +45,13 @@ const TokenDataSheet: React.FC<TokenDataSheetProps> = ({ decoded }) => {
       value: decoded.telegram_username,
       icon: AtSign,
     },
+    decoded.sponsored_by && {
+      label: t("token_info.sponsored_by"),
+      value: decoded.sponsored_by,
+      icon: Gift,
+    },
     { label: t("token_info.version"), value: decoded.version, icon: Rocket },
-  ].filter(Boolean) as TokenDataSheetItem[];
+  ].filter(Boolean) as TokenSummaryItem[];
 
   return (
     <div className="flex flex-col gap-x-4 gap-y-1 items-baseline px-2">
@@ -77,4 +89,4 @@ const TokenDataSheet: React.FC<TokenDataSheetProps> = ({ decoded }) => {
   );
 };
 
-export default TokenDataSheet;
+export default TokenSummary;

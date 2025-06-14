@@ -1,21 +1,34 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import React from "react";
 
 export class PageError {
-  public readonly text: string;
+  public readonly text: string | React.ReactNode;
   public readonly isBlocker: boolean;
+  public readonly showGenericAppendix: boolean;
 
-  public constructor(text: string, isBlocker: boolean) {
+  public constructor(
+    text: string | React.ReactNode,
+    isBlocker: boolean,
+    showGenericAppendix: boolean
+  ) {
     this.text = text;
     this.isBlocker = isBlocker;
+    this.showGenericAppendix = showGenericAppendix;
   }
 
-  public static simple(text: string) {
-    return new PageError(text, false);
+  public static simple(
+    text: string | React.ReactNode,
+    showGenericAppendix: boolean = true
+  ) {
+    return new PageError(text, false, showGenericAppendix);
   }
 
-  public static blocker(text: string) {
-    return new PageError(text, true);
+  public static blocker(
+    text: string | React.ReactNode,
+    showGenericAppendix: boolean = true
+  ) {
+    return new PageError(text, true, showGenericAppendix);
   }
 }
 

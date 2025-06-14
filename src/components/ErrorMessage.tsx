@@ -13,8 +13,8 @@ export const ErrorMessage: React.FC<ErrorMessageProps> = ({
   description,
   genericMessage,
 }) => (
-  <div className="max-w-md mx-auto fixed bottom-10 lg:top-10 inset-x-0 px-6 z-50">
-    <Alert className="space-y-2 bg-accent-dark border-accent-strong border shadow-xl rounded-xl">
+  <div className="max-w-md mx-auto fixed bottom-5 lg:top-30 inset-x-0 px-6 z-50">
+    <Alert className="space-y-2 py-4 px-6 glass-accent-static shadow-2xl shadow-black/60 rounded-xl">
       <AlertCircle className="text-foreground scale-120" />
       <AlertTitle className="text-[1.04rem] font-bold font-sans text-foreground">
         {title}

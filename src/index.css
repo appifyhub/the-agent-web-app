@@ -270,6 +270,17 @@
   );
 }
 
+.glass-accent-static {
+  @apply transition-all duration-200 ease-in-out;
+
+  border-color: rgb(from var(--color-accent-strong) r g b / 50%) !important;
+  background: linear-gradient(
+    to bottom right,
+    var(--color-accent-dark) 30%,
+    var(--color-accent-strong) 250%
+  ) !important;
+}
+
 .dotted-underline {
   /* stylelint-disable declaration-block-no-redundant-longhand-properties */
   text-decoration-line: underline;

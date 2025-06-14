@@ -17,8 +17,9 @@ export class TokenMissingError extends Error {
 export interface DecodedToken {
   iss: string; // bot name
   sub: string; // internal profile ID
-  telegram_user_id: number | string; // TID
+  telegram_user_id?: number | string; // TID
   telegram_username?: string; // TUN
+  sponsored_by?: string; // sponsor name
   exp: number; // expiry timestamp
   iat: number; // issue timestamp
   version: string; // service version
