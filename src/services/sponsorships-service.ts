@@ -109,3 +109,36 @@ export async function removeSponsorship({
     throw new Error(`Failed to remove sponsorship. ${reason}`);
   }
 }
+
+export async function removeSelfSponsorship({
+  apiBaseUrl,
+  resource_id,
+  rawToken,
+}: {
+  apiBaseUrl: string;
+  resource_id: string;
+  rawToken: string;
+}): Promise<{ settings_link: string }> {
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${rawToken}`,
+  };
+  const response = await request(
+    `${apiBaseUrl}/user/${resource_id}/sponsored`,
+    {
+      method: "DELETE",
+      headers: headers,
+    }
+  );
+  if (!response.ok) {
+    let reason = "";
+    try {
+      const data = await response.json();
+      reason = data.detail?.reason || "";
+    } catch (e) {
+      console.error("Failed to parse response!", e);
+    }
+    throw new Error(`Failed to remove self-sponsorship. ${reason}`);
+  }
+  return response.json();
+}

@@ -4,7 +4,7 @@ import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import Header from "@/components/Header";
 import type { ReleaseNotificationsSetting } from "@/services/chat-settings-service";
 import SettingControls from "@/components/SettingControls";
-import TokenDataSheet from "@/components/TokenDataSheet";
+import TokenSummary from "@/components/TokenSummary";
 import SettingSelector from "@/components/SettingSelector";
 import ErrorMessage from "@/components/ErrorMessage";
 import { toast } from "sonner";
@@ -333,7 +333,7 @@ const ChatSettingsPage: React.FC = () => {
 
             {/* Token Information */}
             <footer className="mt-6 text-xs mb-9 text-blue-300/30">
-              {accessToken && <TokenDataSheet decoded={accessToken.decoded} />}
+              {accessToken && <TokenSummary decoded={accessToken.decoded} />}
             </footer>
           </main>
         </div>
@@ -343,7 +343,9 @@ const ChatSettingsPage: React.FC = () => {
         <ErrorMessage
           title={t("errors.oh_no")}
           description={error?.text}
-          genericMessage={t("errors.check_link")}
+          genericMessage={
+            error?.showGenericAppendix ? t("errors.check_link") : undefined
+          }
         />
       )}
     </div>

@@ -2,15 +2,22 @@ import React, { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+} from "@/components/ui/tooltip";
+import {
   Check,
   CheckCheck,
   VenetianMask,
   AtSign,
   CircleUserRound,
-  CircleMinus,
+  Link,
+  UsersRound,
+  Unlink,
 } from "lucide-react";
 import Header from "@/components/Header";
-import TokenDataSheet from "@/components/TokenDataSheet";
+import TokenSummary from "@/components/TokenSummary";
 import SettingInput from "@/components/SettingInput";
 import { DEFAULT_LANGUAGE, INTERFACE_LANGUAGES } from "@/lib/languages";
 import ErrorMessage from "@/components/ErrorMessage";
@@ -25,6 +32,7 @@ import {
   fetchUserSponsorships,
   createSponsorship,
   removeSponsorship,
+  removeSelfSponsorship,
   SponsorshipResponse,
 } from "@/services/sponsorships-service";
 import {
@@ -150,6 +158,30 @@ const SponsorshipsPage: React.FC = () => {
       toast(t("saved"));
     } catch (removeError) {
       console.error("Error removing sponsorship!", removeError);
+      setError(PageError.simple(t("errors.save_failed")));
+    } finally {
+      setIsLoadingState(false);
+    }
+  };
+
+  const handleUnlinkSelf = async () => {
+    if (!user_id || !accessToken) return;
+
+    setIsLoadingState(true);
+    setError(null);
+    try {
+      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+      const response = await removeSelfSponsorship({
+        apiBaseUrl,
+        resource_id: user_id,
+        rawToken: accessToken.raw,
+      });
+
+      // Redirect to the settings link provided by the API
+      toast(t("saved"));
+      window.location.href = response.settings_link;
+    } catch (unlinkError) {
+      console.error("Error unlinking self!", unlinkError);
       setError(PageError.simple(t("errors.save_failed")));
     } finally {
       setIsLoadingState(false);
@@ -288,28 +320,64 @@ const SponsorshipsPage: React.FC = () => {
               expiryTimestamp={accessToken?.decoded?.exp || 0}
               onTokenExpired={handleTokenExpired}
               onActionClicked={
-                isEditing ? handleSaveSponsorship : handleStartEditing
+                accessToken?.decoded?.sponsored_by
+                  ? handleUnlinkSelf
+                  : isEditing
+                  ? handleSaveSponsorship
+                  : handleStartEditing
               }
               actionDisabled={
                 isLoadingState ||
                 !!error?.isBlocker ||
-                (!isEditing && sponsorships.length >= maxSponsorships) ||
-                (isEditing && !cleanUsername(telegramUsername).length)
+                (!accessToken?.decoded?.sponsored_by &&
+                  !isEditing &&
+                  sponsorships.length >= maxSponsorships) ||
+                (!accessToken?.decoded?.sponsored_by &&
+                  isEditing &&
+                  !cleanUsername(telegramUsername).length)
               }
               showActionButton={true}
               actionButtonText={
-                isEditing ? t("save") : t("sponsorship.add_sponsorship")
+                accessToken?.decoded?.sponsored_by
+                  ? t("sponsorship.unlink")
+                  : isEditing
+                  ? t("save")
+                  : t("sponsorship.add_sponsorship")
               }
-              showCancelButton={isEditing}
+              showCancelButton={
+                isEditing && !accessToken?.decoded?.sponsored_by
+              }
               onCancelClicked={handleCancelEditing}
               cancelDisabled={isLoadingState || !!error?.isBlocker}
             />
 
             {/* The Sponsorships card */}
-            <Card className="mt-4.5 mb-4.5 md:px-6 px-2 md:py-12 py-8 glass-static rounded-3xl">
-              <CardContent className="space-y-4">
+            <Card
+              className={cn(
+                "mt-4.5 mb-4.5",
+                "md:px-6 px-2 md:py-12 py-8",
+                "glass-static rounded-3xl"
+              )}
+            >
+              <CardContent className="space-y-4 ">
                 {isLoadingState ? (
                   <SettingsPageSkeleton />
+                ) : accessToken?.decoded?.sponsored_by ? (
+                  <>
+                    <CardTitle className="text-center mx-auto">
+                      {t("sponsorship.you_are_sponsored")}
+                    </CardTitle>
+
+                    {/* Sponsored user message */}
+                    <div className="flex flex-col items-center space-y-10 text-center mt-12">
+                      <Link className="h-12 w-12 text-accent-amber" />
+                      <p className="text-foreground/80 font-light max-w-md">
+                        {t("sponsorship.unlink_message", {
+                          sponsorName: accessToken.decoded.sponsored_by,
+                        })}
+                      </p>
+                    </div>
+                  </>
                 ) : isEditing ? (
                   <>
                     <CardTitle className="text-center mx-auto">
@@ -333,129 +401,150 @@ const SponsorshipsPage: React.FC = () => {
                     <CardTitle className="text-center mx-auto">
                       {t("sponsorship.users_you_sponsor")}
                     </CardTitle>
-                    <div className="h-4" />
 
                     {/* Sponsorships List */}
                     <div className="flex flex-col space-y-0">
                       {sponsorships.length === 0 ? (
-                        <div className="text-center text-muted-foreground py-8">
-                          {t("sponsorship.no_sponsorships_found")}
+                        <div className="flex flex-col items-center space-y-10 text-center mt-12">
+                          <UsersRound className="h-12 w-12 text-accent-amber" />
+                          <p className="text-foreground/80 font-light">
+                            {t("sponsorship.no_sponsorships_found")}
+                          </p>
                         </div>
                       ) : (
-                        sponsorships.map((sponsorship, index) => {
-                          // Expanded state management
-                          const isExpanded = expandedItems.has(index);
-                          const toggleExpanded = () => {
-                            const newExpandedItems = new Set(expandedItems);
-                            if (isExpanded) {
-                              newExpandedItems.delete(index);
-                            } else {
-                              newExpandedItems.add(index);
+                        <>
+                          <div className="h-6" />
+                          {sponsorships.map((sponsorship, index) => {
+                            // Expanded state management
+                            const isExpanded = expandedItems.has(index);
+                            const toggleExpanded = () => {
+                              const newExpandedItems = new Set(expandedItems);
+                              if (isExpanded) {
+                                newExpandedItems.delete(index);
+                              } else {
+                                newExpandedItems.add(index);
+                              }
+                              setExpandedItems(newExpandedItems);
+                            };
+
+                            // Border classes
+                            const isFirst = index === 0;
+                            const isLast = index === sponsorships.length - 1;
+                            let roundedClasses = "";
+                            let borderClasses = "border-t-0";
+                            if (sponsorships.length === 1) {
+                              roundedClasses = "rounded-2xl";
+                              borderClasses = "border-t-1";
+                            } else if (isFirst) {
+                              roundedClasses = "rounded-t-2xl";
+                              borderClasses = "border-t-1";
+                            } else if (isLast) {
+                              roundedClasses = "rounded-b-2xl";
                             }
-                            setExpandedItems(newExpandedItems);
-                          };
 
-                          // Border classes
-                          const isFirst = index === 0;
-                          const isLast = index === sponsorships.length - 1;
-                          let roundedClasses = "";
-                          let borderClasses = "border-t-0";
-                          if (sponsorships.length === 1) {
-                            roundedClasses = "rounded-2xl";
-                            borderClasses = "border-t-1";
-                          } else if (isFirst) {
-                            roundedClasses = "rounded-t-2xl";
-                            borderClasses = "border-t-1";
-                          } else if (isLast) {
-                            roundedClasses = "rounded-b-2xl";
-                          }
-
-                          return (
-                            // Full horizontal row - sponsorship item and delete button
-                            <div
-                              key={index}
-                              className={cn(
-                                "flex items-center justify-between w-full sm:w-sm mx-auto",
-                                expandedItems.size > 0
-                                  ? "space-x-4"
-                                  : "space-x-0"
-                              )}
-                            >
-                              {/* Expanded sponsorship stack (vertical) - display name row and dates */}
+                            return (
+                              // Full horizontal row - sponsorship item and delete button
                               <div
+                                key={index}
                                 className={cn(
-                                  "flex flex-col px-5 py-3 items-start justify-center border glass cursor-pointer w-full min-w-0",
-                                  isExpanded ? "space-y-2" : "space-y-0",
-                                  roundedClasses,
-                                  borderClasses
+                                  "flex items-center justify-between w-full sm:w-sm mx-auto",
+                                  "transition-all duration-300 ease-in-out",
+                                  expandedItems.size > 0
+                                    ? "space-x-6"
+                                    : "space-x-0"
                                 )}
-                                onClick={toggleExpanded}
                               >
-                                {/* Display name row (horizontal) - display name block and status icon */}
-                                <div className="flex items-center justify-start max-w-full min-w-0 space-x-3">
-                                  {/* Display name block (horizontal) */}
-                                  <div className="flex-1 min-w-0">
-                                    {getDisplayName(sponsorship)}
-                                  </div>
-                                  {/* Sponsorship status icon */}
-                                  {!isExpanded &&
-                                    (sponsorship.accepted_at ? (
-                                      <CheckCheck className="h-4 w-4 text-success flex-shrink-0" />
-                                    ) : (
-                                      <Check className="h-4 w-4 text-success flex-shrink-0" />
-                                    ))}
-                                </div>
-
-                                {/* Bottom sponsorship stack (vertical) - status icons and dates */}
+                                {/* Expanded sponsorship stack (vertical) - display name row and dates */}
                                 <div
                                   className={cn(
-                                    "flex flex-col space-y-0 px-0.5",
-                                    isExpanded ? "block" : "hidden"
+                                    "flex flex-col px-5 py-3 items-start justify-center glass border cursor-pointer w-full min-w-0",
+                                    isExpanded ? "space-y-2" : "space-y-0",
+                                    roundedClasses,
+                                    borderClasses
                                   )}
+                                  onClick={toggleExpanded}
                                 >
-                                  {/* Sponsored-at row (horizontal) */}
-                                  <div className="flex items-center space-x-3.5">
-                                    <Check className="h-4 w-4 text-success" />
-                                    <span className="text-sm text-muted-foreground">
-                                      {formatDate(
-                                        sponsorship.sponsored_at,
-                                        currentInterfaceLanguage.isoCode
-                                      )}
-                                    </span>
+                                  {/* Display name row (horizontal) - display name block and status icon */}
+                                  <div className="flex items-center justify-start max-w-full min-w-0 space-x-3">
+                                    {/* Display name block (horizontal) */}
+                                    <div className="flex-1 min-w-0">
+                                      {getDisplayName(sponsorship)}
+                                    </div>
+                                    {/* Sponsorship status icon */}
+                                    {!isExpanded &&
+                                      (sponsorship.accepted_at ? (
+                                        <CheckCheck className="h-4 w-4 text-success flex-shrink-0" />
+                                      ) : (
+                                        <Check className="h-4 w-4 text-success flex-shrink-0" />
+                                      ))}
                                   </div>
-                                  {/* Accepted-at row (horizontal) */}
-                                  {sponsorship.accepted_at && (
+
+                                  {/* Bottom sponsorship stack (vertical) - status icons and dates */}
+                                  <div
+                                    className={cn(
+                                      "flex flex-col space-y-0 px-0.5",
+                                      isExpanded ? "block" : "hidden"
+                                    )}
+                                  >
+                                    {/* Sponsored-at row (horizontal) */}
                                     <div className="flex items-center space-x-3.5">
-                                      <CheckCheck className="h-4 w-4 text-success" />
+                                      <Check className="h-4 w-4 text-success" />
                                       <span className="text-sm text-muted-foreground">
                                         {formatDate(
-                                          sponsorship.accepted_at,
+                                          sponsorship.sponsored_at,
                                           currentInterfaceLanguage.isoCode
                                         )}
                                       </span>
                                     </div>
-                                  )}
+                                    {/* Accepted-at row (horizontal) */}
+                                    {sponsorship.accepted_at && (
+                                      <div className="flex items-center space-x-3.5">
+                                        <CheckCheck className="h-4 w-4 text-success" />
+                                        <span className="text-sm text-muted-foreground">
+                                          {formatDate(
+                                            sponsorship.accepted_at,
+                                            currentInterfaceLanguage.isoCode
+                                          )}
+                                        </span>
+                                      </div>
+                                    )}
+                                  </div>
                                 </div>
+                                {/* Delete button */}
+                                <Tooltip>
+                                  <TooltipTrigger asChild>
+                                    <Unlink
+                                      className={cn(
+                                        "h-6 w-6 flex-shrink-0",
+                                        "transition-all duration-300 ease-in-out",
+                                        expandedItems.size > 0
+                                          ? "block"
+                                          : "hidden",
+                                        isExpanded
+                                          ? "opacity-100"
+                                          : "opacity-0",
+                                        error?.isBlocker
+                                          ? "text-muted-foreground cursor-not-allowed"
+                                          : isExpanded
+                                          ? "text-destructive cursor-pointer hover:scale-110 hover:text-red-300"
+                                          : "text-destructive cursor-default"
+                                      )}
+                                      onClick={(e: React.MouseEvent) => {
+                                        e.stopPropagation();
+                                        if (isExpanded && !error?.isBlocker) {
+                                          handleUnsponsor(sponsorship);
+                                        }
+                                      }}
+                                    />
+                                  </TooltipTrigger>
+                                  <TooltipContent>
+                                    {t("sponsorship.unlink")}
+                                  </TooltipContent>
+                                </Tooltip>
                               </div>
-                              {/* Delete button */}
-                              <CircleMinus
-                                className={cn(
-                                  "h-6 w-6 text-destructive flex-shrink-0",
-                                  expandedItems.size > 0 ? "block" : "hidden",
-                                  isExpanded
-                                    ? "opacity-100 cursor-pointer hover:scale-110"
-                                    : "opacity-0 cursor-default"
-                                )}
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  if (isExpanded) {
-                                    handleUnsponsor(sponsorship);
-                                  }
-                                }}
-                              />
-                            </div>
-                          );
-                        })
+                            );
+                          })}
+                        </>
                       )}
                     </div>
                   </>
@@ -465,7 +554,7 @@ const SponsorshipsPage: React.FC = () => {
 
             {/* Token Information */}
             <footer className="mt-6 text-xs mb-9 text-blue-300/30">
-              {accessToken && <TokenDataSheet decoded={accessToken.decoded} />}
+              {accessToken && <TokenSummary decoded={accessToken.decoded} />}
             </footer>
           </main>
         </div>
@@ -475,7 +564,9 @@ const SponsorshipsPage: React.FC = () => {
         <ErrorMessage
           title={t("errors.oh_no")}
           description={error?.text}
-          genericMessage={t("errors.check_link")}
+          genericMessage={
+            error?.showGenericAppendix ? t("errors.check_link") : undefined
+          }
         />
       )}
     </div>

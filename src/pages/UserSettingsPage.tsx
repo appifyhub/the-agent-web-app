@@ -3,14 +3,14 @@ import { useParams, useSearchParams } from "react-router-dom";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Info } from "lucide-react";
 import Header from "@/components/Header";
-import TokenDataSheet from "@/components/TokenDataSheet";
+import TokenSummary from "@/components/TokenSummary";
 import SettingInput from "@/components/SettingInput";
 import { toast } from "sonner";
 import { DEFAULT_LANGUAGE, INTERFACE_LANGUAGES } from "@/lib/languages";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { SERVICE_PROVIDERS } from "@/lib/service-providers";
 import ErrorMessage from "@/components/ErrorMessage";
-import { maskSecret, PageError } from "@/lib/utils";
+import { cn, maskSecret, PageError } from "@/lib/utils";
 import SettingControls from "@/components/SettingControls";
 import SettingsPageSkeleton from "@/components/SettingsPageSkeleton";
 import GenericPageSkeleton from "@/components/GenericPageSkeleton";
@@ -85,6 +85,33 @@ const UserSettingsPage: React.FC = () => {
       return;
     }
 
+    // Check if user is sponsored
+    if (accessToken.decoded.sponsored_by) {
+      const handleSponsoredUser = (sponsorName: string) => {
+        console.warn("User is sponsored by:", sponsorName);
+        const sponsorshipsUrl = `/${lang_iso_code}/user/${user_id}/sponsorships${window.location.search}`;
+        const sponsorshipsTitle = t("sponsorships");
+
+        const boldSponsorNameHtml = `<span class="text-orange-200 font-medium">${sponsorName}</span>`;
+        const linkStyle = "underline text-orange-200 hover:text-white";
+        const sponsorshipsLinkHtml = `<a href="${sponsorshipsUrl}" class="${linkStyle}" >${sponsorshipsTitle}</a>`;
+
+        const htmlMessage = t("errors.sponsored_user", {
+          sponsorName: boldSponsorNameHtml,
+          sponsorshipsLink: sponsorshipsLinkHtml,
+        });
+
+        const errorMessage = (
+          <span dangerouslySetInnerHTML={{ __html: htmlMessage }} />
+        );
+
+        setError(PageError.blocker(errorMessage, false));
+      };
+
+      handleSponsoredUser(accessToken.decoded.sponsored_by);
+      return;
+    }
+
     console.info("Session parameters are available!", accessToken.decoded);
     const fetchSettings = async () => {
       setIsLoadingState(true);
@@ -107,7 +134,7 @@ const UserSettingsPage: React.FC = () => {
       }
     };
     fetchSettings();
-  }, [accessToken, user_id]);
+  }, [accessToken, user_id, lang_iso_code]);
 
   const isMaskedPropertyChanged = (
     localProperty: string | null | undefined,
@@ -223,13 +250,20 @@ const UserSettingsPage: React.FC = () => {
                       defaultValue={SERVICE_PROVIDERS[0].id}
                       className="w-full sm:w-x"
                     >
-                      <TabsList className="flex flex-nowrap w-full rounded-full border-1 border-muted-foreground/5 overflow-x-auto overflow-y-hidden justify-start px-0">
+                      <TabsList
+                        className={cn(
+                          "flex flex-nowrap w-full rounded-full border-1",
+                          "border-muted-foreground/5 overflow-x-auto overflow-y-hidden",
+                          "justify-start px-0",
+                          "hidden" // for later use
+                        )}
+                      >
                         {SERVICE_PROVIDERS.map((provider) => (
                           <TabsTrigger
                             className="min-w-max px-2 sm:px-4 py-4 text-[0.9rem] sm:text-[1.05rem] truncate cursor-pointer rounded-full transition-all"
                             key={provider.id}
                             value={provider.id}
-                            disabled
+                            disabled={!!error?.isBlocker}
                           >
                             {provider.name}
                           </TabsTrigger>
@@ -294,7 +328,7 @@ const UserSettingsPage: React.FC = () => {
 
             {/* Token Information */}
             <footer className="mt-6 text-xs mb-9 text-blue-300/30">
-              {accessToken && <TokenDataSheet decoded={accessToken.decoded} />}
+              {accessToken && <TokenSummary decoded={accessToken.decoded} />}
             </footer>
           </main>
         </div>
@@ -304,7 +338,9 @@ const UserSettingsPage: React.FC = () => {
         <ErrorMessage
           title={t("errors.oh_no")}
           description={error?.text}
-          genericMessage={t("errors.check_link")}
+          genericMessage={
+            error?.showGenericAppendix ? t("errors.check_link") : undefined
+          }
         />
       )}
     </div>
