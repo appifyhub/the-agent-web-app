@@ -27,7 +27,10 @@
     "no_sponsorships_found": "No se encontraron patrocinios",
     "incognito": "Incógnito",
     "add_sponsorship": "Patrocinar",
-    "telegram_username_label": "Nombre de usuario de Telegram del usuario que quieres patrocinar"
+    "telegram_username_label": "Nombre de usuario de Telegram del usuario que quieres patrocinar",
+    "you_are_sponsored": "¡Eres un usuario patrocinado!",
+    "unlink_message": "Ahora puedes convertirte en un usuario autónomo. Esto rompe el vínculo entre tú y {sponsorName} y la IA dejará de funcionar hasta que configures tu Perfil.",
+    "unlink": "Desvincular"
   },
   "save": "Guardar",
   "saved": "¡Guardado!",
@@ -36,6 +39,7 @@
     "profile_id": "Perfil ID",
     "telegram_user_id": "ID de usuario de Telegram",
     "telegram_username": "Nombre de usuario de Telegram",
+    "sponsored_by": "Patrocinado por",
     "version": "Versión de IA",
     "reveal_placeholder": "Información que recopilamos sobre ti"
   },
@@ -49,6 +53,7 @@
     "misconfigured": "Tu sesión está mal configurada.",
     "fetch_failed": "Error al cargar la configuración.",
     "save_failed": "Error al guardar la configuración.",
-    "check_link": "Verifica tu enlace de acceso e inténtalo de nuevo."
+    "check_link": "Verifica tu enlace de acceso e inténtalo de nuevo.",
+    "sponsored_user": "Tu uso está patrocinado por {sponsorName}. Para convertirte en un usuario autónomo, ve a {sponsorshipsLink}."
   }
 }

@@ -27,7 +27,10 @@
     "no_sponsorships_found": "No sponsorships found",
     "incognito": "Incognito",
     "add_sponsorship": "Sponsor",
-    "telegram_username_label": "Telegram username of the user you want to sponsor"
+    "telegram_username_label": "Telegram username of the user you want to sponsor",
+    "you_are_sponsored": "You are a sponsored user!",
+    "unlink_message": "You can now become an autonomous user. This breaks the link between you and {sponsorName} and AI will stop working until you configure your Profile.",
+    "unlink": "Unlink"
   },
   "save": "Save",
   "saved": "Saved!",
@@ -36,6 +39,7 @@
     "profile_id": "Profile ID",
     "telegram_user_id": "Telegram User ID",
     "telegram_username": "Telegram Username",
+    "sponsored_by": "Sponsored by",
     "version": "AI Version",
     "reveal_placeholder": "Information we collect about you"
   },
@@ -49,6 +53,7 @@
     "misconfigured": "Your session is misconfigured.",
     "fetch_failed": "Failed to load the settings.",
     "save_failed": "Failed to save settings.",
-    "check_link": "Check your access link and try again."
+    "check_link": "Check your access link and try again.",
+    "sponsored_user": "Your usage is sponsored by {sponsorName}. To become an autonomous user, go to {sponsorshipsLink}."
   }
 }

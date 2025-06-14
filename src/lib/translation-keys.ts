@@ -32,12 +32,16 @@ export type TranslationKey =
   | "sponsorship.incognito"
   | "sponsorship.add_sponsorship"
   | "sponsorship.telegram_username_label"
+  | "sponsorship.you_are_sponsored"
+  | "sponsorship.unlink_message"
+  | "sponsorship.unlink"
   | "save"
   | "saved"
   | "copied"
   | "token_info.profile_id"
   | "token_info.telegram_user_id"
   | "token_info.telegram_username"
+  | "token_info.sponsored_by"
   | "token_info.version"
   | "token_info.reveal_placeholder"
   | "provider_needed_for"
@@ -49,4 +53,5 @@ export type TranslationKey =
   | "errors.misconfigured"
   | "errors.fetch_failed"
   | "errors.save_failed"
-  | "errors.check_link";
+  | "errors.check_link"
+  | "errors.sponsored_user";

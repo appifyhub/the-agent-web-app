@@ -27,7 +27,10 @@
     "no_sponsorships_found": "未找到赞助",
     "incognito": "匿名",
     "add_sponsorship": "赞助",
-    "telegram_username_label": "您想赞助的用户的Telegram用户名"
+    "telegram_username_label": "您想要赞助的用户的Telegram用户名",
+    "you_are_sponsored": "您是被赞助的用户！",
+    "unlink_message": "您现在可以成为自主用户。这将断开您与{sponsorName}之间的链接, AI将停止工作, 直到您配置您的个人资料。",
+    "unlink": "取消链接"
   },
   "save": "保存",
   "saved": "已保存！",
@@ -36,6 +39,7 @@
     "profile_id": "个人资料ID",
     "telegram_user_id": "Telegram 用户ID",
     "telegram_username": "Telegram 用户名",
+    "sponsored_by": "赞助者",
     "version": "AI 版本",
     "reveal_placeholder": "我们收集的关于您的信息"
   },
@@ -49,6 +53,7 @@
     "misconfigured": "您的会话配置错误。",
     "fetch_failed": "加载设置失败。",
     "save_failed": "保存设置失败。",
-    "check_link": "请检查您的访问链接并重试。"
+    "check_link": "请检查您的访问链接并重试。",
+    "sponsored_user": "您的使用由{sponsorName}赞助。要成为自主用户，请前往{sponsorshipsLink}。"
   }
 }
