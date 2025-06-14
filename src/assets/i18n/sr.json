@@ -27,7 +27,10 @@
     "no_sponsorships_found": "Nisu pronađena sponzorstva",
     "incognito": "Inkognito",
     "add_sponsorship": "Sponzoriši",
-    "telegram_username_label": "Telegram korisničko ime korisnika kojeg želite da sponzorišete"
+    "telegram_username_label": "Telegram korisničko ime korisnika koga želite da sponzorišete",
+    "you_are_sponsored": "Vi ste sponzorisani korisnik!",
+    "unlink_message": "Sada možete postati autonomni korisnik. Ovo prekida vezu između vas i {sponsorName}. AI će prestati da radi dok ne podesite svoj Profil.",
+    "unlink": "Prekini vezu"
   },
   "save": "Sačuvaj",
   "saved": "Sačuvano!",
@@ -36,19 +39,21 @@
     "profile_id": "ID profila",
     "telegram_user_id": "Telegram korisnički ID",
     "telegram_username": "Telegram korisničko ime",
+    "sponsored_by": "Sponzoriše",
     "version": "AI Verzija",
     "reveal_placeholder": "Informacije koje prikupljamo o vama"
   },
   "provider_needed_for": "{botName} ovo koristi za {tools}",
   "where_is_my_key": "Gde je moj {providerName} ključ?",
   "errors": {
-    "oh_no": "Oh ne!",
+    "oh_no": "O ne!",
     "expired": "Vaša sesija je istekla.",
     "not_found": "Vaša sesija nije pronađena.",
     "not_valid": "Vaša sesija nije validna.",
     "misconfigured": "Vaša sesija je pogrešno podešena.",
     "fetch_failed": "Neuspešno učitavanje podešavanja.",
     "save_failed": "Neuspešno čuvanje podešavanja.",
-    "check_link": "Proverite svoj pristupni link i pokušajte ponovo."
+    "check_link": "Proverite svoj pristupni link i pokušajte ponovo.",
+    "sponsored_user": "Vaše korišćenje sponzoriše {sponsorName}. Da postanete autonomni korisnik, idite na {sponsorshipsLink}."
   }
 }

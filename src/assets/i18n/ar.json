@@ -25,9 +25,12 @@
   "sponsorship": {
     "users_you_sponsor": "المستخدمون الذين ترعاهم:",
     "no_sponsorships_found": "لم يتم العثور على رعايات",
-    "incognito": "متخفي",
-    "add_sponsorship": "ارعَ",
-    "telegram_username_label": "اسم مستخدم تيليجرام للمستخدم الذي تريد رعايته"
+    "incognito": "مجهول",
+    "add_sponsorship": "رعاية",
+    "telegram_username_label": "اسم المستخدم في تليجرام للمستخدم الذي تريد رعايته",
+    "you_are_sponsored": "أنت مستخدم مُرعى!",
+    "unlink_message": "يمكنك الآن أن تصبح مستخدماً مستقلاً. هذا يقطع الرابط بينك وبين {sponsorName} وسيتوقف الذكاء الاصطناعي عن العمل حتى تقوم بتكوين ملفك الشخصي.",
+    "unlink": "إلغاء الربط"
   },
   "save": "حفظ",
   "saved": "تم الحفظ!",
@@ -36,6 +39,7 @@
     "profile_id": "الملف الشخصي ID",
     "telegram_user_id": "معرّف مستخدم تيليجرام",
     "telegram_username": "اسم مستخدم تيليجرام",
+    "sponsored_by": "برعاية",
     "version": "إصدار الذكاء الاصطناعي",
     "reveal_placeholder": "المعلومات التي نجمعها عنك"
   },
@@ -49,6 +53,7 @@
     "misconfigured": "تم تكوين جلستك بشكل غير صحيح.",
     "fetch_failed": "فشل في تحميل الإعدادات.",
     "save_failed": "فشل في حفظ الإعدادات.",
-    "check_link": "تحقق من رابط الوصول الخاص بك وحاول مرة أخرى."
+    "check_link": "تحقق من رابط الوصول الخاص بك وحاول مرة أخرى.",
+    "sponsored_user": "استخدامك مرعى من قبل {sponsorName}. لتصبح مستخدماً مستقلاً، اذهب إلى {sponsorshipsLink}."
   }
 }
