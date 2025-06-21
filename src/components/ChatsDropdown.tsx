@@ -3,9 +3,9 @@ import { Button } from "@/components/ui/button";
 import {
   ChevronDownIcon,
   CheckIcon,
-  UsersRound,
   MessageCircle,
-  Lock,
+  Crown,
+  MessagesSquare,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
@@ -37,15 +37,26 @@ const ChatsDropdown: React.FC<ChatsDropdownProps> = ({
 
   const resolveChatLabel = () => {
     if (chats.length === 0 && !disabled) {
-      return t("loading_placeholder");
+      return (
+        <span className="flex items-baseline gap-2">
+          <MessageCircle className="h-6 w-6 translate-y-0.5" />
+          <span>{t("loading_placeholder")}</span>
+        </span>
+      );
     }
+
     if (isValidChatSelected) {
-      return selectedChat.title;
+      return (
+        <span className="flex items-baseline gap-2">
+          <MessageCircle className="h-6 w-6 translate-y-0.5" />
+          <span className="font-light">{selectedChat.title}</span>
+        </span>
+      );
     }
 
     return (
-      <span className="flex items-center text-foreground gap-2">
-        <MessageCircle className="h-6 w-6" />
+      <span className="flex items-baseline gap-2">
+        <MessageCircle className="h-6 w-6 translate-y-0.5" />
         <span hidden={disabled}>{t("your_chats")}</span>
       </span>
     );
@@ -94,9 +105,9 @@ const ChatsDropdown: React.FC<ChatsDropdownProps> = ({
             disabled={chat.chat_id === selectedChat?.chat_id}
           >
             {chat.is_own ? (
-              <Lock className="h-4 w-4 flex-shrink-0 text-foreground" />
+              <Crown className="h-4 w-4 flex-shrink-0 text-amber-100" />
             ) : (
-              <UsersRound className="h-4 w-4 flex-shrink-0 text-muted-foreground" />
+              <MessagesSquare className="h-4 w-4 flex-shrink-0 text-foreground" />
             )}
             <div className="mx-1 h-4 w-px bg-muted-foreground opacity-30" />
             <span className="flex-1 truncate">{chat.title}</span>

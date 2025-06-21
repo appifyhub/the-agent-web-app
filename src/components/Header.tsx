@@ -23,7 +23,7 @@ interface HeaderProps {
   chats: ChatInfo[];
   selectedChat?: ChatInfo;
   selectedLanguage: Language;
-  disabled?: boolean;
+  hasBlockerError?: boolean;
   showProfileButton?: boolean;
   showSponsorshipsButton?: boolean;
   userId?: string;
@@ -34,7 +34,7 @@ const Header: React.FC<HeaderProps> = ({
   chats,
   selectedChat = undefined,
   selectedLanguage,
-  disabled = false,
+  hasBlockerError = false,
   showProfileButton = true,
   showSponsorshipsButton = true,
   userId,
@@ -136,15 +136,12 @@ const Header: React.FC<HeaderProps> = ({
                 variant="outline"
                 size="icon"
                 className={cn(
-                  disabled
-                    ? "glass-dark-static"
-                    : page === "sponsorships"
-                    ? "glass-active text-amber-100"
+                  page === "sponsorships"
+                    ? "glass-active text-amber-200"
                     : "glass",
                   "rounded-full scale-120",
-                  disabled ? "cursor-not-allowed" : "cursor-pointer"
+                  "cursor-pointer"
                 )}
-                disabled={disabled}
                 onClick={handleSponsorshipsClick}
               >
                 <Gift className="h-6 w-6" />
@@ -162,15 +159,10 @@ const Header: React.FC<HeaderProps> = ({
                 variant="outline"
                 size="icon"
                 className={cn(
-                  disabled
-                    ? "glass-dark-static"
-                    : page === "profile"
-                    ? "glass-active text-amber-100"
-                    : "glass",
+                  page === "profile" ? "glass-active text-amber-200" : "glass",
                   "rounded-full scale-120",
-                  disabled ? "cursor-not-allowed" : "cursor-pointer"
+                  "cursor-pointer"
                 )}
-                disabled={disabled}
                 onClick={handleProfileClick}
               >
                 <UserRound className="h-6 w-6" />
@@ -224,7 +216,7 @@ const Header: React.FC<HeaderProps> = ({
           <ChatsDropdown
             chats={chats}
             selectedChat={selectedChat}
-            disabled={disabled}
+            disabled={hasBlockerError && chats.length === 0}
             onChatChange={handleChatChange}
           />
 
@@ -237,15 +229,12 @@ const Header: React.FC<HeaderProps> = ({
                     variant="outline"
                     size="icon"
                     className={cn(
-                      disabled
-                        ? "glass-dark-static"
-                        : page === "sponsorships"
-                        ? "glass-active text-amber-100"
+                      page === "sponsorships"
+                        ? "glass-active text-amber-200"
                         : "glass",
                       "rounded-full",
-                      disabled ? "cursor-not-allowed" : "cursor-pointer"
+                      "cursor-pointer"
                     )}
-                    disabled={disabled}
                     onClick={handleSponsorshipsClick}
                   >
                     <Gift className="h-6 w-6" />
@@ -265,15 +254,12 @@ const Header: React.FC<HeaderProps> = ({
                     variant="outline"
                     size="icon"
                     className={cn(
-                      disabled
-                        ? "glass-dark-static"
-                        : page === "profile"
-                        ? "glass-active text-amber-100"
+                      page === "profile"
+                        ? "glass-active text-amber-200"
                         : "glass",
                       "rounded-full",
-                      disabled ? "cursor-not-allowed" : "cursor-pointer"
+                      "cursor-pointer"
                     )}
-                    disabled={disabled}
                     onClick={handleProfileClick}
                   >
                     <UserRound className="h-6 w-6" />
