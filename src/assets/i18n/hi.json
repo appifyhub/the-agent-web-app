@@ -7,7 +7,7 @@
   "configure_keys_title": "{botName} की एक्सेस कुंजियाँ कॉन्फ़िगर करें",
   "preferred_language_label": "{botName} निम्न भाषा में उत्तर देने का प्रयास करता है:",
   "preferred_language_placeholder": "भाषा चुनें",
-  "your_chats": "आपकी चैट",
+  "your_chats": "चैट सेट करें",
   "loading_placeholder": "लोड हो रहा है...",
   "notifications": {
     "releases_label": "{botName} मुझे रिलीज़ के बारे में सूचित करे:",

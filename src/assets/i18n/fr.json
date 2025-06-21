@@ -7,7 +7,7 @@
   "configure_keys_title": "Configurer les clés d'accès de {botName}",
   "preferred_language_label": "{botName} essaie de répondre en utilisant :",
   "preferred_language_placeholder": "Sélectionner une langue",
-  "your_chats": "Vos discussions",
+  "your_chats": "Configurer les discussions",
   "loading_placeholder": "Chargement…",
   "notifications": {
     "releases_label": "{botName} doit me notifier des sorties :",
