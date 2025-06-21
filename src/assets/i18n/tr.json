@@ -1,0 +1,59 @@
+{
+  "chat": "Sohbet",
+  "profile": "Profil",
+  "sponsorships": "Sponsorluklar",
+  "close": "Kapat",
+  "configure_title": "{botName}'ın Davranışını Yapılandır",
+  "configure_keys_title": "{botName}'ın Erişim Anahtarlarını Yapılandır",
+  "preferred_language_label": "{botName} şu dilde yanıt vermeye çalışır:",
+  "preferred_language_placeholder": "Bir dil seçin",
+  "your_chats": "Sohbetleri yapılandır",
+  "loading_placeholder": "Yükleniyor…",
+  "notifications": {
+    "releases_label": "{botName} beni sürümlerden haberdar etsin:",
+    "releases_placeholder": "Bir seviye seçin",
+    "releases_choice_none": "Asla",
+    "releases_choice_major": "Sadece önemli olanlar",
+    "releases_choice_minor": "Tüm yeni özellikler",
+    "releases_choice_all": "Tüm değişiklikler"
+  },
+  "spontaneous_label": "{botName} etiketlenmeden yanıt verir:",
+  "spontaneous_placeholder": "Ne sıklıkta seçin",
+  "never": "Asla",
+  "always": "Her zaman",
+  "reply_frequency": "Zamanın %{percent}'i",
+  "sponsorship": {
+    "users_you_sponsor": "Sponsor olduğunuz kullanıcılar:",
+    "no_sponsorships_found": "Sponsorluk bulunamadı",
+    "incognito": "Gizli",
+    "add_sponsorship": "Sponsor Ol",
+    "telegram_username_label": "Sponsor olmak istediğiniz kullanıcının Telegram kullanıcı adı",
+    "you_are_sponsored": "Sponsorlu bir kullanıcısınız!",
+    "unlink_message": "Artık bağımsız bir kullanıcı olabilirsiniz. Bu, siz ve {sponsorName} arasındaki bağlantıyı koparır ve Profilinizi yapılandırana kadar AI çalışmayı durdurur.",
+    "unlink": "Bağlantıyı Kes"
+  },
+  "save": "Kaydet",
+  "saved": "Kaydedildi!",
+  "copied": "Kopyalandı!",
+  "token_info": {
+    "profile_id": "Profil ID",
+    "telegram_user_id": "Telegram Kullanıcı ID",
+    "telegram_username": "Telegram Kullanıcı Adı",
+    "sponsored_by": "Sponsor:",
+    "version": "AI Sürümü",
+    "reveal_placeholder": "Hakkınızda topladığımız bilgiler"
+  },
+  "provider_needed_for": "{botName} bunu {tools} için gerektirir",
+  "where_is_my_key": "{providerName} anahtarım nerede?",
+  "errors": {
+    "oh_no": "Ah hayır!",
+    "expired": "Oturumunuzun süresi doldu.",
+    "not_found": "Oturumunuz bulunamadı.",
+    "not_valid": "Oturumunuz geçerli değil.",
+    "misconfigured": "Oturumunuz yanlış yapılandırılmış.",
+    "fetch_failed": "Ayarlar yüklenemedi.",
+    "save_failed": "Ayarlar kaydedilemedi.",
+    "check_link": "Erişim bağlantınızı kontrol edin ve tekrar deneyin.",
+    "sponsored_user": "Kullanımınız {sponsorName} tarafından sponsorlanıyor. Bağımsız bir kullanıcı olmak için {sponsorshipsLink} sayfasına gidin."
+  }
+}
