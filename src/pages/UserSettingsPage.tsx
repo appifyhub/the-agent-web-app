@@ -85,55 +85,71 @@ const UserSettingsPage: React.FC = () => {
       return;
     }
 
-    // Check if user is sponsored
-    if (accessToken.decoded.sponsored_by) {
-      const handleSponsoredUser = (sponsorName: string) => {
-        console.warn("User is sponsored by:", sponsorName);
-        const sponsorshipsUrl = `/${lang_iso_code}/user/${user_id}/sponsorships${window.location.search}`;
-        const sponsorshipsTitle = t("sponsorships");
-
-        const boldSponsorNameHtml = `<span class="text-orange-200 font-medium">${sponsorName}</span>`;
-        const linkStyle = "underline text-orange-200 hover:text-white";
-        const sponsorshipsLinkHtml = `<a href="${sponsorshipsUrl}" class="${linkStyle}" >${sponsorshipsTitle}</a>`;
-
-        const htmlMessage = t("errors.sponsored_user", {
-          sponsorName: boldSponsorNameHtml,
-          sponsorshipsLink: sponsorshipsLinkHtml,
-        });
-
-        const errorMessage = (
-          <span dangerouslySetInnerHTML={{ __html: htmlMessage }} />
-        );
-
-        setError(PageError.blocker(errorMessage, false));
-      };
-
-      handleSponsoredUser(accessToken.decoded.sponsored_by);
-      return;
-    }
-
     console.info("Session parameters are available!", accessToken.decoded);
-    const fetchSettings = async () => {
+
+    const isSponsored = !!accessToken.decoded.sponsored_by;
+
+    const fetchData = async () => {
       setIsLoadingState(true);
       setError(null);
       try {
         const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
-        const [settings, chats] = await Promise.all([
-          fetchUserSettings({ apiBaseUrl, user_id, rawToken: accessToken.raw }),
-          fetchUserChats({ apiBaseUrl, user_id, rawToken: accessToken.raw }),
-        ]);
-        console.info("Fetched settings!", settings);
-        setUserSettings(settings);
-        setRemoteSettings(settings);
-        setChats(chats);
+
+        if (isSponsored) {
+          // For sponsored users, only fetch chats
+          const chats = await fetchUserChats({
+            apiBaseUrl,
+            user_id,
+            rawToken: accessToken.raw,
+          });
+          setChats(chats);
+
+          // Set sponsored users, error after fetching chats
+          const handleSponsoredUser = (sponsorName: string) => {
+            console.warn("User is sponsored by:", sponsorName);
+            const sponsorshipsUrl = `/${lang_iso_code}/user/${user_id}/sponsorships${window.location.search}`;
+            const sponsorshipsTitle = t("sponsorships");
+
+            const boldSponsorNameHtml = `<span class="font-bold font-mono">${sponsorName}</span>`;
+            const linkStyle = "underline text-amber-100 hover:text-white";
+            const sponsorshipsLinkHtml = `<a href="${sponsorshipsUrl}" class="${linkStyle}" >${sponsorshipsTitle}</a>`;
+
+            const htmlMessage = t("errors.sponsored_user", {
+              sponsorName: boldSponsorNameHtml,
+              sponsorshipsLink: sponsorshipsLinkHtml,
+            });
+
+            const errorMessage = (
+              <span dangerouslySetInnerHTML={{ __html: htmlMessage }} />
+            );
+
+            setError(PageError.blocker(errorMessage, false));
+          };
+
+          handleSponsoredUser(accessToken.decoded.sponsored_by!);
+        } else {
+          // For autonomous users, fetch both settings and chats
+          const [settings, chats] = await Promise.all([
+            fetchUserSettings({
+              apiBaseUrl,
+              user_id,
+              rawToken: accessToken.raw,
+            }),
+            fetchUserChats({ apiBaseUrl, user_id, rawToken: accessToken.raw }),
+          ]);
+          console.info("Fetched settings!", settings);
+          setUserSettings(settings);
+          setRemoteSettings(settings);
+          setChats(chats);
+        }
       } catch (err) {
-        console.error("Error fetching settings or chats!", err);
+        console.error("Error fetching data!", err);
         setError(PageError.blocker(t("errors.fetch_failed")));
       } finally {
         setIsLoadingState(false);
       }
     };
-    fetchSettings();
+    fetchData();
   }, [accessToken, user_id, lang_iso_code]);
 
   const isMaskedPropertyChanged = (
@@ -217,7 +233,7 @@ const UserSettingsPage: React.FC = () => {
         page="profile"
         chats={chats}
         selectedLanguage={currentInterfaceLanguage}
-        disabled={!!error?.isBlocker}
+        hasBlockerError={!!error?.isBlocker}
         userId={accessToken?.decoded?.sub}
       />
 
@@ -304,14 +320,14 @@ const UserSettingsPage: React.FC = () => {
                             spellCheck={false}
                             inputClassName="font-mono"
                           />
-                          <div className="h-2" />
+                          <div className="h-3" />
                           <div className="flex items-center space-x-2 ps-2 text-sm text-muted-foreground">
-                            <Info className="h-4 w-4 text-blue-300/50" />
+                            <Info className="h-4 w-4 text-accent-amber/70" />
                             <a
                               href={provider.token_management_url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="dotted-underline text-blue-300/50"
+                              className="underline underline-offset-3 decoration-accent-amber/70 text-accent-amber/70"
                             >
                               {t("where_is_my_key", {
                                 providerName: provider.name,

@@ -172,7 +172,7 @@ const ChatSettingsPage: React.FC = () => {
         chats={chats}
         selectedChat={chats.find((chat) => chat.chat_id === chat_id)}
         selectedLanguage={currentInterfaceLanguage}
-        disabled={!!error?.isBlocker}
+        hasBlockerError={!!error?.isBlocker}
         userId={accessToken?.decoded?.sub}
       />
 

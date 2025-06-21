@@ -11,10 +11,11 @@ import {
   CheckCheck,
   VenetianMask,
   AtSign,
-  CircleUserRound,
   Link,
   UsersRound,
   Unlink,
+  ChevronDown,
+  UserRound,
 } from "lucide-react";
 import Header from "@/components/Header";
 import TokenSummary from "@/components/TokenSummary";
@@ -40,6 +41,7 @@ import {
   TokenExpiredError,
   TokenMissingError,
 } from "@/lib/tokens";
+import { Button } from "@/components/ui/button";
 
 const SponsorshipsPage: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -276,9 +278,9 @@ const SponsorshipsPage: React.FC = () => {
           )}
         >
           {showAtSign ? (
-            <AtSign className="h-5 w-5 text-sky-300 flex-shrink-0" />
+            <AtSign className="h-5 w-5 text-accent-amber flex-shrink-0" />
           ) : (
-            <CircleUserRound className="h-5 w-5 text-sky-300 translate-y-0.5 flex-shrink-0" />
+            <UserRound className="h-5 w-5 text-accent-amber translate-y-0.5 flex-shrink-0" />
           )}
           <span className="font-normal truncate overflow-hidden whitespace-nowrap">
             {full_name || telegram_username}
@@ -288,7 +290,7 @@ const SponsorshipsPage: React.FC = () => {
     }
     return (
       <div className="flex items-center justify-center space-x-2 truncate overflow-hidden whitespace-nowrap">
-        <VenetianMask className="h-5 w-5 text-sky-300 flex-shrink-0" />
+        <VenetianMask className="h-5 w-5 text-accent-amber flex-shrink-0" />
         <span className="font-normal truncate overflow-hidden whitespace-nowrap">
           {t("sponsorship.incognito")}
         </span>
@@ -307,7 +309,7 @@ const SponsorshipsPage: React.FC = () => {
         page="sponsorships"
         chats={chats}
         selectedLanguage={currentInterfaceLanguage}
-        disabled={!!error?.isBlocker}
+        hasBlockerError={!!error?.isBlocker}
         userId={accessToken?.decoded?.sub}
       />
 
@@ -465,18 +467,28 @@ const SponsorshipsPage: React.FC = () => {
                                   onClick={toggleExpanded}
                                 >
                                   {/* Display name row (horizontal) - display name block and status icon */}
-                                  <div className="flex items-center justify-start max-w-full min-w-0 space-x-3">
-                                    {/* Display name block (horizontal) */}
-                                    <div className="flex-1 min-w-0">
-                                      {getDisplayName(sponsorship)}
+                                  <div className="flex items-center w-full">
+                                    <div className="flex items-center space-x-3 flex-1 min-w-0">
+                                      <div className="min-w-0">
+                                        {getDisplayName(sponsorship)}
+                                      </div>
+                                      {/* Sponsorship status icon */}
+                                      {!isExpanded &&
+                                        (sponsorship.accepted_at ? (
+                                          <CheckCheck className="h-4 w-4 text-success flex-shrink-0" />
+                                        ) : (
+                                          <Check className="h-4 w-4 text-success flex-shrink-0" />
+                                        ))}
                                     </div>
-                                    {/* Sponsorship status icon */}
-                                    {!isExpanded &&
-                                      (sponsorship.accepted_at ? (
-                                        <CheckCheck className="h-4 w-4 text-success flex-shrink-0" />
-                                      ) : (
-                                        <Check className="h-4 w-4 text-success flex-shrink-0" />
-                                      ))}
+                                    {/* Right side: Chevron */}
+                                    <ChevronDown
+                                      className={cn(
+                                        "h-5 w-5 text-muted-foreground flex-shrink-0 transition-transform duration-300",
+                                        isExpanded
+                                          ? "text-foreground rotate-180"
+                                          : "rotate-0"
+                                      )}
+                                    />
                                   </div>
 
                                   {/* Bottom sponsorship stack (vertical) - status icons and dates */}
@@ -511,23 +523,22 @@ const SponsorshipsPage: React.FC = () => {
                                   </div>
                                 </div>
                                 {/* Delete button */}
-                                <Tooltip>
-                                  <TooltipTrigger asChild>
-                                    <Unlink
+                                {(() => {
+                                  const deleteButton = (
+                                    <Button
+                                      variant="outline"
+                                      size="icon"
                                       className={cn(
-                                        "h-6 w-6 flex-shrink-0",
+                                        "items-center justify-center glass rounded-full scale-130",
                                         "transition-all duration-300 ease-in-out",
                                         expandedItems.size > 0
-                                          ? "block"
+                                          ? "flex"
                                           : "hidden",
                                         isExpanded
-                                          ? "opacity-100"
-                                          : "opacity-0",
-                                        error?.isBlocker
-                                          ? "text-muted-foreground cursor-not-allowed"
-                                          : isExpanded
-                                          ? "text-destructive cursor-pointer hover:scale-110 hover:text-red-300"
-                                          : "text-destructive cursor-default"
+                                          ? "opacity-100 text-destructive cursor-pointer"
+                                          : "opacity-0 text-destructive cursor-default",
+                                        error?.isBlocker &&
+                                          "text-muted-foreground cursor-not-allowed glass-static"
                                       )}
                                       onClick={(e: React.MouseEvent) => {
                                         e.stopPropagation();
@@ -535,12 +546,30 @@ const SponsorshipsPage: React.FC = () => {
                                           handleUnsponsor(sponsorship);
                                         }
                                       }}
-                                    />
-                                  </TooltipTrigger>
-                                  <TooltipContent>
-                                    {t("sponsorship.unlink")}
-                                  </TooltipContent>
-                                </Tooltip>
+                                    >
+                                      <Unlink
+                                        className={cn(
+                                          "text-destructive h-6 w-6",
+                                          error?.isBlocker &&
+                                            "text-muted-foreground"
+                                        )}
+                                      />
+                                    </Button>
+                                  );
+
+                                  return isExpanded ? (
+                                    <Tooltip>
+                                      <TooltipTrigger asChild>
+                                        {deleteButton}
+                                      </TooltipTrigger>
+                                      <TooltipContent>
+                                        {t("sponsorship.unlink")}
+                                      </TooltipContent>
+                                    </Tooltip>
+                                  ) : (
+                                    deleteButton
+                                  );
+                                })()}
                               </div>
                             );
                           })}
