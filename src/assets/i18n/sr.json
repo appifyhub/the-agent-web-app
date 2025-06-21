@@ -7,7 +7,7 @@
   "configure_keys_title": "Podesite pristupne ključeve za {botName}a",
   "preferred_language_label": "{botName} će pokušati da odgovori koristeći:",
   "preferred_language_placeholder": "Izaberite jezik",
-  "your_chats": "Vaši četovi",
+  "your_chats": "Podesi četove",
   "loading_placeholder": "Učitavanje…",
   "notifications": {
     "releases_label": "{botName} treba da me obavesti o izdanjima:",

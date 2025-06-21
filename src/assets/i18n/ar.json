@@ -7,7 +7,7 @@
   "configure_keys_title": "تكوين مفاتيح الوصول لـ {botName}",
   "preferred_language_label": "يحاول {botName} الرد باستخدام:",
   "preferred_language_placeholder": "اختر لغة",
-  "your_chats": "محادثاتك",
+  "your_chats": "إعداد المحادثات",
   "loading_placeholder": "جاري التحميل…",
   "notifications": {
     "releases_label": "يجب أن يُخطِرني {botName} بالإصدارات:",
