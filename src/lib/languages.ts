@@ -307,6 +307,12 @@ export const LLM_LANGUAGES: Language[] = [
     flagEmoji: "🇷🇺",
   },
   {
+    isoCode: "tr",
+    defaultName: "Turkish",
+    localizedName: "Türkçe",
+    flagEmoji: "🇹🇷",
+  },
+  {
     isoCode: "sd",
     defaultName: "Sindhi",
     localizedName: "سنڌي",
@@ -416,6 +422,18 @@ export const INTERFACE_LANGUAGES: Language[] = [
     defaultName: "Spanish",
     localizedName: "Español",
     flagEmoji: "🇪🇸",
+  },
+  {
+    isoCode: "ru",
+    defaultName: "Russian",
+    localizedName: "Русский",
+    flagEmoji: "🇷🇺",
+  },
+  {
+    isoCode: "tr",
+    defaultName: "Turkish",
+    localizedName: "Türkçe",
+    flagEmoji: "🇹🇷",
   },
 ];
 

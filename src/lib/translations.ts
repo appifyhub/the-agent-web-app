@@ -9,6 +9,8 @@ import de from "@/assets/i18n/de.json";
 import hi from "@/assets/i18n/hi.json";
 import it from "@/assets/i18n/it.json";
 import es from "@/assets/i18n/es.json";
+import ru from "@/assets/i18n/ru.json";
+import tr from "@/assets/i18n/tr.json";
 import { en as pluralEn } from "make-plural";
 import { sr as pluralRs } from "make-plural";
 import { ar as pluralAr } from "make-plural";
@@ -18,6 +20,8 @@ import { de as pluralDe } from "make-plural";
 import { hi as pluralHi } from "make-plural";
 import { it as pluralIt } from "make-plural";
 import { es as pluralEs } from "make-plural";
+import { ru as pluralRu } from "make-plural";
+import { tr as pluralTr } from "make-plural";
 
 // Dynamically derive Language type from INTERFACE_LANGUAGES
 export type Language = (typeof INTERFACE_LANGUAGES)[number]["isoCode"];
@@ -34,6 +38,8 @@ const TRANSLATIONS: Record<Language, any> = {
   hi,
   it,
   es,
+  ru,
+  tr,
 };
 
 const PLURAL_RULES: Record<Language, (n: number) => string> = {
@@ -46,6 +52,8 @@ const PLURAL_RULES: Record<Language, (n: number) => string> = {
   hi: pluralHi,
   it: pluralIt,
   es: pluralEs,
+  ru: pluralRu,
+  tr: pluralTr,
 };
 
 // Helper: Get nested property by dot-separated key

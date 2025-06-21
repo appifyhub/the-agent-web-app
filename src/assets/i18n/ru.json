@@ -1,0 +1,59 @@
+{
+  "chat": "Чат",
+  "profile": "Профиль",
+  "sponsorships": "Спонсорство",
+  "close": "Закрыть",
+  "configure_title": "Настроить поведение {botName}",
+  "configure_keys_title": "Настроить ключи доступа {botName}",
+  "preferred_language_label": "{botName} пытается отвечать на:",
+  "preferred_language_placeholder": "Выберите язык",
+  "your_chats": "Настроить чаты",
+  "loading_placeholder": "Загрузка…",
+  "notifications": {
+    "releases_label": "{botName} должен уведомлять меня о релизах:",
+    "releases_placeholder": "Выберите уровень",
+    "releases_choice_none": "Никогда",
+    "releases_choice_major": "Только важные",
+    "releases_choice_minor": "Все новые функции",
+    "releases_choice_all": "Все изменения"
+  },
+  "spontaneous_label": "{botName} отвечает без упоминания:",
+  "spontaneous_placeholder": "Выберите как часто",
+  "never": "Никогда",
+  "always": "Всегда",
+  "reply_frequency": "{percent}% времени",
+  "sponsorship": {
+    "users_you_sponsor": "Пользователи, которых вы спонсируете:",
+    "no_sponsorships_found": "Спонсорство не найдено",
+    "incognito": "Инкогнито",
+    "add_sponsorship": "Спонсировать",
+    "telegram_username_label": "Имя пользователя в Telegram для спонсирования",
+    "you_are_sponsored": "Вы спонсируемый пользователь!",
+    "unlink_message": "Теперь вы можете стать автономным пользователем. Это разрывает связь между вами и {sponsorName}, и ИИ перестанет работать, пока вы не настроите свой профиль.",
+    "unlink": "Отвязать"
+  },
+  "save": "Сохранить",
+  "saved": "Сохранено!",
+  "copied": "Скопировано!",
+  "token_info": {
+    "profile_id": "ID профиля",
+    "telegram_user_id": "ID пользователя Telegram",
+    "telegram_username": "Имя пользователя Telegram",
+    "sponsored_by": "Спонсируется",
+    "version": "Версия ИИ",
+    "reveal_placeholder": "Информация, которую мы собираем о вас"
+  },
+  "provider_needed_for": "{botName} нужен это для {tools}",
+  "where_is_my_key": "Где мой ключ {providerName}?",
+  "errors": {
+    "oh_no": "О нет!",
+    "expired": "Ваша сессия истекла.",
+    "not_found": "Ваша сессия не найдена.",
+    "not_valid": "Ваша сессия недействительна.",
+    "misconfigured": "Ваша сессия неправильно настроена.",
+    "fetch_failed": "Не удалось загрузить настройки.",
+    "save_failed": "Не удалось сохранить настройки.",
+    "check_link": "Проверьте ссылку доступа и попробуйте снова.",
+    "sponsored_user": "Ваше использование спонсируется {sponsorName}. Чтобы стать автономным пользователем, перейдите в {sponsorshipsLink}."
+  }
+}
