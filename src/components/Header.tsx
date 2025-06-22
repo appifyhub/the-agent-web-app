@@ -40,7 +40,7 @@ const Header: React.FC<HeaderProps> = ({
   showSponsorshipsButton = true,
   userId,
 }) => {
-  const { lang_iso_code, user_id, chat_id } = useParams<{
+  const { lang_iso_code, user_id } = useParams<{
     lang_iso_code: string;
     user_id?: string;
     chat_id?: string;
