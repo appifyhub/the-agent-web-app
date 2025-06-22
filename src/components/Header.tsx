@@ -14,7 +14,8 @@ import LanguageDropdown from "@/components/LanguageDropdown";
 import ChatsDropdown from "@/components/ChatsDropdown";
 import logoVector from "@/assets/logo-vector.svg";
 import { t } from "@/lib/translations";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
+import { useNavigation } from "@/hooks/useNavigation";
 
 type Page = "sponsorships" | "profile" | "chat";
 
@@ -39,11 +40,19 @@ const Header: React.FC<HeaderProps> = ({
   showSponsorshipsButton = true,
   userId,
 }) => {
-  const { lang_iso_code, user_id, chat_id } = useParams<{
+  const { lang_iso_code, user_id } = useParams<{
     lang_iso_code: string;
     user_id?: string;
     chat_id?: string;
   }>();
+
+  const location = useLocation();
+  const {
+    navigateToChat,
+    navigateToProfile,
+    navigateToSponsorships,
+    navigateWithLanguageChange,
+  } = useNavigation();
 
   const getPageTitle = (page: Page): string => {
     switch (page) {
@@ -59,44 +68,17 @@ const Header: React.FC<HeaderProps> = ({
   };
 
   const handleLangChange = (isoCode: string) => {
-    console.info("Interface language changed to:", isoCode);
-    if (chat_id) {
-      window.location.href = `/${isoCode}/chat/${chat_id}/settings${window.location.search}`;
-    } else if (user_id && page === "sponsorships") {
-      window.location.href = `/${isoCode}/user/${user_id}/sponsorships${window.location.search}`;
-    } else if (user_id) {
-      window.location.href = `/${isoCode}/user/${user_id}/settings${window.location.search}`;
+    if (lang_iso_code) {
+      navigateWithLanguageChange(isoCode, location.pathname);
     } else {
-      console.warn("Cannot navigate without chat_id or user_id");
-    }
-  };
-
-  const buildUrl = (
-    targetPage: Page,
-    targetUserId?: string,
-    targetChatId?: string
-  ): string => {
-    const baseUrl = `/${lang_iso_code}`;
-    const resolvedUserId = targetUserId || user_id || userId;
-    const chatId = targetChatId || chat_id;
-    const search = window.location.search;
-
-    switch (targetPage) {
-      case "sponsorships":
-        return `${baseUrl}/user/${resolvedUserId}/sponsorships${search}`;
-      case "profile":
-        return `${baseUrl}/user/${resolvedUserId}/settings${search}`;
-      case "chat":
-        return `${baseUrl}/chat/${chatId}/settings${search}`;
-      default:
-        return baseUrl;
+      console.warn("Cannot navigate without lang_iso_code");
     }
   };
 
   const handleChatChange = (chatId: string) => {
     if (lang_iso_code) {
       console.info("Chat changed to:", chatId);
-      window.location.href = buildUrl("chat", undefined, chatId);
+      navigateToChat(chatId, lang_iso_code);
     } else {
       console.warn("Cannot navigate without lang_iso_code");
     }
@@ -107,7 +89,7 @@ const Header: React.FC<HeaderProps> = ({
 
     const targetUserId = user_id || userId;
     if (lang_iso_code && targetUserId) {
-      window.location.href = buildUrl("profile", targetUserId);
+      navigateToProfile(targetUserId, lang_iso_code);
     } else {
       console.warn("Cannot navigate to profile without user_id");
     }
@@ -118,7 +100,7 @@ const Header: React.FC<HeaderProps> = ({
 
     const targetUserId = user_id || userId;
     if (lang_iso_code && targetUserId) {
-      window.location.href = buildUrl("sponsorships", targetUserId);
+      navigateToSponsorships(targetUserId, lang_iso_code);
     } else {
       console.warn("Cannot navigate to sponsorships without user_id");
     }
