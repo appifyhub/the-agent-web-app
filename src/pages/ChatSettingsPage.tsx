@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CardTitle } from "@/components/ui/card";
-import BaseSettingsPage from "@/components/BaseSettingsPage";
+import BaseSettingsPage from "@/pages/BaseSettingsPage";
 import type { ReleaseNotificationsSetting } from "@/services/chat-settings-service";
 import SettingSelector from "@/components/SettingSelector";
 import { toast } from "sonner";
@@ -22,16 +22,13 @@ const ChatSettingsPage: React.FC = () => {
     user_id?: string;
   }>();
 
-  const {
-    error,
-    accessToken,
-    isLoadingState,
-    setError,
-    setIsLoadingState,
-  } = usePageSession(user_id, chat_id);
+  const { error, accessToken, isLoadingState, setError, setIsLoadingState } =
+    usePageSession(user_id, chat_id);
 
   const [chatSettings, setChatSettings] = useState<ChatSettings | null>(null);
-  const [remoteSettings, setRemoteSettings] = useState<ChatSettings | null>(null);
+  const [remoteSettings, setRemoteSettings] = useState<ChatSettings | null>(
+    null
+  );
 
   // Fetch chat settings when session is ready
   useEffect(() => {
@@ -42,37 +39,39 @@ const ChatSettingsPage: React.FC = () => {
       setError(null);
       try {
         const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
-        const settings = await fetchChatSettings({ 
-          apiBaseUrl, 
-          chat_id, 
-          rawToken: accessToken.raw 
+        const settings = await fetchChatSettings({
+          apiBaseUrl,
+          chat_id,
+          rawToken: accessToken.raw,
         });
         console.info("Fetched settings!", settings);
         setChatSettings(settings);
         setRemoteSettings(settings);
       } catch (err) {
-        console.error("Error fetching settings!", err);
-        setError(PageError.blocker(t("errors.fetch_failed")));
+        console.error("Error fetching data!", err);
+        setError(PageError.blocker("errors.fetch_failed"));
       } finally {
         setIsLoadingState(false);
       }
     };
 
     fetchSettings();
-  }, [accessToken, chat_id, error?.isBlocker, setError, setIsLoadingState]);
+  }, [accessToken, chat_id, error, setError, setIsLoadingState]);
 
   const areSettingsChanged = !!(
     chatSettings &&
     remoteSettings &&
     (chatSettings.language_name !== remoteSettings.language_name ||
       chatSettings.language_iso_code !== remoteSettings.language_iso_code ||
-      chatSettings.reply_chance_percent !== remoteSettings.reply_chance_percent ||
-      chatSettings.release_notifications !== remoteSettings.release_notifications)
+      chatSettings.reply_chance_percent !==
+        remoteSettings.reply_chance_percent ||
+      chatSettings.release_notifications !==
+        remoteSettings.release_notifications)
   );
 
   const handleSave = async () => {
     if (!chatSettings || !remoteSettings || !chat_id || !accessToken) return;
-    
+
     setIsLoadingState(true);
     setError(null);
     try {
@@ -87,7 +86,7 @@ const ChatSettingsPage: React.FC = () => {
       toast(t("saved"));
     } catch (saveError) {
       console.error("Error saving settings!", saveError);
-      setError(PageError.simple(t("errors.save_failed")));
+      setError(PageError.simple("errors.save_failed"));
     } finally {
       setIsLoadingState(false);
     }
@@ -98,8 +97,6 @@ const ChatSettingsPage: React.FC = () => {
   return (
     <BaseSettingsPage
       page="chat"
-      expectedChatId={chat_id}
-      expectedUserId={user_id}
       onActionClicked={handleSave}
       actionDisabled={!areSettingsChanged}
       isContentLoading={isLoadingState}
@@ -215,9 +212,7 @@ const ChatSettingsPage: React.FC = () => {
             String(i * 10) === String(chatSettings?.reply_chance_percent ?? ""),
         }))}
         disabled={!!error?.isBlocker || chatSettings?.is_private}
-        placeholder={
-          error?.isBlocker ? "—" : t("spontaneous_placeholder")
-        }
+        placeholder={error?.isBlocker ? "—" : t("spontaneous_placeholder")}
         className="mt-9"
       />
     </BaseSettingsPage>

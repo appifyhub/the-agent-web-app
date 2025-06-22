@@ -1,34 +1,62 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import React from "react";
+import { TranslationKey } from "@/lib/translation-keys";
+
+export interface ErrorData {
+  translationKey: TranslationKey;
+  variables?: Record<string, string | number>;
+  htmlContent?: React.ReactNode;
+}
 
 export class PageError {
-  public readonly text: string | React.ReactNode;
+  public readonly errorData: ErrorData | null;
   public readonly isBlocker: boolean;
   public readonly showGenericAppendix: boolean;
 
   public constructor(
-    text: string | React.ReactNode,
+    errorData: ErrorData | null,
     isBlocker: boolean,
     showGenericAppendix: boolean
   ) {
-    this.text = text;
+    this.errorData = errorData;
     this.isBlocker = isBlocker;
     this.showGenericAppendix = showGenericAppendix;
   }
 
   public static simple(
-    text: string | React.ReactNode,
+    translationKey: TranslationKey,
+    variables?: Record<string, string | number>,
     showGenericAppendix: boolean = true
   ) {
-    return new PageError(text, false, showGenericAppendix);
+    return new PageError(
+      { translationKey, variables },
+      false,
+      showGenericAppendix
+    );
   }
 
   public static blocker(
-    text: string | React.ReactNode,
+    translationKey: TranslationKey,
+    variables?: Record<string, string | number>,
     showGenericAppendix: boolean = true
   ) {
-    return new PageError(text, true, showGenericAppendix);
+    return new PageError(
+      { translationKey, variables },
+      true,
+      showGenericAppendix
+    );
+  }
+
+  public static blockerWithHtml(
+    htmlContent: React.ReactNode,
+    showGenericAppendix: boolean = false
+  ) {
+    return new PageError(
+      { translationKey: "" as TranslationKey, htmlContent },
+      true,
+      showGenericAppendix
+    );
   }
 }
 
