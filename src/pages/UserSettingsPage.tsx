@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CardTitle } from "@/components/ui/card";
 import { Info } from "lucide-react";
-import BaseSettingsPage from "@/components/BaseSettingsPage";
+import BaseSettingsPage from "@/pages/BaseSettingsPage";
 import SettingInput from "@/components/SettingInput";
 import { toast } from "sonner";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -23,16 +23,13 @@ const UserSettingsPage: React.FC = () => {
     user_id: string;
   }>();
 
-  const {
-    error,
-    accessToken,
-    isLoadingState,
-    setError,
-    setIsLoadingState,
-  } = usePageSession(user_id, undefined);
+  const { error, accessToken, isLoadingState, setError, setIsLoadingState } =
+    usePageSession(user_id, undefined);
 
   const [userSettings, setUserSettings] = useState<UserSettings | null>(null);
-  const [remoteSettings, setRemoteSettings] = useState<UserSettings | null>(null);
+  const [remoteSettings, setRemoteSettings] = useState<UserSettings | null>(
+    null
+  );
 
   // Fetch user settings when session is ready
   useEffect(() => {
@@ -60,7 +57,7 @@ const UserSettingsPage: React.FC = () => {
           <span dangerouslySetInnerHTML={{ __html: htmlMessage }} />
         );
 
-        setError(PageError.blocker(errorMessage, false));
+        setError(PageError.blockerWithHtml(errorMessage, false));
       };
 
       handleSponsoredUser(accessToken.decoded.sponsored_by!);
@@ -82,14 +79,14 @@ const UserSettingsPage: React.FC = () => {
         setRemoteSettings(settings);
       } catch (err) {
         console.error("Error fetching data!", err);
-        setError(PageError.blocker(t("errors.fetch_failed")));
+        setError(PageError.blocker("errors.fetch_failed"));
       } finally {
         setIsLoadingState(false);
       }
     };
 
     fetchData();
-  }, [accessToken, user_id, lang_iso_code, error?.isBlocker, setError, setIsLoadingState]);
+  }, [accessToken, user_id, lang_iso_code, error, setError, setIsLoadingState]);
 
   const isMaskedPropertyChanged = (
     localProperty: string | null | undefined,
@@ -105,15 +102,27 @@ const UserSettingsPage: React.FC = () => {
   const areSettingsChanged = !!(
     userSettings &&
     remoteSettings &&
-    (isMaskedPropertyChanged(userSettings.open_ai_key, remoteSettings.open_ai_key) ||
-      isMaskedPropertyChanged(userSettings.anthropic_key, remoteSettings.anthropic_key) ||
-      isMaskedPropertyChanged(userSettings.rapid_api_key, remoteSettings.rapid_api_key) ||
-      isMaskedPropertyChanged(userSettings.coin_api_key, remoteSettings.coin_api_key))
+    (isMaskedPropertyChanged(
+      userSettings.open_ai_key,
+      remoteSettings.open_ai_key
+    ) ||
+      isMaskedPropertyChanged(
+        userSettings.anthropic_key,
+        remoteSettings.anthropic_key
+      ) ||
+      isMaskedPropertyChanged(
+        userSettings.rapid_api_key,
+        remoteSettings.rapid_api_key
+      ) ||
+      isMaskedPropertyChanged(
+        userSettings.coin_api_key,
+        remoteSettings.coin_api_key
+      ))
   );
 
   const handleSave = async () => {
     if (!userSettings || !remoteSettings || !user_id || !accessToken) return;
-    
+
     setIsLoadingState(true);
     setError(null);
     try {
@@ -131,7 +140,7 @@ const UserSettingsPage: React.FC = () => {
       toast(t("saved"));
     } catch (saveError) {
       console.error("Error saving settings!", saveError);
-      setError(PageError.simple(t("errors.save_failed")));
+      setError(PageError.simple("errors.save_failed"));
     } finally {
       setIsLoadingState(false);
     }
@@ -142,20 +151,16 @@ const UserSettingsPage: React.FC = () => {
   return (
     <BaseSettingsPage
       page="profile"
-      expectedUserId={user_id}
       onActionClicked={handleSave}
       actionDisabled={!areSettingsChanged}
       isContentLoading={isLoadingState}
+      externalError={error}
     >
       <div className="h-2" />
       <CardTitle className="text-center mx-auto">
         {t("configure_keys_title", { botName })}
       </CardTitle>
-      <div className="h-10" />
-      <Tabs
-        defaultValue={SERVICE_PROVIDERS[0].id}
-        className="w-full sm:w-x"
-      >
+      <Tabs defaultValue={SERVICE_PROVIDERS[0].id} className="w-full sm:w-x">
         <TabsList
           className={cn(
             "flex flex-nowrap w-full rounded-full border-1",
@@ -175,7 +180,7 @@ const UserSettingsPage: React.FC = () => {
             </TabsTrigger>
           ))}
         </TabsList>
-        <div className="h-6" />
+        <div className="h-2" />
         {SERVICE_PROVIDERS.map((provider) => (
           <TabsContent key={provider.id} value={provider.id}>
             <SettingInput
@@ -185,7 +190,7 @@ const UserSettingsPage: React.FC = () => {
                 tools: provider.tools,
               })}
               value={
-                (userSettings?.[ 
+                (userSettings?.[
                   PROVIDER_KEY_MAP[provider.id] as keyof typeof userSettings
                 ] as string) || ""
               }

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { PageError } from "@/lib/utils";
-import { t } from "@/lib/translations";
 import { fetchUserChats, ChatInfo } from "@/services/user-settings-service";
 import {
   AccessToken,
@@ -20,8 +19,8 @@ export interface PageSessionState {
 }
 
 export const usePageSession = (
-  expectedUserId?: string,
-  expectedChatId?: string
+  userId?: string,
+  chatId?: string
 ): PageSessionState => {
   const [searchParams] = useSearchParams();
   const [error, setError] = useState<PageError | null>(null);
@@ -31,10 +30,10 @@ export const usePageSession = (
 
   const handleTokenExpired = () => {
     console.warn("Settings token expired");
-    setError(PageError.blocker(t("errors.expired")));
+    setError(PageError.blocker("errors.expired"));
   };
 
-  // Token parsing effect
+  // Token parsing
   useEffect(() => {
     try {
       const rawToken = searchParams.get("token");
@@ -46,36 +45,21 @@ export const usePageSession = (
         handleTokenExpired();
       } else if (err instanceof TokenMissingError) {
         console.warn("No token found in the URL.");
-        setError(PageError.blocker(t("errors.not_found")));
+        setError(PageError.blocker("errors.not_found"));
       } else {
         console.warn("Error decoding token:", err);
-        setError(PageError.blocker(t("errors.not_valid")));
+        setError(PageError.blocker("errors.not_valid"));
       }
     }
   }, [searchParams]);
 
-  // Session validation and chats fetching effect
+  // Chats fetching and session validation
   useEffect(() => {
     if (!accessToken) return;
-
-    // Validate required parameters
-    if (expectedUserId && !expectedUserId) {
-      console.warn("Missing required user_id parameter");
-      setError(PageError.blocker(t("errors.misconfigured")));
-      return;
-    }
-
-    if (expectedChatId && !expectedChatId) {
-      console.warn("Missing required chat_id parameter");
-      setError(PageError.blocker(t("errors.misconfigured")));
-      return;
-    }
-
     if (accessToken.isExpired()) {
       handleTokenExpired();
       return;
     }
-
     console.info("Session parameters are available!", accessToken.decoded);
 
     const fetchChats = async () => {
@@ -83,23 +67,23 @@ export const usePageSession = (
       setError(null);
       try {
         const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
-        const userId = expectedUserId || accessToken.decoded.sub;
+        const targetUserId = userId || accessToken.decoded.sub;
         const chatsData = await fetchUserChats({
           apiBaseUrl,
-          user_id: userId,
+          user_id: targetUserId,
           rawToken: accessToken.raw,
         });
         setChats(chatsData);
       } catch (err) {
         console.error("Error fetching chats!", err);
-        setError(PageError.blocker(t("errors.fetch_failed")));
+        setError(PageError.blocker("errors.fetch_failed"));
       } finally {
         setIsLoadingState(false);
       }
     };
 
     fetchChats();
-  }, [accessToken, expectedUserId, expectedChatId]);
+  }, [accessToken, userId, chatId]);
 
   return {
     error,

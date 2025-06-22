@@ -45,7 +45,7 @@ const Header: React.FC<HeaderProps> = ({
     user_id?: string;
     chat_id?: string;
   }>();
-  
+
   const location = useLocation();
   const {
     navigateToChat,

@@ -17,7 +17,7 @@ import {
   ChevronDown,
   UserRound,
 } from "lucide-react";
-import BaseSettingsPage from "@/components/BaseSettingsPage";
+import BaseSettingsPage from "@/pages/BaseSettingsPage";
 import SettingInput from "@/components/SettingInput";
 import { PageError, cn, formatDate, cleanUsername } from "@/lib/utils";
 import { toast } from "sonner";
@@ -39,13 +39,8 @@ const SponsorshipsPage: React.FC = () => {
     user_id: string;
   }>();
 
-  const {
-    error,
-    accessToken,
-    isLoadingState,
-    setError,
-    setIsLoadingState,
-  } = usePageSession(user_id, undefined);
+  const { error, accessToken, isLoadingState, setError, setIsLoadingState } =
+    usePageSession(user_id, undefined);
 
   const [sponsorships, setSponsorships] = useState<SponsorshipResponse[]>([]);
   const [maxSponsorships, setMaxSponsorships] = useState<number>(0);
@@ -96,14 +91,14 @@ const SponsorshipsPage: React.FC = () => {
         setSponsorships(sortSponsorships(sponsorshipsData.sponsorships));
         setMaxSponsorships(sponsorshipsData.max_sponsorships);
       } catch (err) {
-        console.error("Error fetching sponsorships!", err);
-        setError(PageError.blocker(t("errors.fetch_failed")));
+        console.error("Error fetching data!", err);
+        setError(PageError.blocker("errors.fetch_failed"));
       } finally {
         setIsLoadingState(false);
       }
     };
     fetchData();
-  }, [accessToken, user_id, error?.isBlocker, setError, setIsLoadingState]);
+  }, [accessToken, user_id, error, setError, setIsLoadingState]);
 
   const handleStartEditing = () => {
     setIsEditing(true);
@@ -143,9 +138,9 @@ const SponsorshipsPage: React.FC = () => {
       setIsEditing(false);
       setTelegramUsername("");
       toast(t("saved"));
-    } catch (saveError) {
-      console.error("Error creating sponsorship!", saveError);
-      setError(PageError.simple(t("errors.save_failed")));
+    } catch (err) {
+      console.error("Error saving sponsorship!", err);
+      setError(PageError.simple("errors.save_failed"));
     } finally {
       setIsLoadingState(false);
     }
@@ -173,9 +168,9 @@ const SponsorshipsPage: React.FC = () => {
       // Collapse expanded items since the list changed
       setExpandedItems(new Set());
       toast(t("saved"));
-    } catch (removeError) {
-      console.error("Error removing sponsorship!", removeError);
-      setError(PageError.simple(t("errors.save_failed")));
+    } catch (err) {
+      console.error("Error saving sponsorship!", err);
+      setError(PageError.simple("errors.save_failed"));
     } finally {
       setIsLoadingState(false);
     }
@@ -197,9 +192,9 @@ const SponsorshipsPage: React.FC = () => {
       // Redirect to the settings link provided by the API
       toast(t("saved"));
       window.location.href = response.settings_link;
-    } catch (unlinkError) {
-      console.error("Error unlinking self!", unlinkError);
-      setError(PageError.simple(t("errors.save_failed")));
+    } catch (err) {
+      console.error("Error saving sponsorship!", err);
+      setError(PageError.simple("errors.save_failed"));
     } finally {
       setIsLoadingState(false);
     }
@@ -259,21 +254,29 @@ const SponsorshipsPage: React.FC = () => {
   };
 
   const isActionDisabled = () => {
-    if (!accessToken?.decoded?.sponsored_by && !isEditing && sponsorships.length >= maxSponsorships) {
+    if (
+      !accessToken?.decoded?.sponsored_by &&
+      !isEditing &&
+      sponsorships.length >= maxSponsorships
+    ) {
       return true;
     }
-    if (!accessToken?.decoded?.sponsored_by && isEditing && !cleanUsername(telegramUsername).length) {
+    if (
+      !accessToken?.decoded?.sponsored_by &&
+      isEditing &&
+      !cleanUsername(telegramUsername).length
+    ) {
       return true;
     }
     return false;
   };
 
-  const shouldShowCancelButton = isEditing && !accessToken?.decoded?.sponsored_by;
+  const shouldShowCancelButton =
+    isEditing && !accessToken?.decoded?.sponsored_by;
 
   return (
     <BaseSettingsPage
       page="sponsorships"
-      expectedUserId={user_id}
       onActionClicked={getActionHandler()}
       actionDisabled={isActionDisabled()}
       actionButtonText={getActionButtonText()}

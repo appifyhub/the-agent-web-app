@@ -11,6 +11,7 @@ import { DEFAULT_LANGUAGE, INTERFACE_LANGUAGES } from "@/lib/languages";
 import { t } from "@/lib/translations";
 import { usePageSession } from "@/hooks/usePageSession";
 import { ChatInfo } from "@/services/user-settings-service";
+import { PageError } from "@/lib/utils";
 
 type Page = "sponsorships" | "profile" | "chat";
 
@@ -24,30 +25,28 @@ interface BaseSettingsPageProps {
   showCancelButton?: boolean;
   onCancelClicked?: () => void;
   cancelDisabled?: boolean;
-  expectedUserId?: string;
-  expectedChatId?: string;
   isContentLoading?: boolean;
   selectedChat?: ChatInfo;
   showProfileButton?: boolean;
   showSponsorshipsButton?: boolean;
+  externalError?: PageError | null;
 }
 
 const BaseSettingsPage: React.FC<BaseSettingsPageProps> = ({
   page,
   children,
-  onActionClicked,
+  onActionClicked = () => {},
   actionDisabled = false,
   showActionButton = true,
   actionButtonText,
   showCancelButton = false,
-  onCancelClicked,
+  onCancelClicked = () => {},
   cancelDisabled = false,
-  expectedUserId,
-  expectedChatId,
   isContentLoading = false,
   selectedChat,
   showProfileButton = true,
   showSponsorshipsButton = true,
+  externalError = null,
 }) => {
   const { lang_iso_code, user_id, chat_id } = useParams<{
     lang_iso_code: string;
@@ -55,15 +54,20 @@ const BaseSettingsPage: React.FC<BaseSettingsPageProps> = ({
     chat_id?: string;
   }>();
 
-  const {
-    error,
-    accessToken,
-    isLoadingState,
-    chats,
-    handleTokenExpired,
-  } = usePageSession(expectedUserId || user_id, expectedChatId || chat_id);
+  const { error, accessToken, isLoadingState, chats, handleTokenExpired } =
+    usePageSession(user_id, chat_id);
 
-  // Early loading state
+  // prioritize external error if provided
+  const displayError = externalError || error;
+  const getErrorText = (error: PageError | null): string | React.ReactNode => {
+    if (!error?.errorData) return "";
+    if (error.errorData.htmlContent) {
+      return error.errorData.htmlContent;
+    }
+    return t(error.errorData.translationKey, error.errorData.variables || {});
+  };
+
+  // show the early loading state
   if (!accessToken && !error) {
     console.info("Rendering the loading state!");
     return (
@@ -75,21 +79,21 @@ const BaseSettingsPage: React.FC<BaseSettingsPageProps> = ({
     );
   }
 
-  const currentInterfaceLanguage =
-    INTERFACE_LANGUAGES.find((lang) => lang.isoCode === lang_iso_code) ||
-    DEFAULT_LANGUAGE;
-
-  const resolvedSelectedChat = selectedChat || chats.find((chat) => chat.chat_id === chat_id);
-
+  // render the main content
   return (
     <div className="flex flex-col min-h-screen">
       {/* The Header section */}
       <Header
         page={page}
         chats={chats}
-        selectedChat={resolvedSelectedChat}
-        selectedLanguage={currentInterfaceLanguage}
-        hasBlockerError={!!error?.isBlocker}
+        selectedChat={
+          selectedChat || chats.find((chat) => chat.chat_id === chat_id)
+        }
+        selectedLanguage={
+          INTERFACE_LANGUAGES.find((lang) => lang.isoCode === lang_iso_code) ||
+          DEFAULT_LANGUAGE
+        }
+        hasBlockerError={!!displayError?.isBlocker}
         userId={accessToken?.decoded?.sub}
         showProfileButton={showProfileButton}
         showSponsorshipsButton={showSponsorshipsButton}
@@ -104,12 +108,16 @@ const BaseSettingsPage: React.FC<BaseSettingsPageProps> = ({
               expiryTimestamp={accessToken?.decoded?.exp || 0}
               onTokenExpired={handleTokenExpired}
               onActionClicked={onActionClicked}
-              actionDisabled={actionDisabled || isLoadingState || !!error?.isBlocker}
+              actionDisabled={
+                actionDisabled || isLoadingState || !!displayError?.isBlocker
+              }
               showActionButton={showActionButton}
               actionButtonText={actionButtonText}
               showCancelButton={showCancelButton}
               onCancelClicked={onCancelClicked}
-              cancelDisabled={cancelDisabled || isLoadingState || !!error?.isBlocker}
+              cancelDisabled={
+                cancelDisabled || isLoadingState || !!displayError?.isBlocker
+              }
             />
 
             {/* The Settings card */}
@@ -131,12 +139,14 @@ const BaseSettingsPage: React.FC<BaseSettingsPageProps> = ({
         </div>
       </div>
 
-      {error && (
+      {displayError && (
         <ErrorMessage
           title={t("errors.oh_no")}
-          description={error?.text}
+          description={getErrorText(displayError)}
           genericMessage={
-            error?.showGenericAppendix ? t("errors.check_link") : undefined
+            displayError?.showGenericAppendix
+              ? t("errors.check_link")
+              : undefined
           }
         />
       )}
