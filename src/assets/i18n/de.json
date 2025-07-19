@@ -43,7 +43,7 @@
     "version": "KI-Version",
     "reveal_placeholder": "Informationen, die wir über Sie sammeln"
   },
-  "provider_needed_for": "{botName} benötigt dies für {tools}",
+  "provider_needed_for": "{botName} benötigt dies für: {tools}",
   "where_is_my_key": "Wo ist mein {providerName}-Schlüssel?",
   "errors": {
     "oh_no": "Oh nein!",

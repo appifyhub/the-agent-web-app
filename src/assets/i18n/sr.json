@@ -43,7 +43,7 @@
     "version": "AI Verzija",
     "reveal_placeholder": "Informacije koje prikupljamo o vama"
   },
-  "provider_needed_for": "{botName} ovo koristi za {tools}",
+  "provider_needed_for": "{botName} ovo koristi za: {tools}",
   "where_is_my_key": "Gde je moj {providerName} ključ?",
   "errors": {
     "oh_no": "O ne!",

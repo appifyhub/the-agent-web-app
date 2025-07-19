@@ -43,7 +43,7 @@
     "version": "AI Version",
     "reveal_placeholder": "Information we collect about you"
   },
-  "provider_needed_for": "{botName} needs this for {tools}",
+  "provider_needed_for": "{botName} needs this for: {tools}",
   "where_is_my_key": "Where is my {providerName} key?",
   "errors": {
     "oh_no": "Oh no!",
