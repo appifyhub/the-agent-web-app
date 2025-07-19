@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CardTitle } from "@/components/ui/card";
-import { Info } from "lucide-react";
 import BaseSettingsPage from "@/pages/BaseSettingsPage";
-import SettingInput from "@/components/SettingInput";
 import { toast } from "sonner";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { cn, PageError } from "@/lib/utils";
+import { PageError } from "@/lib/utils";
 import { t } from "@/lib/translations";
+import ProvidersCarousel from "@/components/ProvidersCarousel";
 import {
   fetchUserSettings,
   saveUserSettings,
@@ -19,7 +17,6 @@ import {
 import {
   fetchExternalTools,
   ExternalToolProvider,
-  formatToolsForDisplay as format,
 } from "@/services/external-tools-service";
 import { usePageSession } from "@/hooks/usePageSession";
 
@@ -159,86 +156,24 @@ const UserSettingsPage: React.FC = () => {
       <CardTitle className="text-center mx-auto">
         {t("configure_keys_title", { botName })}
       </CardTitle>
-      {externalToolProviders.length > 0 ? (
-        <Tabs
-          defaultValue={externalToolProviders[0]?.id}
-          className="w-full sm:w-x"
-        >
-          <TabsList
-            className={cn(
-              "flex flex-nowrap w-full rounded-full border-1",
-              "border-muted-foreground/5 overflow-x-auto overflow-y-hidden",
-              "justify-start px-0"
-            )}
-          >
-            {externalToolProviders.map((provider) => (
-              <TabsTrigger
-                className="min-w-max px-2 sm:px-4 py-4 text-[0.9rem] sm:text-[1.05rem] truncate cursor-pointer rounded-full transition-all"
-                key={provider.id}
-                value={provider.id}
-                disabled={!!error?.isBlocker}
-              >
-                {provider.name}
-              </TabsTrigger>
-            ))}
-          </TabsList>
-          <div className="h-2" />
-          {externalToolProviders.map((provider) => (
-            <TabsContent key={provider.id} value={provider.id}>
-              <SettingInput
-                id={`token-${provider.id}`}
-                label={t("provider_needed_for", {
-                  botName,
-                  tools: format(provider.tools),
-                })}
-                value={
-                  (userSettings?.[
-                    getSettingsFieldName(
-                      provider.id
-                    ) as keyof typeof userSettings
-                  ] as string) || ""
+      <div className="h-4" />
+      <ProvidersCarousel
+        providers={externalToolProviders}
+        userSettings={userSettings}
+        onSettingChange={(providerId, value) => {
+          const key = getSettingsFieldName(providerId);
+          if (!key) return;
+          setUserSettings((prev) =>
+            prev
+              ? {
+                  ...prev,
+                  [key]: value,
                 }
-                onChange={(value) => {
-                  const key = getSettingsFieldName(provider.id);
-                  if (!key) return;
-                  setUserSettings((prev) =>
-                    prev
-                      ? {
-                          ...prev,
-                          [key]: value,
-                        }
-                      : prev
-                  );
-                }}
-                disabled={!!error?.isBlocker}
-                placeholder={provider.token_format}
-                type="text"
-                autoComplete="off"
-                spellCheck={false}
-                inputClassName="font-mono"
-              />
-              <div className="h-3" />
-              <div className="flex items-center space-x-2 ps-2 text-sm text-muted-foreground">
-                <Info className="h-4 w-4 text-accent-amber/70" />
-                <a
-                  href={provider.token_management_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline underline-offset-3 decoration-accent-amber/70 text-accent-amber/70"
-                >
-                  {t("where_is_my_key", {
-                    providerName: provider.name,
-                  })}
-                </a>
-              </div>
-            </TabsContent>
-          ))}
-        </Tabs>
-      ) : (
-        <div className="text-center text-muted-foreground">
-          {isLoadingState ? t("loading_placeholder") : t("errors.not_found")}
-        </div>
-      )}
+              : prev
+          );
+        }}
+        disabled={!!error?.isBlocker}
+      />
     </BaseSettingsPage>
   );
 };
