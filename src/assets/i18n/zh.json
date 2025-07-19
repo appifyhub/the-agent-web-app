@@ -43,7 +43,7 @@
     "version": "AI 版本",
     "reveal_placeholder": "我们收集的关于您的信息"
   },
-  "provider_needed_for": "{botName} 需要此用于 {tools}",
+  "provider_needed_for": "{botName} 需要此用于: {tools}",
   "where_is_my_key": "我的 {providerName} 密钥在哪里？",
   "errors": {
     "oh_no": "哦不！",

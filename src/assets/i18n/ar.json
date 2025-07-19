@@ -43,8 +43,8 @@
     "version": "إصدار الذكاء الاصطناعي",
     "reveal_placeholder": "المعلومات التي نجمعها عنك"
   },
-  "provider_needed_for": "{botName} يحتاج هذا لـ {tools}",
-  "where_is_my_key": "أين مفتاح {providerName} الخاص بي؟",
+  "provider_needed_for": "يحتاج {botName} هذا من أجل {tools}",
+  "where_is_my_key": "أين يوجد مفتاح {providerName} الخاص بي؟",
   "errors": {
     "oh_no": "أوه لا!",
     "expired": "انتهت صلاحية جلستك.",
