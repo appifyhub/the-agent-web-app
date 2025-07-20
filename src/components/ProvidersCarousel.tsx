@@ -30,6 +30,8 @@ interface ProvidersCarouselProps {
   userSettings: UserSettings | null;
   onSettingChange: (providerId: string, value: string) => void;
   disabled?: boolean;
+  setNavigationApi?: (navigateTo: (providerId: string) => void) => void;
+  setApi?: (api: CarouselApi) => void;
 }
 
 // Map provider IDs to their logos
@@ -51,6 +53,8 @@ const ProvidersCarousel: React.FC<ProvidersCarouselProps> = ({
   userSettings,
   onSettingChange,
   disabled = false,
+  setNavigationApi,
+  setApi: setParentApi,
 }) => {
   const [api, setApi] = React.useState<CarouselApi>();
   const [canScrollPrev, setCanScrollPrev] = React.useState(false);
@@ -66,7 +70,31 @@ const ProvidersCarousel: React.FC<ProvidersCarouselProps> = ({
       setCanScrollPrev(api.canScrollPrev());
       setCanScrollNext(api.canScrollNext());
     });
-  }, [api]);
+
+    // Expose API to parent
+    if (setParentApi) {
+      setParentApi(api);
+    }
+  }, [api, setParentApi]);
+
+  // Provide navigation API to parent component
+  React.useEffect(() => {
+    if (!api || !setNavigationApi) return;
+
+    const navigateTo = (providerId: string) => {
+      console.log("Navigating to provider:", providerId);
+      const index = providers.findIndex((p) => p.id === providerId);
+      console.log("Provider index:", index, "out of", providers.length);
+      if (index !== -1) {
+        console.log("Calling scrollTo:", index);
+        api.scrollTo(index);
+      } else {
+        console.warn("Provider not found:", providerId);
+      }
+    };
+
+    setNavigationApi(navigateTo);
+  }, [api, providers, setNavigationApi]);
 
   if (providers.length === 0) {
     return (

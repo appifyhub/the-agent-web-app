@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { PageError } from "@/lib/utils";
 import { t } from "@/lib/translations";
 import ProvidersCarousel from "@/components/ProvidersCarousel";
+import AdvancedToolsPanel from "@/components/AdvancedToolsPanel";
 import {
   fetchUserSettings,
   saveUserSettings,
@@ -17,8 +18,11 @@ import {
 import {
   fetchExternalTools,
   ExternalToolProvider,
+  ExternalToolsResponse,
+  ToolType,
 } from "@/services/external-tools-service";
 import { usePageSession } from "@/hooks/usePageSession";
+import { CarouselApi } from "@/components/ui/carousel";
 
 const UserSettingsPage: React.FC = () => {
   const { user_id, lang_iso_code } = useParams<{
@@ -36,6 +40,32 @@ const UserSettingsPage: React.FC = () => {
   const [externalToolProviders, setExternalToolProviders] = useState<
     ExternalToolProvider[]
   >([]);
+  const [externalToolsData, setExternalToolsData] =
+    useState<ExternalToolsResponse | null>(null);
+  const [showAdvancedOptions, setShowAdvancedOptions] = useState(false);
+  const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
+
+  // Create navigation function that will be passed to the carousel
+  const [providerNavigate, setProviderNavigate] = useState<
+    ((providerId: string) => void) | null
+  >(null);
+
+  // Update navigation function when carousel API becomes available
+  useEffect(() => {
+    if (carouselApi && externalToolProviders.length > 0) {
+      const navigationFn = (providerId: string) => {
+        console.log("Navigation called for:", providerId);
+        const index = externalToolProviders.findIndex(
+          (p) => p.id === providerId
+        );
+        console.log("Provider index:", index);
+        if (index !== -1) {
+          carouselApi.scrollTo(index);
+        }
+      };
+      setProviderNavigate(() => navigationFn);
+    }
+  }, [carouselApi, externalToolProviders]);
 
   // Fetch user settings and service providers when session is ready
   useEffect(() => {
@@ -98,6 +128,7 @@ const UserSettingsPage: React.FC = () => {
         setExternalToolProviders(
           externalTools.providers.map((p) => p.definition)
         );
+        setExternalToolsData(externalTools);
       } catch (err) {
         console.error("Error fetching data!", err);
         setError(PageError.blocker("errors.fetch_failed"));
@@ -132,7 +163,19 @@ const UserSettingsPage: React.FC = () => {
         rawToken: accessToken.raw,
         payload,
       });
+
+      // Refetch external tools data to get updated is_configured status
+      const updatedExternalTools = await fetchExternalTools({
+        apiBaseUrl,
+        user_id,
+        rawToken: accessToken.raw,
+      });
+
       setRemoteSettings(userSettings);
+      setExternalToolsData(updatedExternalTools);
+      setExternalToolProviders(
+        updatedExternalTools.providers.map((p) => p.definition)
+      );
       toast(t("saved"));
     } catch (saveError) {
       console.error("Error saving settings!", saveError);
@@ -140,6 +183,18 @@ const UserSettingsPage: React.FC = () => {
     } finally {
       setIsLoadingState(false);
     }
+  };
+
+  const handleToolChoiceChange = (toolType: ToolType, toolId: string) => {
+    const fieldName = `tool_choice_${toolType}` as keyof UserSettings;
+    setUserSettings((prev) =>
+      prev
+        ? {
+            ...prev,
+            [fieldName]: toolId,
+          }
+        : prev
+    );
   };
 
   const botName = import.meta.env.VITE_APP_NAME_SHORT;
@@ -173,7 +228,35 @@ const UserSettingsPage: React.FC = () => {
           );
         }}
         disabled={!!error?.isBlocker}
+        setApi={setCarouselApi}
+        setNavigationApi={setProviderNavigate}
       />
+
+      <div className="h-8" />
+
+      {/* Advanced Options Section */}
+      {!showAdvancedOptions ? (
+        <div className="text-center">
+          <button
+            onClick={() => setShowAdvancedOptions(true)}
+            disabled={!!error?.isBlocker}
+            className="text-accent-amber hover:text-white text-sm px-4 py-2 font-normal transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {t("tools.show_options")}
+          </button>
+        </div>
+      ) : (
+        externalToolsData && (
+          <AdvancedToolsPanel
+            tools={externalToolsData.tools}
+            providers={externalToolsData.providers}
+            userSettings={userSettings}
+            onToolChoiceChange={handleToolChoiceChange}
+            disabled={!!error?.isBlocker}
+            onProviderNavigate={providerNavigate || undefined}
+          />
+        )
+      )}
     </BaseSettingsPage>
   );
 };
