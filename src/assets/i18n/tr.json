@@ -55,5 +55,74 @@
     "save_failed": "Ayarlar kaydedilemedi.",
     "check_link": "Erişim bağlantınızı kontrol edin ve tekrar deneyin.",
     "sponsored_user": "Kullanımınız {sponsorName} tarafından sponsorlanıyor. Bağımsız bir kullanıcı olmak için {sponsorshipsLink} sayfasına gidin."
+  },
+  "tools": {
+    "show_options": "Gelişmiş seçenekleri göster",
+    "title": "Gelişmiş araç seçimi",
+    "not_configured": "Yapılandır",
+    "select_tool": "Bir araç seçin",
+    "no_tools_available": "Bu tür için mevcut araç yok",
+    "types": {
+      "chat": {
+        "title": "Sohbet",
+        "description": "Temel sohbet işlevselliği ve çeşitli dış araçlarla entegrasyon için kullanılır. Bu konuştuğunuz modeldir."
+      },
+      "reasoning": {
+        "title": "Akıl Yürütme",
+        "description": "Bu genellikle arka planda çalışan ve bittiğinde size bildirim gönderen bir modeldir, sadece akıl yürütme ve karmaşık problem çözme görevleri için kullanılır."
+      },
+      "copywriting": {
+        "title": "Metin Yazarlığı",
+        "description": "Bu metin yazarlığı, içerik oluşturma, yazım ve dilbilgisi düzeltmeleri ile stil ve ton ayarlamaları gerektiren çeşitli diğer görevler için kullanılan bir modeldir."
+      },
+      "vision": {
+        "title": "Görme",
+        "description": "Bu görsel görevler için kullanılan bir modeldir, görüntü sınıflandırması, görüntü anlama ve görüntülerle sohbet etme gibi. Bu sohbete bir görüntü yüklediğinizde kullanılan şeydir."
+      },
+      "hearing": {
+        "title": "İşitme",
+        "description": "Bu işitme görevleri için kullanılan bir modeldir, konuşma tanıma, konuşmadan metne, doğal dil anlama ve sesle sohbet etme gibi. Bu sohbete bir ses dosyası yüklediğinizde kullanılan şeydir."
+      },
+      "images_gen": {
+        "title": "Görüntü Üretimi",
+        "description": "Bu görüntü üretimi için kullanılan bir modeldir, metinden görüntü üretme veya görüntülerden görüntü üretme gibi."
+      },
+      "images_edit": {
+        "title": "Görüntü Düzenleme",
+        "description": "Bu görüntü düzenleme için kullanılan bir modeldir, fotoğraf değiştirme, nesne kaldırma, özel efekt ekleme ve görüntülerin stilini değiştirme gibi."
+      },
+      "images_restoration": {
+        "title": "Görüntü Onarımı",
+        "description": "Bu görüntü onarımı için kullanılan bir modeldir, gürültü kaldırma, bulanıklığı düzeltme ve fotoğrafik hasarı azaltma gibi."
+      },
+      "images_inpainting": {
+        "title": "Görüntü Doldurma",
+        "description": "Bu görüntü doldurma için kullanılan bir modeldir, yanlış yerleştirilmiş nesneleri kaldırma, üretken görüntüleme deliklerini düzeltme, anatomik deformiteleri düzeltme ve görüntüleri onarma gibi."
+      },
+      "images_background_removal": {
+        "title": "Görüntü Arka Plan Kaldırma",
+        "description": "Bu görüntü arka plan kaldırma için kullanılan bir modeldir, bir görüntünün arka planını kaldırma, bir görüntünün arka planını düzeltme ve bir görüntünün arka planını değiştirme gibi."
+      },
+      "search": {
+        "title": "Arama",
+        "description": "Bu web araması için kullanılan bir modeldir, bilgi, haber, ürün, hizmet aramak veya sohbet arkadaşınızın bilmediği bir konu hakkında arka plan araştırması yapmak gibi."
+      },
+      "embedding": {
+        "title": "Gömme",
+        "description": "Bu gömme için kullanılan bir modeldir, metin, görüntü veya ses dosyalarını vektör uzayına gömmek gibi. Dahili veritabanları, belgeler ve diğer semantik arama görevlerinde benzerlik araması için kullanılır. Bu sohbete bir PDF dosyası yüklediğinizde kullanılan şeydir."
+      },
+      "api_fiat_exchange": {
+        "title": "API Fiat Döviz",
+        "description": "Bu bir fiat para biriminin döviz kurunu kontrol etmek için kullanılan bir API'dir."
+      },
+      "api_crypto_exchange": {
+        "title": "API Kripto Döviz",
+        "description": "Bu bir kripto para biriminin döviz kurunu kontrol etmek için kullanılan bir API'dir."
+      },
+      "api_twitter": {
+        "title": "API Twitter",
+        "description": "Bu Twitter içeriğini okumak için kullanılan bir API'dir."
+      }
+    }
   }
 }
