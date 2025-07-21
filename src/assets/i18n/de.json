@@ -43,8 +43,77 @@
     "version": "KI-Version",
     "reveal_placeholder": "Informationen, die wir über Sie sammeln"
   },
-  "provider_needed_for": "{botName} benötigt dies für {tools}",
+  "provider_needed_for": "{botName} benötigt dies für: {tools}",
   "where_is_my_key": "Wo ist mein {providerName}-Schlüssel?",
+  "tools": {
+    "show_options": "Erweiterte Optionen anzeigen",
+    "title": "Erweiterte Tool-Auswahl",
+    "not_configured": "Konfigurieren",
+    "select_tool": "Tool auswählen",
+    "no_tools_available": "Keine Tools für diesen Typ verfügbar",
+    "types": {
+      "chat": {
+        "title": "Chat",
+        "description": "Wird für grundlegende Chat-Funktionen und die Integration mit verschiedenen externen Tools verwendet. Dies ist das Modell, mit dem Sie sprechen."
+      },
+      "reasoning": {
+        "title": "Logisches Denken",
+        "description": "Dies ist ein Modell, das normalerweise im Hintergrund läuft und Sie benachrichtigt, wenn es fertig ist. Es wird nur für logisches Denken und komplexe Problemlösungsaufgaben verwendet."
+      },
+      "copywriting": {
+        "title": "Texterstellung",
+        "description": "Dies ist ein Modell, das für Texterstellung, Content-Erstellung, Rechtschreib- und Grammatikkorrekturen sowie verschiedene andere Aufgaben verwendet wird, die Stil- und Tonanpassungen erfordern."
+      },
+      "vision": {
+        "title": "Bilderkennung",
+        "description": "Dies ist ein Modell, das für Bilderkennungsaufgaben verwendet wird, wie Bildklassifizierung, Bildverständnis und Chatten mit Bildern. Dies wird verwendet, wenn Sie ein Bild zum Chat hochladen."
+      },
+      "hearing": {
+        "title": "Hörerkennung",
+        "description": "Dies ist ein Modell, das für Höraufgaben verwendet wird, wie Spracherkennung, Sprache-zu-Text, natürliches Sprachverständnis und Chatten mit Audio. Dies wird verwendet, wenn Sie eine Audiodatei zum Chat hochladen."
+      },
+      "images_gen": {
+        "title": "Bildgenerierung",
+        "description": "Dies ist ein Modell, das für die Bildgenerierung verwendet wird, wie das Generieren von Bildern aus Text oder Bildern aus Bildern."
+      },
+      "images_edit": {
+        "title": "Bildbearbeitung",
+        "description": "Dies ist ein Modell, das für die Bildbearbeitung verwendet wird, wie Foto-Ersetzungen, Objektentfernung, Hinzufügen von Spezialeffekten und Ändern des Bildstils."
+      },
+      "images_restoration": {
+        "title": "Bildwiederherstellung",
+        "description": "Dies ist ein Modell, das für die Bildwiederherstellung verwendet wird, wie das Entfernen von Rauschen, Beheben von Unschärfe und Reduzieren von fotografischen Schäden."
+      },
+      "images_inpainting": {
+        "title": "Bildrekonstruktion",
+        "description": "Dies ist ein Modell, das für die Bildrekonstruktion verwendet wird, wie das Entfernen falsch platzierter Objekte, Beheben von generativen Bildlöchern, Korrigieren anatomischer Deformitäten und Wiederherstellen von Bildern."
+      },
+      "images_background_removal": {
+        "title": "Hintergrundentfernung",
+        "description": "Dies ist ein Modell, das für die Entfernung von Bildhintergründen verwendet wird, wie das Entfernen des Hintergrunds eines Bildes, Korrigieren des Hintergrunds eines Bildes und Ändern des Hintergrunds eines Bildes."
+      },
+      "search": {
+        "title": "Suche",
+        "description": "Dies ist ein Modell, das für die Websuche verwendet wird, wie das Durchsuchen des Webs nach Informationen, Nachrichten, Produkten, Dienstleistungen oder Hintergrundrecherche zu einem Thema, das Ihrem Chat-Partner nicht bekannt ist."
+      },
+      "embedding": {
+        "title": "Einbettung",
+        "description": "Dies ist ein Modell, das für Einbettungen verwendet wird, wie das Einbetten von Text, Bildern oder Audio in einen Vektorraum. Es wird für Ähnlichkeitssuchen in internen Datenbanken, Dokumenten und anderen semantischen Suchaufgaben verwendet. Dies wird verwendet, wenn Sie eine PDF-Datei zum Chat hochladen."
+      },
+      "api_fiat_exchange": {
+        "title": "API Fiat-Wechselkurs",
+        "description": "Dies ist eine API, die zur Überprüfung des Wechselkurses einer Fiat-Währung verwendet wird."
+      },
+      "api_crypto_exchange": {
+        "title": "API Krypto-Wechselkurs",
+        "description": "Dies ist eine API, die zur Überprüfung des Wechselkurses einer Kryptowährung verwendet wird."
+      },
+      "api_twitter": {
+        "title": "API Twitter",
+        "description": "Dies ist eine API, die zum Lesen von Twitter-Inhalten verwendet wird."
+      }
+    }
+  },
   "errors": {
     "oh_no": "Oh nein!",
     "expired": "Ihre Sitzung ist abgelaufen.",

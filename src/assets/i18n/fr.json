@@ -43,8 +43,77 @@
     "version": "Version IA",
     "reveal_placeholder": "Informations que nous collectons sur vous"
   },
-  "provider_needed_for": "{botName} a besoin de ça pour {tools}",
+  "provider_needed_for": "{botName} a besoin de ça pour: {tools}",
   "where_is_my_key": "Où est ma clé {providerName} ?",
+  "tools": {
+    "show_options": "Afficher les options avancées",
+    "title": "Sélection d'outils avancée",
+    "not_configured": "Configurer",
+    "select_tool": "Sélectionner un outil",
+    "no_tools_available": "Aucun outil disponible pour ce type",
+    "types": {
+      "chat": {
+        "title": "Discussion",
+        "description": "Utilisé pour les fonctionnalités de discussion de base et l'intégration avec divers outils externes. C'est le modèle avec lequel vous parlez."
+      },
+      "reasoning": {
+        "title": "Raisonnement",
+        "description": "C'est un modèle qui fonctionne généralement en arrière-plan et vous notifie quand c'est terminé, utilisé uniquement pour le raisonnement et les tâches complexes de résolution de problèmes."
+      },
+      "copywriting": {
+        "title": "Rédaction",
+        "description": "C'est un modèle utilisé pour la rédaction, la création de contenu, les corrections d'orthographe et de grammaire, ainsi que diverses autres tâches qui nécessitent des ajustements de style et de ton."
+      },
+      "vision": {
+        "title": "Vision",
+        "description": "C'est un modèle utilisé pour les tâches de vision, comme la classification d'images, la compréhension d'images et la discussion avec des images. C'est ce qui est utilisé lorsque vous téléchargez une image dans la discussion."
+      },
+      "hearing": {
+        "title": "Audition",
+        "description": "C'est un modèle utilisé pour les tâches d'audition, comme la reconnaissance vocale, la conversion parole-texte, la compréhension du langage naturel et la discussion avec de l'audio. C'est ce qui est utilisé lorsque vous téléchargez un fichier audio dans la discussion."
+      },
+      "images_gen": {
+        "title": "Génération d'images",
+        "description": "C'est un modèle utilisé pour la génération d'images, comme la génération d'images à partir de texte ou d'images à partir d'images."
+      },
+      "images_edit": {
+        "title": "Édition d'images",
+        "description": "C'est un modèle utilisé pour l'édition d'images, comme les remplacements de photos, la suppression d'objets, l'ajout d'effets spéciaux et le changement du style des images."
+      },
+      "images_restoration": {
+        "title": "Restauration d'images",
+        "description": "C'est un modèle utilisé pour la restauration d'images, comme la suppression du bruit, la correction du flou et la réduction des dommages photographiques."
+      },
+      "images_inpainting": {
+        "title": "Inpainting d'images",
+        "description": "C'est un modèle utilisé pour l'inpainting d'images, comme la suppression d'objets mal placés, la correction de trous dans les images génératives, la correction de déformations anatomiques et la restauration d'images."
+      },
+      "images_background_removal": {
+        "title": "Suppression d'arrière-plan",
+        "description": "C'est un modèle utilisé pour la suppression d'arrière-plan d'images, comme supprimer l'arrière-plan d'une image, corriger l'arrière-plan d'une image et changer l'arrière-plan d'une image."
+      },
+      "search": {
+        "title": "Recherche",
+        "description": "C'est un modèle utilisé pour la recherche web, comme chercher sur le web des informations, nouvelles, produits, services ou recherche de fond sur un sujet non connu de votre compagnon de discussion."
+      },
+      "embedding": {
+        "title": "Intégration",
+        "description": "C'est un modèle utilisé pour l'intégration, comme intégrer du texte, des images ou de l'audio dans un espace vectoriel. Il est utilisé pour la recherche de similitude dans les bases de données internes, documents et autres tâches de recherche sémantique. C'est ce qui est utilisé lorsque vous téléchargez un fichier PDF dans la discussion."
+      },
+      "api_fiat_exchange": {
+        "title": "API de change de devises fiduciaires",
+        "description": "C'est une API utilisée pour vérifier le taux de change d'une devise fiduciaire."
+      },
+      "api_crypto_exchange": {
+        "title": "API de change de cryptomonnaies",
+        "description": "C'est une API utilisée pour vérifier le taux de change d'une cryptomonnaie."
+      },
+      "api_twitter": {
+        "title": "API Twitter",
+        "description": "C'est une API utilisée pour lire le contenu Twitter."
+      }
+    }
+  },
   "errors": {
     "oh_no": "Oh non !",
     "expired": "Votre session a expiré.",

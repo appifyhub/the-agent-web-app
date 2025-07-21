@@ -43,7 +43,7 @@
     "version": "AI Verzija",
     "reveal_placeholder": "Informacije koje prikupljamo o vama"
   },
-  "provider_needed_for": "{botName} ovo koristi za {tools}",
+  "provider_needed_for": "{botName} ovo koristi za: {tools}",
   "where_is_my_key": "Gde je moj {providerName} ključ?",
   "errors": {
     "oh_no": "O ne!",
@@ -55,5 +55,74 @@
     "save_failed": "Neuspešno čuvanje podešavanja.",
     "check_link": "Proverite svoj pristupni link i pokušajte ponovo.",
     "sponsored_user": "Vaše korišćenje sponzoriše {sponsorName}. Da postanete autonomni korisnik, idite na {sponsorshipsLink}."
+  },
+  "tools": {
+    "show_options": "Prikaži napredne opcije",
+    "title": "Napredna selekcija alata",
+    "not_configured": "Podesi",
+    "select_tool": "Izaberite alat",
+    "no_tools_available": "Nema dostupnih alata za ovaj tip",
+    "types": {
+      "chat": {
+        "title": "Čet",
+        "description": "Koristi se za osnovnu funkcionalnost četa i integraciju sa različitim spoljašnjim alatima. Ovo je model sa kojim razgovarate."
+      },
+      "reasoning": {
+        "title": "Razmišljanje",
+        "description": "Ovo je model koji se obično pokreće u pozadini i obaveštava vas kada završi, koristi se samo za razmišljanje i složeno rešavanja problema."
+      },
+      "copywriting": {
+        "title": "Stil i Pisanje",
+        "description": "Ovo je model koji se koristi za pisanje tekstova, kreiranje sadržaja, ispravke pravopisa i gramatike, kao i razne druge zadatke koji zahtevaju prilagođavanje stila i tona."
+      },
+      "vision": {
+        "title": "Vid",
+        "description": "Ovo je model koji se koristi za zadatke vida, kao što su klasifikacija slika, razumevanje slika i razgovor sa slikama. Ovo se koristi kada pošaljete sliku u čet."
+      },
+      "hearing": {
+        "title": "Sluh",
+        "description": "Ovo je model koji se koristi za zadatke sluha, kao što su prepoznavanje govora, govor-u-tekst, razumevanje prirodnog jezika i razgovor sa zvukom. Ovo se koristi kada pošaljete zvučni fajl u čet."
+      },
+      "images_gen": {
+        "title": "Generisanje slika",
+        "description": "Ovo je model koji se koristi za generisanje slika iz teksta, ili slika iz slika."
+      },
+      "images_edit": {
+        "title": "Uređivanje slika",
+        "description": "Ovo je model koji se koristi za uređivanje slika, kao što su zamene delova fotografija, uklanjanje objekata, dodavanje specijalnih efekata i menjanje stila slika."
+      },
+      "images_restoration": {
+        "title": "Obnavljanje slika",
+        "description": "Ovo je model koji se koristi za obnavljanje slika, kao što je uklanjanje šuma, popravka zamućenosti i smanjenje fotografske štete."
+      },
+      "images_inpainting": {
+        "title": "Popunjavanje slika",
+        "description": "Ovo je model koji se koristi za popunjavanje slika, kao što je uklanjanje pogrešno nactanih objekata, popravka rupa u generativnom prikazivanju, ispravka anatomskih deformiteta i obnavljanje slika."
+      },
+      "images_background_removal": {
+        "title": "Uklanjanje pozadine slika",
+        "description": "Ovo je model koji se koristi za uklanjanje pozadine slika, kao što je uklanjanje pozadine slike, popravka pozadine slike i menjanje pozadine slike."
+      },
+      "search": {
+        "title": "Pretraga",
+        "description": "Ovo je model koji se koristi za web pretragu, kao što je pretraga na webu za informacije, vesti, proizvode, usluge, ili istraživanje pozadine o temi koju vaš sagovornik ne poznaje."
+      },
+      "embedding": {
+        "title": "Ugradnja",
+        "description": "Ovo je model koji se koristi za ugradnju, kao što je ugrađivanje teksta, slika ili zvuka u vektorski prostor. Koristi se za pretragu sličnosti kroz interne baze podataka, dokumente i druge zadatke semantičke pretrage. Ovo se koristi kada pošaljete PDF fajl u čet."
+      },
+      "api_fiat_exchange": {
+        "title": "API: Fiat menjačnica",
+        "description": "Ovo je API koji se koristi za proveru kursa fiat valuta."
+      },
+      "api_crypto_exchange": {
+        "title": "API: Kripto menjačnica",
+        "description": "Ovo je API koji se koristi za proveru kursa kripto valuta."
+      },
+      "api_twitter": {
+        "title": "API: Twitter",
+        "description": "Ovo je API koji se koristi za čitanje Twitter sadržaja."
+      }
+    }
   }
 }

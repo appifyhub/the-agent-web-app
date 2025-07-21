@@ -43,7 +43,7 @@
     "version": "AI 版本",
     "reveal_placeholder": "我们收集的关于您的信息"
   },
-  "provider_needed_for": "{botName} 需要此用于 {tools}",
+  "provider_needed_for": "{botName} 需要此用于: {tools}",
   "where_is_my_key": "我的 {providerName} 密钥在哪里？",
   "errors": {
     "oh_no": "哦不！",
@@ -55,5 +55,74 @@
     "save_failed": "保存设置失败。",
     "check_link": "请检查您的访问链接并重试。",
     "sponsored_user": "您的使用由{sponsorName}赞助。要成为自主用户，请前往{sponsorshipsLink}。"
+  },
+  "tools": {
+    "show_options": "显示高级选项",
+    "title": "高级工具选择",
+    "not_configured": "配置",
+    "select_tool": "选择工具",
+    "no_tools_available": "此类型没有可用工具",
+    "types": {
+      "chat": {
+        "title": "聊天",
+        "description": "用于基本聊天功能和与各种外部工具的集成。这是您与之对话的模型。"
+      },
+      "reasoning": {
+        "title": "推理",
+        "description": "这是一个通常在后台运行并在完成时通知您的模型，仅用于推理和复杂的问题解决任务。"
+      },
+      "copywriting": {
+        "title": "文案写作",
+        "description": "这是一个用于文案写作、内容创建、拼写和语法更正以及需要风格和语调调整的各种其他任务的模型。"
+      },
+      "vision": {
+        "title": "视觉",
+        "description": "这是一个用于视觉任务的模型，如图像分类、图像理解和与图像聊天。这是您在聊天中上传图像时使用的功能。"
+      },
+      "hearing": {
+        "title": "听觉",
+        "description": "这是一个用于听觉任务的模型，如语音识别、语音转文本、自然语言理解和与音频聊天。这是您在聊天中上传音频文件时使用的功能。"
+      },
+      "images_gen": {
+        "title": "图像生成",
+        "description": "这是一个用于图像生成的模型，如从文本生成图像或从图像生成图像。"
+      },
+      "images_edit": {
+        "title": "图像编辑",
+        "description": "这是一个用于图像编辑的模型，如照片替换、对象移除、添加特殊效果和更改图像样式。"
+      },
+      "images_restoration": {
+        "title": "图像修复",
+        "description": "这是一个用于图像修复的模型，如去除噪声、修复模糊和减少照片损坏。"
+      },
+      "images_inpainting": {
+        "title": "图像修补",
+        "description": "这是一个用于图像修补的模型，如移除错误放置的对象、修复生成图像的空洞、修正解剖变形和修复图像。"
+      },
+      "images_background_removal": {
+        "title": "图像背景移除",
+        "description": "这是一个用于图像背景移除的模型，如移除图像背景、修复图像背景和更改图像背景。"
+      },
+      "search": {
+        "title": "搜索",
+        "description": "这是一个用于网络搜索的模型，如在网上搜索信息、新闻、产品、服务或对您的聊天伙伴不了解的主题进行背景研究。"
+      },
+      "embedding": {
+        "title": "嵌入",
+        "description": "这是一个用于嵌入的模型，如将文本、图像或音频嵌入到向量空间中。它用于在内部数据库、文档和其他语义搜索任务中进行相似性搜索。这是您在聊天中上传PDF文件时使用的功能。"
+      },
+      "api_fiat_exchange": {
+        "title": "API 法定货币汇率",
+        "description": "这是一个用于检查法定货币汇率的API。"
+      },
+      "api_crypto_exchange": {
+        "title": "API 加密货币汇率",
+        "description": "这是一个用于检查加密货币汇率的API。"
+      },
+      "api_twitter": {
+        "title": "API Twitter",
+        "description": "这是一个用于读取Twitter内容的API。"
+      }
+    }
   }
 }

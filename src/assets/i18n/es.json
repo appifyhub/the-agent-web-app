@@ -43,7 +43,7 @@
     "version": "Versión de IA",
     "reveal_placeholder": "Información que recopilamos sobre ti"
   },
-  "provider_needed_for": "{botName} necesita esto para {tools}",
+  "provider_needed_for": "{botName} necesita esto para: {tools}",
   "where_is_my_key": "¿Dónde está mi clave de {providerName}?",
   "errors": {
     "oh_no": "¡Oh no!",
@@ -55,5 +55,74 @@
     "save_failed": "Error al guardar la configuración.",
     "check_link": "Verifica tu enlace de acceso e inténtalo de nuevo.",
     "sponsored_user": "Tu uso está patrocinado por {sponsorName}. Para convertirte en un usuario autónomo, ve a {sponsorshipsLink}."
+  },
+  "tools": {
+    "show_options": "Mostrar opciones avanzadas",
+    "title": "Selección de herramientas avanzada",
+    "not_configured": "Configurar",
+    "select_tool": "Seleccionar una herramienta",
+    "no_tools_available": "No hay herramientas disponibles para este tipo",
+    "types": {
+      "chat": {
+        "title": "Chat",
+        "description": "Se usa para funcionalidad básica de chat e integración con varias herramientas externas. Este es el modelo con el que hablas."
+      },
+      "reasoning": {
+        "title": "Razonamiento",
+        "description": "Este es un modelo que generalmente se ejecuta en segundo plano y te notifica cuando termina, solo se usa para razonamiento y tareas complejas de resolución de problemas."
+      },
+      "copywriting": {
+        "title": "Redacción publicitaria",
+        "description": "Este es un modelo que se usa para redacción publicitaria, creación de contenido, correcciones de ortografía y gramática, así como varias otras tareas que requieren ajustes de estilo y tono."
+      },
+      "vision": {
+        "title": "Visión",
+        "description": "Este es un modelo que se usa para tareas de visión, como clasificación de imágenes, comprensión de imágenes y chatear con imágenes. Esto es lo que se usa cuando subes una imagen al chat."
+      },
+      "hearing": {
+        "title": "Audición",
+        "description": "Este es un modelo que se usa para tareas de audición, como reconocimiento de voz, conversión de voz a texto, comprensión de lenguaje natural y chatear con audio. Esto es lo que se usa cuando subes un archivo de audio al chat."
+      },
+      "images_gen": {
+        "title": "Generación de imágenes",
+        "description": "Este es un modelo que se usa para generación de imágenes, como generar imágenes a partir de texto o imágenes a partir de imágenes."
+      },
+      "images_edit": {
+        "title": "Edición de imágenes",
+        "description": "Este es un modelo que se usa para edición de imágenes, como reemplazos de fotos, eliminación de objetos, agregar efectos especiales y cambiar el estilo de las imágenes."
+      },
+      "images_restoration": {
+        "title": "Restauración de imágenes",
+        "description": "Este es un modelo que se usa para restauración de imágenes, como eliminar ruido, arreglar desenfoque y reducir daños fotográficos."
+      },
+      "images_inpainting": {
+        "title": "Relleno de imágenes",
+        "description": "Este es un modelo que se usa para relleno de imágenes, como eliminar objetos mal ubicados, arreglar agujeros en imágenes generativas, corregir deformidades anatómicas y restaurar imágenes."
+      },
+      "images_background_removal": {
+        "title": "Eliminación de fondo",
+        "description": "Este es un modelo que se usa para eliminación de fondo de imágenes, como eliminar el fondo de una imagen, arreglar el fondo de una imagen y cambiar el fondo de una imagen."
+      },
+      "search": {
+        "title": "Búsqueda",
+        "description": "Este es un modelo que se usa para búsqueda web, como buscar en la web información, noticias, productos, servicios o investigación de fondo sobre un tema no conocido por tu compañero de chat."
+      },
+      "embedding": {
+        "title": "Incrustación",
+        "description": "Este es un modelo que se usa para incrustación, como incrustar texto, imágenes o audio en un espacio vectorial. Se usa para búsqueda de similitud en bases de datos internas, documentos y otras tareas de búsqueda semántica. Esto es lo que se usa cuando subes un archivo PDF al chat."
+      },
+      "api_fiat_exchange": {
+        "title": "API de cambio de moneda fiduciaria",
+        "description": "Esta es una API que se usa para verificar el tipo de cambio de una moneda fiduciaria."
+      },
+      "api_crypto_exchange": {
+        "title": "API de cambio de criptomoneda",
+        "description": "Esta es una API que se usa para verificar el tipo de cambio de una criptomoneda."
+      },
+      "api_twitter": {
+        "title": "API de Twitter",
+        "description": "Esta es una API que se usa para leer contenido de Twitter."
+      }
+    }
   }
 }

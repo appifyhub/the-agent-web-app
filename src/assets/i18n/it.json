@@ -43,7 +43,7 @@
     "version": "Versione AI",
     "reveal_placeholder": "Informazioni che raccogliamo su di te"
   },
-  "provider_needed_for": "{botName} ha bisogno di questo per {tools}",
+  "provider_needed_for": "{botName} ha bisogno di questo per: {tools}",
   "where_is_my_key": "Dove si trova la mia chiave {providerName}?",
   "errors": {
     "oh_no": "Oh no!",
@@ -55,5 +55,74 @@
     "save_failed": "Impossibile salvare le impostazioni.",
     "check_link": "Controlla il tuo link di accesso e riprova.",
     "sponsored_user": "Il tuo utilizzo è sponsorizzato da {sponsorName}. Per diventare un utente autonomo, vai a {sponsorshipsLink}."
+  },
+  "tools": {
+    "show_options": "Mostra opzioni avanzate",
+    "title": "Selezione strumenti avanzata",
+    "not_configured": "Configura",
+    "select_tool": "Seleziona uno strumento",
+    "no_tools_available": "Nessuno strumento disponibile per questo tipo",
+    "types": {
+      "chat": {
+        "title": "Chat",
+        "description": "Utilizzato per le funzionalità di chat di base e l'integrazione con vari strumenti esterni. Questo è il modello con cui parli."
+      },
+      "reasoning": {
+        "title": "Ragionamento",
+        "description": "Questo è un modello che di solito funziona in background e ti notifica quando è terminato, utilizzato solo per ragionamento e compiti complessi di risoluzione dei problemi."
+      },
+      "copywriting": {
+        "title": "Copywriting",
+        "description": "Questo è un modello utilizzato per copywriting, creazione di contenuti, correzioni di ortografia e grammatica, così come vari altri compiti che richiedono regolazioni di stile e tono."
+      },
+      "vision": {
+        "title": "Visione",
+        "description": "Questo è un modello utilizzato per compiti di visione, come classificazione di immagini, comprensione di immagini e chat con immagini. Questo è quello che viene utilizzato quando carichi un'immagine nella chat."
+      },
+      "hearing": {
+        "title": "Udito",
+        "description": "Questo è un modello utilizzato per compiti di udito, come riconoscimento vocale, speech-to-text, comprensione del linguaggio naturale e chat con audio. Questo è quello che viene utilizzato quando carichi un file audio nella chat."
+      },
+      "images_gen": {
+        "title": "Generazione di immagini",
+        "description": "Questo è un modello utilizzato per la generazione di immagini, come generare immagini da testo o immagini da immagini."
+      },
+      "images_edit": {
+        "title": "Modifica di immagini",
+        "description": "Questo è un modello utilizzato per la modifica di immagini, come sostituzioni di foto, rimozione di oggetti, aggiunta di effetti speciali e cambio dello stile delle immagini."
+      },
+      "images_restoration": {
+        "title": "Restauro di immagini",
+        "description": "Questo è un modello utilizzato per il restauro di immagini, come rimozione di rumore, correzione di sfocature e riduzione di danni fotografici."
+      },
+      "images_inpainting": {
+        "title": "Inpainting di immagini",
+        "description": "Questo è un modello utilizzato per l'inpainting di immagini, come rimozione di oggetti mal posizionati, correzione di buchi nell'imaging generativo, correzione di deformità anatomiche e restauro di immagini."
+      },
+      "images_background_removal": {
+        "title": "Rimozione sfondo immagini",
+        "description": "Questo è un modello utilizzato per la rimozione dello sfondo delle immagini, come rimuovere lo sfondo di un'immagine, correggere lo sfondo di un'immagine e cambiare lo sfondo di un'immagine."
+      },
+      "search": {
+        "title": "Ricerca",
+        "description": "Questo è un modello utilizzato per la ricerca web, come cercare sul web informazioni, notizie, prodotti, servizi o ricerca di background su un argomento non noto al tuo compagno di chat."
+      },
+      "embedding": {
+        "title": "Embedding",
+        "description": "Questo è un modello utilizzato per l'embedding, come incorporare testo, immagini o audio in uno spazio vettoriale. È utilizzato per la ricerca di similarità attraverso database interni, documenti e altri compiti di ricerca semantica. Questo è quello che viene utilizzato quando carichi un file PDF nella chat."
+      },
+      "api_fiat_exchange": {
+        "title": "API Cambio Valute Fiat",
+        "description": "Questa è un'API utilizzata per controllare il tasso di cambio di una valuta fiat."
+      },
+      "api_crypto_exchange": {
+        "title": "API Cambio Criptovalute",
+        "description": "Questa è un'API utilizzata per controllare il tasso di cambio di una criptovaluta."
+      },
+      "api_twitter": {
+        "title": "API Twitter",
+        "description": "Questa è un'API utilizzata per leggere contenuti di Twitter."
+      }
+    }
   }
 }
