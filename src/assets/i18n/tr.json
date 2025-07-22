@@ -3,6 +3,7 @@
   "profile": "Profil",
   "sponsorships": "Sponsorluklar",
   "close": "Kapat",
+  "help": "Yardım",
   "configure_title": "{botName}'ın Davranışını Yapılandır",
   "configure_keys_title": "{botName}'ın Erişim Anahtarlarını Yapılandır",
   "preferred_language_label": "{botName} şu dilde yanıt vermeye çalışır:",
@@ -122,6 +123,52 @@
       "api_twitter": {
         "title": "API Twitter",
         "description": "Bu Twitter içeriğini okumak için kullanılan bir API'dir."
+      }
+    }
+  },
+  "features": {
+    "header": "Özellikler",
+    "title": "{botName} neler yapabilir?",
+    "items": {
+      "language_intelligence": {
+        "title": "Dil zekası",
+        "description": "Asistan, tercih ettiğiniz dili destekleyen 50’den fazla dil desteğiyle anlar ve yanıtlar, böylece sohbetler doğal hale gelir ve dünya çapındaki kullanıcılar için erişilebilir olur. Her şeyi sorun ve hızlı, akıllı yanıtlar alın."
+      },
+      "independent": {
+        "title": "Bağımsız",
+        "description": "Sohbet uygulamaları ve yapay zeka platformları arasında sohbet geçmişinizi veya ayarlarınızı kaybetmeden geçiş yapın. Asistan, nerede etkileşimde bulunursanız bulunun tutarlı ve kesintisiz bir deneyim sunar."
+      },
+      "privacy": {
+        "title": "Açık, ancak özel",
+        "description": "Kod, şeffaflık için tamamen açık kaynaklıdır, ancak verileriniz ve konuşmalarınız özel kalır ve sadece size açıktır. Bilgileriniz üzerinde daha fazla denetim için kendiniz barındırın."
+      },
+      "web_search": {
+        "title": "Web arama",
+        "description": "İnternetten haberler, analizler, döviz kurları, kripto para fiyatları, varlıklar ve daha fazlası dahil güncel bilgileri sohbet içinde edinin."
+      },
+      "media": {
+        "title": "Ekler ve medya",
+        "description": "Asistanınıza resimler, sesli notlar ve belgeler gönderin – bunları işleyebilir ve yardımcı yanıtlar oluşturmak veya görevleri yerine getirmek için kullanabilir. Sadece metinle değil, fotoğraflarınız veya belgelerinizle sohbet edin."
+      },
+      "imaging": {
+        "title": "Yapay zeka görüntüleme",
+        "description": "Yeni görüntüler oluşturun, metin yönergeleri kullanarak mevcut görüntüleri düzenleyin veya gelişmiş yapay zeka modelleri kullanarak eski ve bozuk görüntüleri onarın. Asistan, güçlü ve kullanıcı dostu araçlarla fikirlerinizi hayata geçirir."
+      },
+      "monitoring": {
+        "title": "İzleme",
+        "description": "İlginizi çeken haberler, piyasalar ve konuların gerçek zamanlı izlemesiyle güncel kalın. Asistan, hiçbir şeyi kaçırmamanız için sizi proaktif olarak bilgilendirir."
+      },
+      "profile": {
+        "title": "Kullanıcı profili",
+        "description": "Birleşik kullanıcı profili, kimliğinizi, faturalandırmanızı, kredilerinizi, araç tercihlerinizi ve yapay zeka sağlayıcı ayarlarınızı tüm sohbet platformlarında yönetmenizi sağlar. Her şeyi ayarlayın – asistanınızdan ayarlarınızı açmasını isteyin veya sohbette `/settings` yazın."
+      },
+      "chat_settings": {
+        "title": "Sohbet ayarları",
+        "description": "Asistanın her sohbette nasıl davranacağını, dil, yanıt tarzı ve bildirim tercihleri dahil olmak üzere özelleştirin. Asistanınızdan ayarları açmasını isteyerek veya sohbette `/settings` yazarak bu seçeneklere her zaman erişin."
+      },
+      "sponsorships": {
+        "title": "Sponsorlar",
+        "description": "Erişiminizi başkalarıyla paylaşın ve sizin ve onların kullanımını gizli tutun. Sponsorluklar, asistanın avantajlarını arkadaşlarınızla veya ailenizle paylaşmanıza olanak tanır ve bunları her zaman asistan üzerinden veya sohbette `/settings` yazarak yönetebilirsiniz."
       }
     }
   }

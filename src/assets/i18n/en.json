@@ -3,6 +3,7 @@
   "profile": "Profile",
   "sponsorships": "Sponsorships",
   "close": "Close",
+  "help": "Help",
   "configure_title": "Configure {botName}'s Behavior",
   "configure_keys_title": "Configure {botName}'s Access Keys",
   "preferred_language_label": "{botName} tries to reply using:",
@@ -124,5 +125,51 @@
     "save_failed": "Failed to save settings.",
     "check_link": "Check your access link and try again.",
     "sponsored_user": "Your usage is sponsored by {sponsorName}. To become an autonomous user, go to {sponsorshipsLink}."
+  },
+  "features": {
+    "header": "Features",
+    "title": "What can {botName} do?",
+    "items": {
+      "language_intelligence": {
+        "title": "Language Intelligence",
+        "description": "The assistant understands and responds in your preferred language with 50+ languages supported, making conversations natural and accessible for users worldwide. Ask anything and get smart answers, fast."
+      },
+      "independent": {
+        "title": "Independent",
+        "description": "Switch between chat apps and AI platforms without losing your chat history or settings. The assistant keeps your experience consistent and seamless, wherever you interact."
+      },
+      "privacy": {
+        "title": "Open, yet private",
+        "description": "The code is fully open-source for transparency, but your data and conversations remain private and accessible only to you. Self-host for even greater control over your information."
+      },
+      "web_search": {
+        "title": "Web Search",
+        "description": "Get up-to-date information from the web, including news, analysis, currency prices, crypto prices, assets, and more, directly within your chat."
+      },
+      "media": {
+        "title": "Attachments & Media",
+        "description": "Send images, voice messages, and documents to the assistant – it can process and use them to create helpful responses or perform tasks. Chat with your photos or documents, not just text."
+      },
+      "imaging": {
+        "title": "AI Imaging",
+        "description": "Create new images, edit existing images using text instructions, or restore old and broken images using advanced AI models. The assistant brings your ideas to life with powerful and easy-to-use tools."
+      },
+      "monitoring": {
+        "title": "Monitoring",
+        "description": "Stay informed with real-time monitoring of news, markets, and topics you care about. The assistant proactively keeps you in the loop, so you never miss a beat."
+      },
+      "profile": {
+        "title": "User Profile",
+        "description": "A unified user profile lets you manage your identity, billing, credits, tool preferences, and AI provider settings across all chat platforms. Adjust anything – just ask the assistant to open your settings, or type `/settings` in chat."
+      },
+      "chat_settings": {
+        "title": "Chat Settings",
+        "description": "Customize how the assistant behaves in each chat, including language, reply style, and notification preferences. Access these options anytime by asking the assistant to open settings, or by typing `/settings` in chat."
+      },
+      "sponsorships": {
+        "title": "Sponsorships",
+        "description": "Share your access to the assistant with others, while keeping your and their usage private. Sponsorships let you extend your assistant's benefits to friends or family, and you can always manage them via the assistant or by typing `/settings` in chat."
+      }
+    }
   }
 }

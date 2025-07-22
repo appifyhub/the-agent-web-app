@@ -3,6 +3,7 @@
   "profile": "Profilo",
   "sponsorships": "Sponsorizzazioni",
   "close": "Chiudi",
+  "help": "Aiuto",
   "configure_title": "Configura il comportamento di {botName}",
   "configure_keys_title": "Configura le chiavi di accesso di {botName}",
   "preferred_language_label": "{botName} cerca di rispondere usando:",
@@ -55,6 +56,52 @@
     "save_failed": "Impossibile salvare le impostazioni.",
     "check_link": "Controlla il tuo link di accesso e riprova.",
     "sponsored_user": "Il tuo utilizzo è sponsorizzato da {sponsorName}. Per diventare un utente autonomo, vai a {sponsorshipsLink}."
+  },
+  "features": {
+    "header": "Funzionalità",
+    "title": "Cosa può fare {botName}?",
+    "items": {
+      "language_intelligence": {
+        "title": "Intelligenza linguistica",
+        "description": "L’assistente comprende e risponde nella tua lingua preferita con il supporto di oltre 50 lingue, rendendo le conversazioni naturali e accessibili agli utenti di tutto il mondo. Chiedi qualsiasi cosa e ottieni risposte intelligenti in un attimo."
+      },
+      "independent": {
+        "title": "Indipendente",
+        "description": "Passa tra app di chat e piattaforme di IA senza perdere la cronologia delle chat o le impostazioni. L’assistente mantiene un’esperienza coerente e fluida ovunque interagisci."
+      },
+      "privacy": {
+        "title": "Aperto, ma privato",
+        "description": "Il codice è completamente open source per garantire trasparenza, ma i tuoi dati e le tue conversazioni rimangono privati e accessibili solo a te. Ospita autonomamente per avere un controllo ancora maggiore sulle tue informazioni."
+      },
+      "web_search": {
+        "title": "Ricerca web",
+        "description": "Ottieni informazioni aggiornate dal web, comprese notizie, analisi, tassi di cambio, prezzi delle criptovalute, asset e altro ancora, direttamente nella chat."
+      },
+      "media": {
+        "title": "Allegati e media",
+        "description": "Invia immagini, note vocali e documenti all’assistente: può elaborarli e usarli per creare risposte utili o eseguire attività. Chatta con le tue foto o i tuoi documenti, non solo con il testo."
+      },
+      "imaging": {
+        "title": "Creazione di immagini con IA",
+        "description": "Crea nuove immagini, modifica immagini esistenti utilizzando istruzioni testuali o ripristina immagini vecchie e danneggiate utilizzando modelli IA avanzati. L’assistente dà vita alle tue idee con strumenti potenti e facili da usare."
+      },
+      "monitoring": {
+        "title": "Monitoraggio",
+        "description": "Rimani informato con il monitoraggio in tempo reale di notizie, mercati e argomenti di tuo interesse. L’assistente ti tiene proattivamente aggiornato, così non perdi nulla."
+      },
+      "profile": {
+        "title": "Profilo utente",
+        "description": "Un profilo utente unificato ti consente di gestire identità, fatturazione, crediti, preferenze degli strumenti e impostazioni del provider IA su tutte le piattaforme di chat. Personalizza tutto: chiedi all’assistente di aprire le tue impostazioni o digita `/settings` nella chat."
+      },
+      "chat_settings": {
+        "title": "Impostazioni chat",
+        "description": "Personalizza il comportamento dell’assistente in ogni chat, inclusi lingua, stile di risposta e preferenze di notifica. Accedi a queste opzioni in qualsiasi momento chiedendo all’assistente di aprire le impostazioni o digitando `/settings` nella chat."
+      },
+      "sponsorships": {
+        "title": "Sponsorizzazioni",
+        "description": "Condividi il tuo accesso all’assistente con gli altri mantenendo private le tue e le loro attività. Le sponsorizzazioni ti consentono di estendere i vantaggi dell’assistente ad amici o familiari e puoi sempre gestirle tramite l’assistente o digitando `/settings` nella chat."
+      }
+    }
   },
   "tools": {
     "show_options": "Mostra opzioni avanzate",
