@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import ChatSettingsPage from "@/pages/ChatSettingsPage";
 import UserSettingsPage from "@/pages/UserSettingsPage";
 import SponsorshipsPage from "@/pages/SponsorshipsPage";
+import FeaturesPage from "@/pages/FeaturesPage";
 import logoVector from "@/assets/logo-vector.svg";
 
 function App() {
@@ -21,6 +22,10 @@ function App() {
         <Route
           path="/:lang_iso_code/user/:user_id/sponsorships"
           element={<SponsorshipsPage />}
+        />
+        <Route
+          path="/:lang_iso_code/features"
+          element={<FeaturesPage />}
         />
         {/* Edge-cases */}
         <Route

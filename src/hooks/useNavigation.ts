@@ -4,6 +4,7 @@ export interface NavigationHelpers {
   navigateToChat: (chatId: string, langIsoCode: string) => void;
   navigateToProfile: (userId: string, langIsoCode: string) => void;
   navigateToSponsorships: (userId: string, langIsoCode: string) => void;
+  navigateToFeatures: (langIsoCode: string) => void;
   navigateWithLanguageChange: (
     langIsoCode: string,
     currentPath: string
@@ -35,6 +36,12 @@ export const useNavigation = (): NavigationHelpers => {
     navigate(`/${langIsoCode}/user/${userId}/sponsorships${search}`);
   };
 
+  const navigateToFeatures = (langIsoCode: string) => {
+    const search = preserveSearchParams();
+    console.info("Navigating to features");
+    navigate(`/${langIsoCode}/features${search}`);
+  };
+
   const navigateWithLanguageChange = (
     langIsoCode: string,
     currentPath: string
@@ -57,6 +64,7 @@ export const useNavigation = (): NavigationHelpers => {
     navigateToChat,
     navigateToProfile,
     navigateToSponsorships,
+    navigateToFeatures,
     navigateWithLanguageChange,
   };
 };
