@@ -3,6 +3,7 @@
   "profile": "Profil",
   "sponsorships": "Parrainages",
   "close": "Fermer",
+  "help": "Aide",
   "configure_title": "Configurer le comportement de {botName}",
   "configure_keys_title": "Configurer les clés d'accès de {botName}",
   "preferred_language_label": "{botName} essaie de répondre en utilisant :",
@@ -111,6 +112,52 @@
       "api_twitter": {
         "title": "API Twitter",
         "description": "C'est une API utilisée pour lire le contenu Twitter."
+      }
+    }
+  },
+  "features": {
+    "header": "Fonctionnalités",
+    "title": "Que peut faire {botName} ?",
+    "items": {
+      "language_intelligence": {
+        "title": "Intelligence linguistique",
+        "description": "L’assistant comprend et répond dans la langue de votre choix avec la prise en charge de plus de 50 langues, rendant les conversations naturelles et accessibles aux utilisateurs du monde entier. Posez n’importe quelle question et obtenez des réponses intelligentes rapidement."
+      },
+      "independent": {
+        "title": "Indépendant",
+        "description": "Passez d’applications de chat à des plateformes d’IA sans perdre votre historique de chat ou vos paramètres. L’assistant garantit une expérience cohérente et fluide où que vous interagissiez."
+      },
+      "privacy": {
+        "title": "Ouvert, mais privé",
+        "description": "Le code est entièrement open source pour la transparence, mais vos données et vos conversations restent privées et accessibles uniquement par vous. Auto-hébergez pour un contrôle encore plus grand de vos informations."
+      },
+      "web_search": {
+        "title": "Recherche Web",
+        "description": "Obtenez des informations à jour sur le Web, y compris des actualités, des analyses, des taux de change, des prix de crypto-monnaies, des actifs et plus encore, directement dans le chat."
+      },
+      "media": {
+        "title": "Pièces jointes et médias",
+        "description": "Envoyez des images, des messages vocaux et des documents à l’assistant – il peut les traiter et les utiliser pour créer des réponses utiles ou exécuter des tâches. Discutez avec vos photos ou documents, pas seulement du texte."
+      },
+      "imaging": {
+        "title": "Imagerie IA",
+        "description": "Créez de nouvelles images, modifiez des images existantes à l’aide d’instructions textuelles ou restaurez de vieilles images endommagées à l’aide de modèles IA avancés. L’assistant donne vie à vos idées avec des outils puissants et faciles à utiliser."
+      },
+      "monitoring": {
+        "title": "Surveillance",
+        "description": "Restez informé grâce à la surveillance en temps réel des actualités, marchés et sujets qui vous intéressent. L’assistant vous tient proactivement informé afin que rien ne vous échappe."
+      },
+      "profile": {
+        "title": "Profil utilisateur",
+        "description": "Un profil utilisateur unifié vous permet de gérer votre identité, votre facturation, vos crédits, vos préférences d’outils et les paramètres du fournisseur d’IA sur toutes les plateformes de chat. Ajustez tout – demandez simplement à l’assistant d’ouvrir vos paramètres ou tapez `/settings` dans le chat."
+      },
+      "chat_settings": {
+        "title": "Paramètres de chat",
+        "description": "Personnalisez le comportement de l’assistant dans chaque chat, y compris la langue, le style de réponse et les préférences de notification. Accédez à ces options à tout moment en demandant à l’assistant d’ouvrir les paramètres ou en tapant `/settings` dans le chat."
+      },
+      "sponsorships": {
+        "title": "Parrainages",
+        "description": "Partagez l’accès à l’assistant avec d’autres tout en gardant votre utilisation et la leur privées. Les parrainages vous permettent d’étendre les avantages de l’assistant à des amis ou à la famille, et vous pouvez toujours les gérer via l’assistant ou en tapant `/settings` dans le chat."
       }
     }
   },
