@@ -3,6 +3,7 @@
   "profile": "Profil",
   "sponsorships": "Sponzorstva",
   "close": "Zatvori",
+  "help": "Pomoć",
   "configure_title": "Podesite ponašanje {botName}a",
   "configure_keys_title": "Podesite pristupne ključeve za {botName}a",
   "preferred_language_label": "{botName} će pokušati da odgovori koristeći:",
@@ -55,6 +56,52 @@
     "save_failed": "Neuspešno čuvanje podešavanja.",
     "check_link": "Proverite svoj pristupni link i pokušajte ponovo.",
     "sponsored_user": "Vaše korišćenje sponzoriše {sponsorName}. Da postanete autonomni korisnik, idite na {sponsorshipsLink}."
+  },
+  "features": {
+    "header": "Mogućnosti",
+    "title": "Šta {botName} može da uradi?",
+    "items": {
+      "language_intelligence": {
+        "title": "Jezička inteligencija",
+        "description": "Asistent razume i odgovara na jeziku po vašem izboru, uz podršku više od 50 jezika, čineći razgovore prirodnim i pristupačnim korisnicima širom sveta. Pitajte bilo šta i brzo dobijajte pametne odgovore."
+      },
+      "independent": {
+        "title": "Nezavisnost",
+        "description": "Prebacujte se između chat aplikacija i AI platformi bez gubitka istorije četa ili podešavanja. Asistent čini vaše iskustvo konzistentnim i besprekornim, gde god da komunicirate."
+      },
+      "privacy": {
+        "title": "Otvoreno, a ipak privatno",
+        "description": "Kôd je potpuno javan radi transparentnosti, ali vaši podaci i razgovori ostaju privatni i dostupni samo vama. Hostujte sami za još veću kontrolu nad svojim informacijama."
+      },
+      "web_search": {
+        "title": "Web pretraga",
+        "description": "Dobijajte ažurirane informacije sa interneta, uključujući vesti, analize, kurseve valuta, cene kriptovaluta, hartije od vrednosti i još mnogo toga, direktno u ćaskanju."
+      },
+      "media": {
+        "title": "Prilozi i mediji",
+        "description": "Pošaljite slike, glasovne poruke i dokumente asistentu – on ih može obraditi i iskoristiti za kreiranje korisnih odgovora ili izvršavanje zadataka. Ćaskajte koristeći svoje fotografije ili dokumente, ne samo tekst."
+      },
+      "imaging": {
+        "title": "AI kreiranje slika",
+        "description": "Kreirajte nove slike, uređujte postojeće slike pomoću tekstualnih uputstava ili obnavljajte stare i oštećene slike koristeći napredne AI modele. Asistent oživljava vaše ideje uz moćne i jednostavne alate."
+      },
+      "monitoring": {
+        "title": "Praćenje",
+        "description": "Ostanite informisani uz praćenje vesti, tržišta i tema koje vas zanimaju u realnom vremenu. Asistent proaktivno vas obaveštava, tako da ništa ne promakne."
+      },
+      "profile": {
+        "title": "Korisnički profil",
+        "description": "Jedinstveni korisnički profil omogućava vam da upravljate svojim identitetom, naplatom, kreditima, podešavanjima alata i postavkama AI izdavača na svim chat platformama. Podesite sve – samo zamolite asistenta da otvori vaša podešavanja ili otkucajte `/settings` u četu."
+      },
+      "chat_settings": {
+        "title": "Podešavanja četa",
+        "description": "Prilagodite ponašanje asistenta u svakom četu, uključujući jezik, stil odgovora i podešavanja obaveštenja. Pristupite ovim opcijama u svakom trenutku tako što ćete zamoliti asistenta da otvori podešavanja ili otkucati `/settings` u četu."
+      },
+      "sponsorships": {
+        "title": "Sponzorstva",
+        "description": "Podelite vašeg asistenta sa drugima, zadržavajući vašu i njihovu upotrebu privatnom. Sponzorstva vam omogućavaju da podelite prednosti asistenta sa prijateljima ili porodicom, a možete ih uvek podesiti pitajući asistenta ili kucanjem `/settings` u četu."
+      }
+    }
   },
   "tools": {
     "show_options": "Prikaži napredne opcije",

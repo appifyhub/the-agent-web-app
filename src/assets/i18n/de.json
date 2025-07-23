@@ -3,6 +3,7 @@
   "profile": "Profil",
   "sponsorships": "Sponsoring",
   "close": "Schließen",
+  "help": "Hilfe",
   "configure_title": "{botName}s Verhalten konfigurieren",
   "configure_keys_title": "Zugangsschlüssel von {botName} konfigurieren",
   "preferred_language_label": "{botName} versucht zu antworten mit:",
@@ -111,6 +112,52 @@
       "api_twitter": {
         "title": "API Twitter",
         "description": "Dies ist eine API, die zum Lesen von Twitter-Inhalten verwendet wird."
+      }
+    }
+  },
+  "features": {
+    "header": "Funktionen",
+    "title": "Was kann {botName} tun?",
+    "items": {
+      "language_intelligence": {
+        "title": "Sprachintelligenz",
+        "description": "Der Assistent versteht und antwortet in Ihrer bevorzugten Sprache mit Unterstützung für über 50 Sprachen, wodurch Konversationen natürlich und für Benutzer weltweit zugänglich werden. Fragen Sie alles und erhalten Sie schnelle, intelligente Antworten."
+      },
+      "independent": {
+        "title": "Unabhängig",
+        "description": "Wechseln Sie zwischen Chat-Apps und KI-Plattformen, ohne Ihren Chat-Verlauf oder Ihre Einstellungen zu verlieren. Der Assistent sorgt für eine konsistente und nahtlose Erfahrung, wo immer Sie interagieren."
+      },
+      "privacy": {
+        "title": "Offen, aber privat",
+        "description": "Der Code ist vollständig Open Source für Transparenz, aber Ihre Daten und Unterhaltungen bleiben privat und nur für Sie zugänglich. Hosten Sie selbst, um noch mehr Kontrolle über Ihre Informationen zu haben."
+      },
+      "web_search": {
+        "title": "Web-Suche",
+        "description": "Erhalten Sie aktuelle Informationen aus dem Web, einschließlich Nachrichten, Analysen, Wechselkursen, Kryptowährungspreisen, Vermögenswerten und mehr – direkt im Chat."
+      },
+      "media": {
+        "title": "Anhänge & Medien",
+        "description": "Senden Sie Bilder, Sprachnachrichten und Dokumente an den Assistenten – er kann diese verarbeiten und für hilfreiche Antworten oder Aufgaben verwenden. Chatten Sie mit Ihren Fotos oder Dokumenten, nicht nur mit Text."
+      },
+      "imaging": {
+        "title": "KI-Bilderstellung",
+        "description": "Erstellen Sie neue Bilder, bearbeiten Sie vorhandene Bilder mit Textanweisungen oder stellen Sie alte und beschädigte Bilder mit Hilfe fortschrittlicher KI-Modelle wieder her. Der Assistent setzt Ihre Ideen mit leistungsstarken und einfach zu bedienenden Tools um."
+      },
+      "monitoring": {
+        "title": "Überwachung",
+        "description": "Bleiben Sie informiert mit Echtzeit-Überwachung von Nachrichten, Märkten und Themen, die Sie interessieren. Der Assistent hält Sie proaktiv auf dem Laufenden, damit Sie nichts verpassen."
+      },
+      "profile": {
+        "title": "Benutzerprofil",
+        "description": "Ein einheitliches Benutzerprofil ermöglicht es Ihnen, Ihre Identität, Abrechnung, Guthaben, Tool-Einstellungen und KI-Anbieter-Einstellungen über alle Chat-Plattformen hinweg zu verwalten. Passen Sie alles an – bitten Sie den Assistenten einfach, Ihre Einstellungen zu öffnen, oder geben Sie `/settings` im Chat ein."
+      },
+      "chat_settings": {
+        "title": "Chat-Einstellungen",
+        "description": "Passen Sie das Verhalten des Assistenten in jedem Chat an, einschließlich Sprache, Antwortstil und Benachrichtigungseinstellungen. Greifen Sie jederzeit auf diese Optionen zu, indem Sie den Assistenten bitten, die Einstellungen zu öffnen, oder `/settings` im Chat eingeben."
+      },
+      "sponsorships": {
+        "title": "Sponsoring",
+        "description": "Teilen Sie Ihren Zugriff auf den Assistenten mit anderen und behalten Sie dabei die Privatsphäre Ihrer und ihrer Nutzung bei. Sponsoring ermöglicht es Ihnen, die Vorteile des Assistenten mit Freunden oder Familie zu teilen, und Sie können es jederzeit über den Assistenten oder durch Eingabe von `/settings` im Chat verwalten."
       }
     }
   },
