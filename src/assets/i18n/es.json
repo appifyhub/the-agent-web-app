@@ -171,5 +171,6 @@
         "description": "Esta es una API que se usa para leer contenido de Twitter."
       }
     }
-  }
+  },
+  "check_out_project": "Ver el proyecto"
 }

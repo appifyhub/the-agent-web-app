@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import Header from "@/components/Header";
+import { Button } from "@/components/ui/button";
 import {
   Brain,
   LockOpen,
@@ -11,6 +12,7 @@ import {
   UserRound,
   MessageCircle,
   Gift,
+  ExternalLink,
 } from "lucide-react";
 import { usePageSession } from "@/hooks/usePageSession";
 import { DEFAULT_LANGUAGE, INTERFACE_LANGUAGES } from "@/lib/languages";
@@ -57,6 +59,10 @@ export default function FeaturesPage() {
 
   const showNav = Boolean(accessToken);
 
+  const handleProjectClick = () => {
+    window.open(import.meta.env.VITE_LANDING_PAGE_URL, "_blank");
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
       <Header
@@ -75,7 +81,7 @@ export default function FeaturesPage() {
         <h1 className="text-4xl text-center mb-16">
           {t("features.title", { botName })}
         </h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {featureKeys.map((key) => {
             const Icon = iconsMap[key];
             return (
@@ -96,6 +102,24 @@ export default function FeaturesPage() {
             );
           })}
         </div>
+
+        <div className="block h-16" />
+
+        {/* Project button */}
+        <div className="flex justify-center">
+          <Button
+            variant="outline"
+            className="glass px-4 py-8 text-lg font-medium rounded-full cursor-pointer hover:glass-active hover:text-accent-amber transition-all flex items-center gap-4"
+            onClick={handleProjectClick}
+          >
+            <div className="block h-6" />
+            <ExternalLink className="h-8 w-8" />
+            {t("check_out_project")}
+            <div className="block h-6" />
+          </Button>
+        </div>
+
+        <div className="block h-32" />
       </div>
     </div>
   );
