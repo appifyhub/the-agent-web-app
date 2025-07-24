@@ -112,4 +112,5 @@ export type TranslationKey =
   | "features.items.chat_settings.title"
   | "features.items.chat_settings.description"
   | "features.items.sponsorships.title"
-  | "features.items.sponsorships.description";
+  | "features.items.sponsorships.description"
+  | "check_out_project";

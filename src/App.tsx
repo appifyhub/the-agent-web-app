@@ -1,10 +1,11 @@
 import { Toaster } from "@/components/ui/sonner";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import ChatSettingsPage from "@/pages/ChatSettingsPage";
 import UserSettingsPage from "@/pages/UserSettingsPage";
 import SponsorshipsPage from "@/pages/SponsorshipsPage";
 import FeaturesPage from "@/pages/FeaturesPage";
 import logoVector from "@/assets/logo-vector.svg";
+import { DEFAULT_LANGUAGE } from "@/lib/languages";
 
 function App() {
   return (
@@ -23,10 +24,7 @@ function App() {
           path="/:lang_iso_code/user/:user_id/sponsorships"
           element={<SponsorshipsPage />}
         />
-        <Route
-          path="/:lang_iso_code/features"
-          element={<FeaturesPage />}
-        />
+        <Route path="/:lang_iso_code/features" element={<FeaturesPage />} />
         {/* Edge-cases */}
         <Route
           path="*"
@@ -42,14 +40,12 @@ function App() {
             </div>
           }
         />
+        {/* Root redirects to features page */}
         <Route
           path="/"
-          element={(() => {
-            if (window.location.pathname === "/") {
-              window.location.href = import.meta.env.VITE_LANDING_PAGE_URL;
-            }
-            return null;
-          })()}
+          element={
+            <Navigate to={`/${DEFAULT_LANGUAGE.isoCode}/features`} replace />
+          }
         />
       </Routes>
       <Toaster />
