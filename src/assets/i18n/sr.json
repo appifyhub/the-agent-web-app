@@ -171,5 +171,6 @@
         "description": "Ovo je API koji se koristi za čitanje Twitter sadržaja."
       }
     }
-  }
+  },
+  "check_out_project": "Pogledaj projekat"
 }

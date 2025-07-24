@@ -171,5 +171,6 @@
         "description": "Share your access to the assistant with others, while keeping your and their usage private. Sponsorships let you extend your assistant's benefits to friends or family, and you can always manage them via the assistant or by typing `/settings` in chat."
       }
     }
-  }
+  },
+  "check_out_project": "Check out the project"
 }
