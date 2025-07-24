@@ -171,5 +171,6 @@
     "save_failed": "Échec de l'enregistrement des paramètres.",
     "check_link": "Vérifiez votre lien d'accès et réessayez.",
     "sponsored_user": "Votre utilisation est parrainée par {sponsorName}. Pour devenir un utilisateur autonome, allez à {sponsorshipsLink}."
-  }
+  },
+  "check_out_project": "Découvrir le projet"
 }

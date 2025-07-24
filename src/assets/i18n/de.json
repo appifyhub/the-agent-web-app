@@ -171,5 +171,6 @@
     "save_failed": "Speichern der Einstellungen fehlgeschlagen.",
     "check_link": "Überprüfen Sie Ihren Zugangslink und versuchen Sie es erneut.",
     "sponsored_user": "Ihre Nutzung wird von {sponsorName} gesponsert. Um ein autonomer Benutzer zu werden, gehen Sie zu {sponsorshipsLink}."
-  }
+  },
+  "check_out_project": "Projekt ansehen"
 }
