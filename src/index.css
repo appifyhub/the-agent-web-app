@@ -187,6 +187,7 @@
     rgb(255 255 255 / 4%) 0%,
     rgb(255 255 255 / 8%) 100%
   );
+  backdrop-filter: blur(10px);
 }
 
 .glass-static {
@@ -198,6 +199,7 @@
     rgb(255 255 255 / 4%) 0%,
     rgb(255 255 255 / 8%) 100%
   ) !important;
+  backdrop-filter: blur(10px);
 }
 
 .glass:hover {
@@ -206,6 +208,7 @@
     rgb(255 255 255 / 5%) 0%,
     rgb(255 255 255 / 10%) 100%
   );
+  backdrop-filter: blur(10px);
 }
 
 .glass-active {
@@ -217,6 +220,7 @@
     rgb(255 255 255 / 15%) 0%,
     rgb(255 255 255 / 40%) 100%
   );
+  backdrop-filter: blur(10px);
 }
 
 .glass-active-static {
@@ -228,6 +232,7 @@
     rgb(255 255 255 / 15%) 0%,
     rgb(255 255 255 / 40%) 100%
   ) !important;
+  backdrop-filter: blur(10px);
 }
 
 .glass-active:hover {
@@ -236,6 +241,7 @@
     rgb(255 255 255 / 25%) 0%,
     rgb(255 255 255 / 50%) 100%
   ) !important;
+  backdrop-filter: blur(10px);
 }
 
 .glass-dark {
@@ -244,9 +250,10 @@
   border-color: rgb(255 255 255 / 7%);
   background: linear-gradient(
     to bottom right,
-    oklch(0.2 0.0543 262.66) 0%,
-    oklch(0.25 0.0543 262.66) 100%
+    oklch(0.2 0.0543 262.66 / 60%) 0%,
+    oklch(0.25 0.0543 262.66 / 70%) 100%
   );
+  backdrop-filter: blur(10px);
 }
 
 .glass-dark-static {
@@ -255,9 +262,10 @@
   border-color: rgb(255 255 255 / 9%) !important;
   background: linear-gradient(
     to bottom right,
-    oklch(0.2 0.0543 262.66) 0%,
-    oklch(0.25 0.0543 262.66) 100%
+    oklch(0.2 0.0543 262.66 / 60%) 0%,
+    oklch(0.25 0.0543 262.66 / 70%) 100%
   ) !important;
+  backdrop-filter: blur(10px);
 }
 
 .glass-dark:hover {
@@ -265,9 +273,10 @@
 
   background: linear-gradient(
     to bottom right,
-    oklch(0.22 0.0543 262.66) 0%,
-    oklch(0.33 0.0543 262.66) 100%
+    oklch(0.22 0.0543 262.66 / 60%) 0%,
+    oklch(0.33 0.0543 262.66 / 70%) 100%
   );
+  backdrop-filter: blur(10px);
 }
 
 .glass-accent-static {
@@ -276,9 +285,10 @@
   border-color: rgb(from var(--color-accent-strong) r g b / 50%) !important;
   background: linear-gradient(
     to bottom right,
-    var(--color-accent-dark) 30%,
-    var(--color-accent-strong) 250%
+    rgb(from var(--color-accent-dark) r g b / 60%) 30%,
+    rgb(from var(--color-accent-strong) r g b / 70%) 250%
   ) !important;
+  backdrop-filter: blur(10px);
 }
 
 .dotted-underline {
