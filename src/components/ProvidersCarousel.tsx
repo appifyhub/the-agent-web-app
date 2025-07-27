@@ -20,6 +20,7 @@ import { formatToolsForDisplay as format } from "@/services/external-tools-servi
 // Import logo assets
 import AnthropicLogo from "@/assets/svg/anthropic-white.svg";
 import OpenAILogo from "@/assets/svg/openai-white.svg";
+import GoogleAILogo from "@/assets/svg/googleai-white.svg";
 import PerplexityLogo from "@/assets/svg/perplexity-white.svg";
 import RapidAPILogo from "@/assets/svg/rapidapi-white.svg";
 import CoinMarketCapLogo from "@/assets/svg/coinmarketcap-white.svg";
@@ -39,6 +40,7 @@ const getProviderLogo = (providerId: string): string | null => {
   const logoMap: { [key: string]: string } = {
     anthropic: AnthropicLogo,
     "open-ai": OpenAILogo,
+    "google-ai": GoogleAILogo,
     perplexity: PerplexityLogo,
     "rapid-api": RapidAPILogo,
     "coinmarketcap-api": CoinMarketCapLogo,
