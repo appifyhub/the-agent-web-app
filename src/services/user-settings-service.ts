@@ -9,6 +9,7 @@ export interface UserSettings {
   telegram_user_id?: number;
   open_ai_key?: string;
   anthropic_key?: string;
+  google_ai_key?: string;
   perplexity_key?: string;
   replicate_key?: string;
   rapid_api_key?: string;
@@ -41,6 +42,7 @@ export interface ChatInfo {
 const PROVIDER_ID_TO_SETTING: Record<string, keyof UserSettings> = {
   "open-ai": "open_ai_key",
   anthropic: "anthropic_key",
+  "google-ai": "google_ai_key",
   perplexity: "perplexity_key",
   replicate: "replicate_key",
   "rapid-api": "rapid_api_key",
@@ -54,6 +56,7 @@ export function getSettingsFieldName(providerId: string): keyof UserSettings {
 export interface UserSettingsPayload {
   open_ai_key?: string;
   anthropic_key?: string;
+  google_ai_key?: string;
   perplexity_key?: string;
   replicate_key?: string;
   rapid_api_key?: string;
@@ -78,6 +81,7 @@ export interface UserSettingsPayload {
 const MASKED_FIELDS: (keyof UserSettingsPayload)[] = [
   "open_ai_key",
   "anthropic_key",
+  "google_ai_key",
   "perplexity_key",
   "replicate_key",
   "rapid_api_key",
