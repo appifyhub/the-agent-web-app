@@ -48,7 +48,8 @@
   "where_is_my_key": "Où est ma clé {providerName} ?",
   "tools": {
     "show_options": "Afficher les options avancées",
-    "title": "Sélection d'outils avancée",
+    "hide_options": "Masquer les options avancées",
+    "title": "Options avancées",
     "not_configured": "Configurer",
     "select_tool": "Sélectionner un outil",
     "no_tools_available": "Aucun outil disponible pour ce type",

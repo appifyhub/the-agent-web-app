@@ -105,7 +105,8 @@
   },
   "tools": {
     "show_options": "Mostra opzioni avanzate",
-    "title": "Selezione strumenti avanzata",
+    "hide_options": "Nascondi opzioni avanzate",
+    "title": "Opzioni avanzate",
     "not_configured": "Configura",
     "select_tool": "Seleziona uno strumento",
     "no_tools_available": "Nessuno strumento disponibile per questo tipo",
