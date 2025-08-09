@@ -194,8 +194,6 @@ const AdvancedToolsPanel: React.FC<AdvancedToolsPanelProps> = ({
 
   return (
     <div className="space-y-6">
-      <h3 className="text-lg font-medium text-center">{t("tools.title")}</h3>
-
       <Accordion
         type="single"
         collapsible
