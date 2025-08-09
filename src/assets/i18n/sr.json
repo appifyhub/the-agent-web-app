@@ -105,7 +105,8 @@
   },
   "tools": {
     "show_options": "Prikaži napredne opcije",
-    "title": "Napredna selekcija alata",
+    "hide_options": "Sakrij napredne opcije",
+    "title": "Napredne opcije",
     "not_configured": "Podesi",
     "select_tool": "Izaberite alat",
     "no_tools_available": "Nema dostupnih alata za ovaj tip",

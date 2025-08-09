@@ -59,7 +59,8 @@
   },
   "tools": {
     "show_options": "Gelişmiş seçenekleri göster",
-    "title": "Gelişmiş araç seçimi",
+    "hide_options": "Gelişmiş seçenekleri gizle",
+    "title": "Gelişmiş seçenekler",
     "not_configured": "Yapılandır",
     "select_tool": "Bir araç seçin",
     "no_tools_available": "Bu tür için mevcut araç yok",
