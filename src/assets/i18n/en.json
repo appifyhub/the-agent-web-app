@@ -48,7 +48,8 @@
   "where_is_my_key": "Where is my {providerName} key?",
   "tools": {
     "show_options": "Show advanced options",
-    "title": "Advanced Tool Selection",
+    "hide_options": "Hide advanced options",
+    "title": "Advanced options",
     "not_configured": "Configure",
     "select_tool": "Select a tool",
     "no_tools_available": "No tools available for this type",

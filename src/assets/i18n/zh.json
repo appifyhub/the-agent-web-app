@@ -105,7 +105,8 @@
   },
   "tools": {
     "show_options": "显示高级选项",
-    "title": "高级工具选择",
+    "hide_options": "隐藏高级选项",
+    "title": "高级选项",
     "not_configured": "配置",
     "select_tool": "选择工具",
     "no_tools_available": "此类型没有可用工具",

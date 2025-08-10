@@ -1,3 +1,4 @@
+import { ChevronDown, ChevronUp } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CardTitle } from "@/components/ui/card";
@@ -235,18 +236,32 @@ const UserSettingsPage: React.FC = () => {
       <div className="h-8" />
 
       {/* Advanced Options Section */}
-      {!showAdvancedOptions ? (
-        <div className="text-center">
-          <button
-            onClick={() => setShowAdvancedOptions(true)}
-            disabled={!!error?.isBlocker}
-            className="text-accent-amber hover:text-white text-sm px-4 py-2 font-normal transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {t("tools.show_options")}
-          </button>
-        </div>
-      ) : (
-        externalToolsData && (
+      <div className="flex justify-center">
+        <button
+          onClick={() => setShowAdvancedOptions(!showAdvancedOptions)}
+          disabled={!!error?.isBlocker}
+          className="text-accent-amber hover:text-white text-sm px-4 py-2 font-normal transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+        >
+          {showAdvancedOptions
+            ? t("tools.hide_options")
+            : t("tools.show_options")}
+          {showAdvancedOptions ? (
+            <ChevronUp className="h-5 w-5" />
+          ) : (
+            <ChevronDown className="h-5 w-5" />
+          )}
+        </button>
+      </div>
+
+      <div
+        className={`transition-all duration-500 ease-in-out overflow-hidden ${
+          showAdvancedOptions
+            ? "max-h-[1000px] opacity-100"
+            : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="h-8" />
+        {externalToolsData && (
           <AdvancedToolsPanel
             tools={externalToolsData.tools}
             providers={externalToolsData.providers}
@@ -255,8 +270,8 @@ const UserSettingsPage: React.FC = () => {
             disabled={!!error?.isBlocker}
             onProviderNavigate={providerNavigate || undefined}
           />
-        )
-      )}
+        )}
+      </div>
     </BaseSettingsPage>
   );
 };

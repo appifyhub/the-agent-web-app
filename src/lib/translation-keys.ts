@@ -48,6 +48,7 @@ export type TranslationKey =
   | "provider_needed_for"
   | "where_is_my_key"
   | "tools.show_options"
+  | "tools.hide_options"
   | "tools.title"
   | "tools.not_configured"
   | "tools.select_tool"

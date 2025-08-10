@@ -48,7 +48,8 @@
   "where_is_my_key": "Wo ist mein {providerName}-Schlüssel?",
   "tools": {
     "show_options": "Erweiterte Optionen anzeigen",
-    "title": "Erweiterte Tool-Auswahl",
+    "hide_options": "Erweiterte Optionen ausblenden",
+    "title": "Erweiterte Optionen",
     "not_configured": "Konfigurieren",
     "select_tool": "Tool auswählen",
     "no_tools_available": "Keine Tools für diesen Typ verfügbar",
