@@ -161,6 +161,7 @@ const AdvancedToolsPanel: React.FC<AdvancedToolsPanelProps> = ({
               value: tool.definition.id,
               label: tool.definition.name,
               isConfigured: isToolConfigured(tool.definition.id),
+              providerId: providerId, // for logo lookup
             });
           }
         });
