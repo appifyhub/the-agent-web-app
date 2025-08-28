@@ -1,6 +1,6 @@
 import React from "react";
 import { Label } from "@/components/ui/label";
-import { cn } from "@/lib/utils";
+import { cn, getProviderLogo } from "@/lib/utils";
 import {
   Select,
   SelectTrigger,
@@ -11,7 +11,7 @@ import {
 
 export interface SectionedSelectorSection {
   sectionTitle: string;
-  providerId?: string; // Add provider ID for navigation
+  providerId?: string; // for navigation
   isConfigured: boolean;
   options: SectionedSelectorOption[];
 }
@@ -21,6 +21,7 @@ export interface SectionedSelectorOption {
   label: React.ReactNode;
   disabled?: boolean;
   isConfigured?: boolean;
+  providerId?: string; // for provider logos
 }
 
 interface SectionedSelectorProps {
@@ -155,7 +156,16 @@ const SectionedSelector: React.FC<SectionedSelectorProps> = ({
                   )}
                 >
                   <div className="flex items-center justify-between w-full">
-                    <span>{opt.label}</span>
+                    <div className="flex items-center gap-3">
+                      {opt.providerId && getProviderLogo(opt.providerId) && (
+                        <img
+                          src={getProviderLogo(opt.providerId)!}
+                          alt={`Provider logo`}
+                          className="w-4 h-4 object-contain opacity-70"
+                        />
+                      )}
+                      <span>{opt.label}</span>
+                    </div>
                     {section.isConfigured && !opt.isConfigured && (
                       <span className="text-xs text-muted-foreground/60 ml-2">
                         {notConfiguredLabel}
