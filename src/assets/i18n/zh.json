@@ -5,7 +5,7 @@
   "close": "关闭",
   "help": "帮助",
   "configure_title": "配置{botName}的行为",
-  "configure_keys_title": "配置{botName}的访问密钥",
+  "configure_keys_title": "提升 {botName} 的智能",
   "preferred_language_label": "{botName} 尝试使用以下语言回复：",
   "preferred_language_placeholder": "请选择您的首选语言",
   "your_chats": "设置聊天",
