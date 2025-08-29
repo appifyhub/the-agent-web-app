@@ -212,28 +212,45 @@ const UserSettingsPage: React.FC = () => {
       <CardTitle className="text-center mx-auto">
         {t("configure_keys_title", { botName })}
       </CardTitle>
-      <div className="h-4" />
-      <ProvidersCarousel
-        providers={externalToolProviders}
-        userSettings={userSettings}
-        onSettingChange={(providerId, value) => {
-          const key = getSettingsFieldName(providerId);
-          if (!key) return;
-          setUserSettings((prev) =>
-            prev
-              ? {
-                  ...prev,
-                  [key]: value,
-                }
-              : prev
-          );
-        }}
-        disabled={!!error?.isBlocker}
-        setApi={setCarouselApi}
-        setNavigationApi={setProviderNavigate}
+
+      {/* Dynamic spacing after title */}
+      <div
+        className={`transition-all duration-500 ease-in-out ${
+          showAdvancedOptions ? "h-0" : "h-4"
+        }`}
       />
 
-      <div className="h-8" />
+      {/* Basic Settings - hidden when advanced options are open */}
+      <div
+        className={`transition-all duration-500 ease-in-out overflow-hidden ${
+          showAdvancedOptions
+            ? "max-h-0 opacity-0"
+            : "max-h-[1000px] opacity-100"
+        }`}
+      >
+        <ProvidersCarousel
+          providers={externalToolProviders}
+          userSettings={userSettings}
+          onSettingChange={(providerId, value) => {
+            const key = getSettingsFieldName(providerId);
+            if (!key) return;
+            setUserSettings((prev) =>
+              prev
+                ? {
+                    ...prev,
+                    [key]: value,
+                  }
+                : prev
+            );
+          }}
+          disabled={!!error?.isBlocker}
+          setApi={setCarouselApi}
+          setNavigationApi={setProviderNavigate}
+        />
+
+        {/* Spacing after carousel when visible */}
+        <div className="h-8" />
+      </div>
 
       {/* Advanced Options Section */}
       <div className="flex justify-center">
