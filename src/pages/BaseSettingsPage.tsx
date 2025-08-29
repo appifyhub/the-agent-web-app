@@ -121,7 +121,7 @@ const BaseSettingsPage: React.FC<BaseSettingsPageProps> = ({
             />
 
             {/* The Settings card */}
-            <Card className="mt-4.5 mb-4.5 md:px-6 px-2 md:py-12 py-8 glass-static rounded-3xl">
+            <Card className="mt-4.5 md:px-6 px-2 md:py-12 py-8 glass-static rounded-3xl">
               <CardContent className="space-y-4">
                 {isLoadingState || isContentLoading ? (
                   <SettingsPageSkeleton />
@@ -131,8 +131,11 @@ const BaseSettingsPage: React.FC<BaseSettingsPageProps> = ({
               </CardContent>
             </Card>
 
+            {/* Spacer */}
+            <div className="h-4" />
+
             {/* Token Information */}
-            <footer className="mt-6 text-xs mb-9 text-blue-300/30">
+            <footer className="text-xs mb-9 text-blue-300/30">
               {accessToken && <TokenSummary decoded={accessToken.decoded} />}
             </footer>
           </main>

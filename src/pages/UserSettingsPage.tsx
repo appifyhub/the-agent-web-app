@@ -256,7 +256,7 @@ const UserSettingsPage: React.FC = () => {
       <div
         className={`transition-all duration-500 ease-in-out overflow-hidden ${
           showAdvancedOptions
-            ? "max-h-[1000px] opacity-100"
+            ? "max-h-[2000px] opacity-100"
             : "max-h-0 opacity-0"
         }`}
       >
