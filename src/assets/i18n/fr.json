@@ -28,7 +28,8 @@
     "no_sponsorships_found": "Aucun parrainage trouvé",
     "incognito": "Incognito",
     "add_sponsorship": "Parrainer",
-    "telegram_username_label": "Nom d'utilisateur Telegram de l'utilisateur que vous voulez parrainer",
+    "platform_handle_label": "Nom d'utilisateur ou téléphone de l'utilisateur que vous voulez parrainer",
+    "platform_handle_placeholder": "@utilisateur ou +00-téléphone",
     "you_are_sponsored": "Vous êtes un utilisateur parrainé !",
     "unlink_message": "Vous pouvez maintenant devenir un utilisateur autonome. Cela rompt le lien entre vous et {sponsorName} et l'IA cessera de fonctionner jusqu'à ce que vous configuriez votre Profil.",
     "unlink": "Délier"
@@ -38,8 +39,9 @@
   "copied": "Copié !",
   "token_info": {
     "profile_id": "Profil ID",
-    "telegram_user_id": "ID utilisateur Telegram",
-    "telegram_username": "Nom d'utilisateur Telegram",
+    "platform": "Plateforme",
+    "platform_user_id": "ID utilisateur de plateforme",
+    "platform_handle": "Nom d'utilisateur de plateforme",
     "sponsored_by": "Parrainé par",
     "version": "Version IA",
     "reveal_placeholder": "Informations que nous collectons sur vous"

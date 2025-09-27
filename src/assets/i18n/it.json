@@ -28,7 +28,8 @@
     "no_sponsorships_found": "Nessuna sponsorizzazione trovata",
     "incognito": "Incognito",
     "add_sponsorship": "Sponsorizza",
-    "telegram_username_label": "Nome utente Telegram dell'utente che vuoi sponsorizzare",
+    "platform_handle_label": "Nome utente o telefono dell'utente che vuoi sponsorizzare",
+    "platform_handle_placeholder": "@utente o +00-telefono",
     "you_are_sponsored": "Sei un utente sponsorizzato!",
     "unlink_message": "Ora puoi diventare un utente autonomo. Questo interrompe il collegamento tra te e {sponsorName} e l'IA smetterà di funzionare finché non configurerai il tuo Profilo.",
     "unlink": "Scollega"
@@ -38,8 +39,9 @@
   "copied": "Copiato!",
   "token_info": {
     "profile_id": "Profilo ID",
-    "telegram_user_id": "ID utente Telegram",
-    "telegram_username": "Nome utente Telegram",
+    "platform": "Piattaforma",
+    "platform_user_id": "ID utente piattaforma",
+    "platform_handle": "Nome utente piattaforma",
     "sponsored_by": "Sponsorizzato da",
     "version": "Versione AI",
     "reveal_placeholder": "Informazioni che raccogliamo su di te"

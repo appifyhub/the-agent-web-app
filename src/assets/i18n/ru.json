@@ -28,7 +28,8 @@
     "no_sponsorships_found": "Спонсорство не найдено",
     "incognito": "Инкогнито",
     "add_sponsorship": "Спонсировать",
-    "telegram_username_label": "Имя пользователя в Telegram для спонсирования",
+    "platform_handle_label": "Имя пользователя или телефон для спонсирования",
+    "platform_handle_placeholder": "@пользователь или +00-телефон",
     "you_are_sponsored": "Вы спонсируемый пользователь!",
     "unlink_message": "Теперь вы можете стать автономным пользователем. Это разрывает связь между вами и {sponsorName}, и ИИ перестанет работать, пока вы не настроите свой профиль.",
     "unlink": "Отвязать"
@@ -38,8 +39,9 @@
   "copied": "Скопировано!",
   "token_info": {
     "profile_id": "ID профиля",
-    "telegram_user_id": "ID пользователя Telegram",
-    "telegram_username": "Имя пользователя Telegram",
+    "platform": "Платформа",
+    "platform_user_id": "ID пользователя платформы",
+    "platform_handle": "Имя пользователя платформы",
     "sponsored_by": "Спонсируется",
     "version": "Версия ИИ",
     "reveal_placeholder": "Информация, которую мы собираем о вас"
