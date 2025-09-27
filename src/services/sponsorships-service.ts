@@ -2,7 +2,8 @@ import { request } from "@/services/networking";
 
 export interface SponsorshipResponse {
   full_name: string | null;
-  telegram_username: string | null;
+  platform_handle: string | null;
+  platform: string;
   sponsored_at: string;
   accepted_at: string | null;
 }
@@ -44,18 +45,20 @@ export async function createSponsorship({
   apiBaseUrl,
   resource_id,
   rawToken,
-  receiver_telegram_username,
+  platform_handle,
+  platform = "telegram",
 }: {
   apiBaseUrl: string;
   resource_id: string;
   rawToken: string;
-  receiver_telegram_username: string;
+  platform_handle: string;
+  platform?: string;
 }): Promise<void> {
   const headers = {
     "Content-Type": "application/json",
     Authorization: `Bearer ${rawToken}`,
   };
-  const payload = { receiver_telegram_username };
+  const payload = { platform_handle, platform };
   const response = await request(
     `${apiBaseUrl}/user/${resource_id}/sponsorships`,
     {
@@ -79,12 +82,14 @@ export async function createSponsorship({
 export async function removeSponsorship({
   apiBaseUrl,
   resource_id,
-  receiver_telegram_username,
+  platform_handle,
+  platform = "telegram",
   rawToken,
 }: {
   apiBaseUrl: string;
   resource_id: string;
-  receiver_telegram_username: string;
+  platform_handle: string;
+  platform?: string;
   rawToken: string;
 }): Promise<void> {
   const headers = {
@@ -92,7 +97,7 @@ export async function removeSponsorship({
     Authorization: `Bearer ${rawToken}`,
   };
   const response = await request(
-    `${apiBaseUrl}/user/${resource_id}/sponsorships/${receiver_telegram_username}`,
+    `${apiBaseUrl}/user/${resource_id}/sponsorships/${platform}/${platform_handle}`,
     {
       method: "DELETE",
       headers: headers,

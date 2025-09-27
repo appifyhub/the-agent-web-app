@@ -15,14 +15,15 @@ export class TokenMissingError extends Error {
 }
 
 export interface DecodedToken {
-  iss: string; // bot name
-  sub: string; // internal profile ID
-  telegram_user_id?: number | string; // TID
-  telegram_username?: string; // TUN
-  sponsored_by?: string; // sponsor name
-  exp: number; // expiry timestamp
-  iat: number; // issue timestamp
-  version: string; // service version
+  iss: string; // issuer - The app name that issued the token
+  sub: string; // subject - The user's unique identifier
+  platform: string; // platform where the token was issued
+  platform_id?: string; // platform-specific user ID
+  platform_handle?: string; // platform-specific user handle (username)
+  sponsored_by?: string; // name of the user who sponsors this user (if any)
+  exp: number; // token expiration timestamp (Unix epoch)
+  iat: number; // token issued at timestamp (Unix epoch)
+  version: string; // version of the app that issued the token
 }
 
 export class AccessToken {
