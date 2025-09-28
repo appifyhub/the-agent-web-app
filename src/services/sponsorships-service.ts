@@ -1,9 +1,10 @@
 import { request } from "@/services/networking";
+import { Platform } from "@/lib/platform";
 
 export interface SponsorshipResponse {
   full_name: string | null;
   platform_handle: string | null;
-  platform: string;
+  platform: Platform;
   sponsored_at: string;
   accepted_at: string | null;
 }
@@ -38,7 +39,17 @@ export async function fetchUserSponsorships({
       `Network error!\n\tStatus: ${response.status}\n\tError: ${response.statusText}`
     );
   }
-  return response.json();
+  const rawData = await response.json() as Omit<UserSponsorshipsResponse, "sponsorships"> & {
+    sponsorships: (Omit<SponsorshipResponse, "platform"> & { platform: string })[];
+  };
+
+  return {
+    ...rawData,
+    sponsorships: rawData.sponsorships.map(sponsorship => ({
+      ...sponsorship,
+      platform: Platform.fromString(sponsorship.platform),
+    })),
+  };
 }
 
 export async function createSponsorship({
@@ -46,13 +57,13 @@ export async function createSponsorship({
   resource_id,
   rawToken,
   platform_handle,
-  platform = "telegram",
+  platform,
 }: {
   apiBaseUrl: string;
   resource_id: string;
   rawToken: string;
   platform_handle: string;
-  platform?: string;
+  platform: Platform;
 }): Promise<void> {
   const headers = {
     "Content-Type": "application/json",
@@ -83,13 +94,13 @@ export async function removeSponsorship({
   apiBaseUrl,
   resource_id,
   platform_handle,
-  platform = "telegram",
+  platform,
   rawToken,
 }: {
   apiBaseUrl: string;
   resource_id: string;
   platform_handle: string;
-  platform?: string;
+  platform: Platform;
   rawToken: string;
 }): Promise<void> {
   const headers = {

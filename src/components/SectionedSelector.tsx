@@ -1,6 +1,7 @@
 import React from "react";
 import { Label } from "@/components/ui/label";
-import { cn, getProviderLogo } from "@/lib/utils";
+import { cn } from "@/lib/utils";
+import ProviderIcon from "@/components/ProviderIcon";
 import {
   Select,
   SelectTrigger,
@@ -157,11 +158,11 @@ const SectionedSelector: React.FC<SectionedSelectorProps> = ({
                 >
                   <div className="flex items-center justify-between w-full">
                     <div className="flex items-center gap-3">
-                      {opt.providerId && getProviderLogo(opt.providerId) && (
-                        <img
-                          src={getProviderLogo(opt.providerId)!}
-                          alt={`Provider logo`}
-                          className="w-4 h-4 object-contain opacity-70"
+                      {opt.providerId && (
+                        <ProviderIcon
+                          providerId={opt.providerId}
+                          className="w-4 h-4 opacity-70"
+                          alt="Provider logo"
                         />
                       )}
                       <span>{opt.label}</span>

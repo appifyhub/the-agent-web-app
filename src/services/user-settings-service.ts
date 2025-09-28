@@ -34,6 +34,7 @@ export interface UserSettings {
 export interface ChatInfo {
   chat_id: string;
   title: string;
+  platform: string;
   is_own: boolean;
 }
 

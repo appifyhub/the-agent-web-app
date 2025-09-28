@@ -5,6 +5,7 @@ export type ReleaseNotificationsSetting = "none" | "major" | "minor" | "all";
 export interface ChatSettings {
   chat_id: string;
   title: string;
+  platform: string;
   is_own: boolean;
   is_private: boolean;
   language_name: string;

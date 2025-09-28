@@ -47,6 +47,8 @@ export type TranslationKey =
   | "token_info.sponsored_by"
   | "token_info.version"
   | "token_info.reveal_placeholder"
+  | "platforms.telegram"
+  | "platforms.unknown"
   | "provider_needed_for"
   | "where_is_my_key"
   | "tools.show_options"

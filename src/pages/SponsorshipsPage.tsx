@@ -18,7 +18,6 @@ import {
   UserRound,
 } from "lucide-react";
 import BaseSettingsPage from "@/pages/BaseSettingsPage";
-import SettingInput from "@/components/SettingInput";
 import { PageError, cn, formatDate, cleanUsername } from "@/lib/utils";
 import { toast } from "sonner";
 import { t } from "@/lib/translations";
@@ -29,8 +28,13 @@ import {
   removeSelfSponsorship,
   SponsorshipResponse,
 } from "@/services/sponsorships-service";
+import { Platform } from "@/lib/platform";
 import { usePageSession } from "@/hooks/usePageSession";
+import PlatformDropdown from "@/components/PlatformDropdown";
+import PlatformIcon from "@/components/PlatformIcon";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { DEFAULT_LANGUAGE, INTERFACE_LANGUAGES } from "@/lib/languages";
 
 const SponsorshipsPage: React.FC = () => {
@@ -47,6 +51,7 @@ const SponsorshipsPage: React.FC = () => {
   const [expandedItems, setExpandedItems] = useState<Set<number>>(new Set());
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [platformHandle, setPlatformHandle] = useState<string>("");
+  const [selectedPlatform, setSelectedPlatform] = useState<Platform>(Platform.TELEGRAM);
 
   const sortSponsorships = (
     sponsorships: SponsorshipResponse[]
@@ -108,6 +113,7 @@ const SponsorshipsPage: React.FC = () => {
   const handleCancelEditing = () => {
     setIsEditing(false);
     setPlatformHandle("");
+    setSelectedPlatform(Platform.TELEGRAM);
   };
 
   const handleSaveSponsorship = async () => {
@@ -123,6 +129,7 @@ const SponsorshipsPage: React.FC = () => {
         resource_id: user_id,
         rawToken: accessToken.raw,
         platform_handle: cleanPlatformHandle,
+        platform: selectedPlatform,
       });
 
       // Refresh the sponsorships list
@@ -137,6 +144,7 @@ const SponsorshipsPage: React.FC = () => {
       // Exit editing mode and show success
       setIsEditing(false);
       setPlatformHandle("");
+      setSelectedPlatform(Platform.TELEGRAM);
       toast(t("saved"));
     } catch (err) {
       console.error("Error saving sponsorship!", err);
@@ -157,6 +165,7 @@ const SponsorshipsPage: React.FC = () => {
         apiBaseUrl,
         resource_id: user_id,
         platform_handle: sponsorship.platform_handle,
+        platform: sponsorship.platform,
         rawToken: accessToken.raw,
       });
 
@@ -307,16 +316,31 @@ const SponsorshipsPage: React.FC = () => {
           </CardTitle>
           <div className="h-4" />
 
-          {/* New sponsorship input */}
-          <SettingInput
-            id="platform-handle"
-            label={t("sponsorship.platform_handle_label")}
-            value={platformHandle}
-            onChange={setPlatformHandle}
-            disabled={!!error?.isBlocker}
-            placeholder={t("sponsorship.platform_handle_placeholder")}
-            onKeyboardConfirm={handleSaveSponsorship}
-          />
+          {/* New sponsorship input with platform dropdown */}
+          <div className="space-y-4">
+            <Label className="ps-2 text-[1.05rem] font-light">
+              {t("sponsorship.platform_handle_label")}
+            </Label>
+            <div className="flex space-x-3">
+              <PlatformDropdown
+                selectedPlatform={selectedPlatform}
+                onPlatformChange={setSelectedPlatform}
+              />
+              <Input
+                id="platform-handle"
+                className="py-6 px-6 w-full sm:w-sm text-[1.05rem] glass rounded-xl"
+                placeholder={error?.isBlocker ? "—" : t("sponsorship.platform_handle_placeholder")}
+                disabled={!!error?.isBlocker}
+                value={platformHandle}
+                onChange={(e) => setPlatformHandle(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && !error?.isBlocker) {
+                    handleSaveSponsorship();
+                  }
+                }}
+              />
+            </div>
+          </div>
         </>
       ) : (
         <>
@@ -377,8 +401,8 @@ const SponsorshipsPage: React.FC = () => {
                       {/* Expanded sponsorship stack (vertical) - display name row and dates */}
                       <div
                         className={cn(
-                          "flex flex-col px-5 py-3 items-start justify-center glass border cursor-pointer w-full min-w-0",
-                          isExpanded ? "space-y-2" : "space-y-0",
+                          "flex flex-col px-5 items-start justify-center glass border cursor-pointer w-full min-w-0",
+                          isExpanded ? "space-y-4 py-4" : "space-y-0 py-3",
                           roundedClasses,
                           borderClasses
                         )}
@@ -409,13 +433,20 @@ const SponsorshipsPage: React.FC = () => {
                           />
                         </div>
 
-                        {/* Bottom sponsorship stack (vertical) - status icons and dates */}
+                        {/* Bottom sponsorship stack (vertical) - platform, statuses and dates */}
                         <div
                           className={cn(
-                            "flex flex-col space-y-0 px-0.5",
+                            "flex flex-col space-y-1 px-0.5",
                             isExpanded ? "block" : "hidden"
                           )}
                         >
+                          {/* Platform row */}
+                          <div className="flex items-center space-x-3.5">
+                            <PlatformIcon platform={sponsorship.platform} className="h-4 w-4" />
+                            <span className="text-sm text-muted-foreground">
+                              {Platform.getName(sponsorship.platform)}
+                            </span>
+                          </div>
                           {/* Sponsored-at row (horizontal) */}
                           <div className="flex items-center space-x-3.5">
                             <Check className="h-4 w-4 text-success" />
