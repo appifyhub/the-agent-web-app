@@ -46,6 +46,10 @@
     "version": "AI Sürümü",
     "reveal_placeholder": "Hakkınızda topladığımız bilgiler"
   },
+  "platforms": {
+    "telegram": "Telegram",
+    "unknown": "Bilinmeyen"
+  },
   "provider_needed_for": "{botName} bunu {tools} için gerektirir",
   "where_is_my_key": "{providerName} anahtarım nerede?",
   "errors": {

@@ -46,6 +46,10 @@
     "version": "KI-Version",
     "reveal_placeholder": "Informationen, die wir über Sie sammeln"
   },
+  "platforms": {
+    "telegram": "Telegram",
+    "unknown": "Unbekannt"
+  },
   "provider_needed_for": "{botName} benötigt dies für: {tools}",
   "where_is_my_key": "Wo ist mein {providerName}-Schlüssel?",
   "tools": {

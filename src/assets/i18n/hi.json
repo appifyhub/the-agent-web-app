@@ -46,6 +46,10 @@
     "version": "AI संस्करण",
     "reveal_placeholder": "आपके बारे में हमारे द्वारा एकत्रित जानकारी"
   },
+  "platforms": {
+    "telegram": "टेलीग्राम",
+    "unknown": "अज्ञात"
+  },
   "provider_needed_for": "{botName} को इसके लिए {tools} चाहिए",
   "where_is_my_key": "मेरा {providerName} कुंजी कहाँ है?",
   "errors": {

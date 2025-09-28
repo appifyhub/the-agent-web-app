@@ -46,6 +46,10 @@
     "version": "Versión de IA",
     "reveal_placeholder": "Información que recopilamos sobre ti"
   },
+  "platforms": {
+    "telegram": "Telegram",
+    "unknown": "Desconocido"
+  },
   "provider_needed_for": "{botName} necesita esto para: {tools}",
   "where_is_my_key": "¿Dónde está mi clave de {providerName}?",
   "errors": {

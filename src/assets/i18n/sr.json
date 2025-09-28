@@ -46,6 +46,10 @@
     "version": "AI Verzija",
     "reveal_placeholder": "Informacije koje prikupljamo o vama"
   },
+  "platforms": {
+    "telegram": "Telegram",
+    "unknown": "Nepoznato"
+  },
   "provider_needed_for": "{botName} ovo koristi za: {tools}",
   "where_is_my_key": "Gde je moj {providerName} ključ?",
   "errors": {

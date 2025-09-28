@@ -46,6 +46,10 @@
     "version": "إصدار الذكاء الاصطناعي",
     "reveal_placeholder": "المعلومات التي نجمعها عنك"
   },
+  "platforms": {
+    "telegram": "تيليجرام",
+    "unknown": "غير معروف"
+  },
   "provider_needed_for": "يحتاج {botName} هذا من أجل {tools}",
   "where_is_my_key": "أين يوجد مفتاح {providerName} الخاص بي؟",
   "errors": {

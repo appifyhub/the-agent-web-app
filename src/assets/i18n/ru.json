@@ -46,6 +46,10 @@
     "version": "Версия ИИ",
     "reveal_placeholder": "Информация, которую мы собираем о вас"
   },
+  "platforms": {
+    "telegram": "Телеграм",
+    "unknown": "Неизвестно"
+  },
   "provider_needed_for": "{botName} нужен это для: {tools}",
   "where_is_my_key": "Где мой ключ {providerName}?",
   "errors": {
