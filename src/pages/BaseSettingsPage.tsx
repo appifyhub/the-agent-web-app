@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import SettingControls from "@/components/SettingControls";
 import TokenSummary from "@/components/TokenSummary";
 import ErrorMessage from "@/components/ErrorMessage";
@@ -100,8 +101,8 @@ const BaseSettingsPage: React.FC<BaseSettingsPageProps> = ({
       />
 
       {/* The Main content section */}
-      <div className="mx-auto w-full max-w-3xl">
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex-grow">
+      <div className="flex-1 mx-auto w-full max-w-3xl">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <main>
             {/* The Session Expiry timer and Save button */}
             <SettingControls
@@ -135,9 +136,9 @@ const BaseSettingsPage: React.FC<BaseSettingsPageProps> = ({
             <div className="h-4" />
 
             {/* Token Information */}
-            <footer className="text-xs mb-9 text-blue-300/30">
+            <div className="text-xs mb-9 text-blue-300/30">
               {accessToken && <TokenSummary decoded={accessToken.decoded} />}
-            </footer>
+            </div>
           </main>
         </div>
       </div>
@@ -153,6 +154,8 @@ const BaseSettingsPage: React.FC<BaseSettingsPageProps> = ({
           }
         />
       )}
+
+      <Footer />
     </div>
   );
 };

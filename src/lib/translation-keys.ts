@@ -118,4 +118,9 @@ export type TranslationKey =
   | "features.items.chat_settings.description"
   | "features.items.sponsorships.title"
   | "features.items.sponsorships.description"
-  | "check_out_project";
+  | "check_out_project"
+  | "footer.logo_alt"
+  | "footer.terms"
+  | "footer.privacy"
+  | "footer.powered_by"
+  | "footer.rights_reserved";
