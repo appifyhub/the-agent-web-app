@@ -179,5 +179,12 @@
       }
     }
   },
-  "check_out_project": "查看项目"
+  "check_out_project": "查看项目",
+  "footer": {
+    "logo_alt": "标志",
+    "terms": "服务条款",
+    "privacy": "隐私政策",
+    "powered_by": "由以下提供支持",
+    "rights_reserved": "保留所有权利"
+  }
 }

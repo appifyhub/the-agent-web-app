@@ -179,5 +179,12 @@
       }
     }
   },
-  "check_out_project": "Check out the project"
+  "check_out_project": "Check out the project",
+  "footer": {
+    "logo_alt": "Logo",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy",
+    "powered_by": "Powered by",
+    "rights_reserved": "All Rights Reserved"
+  }
 }

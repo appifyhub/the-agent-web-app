@@ -179,5 +179,12 @@
       }
     }
   },
-  "check_out_project": "प्रोजेक्ट देखें"
+  "check_out_project": "प्रोजेक्ट देखें",
+  "footer": {
+    "logo_alt": "लोगो",
+    "terms": "सेवा की शर्तें",
+    "privacy": "गोपनीयता नीति",
+    "powered_by": "द्वारा संचालित",
+    "rights_reserved": "सभी अधिकार सुरक्षित"
+  }
 }

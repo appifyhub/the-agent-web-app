@@ -179,5 +179,12 @@
     "check_link": "Vérifiez votre lien d'accès et réessayez.",
     "sponsored_user": "Votre utilisation est parrainée par {sponsorName}. Pour devenir un utilisateur autonome, allez à {sponsorshipsLink}."
   },
-  "check_out_project": "Découvrir le projet"
+  "check_out_project": "Découvrir le projet",
+  "footer": {
+    "logo_alt": "Logo",
+    "terms": "Conditions d'utilisation",
+    "privacy": "Politique de confidentialité",
+    "powered_by": "Propulsé par",
+    "rights_reserved": "Tous droits réservés"
+  }
 }
