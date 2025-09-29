@@ -2,13 +2,6 @@ import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import React from "react";
 import { TranslationKey } from "@/lib/translation-keys";
-import AnthropicLogo from "@/assets/svg/anthropic-white.svg";
-import OpenAILogo from "@/assets/svg/openai-white.svg";
-import GoogleAILogo from "@/assets/svg/googleai-white.svg";
-import PerplexityLogo from "@/assets/svg/perplexity-white.svg";
-import RapidAPILogo from "@/assets/svg/rapidapi-white.svg";
-import CoinMarketCapLogo from "@/assets/svg/coinmarketcap-white.svg";
-import ReplicateLogo from "@/assets/svg/replicate-white.svg";
 
 export interface ErrorData {
   translationKey: TranslationKey;
@@ -117,18 +110,4 @@ export function cleanUsername(username: string): string {
     .replace(/\s+/g, "") // remove all spaces
     .replace(/^@+/, "") // remove leading @ signs
     .trim(); // remove any remaining leading/trailing whitespace
-}
-
-export function getProviderLogo(providerId: string): string | null {
-  const logoMap: { [key: string]: string } = {
-    anthropic: AnthropicLogo,
-    "open-ai": OpenAILogo,
-    "google-ai": GoogleAILogo,
-    perplexity: PerplexityLogo,
-    "rapid-api": RapidAPILogo,
-    "coinmarketcap-api": CoinMarketCapLogo,
-    replicate: ReplicateLogo,
-  };
-
-  return logoMap[providerId] || null;
 }

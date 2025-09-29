@@ -28,7 +28,8 @@
     "no_sponsorships_found": "لم يتم العثور على رعايات",
     "incognito": "مجهول",
     "add_sponsorship": "رعاية",
-    "telegram_username_label": "اسم المستخدم في تليجرام للمستخدم الذي تريد رعايته",
+    "platform_handle_label": "اسم المستخدم أو الهاتف للمستخدم الذي تريد رعايته",
+    "platform_handle_placeholder": "@اسم_المستخدم أو +00-هاتف",
     "you_are_sponsored": "أنت مستخدم مُرعى!",
     "unlink_message": "يمكنك الآن أن تصبح مستخدماً مستقلاً. هذا يقطع الرابط بينك وبين {sponsorName} وسيتوقف الذكاء الاصطناعي عن العمل حتى تقوم بتكوين ملفك الشخصي.",
     "unlink": "إلغاء الربط"
@@ -38,11 +39,16 @@
   "copied": "تم النسخ!",
   "token_info": {
     "profile_id": "الملف الشخصي ID",
-    "telegram_user_id": "معرّف مستخدم تيليجرام",
-    "telegram_username": "اسم مستخدم تيليجرام",
+    "platform": "المنصة",
+    "platform_user_id": "معرّف مستخدم المنصة",
+    "platform_handle": "اسم مستخدم المنصة",
     "sponsored_by": "برعاية",
     "version": "إصدار الذكاء الاصطناعي",
     "reveal_placeholder": "المعلومات التي نجمعها عنك"
+  },
+  "platforms": {
+    "telegram": "تيليجرام",
+    "unknown": "غير معروف"
   },
   "provider_needed_for": "يحتاج {botName} هذا من أجل {tools}",
   "where_is_my_key": "أين يوجد مفتاح {providerName} الخاص بي؟",
@@ -173,5 +179,12 @@
       }
     }
   },
-  "check_out_project": "تحقق من المشروع"
+  "check_out_project": "تحقق من المشروع",
+  "footer": {
+    "logo_alt": "الشعار",
+    "terms": "شروط الخدمة",
+    "privacy": "سياسة الخصوصية",
+    "powered_by": "مدعوم من",
+    "rights_reserved": "جميع الحقوق محفوظة"
+  }
 }

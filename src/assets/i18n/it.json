@@ -28,7 +28,8 @@
     "no_sponsorships_found": "Nessuna sponsorizzazione trovata",
     "incognito": "Incognito",
     "add_sponsorship": "Sponsorizza",
-    "telegram_username_label": "Nome utente Telegram dell'utente che vuoi sponsorizzare",
+    "platform_handle_label": "Nome utente o telefono dell'utente che vuoi sponsorizzare",
+    "platform_handle_placeholder": "@utente o +00-telefono",
     "you_are_sponsored": "Sei un utente sponsorizzato!",
     "unlink_message": "Ora puoi diventare un utente autonomo. Questo interrompe il collegamento tra te e {sponsorName} e l'IA smetterà di funzionare finché non configurerai il tuo Profilo.",
     "unlink": "Scollega"
@@ -38,11 +39,16 @@
   "copied": "Copiato!",
   "token_info": {
     "profile_id": "Profilo ID",
-    "telegram_user_id": "ID utente Telegram",
-    "telegram_username": "Nome utente Telegram",
+    "platform": "Piattaforma",
+    "platform_user_id": "ID utente piattaforma",
+    "platform_handle": "Nome utente piattaforma",
     "sponsored_by": "Sponsorizzato da",
     "version": "Versione AI",
     "reveal_placeholder": "Informazioni che raccogliamo su di te"
+  },
+  "platforms": {
+    "telegram": "Telegram",
+    "unknown": "Sconosciuto"
   },
   "provider_needed_for": "{botName} ha bisogno di questo per: {tools}",
   "where_is_my_key": "Dove si trova la mia chiave {providerName}?",
@@ -173,5 +179,12 @@
       }
     }
   },
-  "check_out_project": "Scopri il progetto"
+  "check_out_project": "Scopri il progetto",
+  "footer": {
+    "logo_alt": "Logo",
+    "terms": "Termini di Servizio",
+    "privacy": "Informativa sulla Privacy",
+    "powered_by": "Alimentato da",
+    "rights_reserved": "Tutti i diritti riservati"
+  }
 }

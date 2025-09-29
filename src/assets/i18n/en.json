@@ -28,7 +28,8 @@
     "no_sponsorships_found": "No sponsorships found",
     "incognito": "Incognito",
     "add_sponsorship": "Sponsor",
-    "telegram_username_label": "Telegram username of the user you want to sponsor",
+    "platform_handle_label": "Username or phone of the user you want to sponsor",
+    "platform_handle_placeholder": "@username or +00-phone",
     "you_are_sponsored": "You are a sponsored user!",
     "unlink_message": "You can now become an autonomous user. This breaks the link between you and {sponsorName} and AI will stop working until you configure your Profile.",
     "unlink": "Unlink"
@@ -38,11 +39,16 @@
   "copied": "Copied!",
   "token_info": {
     "profile_id": "Profile ID",
-    "telegram_user_id": "Telegram User ID",
-    "telegram_username": "Telegram Username",
+    "platform": "Platform",
+    "platform_user_id": "Platform User ID",
+    "platform_handle": "Platform Handle",
     "sponsored_by": "Sponsored by",
     "version": "AI Version",
     "reveal_placeholder": "Information we collect about you"
+  },
+  "platforms": {
+    "telegram": "Telegram",
+    "unknown": "Unknown"
   },
   "provider_needed_for": "{botName} needs this for: {tools}",
   "where_is_my_key": "Where is my {providerName} key?",
@@ -173,5 +179,12 @@
       }
     }
   },
-  "check_out_project": "Check out the project"
+  "check_out_project": "Check out the project",
+  "footer": {
+    "logo_alt": "Logo",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy",
+    "powered_by": "Powered by",
+    "rights_reserved": "All Rights Reserved"
+  }
 }

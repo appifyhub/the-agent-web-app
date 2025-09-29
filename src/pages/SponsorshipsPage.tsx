@@ -18,7 +18,6 @@ import {
   UserRound,
 } from "lucide-react";
 import BaseSettingsPage from "@/pages/BaseSettingsPage";
-import SettingInput from "@/components/SettingInput";
 import { PageError, cn, formatDate, cleanUsername } from "@/lib/utils";
 import { toast } from "sonner";
 import { t } from "@/lib/translations";
@@ -29,8 +28,13 @@ import {
   removeSelfSponsorship,
   SponsorshipResponse,
 } from "@/services/sponsorships-service";
+import { Platform } from "@/lib/platform";
 import { usePageSession } from "@/hooks/usePageSession";
+import PlatformDropdown from "@/components/PlatformDropdown";
+import PlatformIcon from "@/components/PlatformIcon";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { DEFAULT_LANGUAGE, INTERFACE_LANGUAGES } from "@/lib/languages";
 
 const SponsorshipsPage: React.FC = () => {
@@ -46,7 +50,8 @@ const SponsorshipsPage: React.FC = () => {
   const [maxSponsorships, setMaxSponsorships] = useState<number>(0);
   const [expandedItems, setExpandedItems] = useState<Set<number>>(new Set());
   const [isEditing, setIsEditing] = useState<boolean>(false);
-  const [telegramUsername, setTelegramUsername] = useState<string>("");
+  const [platformHandle, setPlatformHandle] = useState<string>("");
+  const [selectedPlatform, setSelectedPlatform] = useState<Platform>(Platform.TELEGRAM);
 
   const sortSponsorships = (
     sponsorships: SponsorshipResponse[]
@@ -67,8 +72,8 @@ const SponsorshipsPage: React.FC = () => {
       if (sponsoredCompare !== 0) return sponsoredCompare;
 
       // 3. Display name (full_name or username)
-      const aName = (a.full_name || a.telegram_username || "").toLowerCase();
-      const bName = (b.full_name || b.telegram_username || "").toLowerCase();
+      const aName = (a.full_name || a.platform_handle || "").toLowerCase();
+      const bName = (b.full_name || b.platform_handle || "").toLowerCase();
       return aName.localeCompare(bName);
     });
   };
@@ -102,17 +107,18 @@ const SponsorshipsPage: React.FC = () => {
 
   const handleStartEditing = () => {
     setIsEditing(true);
-    setTelegramUsername("");
+    setPlatformHandle("");
   };
 
   const handleCancelEditing = () => {
     setIsEditing(false);
-    setTelegramUsername("");
+    setPlatformHandle("");
+    setSelectedPlatform(Platform.TELEGRAM);
   };
 
   const handleSaveSponsorship = async () => {
-    const cleanTelegramUsername = cleanUsername(telegramUsername);
-    if (!cleanTelegramUsername || !user_id || !accessToken) return;
+    const cleanPlatformHandle = cleanUsername(platformHandle);
+    if (!cleanPlatformHandle || !user_id || !accessToken) return;
 
     setIsLoadingState(true);
     setError(null);
@@ -122,7 +128,8 @@ const SponsorshipsPage: React.FC = () => {
         apiBaseUrl,
         resource_id: user_id,
         rawToken: accessToken.raw,
-        receiver_telegram_username: cleanTelegramUsername,
+        platform_handle: cleanPlatformHandle,
+        platform: selectedPlatform,
       });
 
       // Refresh the sponsorships list
@@ -136,7 +143,8 @@ const SponsorshipsPage: React.FC = () => {
 
       // Exit editing mode and show success
       setIsEditing(false);
-      setTelegramUsername("");
+      setPlatformHandle("");
+      setSelectedPlatform(Platform.TELEGRAM);
       toast(t("saved"));
     } catch (err) {
       console.error("Error saving sponsorship!", err);
@@ -147,7 +155,7 @@ const SponsorshipsPage: React.FC = () => {
   };
 
   const handleUnsponsor = async (sponsorship: SponsorshipResponse) => {
-    if (!sponsorship.telegram_username || !user_id || !accessToken) return;
+    if (!sponsorship.platform_handle || !user_id || !accessToken) return;
 
     setIsLoadingState(true);
     setError(null);
@@ -156,7 +164,8 @@ const SponsorshipsPage: React.FC = () => {
       await removeSponsorship({
         apiBaseUrl,
         resource_id: user_id,
-        receiver_telegram_username: sponsorship.telegram_username,
+        platform_handle: sponsorship.platform_handle,
+        platform: sponsorship.platform,
         rawToken: accessToken.raw,
       });
 
@@ -201,10 +210,10 @@ const SponsorshipsPage: React.FC = () => {
   };
 
   const getDisplayName = (sponsorship: SponsorshipResponse) => {
-    const { full_name, telegram_username } = sponsorship;
+    const { full_name, platform_handle } = sponsorship;
 
-    if (full_name || telegram_username) {
-      const showAtSign = !full_name && telegram_username;
+    if (full_name || platform_handle) {
+      const showAtSign = !full_name && platform_handle;
 
       return (
         <div
@@ -219,7 +228,7 @@ const SponsorshipsPage: React.FC = () => {
             <UserRound className="h-5 w-5 text-accent-amber translate-y-0.5 flex-shrink-0" />
           )}
           <span className="font-normal truncate overflow-hidden whitespace-nowrap">
-            {full_name || telegram_username}
+            {full_name || platform_handle}
           </span>
         </div>
       );
@@ -264,7 +273,7 @@ const SponsorshipsPage: React.FC = () => {
     if (
       !accessToken?.decoded?.sponsored_by &&
       isEditing &&
-      !cleanUsername(telegramUsername).length
+      !cleanUsername(platformHandle).length
     ) {
       return true;
     }
@@ -307,16 +316,31 @@ const SponsorshipsPage: React.FC = () => {
           </CardTitle>
           <div className="h-4" />
 
-          {/* New sponsorship input */}
-          <SettingInput
-            id="telegram-username"
-            label={t("sponsorship.telegram_username_label")}
-            value={telegramUsername}
-            onChange={setTelegramUsername}
-            disabled={!!error?.isBlocker}
-            placeholder="@username"
-            onKeyboardConfirm={handleSaveSponsorship}
-          />
+          {/* New sponsorship input with platform dropdown */}
+          <div className="space-y-4">
+            <Label className="ps-2 text-[1.05rem] font-light">
+              {t("sponsorship.platform_handle_label")}
+            </Label>
+            <div className="flex space-x-3">
+              <PlatformDropdown
+                selectedPlatform={selectedPlatform}
+                onPlatformChange={setSelectedPlatform}
+              />
+              <Input
+                id="platform-handle"
+                className="py-6 px-6 w-full sm:w-sm text-[1.05rem] glass rounded-xl"
+                placeholder={error?.isBlocker ? "—" : t("sponsorship.platform_handle_placeholder")}
+                disabled={!!error?.isBlocker}
+                value={platformHandle}
+                onChange={(e) => setPlatformHandle(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && !error?.isBlocker) {
+                    handleSaveSponsorship();
+                  }
+                }}
+              />
+            </div>
+          </div>
         </>
       ) : (
         <>
@@ -377,8 +401,8 @@ const SponsorshipsPage: React.FC = () => {
                       {/* Expanded sponsorship stack (vertical) - display name row and dates */}
                       <div
                         className={cn(
-                          "flex flex-col px-5 py-3 items-start justify-center glass border cursor-pointer w-full min-w-0",
-                          isExpanded ? "space-y-2" : "space-y-0",
+                          "flex flex-col px-5 items-start justify-center glass border cursor-pointer w-full min-w-0",
+                          isExpanded ? "space-y-4 py-4" : "space-y-0 py-3",
                           roundedClasses,
                           borderClasses
                         )}
@@ -409,13 +433,20 @@ const SponsorshipsPage: React.FC = () => {
                           />
                         </div>
 
-                        {/* Bottom sponsorship stack (vertical) - status icons and dates */}
+                        {/* Bottom sponsorship stack (vertical) - platform, statuses and dates */}
                         <div
                           className={cn(
-                            "flex flex-col space-y-0 px-0.5",
+                            "flex flex-col space-y-1 px-0.5",
                             isExpanded ? "block" : "hidden"
                           )}
                         >
+                          {/* Platform row */}
+                          <div className="flex items-center space-x-3.5">
+                            <PlatformIcon platform={sponsorship.platform} className="h-4 w-4" />
+                            <span className="text-sm text-muted-foreground">
+                              {Platform.getName(sponsorship.platform)}
+                            </span>
+                          </div>
                           {/* Sponsored-at row (horizontal) */}
                           <div className="flex items-center space-x-3.5">
                             <Check className="h-4 w-4 text-success" />

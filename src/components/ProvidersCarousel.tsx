@@ -16,7 +16,7 @@ import {
   getSettingsFieldName,
 } from "@/services/user-settings-service";
 import { formatToolsForDisplay as format } from "@/services/external-tools-service";
-import { getProviderLogo } from "@/lib/utils";
+import ProviderIcon from "@/components/ProviderIcon";
 
 interface ProvidersCarouselProps {
   providers: ExternalToolProvider[];
@@ -106,13 +106,12 @@ const ProvidersCarousel: React.FC<ProvidersCarouselProps> = ({
 
                 <div className="flex flex-col items-center justify-center space-y-2">
                   <div className="flex items-center justify-center w-10 h-10">
-                    {getProviderLogo(provider.id) ? (
-                      <img
-                        src={getProviderLogo(provider.id)!}
-                        alt={`${provider.name} logo`}
-                        className="w-full h-full object-contain"
-                      />
-                    ) : (
+                    <ProviderIcon
+                      providerId={provider.id}
+                      className="w-full h-full"
+                      alt={`${provider.name} logo`}
+                    />
+                    {!provider.id && (
                       <span className="text-white text-lg font-bold text-center">
                         {provider.name.charAt(0).toUpperCase()}
                       </span>

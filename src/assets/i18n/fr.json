@@ -28,7 +28,8 @@
     "no_sponsorships_found": "Aucun parrainage trouvé",
     "incognito": "Incognito",
     "add_sponsorship": "Parrainer",
-    "telegram_username_label": "Nom d'utilisateur Telegram de l'utilisateur que vous voulez parrainer",
+    "platform_handle_label": "Nom d'utilisateur ou téléphone de l'utilisateur que vous voulez parrainer",
+    "platform_handle_placeholder": "@utilisateur ou +00-téléphone",
     "you_are_sponsored": "Vous êtes un utilisateur parrainé !",
     "unlink_message": "Vous pouvez maintenant devenir un utilisateur autonome. Cela rompt le lien entre vous et {sponsorName} et l'IA cessera de fonctionner jusqu'à ce que vous configuriez votre Profil.",
     "unlink": "Délier"
@@ -38,11 +39,16 @@
   "copied": "Copié !",
   "token_info": {
     "profile_id": "Profil ID",
-    "telegram_user_id": "ID utilisateur Telegram",
-    "telegram_username": "Nom d'utilisateur Telegram",
+    "platform": "Plateforme",
+    "platform_user_id": "ID utilisateur de plateforme",
+    "platform_handle": "Nom d'utilisateur de plateforme",
     "sponsored_by": "Parrainé par",
     "version": "Version IA",
     "reveal_placeholder": "Informations que nous collectons sur vous"
+  },
+  "platforms": {
+    "telegram": "Telegram",
+    "unknown": "Inconnu"
   },
   "provider_needed_for": "{botName} a besoin de ça pour: {tools}",
   "where_is_my_key": "Où est ma clé {providerName} ?",
@@ -173,5 +179,12 @@
     "check_link": "Vérifiez votre lien d'accès et réessayez.",
     "sponsored_user": "Votre utilisation est parrainée par {sponsorName}. Pour devenir un utilisateur autonome, allez à {sponsorshipsLink}."
   },
-  "check_out_project": "Découvrir le projet"
+  "check_out_project": "Découvrir le projet",
+  "footer": {
+    "logo_alt": "Logo",
+    "terms": "Conditions d'utilisation",
+    "privacy": "Politique de confidentialité",
+    "powered_by": "Propulsé par",
+    "rights_reserved": "Tous droits réservés"
+  }
 }

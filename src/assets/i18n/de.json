@@ -28,7 +28,8 @@
     "no_sponsorships_found": "Keine Sponsorings gefunden",
     "incognito": "Inkognito",
     "add_sponsorship": "Sponsern",
-    "telegram_username_label": "Telegram-Benutzername des Benutzers, den Sie sponsern möchten",
+    "platform_handle_label": "Benutzername oder Telefon des Benutzers, den Sie sponsern möchten",
+    "platform_handle_placeholder": "@benutzername oder +00-telefon",
     "you_are_sponsored": "Sie sind ein gesponserter Benutzer!",
     "unlink_message": "Sie können jetzt ein autonomer Benutzer werden. Dies bricht die Verbindung zwischen Ihnen und {sponsorName} und die KI wird nicht mehr funktionieren, bis Sie Ihr Profil konfigurieren.",
     "unlink": "Verknüpfung aufheben"
@@ -38,11 +39,16 @@
   "copied": "Kopiert!",
   "token_info": {
     "profile_id": "Profil ID",
-    "telegram_user_id": "Telegram-Benutzer-ID",
-    "telegram_username": "Telegram-Benutzername",
+    "platform": "Plattform",
+    "platform_user_id": "Plattform-Benutzer-ID",
+    "platform_handle": "Plattform-Benutzername",
     "sponsored_by": "Gesponsert von",
     "version": "KI-Version",
     "reveal_placeholder": "Informationen, die wir über Sie sammeln"
+  },
+  "platforms": {
+    "telegram": "Telegram",
+    "unknown": "Unbekannt"
   },
   "provider_needed_for": "{botName} benötigt dies für: {tools}",
   "where_is_my_key": "Wo ist mein {providerName}-Schlüssel?",
@@ -173,5 +179,12 @@
     "check_link": "Überprüfen Sie Ihren Zugangslink und versuchen Sie es erneut.",
     "sponsored_user": "Ihre Nutzung wird von {sponsorName} gesponsert. Um ein autonomer Benutzer zu werden, gehen Sie zu {sponsorshipsLink}."
   },
-  "check_out_project": "Projekt ansehen"
+  "check_out_project": "Projekt ansehen",
+  "footer": {
+    "logo_alt": "Logo",
+    "terms": "Nutzungsbedingungen",
+    "privacy": "Datenschutzrichtlinie",
+    "powered_by": "Unterstützt von",
+    "rights_reserved": "Alle Rechte vorbehalten"
+  }
 }

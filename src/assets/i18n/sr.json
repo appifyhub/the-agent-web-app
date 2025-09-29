@@ -28,7 +28,8 @@
     "no_sponsorships_found": "Nisu pronađena sponzorstva",
     "incognito": "Inkognito",
     "add_sponsorship": "Sponzoriši",
-    "telegram_username_label": "Telegram korisničko ime korisnika koga želite da sponzorišete",
+    "platform_handle_label": "Korisničko ime ili telefon korisnika koga želite da sponzorišete",
+    "platform_handle_placeholder": "@korisnik ili +00-telefon",
     "you_are_sponsored": "Vi ste sponzorisani korisnik!",
     "unlink_message": "Sada možete postati autonomni korisnik. Ovo prekida vezu između vas i {sponsorName}. AI će prestati da radi dok ne podesite svoj Profil.",
     "unlink": "Prekini vezu"
@@ -38,11 +39,16 @@
   "copied": "Kopirano!",
   "token_info": {
     "profile_id": "ID profila",
-    "telegram_user_id": "Telegram korisnički ID",
-    "telegram_username": "Telegram korisničko ime",
+    "platform": "Platforma",
+    "platform_user_id": "Platform korisnički ID",
+    "platform_handle": "Platform korisničko ime",
     "sponsored_by": "Sponzoriše",
     "version": "AI Verzija",
     "reveal_placeholder": "Informacije koje prikupljamo o vama"
+  },
+  "platforms": {
+    "telegram": "Telegram",
+    "unknown": "Nepoznato"
   },
   "provider_needed_for": "{botName} ovo koristi za: {tools}",
   "where_is_my_key": "Gde je moj {providerName} ključ?",
@@ -173,5 +179,12 @@
       }
     }
   },
-  "check_out_project": "Pogledaj projekat"
+  "check_out_project": "Pogledaj projekat",
+  "footer": {
+    "logo_alt": "Logo",
+    "terms": "Uslovi korišćenja",
+    "privacy": "Politika privatnosti",
+    "powered_by": "Pokreće",
+    "rights_reserved": "Sva prava zadržana"
+  }
 }

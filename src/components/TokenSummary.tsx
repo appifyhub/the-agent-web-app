@@ -8,6 +8,7 @@ import {
   ChevronDown,
   ChevronRight,
   Gift,
+  Radio,
 } from "lucide-react";
 import type { DecodedToken } from "@/lib/tokens";
 import { t } from "@/lib/translations";
@@ -18,13 +19,6 @@ export interface TokenSummaryItem {
   value: string | number;
 }
 
-export interface TokenSummaryLabels {
-  profileId: string;
-  chatId: string;
-  telegramUserId: string;
-  telegramUsername: string;
-  version: string;
-}
 
 interface TokenSummaryProps {
   decoded: DecodedToken;
@@ -35,14 +29,15 @@ const TokenSummary: React.FC<TokenSummaryProps> = ({ decoded }) => {
 
   const items: TokenSummaryItem[] = [
     { label: t("token_info.profile_id"), value: decoded.sub, icon: Hash },
-    decoded.telegram_user_id && {
-      label: t("token_info.telegram_user_id"),
-      value: decoded.telegram_user_id,
+    { label: t("token_info.platform"), value: decoded.platform?.charAt(0).toUpperCase() + decoded.platform?.slice(1) || decoded.platform, icon: Radio },
+    decoded.platform_id && {
+      label: t("token_info.platform_user_id"),
+      value: decoded.platform_id,
       icon: Hash,
     },
-    decoded.telegram_username && {
-      label: t("token_info.telegram_username"),
-      value: decoded.telegram_username,
+    decoded.platform_handle && {
+      label: t("token_info.platform_handle"),
+      value: decoded.platform_handle,
       icon: AtSign,
     },
     decoded.sponsored_by && {

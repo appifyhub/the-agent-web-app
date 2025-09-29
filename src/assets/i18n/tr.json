@@ -28,7 +28,8 @@
     "no_sponsorships_found": "Sponsorluk bulunamadı",
     "incognito": "Gizli",
     "add_sponsorship": "Sponsor Ol",
-    "telegram_username_label": "Sponsor olmak istediğiniz kullanıcının Telegram kullanıcı adı",
+    "platform_handle_label": "Sponsor olmak istediğiniz kullanıcının kullanıcı adı veya telefonu",
+    "platform_handle_placeholder": "@kullanıcı veya +00-telefon",
     "you_are_sponsored": "Sponsorlu bir kullanıcısınız!",
     "unlink_message": "Artık bağımsız bir kullanıcı olabilirsiniz. Bu, siz ve {sponsorName} arasındaki bağlantıyı koparır ve Profilinizi yapılandırana kadar AI çalışmayı durdurur.",
     "unlink": "Bağlantıyı Kes"
@@ -38,11 +39,16 @@
   "copied": "Kopyalandı!",
   "token_info": {
     "profile_id": "Profil ID",
-    "telegram_user_id": "Telegram Kullanıcı ID",
-    "telegram_username": "Telegram Kullanıcı Adı",
+    "platform": "Platform",
+    "platform_user_id": "Platform Kullanıcı ID",
+    "platform_handle": "Platform Kullanıcı Adı",
     "sponsored_by": "Sponsor:",
     "version": "AI Sürümü",
     "reveal_placeholder": "Hakkınızda topladığımız bilgiler"
+  },
+  "platforms": {
+    "telegram": "Telegram",
+    "unknown": "Bilinmeyen"
   },
   "provider_needed_for": "{botName} bunu {tools} için gerektirir",
   "where_is_my_key": "{providerName} anahtarım nerede?",
@@ -173,5 +179,12 @@
       }
     }
   },
-  "check_out_project": "Projeyi incele"
+  "check_out_project": "Projeyi incele",
+  "footer": {
+    "logo_alt": "Logo",
+    "terms": "Hizmet Şartları",
+    "privacy": "Gizlilik Politikası",
+    "powered_by": "Destekleyen",
+    "rights_reserved": "Tüm hakları saklıdır"
+  }
 }
