@@ -48,6 +48,7 @@
   },
   "platforms": {
     "telegram": "电报",
+    "whatsapp": "WhatsApp",
     "unknown": "未知"
   },
   "provider_needed_for": "{botName} 需要此用于: {tools}",
