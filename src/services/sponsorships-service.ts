@@ -1,5 +1,6 @@
 import { request } from "@/services/networking";
 import { Platform } from "@/lib/platform";
+import { cleanUsername } from "@/lib/utils";
 
 export interface SponsorshipResponse {
   full_name: string | null;
@@ -48,6 +49,7 @@ export async function fetchUserSponsorships({
     sponsorships: rawData.sponsorships.map(sponsorship => ({
       ...sponsorship,
       platform: Platform.fromString(sponsorship.platform),
+      platform_handle: sponsorship.platform_handle ? cleanUsername(sponsorship.platform_handle) : null, // Clean handle on fetch
     })),
   };
 }
