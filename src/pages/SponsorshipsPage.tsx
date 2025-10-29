@@ -16,6 +16,7 @@ import {
   Unlink,
   ChevronDown,
   UserRound,
+  Phone,
 } from "lucide-react";
 import BaseSettingsPage from "@/pages/BaseSettingsPage";
 import { PageError, cn, formatDate, cleanUsername } from "@/lib/utils";
@@ -164,7 +165,7 @@ const SponsorshipsPage: React.FC = () => {
       await removeSponsorship({
         apiBaseUrl,
         resource_id: user_id,
-        platform_handle: sponsorship.platform_handle,
+        platform_handle: cleanUsername(sponsorship.platform_handle),
         platform: sponsorship.platform,
         rawToken: accessToken.raw,
       });
@@ -210,25 +211,37 @@ const SponsorshipsPage: React.FC = () => {
   };
 
   const getDisplayName = (sponsorship: SponsorshipResponse) => {
-    const { full_name, platform_handle } = sponsorship;
+    const { full_name, platform_handle, platform } = sponsorship;
 
     if (full_name || platform_handle) {
-      const showAtSign = !full_name && platform_handle;
+      let prefixIcon = null;
+      let prefixChar = "";
+
+      if (!full_name && platform_handle) {
+        if (platform === Platform.WHATSAPP) {
+          prefixIcon = <Phone className="h-5 w-5 text-accent-amber flex-shrink-0" />;
+          prefixChar = "+";
+        } else if (platform === Platform.TELEGRAM) {
+          prefixIcon = <AtSign className="h-5 w-5 text-accent-amber flex-shrink-0" />;
+          prefixChar = "@";
+        } else {
+          prefixIcon = <UserRound className="h-5 w-5 text-accent-amber translate-y-0.5 flex-shrink-0" />;
+        }
+      } else if (full_name) {
+        prefixIcon = <UserRound className="h-5 w-5 text-accent-amber translate-y-0.5 flex-shrink-0" />;
+      }
+
 
       return (
         <div
           className={cn(
             "flex justify-center space-x-3 truncate overflow-hidden whitespace-nowrap",
-            showAtSign ? "items-center" : "items-stretch"
+            (prefixIcon !== null) ? "items-center" : "items-stretch"
           )}
         >
-          {showAtSign ? (
-            <AtSign className="h-5 w-5 text-accent-amber flex-shrink-0" />
-          ) : (
-            <UserRound className="h-5 w-5 text-accent-amber translate-y-0.5 flex-shrink-0" />
-          )}
+          {prefixIcon}
           <span className="font-normal truncate overflow-hidden whitespace-nowrap">
-            {full_name || platform_handle}
+            {prefixChar}{full_name || platform_handle}
           </span>
         </div>
       );

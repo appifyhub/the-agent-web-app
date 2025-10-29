@@ -27,6 +27,10 @@ const AVAILABLE_PLATFORMS: PlatformInfo[] = [
     platform: Platform.TELEGRAM,
     icon: ({ className }: { className?: string }) => <PlatformIcon platform={Platform.TELEGRAM} className={className} />,
   },
+  {
+    platform: Platform.WHATSAPP,
+    icon: ({ className }: { className?: string }) => <PlatformIcon platform={Platform.WHATSAPP} className={className} />,
+  },
 ];
 
 const PlatformDropdown: React.FC<PlatformDropdownProps> = ({

@@ -1,6 +1,7 @@
 import React from "react";
 import { Platform } from "@/lib/platform";
 import TelegramIcon from "@/components/TelegramIcon";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { Radio } from "lucide-react";
 
 interface PlatformIconProps {
@@ -20,6 +21,11 @@ const PlatformIcon: React.FC<PlatformIconProps> = ({
         return {
           name: Platform.getName(platform),
           icon: <TelegramIcon className={className} />,
+        };
+      case Platform.WHATSAPP:
+        return {
+          name: Platform.getName(platform),
+          icon: <WhatsAppIcon className={className} />,
         };
       default:
         return {

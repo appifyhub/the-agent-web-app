@@ -48,6 +48,7 @@
   },
   "platforms": {
     "telegram": "टेलीग्राम",
+    "whatsapp": "व्हाट्सएप",
     "unknown": "अज्ञात"
   },
   "provider_needed_for": "{botName} को इसके लिए {tools} चाहिए",

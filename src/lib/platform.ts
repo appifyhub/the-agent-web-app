@@ -4,6 +4,7 @@ export enum Platform {
   BACKGROUND = "background",
   GITHUB = "github",
   TELEGRAM = "telegram",
+  WHATSAPP = "whatsapp",
   UNKNOWN = "unknown",
 }
 
@@ -21,6 +22,8 @@ export namespace Platform {
     switch (platform) {
       case Platform.TELEGRAM:
         return t("platforms.telegram");
+      case Platform.WHATSAPP:
+        return t("platforms.whatsapp");
       default:
         return t("platforms.unknown");
     }

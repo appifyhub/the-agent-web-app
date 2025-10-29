@@ -48,6 +48,7 @@
   },
   "platforms": {
     "telegram": "تيليجرام",
+    "whatsapp": "واتساب",
     "unknown": "غير معروف"
   },
   "provider_needed_for": "يحتاج {botName} هذا من أجل {tools}",

@@ -5,6 +5,7 @@ export interface UserSettings {
   id: string;
   full_name?: string;
   telegram_chat_id?: string;
+  whatsapp_chat_id?: string;
   open_ai_key?: string;
   anthropic_key?: string;
   google_ai_key?: string;

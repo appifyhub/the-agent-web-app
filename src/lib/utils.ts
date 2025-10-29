@@ -108,6 +108,7 @@ export function truncateMiddle(
 export function cleanUsername(username: string): string {
   return username
     .replace(/\s+/g, "") // remove all spaces
-    .replace(/^@+/, "") // remove leading @ signs
+    .replace(/^[@+]+/, "") // remove leading @ or + signs
+    .replace(/^\++/, "") // remove leading + signs
     .trim(); // remove any remaining leading/trailing whitespace
 }

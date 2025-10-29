@@ -48,6 +48,7 @@
   },
   "platforms": {
     "telegram": "Telegram",
+    "whatsapp": "WhatsApp",
     "unknown": "Bilinmeyen"
   },
   "provider_needed_for": "{botName} bunu {tools} için gerektirir",
