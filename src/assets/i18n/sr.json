@@ -4,10 +4,14 @@
   "sponsorships": "Sponzorstva",
   "close": "Zatvori",
   "help": "Pomoć",
-  "configure_title": "Podesite ponašanje {botName}a",
-  "configure_keys_title": "Pojačajte {botName}ovu Inteligenciju",
-  "preferred_language_label": "{botName} će pokušati da odgovori koristeći:",
-  "preferred_language_placeholder": "Izaberite jezik",
+  "configure_title": "Podesi ponašanje {botName}a",
+  "intelligence_card_title": "Unapredi {botName}ovu Inteligenciju",
+  "access": "Pristup",
+  "intelligence": "Inteligencija",
+  "access_card_title": "Učini {botName}a nezavisnim",
+  "profile_card_title": "Prilagodi {botName}a",
+  "preferred_language_label": "{botName} odgovara koristeći:",
+  "preferred_language_placeholder": "Izaberi jezik",
   "your_chats": "Podesi četove",
   "loading_placeholder": "Učitavanje…",
   "notifications": {
@@ -18,13 +22,13 @@
     "releases_choice_minor": "Sve nove funkcije",
     "releases_choice_all": "Sve promene"
   },
-  "spontaneous_label": "{botName} će odgovarati bez taga:",
-  "spontaneous_placeholder": "Izaberite učestalost",
+  "spontaneous_label": "{botName} odgovara bez taga:",
+  "spontaneous_placeholder": "Izaberi učestalost",
   "never": "Nikada",
   "always": "Uvek",
   "reply_frequency": "{percent}% vremena",
   "sponsorship": {
-    "users_you_sponsor": "Korisnici koje sponzorišete:",
+    "users_you_sponsor": "Korisnici koje sponzorišem:",
     "no_sponsorships_found": "Nisu pronađena sponzorstva",
     "incognito": "Inkognito",
     "add_sponsorship": "Sponzoriši",
@@ -40,11 +44,11 @@
   "token_info": {
     "profile_id": "ID profila",
     "platform": "Platforma",
-    "platform_user_id": "Platformski korisnički ID",
-    "platform_handle": "Platformsko korisničko ime",
+    "platform_user_id": "Plat. korisnički ID",
+    "platform_handle": "Plat. korisničko ime",
     "sponsored_by": "Sponzoriše",
     "version": "AI Verzija",
-    "reveal_placeholder": "Informacije koje prikupljamo o vama"
+    "reveal_placeholder": "Informacije koje prikupljamo"
   },
   "platforms": {
     "telegram": "Telegram",
@@ -53,16 +57,16 @@
   },
   "provider_needed_for": "{botName} ovo koristi za: {tools}",
   "where_is_my_key": "Gde je moj {providerName} ključ?",
+  "configure_intelligence": "Podesi inteligenciju",
   "errors": {
     "oh_no": "O ne!",
-    "expired": "Vaša sesija je istekla.",
-    "not_found": "Vaša sesija nije pronađena.",
-    "not_valid": "Vaša sesija nije validna.",
-    "misconfigured": "Vaša sesija je pogrešno podešena.",
+    "expired": "Ova sesija je istekla.",
+    "not_found": "Ova sesija nije pronađena.",
+    "not_valid": "Ova sesija nije validna.",
     "fetch_failed": "Neuspešno učitavanje podešavanja.",
     "save_failed": "Neuspešno čuvanje podešavanja.",
-    "check_link": "Proverite svoj pristupni link i pokušajte ponovo.",
-    "sponsored_user": "Vaše korišćenje sponzoriše {sponsorName}. Da postanete autonomni korisnik, idite na {sponsorshipsLink}."
+    "check_link": "Proveri svoj pristupni link i pokušaj ponovo.",
+    "sponsored_user": "Korišćenje sponzoriše {sponsorName}. Da postaneš autonomni korisnik, idi na {sponsorshipsLink}."
   },
   "features": {
     "header": "Mogućnosti",
@@ -70,7 +74,7 @@
     "items": {
       "language_intelligence": {
         "title": "Jezička inteligencija",
-        "description": "Asistent razume i odgovara na jeziku po vašem izboru, uz podršku više od 50 jezika, čineći razgovore prirodnim i pristupačnim korisnicima širom sveta. Pitajte bilo šta i brzo dobijajte pametne odgovore."
+        "description": "Agent razume i odgovara na jeziku po vašem izboru, uz podršku više od 50 jezika, čineći razgovore prirodnim i pristupačnim korisnicima širom sveta. Pitajte bilo šta i brzo dobijajte pametne odgovore."
       },
       "independent": {
         "title": "Nezavisnost",
@@ -111,11 +115,8 @@
     }
   },
   "tools": {
-    "show_options": "Prikaži napredne opcije",
-    "hide_options": "Sakrij napredne opcije",
-    "title": "Napredne opcije",
     "not_configured": "Podesi",
-    "select_tool": "Izaberite alat",
+    "select_tool": "Izaberi alat",
     "no_tools_available": "Nema dostupnih alata za ovaj tip",
     "types": {
       "chat": {
