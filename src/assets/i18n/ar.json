@@ -10,6 +10,8 @@
   "intelligence": "الذكاء",
   "access_card_title": "اجعل {botName} مستقلاً",
   "profile_card_title": "تخصيص {botName}",
+  "profile_full_name_label": "{botName} يعرفني كـ:",
+  "profile_full_name_placeholder": "اسم العرض الخاص بك",
   "preferred_language_label": "يحاول {botName} الرد باستخدام:",
   "preferred_language_placeholder": "اختر لغة",
   "your_chats": "إعداد المحادثات",

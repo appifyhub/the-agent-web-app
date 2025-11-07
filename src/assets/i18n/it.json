@@ -10,6 +10,8 @@
   "intelligence": "Intelligenza",
   "access_card_title": "Rendi {botName} indipendente",
   "profile_card_title": "Personalizza {botName}",
+  "profile_full_name_label": "{botName} mi conosce come:",
+  "profile_full_name_placeholder": "Il tuo nome visualizzato",
   "preferred_language_label": "{botName} cerca di rispondere usando:",
   "preferred_language_placeholder": "Seleziona una lingua",
   "your_chats": "Configura chat",

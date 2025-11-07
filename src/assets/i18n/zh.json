@@ -10,6 +10,8 @@
   "intelligence": "智能",
   "access_card_title": "让 {botName} 独立",
   "profile_card_title": "自定义 {botName}",
+  "profile_full_name_label": "{botName} 认识我为：",
+  "profile_full_name_placeholder": "您的显示名称",
   "preferred_language_label": "{botName} 尝试使用以下语言回复：",
   "preferred_language_placeholder": "请选择您的首选语言",
   "your_chats": "设置聊天",

@@ -10,6 +10,8 @@
   "intelligence": "Интеллект",
   "access_card_title": "Сделайте {botName}а независимым",
   "profile_card_title": "Настройте {botName}а",
+  "profile_full_name_label": "{botName} знает меня как:",
+  "profile_full_name_placeholder": "Ваше отображаемое имя",
   "preferred_language_label": "{botName} пытается отвечать на:",
   "preferred_language_placeholder": "Выберите язык",
   "your_chats": "Настроить чаты",

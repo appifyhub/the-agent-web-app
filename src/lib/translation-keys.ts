@@ -17,6 +17,8 @@ export type TranslationKey =
   | "intelligence"
   | "access_card_title"
   | "profile_card_title"
+  | "profile_full_name_label"
+  | "profile_full_name_placeholder"
   | "preferred_language_label"
   | "preferred_language_placeholder"
   | "your_chats"

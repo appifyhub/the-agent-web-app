@@ -10,6 +10,8 @@
   "intelligence": "Inteligencija",
   "access_card_title": "Učini {botName}a nezavisnim",
   "profile_card_title": "Prilagodi {botName}a",
+  "profile_full_name_label": "{botName} me zna kao:",
+  "profile_full_name_placeholder": "Ime za prikaz",
   "preferred_language_label": "{botName} odgovara koristeći:",
   "preferred_language_placeholder": "Izaberi jezik",
   "your_chats": "Podesi četove",

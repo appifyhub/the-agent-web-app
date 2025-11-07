@@ -10,6 +10,8 @@
   "intelligence": "बुद्धिमत्ता",
   "access_card_title": "{botName} को स्वतंत्र बनाएं",
   "profile_card_title": "{botName} को अनुकूलित करें",
+  "profile_full_name_label": "{botName} मुझे इस नाम से जानता है:",
+  "profile_full_name_placeholder": "आपका प्रदर्शन नाम",
   "preferred_language_label": "{botName} निम्न भाषा में उत्तर देने का प्रयास करता है:",
   "preferred_language_placeholder": "भाषा चुनें",
   "your_chats": "चैट सेट करें",

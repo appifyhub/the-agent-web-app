@@ -10,6 +10,8 @@
   "intelligence": "Zeka",
   "access_card_title": "{botName}'ı bağımsız yapın",
   "profile_card_title": "{botName}'ı Özelleştir",
+  "profile_full_name_label": "{botName} beni şöyle tanıyor:",
+  "profile_full_name_placeholder": "Görünen adınız",
   "preferred_language_label": "{botName} şu dilde yanıt vermeye çalışır:",
   "preferred_language_placeholder": "Bir dil seçin",
   "your_chats": "Sohbetleri yapılandır",
