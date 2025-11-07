@@ -244,6 +244,7 @@ const AccessSettingsPage: React.FC = () => {
       externalError={error}
     >
       <div className="h-2" />
+
       <CardTitle className="text-center mx-auto">
         {t("access_card_title", { botName })}
       </CardTitle>
@@ -274,8 +275,6 @@ const AccessSettingsPage: React.FC = () => {
           }
         }}
       />
-
-      <div className="h-8" />
     </BaseSettingsPage>
   );
 };

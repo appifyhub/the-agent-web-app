@@ -187,7 +187,7 @@ const IntelligenceSettingsPage: React.FC = () => {
         {t("intelligence_card_title", { botName })}
       </CardTitle>
 
-      <div className="h-8" />
+      <div className="h-4" />
 
       {externalToolsData && (
         <AdvancedToolsPanel

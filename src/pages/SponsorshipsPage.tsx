@@ -227,7 +227,6 @@ const SponsorshipsPage: React.FC = () => {
           prefixIcon = (
             <AtSign className="h-5 w-5 text-accent-amber shrink-0" />
           );
-          prefixChar = "@";
         } else {
           prefixIcon = (
             <UserRound className="h-5 w-5 text-accent-amber translate-y-0.5 shrink-0" />

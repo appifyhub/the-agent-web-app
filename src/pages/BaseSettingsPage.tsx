@@ -12,7 +12,7 @@ import { DEFAULT_LANGUAGE, INTERFACE_LANGUAGES } from "@/lib/languages";
 import { t } from "@/lib/translations";
 import { usePageSession } from "@/hooks/usePageSession";
 import { ChatInfo } from "@/services/user-settings-service";
-import { PageError } from "@/lib/utils";
+import { PageError, cn } from "@/lib/utils";
 
 type Page = "sponsorships" | "profile" | "chat" | "access" | "intelligence";
 
@@ -35,6 +35,7 @@ interface BaseSettingsPageProps {
   showProfileButton?: boolean;
   showSponsorshipsButton?: boolean;
   externalError?: PageError | null;
+  cardClassName?: string;
 }
 
 const BaseSettingsPage = forwardRef<BaseSettingsPageRef, BaseSettingsPageProps>(
@@ -54,6 +55,7 @@ const BaseSettingsPage = forwardRef<BaseSettingsPageRef, BaseSettingsPageProps>(
       showProfileButton = true,
       showSponsorshipsButton = true,
       externalError = null,
+      cardClassName,
     },
     ref
   ) => {
@@ -139,7 +141,7 @@ const BaseSettingsPage = forwardRef<BaseSettingsPageRef, BaseSettingsPageProps>(
               />
 
               {/* The Settings card */}
-              <Card className="mt-4.5 md:px-6 px-2 md:py-12 py-8 glass-static rounded-3xl">
+              <Card className={cn("mt-4.5 md:px-6 px-2 md:py-12 py-8 glass-static rounded-3xl", cardClassName)}>
                 <CardContent className="space-y-4">
                   {isLoadingState || isContentLoading ? (
                     <SettingsPageSkeleton />

@@ -95,7 +95,7 @@ const ProvidersCarousel: React.FC<ProvidersCarouselProps> = ({
       <CarouselContent>
         {providers.map((provider) => (
           <CarouselItem key={provider.id} className="px-2 sm:px-0">
-            <div className="space-y-6 px-2">
+            <div className="space-y-8 px-2">
               {/* Header with logo and navigation */}
               <div className="flex items-center justify-center space-x-16">
                 {canScrollPrev && !disabled && (
@@ -160,7 +160,7 @@ const ProvidersCarousel: React.FC<ProvidersCarouselProps> = ({
                 autoComplete="off"
                 spellCheck={false}
                 inputClassName="font-mono"
-                labelClassName="h-12 flex items-center leading-tight"
+                labelClassName="flex items-center leading-tight"
               />
 
               {/* Info links */}
@@ -178,6 +178,7 @@ const ProvidersCarousel: React.FC<ProvidersCarouselProps> = ({
                     })}
                   </a>
                 </div>
+
                 {onNavigateToIntelligence &&
                   (() => {
                     const isConfigured =

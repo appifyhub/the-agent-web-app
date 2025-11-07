@@ -54,6 +54,7 @@ export function getSettingsFieldName(providerId: string): keyof UserSettings {
 }
 
 export interface UserSettingsPayload {
+  full_name?: string;
   open_ai_key?: string;
   anthropic_key?: string;
   google_ai_key?: string;
@@ -89,6 +90,7 @@ const MASKED_FIELDS: (keyof UserSettingsPayload)[] = [
 ];
 
 const REGULAR_FIELDS: (keyof UserSettingsPayload)[] = [
+  "full_name",
   "tool_choice_chat",
   "tool_choice_reasoning",
   "tool_choice_copywriting",
