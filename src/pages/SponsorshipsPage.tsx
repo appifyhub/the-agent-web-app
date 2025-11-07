@@ -45,14 +45,16 @@ const SponsorshipsPage: React.FC = () => {
   }>();
 
   const { error, accessToken, isLoadingState, setError, setIsLoadingState } =
-    usePageSession(user_id, undefined);
+    usePageSession();
 
   const [sponsorships, setSponsorships] = useState<SponsorshipResponse[]>([]);
   const [maxSponsorships, setMaxSponsorships] = useState<number>(0);
   const [expandedItems, setExpandedItems] = useState<Set<number>>(new Set());
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [platformHandle, setPlatformHandle] = useState<string>("");
-  const [selectedPlatform, setSelectedPlatform] = useState<Platform>(Platform.TELEGRAM);
+  const [selectedPlatform, setSelectedPlatform] = useState<Platform>(
+    Platform.TELEGRAM
+  );
 
   const sortSponsorships = (
     sponsorships: SponsorshipResponse[]
@@ -219,36 +221,42 @@ const SponsorshipsPage: React.FC = () => {
 
       if (!full_name && platform_handle) {
         if (platform === Platform.WHATSAPP) {
-          prefixIcon = <Phone className="h-5 w-5 text-accent-amber flex-shrink-0" />;
+          prefixIcon = <Phone className="h-5 w-5 text-accent-amber shrink-0" />;
           prefixChar = "+";
         } else if (platform === Platform.TELEGRAM) {
-          prefixIcon = <AtSign className="h-5 w-5 text-accent-amber flex-shrink-0" />;
+          prefixIcon = (
+            <AtSign className="h-5 w-5 text-accent-amber shrink-0" />
+          );
           prefixChar = "@";
         } else {
-          prefixIcon = <UserRound className="h-5 w-5 text-accent-amber translate-y-0.5 flex-shrink-0" />;
+          prefixIcon = (
+            <UserRound className="h-5 w-5 text-accent-amber translate-y-0.5 shrink-0" />
+          );
         }
       } else if (full_name) {
-        prefixIcon = <UserRound className="h-5 w-5 text-accent-amber translate-y-0.5 flex-shrink-0" />;
+        prefixIcon = (
+          <UserRound className="h-5 w-5 text-accent-amber translate-y-0.5 shrink-0" />
+        );
       }
-
 
       return (
         <div
           className={cn(
             "flex justify-center space-x-3 truncate overflow-hidden whitespace-nowrap",
-            (prefixIcon !== null) ? "items-center" : "items-stretch"
+            prefixIcon !== null ? "items-center" : "items-stretch"
           )}
         >
           {prefixIcon}
           <span className="font-normal truncate overflow-hidden whitespace-nowrap">
-            {prefixChar}{full_name || platform_handle}
+            {prefixChar}
+            {full_name || platform_handle}
           </span>
         </div>
       );
     }
     return (
       <div className="flex items-center justify-center space-x-2 truncate overflow-hidden whitespace-nowrap">
-        <VenetianMask className="h-5 w-5 text-accent-amber flex-shrink-0" />
+        <VenetianMask className="h-5 w-5 text-accent-amber shrink-0" />
         <span className="font-normal truncate overflow-hidden whitespace-nowrap">
           {t("sponsorship.incognito")}
         </span>
@@ -342,7 +350,11 @@ const SponsorshipsPage: React.FC = () => {
               <Input
                 id="platform-handle"
                 className="py-6 px-6 w-full sm:w-sm text-[1.05rem] glass rounded-xl"
-                placeholder={error?.isBlocker ? "—" : t("sponsorship.platform_handle_placeholder")}
+                placeholder={
+                  error?.isBlocker
+                    ? "—"
+                    : t("sponsorship.platform_handle_placeholder")
+                }
                 disabled={!!error?.isBlocker}
                 value={platformHandle}
                 onChange={(e) => setPlatformHandle(e.target.value)}
@@ -430,15 +442,15 @@ const SponsorshipsPage: React.FC = () => {
                             {/* Sponsorship status icon */}
                             {!isExpanded &&
                               (sponsorship.accepted_at ? (
-                                <CheckCheck className="h-4 w-4 text-success flex-shrink-0" />
+                                <CheckCheck className="h-4 w-4 text-success shrink-0" />
                               ) : (
-                                <Check className="h-4 w-4 text-success flex-shrink-0" />
+                                <Check className="h-4 w-4 text-success shrink-0" />
                               ))}
                           </div>
                           {/* Right side: Chevron */}
                           <ChevronDown
                             className={cn(
-                              "h-5 w-5 text-muted-foreground flex-shrink-0 transition-transform duration-300",
+                              "h-5 w-5 text-muted-foreground shrink-0 transition-transform duration-300",
                               isExpanded
                                 ? "text-foreground rotate-180"
                                 : "rotate-0"
@@ -455,7 +467,10 @@ const SponsorshipsPage: React.FC = () => {
                         >
                           {/* Platform row */}
                           <div className="flex items-center space-x-3.5">
-                            <PlatformIcon platform={sponsorship.platform} className="h-4 w-4" />
+                            <PlatformIcon
+                              platform={sponsorship.platform}
+                              className="h-4 w-4"
+                            />
                             <span className="text-sm text-muted-foreground">
                               {Platform.getName(sponsorship.platform)}
                             </span>

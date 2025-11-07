@@ -92,7 +92,7 @@ const ProvidersCarousel: React.FC<ProvidersCarouselProps> = ({
           <CarouselItem key={provider.id} className="px-2 sm:px-0">
             <div className="space-y-6">
               {/* Header with logo and navigation */}
-              <div className="flex items-center justify-center space-x-6">
+              <div className="flex items-center justify-center space-x-16">
                 {canScrollPrev && !disabled && (
                   <button
                     onClick={() => api?.scrollPrev()}

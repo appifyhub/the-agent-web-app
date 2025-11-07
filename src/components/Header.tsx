@@ -1,12 +1,21 @@
 import "@/components/header.css";
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { UserRound, Gift, LifeBuoy } from "lucide-react";
+import { UserRound, Gift, LifeBuoy, Menu as MenuIcon } from "lucide-react";
 import {
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-} from "@/components/ui/tooltip";
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuList,
+} from "@/components/ui/navigation-menu";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetTrigger,
+  SheetTitle,
+  SheetDescription,
+} from "@/components/ui/sheet";
+import ChatsCollapsible from "@/components/ChatsCollapsible";
 import { cn } from "@/lib/utils";
 import { Language } from "@/lib/languages";
 import { ChatInfo } from "@/services/user-settings-service";
@@ -16,12 +25,12 @@ import logoVector from "@/assets/logo-vector.svg";
 import { t } from "@/lib/translations";
 import { useParams, useLocation } from "react-router-dom";
 import { useNavigation } from "@/hooks/useNavigation";
+import { useChats } from "@/hooks/useChats";
 
 type Page = "sponsorships" | "profile" | "chat" | "features";
 
 interface HeaderProps {
   page: Page;
-  chats: ChatInfo[];
   selectedChat?: ChatInfo;
   selectedLanguage: Language;
   hasBlockerError?: boolean;
@@ -30,11 +39,11 @@ interface HeaderProps {
   showChatsDropdown?: boolean;
   showHelpButton?: boolean;
   userId?: string;
+  rawToken?: string;
 }
 
 const Header: React.FC<HeaderProps> = ({
   page,
-  chats,
   selectedChat = undefined,
   selectedLanguage,
   hasBlockerError = false,
@@ -43,8 +52,11 @@ const Header: React.FC<HeaderProps> = ({
   showChatsDropdown = true,
   showHelpButton = true,
   userId,
+  rawToken,
 }) => {
-  const { lang_iso_code, user_id } = useParams<{
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const { lang_iso_code, user_id, chat_id } = useParams<{
     lang_iso_code: string;
     user_id?: string;
     chat_id?: string;
@@ -58,6 +70,20 @@ const Header: React.FC<HeaderProps> = ({
     navigateToFeatures,
     navigateWithLanguageChange,
   } = useNavigation();
+
+  // Fetch chats internally using the hook
+  const { chats } = useChats(userId || user_id, rawToken);
+
+  // Resolve selected chat from URL or prop
+  const resolvedSelectedChat =
+    selectedChat || chats.find((chat) => chat.chat_id === chat_id);
+
+  // Determine if we should show the drawer at all
+  const hasAnyNavItems =
+    showProfileButton ||
+    showSponsorshipsButton ||
+    showHelpButton ||
+    (showChatsDropdown && chats.length > 0);
 
   const getPageTitle = (page: Page): string => {
     switch (page) {
@@ -86,6 +112,7 @@ const Header: React.FC<HeaderProps> = ({
     if (lang_iso_code) {
       console.info("Chat changed to:", chatId);
       navigateToChat(chatId, lang_iso_code);
+      setMenuOpen(false);
     } else {
       console.warn("Cannot navigate without lang_iso_code");
     }
@@ -97,6 +124,7 @@ const Header: React.FC<HeaderProps> = ({
     const targetUserId = user_id || userId;
     if (lang_iso_code && targetUserId) {
       navigateToProfile(targetUserId, lang_iso_code);
+      setMenuOpen(false);
     } else {
       console.warn("Cannot navigate to profile without user_id");
     }
@@ -108,6 +136,7 @@ const Header: React.FC<HeaderProps> = ({
     const targetUserId = user_id || userId;
     if (lang_iso_code && targetUserId) {
       navigateToSponsorships(targetUserId, lang_iso_code);
+      setMenuOpen(false);
     } else {
       console.warn("Cannot navigate to sponsorships without user_id");
     }
@@ -118,6 +147,7 @@ const Header: React.FC<HeaderProps> = ({
 
     if (lang_iso_code) {
       navigateToFeatures(lang_iso_code);
+      setMenuOpen(false);
     } else {
       console.warn("Cannot navigate to features without lang_iso_code");
     }
@@ -125,85 +155,120 @@ const Header: React.FC<HeaderProps> = ({
 
   return (
     <div className="header-gradient w-screen relative">
-      {/* Small-screen buttons */}
-      <div className="absolute top-4 right-6 z-10 md:hidden flex items-center space-x-5">
-        {/* Sponsorships button */}
-        {showSponsorshipsButton && (
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant="outline"
-                size="icon"
-                className={cn(
-                  page === "sponsorships"
-                    ? "glass-active text-amber-200"
-                    : "glass",
-                  "rounded-full scale-120",
-                  "cursor-pointer"
-                )}
-                onClick={handleSponsorshipsClick}
-              >
-                <Gift className="h-6 w-6" />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>{t("sponsorships")}</TooltipContent>
-          </Tooltip>
-        )}
-
-        {/* Profile button */}
-        {showProfileButton && (
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant="outline"
-                size="icon"
-                className={cn(
-                  page === "profile" ? "glass-active text-amber-200" : "glass",
-                  "rounded-full scale-120",
-                  "cursor-pointer"
-                )}
-                onClick={handleProfileClick}
-              >
-                <UserRound className="h-6 w-6" />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>{t("profile")}</TooltipContent>
-          </Tooltip>
-        )}
-
-        {/* Help button */}
-        {showHelpButton && (
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant="outline"
-                size="icon"
-                className={cn(
-                  page === "features" ? "glass-active text-amber-200" : "glass",
-                  "rounded-full scale-120",
-                  "cursor-pointer"
-                )}
-                onClick={handleHelpClick}
-              >
-                <LifeBuoy className="h-6 w-6" />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>{t("help")}</TooltipContent>
-          </Tooltip>
-        )}
-
-        {/* Language dropdown */}
+      {/* Mobile & Mid-size menu button - absolute positioned (<lg) */}
+      <div className={cn(
+        "absolute right-6 z-10 lg:hidden flex items-center",
+        "top-6 md:top-12",
+        "gap-5 md:gap-2"
+      )}>
         <LanguageDropdown
-          className="scale-120 translate-x-1"
           selectedLanguage={selectedLanguage}
           onLangChange={handleLangChange}
+          className="scale-120 md:scale-100"
         />
+        {hasAnyNavItems && (
+          <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
+            <SheetTrigger asChild>
+              <Button
+                variant="outline"
+                size="icon"
+                className={cn("glass rounded-full", "scale-120 md:scale-100")}
+              >
+                <MenuIcon className="h-6 w-6" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent
+              side="right"
+              className="w-full! sm:max-w-sm glass-dark-static border-l border-white/20 px-2 [&>button]:hidden"
+            >
+              <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+              <SheetDescription className="sr-only">
+                Access your chats, profile, sponsorships, help, and other
+              </SheetDescription>
+              <div className="flex flex-col gap-1 h-full">
+                <div className="h-8" />
+                {/* Custom close button */}
+                <div className="px-3">
+                  <SheetClose asChild>
+                    <button className="text-accent-amber/70 hover:text-white text-sm font-light transition-colors underline underline-offset-3 decoration-accent-amber/70">
+                      {t("close")}
+                    </button>
+                  </SheetClose>
+                </div>
+
+                <div className="h-4" />
+
+                {/* Chats collapsible in drawer */}
+                {showChatsDropdown && chats.length > 0 && (
+                  <ChatsCollapsible
+                    chats={chats}
+                    selectedChat={resolvedSelectedChat}
+                    onChatChange={handleChatChange}
+                    defaultOpen={page === "chat"}
+                  />
+                )}
+
+                {/* Navigation items */}
+                <div className="flex flex-col gap-1 border-white/10">
+                  {showProfileButton && (
+                    <Button
+                      variant="ghost"
+                      disabled={page === "profile"}
+                      className={cn(
+                        "justify-start gap-3 text-base h-12 rounded-xl font-normal",
+                        page === "profile"
+                          ? "bg-accent/70 cursor-default opacity-100"
+                          : "text-white hover:bg-white/10"
+                      )}
+                      onClick={handleProfileClick}
+                    >
+                      <UserRound className="h-5 w-5 shrink-0" />
+                      {t("profile")}
+                    </Button>
+                  )}
+                  {showSponsorshipsButton && (
+                    <Button
+                      variant="ghost"
+                      disabled={page === "sponsorships"}
+                      className={cn(
+                        "justify-start gap-3 text-base h-12 rounded-xl font-normal",
+                        page === "sponsorships"
+                          ? "bg-accent/70 cursor-default opacity-100"
+                          : "text-white hover:bg-white/10"
+                      )}
+                      onClick={handleSponsorshipsClick}
+                    >
+                      <Gift className="h-5 w-5 shrink-0" />
+                      {t("sponsorships")}
+                    </Button>
+                  )}
+                  {showHelpButton && (
+                    <Button
+                      variant="ghost"
+                      disabled={page === "features"}
+                      className={cn(
+                        "justify-start gap-3 text-base h-12 rounded-xl font-normal",
+                        page === "features"
+                          ? "bg-accent/70 cursor-default opacity-100"
+                          : "text-white hover:bg-white/10"
+                      )}
+                      onClick={handleHelpClick}
+                    >
+                      <LifeBuoy className="h-5 w-5 shrink-0" />
+                      {t("help")}
+                    </Button>
+                  )}
+                </div>
+              </div>
+            </SheetContent>
+          </Sheet>
+        )}
       </div>
 
       {/* Header content */}
       <div
         className={cn(
-          "flex flex-col items-center space-y-6",
+          "flex flex-col items-center space-y-2",
           "md:flex-row md:justify-between md:items-center md:space-y-0",
           "px-4 pt-30 pb-12",
           "md:px-10 md:pt-10 md:pb-24",
@@ -232,100 +297,86 @@ const Header: React.FC<HeaderProps> = ({
           </h1>
         </div>
 
-        {/* Dropdowns & Menus */}
-        <div className="flex items-center justify-center space-x-2 w-full md:w-auto">
+        {/* Desktop navigation - full menu (lg+) */}
+        <div className="hidden lg:flex items-center justify-center gap-2">
           {/* Chats dropdown */}
           {showChatsDropdown && (
             <ChatsDropdown
               chats={chats}
-              selectedChat={selectedChat}
+              selectedChat={resolvedSelectedChat}
               disabled={hasBlockerError && chats.length === 0}
               onChatChange={handleChatChange}
             />
           )}
 
-          {/* Large-screen Sponsorships button */}
-          {showSponsorshipsButton && (
-            <div className="hidden md:block">
-              <Tooltip>
-                <TooltipTrigger asChild>
+          {/* Navigation menu */}
+          <NavigationMenu>
+            <NavigationMenuList className="flex items-center gap-2">
+              {showProfileButton && (
+                <NavigationMenuItem>
                   <Button
                     variant="outline"
                     size="icon"
+                    disabled={page === "profile"}
                     className={cn(
-                      page === "sponsorships"
-                        ? "glass-active text-amber-200"
-                        : "glass",
-                      "rounded-full",
-                      "cursor-pointer"
-                    )}
-                    onClick={handleSponsorshipsClick}
-                  >
-                    <Gift className="h-6 w-6" />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>{t("sponsorships")}</TooltipContent>
-              </Tooltip>
-            </div>
-          )}
-
-          {/* Large-screen Profile button */}
-          {showProfileButton && (
-            <div className="hidden md:block">
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    className={cn(
+                      "gap-2 text-base w-auto px-4 rounded-full",
                       page === "profile"
-                        ? "glass-active text-amber-200"
-                        : "glass",
-                      "rounded-full",
-                      "cursor-pointer"
+                        ? "glass-active text-accent-amber"
+                        : "glass"
                     )}
                     onClick={handleProfileClick}
                   >
-                    <UserRound className="h-6 w-6" />
+                    <UserRound className="h-5 w-5" />
+                    {t("profile")}
                   </Button>
-                </TooltipTrigger>
-                <TooltipContent>{t("profile")}</TooltipContent>
-              </Tooltip>
-            </div>
-          )}
-
-          {/* Large-screen Help button */}
-          {showHelpButton && (
-            <div className="hidden md:block">
-              <Tooltip>
-                <TooltipTrigger asChild>
+                </NavigationMenuItem>
+              )}
+              {showSponsorshipsButton && (
+                <NavigationMenuItem>
                   <Button
                     variant="outline"
                     size="icon"
+                    disabled={page === "sponsorships"}
                     className={cn(
+                      "gap-2 text-base w-auto px-4 rounded-full",
+                      page === "sponsorships"
+                        ? "glass-active text-accent-amber"
+                        : "glass"
+                    )}
+                    onClick={handleSponsorshipsClick}
+                  >
+                    <Gift className="h-5 w-5" />
+                    {t("sponsorships")}
+                  </Button>
+                </NavigationMenuItem>
+              )}
+              {showHelpButton && (
+                <NavigationMenuItem>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    disabled={page === "features"}
+                    className={cn(
+                      "gap-2 text-base w-auto px-4 rounded-full",
                       page === "features"
-                        ? "glass-active text-amber-200"
-                        : "glass",
-                      "rounded-full",
-                      "cursor-pointer"
+                        ? "glass-active text-accent-amber"
+                        : "glass"
                     )}
                     onClick={handleHelpClick}
                   >
-                    <LifeBuoy className="h-6 w-6" />
+                    <LifeBuoy className="h-5 w-5" />
+                    {t("help")}
                   </Button>
-                </TooltipTrigger>
-                <TooltipContent>{t("help")}</TooltipContent>
-              </Tooltip>
-            </div>
-          )}
-
-          {/* Large-screen Languages dropdown */}
-          <div className="hidden md:block">
-            <LanguageDropdown
-              selectedLanguage={selectedLanguage}
-              onLangChange={handleLangChange}
-            />
-          </div>
+                </NavigationMenuItem>
+              )}
+              <NavigationMenuItem>
+                <LanguageDropdown
+                  selectedLanguage={selectedLanguage}
+                  onLangChange={handleLangChange}
+                />
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
         </div>
       </div>
     </div>

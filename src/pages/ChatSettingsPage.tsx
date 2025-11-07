@@ -14,21 +14,36 @@ import {
 } from "@/services/chat-settings-service";
 import { usePageSession } from "@/hooks/usePageSession";
 import { LLM_LANGUAGES } from "@/lib/languages";
+import ChatsDropdown from "@/components/ChatsDropdown";
+import { useChats } from "@/hooks/useChats";
+import { useNavigation } from "@/hooks/useNavigation";
 
 const ChatSettingsPage: React.FC = () => {
-  const { chat_id, user_id } = useParams<{
+  const { chat_id, user_id, lang_iso_code } = useParams<{
     lang_iso_code: string;
     chat_id: string;
     user_id?: string;
   }>();
 
   const { error, accessToken, isLoadingState, setError, setIsLoadingState } =
-    usePageSession(user_id, chat_id);
+    usePageSession();
+
+  const { chats } = useChats(
+    user_id || accessToken?.decoded.sub,
+    accessToken?.raw
+  );
+  const { navigateToChat } = useNavigation();
 
   const [chatSettings, setChatSettings] = useState<ChatSettings | null>(null);
   const [remoteSettings, setRemoteSettings] = useState<ChatSettings | null>(
     null
   );
+
+  const handleChatChange = (chatId: string) => {
+    if (lang_iso_code) {
+      navigateToChat(chatId, lang_iso_code);
+    }
+  };
 
   // Fetch chat settings when session is ready
   useEffect(() => {
@@ -104,7 +119,17 @@ const ChatSettingsPage: React.FC = () => {
       <CardTitle className="text-center mx-auto">
         {t("configure_title", { botName })}
       </CardTitle>
-      <div className="h-4" />
+
+      {/* Chats dropdown for switching between chats - mobile only */}
+      <div className="flex justify-center lg:hidden">
+        <ChatsDropdown
+          chats={chats}
+          selectedChat={chats.find((chat) => chat.chat_id === chat_id)}
+          onChatChange={handleChatChange}
+          disabled={!!error?.isBlocker}
+        />
+      </div>
+      <div className="h-2" />
 
       {/* The Preferred Language Dropdown */}
       <SettingSelector
