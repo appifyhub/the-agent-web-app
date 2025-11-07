@@ -40,8 +40,8 @@
   "token_info": {
     "profile_id": "ID profila",
     "platform": "Platforma",
-    "platform_user_id": "Platform korisnički ID",
-    "platform_handle": "Platform korisničko ime",
+    "platform_user_id": "Platformski korisnički ID",
+    "platform_handle": "Platformsko korisničko ime",
     "sponsored_by": "Sponzoriše",
     "version": "AI Verzija",
     "reveal_placeholder": "Informacije koje prikupljamo o vama"
