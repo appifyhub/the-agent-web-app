@@ -35,7 +35,7 @@ const TokenSummary: React.FC<TokenSummaryProps> = ({ decoded }) => {
       value: decoded.platform_id,
       icon: Hash,
     },
-    decoded.platform_handle && {
+    decoded.platform_handle && decoded.platform_handle !== decoded.platform_id && {
       label: t("token_info.platform_handle"),
       value: decoded.platform_handle,
       icon: AtSign,

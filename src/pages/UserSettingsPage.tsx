@@ -32,7 +32,7 @@ const UserSettingsPage: React.FC = () => {
   }>();
 
   const { error, accessToken, isLoadingState, setError, setIsLoadingState } =
-    usePageSession(user_id, undefined);
+    usePageSession();
 
   const [userSettings, setUserSettings] = useState<UserSettings | null>(null);
   const [remoteSettings, setRemoteSettings] = useState<UserSettings | null>(

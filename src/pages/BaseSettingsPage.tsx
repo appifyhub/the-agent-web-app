@@ -49,14 +49,14 @@ const BaseSettingsPage: React.FC<BaseSettingsPageProps> = ({
   showSponsorshipsButton = true,
   externalError = null,
 }) => {
-  const { lang_iso_code, user_id, chat_id } = useParams<{
+  const { lang_iso_code } = useParams<{
     lang_iso_code: string;
     user_id?: string;
     chat_id?: string;
   }>();
 
-  const { error, accessToken, isLoadingState, chats, handleTokenExpired } =
-    usePageSession(user_id, chat_id);
+  const { error, accessToken, isLoadingState, handleTokenExpired } =
+    usePageSession();
 
   // prioritize external error if provided
   const displayError = externalError || error;
@@ -86,16 +86,14 @@ const BaseSettingsPage: React.FC<BaseSettingsPageProps> = ({
       {/* The Header section */}
       <Header
         page={page}
-        chats={chats}
-        selectedChat={
-          selectedChat || chats.find((chat) => chat.chat_id === chat_id)
-        }
+        selectedChat={selectedChat}
         selectedLanguage={
           INTERFACE_LANGUAGES.find((lang) => lang.isoCode === lang_iso_code) ||
           DEFAULT_LANGUAGE
         }
         hasBlockerError={!!displayError?.isBlocker}
         userId={accessToken?.decoded?.sub}
+        rawToken={accessToken?.raw}
         showProfileButton={showProfileButton}
         showSponsorshipsButton={showSponsorshipsButton}
       />

@@ -68,12 +68,12 @@ export default function FeaturesPage() {
     <div className="flex flex-col min-h-screen">
       <Header
         page="features"
-        chats={[]}
         selectedLanguage={language}
         userId={accessToken?.decoded.sub}
+        rawToken={accessToken?.raw}
         showProfileButton={showNav}
-        showSponsorshipsButton={false}
-        showChatsDropdown={false}
+        showSponsorshipsButton={showNav}
+        showChatsDropdown={showNav}
         showHelpButton={showNav}
         hasBlockerError={false}
       />
