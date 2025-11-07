@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { CardTitle } from "@/components/ui/card";
-import BaseSettingsPage from "@/pages/BaseSettingsPage";
+import BaseSettingsPage, {
+  BaseSettingsPageRef,
+} from "@/pages/BaseSettingsPage";
 import type { ReleaseNotificationsSetting } from "@/services/chat-settings-service";
 import SettingSelector from "@/components/SettingSelector";
 import { toast } from "sonner";
@@ -14,12 +16,13 @@ import {
 } from "@/services/chat-settings-service";
 import { usePageSession } from "@/hooks/usePageSession";
 import { LLM_LANGUAGES } from "@/lib/languages";
-import ChatsDropdown from "@/components/ChatsDropdown";
 import { useChats } from "@/hooks/useChats";
-import { useNavigation } from "@/hooks/useNavigation";
+import { ChevronsRight } from "lucide-react";
+import PlatformIcon from "@/components/PlatformIcon";
+import { Platform } from "@/lib/platform";
 
 const ChatSettingsPage: React.FC = () => {
-  const { chat_id, user_id, lang_iso_code } = useParams<{
+  const { chat_id, user_id } = useParams<{
     lang_iso_code: string;
     chat_id: string;
     user_id?: string;
@@ -32,18 +35,14 @@ const ChatSettingsPage: React.FC = () => {
     user_id || accessToken?.decoded.sub,
     accessToken?.raw
   );
-  const { navigateToChat } = useNavigation();
+  const basePageRef = useRef<BaseSettingsPageRef>(null);
+
+  const selectedChat = chats.find((chat) => chat.chat_id === chat_id);
 
   const [chatSettings, setChatSettings] = useState<ChatSettings | null>(null);
   const [remoteSettings, setRemoteSettings] = useState<ChatSettings | null>(
     null
   );
-
-  const handleChatChange = (chatId: string) => {
-    if (lang_iso_code) {
-      navigateToChat(chatId, lang_iso_code);
-    }
-  };
 
   // Fetch chat settings when session is ready
   useEffect(() => {
@@ -111,24 +110,36 @@ const ChatSettingsPage: React.FC = () => {
 
   return (
     <BaseSettingsPage
+      ref={basePageRef}
       page="chat"
       onActionClicked={handleSave}
       actionDisabled={!areSettingsChanged}
       isContentLoading={isLoadingState}
+      externalError={error}
     >
+      <div className="h-2" />
       <CardTitle className="text-center mx-auto">
         {t("configure_title", { botName })}
       </CardTitle>
 
-      {/* Chats dropdown for switching between chats - mobile only */}
-      <div className="flex justify-center lg:hidden">
-        <ChatsDropdown
-          chats={chats}
-          selectedChat={chats.find((chat) => chat.chat_id === chat_id)}
-          onChatChange={handleChatChange}
-          disabled={!!error?.isBlocker}
-        />
-      </div>
+      {/* Chat name link for opening drawer - mobile only */}
+      {selectedChat && (
+        <div className="flex justify-center lg:hidden">
+          <button
+            onClick={() => basePageRef.current?.openDrawer()}
+            className="text-sm text-accent-amber/70 hover:text-accent-amber"
+          >
+            <span className="flex items-center space-x-1 underline underline-offset-4 decoration-accent-amber/70">
+              <span>{selectedChat.title}</span>
+              <PlatformIcon
+                platform={Platform.fromString(selectedChat.platform)}
+                className="h-3 w-3"
+              />
+              <ChevronsRight className="h-4 w-4" />
+            </span>
+          </button>
+        </div>
+      )}
       <div className="h-2" />
 
       {/* The Preferred Language Dropdown */}

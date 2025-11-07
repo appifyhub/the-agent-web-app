@@ -2,6 +2,8 @@ import { Toaster } from "@/components/ui/sonner";
 import { Routes, Route, Navigate } from "react-router-dom";
 import ChatSettingsPage from "@/pages/ChatSettingsPage";
 import UserSettingsPage from "@/pages/UserSettingsPage";
+import AccessSettingsPage from "@/pages/AccessSettingsPage";
+import IntelligenceSettingsPage from "@/pages/IntelligenceSettingsPage";
 import SponsorshipsPage from "@/pages/SponsorshipsPage";
 import FeaturesPage from "@/pages/FeaturesPage";
 import logoVector from "@/assets/logo-vector.svg";
@@ -21,6 +23,14 @@ function App() {
           element={<UserSettingsPage />}
         />
         <Route
+          path="/:lang_iso_code/user/:user_id/access"
+          element={<AccessSettingsPage />}
+        />
+        <Route
+          path="/:lang_iso_code/user/:user_id/intelligence"
+          element={<IntelligenceSettingsPage />}
+        />
+        <Route
           path="/:lang_iso_code/user/:user_id/sponsorships"
           element={<SponsorshipsPage />}
         />
@@ -34,8 +44,17 @@ function App() {
               <h1 className="text-4xl font-extralight text-center mb-12">
                 {import.meta.env.VITE_APP_NAME}
               </h1>
-              <span className="text-5xl font-bold text-center text-accent-strong">
-                404 💥
+              <span className="text-5xl font-bold text-center text-accent-strong flex flex-col items-center gap-4">
+                <p className="text-3xl">⚠️ 404 ⚠️</p>
+                <a
+                  href={import.meta.env.VITE_LANDING_PAGE_URL}
+                  className="text-accent-amber hover:text-white text-lg underline"
+                >
+                  {import.meta.env.VITE_LANDING_PAGE_URL.replace(
+                    "https://",
+                    "www."
+                  )}
+                </a>
               </span>
             </div>
           }

@@ -1,7 +1,14 @@
 import "@/components/header.css";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { UserRound, Gift, LifeBuoy, Menu as MenuIcon } from "lucide-react";
+import {
+  UserRound,
+  Gift,
+  LifeBuoy,
+  Menu as MenuIcon,
+  Key,
+  Brain,
+} from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -27,7 +34,13 @@ import { useParams, useLocation } from "react-router-dom";
 import { useNavigation } from "@/hooks/useNavigation";
 import { useChats } from "@/hooks/useChats";
 
-type Page = "sponsorships" | "profile" | "chat" | "features";
+type Page =
+  | "sponsorships"
+  | "profile"
+  | "chat"
+  | "features"
+  | "access"
+  | "intelligence";
 
 interface HeaderProps {
   page: Page;
@@ -40,6 +53,8 @@ interface HeaderProps {
   showHelpButton?: boolean;
   userId?: string;
   rawToken?: string;
+  drawerOpen?: boolean;
+  onDrawerOpenChange?: (open: boolean) => void;
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -53,8 +68,13 @@ const Header: React.FC<HeaderProps> = ({
   showHelpButton = true,
   userId,
   rawToken,
+  drawerOpen: externalDrawerOpen,
+  onDrawerOpenChange,
 }) => {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [internalMenuOpen, setInternalMenuOpen] = useState(false);
+  const menuOpen =
+    externalDrawerOpen !== undefined ? externalDrawerOpen : internalMenuOpen;
+  const setMenuOpen = onDrawerOpenChange || setInternalMenuOpen;
 
   const { lang_iso_code, user_id, chat_id } = useParams<{
     lang_iso_code: string;
@@ -66,6 +86,8 @@ const Header: React.FC<HeaderProps> = ({
   const {
     navigateToChat,
     navigateToProfile,
+    navigateToAccess,
+    navigateToIntelligence,
     navigateToSponsorships,
     navigateToFeatures,
     navigateWithLanguageChange,
@@ -95,6 +117,10 @@ const Header: React.FC<HeaderProps> = ({
         return t("chat");
       case "features":
         return t("features.header");
+      case "access":
+        return t("access");
+      case "intelligence":
+        return t("intelligence");
       default:
         return "";
     }
@@ -142,6 +168,30 @@ const Header: React.FC<HeaderProps> = ({
     }
   };
 
+  const handleAccessClick = () => {
+    if (page === "access") return;
+
+    const targetUserId = user_id || userId;
+    if (lang_iso_code && targetUserId) {
+      navigateToAccess(targetUserId, lang_iso_code);
+      setMenuOpen(false);
+    } else {
+      console.warn("Cannot navigate to access without user_id");
+    }
+  };
+
+  const handleIntelligenceClick = () => {
+    if (page === "intelligence") return;
+
+    const targetUserId = user_id || userId;
+    if (lang_iso_code && targetUserId) {
+      navigateToIntelligence(targetUserId, lang_iso_code);
+      setMenuOpen(false);
+    } else {
+      console.warn("Cannot navigate to intelligence without user_id");
+    }
+  };
+
   const handleHelpClick = () => {
     if (page === "features") return;
 
@@ -156,11 +206,13 @@ const Header: React.FC<HeaderProps> = ({
   return (
     <div className="header-gradient w-screen relative">
       {/* Mobile & Mid-size menu button - absolute positioned (<lg) */}
-      <div className={cn(
-        "absolute right-6 z-10 lg:hidden flex items-center",
-        "top-6 md:top-12",
-        "gap-5 md:gap-2"
-      )}>
+      <div
+        className={cn(
+          "absolute right-6 z-10 lg:hidden flex items-center",
+          "top-6 md:top-12",
+          "gap-5 md:gap-2"
+        )}
+      >
         <LanguageDropdown
           selectedLanguage={selectedLanguage}
           onLangChange={handleLangChange}
@@ -188,7 +240,7 @@ const Header: React.FC<HeaderProps> = ({
               <div className="flex flex-col gap-1 h-full">
                 <div className="h-8" />
                 {/* Custom close button */}
-                <div className="px-3">
+                <div className="px-3 flex justify-end">
                   <SheetClose asChild>
                     <button className="text-accent-amber/70 hover:text-white text-sm font-light transition-colors underline underline-offset-3 decoration-accent-amber/70">
                       {t("close")}
@@ -226,6 +278,34 @@ const Header: React.FC<HeaderProps> = ({
                       {t("profile")}
                     </Button>
                   )}
+                  <Button
+                    variant="ghost"
+                    disabled={page === "access"}
+                    className={cn(
+                      "justify-start gap-3 text-base h-12 rounded-xl font-normal",
+                      page === "access"
+                        ? "bg-accent/70 cursor-default opacity-100"
+                        : "text-white hover:bg-white/10"
+                    )}
+                    onClick={handleAccessClick}
+                  >
+                    <Key className="h-5 w-5 shrink-0" />
+                    {t("access")}
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    disabled={page === "intelligence"}
+                    className={cn(
+                      "justify-start gap-3 text-base h-12 rounded-xl font-normal",
+                      page === "intelligence"
+                        ? "bg-accent/70 cursor-default opacity-100"
+                        : "text-white hover:bg-white/10"
+                    )}
+                    onClick={handleIntelligenceClick}
+                  >
+                    <Brain className="h-5 w-5 shrink-0" />
+                    {t("intelligence")}
+                  </Button>
                   {showSponsorshipsButton && (
                     <Button
                       variant="ghost"
@@ -331,50 +411,142 @@ const Header: React.FC<HeaderProps> = ({
                   </Button>
                 </NavigationMenuItem>
               )}
-              {showSponsorshipsButton && (
-                <NavigationMenuItem>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    disabled={page === "sponsorships"}
-                    className={cn(
-                      "gap-2 text-base w-auto px-4 rounded-full",
-                      page === "sponsorships"
-                        ? "glass-active text-accent-amber"
-                        : "glass"
-                    )}
-                    onClick={handleSponsorshipsClick}
-                  >
-                    <Gift className="h-5 w-5" />
-                    {t("sponsorships")}
-                  </Button>
-                </NavigationMenuItem>
-              )}
-              {showHelpButton && (
-                <NavigationMenuItem>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    disabled={page === "features"}
-                    className={cn(
-                      "gap-2 text-base w-auto px-4 rounded-full",
-                      page === "features"
-                        ? "glass-active text-accent-amber"
-                        : "glass"
-                    )}
-                    onClick={handleHelpClick}
-                  >
-                    <LifeBuoy className="h-5 w-5" />
-                    {t("help")}
-                  </Button>
-                </NavigationMenuItem>
-              )}
               <NavigationMenuItem>
                 <LanguageDropdown
                   selectedLanguage={selectedLanguage}
                   onLangChange={handleLangChange}
                 />
               </NavigationMenuItem>
+              {hasAnyNavItems && (
+                <NavigationMenuItem>
+                  <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
+                    <SheetTrigger asChild>
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="glass rounded-full"
+                      >
+                        <MenuIcon className="h-5 w-5" />
+                      </Button>
+                    </SheetTrigger>
+                    <SheetContent
+                      side="right"
+                      className="w-full! sm:max-w-sm glass-dark-static border-l border-white/20 px-2 [&>button]:hidden"
+                    >
+                      <SheetTitle className="sr-only">
+                        Navigation Menu
+                      </SheetTitle>
+                      <SheetDescription className="sr-only">
+                        Access your chats, profile, access, intelligence,
+                        sponsorships, help, and other
+                      </SheetDescription>
+                      <div className="flex flex-col gap-1 h-full">
+                        <div className="h-8" />
+                        {/* Custom close button */}
+                        <div className="px-3 flex justify-end">
+                          <SheetClose asChild>
+                            <button className="text-accent-amber/70 hover:text-white text-sm font-light transition-colors underline underline-offset-3 decoration-accent-amber/70">
+                              {t("close")}
+                            </button>
+                          </SheetClose>
+                        </div>
+
+                        <div className="h-4" />
+
+                        {/* Chats collapsible in drawer */}
+                        {showChatsDropdown && chats.length > 0 && (
+                          <ChatsCollapsible
+                            chats={chats}
+                            selectedChat={resolvedSelectedChat}
+                            onChatChange={handleChatChange}
+                            defaultOpen={page === "chat"}
+                          />
+                        )}
+
+                        {/* Navigation items */}
+                        <div className="flex flex-col gap-1 border-white/10">
+                          {showProfileButton && (
+                            <Button
+                              variant="ghost"
+                              disabled={page === "profile"}
+                              className={cn(
+                                "justify-start gap-3 text-base h-12 rounded-xl font-normal",
+                                page === "profile"
+                                  ? "bg-accent/70 cursor-default opacity-100"
+                                  : "text-white hover:bg-white/10"
+                              )}
+                              onClick={handleProfileClick}
+                            >
+                              <UserRound className="h-5 w-5 shrink-0" />
+                              {t("profile")}
+                            </Button>
+                          )}
+                          <Button
+                            variant="ghost"
+                            disabled={page === "access"}
+                            className={cn(
+                              "justify-start gap-3 text-base h-12 rounded-xl font-normal",
+                              page === "access"
+                                ? "bg-accent/70 cursor-default opacity-100"
+                                : "text-white hover:bg-white/10"
+                            )}
+                            onClick={handleAccessClick}
+                          >
+                            <Key className="h-5 w-5 shrink-0" />
+                            {t("access")}
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            disabled={page === "intelligence"}
+                            className={cn(
+                              "justify-start gap-3 text-base h-12 rounded-xl font-normal",
+                              page === "intelligence"
+                                ? "bg-accent/70 cursor-default opacity-100"
+                                : "text-white hover:bg-white/10"
+                            )}
+                            onClick={handleIntelligenceClick}
+                          >
+                            <Brain className="h-5 w-5 shrink-0" />
+                            {t("intelligence")}
+                          </Button>
+                          {showSponsorshipsButton && (
+                            <Button
+                              variant="ghost"
+                              disabled={page === "sponsorships"}
+                              className={cn(
+                                "justify-start gap-3 text-base h-12 rounded-xl font-normal",
+                                page === "sponsorships"
+                                  ? "bg-accent/70 cursor-default opacity-100"
+                                  : "text-white hover:bg-white/10"
+                              )}
+                              onClick={handleSponsorshipsClick}
+                            >
+                              <Gift className="h-5 w-5 shrink-0" />
+                              {t("sponsorships")}
+                            </Button>
+                          )}
+                          {showHelpButton && (
+                            <Button
+                              variant="ghost"
+                              disabled={page === "features"}
+                              className={cn(
+                                "justify-start gap-3 text-base h-12 rounded-xl font-normal",
+                                page === "features"
+                                  ? "bg-accent/70 cursor-default opacity-100"
+                                  : "text-white hover:bg-white/10"
+                              )}
+                              onClick={handleHelpClick}
+                            >
+                              <LifeBuoy className="h-5 w-5 shrink-0" />
+                              {t("help")}
+                            </Button>
+                          )}
+                        </div>
+                      </div>
+                    </SheetContent>
+                  </Sheet>
+                </NavigationMenuItem>
+              )}
             </NavigationMenuList>
           </NavigationMenu>
         </div>

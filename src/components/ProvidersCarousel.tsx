@@ -1,5 +1,5 @@
 import React from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ChevronsRight } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -17,23 +17,28 @@ import {
 } from "@/services/user-settings-service";
 import { formatToolsForDisplay as format } from "@/services/external-tools-service";
 import ProviderIcon from "@/components/ProviderIcon";
+import { cn } from "@/lib/utils";
 
 interface ProvidersCarouselProps {
   providers: ExternalToolProvider[];
   userSettings: UserSettings | null;
+  providerConfigStatus?: Map<string, boolean>;
   onSettingChange: (providerId: string, value: string) => void;
   disabled?: boolean;
   setNavigationApi?: (navigateTo: (providerId: string) => void) => void;
   setApi?: (api: CarouselApi) => void;
+  onNavigateToIntelligence?: () => void;
 }
 
 const ProvidersCarousel: React.FC<ProvidersCarouselProps> = ({
   providers,
   userSettings,
+  providerConfigStatus,
   onSettingChange,
   disabled = false,
   setNavigationApi,
   setApi: setParentApi,
+  onNavigateToIntelligence,
 }) => {
   const [api, setApi] = React.useState<CarouselApi>();
   const [canScrollPrev, setCanScrollPrev] = React.useState(false);
@@ -90,7 +95,7 @@ const ProvidersCarousel: React.FC<ProvidersCarouselProps> = ({
       <CarouselContent>
         {providers.map((provider) => (
           <CarouselItem key={provider.id} className="px-2 sm:px-0">
-            <div className="space-y-6">
+            <div className="space-y-6 px-2">
               {/* Header with logo and navigation */}
               <div className="flex items-center justify-center space-x-16">
                 {canScrollPrev && !disabled && (
@@ -158,19 +163,50 @@ const ProvidersCarousel: React.FC<ProvidersCarouselProps> = ({
                 labelClassName="h-12 flex items-center leading-tight"
               />
 
-              {/* Info link */}
-              <div className="flex items-center space-x-2 ps-2 text-sm text-muted-foreground">
-                <Info className="h-4 w-4 text-accent-amber/70" />
-                <a
-                  href={provider.token_management_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline underline-offset-3 decoration-accent-amber/70 text-accent-amber/70"
-                >
-                  {t("where_is_my_key", {
-                    providerName: provider.name,
-                  })}
-                </a>
+              {/* Info links */}
+              <div className="flex flex-col space-y-2 ps-2 text-sm text-muted-foreground">
+                <div className="flex items-center space-x-2">
+                  <Info className="h-4 w-4 text-accent-amber/70" />
+                  <a
+                    href={provider.token_management_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline underline-offset-3 decoration-accent-amber/70 text-accent-amber/70"
+                  >
+                    {t("where_is_my_key", {
+                      providerName: provider.name,
+                    })}
+                  </a>
+                </div>
+                {onNavigateToIntelligence &&
+                  (() => {
+                    const isConfigured =
+                      providerConfigStatus?.get(provider.id) ?? false;
+                    return (
+                      <div className="flex items-center space-x-2">
+                        <ChevronsRight
+                          className={cn(
+                            "h-4 w-4",
+                            isConfigured
+                              ? "text-accent-amber/70"
+                              : "text-muted-foreground/50"
+                          )}
+                        />
+                        {isConfigured ? (
+                          <button
+                            onClick={onNavigateToIntelligence}
+                            className="underline underline-offset-3 decoration-accent-amber/70 text-accent-amber/70 hover:text-accent-amber cursor-pointer"
+                          >
+                            {t("configure_intelligence")}
+                          </button>
+                        ) : (
+                          <span className="text-muted-foreground/50 cursor-not-allowed">
+                            {t("configure_intelligence")}
+                          </span>
+                        )}
+                      </div>
+                    );
+                  })()}
               </div>
             </div>
           </CarouselItem>

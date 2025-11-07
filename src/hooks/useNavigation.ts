@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 export interface NavigationHelpers {
   navigateToChat: (chatId: string, langIsoCode: string) => void;
   navigateToProfile: (userId: string, langIsoCode: string) => void;
+  navigateToAccess: (userId: string, langIsoCode: string) => void;
+  navigateToIntelligence: (userId: string, langIsoCode: string) => void;
   navigateToSponsorships: (userId: string, langIsoCode: string) => void;
   navigateToFeatures: (langIsoCode: string) => void;
   navigateWithLanguageChange: (
@@ -28,6 +30,18 @@ export const useNavigation = (): NavigationHelpers => {
     const search = preserveSearchParams();
     console.info("Navigating to profile:", userId);
     navigate(`/${langIsoCode}/user/${userId}/settings${search}`);
+  };
+
+  const navigateToAccess = (userId: string, langIsoCode: string) => {
+    const search = preserveSearchParams();
+    console.info("Navigating to access:", userId);
+    navigate(`/${langIsoCode}/user/${userId}/access${search}`);
+  };
+
+  const navigateToIntelligence = (userId: string, langIsoCode: string) => {
+    const search = preserveSearchParams();
+    console.info("Navigating to intelligence:", userId);
+    navigate(`/${langIsoCode}/user/${userId}/intelligence${search}`);
   };
 
   const navigateToSponsorships = (userId: string, langIsoCode: string) => {
@@ -63,6 +77,8 @@ export const useNavigation = (): NavigationHelpers => {
   return {
     navigateToChat,
     navigateToProfile,
+    navigateToAccess,
+    navigateToIntelligence,
     navigateToSponsorships,
     navigateToFeatures,
     navigateWithLanguageChange,
