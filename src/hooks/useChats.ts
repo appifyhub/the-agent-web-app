@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
 import { fetchUserChats, ChatInfo } from "@/services/user-settings-service";
+import {
+  getCachedChats,
+  setCachedChats,
+  areChatsCached,
+} from "@/services/chat-cache";
 
 export interface UseChatsResult {
   chats: ChatInfo[];
@@ -24,6 +29,18 @@ export const useChats = (
     }
 
     const fetchChats = async () => {
+      // Check cache first
+      if (areChatsCached(userId)) {
+        const cachedChats = getCachedChats(userId);
+        if (cachedChats) {
+          setChats(cachedChats);
+          setIsLoading(false);
+          setError(null);
+          return;
+        }
+      }
+
+      // If not cached, fetch from API
       setIsLoading(true);
       setError(null);
       try {
@@ -34,6 +51,8 @@ export const useChats = (
           rawToken,
         });
         setChats(chatsData);
+        // Store in cache for future use
+        setCachedChats(userId, chatsData);
       } catch (err) {
         console.error("Error fetching chats!", err);
         setError(err instanceof Error ? err : new Error("Unknown error"));

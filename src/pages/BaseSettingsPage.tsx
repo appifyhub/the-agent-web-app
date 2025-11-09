@@ -11,6 +11,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { DEFAULT_LANGUAGE, INTERFACE_LANGUAGES } from "@/lib/languages";
 import { t } from "@/lib/translations";
 import { usePageSession } from "@/hooks/usePageSession";
+import { useChats } from "@/hooks/useChats";
 import { ChatInfo } from "@/services/user-settings-service";
 import { PageError, cn } from "@/lib/utils";
 
@@ -68,6 +69,9 @@ const BaseSettingsPage = forwardRef<BaseSettingsPageRef, BaseSettingsPageProps>(
     const { error, accessToken, isLoadingState, handleTokenExpired } =
       usePageSession();
 
+    // Fetch chats once at this level to avoid duplicate calls
+    const { chats } = useChats(accessToken?.decoded?.sub, accessToken?.raw);
+
     const [drawerOpen, setDrawerOpen] = useState(false);
 
     useImperativeHandle(ref, () => ({
@@ -105,14 +109,14 @@ const BaseSettingsPage = forwardRef<BaseSettingsPageRef, BaseSettingsPageProps>(
         <Header
           page={page}
           selectedChat={selectedChat}
+          chats={chats}
+          userId={accessToken?.decoded?.sub}
           selectedLanguage={
             INTERFACE_LANGUAGES.find(
               (lang) => lang.isoCode === lang_iso_code
             ) || DEFAULT_LANGUAGE
           }
           hasBlockerError={!!displayError?.isBlocker}
-          userId={accessToken?.decoded?.sub}
-          rawToken={accessToken?.raw}
           showProfileButton={showProfileButton}
           showSponsorshipsButton={showSponsorshipsButton}
           drawerOpen={drawerOpen}
@@ -141,7 +145,12 @@ const BaseSettingsPage = forwardRef<BaseSettingsPageRef, BaseSettingsPageProps>(
               />
 
               {/* The Settings card */}
-              <Card className={cn("mt-4.5 md:px-6 px-2 md:py-12 py-8 glass-static rounded-3xl", cardClassName)}>
+              <Card
+                className={cn(
+                  "mt-4.5 md:px-6 px-2 md:py-12 py-8 glass-static rounded-3xl",
+                  cardClassName
+                )}
+              >
                 <CardContent className="space-y-4">
                   {isLoadingState || isContentLoading ? (
                     <SettingsPageSkeleton />

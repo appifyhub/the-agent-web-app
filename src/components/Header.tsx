@@ -6,6 +6,7 @@ import {
   Gift,
   LifeBuoy,
   Menu as MenuIcon,
+  MoreHorizontal,
   Key,
   Brain,
 } from "lucide-react";
@@ -32,7 +33,6 @@ import logoVector from "@/assets/logo-vector.svg";
 import { t } from "@/lib/translations";
 import { useParams, useLocation } from "react-router-dom";
 import { useNavigation } from "@/hooks/useNavigation";
-import { useChats } from "@/hooks/useChats";
 
 type Page =
   | "sponsorships"
@@ -45,14 +45,14 @@ type Page =
 interface HeaderProps {
   page: Page;
   selectedChat?: ChatInfo;
+  chats?: ChatInfo[];
+  userId?: string;
   selectedLanguage: Language;
   hasBlockerError?: boolean;
   showProfileButton?: boolean;
   showSponsorshipsButton?: boolean;
   showChatsDropdown?: boolean;
   showHelpButton?: boolean;
-  userId?: string;
-  rawToken?: string;
   drawerOpen?: boolean;
   onDrawerOpenChange?: (open: boolean) => void;
 }
@@ -60,14 +60,14 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({
   page,
   selectedChat = undefined,
+  chats: externalChats = [],
+  userId: propUserId,
   selectedLanguage,
   hasBlockerError = false,
   showProfileButton = true,
   showSponsorshipsButton = true,
   showChatsDropdown = true,
   showHelpButton = true,
-  userId,
-  rawToken,
   drawerOpen: externalDrawerOpen,
   onDrawerOpenChange,
 }) => {
@@ -93,8 +93,11 @@ const Header: React.FC<HeaderProps> = ({
     navigateWithLanguageChange,
   } = useNavigation();
 
-  // Fetch chats internally using the hook
-  const { chats } = useChats(userId || user_id, rawToken);
+  // Use chats passed from parent component
+  const chats = externalChats;
+
+  // Prefer URL param, fall back to prop (for navigation from non-user-specific pages)
+  const effectiveUserId = user_id || propUserId;
 
   // Resolve selected chat from URL or prop
   const resolvedSelectedChat =
@@ -147,9 +150,8 @@ const Header: React.FC<HeaderProps> = ({
   const handleProfileClick = () => {
     if (page === "profile") return;
 
-    const targetUserId = user_id || userId;
-    if (lang_iso_code && targetUserId) {
-      navigateToProfile(targetUserId, lang_iso_code);
+    if (lang_iso_code && effectiveUserId) {
+      navigateToProfile(effectiveUserId, lang_iso_code);
       setMenuOpen(false);
     } else {
       console.warn("Cannot navigate to profile without user_id");
@@ -159,9 +161,8 @@ const Header: React.FC<HeaderProps> = ({
   const handleSponsorshipsClick = () => {
     if (page === "sponsorships") return;
 
-    const targetUserId = user_id || userId;
-    if (lang_iso_code && targetUserId) {
-      navigateToSponsorships(targetUserId, lang_iso_code);
+    if (lang_iso_code && effectiveUserId) {
+      navigateToSponsorships(effectiveUserId, lang_iso_code);
       setMenuOpen(false);
     } else {
       console.warn("Cannot navigate to sponsorships without user_id");
@@ -171,9 +172,8 @@ const Header: React.FC<HeaderProps> = ({
   const handleAccessClick = () => {
     if (page === "access") return;
 
-    const targetUserId = user_id || userId;
-    if (lang_iso_code && targetUserId) {
-      navigateToAccess(targetUserId, lang_iso_code);
+    if (lang_iso_code && effectiveUserId) {
+      navigateToAccess(effectiveUserId, lang_iso_code);
       setMenuOpen(false);
     } else {
       console.warn("Cannot navigate to access without user_id");
@@ -183,9 +183,8 @@ const Header: React.FC<HeaderProps> = ({
   const handleIntelligenceClick = () => {
     if (page === "intelligence") return;
 
-    const targetUserId = user_id || userId;
-    if (lang_iso_code && targetUserId) {
-      navigateToIntelligence(targetUserId, lang_iso_code);
+    if (lang_iso_code && effectiveUserId) {
+      navigateToIntelligence(effectiveUserId, lang_iso_code);
       setMenuOpen(false);
     } else {
       console.warn("Cannot navigate to intelligence without user_id");
@@ -401,7 +400,7 @@ const Header: React.FC<HeaderProps> = ({
                     className={cn(
                       "gap-2 text-base w-auto px-4 rounded-full",
                       page === "profile"
-                        ? "glass-active text-accent-amber"
+                        ? "glass-active text-accent-amber underline underline-offset-4 decoration-accent-amber"
                         : "glass"
                     )}
                     onClick={handleProfileClick}
@@ -426,7 +425,7 @@ const Header: React.FC<HeaderProps> = ({
                         size="icon"
                         className="glass rounded-full"
                       >
-                        <MenuIcon className="h-5 w-5" />
+                        <MoreHorizontal className="h-5 w-5" />
                       </Button>
                     </SheetTrigger>
                     <SheetContent
