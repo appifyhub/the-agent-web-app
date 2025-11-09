@@ -130,7 +130,7 @@ const ChatSettingsPage: React.FC = () => {
             className="text-sm text-accent-amber/70 hover:text-accent-amber"
           >
             <span className="flex items-center space-x-1 underline underline-offset-4 decoration-accent-amber/70">
-              <span>{selectedChat.title}</span>
+              <span>{selectedChat.title || t("untitled")}</span>
               <PlatformIcon
                 platform={Platform.fromString(selectedChat.platform)}
                 className="h-3 w-3"

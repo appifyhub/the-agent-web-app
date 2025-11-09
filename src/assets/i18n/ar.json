@@ -16,6 +16,7 @@
   "preferred_language_placeholder": "اختر لغة",
   "your_chats": "إعداد المحادثات",
   "loading_placeholder": "جاري التحميل…",
+  "untitled": "بدون عنوان",
   "notifications": {
     "releases_label": "يجب أن يُخطِرني {botName} بالإصدارات:",
     "releases_placeholder": "اختر مستوى",

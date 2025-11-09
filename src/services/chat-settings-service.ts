@@ -4,12 +4,12 @@ export type ReleaseNotificationsSetting = "none" | "major" | "minor" | "all";
 
 export interface ChatSettings {
   chat_id: string;
-  title: string;
+  title?: string;
   platform: string;
   is_own: boolean;
   is_private: boolean;
-  language_name: string;
-  language_iso_code: string;
+  language_name?: string;
+  language_iso_code?: string;
   reply_chance_percent: number;
   release_notifications: ReleaseNotificationsSetting;
 }

@@ -16,6 +16,7 @@
   "preferred_language_placeholder": "请选择您的首选语言",
   "your_chats": "设置聊天",
   "loading_placeholder": "加载中…",
+  "untitled": "无标题",
   "notifications": {
     "releases_label": "{botName} 应通知我有关发布的信息：",
     "releases_placeholder": "请选择级别",

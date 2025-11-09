@@ -16,6 +16,7 @@
   "preferred_language_placeholder": "Выберите язык",
   "your_chats": "Настроить чаты",
   "loading_placeholder": "Загрузка…",
+  "untitled": "Без названия",
   "notifications": {
     "releases_label": "{botName} должен уведомлять меня о релизах:",
     "releases_placeholder": "Выберите уровень",

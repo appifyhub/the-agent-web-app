@@ -6,6 +6,7 @@ import { Platform } from "@/lib/platform";
 import PlatformIcon from "@/components/PlatformIcon";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { t } from "@/lib/translations";
 
 interface ChatListItemProps {
   chat: ChatInfo;
@@ -33,7 +34,7 @@ const ChatListItem: React.FC<ChatListItemProps> = ({
         className
       )}
     >
-      <span className="flex-1 truncate text-left min-w-0">{chat.title}</span>
+      <span className="flex-1 truncate text-left min-w-0">{chat.title || t("untitled")}</span>
       <div className="flex items-center gap-1">
         <Badge
           variant="outline"

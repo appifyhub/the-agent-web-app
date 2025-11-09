@@ -16,6 +16,7 @@
   "preferred_language_placeholder": "Izaberi jezik",
   "your_chats": "Podesi četove",
   "loading_placeholder": "Učitavanje…",
+  "untitled": "Bez naslova",
   "notifications": {
     "releases_label": "{botName} treba da me obavesti o izdanjima:",
     "releases_placeholder": "Izaberite nivo",

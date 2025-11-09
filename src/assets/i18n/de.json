@@ -16,6 +16,7 @@
   "preferred_language_placeholder": "Sprache auswählen",
   "your_chats": "Chats einrichten",
   "loading_placeholder": "Wird geladen...",
+  "untitled": "Unbenannt",
   "notifications": {
     "releases_label": "{botName} soll mich über Releases benachrichtigen:",
     "releases_placeholder": "Niveau auswählen",

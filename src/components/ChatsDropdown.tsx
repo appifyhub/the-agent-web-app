@@ -52,7 +52,7 @@ const ChatsDropdown: React.FC<ChatsDropdownProps> = ({
       return (
         <span className="flex items-baseline gap-2">
           <PlatformIcon platform={Platform.fromString(selectedChat.platform)} className="h-4 w-4 translate-y-0.5" />
-          <span className="font-light">{selectedChat.title}</span>
+          <span className="font-light">{selectedChat.title || t("untitled")}</span>
         </span>
       );
     }
@@ -107,7 +107,7 @@ const ChatsDropdown: React.FC<ChatsDropdownProps> = ({
             )}
             disabled={chat.chat_id === selectedChat?.chat_id}
           >
-            <span className="flex-1 truncate">{chat.title}</span>
+            <span className="flex-1 truncate">{chat.title || t("untitled")}</span>
             {chat.chat_id === selectedChat?.chat_id && (
               <CheckIcon className="h-4 w-4 flex-shrink-0" />
             )}

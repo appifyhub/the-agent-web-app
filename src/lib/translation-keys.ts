@@ -23,6 +23,7 @@ export type TranslationKey =
   | "preferred_language_placeholder"
   | "your_chats"
   | "loading_placeholder"
+  | "untitled"
   | "notifications.releases_label"
   | "notifications.releases_placeholder"
   | "notifications.releases_choice_none"

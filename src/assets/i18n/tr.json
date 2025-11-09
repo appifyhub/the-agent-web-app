@@ -16,6 +16,7 @@
   "preferred_language_placeholder": "Bir dil seçin",
   "your_chats": "Sohbetleri yapılandır",
   "loading_placeholder": "Yükleniyor…",
+  "untitled": "Başlıksız",
   "notifications": {
     "releases_label": "{botName} beni sürümlerden haberdar etsin:",
     "releases_placeholder": "Bir seviye seçin",

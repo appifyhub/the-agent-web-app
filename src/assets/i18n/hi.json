@@ -16,6 +16,7 @@
   "preferred_language_placeholder": "भाषा चुनें",
   "your_chats": "चैट सेट करें",
   "loading_placeholder": "लोड हो रहा है...",
+  "untitled": "अनामित",
   "notifications": {
     "releases_label": "{botName} मुझे रिलीज़ के बारे में सूचित करे:",
     "releases_placeholder": "स्तर चुनें",
