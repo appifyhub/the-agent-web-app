@@ -5,6 +5,7 @@ import UserSettingsPage from "@/pages/UserSettingsPage";
 import AccessSettingsPage from "@/pages/AccessSettingsPage";
 import IntelligenceSettingsPage from "@/pages/IntelligenceSettingsPage";
 import SponsorshipsPage from "@/pages/SponsorshipsPage";
+import ConnectionsPage from "@/pages/ConnectionsPage";
 import FeaturesPage from "@/pages/FeaturesPage";
 import logoVector from "@/assets/logo-vector.svg";
 import { DEFAULT_LANGUAGE } from "@/lib/languages";
@@ -33,6 +34,10 @@ function App() {
         <Route
           path="/:lang_iso_code/user/:user_id/sponsorships"
           element={<SponsorshipsPage />}
+        />
+        <Route
+          path="/:lang_iso_code/user/:user_id/connections"
+          element={<ConnectionsPage />}
         />
         <Route path="/:lang_iso_code/features" element={<FeaturesPage />} />
         {/* Edge-cases */}

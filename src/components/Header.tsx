@@ -10,6 +10,7 @@ import {
   Key,
   Brain,
   X,
+  Merge,
 } from "lucide-react";
 import {
   NavigationMenu,
@@ -41,7 +42,8 @@ type Page =
   | "chat"
   | "features"
   | "access"
-  | "intelligence";
+  | "intelligence"
+  | "connections";
 
 interface HeaderProps {
   page: Page;
@@ -94,6 +96,7 @@ const Header: React.FC<HeaderProps> = ({
     navigateToIntelligence,
     navigateToSponsorships,
     navigateToFeatures,
+    navigateToConnections,
     navigateWithLanguageChange,
   } = useNavigation();
 
@@ -128,6 +131,8 @@ const Header: React.FC<HeaderProps> = ({
         return t("access");
       case "intelligence":
         return t("intelligence");
+      case "connections":
+        return t("connections.page_title");
       default:
         return "";
     }
@@ -203,6 +208,17 @@ const Header: React.FC<HeaderProps> = ({
       setMenuOpen(false);
     } else {
       console.warn("Cannot navigate to features without lang_iso_code");
+    }
+  };
+
+  const handleConnectionsClick = () => {
+    if (page === "connections") return;
+
+    if (lang_iso_code && effectiveUserId) {
+      navigateToConnections(effectiveUserId, lang_iso_code);
+      setMenuOpen(false);
+    } else {
+      console.warn("Cannot navigate to connections without user_id");
     }
   };
 
@@ -317,6 +333,20 @@ const Header: React.FC<HeaderProps> = ({
                   >
                     <Brain className="h-5 w-5 shrink-0" />
                     {t("intelligence")}
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    disabled={page === "connections"}
+                    className={cn(
+                      "justify-start gap-3 text-base h-12 rounded-xl font-normal",
+                      page === "connections"
+                        ? "bg-accent/70 cursor-default opacity-100"
+                        : "text-white hover:bg-white/10 cursor-pointer"
+                    )}
+                    onClick={handleConnectionsClick}
+                  >
+                    <Merge className="h-5 w-5 shrink-0" />
+                    {t("connections.page_title")}
                   </Button>
                   {showSponsorshipsButton && (
                     <Button
@@ -529,6 +559,20 @@ const Header: React.FC<HeaderProps> = ({
                           >
                             <Brain className="h-5 w-5 shrink-0" />
                             {t("intelligence")}
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            disabled={page === "connections"}
+                            className={cn(
+                              "justify-start gap-3 text-base h-12 rounded-xl font-normal",
+                              page === "connections"
+                                ? "bg-accent/70 cursor-default opacity-100"
+                                : "text-white hover:bg-white/10 cursor-pointer"
+                            )}
+                            onClick={handleConnectionsClick}
+                          >
+                            <Merge className="h-5 w-5 shrink-0" />
+                            {t("connections.page_title")}
                           </Button>
                           {showSponsorshipsButton && (
                             <Button

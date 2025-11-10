@@ -6,6 +6,7 @@ export interface NavigationHelpers {
   navigateToAccess: (userId: string, langIsoCode: string) => void;
   navigateToIntelligence: (userId: string, langIsoCode: string) => void;
   navigateToSponsorships: (userId: string, langIsoCode: string) => void;
+  navigateToConnections: (userId: string, langIsoCode: string) => void;
   navigateToFeatures: (langIsoCode: string) => void;
   navigateWithLanguageChange: (
     langIsoCode: string,
@@ -50,6 +51,12 @@ export const useNavigation = (): NavigationHelpers => {
     navigate(`/${langIsoCode}/user/${userId}/sponsorships${search}`);
   };
 
+  const navigateToConnections = (userId: string, langIsoCode: string) => {
+    const search = preserveSearchParams();
+    console.info("Navigating to connections:", userId);
+    navigate(`/${langIsoCode}/user/${userId}/connections${search}`);
+  };
+
   const navigateToFeatures = (langIsoCode: string) => {
     const search = preserveSearchParams();
     console.info("Navigating to features");
@@ -80,6 +87,7 @@ export const useNavigation = (): NavigationHelpers => {
     navigateToAccess,
     navigateToIntelligence,
     navigateToSponsorships,
+    navigateToConnections,
     navigateToFeatures,
     navigateWithLanguageChange,
   };
