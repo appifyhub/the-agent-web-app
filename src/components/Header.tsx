@@ -9,6 +9,7 @@ import {
   MoreHorizontal,
   Key,
   Brain,
+  X,
 } from "lucide-react";
 import {
   NavigationMenu,
@@ -72,6 +73,9 @@ const Header: React.FC<HeaderProps> = ({
   onDrawerOpenChange,
 }) => {
   const [internalMenuOpen, setInternalMenuOpen] = useState(false);
+  const [chatsCollapsibleOpen, setChatsCollapsibleOpen] = useState(
+    page === "chat"
+  );
   const menuOpen =
     externalDrawerOpen !== undefined ? externalDrawerOpen : internalMenuOpen;
   const setMenuOpen = onDrawerOpenChange || setInternalMenuOpen;
@@ -237,13 +241,18 @@ const Header: React.FC<HeaderProps> = ({
                 Access your chats, profile, sponsorships, help, and other
               </SheetDescription>
               <div className="flex flex-col gap-1 h-full">
-                <div className="h-8" />
+                <div className="h-6" />
                 {/* Custom close button */}
-                <div className="px-3 flex justify-end">
+                <div className="px-3 flex items-center justify-end gap-4">
+                  <div className="flex-1 h-px bg-blue-300/30" />
                   <SheetClose asChild>
-                    <button className="text-accent-amber/70 hover:text-white text-sm font-light transition-colors underline underline-offset-3 decoration-accent-amber/70">
-                      {t("close")}
-                    </button>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className={cn("glass rounded-full cursor-pointer", "scale-120 md:scale-100")}
+                    >
+                      <X className="h-6 w-6" />
+                    </Button>
                   </SheetClose>
                 </div>
 
@@ -251,12 +260,16 @@ const Header: React.FC<HeaderProps> = ({
 
                 {/* Chats collapsible in drawer */}
                 {showChatsDropdown && chats.length > 0 && (
-                  <ChatsCollapsible
-                    chats={chats}
-                    selectedChat={resolvedSelectedChat}
-                    onChatChange={handleChatChange}
-                    defaultOpen={page === "chat"}
-                  />
+                  <>
+                    <ChatsCollapsible
+                      chats={chats}
+                      selectedChat={resolvedSelectedChat}
+                      onChatChange={handleChatChange}
+                      defaultOpen={page === "chat"}
+                      onOpenChange={setChatsCollapsibleOpen}
+                    />
+                    {chatsCollapsibleOpen && <div className="h-2" />}
+                  </>
                 )}
 
                 {/* Navigation items */}
@@ -269,7 +282,7 @@ const Header: React.FC<HeaderProps> = ({
                         "justify-start gap-3 text-base h-12 rounded-xl font-normal",
                         page === "profile"
                           ? "bg-accent/70 cursor-default opacity-100"
-                          : "text-white hover:bg-white/10"
+                          : "text-white hover:bg-white/10 cursor-pointer"
                       )}
                       onClick={handleProfileClick}
                     >
@@ -284,7 +297,7 @@ const Header: React.FC<HeaderProps> = ({
                       "justify-start gap-3 text-base h-12 rounded-xl font-normal",
                       page === "access"
                         ? "bg-accent/70 cursor-default opacity-100"
-                        : "text-white hover:bg-white/10"
+                        : "text-white hover:bg-white/10 cursor-pointer"
                     )}
                     onClick={handleAccessClick}
                   >
@@ -298,7 +311,7 @@ const Header: React.FC<HeaderProps> = ({
                       "justify-start gap-3 text-base h-12 rounded-xl font-normal",
                       page === "intelligence"
                         ? "bg-accent/70 cursor-default opacity-100"
-                        : "text-white hover:bg-white/10"
+                        : "text-white hover:bg-white/10 cursor-pointer"
                     )}
                     onClick={handleIntelligenceClick}
                   >
@@ -313,7 +326,7 @@ const Header: React.FC<HeaderProps> = ({
                         "justify-start gap-3 text-base h-12 rounded-xl font-normal",
                         page === "sponsorships"
                           ? "bg-accent/70 cursor-default opacity-100"
-                          : "text-white hover:bg-white/10"
+                          : "text-white hover:bg-white/10 cursor-pointer"
                       )}
                       onClick={handleSponsorshipsClick}
                     >
@@ -329,7 +342,7 @@ const Header: React.FC<HeaderProps> = ({
                         "justify-start gap-3 text-base h-12 rounded-xl font-normal",
                         page === "features"
                           ? "bg-accent/70 cursor-default opacity-100"
-                          : "text-white hover:bg-white/10"
+                          : "text-white hover:bg-white/10 cursor-pointer"
                       )}
                       onClick={handleHelpClick}
                     >
@@ -400,8 +413,8 @@ const Header: React.FC<HeaderProps> = ({
                     className={cn(
                       "gap-2 text-base w-auto px-4 rounded-full",
                       page === "profile"
-                        ? "glass-active text-accent-amber underline underline-offset-4 decoration-accent-amber"
-                        : "glass"
+                        ? "glass-active text-accent-amber underline underline-offset-4 decoration-accent-amber cursor-default"
+                        : "glass cursor-pointer"
                     )}
                     onClick={handleProfileClick}
                   >
@@ -423,14 +436,14 @@ const Header: React.FC<HeaderProps> = ({
                       <Button
                         variant="outline"
                         size="icon"
-                        className="glass rounded-full"
+                        className="glass rounded-full cursor-pointer"
                       >
                         <MoreHorizontal className="h-5 w-5" />
                       </Button>
                     </SheetTrigger>
                     <SheetContent
                       side="right"
-                      className="w-full! sm:max-w-sm glass-dark-static border-l border-white/20 px-2 [&>button]:hidden"
+                      className="w-full! sm:max-w-sm glass-dark-static border-l border-white/20 px-4 [&>button]:hidden"
                     >
                       <SheetTitle className="sr-only">
                         Navigation Menu
@@ -440,13 +453,18 @@ const Header: React.FC<HeaderProps> = ({
                         sponsorships, help, and other
                       </SheetDescription>
                       <div className="flex flex-col gap-1 h-full">
-                        <div className="h-8" />
+                        <div className="h-6" />
                         {/* Custom close button */}
-                        <div className="px-3 flex justify-end">
+                        <div className="px-1 flex items-center justify-end gap-6">
+                          <div className="flex-1 h-px bg-blue-300/30" />
                           <SheetClose asChild>
-                            <button className="text-accent-amber/70 hover:text-white text-sm font-light transition-colors underline underline-offset-3 decoration-accent-amber/70">
-                              {t("close")}
-                            </button>
+                            <Button
+                              variant="outline"
+                              size="icon"
+                              className={cn("glass rounded-full cursor-pointer", "scale-120 md:scale-100")}
+                            >
+                              <X className="h-6 w-6" />
+                            </Button>
                           </SheetClose>
                         </div>
 
@@ -454,12 +472,16 @@ const Header: React.FC<HeaderProps> = ({
 
                         {/* Chats collapsible in drawer */}
                         {showChatsDropdown && chats.length > 0 && (
-                          <ChatsCollapsible
-                            chats={chats}
-                            selectedChat={resolvedSelectedChat}
-                            onChatChange={handleChatChange}
-                            defaultOpen={page === "chat"}
-                          />
+                          <>
+                            <ChatsCollapsible
+                              chats={chats}
+                              selectedChat={resolvedSelectedChat}
+                              onChatChange={handleChatChange}
+                              defaultOpen={page === "chat"}
+                              onOpenChange={setChatsCollapsibleOpen}
+                            />
+                            {chatsCollapsibleOpen && <div className="h-4" />}
+                          </>
                         )}
 
                         {/* Navigation items */}
@@ -472,7 +494,7 @@ const Header: React.FC<HeaderProps> = ({
                                 "justify-start gap-3 text-base h-12 rounded-xl font-normal",
                                 page === "profile"
                                   ? "bg-accent/70 cursor-default opacity-100"
-                                  : "text-white hover:bg-white/10"
+                                  : "text-white hover:bg-white/10 cursor-pointer"
                               )}
                               onClick={handleProfileClick}
                             >
@@ -487,7 +509,7 @@ const Header: React.FC<HeaderProps> = ({
                               "justify-start gap-3 text-base h-12 rounded-xl font-normal",
                               page === "access"
                                 ? "bg-accent/70 cursor-default opacity-100"
-                                : "text-white hover:bg-white/10"
+                                : "text-white hover:bg-white/10 cursor-pointer"
                             )}
                             onClick={handleAccessClick}
                           >
@@ -501,7 +523,7 @@ const Header: React.FC<HeaderProps> = ({
                               "justify-start gap-3 text-base h-12 rounded-xl font-normal",
                               page === "intelligence"
                                 ? "bg-accent/70 cursor-default opacity-100"
-                                : "text-white hover:bg-white/10"
+                                : "text-white hover:bg-white/10 cursor-pointer"
                             )}
                             onClick={handleIntelligenceClick}
                           >
@@ -516,7 +538,7 @@ const Header: React.FC<HeaderProps> = ({
                                 "justify-start gap-3 text-base h-12 rounded-xl font-normal",
                                 page === "sponsorships"
                                   ? "bg-accent/70 cursor-default opacity-100"
-                                  : "text-white hover:bg-white/10"
+                                  : "text-white hover:bg-white/10 cursor-pointer"
                               )}
                               onClick={handleSponsorshipsClick}
                             >
@@ -532,7 +554,7 @@ const Header: React.FC<HeaderProps> = ({
                                 "justify-start gap-3 text-base h-12 rounded-xl font-normal",
                                 page === "features"
                                   ? "bg-accent/70 cursor-default opacity-100"
-                                  : "text-white hover:bg-white/10"
+                                  : "text-white hover:bg-white/10 cursor-pointer"
                               )}
                               onClick={handleHelpClick}
                             >

@@ -30,11 +30,13 @@ const ChatListItem: React.FC<ChatListItemProps> = ({
         "w-full justify-start gap-3 text-base h-12 rounded-xl px-8 font-normal",
         isSelected
           ? "bg-accent/70 cursor-default opacity-100"
-          : "text-white hover:bg-white/10",
+          : "text-white hover:bg-white/10 cursor-pointer",
         className
       )}
     >
-      <span className="flex-1 truncate text-left min-w-0">{chat.title || t("untitled")}</span>
+      <span className="flex-1 truncate text-left min-w-0">
+        {chat.title || t("untitled")}
+      </span>
       <div className="flex items-center gap-1">
         <Badge
           variant="outline"
