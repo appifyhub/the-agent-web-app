@@ -151,6 +151,20 @@
     "not_configured": "Podesi",
     "select_tool": "Izaberi alat",
     "no_tools_available": "Nema dostupnih alata za ovaj tip",
+    "groups": {
+      "text_intelligence": {
+        "title": "Jezična inteligencija"
+      },
+      "content_analysis": {
+        "title": "Analiza sadržaja"
+      },
+      "image_tools": {
+        "title": "Alati za slike"
+      },
+      "integrations": {
+        "title": "Integracije"
+      }
+    },
     "types": {
       "chat": {
         "title": "Čet",

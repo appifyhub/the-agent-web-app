@@ -151,6 +151,20 @@
     "not_configured": "Configurar",
     "select_tool": "Seleccionar una herramienta",
     "no_tools_available": "No hay herramientas disponibles para este tipo",
+    "groups": {
+      "text_intelligence": {
+        "title": "Inteligencia de Lenguaje"
+      },
+      "content_analysis": {
+        "title": "Análisis de Contenido"
+      },
+      "image_tools": {
+        "title": "Herramientas de Imagen"
+      },
+      "integrations": {
+        "title": "Integraciones"
+      }
+    },
     "types": {
       "chat": {
         "title": "Chat",

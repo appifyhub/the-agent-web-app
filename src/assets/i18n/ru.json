@@ -105,6 +105,20 @@
     "not_configured": "Настроить",
     "select_tool": "Выберите инструмент",
     "no_tools_available": "Нет доступных инструментов для этого типа",
+    "groups": {
+      "text_intelligence": {
+        "title": "Языковая Интеллект"
+      },
+      "content_analysis": {
+        "title": "Анализ Контента"
+      },
+      "image_tools": {
+        "title": "Инструменты Изображений"
+      },
+      "integrations": {
+        "title": "Интеграции"
+      }
+    },
     "types": {
       "chat": {
         "title": "Чат",

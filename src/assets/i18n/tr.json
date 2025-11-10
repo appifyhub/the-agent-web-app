@@ -105,6 +105,20 @@
     "not_configured": "Yapılandır",
     "select_tool": "Bir araç seçin",
     "no_tools_available": "Bu tür için mevcut araç yok",
+    "groups": {
+      "text_intelligence": {
+        "title": "Dil Zekası"
+      },
+      "content_analysis": {
+        "title": "İçerik Analizi"
+      },
+      "image_tools": {
+        "title": "Görüntü Araçları"
+      },
+      "integrations": {
+        "title": "Entegrasyonlar"
+      }
+    },
     "types": {
       "chat": {
         "title": "Sohbet",

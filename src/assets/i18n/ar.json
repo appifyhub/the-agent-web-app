@@ -105,6 +105,20 @@
     "not_configured": "كوِّن",
     "select_tool": "اختر أداة",
     "no_tools_available": "لا توجد أدوات متاحة لهذا النوع",
+    "groups": {
+      "text_intelligence": {
+        "title": "ذكاء اللغة"
+      },
+      "content_analysis": {
+        "title": "تحليل المحتوى"
+      },
+      "image_tools": {
+        "title": "أدوات الصور"
+      },
+      "integrations": {
+        "title": "التكاملات"
+      }
+    },
     "types": {
       "chat": {
         "title": "محادثة",

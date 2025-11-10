@@ -95,6 +95,20 @@
     "not_configured": "Configure",
     "select_tool": "Select a tool",
     "no_tools_available": "No tools available for this type",
+    "groups": {
+      "text_intelligence": {
+        "title": "Language Intelligence"
+      },
+      "content_analysis": {
+        "title": "Content Analysis"
+      },
+      "image_tools": {
+        "title": "Image Tools"
+      },
+      "integrations": {
+        "title": "Integrations"
+      }
+    },
     "types": {
       "chat": {
         "title": "Chat",

@@ -151,6 +151,20 @@
     "not_configured": "配置",
     "select_tool": "选择工具",
     "no_tools_available": "此类型没有可用工具",
+    "groups": {
+      "text_intelligence": {
+        "title": "语言智能"
+      },
+      "content_analysis": {
+        "title": "内容分析"
+      },
+      "image_tools": {
+        "title": "图像工具"
+      },
+      "integrations": {
+        "title": "集成"
+      }
+    },
     "types": {
       "chat": {
         "title": "聊天",

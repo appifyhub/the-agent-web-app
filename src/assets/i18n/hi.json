@@ -105,6 +105,20 @@
     "not_configured": "कॉन्फ़िगर करें",
     "select_tool": "एक उपकरण चुनें",
     "no_tools_available": "इस प्रकार के लिए कोई उपकरण उपलब्ध नहीं",
+    "groups": {
+      "text_intelligence": {
+        "title": "भाषा बुद्धिमत्ता"
+      },
+      "content_analysis": {
+        "title": "सामग्री विश्लेषण"
+      },
+      "image_tools": {
+        "title": "छवि उपकरण"
+      },
+      "integrations": {
+        "title": "एकीकरण"
+      }
+    },
     "types": {
       "chat": {
         "title": "चैट",
