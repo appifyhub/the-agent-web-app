@@ -37,6 +37,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { DEFAULT_LANGUAGE, INTERFACE_LANGUAGES } from "@/lib/languages";
+import { fetchExternalTools } from "@/services/external-tools-service";
 
 const SponsorshipsPage: React.FC = () => {
   const { user_id, lang_iso_code } = useParams<{
@@ -55,6 +56,8 @@ const SponsorshipsPage: React.FC = () => {
   const [selectedPlatform, setSelectedPlatform] = useState<Platform>(
     Platform.TELEGRAM
   );
+  const [hasApiKeysConfigured, setHasApiKeysConfigured] =
+    useState<boolean>(false);
 
   const sortSponsorships = (
     sponsorships: SponsorshipResponse[]
@@ -81,7 +84,7 @@ const SponsorshipsPage: React.FC = () => {
     });
   };
 
-  // Fetch sponsorships when session is ready
+  // Fetch sponsorships and external tools when session is ready
   useEffect(() => {
     if (!accessToken || !user_id || error?.isBlocker) return;
 
@@ -90,14 +93,28 @@ const SponsorshipsPage: React.FC = () => {
       setError(null);
       try {
         const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
-        const sponsorshipsData = await fetchUserSponsorships({
-          apiBaseUrl,
-          resource_id: user_id,
-          rawToken: accessToken.raw,
-        });
+        const [sponsorshipsData, externalTools] = await Promise.all([
+          fetchUserSponsorships({
+            apiBaseUrl,
+            resource_id: user_id,
+            rawToken: accessToken.raw,
+          }),
+          fetchExternalTools({
+            apiBaseUrl,
+            user_id,
+            rawToken: accessToken.raw,
+          }),
+        ]);
         console.info("Fetched sponsorships!", sponsorshipsData);
+        console.info("Fetched external tools!", externalTools);
         setSponsorships(sortSponsorships(sponsorshipsData.sponsorships));
         setMaxSponsorships(sponsorshipsData.max_sponsorships);
+
+        // Check if any provider has API keys configured
+        const hasConfiguredProviders = externalTools.providers.some(
+          (provider) => provider.is_configured
+        );
+        setHasApiKeysConfigured(hasConfiguredProviders);
       } catch (err) {
         console.error("Error fetching data!", err);
         setError(PageError.blocker("errors.fetch_failed"));
@@ -283,6 +300,14 @@ const SponsorshipsPage: React.FC = () => {
   };
 
   const isActionDisabled = () => {
+    // Disable if no API keys configured (only when trying to sponsor, not when unlinking)
+    if (
+      !accessToken?.decoded?.sponsored_by &&
+      !isEditing &&
+      !hasApiKeysConfigured
+    ) {
+      return true;
+    }
     if (
       !accessToken?.decoded?.sponsored_by &&
       !isEditing &&
@@ -303,6 +328,20 @@ const SponsorshipsPage: React.FC = () => {
   const shouldShowCancelButton =
     isEditing && !accessToken?.decoded?.sponsored_by;
 
+  // Get platform-specific placeholder
+  const getPlatformPlaceholder = (): string => {
+    if (error?.isBlocker) return "—";
+
+    switch (selectedPlatform) {
+      case Platform.TELEGRAM:
+        return t("sponsorship.platform_handle_placeholder_telegram");
+      case Platform.WHATSAPP:
+        return t("sponsorship.platform_handle_placeholder_whatsapp");
+      default:
+        return t("sponsorship.platform_handle_placeholder");
+    }
+  };
+
   return (
     <BaseSettingsPage
       page="sponsorships"
@@ -322,7 +361,7 @@ const SponsorshipsPage: React.FC = () => {
           {/* Sponsored user message */}
           <div className="flex flex-col items-center space-y-10 text-center mt-12">
             <Link className="h-12 w-12 text-accent-amber" />
-            <p className="text-foreground/80 font-light max-w-md">
+            <p className="text-[1.05rem] font-light text-justify md:text-left [hyphens:auto] opacity-80">
               {t("sponsorship.unlink_message", {
                 sponsorName: accessToken.decoded.sponsored_by,
               })}
@@ -349,11 +388,7 @@ const SponsorshipsPage: React.FC = () => {
               <Input
                 id="platform-handle"
                 className="py-6 px-6 w-full sm:w-sm text-[1.05rem] glass rounded-xl"
-                placeholder={
-                  error?.isBlocker
-                    ? "—"
-                    : t("sponsorship.platform_handle_placeholder")
-                }
+                placeholder={getPlatformPlaceholder()}
                 disabled={!!error?.isBlocker}
                 value={platformHandle}
                 onChange={(e) => setPlatformHandle(e.target.value)}
@@ -378,7 +413,9 @@ const SponsorshipsPage: React.FC = () => {
               <div className="flex flex-col items-center space-y-10 text-center mt-12">
                 <UsersRound className="h-12 w-12 text-accent-amber" />
                 <p className="text-foreground/80 font-light">
-                  {t("sponsorship.no_sponsorships_found")}
+                  {!hasApiKeysConfigured
+                    ? t("sponsorship.configure_ai_access_first")
+                    : t("sponsorship.no_sponsorships_found")}
                 </p>
               </div>
             ) : (
