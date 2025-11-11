@@ -31,12 +31,15 @@
   "always": "Всегда",
   "reply_frequency": "{percent}% времени",
   "sponsorship": {
-    "users_you_sponsor": "Пользователи, которых вы спонсируете:",
+    "users_you_sponsor": "Пользователи, которых вы спонсируете",
     "no_sponsorships_found": "Спонсорство не найдено",
+    "configure_ai_access_first": "Вы должны сначала настроить доступ к ИИ, прежде чем сможете спонсировать других пользователей и профили.",
     "incognito": "Инкогнито",
     "add_sponsorship": "Спонсировать",
     "platform_handle_label": "Имя пользователя или телефон для спонсирования",
     "platform_handle_placeholder": "@пользователь или +00-телефон",
+    "platform_handle_placeholder_telegram": "@имя_пользователя",
+    "platform_handle_placeholder_whatsapp": "+71234567890",
     "you_are_sponsored": "Вы спонсируемый пользователь!",
     "unlink_message": "Теперь вы можете стать автономным пользователем. Это разрывает связь между вами и {sponsorName}, и ИИ перестанет работать, пока вы не настроите свой профиль.",
     "unlink": "Отвязать"

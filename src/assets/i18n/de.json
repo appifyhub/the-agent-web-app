@@ -31,12 +31,15 @@
   "always": "Immer",
   "reply_frequency": "{percent}% der Zeit",
   "sponsorship": {
-    "users_you_sponsor": "Benutzer, die Sie sponsern:",
+    "users_you_sponsor": "Benutzer, die Sie sponsern",
     "no_sponsorships_found": "Keine Sponsorings gefunden",
+    "configure_ai_access_first": "Sie müssen zuerst den KI-Zugang konfigurieren, bevor Sie andere Benutzer und Profile sponsern können.",
     "incognito": "Inkognito",
     "add_sponsorship": "Sponsern",
     "platform_handle_label": "Benutzername oder Telefon des Benutzers, den Sie sponsern möchten",
     "platform_handle_placeholder": "@benutzername oder +00-telefon",
+    "platform_handle_placeholder_telegram": "@benutzername",
+    "platform_handle_placeholder_whatsapp": "+491234567890",
     "you_are_sponsored": "Sie sind ein gesponserter Benutzer!",
     "unlink_message": "Sie können jetzt ein autonomer Benutzer werden. Dies bricht die Verbindung zwischen Ihnen und {sponsorName} und die KI wird nicht mehr funktionieren, bis Sie Ihr Profil konfigurieren.",
     "unlink": "Verknüpfung aufheben"

@@ -31,12 +31,15 @@
   "always": "Uvek",
   "reply_frequency": "{percent}% vremena",
   "sponsorship": {
-    "users_you_sponsor": "Korisnici koje sponzorišem:",
+    "users_you_sponsor": "Korisnici koje sponzorišem",
     "no_sponsorships_found": "Nisu pronađena sponzorstva",
+    "configure_ai_access_first": "Morate prvo da konfigurišete AI pristup, pre nego što možete da sponzorišete druge korisnike i profile.",
     "incognito": "Inkognito",
     "add_sponsorship": "Sponzoriši",
     "platform_handle_label": "Korisničko ime ili telefon korisnika koga želite da sponzorišete",
     "platform_handle_placeholder": "@korisnik ili +00-telefon",
+    "platform_handle_placeholder_telegram": "@korisničko_ime",
+    "platform_handle_placeholder_whatsapp": "+3811234567890",
     "you_are_sponsored": "Vi ste sponzorisani korisnik!",
     "unlink_message": "Sada možete postati autonomni korisnik. Ovo prekida vezu između vas i {sponsorName}. AI će prestati da radi dok ne podesite svoj Profil.",
     "unlink": "Prekini vezu"

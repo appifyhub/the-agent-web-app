@@ -31,12 +31,15 @@
   "always": "Toujours",
   "reply_frequency": "{percent}% du temps",
   "sponsorship": {
-    "users_you_sponsor": "Utilisateurs que vous parrainez :",
+    "users_you_sponsor": "Utilisateurs que vous parrainez",
     "no_sponsorships_found": "Aucun parrainage trouvé",
+    "configure_ai_access_first": "Vous devez d'abord configurer l'accès à l'IA, avant de pouvoir parrainer d'autres utilisateurs et profils.",
     "incognito": "Incognito",
     "add_sponsorship": "Parrainer",
     "platform_handle_label": "Nom d'utilisateur ou téléphone de l'utilisateur que vous voulez parrainer",
     "platform_handle_placeholder": "@utilisateur ou +00-téléphone",
+    "platform_handle_placeholder_telegram": "@nom_utilisateur",
+    "platform_handle_placeholder_whatsapp": "+331234567890",
     "you_are_sponsored": "Vous êtes un utilisateur parrainé !",
     "unlink_message": "Vous pouvez maintenant devenir un utilisateur autonome. Cela rompt le lien entre vous et {sponsorName} et l'IA cessera de fonctionner jusqu'à ce que vous configuriez votre Profil.",
     "unlink": "Délier"

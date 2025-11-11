@@ -31,12 +31,15 @@
   "always": "Siempre",
   "reply_frequency": "{percent}% del tiempo",
   "sponsorship": {
-    "users_you_sponsor": "Usuarios que patrocinas:",
+    "users_you_sponsor": "Usuarios que patrocinas",
     "no_sponsorships_found": "No se encontraron patrocinios",
+    "configure_ai_access_first": "Debe configurar primero el acceso a la IA, antes de poder patrocinar a otros usuarios y perfiles.",
     "incognito": "Incógnito",
     "add_sponsorship": "Patrocinar",
     "platform_handle_label": "Nombre de usuario o teléfono del usuario que quieres patrocinar",
     "platform_handle_placeholder": "@usuario o +00-teléfono",
+    "platform_handle_placeholder_telegram": "@nombre_usuario",
+    "platform_handle_placeholder_whatsapp": "+341234567890",
     "you_are_sponsored": "¡Eres un usuario patrocinado!",
     "unlink_message": "Ahora puedes convertirte en un usuario autónomo. Esto rompe el vínculo entre tú y {sponsorName} y la IA dejará de funcionar hasta que configures tu Perfil.",
     "unlink": "Desvincular"

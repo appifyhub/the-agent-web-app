@@ -31,12 +31,15 @@
   "always": "总是",
   "reply_frequency": "{percent}% 的时间",
   "sponsorship": {
-    "users_you_sponsor": "您赞助的用户：",
+    "users_you_sponsor": "您赞助的用户",
     "no_sponsorships_found": "未找到赞助",
+    "configure_ai_access_first": "在您可以赞助其他用户和资料之前，必须先配置AI访问权限。",
     "incognito": "匿名",
     "add_sponsorship": "赞助",
     "platform_handle_label": "您想要赞助的用户的用户名或电话",
     "platform_handle_placeholder": "@用户名 或 +00-电话",
+    "platform_handle_placeholder_telegram": "@用户名",
+    "platform_handle_placeholder_whatsapp": "+861234567890",
     "you_are_sponsored": "您是被赞助的用户！",
     "unlink_message": "您现在可以成为自主用户。这将断开您与{sponsorName}之间的链接, AI将停止工作, 直到您配置您的个人资料。",
     "unlink": "取消链接"

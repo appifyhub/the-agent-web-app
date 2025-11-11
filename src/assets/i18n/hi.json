@@ -31,12 +31,15 @@
   "always": "हमेशा",
   "reply_frequency": "{percent}% समय",
   "sponsorship": {
-    "users_you_sponsor": "आपके द्वारा प्रायोजित उपयोगकर्ता:",
+    "users_you_sponsor": "आपके द्वारा प्रायोजित उपयोगकर्ता",
     "no_sponsorships_found": "कोई प्रायोजन नहीं मिला",
+    "configure_ai_access_first": "आपको पहले AI एक्सेस कॉन्फ़िगर करना होगा, इससे पहले कि आप अन्य उपयोगकर्ताओं और प्रोफाइल को प्रायोजित कर सकें।",
     "incognito": "गुप्त",
     "add_sponsorship": "प्रायोजन",
     "platform_handle_label": "उस उपयोगकर्ता का उपयोगकर्ता नाम या फोन जिसे आप प्रायोजित करना चाहते हैं",
     "platform_handle_placeholder": "@उपयोगकर्ता या +00-फोन",
+    "platform_handle_placeholder_telegram": "@उपयोगकर्ता_नाम",
+    "platform_handle_placeholder_whatsapp": "+911234567890",
     "you_are_sponsored": "आप एक प्रायोजित उपयोगकर्ता हैं!",
     "unlink_message": "अब आप एक स्वायत्त उपयोगकर्ता बन सकते हैं। यह आपके और {sponsorName} के बीच की कड़ी तोड़ देता है और जब तक आप अपनी प्रोफाइल कॉन्फ़िगर नहीं करते तब तक AI काम करना बंद कर देगा।",
     "unlink": "लिंक हटाएं"

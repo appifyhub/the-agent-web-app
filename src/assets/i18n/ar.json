@@ -31,12 +31,15 @@
   "always": "دائمًا",
   "reply_frequency": "{percent}% من الوقت",
   "sponsorship": {
-    "users_you_sponsor": "المستخدمون الذين ترعاهم:",
+    "users_you_sponsor": "المستخدمون الذين ترعاهم",
     "no_sponsorships_found": "لم يتم العثور على رعايات",
+    "configure_ai_access_first": "يجب عليك أولاً تكوين وصول الذكاء الاصطناعي، قبل أن تتمكن من رعاية المستخدمين والملفات الشخصية الأخرى.",
     "incognito": "مجهول",
     "add_sponsorship": "رعاية",
     "platform_handle_label": "اسم المستخدم أو الهاتف للمستخدم الذي تريد رعايته",
     "platform_handle_placeholder": "@اسم_المستخدم أو +00-هاتف",
+    "platform_handle_placeholder_telegram": "@اسم_المستخدم",
+    "platform_handle_placeholder_whatsapp": "+9661234567890",
     "you_are_sponsored": "أنت مستخدم مُرعى!",
     "unlink_message": "يمكنك الآن أن تصبح مستخدماً مستقلاً. هذا يقطع الرابط بينك وبين {sponsorName} وسيتوقف الذكاء الاصطناعي عن العمل حتى تقوم بتكوين ملفك الشخصي.",
     "unlink": "إلغاء الربط"
