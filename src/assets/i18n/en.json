@@ -5,11 +5,18 @@
   "close": "Close",
   "help": "Help",
   "configure_title": "Configure {botName}'s Behavior",
-  "configure_keys_title": "Boost {botName}'s Intelligence",
+  "intelligence_card_title": "Boost {botName}'s Intelligence",
+  "access": "Access",
+  "intelligence": "Intelligence",
+  "access_card_title": "Make {botName} independent",
+  "profile_card_title": "Customize {botName}",
+  "profile_full_name_label": "{botName} knows me as:",
+  "profile_full_name_placeholder": "Your display name",
   "preferred_language_label": "{botName} tries to reply using:",
   "preferred_language_placeholder": "Select a language",
   "your_chats": "Configure chats",
   "loading_placeholder": "Loading…",
+  "untitled": "Untitled",
   "notifications": {
     "releases_label": "{botName} should notify me of releases:",
     "releases_placeholder": "Select a level",
@@ -24,12 +31,15 @@
   "always": "Always",
   "reply_frequency": "{percent}% of the time",
   "sponsorship": {
-    "users_you_sponsor": "Users you are sponsoring:",
+    "users_you_sponsor": "Users I am sponsoring",
     "no_sponsorships_found": "No sponsorships found",
+    "configure_ai_access_first": "You must configure AI access first, before you can sponsor other users and profiles.",
     "incognito": "Incognito",
     "add_sponsorship": "Sponsor",
     "platform_handle_label": "Username or phone of the user you want to sponsor",
     "platform_handle_placeholder": "@username or +00-phone",
+    "platform_handle_placeholder_telegram": "@username",
+    "platform_handle_placeholder_whatsapp": "+441234567890",
     "you_are_sponsored": "You are a sponsored user!",
     "unlink_message": "You can now become an autonomous user. This breaks the link between you and {sponsorName} and AI will stop working until you configure your Profile.",
     "unlink": "Unlink"
@@ -37,6 +47,36 @@
   "save": "Save",
   "saved": "Saved!",
   "copied": "Copied!",
+  "connections": {
+    "page_title": "Connections",
+    "card_title": "Connect Profiles",
+    "show_my_key": "Show my Connect Key",
+    "hide_my_key": "Hide my Connect Key",
+    "copy_key": "Copy",
+    "regenerate_key": "Regenerate",
+    "share_key": "Share",
+    "share_not_supported": "Share is not supported on this device",
+    "share_failed": "Failed to share",
+    "connect_to_another_label": "Connect to Another Profile",
+    "paste_key": "Paste",
+    "clear_key": "Clear",
+    "paste_permission_denied": "Please allow clipboard access when prompted by Safari",
+    "paste_chrome_permission": "Please allow clipboard access in Chrome: Settings > Privacy and Security > Site Settings > Clipboard",
+    "paste_failed": "Failed to paste",
+    "connect_button": "Connect",
+    "connecting": "Connecting...",
+    "main_info": "You can connect this profile to another profile if you have that profile's Connect Key. For example, this can be used to merge your WhatsApp and Telegram profiles. Each profile's Connect Key is unique and secret! To get the Connect Key from another profile, you must open this same page using that profile's chat with {botName}. Connecting the two profiles merges them into a single profile.",
+    "my_key_info": "This is your Connect Key. Do not share your Connect Key with anyone other than your other profiles!",
+    "command_info": "You can also directly send this key to {botName} in one of the supported platforms, using a Connect command. This will automatically connect this profile with the profile you send it to:",
+    "chat_command_info": "Alternatively, you can ask {botName} to connect to another profile using chat:",
+    "chat_command_example": "Please connect me to this profile: {connectKey}.",
+    "cannot_connect_to_self": "You cannot connect this profile to itself. To make connections, you must go to the other profile's Connections settings and take the key from there!",
+    "invalid_format": "Invalid format. Connect key must be in the correct format.",
+    "connect_success": "Profiles connected successfully!",
+    "regenerate_success": "Connect key regenerated successfully!",
+    "copy_failed": "Failed to copy",
+    "generic_error": "An error occurred"
+  },
   "token_info": {
     "profile_id": "Profile ID",
     "platform": "Platform",
@@ -53,13 +93,25 @@
   },
   "provider_needed_for": "{botName} needs this for: {tools}",
   "where_is_my_key": "Where is my {providerName} key?",
+  "configure_intelligence": "Configure intelligence",
   "tools": {
-    "show_options": "Show advanced options",
-    "hide_options": "Hide advanced options",
-    "title": "Advanced options",
     "not_configured": "Configure",
     "select_tool": "Select a tool",
     "no_tools_available": "No tools available for this type",
+    "groups": {
+      "text_intelligence": {
+        "title": "Language Intelligence"
+      },
+      "content_analysis": {
+        "title": "Content Analysis"
+      },
+      "image_tools": {
+        "title": "Image Tools"
+      },
+      "integrations": {
+        "title": "Integrations"
+      }
+    },
     "types": {
       "chat": {
         "title": "Chat",
@@ -128,7 +180,6 @@
     "expired": "Your session has expired.",
     "not_found": "Your session is not found.",
     "not_valid": "Your session is not valid.",
-    "misconfigured": "Your session is misconfigured.",
     "fetch_failed": "Failed to load the settings.",
     "save_failed": "Failed to save settings.",
     "check_link": "Check your access link and try again.",

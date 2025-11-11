@@ -5,11 +5,18 @@
   "close": "Kapat",
   "help": "Yardım",
   "configure_title": "{botName}'ın Davranışını Yapılandır",
-  "configure_keys_title": "{botName}'ın Zekasını Güçlendir",
+  "intelligence_card_title": "{botName}'ın Zekasını Güçlendir",
+  "access": "Erişim",
+  "intelligence": "Zeka",
+  "access_card_title": "{botName}'ı bağımsız yapın",
+  "profile_card_title": "{botName}'ı Özelleştir",
+  "profile_full_name_label": "{botName} beni şöyle tanıyor:",
+  "profile_full_name_placeholder": "Görünen adınız",
   "preferred_language_label": "{botName} şu dilde yanıt vermeye çalışır:",
   "preferred_language_placeholder": "Bir dil seçin",
   "your_chats": "Sohbetleri yapılandır",
   "loading_placeholder": "Yükleniyor…",
+  "untitled": "Başlıksız",
   "notifications": {
     "releases_label": "{botName} beni sürümlerden haberdar etsin:",
     "releases_placeholder": "Bir seviye seçin",
@@ -24,12 +31,15 @@
   "always": "Her zaman",
   "reply_frequency": "Zamanın %{percent}'i",
   "sponsorship": {
-    "users_you_sponsor": "Sponsor olduğunuz kullanıcılar:",
+    "users_you_sponsor": "Sponsor olduğunuz kullanıcılar",
     "no_sponsorships_found": "Sponsorluk bulunamadı",
+    "configure_ai_access_first": "Diğer kullanıcıları ve profilleri sponsor edebilmeniz için önce AI erişimini yapılandırmanız gerekir.",
     "incognito": "Gizli",
     "add_sponsorship": "Sponsor Ol",
     "platform_handle_label": "Sponsor olmak istediğiniz kullanıcının kullanıcı adı veya telefonu",
     "platform_handle_placeholder": "@kullanıcı veya +00-telefon",
+    "platform_handle_placeholder_telegram": "@kullanıcı_adı",
+    "platform_handle_placeholder_whatsapp": "+901234567890",
     "you_are_sponsored": "Sponsorlu bir kullanıcısınız!",
     "unlink_message": "Artık bağımsız bir kullanıcı olabilirsiniz. Bu, siz ve {sponsorName} arasındaki bağlantıyı koparır ve Profilinizi yapılandırana kadar AI çalışmayı durdurur.",
     "unlink": "Bağlantıyı Kes"
@@ -37,6 +47,36 @@
   "save": "Kaydet",
   "saved": "Kaydedildi!",
   "copied": "Kopyalandı!",
+  "connections": {
+    "page_title": "Bağlantılar",
+    "card_title": "Profilleri Bağla",
+    "show_my_key": "Bağlantı Anahtarımı Göster",
+    "hide_my_key": "Bağlantı Anahtarımı Gizle",
+    "copy_key": "Kopyala",
+    "regenerate_key": "Yeniden Oluştur",
+    "share_key": "Paylaş",
+    "share_not_supported": "Bu cihazda paylaşım desteklenmiyor",
+    "share_failed": "Paylaşım başarısız",
+    "connect_to_another_label": "Başka Bir Profile Bağlan",
+    "paste_key": "Yapıştır",
+    "clear_key": "Temizle",
+    "paste_permission_denied": "Lütfen Safari istediğinde panoya erişime izin verin",
+    "paste_chrome_permission": "Lütfen Chrome'da panoya erişime izin verin: Ayarlar > Gizlilik ve güvenlik > Site ayarları > Pano",
+    "paste_failed": "Yapıştırma başarısız",
+    "connect_button": "Bağlan",
+    "connecting": "Bağlanıyor...",
+    "main_info": "O profilin Bağlantı Anahtarına sahipseniz, bu profili başka bir profile bağlayabilirsiniz. Örneğin, bu WhatsApp ve Telegram profillerinizi birleştirmek için kullanılabilir. Her profilin Bağlantı Anahtarı benzersiz ve gizlidir! Başka bir profilden Bağlantı Anahtarını almak için, o profilin {botName} ile sohbetini kullanarak bu aynı sayfayı açmalısınız. İki profili bağlamak onları tek bir profile birleştirir.",
+    "my_key_info": "Bu sizin Bağlantı Anahtarınızdır. Bağlantı Anahtarınızı diğer profilleriniz dışında kimseyle paylaşmayın!",
+    "command_info": "Ayrıca bu anahtarı doğrudan desteklenen platformlardan birinde {botName}'e bir Bağlantı komutu kullanarak gönderebilirsiniz. Bu, bu profili gönderdiğiniz profile otomatik olarak bağlayacaktır:",
+    "chat_command_info": "Alternatif olarak, {botName}'den sohbet kullanarak başka bir profile bağlanmasını isteyebilirsiniz:",
+    "chat_command_example": "Lütfen beni bu profile bağlayın: {connectKey}.",
+    "cannot_connect_to_self": "Bu profili kendisine bağlayamazsınız. Bağlantı yapmak için diğer profilin Bağlantılar ayarlarına gitmeli ve anahtarı oradan almalısınız!",
+    "invalid_format": "Geçersiz format. Bağlantı anahtarı doğru formatta olmalıdır.",
+    "connect_success": "Profiller başarıyla bağlandı!",
+    "regenerate_success": "Bağlantı anahtarı başarıyla yeniden oluşturuldu!",
+    "copy_failed": "Kopyalama başarısız",
+    "generic_error": "Bir hata oluştu"
+  },
   "token_info": {
     "profile_id": "Profil ID",
     "platform": "Platform",
@@ -53,24 +93,35 @@
   },
   "provider_needed_for": "{botName} bunu {tools} için gerektirir",
   "where_is_my_key": "{providerName} anahtarım nerede?",
+  "configure_intelligence": "Zeka yapılandır",
   "errors": {
     "oh_no": "Ah hayır!",
     "expired": "Oturumunuzun süresi doldu.",
     "not_found": "Oturumunuz bulunamadı.",
     "not_valid": "Oturumunuz geçerli değil.",
-    "misconfigured": "Oturumunuz yanlış yapılandırılmış.",
     "fetch_failed": "Ayarlar yüklenemedi.",
     "save_failed": "Ayarlar kaydedilemedi.",
     "check_link": "Erişim bağlantınızı kontrol edin ve tekrar deneyin.",
     "sponsored_user": "Kullanımınız {sponsorName} tarafından sponsorlanıyor. Bağımsız bir kullanıcı olmak için {sponsorshipsLink} sayfasına gidin."
   },
   "tools": {
-    "show_options": "Gelişmiş seçenekleri göster",
-    "hide_options": "Gelişmiş seçenekleri gizle",
-    "title": "Gelişmiş seçenekler",
     "not_configured": "Yapılandır",
     "select_tool": "Bir araç seçin",
     "no_tools_available": "Bu tür için mevcut araç yok",
+    "groups": {
+      "text_intelligence": {
+        "title": "Dil Zekası"
+      },
+      "content_analysis": {
+        "title": "İçerik Analizi"
+      },
+      "image_tools": {
+        "title": "Görüntü Araçları"
+      },
+      "integrations": {
+        "title": "Entegrasyonlar"
+      }
+    },
     "types": {
       "chat": {
         "title": "Sohbet",

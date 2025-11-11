@@ -5,11 +5,18 @@
   "close": "إغلاق",
   "help": "مساعدة",
   "configure_title": "تكوين سلوك {botName}",
-  "configure_keys_title": "تعزيز ذكاء {botName}",
+  "intelligence_card_title": "تعزيز ذكاء {botName}",
+  "access": "الوصول",
+  "intelligence": "الذكاء",
+  "access_card_title": "اجعل {botName} مستقلاً",
+  "profile_card_title": "تخصيص {botName}",
+  "profile_full_name_label": "{botName} يعرفني كـ:",
+  "profile_full_name_placeholder": "اسم العرض الخاص بك",
   "preferred_language_label": "يحاول {botName} الرد باستخدام:",
   "preferred_language_placeholder": "اختر لغة",
   "your_chats": "إعداد المحادثات",
   "loading_placeholder": "جاري التحميل…",
+  "untitled": "بدون عنوان",
   "notifications": {
     "releases_label": "يجب أن يُخطِرني {botName} بالإصدارات:",
     "releases_placeholder": "اختر مستوى",
@@ -24,12 +31,15 @@
   "always": "دائمًا",
   "reply_frequency": "{percent}% من الوقت",
   "sponsorship": {
-    "users_you_sponsor": "المستخدمون الذين ترعاهم:",
+    "users_you_sponsor": "المستخدمون الذين ترعاهم",
     "no_sponsorships_found": "لم يتم العثور على رعايات",
+    "configure_ai_access_first": "يجب عليك أولاً تكوين وصول الذكاء الاصطناعي، قبل أن تتمكن من رعاية المستخدمين والملفات الشخصية الأخرى.",
     "incognito": "مجهول",
     "add_sponsorship": "رعاية",
     "platform_handle_label": "اسم المستخدم أو الهاتف للمستخدم الذي تريد رعايته",
     "platform_handle_placeholder": "@اسم_المستخدم أو +00-هاتف",
+    "platform_handle_placeholder_telegram": "@اسم_المستخدم",
+    "platform_handle_placeholder_whatsapp": "+9661234567890",
     "you_are_sponsored": "أنت مستخدم مُرعى!",
     "unlink_message": "يمكنك الآن أن تصبح مستخدماً مستقلاً. هذا يقطع الرابط بينك وبين {sponsorName} وسيتوقف الذكاء الاصطناعي عن العمل حتى تقوم بتكوين ملفك الشخصي.",
     "unlink": "إلغاء الربط"
@@ -37,6 +47,36 @@
   "save": "حفظ",
   "saved": "تم الحفظ!",
   "copied": "تم النسخ!",
+  "connections": {
+    "page_title": "الاتصالات",
+    "card_title": "ربط الملفات الشخصية",
+    "show_my_key": "إظهار مفتاح الاتصال الخاص بي",
+    "hide_my_key": "إخفاء مفتاح الاتصال الخاص بي",
+    "copy_key": "نسخ",
+    "regenerate_key": "إعادة إنشاء",
+    "share_key": "مشاركة",
+    "share_not_supported": "المشاركة غير مدعومة على هذا الجهاز",
+    "share_failed": "فشلت المشاركة",
+    "connect_to_another_label": "الاتصال بملف شخصي آخر",
+    "paste_key": "لصق",
+    "clear_key": "مسح",
+    "paste_permission_denied": "يرجى السماح بالوصول إلى الحافظة عند المطالبة من Safari",
+    "paste_chrome_permission": "يرجى السماح بالوصول إلى الحافظة في Chrome: الإعدادات > الخصوصية والأمان > إعدادات الموقع > الحافظة",
+    "paste_failed": "فشل اللصق",
+    "connect_button": "اتصال",
+    "connecting": "جاري الاتصال...",
+    "main_info": "يمكنك ربط هذا الملف الشخصي بملف شخصي آخر إذا كان لديك مفتاح الاتصال لذلك الملف الشخصي. على سبيل المثال، يمكن استخدام هذا لدمج ملفاتك الشخصية في WhatsApp و Telegram. مفتاح الاتصال لكل ملف شخصي فريد وسري! للحصول على مفتاح الاتصال من ملف شخصي آخر، يجب عليك فتح هذه الصفحة نفسها باستخدام محادثة ذلك الملف الشخصي مع {botName}. ربط الملفين الشخصيين يدمجهما في ملف شخصي واحد.",
+    "my_key_info": "هذا هو مفتاح الاتصال الخاص بك. لا تشارك مفتاح الاتصال الخاص بك مع أي شخص بخلاف ملفاتك الشخصية الأخرى!",
+    "command_info": "يمكنك أيضًا إرسال هذا المفتاح مباشرة إلى {botName} في إحدى المنصات المدعومة، باستخدام أمر الاتصال. سيؤدي هذا تلقائيًا إلى ربط هذا الملف الشخصي بالملف الشخصي الذي ترسله إليه:",
+    "chat_command_info": "بدلاً من ذلك، يمكنك أن تطلب من {botName} الاتصال بملف شخصي آخر باستخدام الدردشة:",
+    "chat_command_example": "يرجى ربطي بهذا الملف الشخصي: {connectKey}.",
+    "cannot_connect_to_self": "لا يمكنك ربط هذا الملف الشخصي بنفسه. لإجراء الاتصالات، يجب عليك الانتقال إلى إعدادات الاتصالات للملف الشخصي الآخر وأخذ المفتاح من هناك!",
+    "invalid_format": "تنسيق غير صالح. يجب أن يكون مفتاح الاتصال بالتنسيق الصحيح.",
+    "connect_success": "تم ربط الملفات الشخصية بنجاح!",
+    "regenerate_success": "تم إعادة إنشاء مفتاح الاتصال بنجاح!",
+    "copy_failed": "فشل النسخ",
+    "generic_error": "حدث خطأ"
+  },
   "token_info": {
     "profile_id": "الملف الشخصي ID",
     "platform": "المنصة",
@@ -53,24 +93,35 @@
   },
   "provider_needed_for": "يحتاج {botName} هذا من أجل {tools}",
   "where_is_my_key": "أين يوجد مفتاح {providerName} الخاص بي؟",
+  "configure_intelligence": "تكوين الذكاء",
   "errors": {
     "oh_no": "أوه لا!",
     "expired": "انتهت صلاحية جلستك.",
     "not_found": "لم يتم العثور على جلستك.",
     "not_valid": "جلستك غير صالحة.",
-    "misconfigured": "تم تكوين جلستك بشكل غير صحيح.",
     "fetch_failed": "فشل في تحميل الإعدادات.",
     "save_failed": "فشل في حفظ الإعدادات.",
     "check_link": "تحقق من رابط الوصول الخاص بك وحاول مرة أخرى.",
     "sponsored_user": "استخدامك مرعى من قبل {sponsorName}. لتصبح مستخدماً مستقلاً، اذهب إلى {sponsorshipsLink}."
   },
   "tools": {
-    "show_options": "إظهار الخيارات المتقدمة",
-    "hide_options": "إخفاء الخيارات المتقدمة",
-    "title": "خيارات متقدمة",
     "not_configured": "كوِّن",
     "select_tool": "اختر أداة",
     "no_tools_available": "لا توجد أدوات متاحة لهذا النوع",
+    "groups": {
+      "text_intelligence": {
+        "title": "ذكاء اللغة"
+      },
+      "content_analysis": {
+        "title": "تحليل المحتوى"
+      },
+      "image_tools": {
+        "title": "أدوات الصور"
+      },
+      "integrations": {
+        "title": "التكاملات"
+      }
+    },
     "types": {
       "chat": {
         "title": "محادثة",

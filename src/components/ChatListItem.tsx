@@ -1,11 +1,11 @@
 import React from "react";
-import { Crown, MessagesSquare } from "lucide-react";
+import { Users, ShieldCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ChatInfo } from "@/services/user-settings-service";
 import { Platform } from "@/lib/platform";
 import PlatformIcon from "@/components/PlatformIcon";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { t } from "@/lib/translations";
 
 interface ChatListItemProps {
   chat: ChatInfo;
@@ -29,36 +29,27 @@ const ChatListItem: React.FC<ChatListItemProps> = ({
         "w-full justify-start gap-3 text-base h-12 rounded-xl px-8 font-normal",
         isSelected
           ? "bg-accent/70 cursor-default opacity-100"
-          : "text-white hover:bg-white/10",
+          : "text-white hover:bg-white/10 cursor-pointer",
         className
       )}
     >
-      <span className="flex-1 truncate text-left min-w-0">{chat.title}</span>
-      <div className="flex items-center gap-1">
-        <Badge
-          variant="outline"
-          className={cn(
-            "flex items-center justify-center w-8 h-7",
-            chat.is_own
-              ? "bg-amber-100 text-background border-orange-600/20"
-              : "bg-foreground text-background border-black/20"
-          )}
-        >
+      <span className="flex-1 truncate text-left min-w-0">
+        {chat.title || t("untitled")}
+      </span>
+      <div className="flex items-center gap-2">
+        <div className="flex items-center justify-center w-6 h-6">
           {chat.is_own ? (
-            <Crown className="h-4 w-4 text-amber-800/70" />
+            <ShieldCheck className="h-6 w-6 text-accent-amber" />
           ) : (
-            <MessagesSquare className="h-4 w-4 text-background" />
+            <Users className="h-6 w-6 text-foreground-muted" />
           )}
-        </Badge>
-        <Badge
-          variant="outline"
-          className="flex items-center justify-center w-8 h-7 bg-transparent text-white border-foreground"
-        >
+        </div>
+        <div className="flex items-center justify-center w-6 h-6">
           <PlatformIcon
             platform={Platform.fromString(chat.platform)}
-            className="h-3 w-3 text-white"
+            className="h-6 w-6 text-foreground-muted"
           />
-        </Badge>
+        </div>
       </div>
     </Button>
   );

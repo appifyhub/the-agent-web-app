@@ -1,7 +1,17 @@
 import "@/components/header.css";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { UserRound, Gift, LifeBuoy, Menu as MenuIcon } from "lucide-react";
+import {
+  UserRound,
+  Gift,
+  LifeBuoy,
+  Menu as MenuIcon,
+  MoreHorizontal,
+  Key,
+  Brain,
+  X,
+  Merge,
+} from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -25,36 +35,52 @@ import logoVector from "@/assets/logo-vector.svg";
 import { t } from "@/lib/translations";
 import { useParams, useLocation } from "react-router-dom";
 import { useNavigation } from "@/hooks/useNavigation";
-import { useChats } from "@/hooks/useChats";
 
-type Page = "sponsorships" | "profile" | "chat" | "features";
+type Page =
+  | "sponsorships"
+  | "profile"
+  | "chat"
+  | "features"
+  | "access"
+  | "intelligence"
+  | "connections";
 
 interface HeaderProps {
   page: Page;
   selectedChat?: ChatInfo;
+  chats?: ChatInfo[];
+  userId?: string;
   selectedLanguage: Language;
   hasBlockerError?: boolean;
   showProfileButton?: boolean;
   showSponsorshipsButton?: boolean;
   showChatsDropdown?: boolean;
   showHelpButton?: boolean;
-  userId?: string;
-  rawToken?: string;
+  drawerOpen?: boolean;
+  onDrawerOpenChange?: (open: boolean) => void;
 }
 
 const Header: React.FC<HeaderProps> = ({
   page,
   selectedChat = undefined,
+  chats: externalChats = [],
+  userId: propUserId,
   selectedLanguage,
   hasBlockerError = false,
   showProfileButton = true,
   showSponsorshipsButton = true,
   showChatsDropdown = true,
   showHelpButton = true,
-  userId,
-  rawToken,
+  drawerOpen: externalDrawerOpen,
+  onDrawerOpenChange,
 }) => {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [internalMenuOpen, setInternalMenuOpen] = useState(false);
+  const [chatsCollapsibleOpen, setChatsCollapsibleOpen] = useState(
+    page === "chat"
+  );
+  const menuOpen =
+    externalDrawerOpen !== undefined ? externalDrawerOpen : internalMenuOpen;
+  const setMenuOpen = onDrawerOpenChange || setInternalMenuOpen;
 
   const { lang_iso_code, user_id, chat_id } = useParams<{
     lang_iso_code: string;
@@ -66,13 +92,19 @@ const Header: React.FC<HeaderProps> = ({
   const {
     navigateToChat,
     navigateToProfile,
+    navigateToAccess,
+    navigateToIntelligence,
     navigateToSponsorships,
     navigateToFeatures,
+    navigateToConnections,
     navigateWithLanguageChange,
   } = useNavigation();
 
-  // Fetch chats internally using the hook
-  const { chats } = useChats(userId || user_id, rawToken);
+  // Use chats passed from parent component
+  const chats = externalChats;
+
+  // Prefer URL param, fall back to prop (for navigation from non-user-specific pages)
+  const effectiveUserId = user_id || propUserId;
 
   // Resolve selected chat from URL or prop
   const resolvedSelectedChat =
@@ -95,6 +127,12 @@ const Header: React.FC<HeaderProps> = ({
         return t("chat");
       case "features":
         return t("features.header");
+      case "access":
+        return t("access");
+      case "intelligence":
+        return t("intelligence");
+      case "connections":
+        return t("connections.page_title");
       default:
         return "";
     }
@@ -121,9 +159,8 @@ const Header: React.FC<HeaderProps> = ({
   const handleProfileClick = () => {
     if (page === "profile") return;
 
-    const targetUserId = user_id || userId;
-    if (lang_iso_code && targetUserId) {
-      navigateToProfile(targetUserId, lang_iso_code);
+    if (lang_iso_code && effectiveUserId) {
+      navigateToProfile(effectiveUserId, lang_iso_code);
       setMenuOpen(false);
     } else {
       console.warn("Cannot navigate to profile without user_id");
@@ -133,12 +170,33 @@ const Header: React.FC<HeaderProps> = ({
   const handleSponsorshipsClick = () => {
     if (page === "sponsorships") return;
 
-    const targetUserId = user_id || userId;
-    if (lang_iso_code && targetUserId) {
-      navigateToSponsorships(targetUserId, lang_iso_code);
+    if (lang_iso_code && effectiveUserId) {
+      navigateToSponsorships(effectiveUserId, lang_iso_code);
       setMenuOpen(false);
     } else {
       console.warn("Cannot navigate to sponsorships without user_id");
+    }
+  };
+
+  const handleAccessClick = () => {
+    if (page === "access") return;
+
+    if (lang_iso_code && effectiveUserId) {
+      navigateToAccess(effectiveUserId, lang_iso_code);
+      setMenuOpen(false);
+    } else {
+      console.warn("Cannot navigate to access without user_id");
+    }
+  };
+
+  const handleIntelligenceClick = () => {
+    if (page === "intelligence") return;
+
+    if (lang_iso_code && effectiveUserId) {
+      navigateToIntelligence(effectiveUserId, lang_iso_code);
+      setMenuOpen(false);
+    } else {
+      console.warn("Cannot navigate to intelligence without user_id");
     }
   };
 
@@ -153,14 +211,27 @@ const Header: React.FC<HeaderProps> = ({
     }
   };
 
+  const handleConnectionsClick = () => {
+    if (page === "connections") return;
+
+    if (lang_iso_code && effectiveUserId) {
+      navigateToConnections(effectiveUserId, lang_iso_code);
+      setMenuOpen(false);
+    } else {
+      console.warn("Cannot navigate to connections without user_id");
+    }
+  };
+
   return (
     <div className="header-gradient w-screen relative">
       {/* Mobile & Mid-size menu button - absolute positioned (<lg) */}
-      <div className={cn(
-        "absolute right-6 z-10 lg:hidden flex items-center",
-        "top-6 md:top-12",
-        "gap-5 md:gap-2"
-      )}>
+      <div
+        className={cn(
+          "absolute right-6 z-10 lg:hidden flex items-center",
+          "top-6 md:top-12",
+          "gap-5 md:gap-2"
+        )}
+      >
         <LanguageDropdown
           selectedLanguage={selectedLanguage}
           onLangChange={handleLangChange}
@@ -186,13 +257,18 @@ const Header: React.FC<HeaderProps> = ({
                 Access your chats, profile, sponsorships, help, and other
               </SheetDescription>
               <div className="flex flex-col gap-1 h-full">
-                <div className="h-8" />
+                <div className="h-6" />
                 {/* Custom close button */}
-                <div className="px-3">
+                <div className="px-3 flex items-center justify-end gap-4">
+                  <div className="flex-1 h-px bg-blue-300/30" />
                   <SheetClose asChild>
-                    <button className="text-accent-amber/70 hover:text-white text-sm font-light transition-colors underline underline-offset-3 decoration-accent-amber/70">
-                      {t("close")}
-                    </button>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className={cn("glass rounded-full cursor-pointer", "scale-120 md:scale-100")}
+                    >
+                      <X className="h-6 w-6" />
+                    </Button>
                   </SheetClose>
                 </div>
 
@@ -200,12 +276,16 @@ const Header: React.FC<HeaderProps> = ({
 
                 {/* Chats collapsible in drawer */}
                 {showChatsDropdown && chats.length > 0 && (
-                  <ChatsCollapsible
-                    chats={chats}
-                    selectedChat={resolvedSelectedChat}
-                    onChatChange={handleChatChange}
-                    defaultOpen={page === "chat"}
-                  />
+                  <>
+                    <ChatsCollapsible
+                      chats={chats}
+                      selectedChat={resolvedSelectedChat}
+                      onChatChange={handleChatChange}
+                      defaultOpen={page === "chat"}
+                      onOpenChange={setChatsCollapsibleOpen}
+                    />
+                    {chatsCollapsibleOpen && <div className="h-2" />}
+                  </>
                 )}
 
                 {/* Navigation items */}
@@ -218,7 +298,7 @@ const Header: React.FC<HeaderProps> = ({
                         "justify-start gap-3 text-base h-12 rounded-xl font-normal",
                         page === "profile"
                           ? "bg-accent/70 cursor-default opacity-100"
-                          : "text-white hover:bg-white/10"
+                          : "text-white hover:bg-white/10 cursor-pointer"
                       )}
                       onClick={handleProfileClick}
                     >
@@ -226,6 +306,48 @@ const Header: React.FC<HeaderProps> = ({
                       {t("profile")}
                     </Button>
                   )}
+                  <Button
+                    variant="ghost"
+                    disabled={page === "access"}
+                    className={cn(
+                      "justify-start gap-3 text-base h-12 rounded-xl font-normal",
+                      page === "access"
+                        ? "bg-accent/70 cursor-default opacity-100"
+                        : "text-white hover:bg-white/10 cursor-pointer"
+                    )}
+                    onClick={handleAccessClick}
+                  >
+                    <Key className="h-5 w-5 shrink-0" />
+                    {t("access")}
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    disabled={page === "intelligence"}
+                    className={cn(
+                      "justify-start gap-3 text-base h-12 rounded-xl font-normal",
+                      page === "intelligence"
+                        ? "bg-accent/70 cursor-default opacity-100"
+                        : "text-white hover:bg-white/10 cursor-pointer"
+                    )}
+                    onClick={handleIntelligenceClick}
+                  >
+                    <Brain className="h-5 w-5 shrink-0" />
+                    {t("intelligence")}
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    disabled={page === "connections"}
+                    className={cn(
+                      "justify-start gap-3 text-base h-12 rounded-xl font-normal",
+                      page === "connections"
+                        ? "bg-accent/70 cursor-default opacity-100"
+                        : "text-white hover:bg-white/10 cursor-pointer"
+                    )}
+                    onClick={handleConnectionsClick}
+                  >
+                    <Merge className="h-5 w-5 shrink-0" />
+                    {t("connections.page_title")}
+                  </Button>
                   {showSponsorshipsButton && (
                     <Button
                       variant="ghost"
@@ -234,7 +356,7 @@ const Header: React.FC<HeaderProps> = ({
                         "justify-start gap-3 text-base h-12 rounded-xl font-normal",
                         page === "sponsorships"
                           ? "bg-accent/70 cursor-default opacity-100"
-                          : "text-white hover:bg-white/10"
+                          : "text-white hover:bg-white/10 cursor-pointer"
                       )}
                       onClick={handleSponsorshipsClick}
                     >
@@ -250,7 +372,7 @@ const Header: React.FC<HeaderProps> = ({
                         "justify-start gap-3 text-base h-12 rounded-xl font-normal",
                         page === "features"
                           ? "bg-accent/70 cursor-default opacity-100"
-                          : "text-white hover:bg-white/10"
+                          : "text-white hover:bg-white/10 cursor-pointer"
                       )}
                       onClick={handleHelpClick}
                     >
@@ -321,51 +443,13 @@ const Header: React.FC<HeaderProps> = ({
                     className={cn(
                       "gap-2 text-base w-auto px-4 rounded-full",
                       page === "profile"
-                        ? "glass-active text-accent-amber"
-                        : "glass"
+                        ? "glass-active text-accent-amber underline underline-offset-4 decoration-accent-amber cursor-default"
+                        : "glass cursor-pointer"
                     )}
                     onClick={handleProfileClick}
                   >
                     <UserRound className="h-5 w-5" />
                     {t("profile")}
-                  </Button>
-                </NavigationMenuItem>
-              )}
-              {showSponsorshipsButton && (
-                <NavigationMenuItem>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    disabled={page === "sponsorships"}
-                    className={cn(
-                      "gap-2 text-base w-auto px-4 rounded-full",
-                      page === "sponsorships"
-                        ? "glass-active text-accent-amber"
-                        : "glass"
-                    )}
-                    onClick={handleSponsorshipsClick}
-                  >
-                    <Gift className="h-5 w-5" />
-                    {t("sponsorships")}
-                  </Button>
-                </NavigationMenuItem>
-              )}
-              {showHelpButton && (
-                <NavigationMenuItem>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    disabled={page === "features"}
-                    className={cn(
-                      "gap-2 text-base w-auto px-4 rounded-full",
-                      page === "features"
-                        ? "glass-active text-accent-amber"
-                        : "glass"
-                    )}
-                    onClick={handleHelpClick}
-                  >
-                    <LifeBuoy className="h-5 w-5" />
-                    {t("help")}
                   </Button>
                 </NavigationMenuItem>
               )}
@@ -375,6 +459,159 @@ const Header: React.FC<HeaderProps> = ({
                   onLangChange={handleLangChange}
                 />
               </NavigationMenuItem>
+              {hasAnyNavItems && (
+                <NavigationMenuItem>
+                  <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
+                    <SheetTrigger asChild>
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="glass rounded-full cursor-pointer"
+                      >
+                        <MoreHorizontal className="h-5 w-5" />
+                      </Button>
+                    </SheetTrigger>
+                    <SheetContent
+                      side="right"
+                      className="w-full! sm:max-w-sm glass-dark-static border-l border-white/20 px-4 [&>button]:hidden"
+                    >
+                      <SheetTitle className="sr-only">
+                        Navigation Menu
+                      </SheetTitle>
+                      <SheetDescription className="sr-only">
+                        Access your chats, profile, access, intelligence,
+                        sponsorships, help, and other
+                      </SheetDescription>
+                      <div className="flex flex-col gap-1 h-full">
+                        <div className="h-6" />
+                        {/* Custom close button */}
+                        <div className="px-1 flex items-center justify-end gap-6">
+                          <div className="flex-1 h-px bg-blue-300/30" />
+                          <SheetClose asChild>
+                            <Button
+                              variant="outline"
+                              size="icon"
+                              className={cn("glass rounded-full cursor-pointer", "scale-120 md:scale-100")}
+                            >
+                              <X className="h-6 w-6" />
+                            </Button>
+                          </SheetClose>
+                        </div>
+
+                        <div className="h-4" />
+
+                        {/* Chats collapsible in drawer */}
+                        {showChatsDropdown && chats.length > 0 && (
+                          <>
+                            <ChatsCollapsible
+                              chats={chats}
+                              selectedChat={resolvedSelectedChat}
+                              onChatChange={handleChatChange}
+                              defaultOpen={page === "chat"}
+                              onOpenChange={setChatsCollapsibleOpen}
+                            />
+                            {chatsCollapsibleOpen && <div className="h-4" />}
+                          </>
+                        )}
+
+                        {/* Navigation items */}
+                        <div className="flex flex-col gap-1 border-white/10">
+                          {showProfileButton && (
+                            <Button
+                              variant="ghost"
+                              disabled={page === "profile"}
+                              className={cn(
+                                "justify-start gap-3 text-base h-12 rounded-xl font-normal",
+                                page === "profile"
+                                  ? "bg-accent/70 cursor-default opacity-100"
+                                  : "text-white hover:bg-white/10 cursor-pointer"
+                              )}
+                              onClick={handleProfileClick}
+                            >
+                              <UserRound className="h-5 w-5 shrink-0" />
+                              {t("profile")}
+                            </Button>
+                          )}
+                          <Button
+                            variant="ghost"
+                            disabled={page === "access"}
+                            className={cn(
+                              "justify-start gap-3 text-base h-12 rounded-xl font-normal",
+                              page === "access"
+                                ? "bg-accent/70 cursor-default opacity-100"
+                                : "text-white hover:bg-white/10 cursor-pointer"
+                            )}
+                            onClick={handleAccessClick}
+                          >
+                            <Key className="h-5 w-5 shrink-0" />
+                            {t("access")}
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            disabled={page === "intelligence"}
+                            className={cn(
+                              "justify-start gap-3 text-base h-12 rounded-xl font-normal",
+                              page === "intelligence"
+                                ? "bg-accent/70 cursor-default opacity-100"
+                                : "text-white hover:bg-white/10 cursor-pointer"
+                            )}
+                            onClick={handleIntelligenceClick}
+                          >
+                            <Brain className="h-5 w-5 shrink-0" />
+                            {t("intelligence")}
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            disabled={page === "connections"}
+                            className={cn(
+                              "justify-start gap-3 text-base h-12 rounded-xl font-normal",
+                              page === "connections"
+                                ? "bg-accent/70 cursor-default opacity-100"
+                                : "text-white hover:bg-white/10 cursor-pointer"
+                            )}
+                            onClick={handleConnectionsClick}
+                          >
+                            <Merge className="h-5 w-5 shrink-0" />
+                            {t("connections.page_title")}
+                          </Button>
+                          {showSponsorshipsButton && (
+                            <Button
+                              variant="ghost"
+                              disabled={page === "sponsorships"}
+                              className={cn(
+                                "justify-start gap-3 text-base h-12 rounded-xl font-normal",
+                                page === "sponsorships"
+                                  ? "bg-accent/70 cursor-default opacity-100"
+                                  : "text-white hover:bg-white/10 cursor-pointer"
+                              )}
+                              onClick={handleSponsorshipsClick}
+                            >
+                              <Gift className="h-5 w-5 shrink-0" />
+                              {t("sponsorships")}
+                            </Button>
+                          )}
+                          {showHelpButton && (
+                            <Button
+                              variant="ghost"
+                              disabled={page === "features"}
+                              className={cn(
+                                "justify-start gap-3 text-base h-12 rounded-xl font-normal",
+                                page === "features"
+                                  ? "bg-accent/70 cursor-default opacity-100"
+                                  : "text-white hover:bg-white/10 cursor-pointer"
+                              )}
+                              onClick={handleHelpClick}
+                            >
+                              <LifeBuoy className="h-5 w-5 shrink-0" />
+                              {t("help")}
+                            </Button>
+                          )}
+                        </div>
+                      </div>
+                    </SheetContent>
+                  </Sheet>
+                </NavigationMenuItem>
+              )}
             </NavigationMenuList>
           </NavigationMenu>
         </div>

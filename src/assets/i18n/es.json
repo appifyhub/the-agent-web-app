@@ -5,11 +5,18 @@
   "close": "Cerrar",
   "help": "Ayuda",
   "configure_title": "Configurar el comportamiento de {botName}",
-  "configure_keys_title": "Potencia la Inteligencia de {botName}",
+  "intelligence_card_title": "Potencia la Inteligencia de {botName}",
+  "access": "Acceso",
+  "intelligence": "Inteligencia",
+  "access_card_title": "Haz que {botName} sea independiente",
+  "profile_card_title": "Personaliza {botName}",
+  "profile_full_name_label": "{botName} me conoce como:",
+  "profile_full_name_placeholder": "Tu nombre para mostrar",
   "preferred_language_label": "{botName} intenta responder usando:",
   "preferred_language_placeholder": "Selecciona un idioma",
   "your_chats": "Configurar chats",
   "loading_placeholder": "Cargando…",
+  "untitled": "Sin título",
   "notifications": {
     "releases_label": "{botName} debe notificarme de lanzamientos:",
     "releases_placeholder": "Selecciona un nivel",
@@ -24,12 +31,15 @@
   "always": "Siempre",
   "reply_frequency": "{percent}% del tiempo",
   "sponsorship": {
-    "users_you_sponsor": "Usuarios que patrocinas:",
+    "users_you_sponsor": "Usuarios que patrocinas",
     "no_sponsorships_found": "No se encontraron patrocinios",
+    "configure_ai_access_first": "Debe configurar primero el acceso a la IA, antes de poder patrocinar a otros usuarios y perfiles.",
     "incognito": "Incógnito",
     "add_sponsorship": "Patrocinar",
     "platform_handle_label": "Nombre de usuario o teléfono del usuario que quieres patrocinar",
     "platform_handle_placeholder": "@usuario o +00-teléfono",
+    "platform_handle_placeholder_telegram": "@nombre_usuario",
+    "platform_handle_placeholder_whatsapp": "+341234567890",
     "you_are_sponsored": "¡Eres un usuario patrocinado!",
     "unlink_message": "Ahora puedes convertirte en un usuario autónomo. Esto rompe el vínculo entre tú y {sponsorName} y la IA dejará de funcionar hasta que configures tu Perfil.",
     "unlink": "Desvincular"
@@ -37,6 +47,36 @@
   "save": "Guardar",
   "saved": "¡Guardado!",
   "copied": "¡Copiado!",
+  "connections": {
+    "page_title": "Conexiones",
+    "card_title": "Conectar Perfiles",
+    "show_my_key": "Mostrar mi Clave de Conexión",
+    "hide_my_key": "Ocultar mi Clave de Conexión",
+    "copy_key": "Copiar",
+    "regenerate_key": "Regenerar",
+    "share_key": "Compartir",
+    "share_not_supported": "Compartir no está soportado en este dispositivo",
+    "share_failed": "Error al compartir",
+    "connect_to_another_label": "Conectar a Otro Perfil",
+    "paste_key": "Pegar",
+    "clear_key": "Limpiar",
+    "paste_permission_denied": "Por favor, permita el acceso al portapapeles cuando Safari lo solicite",
+    "paste_chrome_permission": "Por favor, permita el acceso al portapapeles en Chrome: Configuración > Privacidad y seguridad > Configuración del sitio > Portapapeles",
+    "paste_failed": "Error al pegar",
+    "connect_button": "Conectar",
+    "connecting": "Conectando...",
+    "main_info": "Puedes conectar este perfil a otro perfil si tienes la Clave de Conexión de ese perfil. Por ejemplo, esto se puede usar para fusionar tus perfiles de WhatsApp y Telegram. ¡La Clave de Conexión de cada perfil es única y secreta! Para obtener la Clave de Conexión de otro perfil, debes abrir esta misma página usando el chat de ese perfil con {botName}. Conectar los dos perfiles los fusiona en un solo perfil.",
+    "my_key_info": "Esta es tu Clave de Conexión. ¡No compartas tu Clave de Conexión con nadie más que con tus otros perfiles!",
+    "command_info": "También puedes enviar directamente esta clave a {botName} en una de las plataformas compatibles, usando un comando de Conexión. Esto conectará automáticamente este perfil con el perfil al que se la envíes:",
+    "chat_command_info": "Alternativamente, puedes pedirle a {botName} que se conecte a otro perfil usando el chat:",
+    "chat_command_example": "Por favor, conéctame a este perfil: {connectKey}.",
+    "cannot_connect_to_self": "No puedes conectar este perfil consigo mismo. Para hacer conexiones, debes ir a la configuración de Conexiones del otro perfil y tomar la clave desde allí!",
+    "invalid_format": "Formato inválido. La clave de conexión debe estar en el formato correcto.",
+    "connect_success": "¡Perfiles conectados exitosamente!",
+    "regenerate_success": "¡Clave de conexión regenerada exitosamente!",
+    "copy_failed": "Error al copiar",
+    "generic_error": "Ocurrió un error"
+  },
   "token_info": {
     "profile_id": "Perfil ID",
     "platform": "Plataforma",
@@ -53,12 +93,12 @@
   },
   "provider_needed_for": "{botName} necesita esto para: {tools}",
   "where_is_my_key": "¿Dónde está mi clave de {providerName}?",
+  "configure_intelligence": "Configurar inteligencia",
   "errors": {
     "oh_no": "¡Oh no!",
     "expired": "Tu sesión ha expirado.",
     "not_found": "Tu sesión no se encuentra.",
     "not_valid": "Tu sesión no es válida.",
-    "misconfigured": "Tu sesión está mal configurada.",
     "fetch_failed": "Error al cargar la configuración.",
     "save_failed": "Error al guardar la configuración.",
     "check_link": "Verifica tu enlace de acceso e inténtalo de nuevo.",
@@ -111,12 +151,23 @@
     }
   },
   "tools": {
-    "show_options": "Mostrar opciones avanzadas",
-    "hide_options": "Ocultar opciones avanzadas",
-    "title": "Opciones avanzadas",
     "not_configured": "Configurar",
     "select_tool": "Seleccionar una herramienta",
     "no_tools_available": "No hay herramientas disponibles para este tipo",
+    "groups": {
+      "text_intelligence": {
+        "title": "Inteligencia de Lenguaje"
+      },
+      "content_analysis": {
+        "title": "Análisis de Contenido"
+      },
+      "image_tools": {
+        "title": "Herramientas de Imagen"
+      },
+      "integrations": {
+        "title": "Integraciones"
+      }
+    },
     "types": {
       "chat": {
         "title": "Chat",

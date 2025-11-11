@@ -15,6 +15,10 @@ import {
   Euro,
   Bitcoin,
   Twitter,
+  BookOpenText,
+  BrainCog,
+  Image,
+  Blocks,
 } from "lucide-react";
 import { t } from "@/lib/translations";
 import { TranslationKey } from "@/lib/translation-keys";
@@ -43,6 +47,19 @@ interface AdvancedToolsPanelProps {
   disabled?: boolean;
 }
 
+type ToolGroupCategory =
+  | "text_intelligence"
+  | "content_analysis"
+  | "image_tools"
+  | "integrations";
+
+interface ToolCategoryGroup {
+  category: ToolGroupCategory;
+  title: string;
+  icon: React.ComponentType<{ className?: string }>;
+  toolTypes: ToolTypeGroup[];
+}
+
 interface ToolTypeGroup {
   type: ToolType;
   title: string;
@@ -51,6 +68,44 @@ interface ToolTypeGroup {
   currentValue: string | undefined;
   icon?: React.ComponentType<{ className?: string }>;
 }
+
+// Map tool types to their category
+const getToolGroupCategory = (toolType: ToolType): ToolGroupCategory => {
+  const categoryMap: Record<ToolType, ToolGroupCategory> = {
+    chat: "text_intelligence",
+    reasoning: "text_intelligence",
+    copywriting: "text_intelligence",
+    vision: "content_analysis",
+    hearing: "content_analysis",
+    embedding: "content_analysis",
+    images_gen: "image_tools",
+    images_edit: "image_tools",
+    images_restoration: "image_tools",
+    images_inpainting: "image_tools",
+    images_background_removal: "image_tools",
+    search: "integrations",
+    api_fiat_exchange: "integrations",
+    api_crypto_exchange: "integrations",
+    api_twitter: "integrations",
+  };
+  return categoryMap[toolType];
+};
+
+// Get icon for category
+const getToolGroupIcon = (
+  category: ToolGroupCategory
+): React.ComponentType<{ className?: string }> => {
+  const iconMap: Record<
+    ToolGroupCategory,
+    React.ComponentType<{ className?: string }>
+  > = {
+    text_intelligence: BookOpenText,
+    content_analysis: BrainCog,
+    image_tools: Image,
+    integrations: Blocks,
+  };
+  return iconMap[category];
+};
 
 const AdvancedToolsPanel: React.FC<AdvancedToolsPanelProps> = ({
   tools,
@@ -187,9 +242,51 @@ const AdvancedToolsPanel: React.FC<AdvancedToolsPanelProps> = ({
     return Array.from(typeGroups.values());
   };
 
-  const toolTypeGroups = groupToolsByType();
+  // Group tool types by category
+  const groupToolsByCategory = (): ToolCategoryGroup[] => {
+    const toolTypeGroups = groupToolsByType();
+    const categoryGroups: Map<ToolGroupCategory, ToolCategoryGroup> = new Map();
 
-  if (toolTypeGroups.length === 0) {
+    // Define category order
+    const categoryOrder: ToolGroupCategory[] = [
+      "text_intelligence",
+      "content_analysis",
+      "image_tools",
+      "integrations",
+    ];
+
+    // Group tool types by category
+    toolTypeGroups.forEach((toolTypeGroup) => {
+      const category = getToolGroupCategory(toolTypeGroup.type);
+
+      if (!categoryGroups.has(category)) {
+        const titleKey = `tools.groups.${category}.title` as TranslationKey;
+        const title = t(titleKey);
+
+        categoryGroups.set(category, {
+          category,
+          title,
+          icon: getToolGroupIcon(category),
+          toolTypes: [],
+        });
+      }
+
+      const categoryGroup = categoryGroups.get(category)!;
+      categoryGroup.toolTypes.push(toolTypeGroup);
+    });
+
+    // Return in defined order, filtering out empty categories
+    return categoryOrder
+      .map((category) => categoryGroups.get(category))
+      .filter(
+        (group): group is ToolCategoryGroup =>
+          group !== undefined && group.toolTypes.length > 0
+      );
+  };
+
+  const categoryGroups = groupToolsByCategory();
+
+  if (categoryGroups.length === 0) {
     return null; // Don't render if no valid tool types
   }
 
@@ -202,74 +299,90 @@ const AdvancedToolsPanel: React.FC<AdvancedToolsPanelProps> = ({
         value={openSection}
         onValueChange={setOpenSection}
       >
-        {toolTypeGroups.map((group) => {
-          const IconComponent = group.icon;
-          const isCurrentlyOpen = openSection === group.type;
+        {categoryGroups.map((categoryGroup) => {
+          const CategoryIcon = categoryGroup.icon;
+          const isCurrentlyOpen = openSection === categoryGroup.category;
           const shouldReduceOpacity = openSection && !isCurrentlyOpen;
 
           return (
             <AccordionItem
-              key={group.type}
-              value={group.type}
+              key={categoryGroup.category}
+              value={categoryGroup.category}
               className="border-b border-muted-foreground/20 last:border-b-0"
             >
               <AccordionTrigger
-                className={`hover:no-underline py-4 px-0 text-[1.05rem] font-normal data-[state=open]:font-medium data-[state=open]:text-accent-amber text-left transition-opacity duration-200 cursor-pointer ${
+                className={`hover:no-underline py-4 px-0 text-[1.05rem] font-normal data-[state=open]:font-medium data-[state=open]:text-accent-amber data-[state=open]:text-xl text-left transition-opacity duration-200 cursor-pointer ${
                   shouldReduceOpacity ? "opacity-30" : "opacity-100"
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  {IconComponent && (
-                    <IconComponent className="h-5 w-5 shrink-0" />
-                  )}
-                  <span>{group.title}</span>
+                  <CategoryIcon className="h-5 w-5 shrink-0" />
+                  <span>{categoryGroup.title}</span>
                 </div>
               </AccordionTrigger>
-              <AccordionContent className="!pb-6 pt-0">
+              <AccordionContent>
                 <div className="space-y-4">
-                  <p className="text-base text-muted-foreground leading-tight">
-                    {group.description}
-                  </p>
+                  <div className="h-2" />
+                  {categoryGroup.toolTypes.map((toolTypeGroup) => {
+                    const ToolIcon = toolTypeGroup.icon;
+                    return (
+                      <div key={toolTypeGroup.type} className="space-y-2">
+                        <div className="flex items-center gap-2">
+                          {ToolIcon && (
+                            <ToolIcon className="h-4 w-4 text-blue-100" />
+                          )}
+                          <h4 className="text-base font-medium text-blue-100 underline underline-offset-4">
+                            {toolTypeGroup.title}
+                          </h4>
+                        </div>
+                        <p className="text-sm text-muted-foreground leading-tight">
+                          {toolTypeGroup.description}
+                        </p>
 
-                  {group.sections.length > 0 ? (
-                    (() => {
-                      // Count total available options across all sections
-                      const totalOptions = group.sections.reduce(
-                        (count, section) => count + section.options.length,
-                        0
-                      );
-                      const isSingleOption = totalOptions === 1;
-                      const singleOption = isSingleOption
-                        ? group.sections[0].options[0]
-                        : null;
+                        {toolTypeGroup.sections.length > 0 ? (
+                          (() => {
+                            // Count total available options across all sections
+                            const totalOptions = toolTypeGroup.sections.reduce(
+                              (count, section) =>
+                                count + section.options.length,
+                              0
+                            );
+                            const isSingleOption = totalOptions === 1;
+                            const singleOption = isSingleOption
+                              ? toolTypeGroup.sections[0].options[0]
+                              : null;
 
-                      return (
-                        <SectionedSelector
-                          label={t("tools.select_tool")}
-                          value={
-                            isSingleOption && singleOption
-                              ? singleOption.value
-                              : group.currentValue
-                          }
-                          onChange={(toolId) =>
-                            onToolChoiceChange(group.type, toolId)
-                          }
-                          sections={group.sections}
-                          disabled={disabled || isSingleOption}
-                          placeholder={t("tools.select_tool")}
-                          notConfiguredLabel={t("tools.not_configured")}
-                          onProviderNavigate={onProviderNavigate}
-                          labelClassName="text-base"
-                        />
-                      );
-                    })()
-                  ) : (
-                    <div className="text-sm text-muted-foreground text-center py-4">
-                      {t("tools.no_tools_available")}
-                    </div>
-                  )}
+                            return (
+                              <SectionedSelector
+                                label={t("tools.select_tool")}
+                                value={
+                                  isSingleOption && singleOption
+                                    ? singleOption.value
+                                    : toolTypeGroup.currentValue
+                                }
+                                onChange={(toolId) =>
+                                  onToolChoiceChange(toolTypeGroup.type, toolId)
+                                }
+                                sections={toolTypeGroup.sections}
+                                disabled={disabled || isSingleOption}
+                                placeholder={t("tools.select_tool")}
+                                notConfiguredLabel={t("tools.not_configured")}
+                                onProviderNavigate={onProviderNavigate}
+                                labelClassName="text-base"
+                              />
+                            );
+                          })()
+                        ) : (
+                          <div className="text-sm text-muted-foreground text-center py-4">
+                            {t("tools.no_tools_available")}
+                          </div>
+                        )}
+                        <div className="h-6" />
+                      </div>
+                    );
+                  })}
+                  <div className="h-2" />
                 </div>
-                <div className="h-6" />
               </AccordionContent>
             </AccordionItem>
           );

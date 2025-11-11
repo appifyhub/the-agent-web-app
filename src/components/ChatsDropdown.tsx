@@ -4,8 +4,8 @@ import {
   ChevronDownIcon,
   CheckIcon,
   MessageCircle,
-  Crown,
-  MessagesSquare,
+  Users,
+  ShieldCheck,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
@@ -17,7 +17,6 @@ import {
 import { ChatInfo } from "@/services/user-settings-service";
 import { Platform } from "@/lib/platform";
 import PlatformIcon from "@/components/PlatformIcon";
-import { Badge } from "@/components/ui/badge";
 import { t } from "@/lib/translations";
 
 interface ChatsDropdownProps {
@@ -51,8 +50,13 @@ const ChatsDropdown: React.FC<ChatsDropdownProps> = ({
     if (isValidChatSelected) {
       return (
         <span className="flex items-baseline gap-2">
-          <PlatformIcon platform={Platform.fromString(selectedChat.platform)} className="h-4 w-4 translate-y-0.5" />
-          <span className="font-light">{selectedChat.title}</span>
+          <PlatformIcon
+            platform={Platform.fromString(selectedChat.platform)}
+            className="h-4 w-4 translate-y-0.5"
+          />
+          <span className="font-light">
+            {selectedChat.title || t("untitled")}
+          </span>
         </span>
       );
     }
@@ -81,7 +85,7 @@ const ChatsDropdown: React.FC<ChatsDropdownProps> = ({
             chats.length === 0 || disabled
               ? "glass-dark-static"
               : isValidChatSelected
-              ? "glass-active text-amber-100 font-normal"
+              ? "glass-active text-orange-200 font-normal underline underline-offset-4 decoration-accent-amber hover:decoration-white"
               : "glass font-light",
             "w-auto min-w-0 whitespace-nowrap overflow-hidden md:w-auto md:max-w-md text-base"
           )}
@@ -107,35 +111,27 @@ const ChatsDropdown: React.FC<ChatsDropdownProps> = ({
             )}
             disabled={chat.chat_id === selectedChat?.chat_id}
           >
-            <span className="flex-1 truncate">{chat.title}</span>
+            <span className="flex-1 truncate">
+              {chat.title || t("untitled")}
+            </span>
+            <div className="w-1" />
             {chat.chat_id === selectedChat?.chat_id && (
-              <CheckIcon className="h-4 w-4 flex-shrink-0" />
+              <CheckIcon className="h-6 w-6 shrink-0" />
             )}
-            <div className="flex items-center gap-1">
-              <Badge
-                variant="outline"
-                className={cn(
-                  "flex items-center justify-center w-8 h-7",
-                  chat.is_own
-                    ? "bg-amber-100 text-background border-orange-600/20"
-                    : "bg-foreground text-background border-black/20"
-                )}
-              >
+            <div className="flex items-center gap-2">
+              <div className="flex items-center justify-center w-6 h-6">
                 {chat.is_own ? (
-                  <Crown className="h-4 w-4 text-amber-800/70" />
+                  <ShieldCheck className="h-6 w-6 text-accent-amber" />
                 ) : (
-                  <MessagesSquare className="h-4 w-4 text-background" />
+                  <Users className="h-6 w-6 text-foreground-muted" />
                 )}
-              </Badge>
-              <Badge
-                variant="outline"
-                className="flex items-center justify-center w-8 h-7 bg-transparent text-white border-foreground"
-              >
+              </div>
+              <div className="flex items-center justify-center w-6 h-6">
                 <PlatformIcon
                   platform={Platform.fromString(chat.platform)}
-                  className="h-3 w-3 text-white"
+                  className="h-6 w-6 text-foreground-muted"
                 />
-              </Badge>
+              </div>
             </div>
           </DropdownMenuItem>
         ))}

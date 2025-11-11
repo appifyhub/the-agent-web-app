@@ -11,6 +11,7 @@ interface ChatsCollapsibleProps {
   selectedChat?: ChatInfo;
   onChatChange: (chatId: string) => void;
   defaultOpen?: boolean;
+  onOpenChange?: (isOpen: boolean) => void;
 }
 
 const ChatsCollapsible: React.FC<ChatsCollapsibleProps> = ({
@@ -18,15 +19,27 @@ const ChatsCollapsible: React.FC<ChatsCollapsibleProps> = ({
   selectedChat,
   onChatChange,
   defaultOpen = false,
+  onOpenChange,
 }) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
+  const handleToggle = () => {
+    const newState = !isOpen;
+    setIsOpen(newState);
+    onOpenChange?.(newState);
+  };
+
   return (
-    <div className={cn("w-full rounded-2xl", isOpen ? "bg-white/1 border border-solid border-white/5" : "")}>
+    <div
+      className={cn(
+        "w-full rounded-2xl",
+        isOpen ? "bg-white/1 border border-solid border-white/5" : ""
+      )}
+    >
       <Button
         variant="ghost"
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full justify-start gap-3 text-base h-12 rounded-xl font-normal text-white hover:bg-white/10"
+        onClick={handleToggle}
+        className="w-full justify-start gap-3 text-base h-12 rounded-xl font-normal text-white hover:bg-white/10 cursor-pointer"
       >
         <MessageCircle className="h-5 w-5 shrink-0" />
         <span className="flex-1 text-left">{t("your_chats")}</span>

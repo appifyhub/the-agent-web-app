@@ -5,11 +5,18 @@
   "close": "Fermer",
   "help": "Aide",
   "configure_title": "Configurer le comportement de {botName}",
-  "configure_keys_title": "Boostez l'Intelligence de {botName}",
+  "intelligence_card_title": "Boostez l'Intelligence de {botName}",
+  "access": "Accès",
+  "intelligence": "Intelligence",
+  "access_card_title": "Rendez {botName} indépendant",
+  "profile_card_title": "Personnalisez {botName}",
+  "profile_full_name_label": "{botName} me connaît comme :",
+  "profile_full_name_placeholder": "Votre nom d'affichage",
   "preferred_language_label": "{botName} essaie de répondre en utilisant :",
   "preferred_language_placeholder": "Sélectionner une langue",
   "your_chats": "Configurer les discussions",
   "loading_placeholder": "Chargement…",
+  "untitled": "Sans titre",
   "notifications": {
     "releases_label": "{botName} doit me notifier des sorties :",
     "releases_placeholder": "Sélectionner un niveau",
@@ -24,12 +31,15 @@
   "always": "Toujours",
   "reply_frequency": "{percent}% du temps",
   "sponsorship": {
-    "users_you_sponsor": "Utilisateurs que vous parrainez :",
+    "users_you_sponsor": "Utilisateurs que vous parrainez",
     "no_sponsorships_found": "Aucun parrainage trouvé",
+    "configure_ai_access_first": "Vous devez d'abord configurer l'accès à l'IA, avant de pouvoir parrainer d'autres utilisateurs et profils.",
     "incognito": "Incognito",
     "add_sponsorship": "Parrainer",
     "platform_handle_label": "Nom d'utilisateur ou téléphone de l'utilisateur que vous voulez parrainer",
     "platform_handle_placeholder": "@utilisateur ou +00-téléphone",
+    "platform_handle_placeholder_telegram": "@nom_utilisateur",
+    "platform_handle_placeholder_whatsapp": "+331234567890",
     "you_are_sponsored": "Vous êtes un utilisateur parrainé !",
     "unlink_message": "Vous pouvez maintenant devenir un utilisateur autonome. Cela rompt le lien entre vous et {sponsorName} et l'IA cessera de fonctionner jusqu'à ce que vous configuriez votre Profil.",
     "unlink": "Délier"
@@ -37,6 +47,36 @@
   "save": "Enregistrer",
   "saved": "Enregistré !",
   "copied": "Copié !",
+  "connections": {
+    "page_title": "Connexions",
+    "card_title": "Connecter les Profils",
+    "show_my_key": "Afficher ma Clé de Connexion",
+    "hide_my_key": "Masquer ma Clé de Connexion",
+    "copy_key": "Copier",
+    "regenerate_key": "Régénérer",
+    "share_key": "Partager",
+    "share_not_supported": "Le partage n'est pas pris en charge sur cet appareil",
+    "share_failed": "Échec du partage",
+    "connect_to_another_label": "Connecter à un Autre Profil",
+    "paste_key": "Coller",
+    "clear_key": "Effacer",
+    "paste_permission_denied": "Veuillez autoriser l'accès au presse-papiers lorsque Safari le demande",
+    "paste_chrome_permission": "Veuillez autoriser l'accès au presse-papiers dans Chrome : Paramètres > Confidentialité et sécurité > Paramètres du site > Presse-papiers",
+    "paste_failed": "Échec du collage",
+    "connect_button": "Connecter",
+    "connecting": "Connexion...",
+    "main_info": "Vous pouvez connecter ce profil à un autre profil si vous avez la Clé de Connexion de ce profil. Par exemple, cela peut être utilisé pour fusionner vos profils WhatsApp et Telegram. La Clé de Connexion de chaque profil est unique et secrète ! Pour obtenir la Clé de Connexion d'un autre profil, vous devez ouvrir cette même page en utilisant le chat de ce profil avec {botName}. Connecter les deux profils les fusionne en un seul profil.",
+    "my_key_info": "Ceci est votre Clé de Connexion. Ne partagez pas votre Clé de Connexion avec qui que ce soit d'autre que vos autres profils !",
+    "command_info": "Vous pouvez également envoyer directement cette clé à {botName} sur l'une des plateformes prises en charge, en utilisant une commande de Connexion. Cela connectera automatiquement ce profil au profil auquel vous l'enverrez :",
+    "chat_command_info": "Alternativement, vous pouvez demander à {botName} de se connecter à un autre profil en utilisant le chat :",
+    "chat_command_example": "Veuillez me connecter à ce profil : {connectKey}.",
+    "cannot_connect_to_self": "Vous ne pouvez pas connecter ce profil à lui-même. Pour établir des connexions, vous devez aller dans les paramètres de Connexions de l'autre profil et prendre la clé de là !",
+    "invalid_format": "Format invalide. La clé de connexion doit être au bon format.",
+    "connect_success": "Profils connectés avec succès !",
+    "regenerate_success": "Clé de connexion régénérée avec succès !",
+    "copy_failed": "Échec de la copie",
+    "generic_error": "Une erreur s'est produite"
+  },
   "token_info": {
     "profile_id": "Profil ID",
     "platform": "Plateforme",
@@ -53,13 +93,25 @@
   },
   "provider_needed_for": "{botName} a besoin de ça pour: {tools}",
   "where_is_my_key": "Où est ma clé {providerName} ?",
+  "configure_intelligence": "Configurer l'intelligence",
   "tools": {
-    "show_options": "Afficher les options avancées",
-    "hide_options": "Masquer les options avancées",
-    "title": "Options avancées",
     "not_configured": "Configurer",
     "select_tool": "Sélectionner un outil",
     "no_tools_available": "Aucun outil disponible pour ce type",
+    "groups": {
+      "text_intelligence": {
+        "title": "Intelligence Linguistique"
+      },
+      "content_analysis": {
+        "title": "Analyse de Contenu"
+      },
+      "image_tools": {
+        "title": "Outils d'Image"
+      },
+      "integrations": {
+        "title": "Intégrations"
+      }
+    },
     "types": {
       "chat": {
         "title": "Discussion",
@@ -174,7 +226,6 @@
     "expired": "Votre session a expiré.",
     "not_found": "Votre session est introuvable.",
     "not_valid": "Votre session n'est pas valide.",
-    "misconfigured": "Votre session est mal configurée.",
     "fetch_failed": "Échec du chargement des paramètres.",
     "save_failed": "Échec de l'enregistrement des paramètres.",
     "check_link": "Vérifiez votre lien d'accès et réessayez.",

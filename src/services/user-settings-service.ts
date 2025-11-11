@@ -4,8 +4,11 @@ import { maskSecret } from "@/lib/utils";
 export interface UserSettings {
   id: string;
   full_name?: string;
+  telegram_username?: string;
   telegram_chat_id?: string;
-  whatsapp_chat_id?: string;
+  telegram_user_id?: number;
+  whatsapp_user_id?: string;
+  whatsapp_phone_number?: string;
   open_ai_key?: string;
   anthropic_key?: string;
   google_ai_key?: string;
@@ -34,7 +37,7 @@ export interface UserSettings {
 
 export interface ChatInfo {
   chat_id: string;
-  title: string;
+  title?: string;
   platform: string;
   is_own: boolean;
 }
@@ -54,6 +57,7 @@ export function getSettingsFieldName(providerId: string): keyof UserSettings {
 }
 
 export interface UserSettingsPayload {
+  full_name?: string;
   open_ai_key?: string;
   anthropic_key?: string;
   google_ai_key?: string;
@@ -89,6 +93,7 @@ const MASKED_FIELDS: (keyof UserSettingsPayload)[] = [
 ];
 
 const REGULAR_FIELDS: (keyof UserSettingsPayload)[] = [
+  "full_name",
   "tool_choice_chat",
   "tool_choice_reasoning",
   "tool_choice_copywriting",

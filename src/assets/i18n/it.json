@@ -5,11 +5,18 @@
   "close": "Chiudi",
   "help": "Aiuto",
   "configure_title": "Configura il comportamento di {botName}",
-  "configure_keys_title": "Potenzia l'Intelligenza di {botName}",
+  "intelligence_card_title": "Potenzia l'Intelligenza di {botName}",
+  "access": "Accesso",
+  "intelligence": "Intelligenza",
+  "access_card_title": "Rendi {botName} indipendente",
+  "profile_card_title": "Personalizza {botName}",
+  "profile_full_name_label": "{botName} mi conosce come:",
+  "profile_full_name_placeholder": "Il tuo nome visualizzato",
   "preferred_language_label": "{botName} cerca di rispondere usando:",
   "preferred_language_placeholder": "Seleziona una lingua",
   "your_chats": "Configura chat",
   "loading_placeholder": "Caricamento…",
+  "untitled": "Senza titolo",
   "notifications": {
     "releases_label": "{botName} dovrebbe avvisarmi delle release:",
     "releases_placeholder": "Seleziona un livello",
@@ -24,12 +31,15 @@
   "always": "Sempre",
   "reply_frequency": "{percent}% del tempo",
   "sponsorship": {
-    "users_you_sponsor": "Utenti che sponsorizzi:",
+    "users_you_sponsor": "Utenti che sponsorizzi",
     "no_sponsorships_found": "Nessuna sponsorizzazione trovata",
+    "configure_ai_access_first": "Devi prima configurare l'accesso all'IA, prima di poter sponsorizzare altri utenti e profili.",
     "incognito": "Incognito",
     "add_sponsorship": "Sponsorizza",
     "platform_handle_label": "Nome utente o telefono dell'utente che vuoi sponsorizzare",
     "platform_handle_placeholder": "@utente o +00-telefono",
+    "platform_handle_placeholder_telegram": "@nome_utente",
+    "platform_handle_placeholder_whatsapp": "+391234567890",
     "you_are_sponsored": "Sei un utente sponsorizzato!",
     "unlink_message": "Ora puoi diventare un utente autonomo. Questo interrompe il collegamento tra te e {sponsorName} e l'IA smetterà di funzionare finché non configurerai il tuo Profilo.",
     "unlink": "Scollega"
@@ -37,6 +47,36 @@
   "save": "Salva",
   "saved": "Salvato!",
   "copied": "Copiato!",
+  "connections": {
+    "page_title": "Connessioni",
+    "card_title": "Connetti Profili",
+    "show_my_key": "Mostra la mia Chiave di Connessione",
+    "hide_my_key": "Nascondi la mia Chiave di Connessione",
+    "copy_key": "Copia",
+    "regenerate_key": "Rigenera",
+    "share_key": "Condividi",
+    "share_not_supported": "La condivisione non è supportata su questo dispositivo",
+    "share_failed": "Condivisione fallita",
+    "connect_to_another_label": "Connetti a un Altro Profilo",
+    "paste_key": "Incolla",
+    "clear_key": "Cancella",
+    "paste_permission_denied": "Si prega di consentire l'accesso agli appunti quando Safari lo richiede",
+    "paste_chrome_permission": "Si prega di consentire l'accesso agli appunti in Chrome: Impostazioni > Privacy e sicurezza > Impostazioni sito > Appunti",
+    "paste_failed": "Incolla fallito",
+    "connect_button": "Connetti",
+    "connecting": "Connessione...",
+    "main_info": "Puoi connettere questo profilo a un altro profilo se hai la Chiave di Connessione di quel profilo. Ad esempio, questo può essere usato per unire i tuoi profili WhatsApp e Telegram. La Chiave di Connessione di ogni profilo è unica e segreta! Per ottenere la Chiave di Connessione da un altro profilo, devi aprire questa stessa pagina usando la chat di quel profilo con {botName}. Collegare i due profili li unisce in un unico profilo.",
+    "my_key_info": "Questa è la tua Chiave di Connessione. Non condividere la tua Chiave di Connessione con nessuno tranne i tuoi altri profili!",
+    "command_info": "Puoi anche inviare direttamente questa chiave a {botName} su una delle piattaforme supportate, usando un comando di Connessione. Questo collegherà automaticamente questo profilo con il profilo a cui lo invii:",
+    "chat_command_info": "In alternativa, puoi chiedere a {botName} di connettersi a un altro profilo usando la chat:",
+    "chat_command_example": "Per favore connettimi a questo profilo: {connectKey}.",
+    "cannot_connect_to_self": "Non puoi connettere questo profilo a se stesso. Per fare connessioni, devi andare alle impostazioni Connessioni dell'altro profilo e prendere la chiave da lì!",
+    "invalid_format": "Formato non valido. La chiave di connessione deve essere nel formato corretto.",
+    "connect_success": "Profili connessi con successo!",
+    "regenerate_success": "Chiave di connessione rigenerata con successo!",
+    "copy_failed": "Copia fallita",
+    "generic_error": "Si è verificato un errore"
+  },
   "token_info": {
     "profile_id": "Profilo ID",
     "platform": "Piattaforma",
@@ -53,12 +93,12 @@
   },
   "provider_needed_for": "{botName} ha bisogno di questo per: {tools}",
   "where_is_my_key": "Dove si trova la mia chiave {providerName}?",
+  "configure_intelligence": "Configura intelligenza",
   "errors": {
     "oh_no": "Oh no!",
     "expired": "La tua sessione è scaduta.",
     "not_found": "La tua sessione non è stata trovata.",
     "not_valid": "La tua sessione non è valida.",
-    "misconfigured": "La tua sessione è configurata in modo errato.",
     "fetch_failed": "Impossibile caricare le impostazioni.",
     "save_failed": "Impossibile salvare le impostazioni.",
     "check_link": "Controlla il tuo link di accesso e riprova.",
@@ -111,12 +151,23 @@
     }
   },
   "tools": {
-    "show_options": "Mostra opzioni avanzate",
-    "hide_options": "Nascondi opzioni avanzate",
-    "title": "Opzioni avanzate",
     "not_configured": "Configura",
     "select_tool": "Seleziona uno strumento",
     "no_tools_available": "Nessuno strumento disponibile per questo tipo",
+    "groups": {
+      "text_intelligence": {
+        "title": "Intelligenza Linguistica"
+      },
+      "content_analysis": {
+        "title": "Analisi del Contenuto"
+      },
+      "image_tools": {
+        "title": "Strumenti Immagine"
+      },
+      "integrations": {
+        "title": "Integrazioni"
+      }
+    },
     "types": {
       "chat": {
         "title": "Chat",

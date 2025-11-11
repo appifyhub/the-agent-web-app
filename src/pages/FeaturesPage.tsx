@@ -16,6 +16,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { usePageSession } from "@/hooks/usePageSession";
+import { useChats } from "@/hooks/useChats";
 import { DEFAULT_LANGUAGE, INTERFACE_LANGUAGES } from "@/lib/languages";
 import { Card } from "@/components/ui/card";
 import { t } from "@/lib/translations";
@@ -53,6 +54,7 @@ const iconsMap: Record<
 export default function FeaturesPage() {
   const { lang_iso_code } = useParams<{ lang_iso_code: string }>();
   const { accessToken } = usePageSession();
+  const { chats } = useChats(accessToken?.decoded.sub, accessToken?.raw);
   const language =
     INTERFACE_LANGUAGES.find((lang) => lang.isoCode === lang_iso_code) ||
     DEFAULT_LANGUAGE;
@@ -68,9 +70,9 @@ export default function FeaturesPage() {
     <div className="flex flex-col min-h-screen">
       <Header
         page="features"
+        chats={chats}
+        userId={accessToken?.decoded?.sub}
         selectedLanguage={language}
-        userId={accessToken?.decoded.sub}
-        rawToken={accessToken?.raw}
         showProfileButton={showNav}
         showSponsorshipsButton={showNav}
         showChatsDropdown={showNav}

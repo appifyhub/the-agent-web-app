@@ -5,11 +5,18 @@
   "close": "Schließen",
   "help": "Hilfe",
   "configure_title": "{botName}s Verhalten konfigurieren",
-  "configure_keys_title": "Verstärke {botName}s Intelligenz",
+  "intelligence_card_title": "Verstärke {botName}s Intelligenz",
+  "access": "Zugang",
+  "intelligence": "Intelligenz",
+  "access_card_title": "Machen Sie {botName} unabhängig",
+  "profile_card_title": "Passen Sie {botName} an",
+  "profile_full_name_label": "{botName} kennt mich als:",
+  "profile_full_name_placeholder": "Ihr Anzeigename",
   "preferred_language_label": "{botName} versucht zu antworten mit:",
   "preferred_language_placeholder": "Sprache auswählen",
   "your_chats": "Chats einrichten",
   "loading_placeholder": "Wird geladen...",
+  "untitled": "Unbenannt",
   "notifications": {
     "releases_label": "{botName} soll mich über Releases benachrichtigen:",
     "releases_placeholder": "Niveau auswählen",
@@ -24,12 +31,15 @@
   "always": "Immer",
   "reply_frequency": "{percent}% der Zeit",
   "sponsorship": {
-    "users_you_sponsor": "Benutzer, die Sie sponsern:",
+    "users_you_sponsor": "Benutzer, die Sie sponsern",
     "no_sponsorships_found": "Keine Sponsorings gefunden",
+    "configure_ai_access_first": "Sie müssen zuerst den KI-Zugang konfigurieren, bevor Sie andere Benutzer und Profile sponsern können.",
     "incognito": "Inkognito",
     "add_sponsorship": "Sponsern",
     "platform_handle_label": "Benutzername oder Telefon des Benutzers, den Sie sponsern möchten",
     "platform_handle_placeholder": "@benutzername oder +00-telefon",
+    "platform_handle_placeholder_telegram": "@benutzername",
+    "platform_handle_placeholder_whatsapp": "+491234567890",
     "you_are_sponsored": "Sie sind ein gesponserter Benutzer!",
     "unlink_message": "Sie können jetzt ein autonomer Benutzer werden. Dies bricht die Verbindung zwischen Ihnen und {sponsorName} und die KI wird nicht mehr funktionieren, bis Sie Ihr Profil konfigurieren.",
     "unlink": "Verknüpfung aufheben"
@@ -37,6 +47,36 @@
   "save": "Speichern",
   "saved": "Gespeichert!",
   "copied": "Kopiert!",
+  "connections": {
+    "page_title": "Verbindungen",
+    "card_title": "Profile verbinden",
+    "show_my_key": "Meinen Verbindungsschlüssel anzeigen",
+    "hide_my_key": "Meinen Verbindungsschlüssel ausblenden",
+    "copy_key": "Kopieren",
+    "regenerate_key": "Erneuern",
+    "share_key": "Teilen",
+    "share_not_supported": "Teilen wird auf diesem Gerät nicht unterstützt",
+    "share_failed": "Teilen fehlgeschlagen",
+    "connect_to_another_label": "Mit einem anderen Profil verbinden",
+    "paste_key": "Einfügen",
+    "clear_key": "Löschen",
+    "paste_permission_denied": "Bitte erlauben Sie den Zugriff auf die Zwischenablage, wenn Safari danach fragt",
+    "paste_chrome_permission": "Bitte erlauben Sie den Zugriff auf die Zwischenablage in Chrome: Einstellungen > Datenschutz und Sicherheit > Website-Einstellungen > Zwischenablage",
+    "paste_failed": "Einfügen fehlgeschlagen",
+    "connect_button": "Verbinden",
+    "connecting": "Verbinden...",
+    "main_info": "Sie können dieses Profil mit einem anderen Profil verbinden, wenn Sie den Verbindungsschlüssel dieses Profils haben. Dies kann beispielsweise verwendet werden, um Ihre WhatsApp- und Telegram-Profile zusammenzuführen. Der Verbindungsschlüssel jedes Profils ist eindeutig und geheim! Um den Verbindungsschlüssel von einem anderen Profil zu erhalten, müssen Sie diese Seite über den Chat dieses Profils mit {botName} öffnen. Das Verbinden der beiden Profile führt sie zu einem einzigen Profil zusammen.",
+    "my_key_info": "Dies ist Ihr Verbindungsschlüssel. Teilen Sie Ihren Verbindungsschlüssel nicht mit anderen als Ihren anderen Profilen!",
+    "command_info": "Sie können diesen Schlüssel auch direkt an {botName} auf einer der unterstützten Plattformen senden, indem Sie einen Verbindungsbefehl verwenden. Dies verbindet automatisch dieses Profil mit dem Profil, an das Sie es senden:",
+    "chat_command_info": "Alternativ können Sie {botName} bitten, sich über den Chat mit einem anderen Profil zu verbinden:",
+    "chat_command_example": "Bitte verbinde mich mit diesem Profil: {connectKey}.",
+    "cannot_connect_to_self": "Sie können dieses Profil nicht mit sich selbst verbinden. Um Verbindungen herzustellen, müssen Sie zu den Verbindungseinstellungen des anderen Profils gehen und den Schlüssel von dort nehmen!",
+    "invalid_format": "Ungültiges Format. Der Verbindungsschlüssel muss im richtigen Format sein.",
+    "connect_success": "Profile erfolgreich verbunden!",
+    "regenerate_success": "Verbindungsschlüssel erfolgreich erneuert!",
+    "copy_failed": "Kopieren fehlgeschlagen",
+    "generic_error": "Ein Fehler ist aufgetreten"
+  },
   "token_info": {
     "profile_id": "Profil ID",
     "platform": "Plattform",
@@ -53,13 +93,25 @@
   },
   "provider_needed_for": "{botName} benötigt dies für: {tools}",
   "where_is_my_key": "Wo ist mein {providerName}-Schlüssel?",
+  "configure_intelligence": "Intelligenz konfigurieren",
   "tools": {
-    "show_options": "Erweiterte Optionen anzeigen",
-    "hide_options": "Erweiterte Optionen ausblenden",
-    "title": "Erweiterte Optionen",
     "not_configured": "Konfigurieren",
     "select_tool": "Tool auswählen",
     "no_tools_available": "Keine Tools für diesen Typ verfügbar",
+    "groups": {
+      "text_intelligence": {
+        "title": "Sprach-Intelligenz"
+      },
+      "content_analysis": {
+        "title": "Inhaltsanalyse"
+      },
+      "image_tools": {
+        "title": "Bildtools"
+      },
+      "integrations": {
+        "title": "Integrationen"
+      }
+    },
     "types": {
       "chat": {
         "title": "Chat",
@@ -174,7 +226,6 @@
     "expired": "Ihre Sitzung ist abgelaufen.",
     "not_found": "Ihre Sitzung wurde nicht gefunden.",
     "not_valid": "Ihre Sitzung ist ungültig.",
-    "misconfigured": "Ihre Sitzung ist falsch konfiguriert.",
     "fetch_failed": "Laden der Einstellungen fehlgeschlagen.",
     "save_failed": "Speichern der Einstellungen fehlgeschlagen.",
     "check_link": "Überprüfen Sie Ihren Zugangslink und versuchen Sie es erneut.",

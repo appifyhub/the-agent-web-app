@@ -5,11 +5,18 @@
   "close": "关闭",
   "help": "帮助",
   "configure_title": "配置{botName}的行为",
-  "configure_keys_title": "提升 {botName} 的智能",
+  "intelligence_card_title": "提升 {botName} 的智能",
+  "access": "访问",
+  "intelligence": "智能",
+  "access_card_title": "让 {botName} 独立",
+  "profile_card_title": "自定义 {botName}",
+  "profile_full_name_label": "{botName} 认识我为：",
+  "profile_full_name_placeholder": "您的显示名称",
   "preferred_language_label": "{botName} 尝试使用以下语言回复：",
   "preferred_language_placeholder": "请选择您的首选语言",
   "your_chats": "设置聊天",
   "loading_placeholder": "加载中…",
+  "untitled": "无标题",
   "notifications": {
     "releases_label": "{botName} 应通知我有关发布的信息：",
     "releases_placeholder": "请选择级别",
@@ -24,12 +31,15 @@
   "always": "总是",
   "reply_frequency": "{percent}% 的时间",
   "sponsorship": {
-    "users_you_sponsor": "您赞助的用户：",
+    "users_you_sponsor": "您赞助的用户",
     "no_sponsorships_found": "未找到赞助",
+    "configure_ai_access_first": "在您可以赞助其他用户和资料之前，必须先配置AI访问权限。",
     "incognito": "匿名",
     "add_sponsorship": "赞助",
     "platform_handle_label": "您想要赞助的用户的用户名或电话",
     "platform_handle_placeholder": "@用户名 或 +00-电话",
+    "platform_handle_placeholder_telegram": "@用户名",
+    "platform_handle_placeholder_whatsapp": "+861234567890",
     "you_are_sponsored": "您是被赞助的用户！",
     "unlink_message": "您现在可以成为自主用户。这将断开您与{sponsorName}之间的链接, AI将停止工作, 直到您配置您的个人资料。",
     "unlink": "取消链接"
@@ -37,6 +47,36 @@
   "save": "保存",
   "saved": "已保存！",
   "copied": "已复制！",
+  "connections": {
+    "page_title": "连接",
+    "card_title": "连接配置文件",
+    "show_my_key": "显示我的连接密钥",
+    "hide_my_key": "隐藏我的连接密钥",
+    "copy_key": "复制",
+    "regenerate_key": "重新生成",
+    "share_key": "分享",
+    "share_not_supported": "此设备不支持分享",
+    "share_failed": "分享失败",
+    "connect_to_another_label": "连接到另一个配置文件",
+    "paste_key": "粘贴",
+    "clear_key": "清除",
+    "paste_permission_denied": "请在 Safari 提示时允许剪贴板访问",
+    "paste_chrome_permission": "请在 Chrome 中允许剪贴板访问：设置 > 隐私和安全 > 网站设置 > 剪贴板",
+    "paste_failed": "粘贴失败",
+    "connect_button": "连接",
+    "connecting": "连接中...",
+    "main_info": "如果您拥有该配置文件的连接密钥，则可以将此配置文件连接到另一个配置文件。例如，这可用于合并您的 WhatsApp 和 Telegram 配置文件。每个配置文件的连接密钥都是唯一且保密的！要从另一个配置文件获取连接密钥，您必须使用该配置文件与 {botName} 的聊天打开此页面。连接两个配置文件会将它们合并为一个配置文件。",
+    "my_key_info": "这是您的连接密钥。不要与您的其他配置文件以外的任何人分享您的连接密钥！",
+    "command_info": "您也可以使用连接命令在支持的平台之一中直接将此密钥发送给 {botName}。这将自动将此配置文件与您发送到的配置文件连接：",
+    "chat_command_info": "或者，您可以要求 {botName} 使用聊天连接到另一个配置文件：",
+    "chat_command_example": "请将我连接到此配置文件：{connectKey}。",
+    "cannot_connect_to_self": "您不能将此配置文件连接到自身。要进行连接，您必须转到另一个配置文件的连接设置并从那里获取密钥！",
+    "invalid_format": "格式无效。连接密钥必须采用正确的格式。",
+    "connect_success": "配置文件连接成功！",
+    "regenerate_success": "连接密钥重新生成成功！",
+    "copy_failed": "复制失败",
+    "generic_error": "发生错误"
+  },
   "token_info": {
     "profile_id": "个人资料ID",
     "platform": "平台",
@@ -53,12 +93,12 @@
   },
   "provider_needed_for": "{botName} 需要此用于: {tools}",
   "where_is_my_key": "我的 {providerName} 密钥在哪里？",
+  "configure_intelligence": "配置智能",
   "errors": {
     "oh_no": "哦不！",
     "expired": "您的会话已过期。",
     "not_found": "未找到您的会话。",
     "not_valid": "您的会话无效。",
-    "misconfigured": "您的会话配置错误。",
     "fetch_failed": "加载设置失败。",
     "save_failed": "保存设置失败。",
     "check_link": "请检查您的访问链接并重试。",
@@ -111,12 +151,23 @@
     }
   },
   "tools": {
-    "show_options": "显示高级选项",
-    "hide_options": "隐藏高级选项",
-    "title": "高级选项",
     "not_configured": "配置",
     "select_tool": "选择工具",
     "no_tools_available": "此类型没有可用工具",
+    "groups": {
+      "text_intelligence": {
+        "title": "语言智能"
+      },
+      "content_analysis": {
+        "title": "内容分析"
+      },
+      "image_tools": {
+        "title": "图像工具"
+      },
+      "integrations": {
+        "title": "集成"
+      }
+    },
     "types": {
       "chat": {
         "title": "聊天",

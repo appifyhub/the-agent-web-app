@@ -63,7 +63,7 @@ const SectionedSelector: React.FC<SectionedSelectorProps> = ({
   const selectValue = validOption ? value : undefined;
 
   return (
-    <div className={cn("space-y-4", className)}>
+    <div className={cn("space-y-2", className)}>
       <Label
         className={cn(
           "text-[1.05rem] font-light",
@@ -149,7 +149,7 @@ const SectionedSelector: React.FC<SectionedSelectorProps> = ({
                     opt.value === value
                   }
                   className={cn(
-                    "py-4 px-8 !pr-16 cursor-pointer text-foreground [&>span:first-child]:!right-4", // Extra left padding for indentation, override right padding and checkbox position
+                    "py-4 px-8 pr-16! cursor-pointer text-foreground [&>span:first-child]:right-4!", // Extra left padding for indentation, override right padding and checkbox position
                     opt.value === value ? "bg-accent/70" : "",
                     !section.isConfigured || !opt.isConfigured
                       ? "text-muted-foreground/50"

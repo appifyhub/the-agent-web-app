@@ -5,11 +5,18 @@
   "close": "बंद करें",
   "help": "सहायता",
   "configure_title": "{botName} का व्यवहार कॉन्फ़िगर करें",
-  "configure_keys_title": "{botName} की बुद्धिमत्ता बढ़ाएं",
+  "intelligence_card_title": "{botName} की बुद्धिमत्ता बढ़ाएं",
+  "access": "पहुंच",
+  "intelligence": "बुद्धिमत्ता",
+  "access_card_title": "{botName} को स्वतंत्र बनाएं",
+  "profile_card_title": "{botName} को अनुकूलित करें",
+  "profile_full_name_label": "{botName} मुझे इस नाम से जानता है:",
+  "profile_full_name_placeholder": "आपका प्रदर्शन नाम",
   "preferred_language_label": "{botName} निम्न भाषा में उत्तर देने का प्रयास करता है:",
   "preferred_language_placeholder": "भाषा चुनें",
   "your_chats": "चैट सेट करें",
   "loading_placeholder": "लोड हो रहा है...",
+  "untitled": "अनामित",
   "notifications": {
     "releases_label": "{botName} मुझे रिलीज़ के बारे में सूचित करे:",
     "releases_placeholder": "स्तर चुनें",
@@ -24,12 +31,15 @@
   "always": "हमेशा",
   "reply_frequency": "{percent}% समय",
   "sponsorship": {
-    "users_you_sponsor": "आपके द्वारा प्रायोजित उपयोगकर्ता:",
+    "users_you_sponsor": "आपके द्वारा प्रायोजित उपयोगकर्ता",
     "no_sponsorships_found": "कोई प्रायोजन नहीं मिला",
+    "configure_ai_access_first": "आपको पहले AI एक्सेस कॉन्फ़िगर करना होगा, इससे पहले कि आप अन्य उपयोगकर्ताओं और प्रोफाइल को प्रायोजित कर सकें।",
     "incognito": "गुप्त",
     "add_sponsorship": "प्रायोजन",
     "platform_handle_label": "उस उपयोगकर्ता का उपयोगकर्ता नाम या फोन जिसे आप प्रायोजित करना चाहते हैं",
     "platform_handle_placeholder": "@उपयोगकर्ता या +00-फोन",
+    "platform_handle_placeholder_telegram": "@उपयोगकर्ता_नाम",
+    "platform_handle_placeholder_whatsapp": "+911234567890",
     "you_are_sponsored": "आप एक प्रायोजित उपयोगकर्ता हैं!",
     "unlink_message": "अब आप एक स्वायत्त उपयोगकर्ता बन सकते हैं। यह आपके और {sponsorName} के बीच की कड़ी तोड़ देता है और जब तक आप अपनी प्रोफाइल कॉन्फ़िगर नहीं करते तब तक AI काम करना बंद कर देगा।",
     "unlink": "लिंक हटाएं"
@@ -37,6 +47,36 @@
   "save": "सहेजें",
   "saved": "सहेजा गया!",
   "copied": "कॉपी किया गया!",
+  "connections": {
+    "page_title": "कनेक्शन",
+    "card_title": "प्रोफाइल कनेक्ट करें",
+    "show_my_key": "मेरी कनेक्ट कुंजी दिखाएं",
+    "hide_my_key": "मेरी कनेक्ट कुंजी छुपाएं",
+    "copy_key": "कॉपी करें",
+    "regenerate_key": "पुनर्जीवित करें",
+    "share_key": "साझा करें",
+    "share_not_supported": "इस डिवाइस पर साझाकरण समर्थित नहीं है",
+    "share_failed": "साझा करने में विफल",
+    "connect_to_another_label": "दूसरे प्रोफाइल से कनेक्ट करें",
+    "paste_key": "पेस्ट करें",
+    "clear_key": "साफ़ करें",
+    "paste_permission_denied": "कृपया Safari द्वारा अनुरोध किए जाने पर क्लिपबोर्ड एक्सेस की अनुमति दें",
+    "paste_chrome_permission": "कृपया Chrome में क्लिपबोर्ड एक्सेस की अनुमति दें: सेटिंग्स > प्राइवेसी और सुरक्षा > साइट सेटिंग्स > क्लिपबोर्ड",
+    "paste_failed": "पेस्ट करने में विफल",
+    "connect_button": "कनेक्ट करें",
+    "connecting": "कनेक्ट हो रहा है...",
+    "main_info": "यदि आपके पास उस प्रोफाइल की कनेक्ट कुंजी है, तो आप इस प्रोफाइल को दूसरे प्रोफाइल से कनेक्ट कर सकते हैं। उदाहरण के लिए, इसका उपयोग आपके WhatsApp और Telegram प्रोफाइल को मर्ज करने के लिए किया जा सकता है। प्रत्येक प्रोफाइल की कनेक्ट कुंजी अद्वितीय और गुप्त है! दूसरे प्रोफाइल से कनेक्ट कुंजी प्राप्त करने के लिए, आपको {botName} के साथ उस प्रोफाइल के चैट का उपयोग करके यही पृष्ठ खोलना होगा। दो प्रोफाइल को कनेक्ट करने से वे एक प्रोफाइल में मर्ज हो जाते हैं।",
+    "my_key_info": "यह आपकी कनेक्ट कुंजी है। अपनी कनेक्ट कुंजी को अपने अन्य प्रोफाइल के अलावा किसी के साथ साझा न करें!",
+    "command_info": "आप इस कुंजी को सीधे {botName} को समर्थित प्लेटफॉर्म में से एक में कनेक्ट कमांड का उपयोग करके भेज सकते हैं। यह स्वचालित रूप से इस प्रोफाइल को उस प्रोफाइल से कनेक्ट कर देगा जिसे आप इसे भेजते हैं:",
+    "chat_command_info": "वैकल्पिक रूप से, आप {botName} से चैट का उपयोग करके दूसरे प्रोफाइल से कनेक्ट करने के लिए कह सकते हैं:",
+    "chat_command_example": "कृपया मुझे इस प्रोफाइल से कनेक्ट करें: {connectKey}।",
+    "cannot_connect_to_self": "आप इस प्रोफाइल को स्वयं से कनेक्ट नहीं कर सकते। कनेक्शन बनाने के लिए, आपको दूसरे प्रोफाइल की कनेक्शन सेटिंग्स पर जाना होगा और वहां से कुंजी लेनी होगी!",
+    "invalid_format": "अमान्य प्रारूप। कनेक्ट कुंजी सही प्रारूप में होनी चाहिए।",
+    "connect_success": "प्रोफाइल सफलतापूर्वक कनेक्ट हो गए!",
+    "regenerate_success": "कनेक्ट कुंजी सफलतापूर्वक पुनर्जीवित हो गई!",
+    "copy_failed": "कॉपी करने में विफल",
+    "generic_error": "एक त्रुटि हुई"
+  },
   "token_info": {
     "profile_id": "प्रोफ़ाइल ID",
     "platform": "प्लेटफॉर्म",
@@ -53,24 +93,35 @@
   },
   "provider_needed_for": "{botName} को इसके लिए {tools} चाहिए",
   "where_is_my_key": "मेरा {providerName} कुंजी कहाँ है?",
+  "configure_intelligence": "बुद्धिमत्ता कॉन्फ़िगर करें",
   "errors": {
     "oh_no": "ओह नहीं!",
     "expired": "आपका सत्र समाप्त हो गया है।",
     "not_found": "आपका सत्र नहीं मिला।",
     "not_valid": "आपका सत्र मान्य नहीं है।",
-    "misconfigured": "आपका सत्र गलत कॉन्फ़िगर किया गया है।",
     "fetch_failed": "सेटिंग्स लोड करने में विफल।",
     "save_failed": "सेटिंग्स सहेजने में विफल।",
     "check_link": "अपना एक्सेस लिंक जांचें और पुनः प्रयास करें।",
     "sponsored_user": "आपका उपयोग {sponsorName} द्वारा प्रायोजित है। स्वायत्त उपयोगकर्ता बनने के लिए, {sponsorshipsLink} पर जाएं।"
   },
   "tools": {
-    "show_options": "उन्नत विकल्प दिखाएं",
-    "hide_options": "उन्नत विकल्प छिपाएं",
-    "title": "उन्नत विकल्प",
     "not_configured": "कॉन्फ़िगर करें",
     "select_tool": "एक उपकरण चुनें",
     "no_tools_available": "इस प्रकार के लिए कोई उपकरण उपलब्ध नहीं",
+    "groups": {
+      "text_intelligence": {
+        "title": "भाषा बुद्धिमत्ता"
+      },
+      "content_analysis": {
+        "title": "सामग्री विश्लेषण"
+      },
+      "image_tools": {
+        "title": "छवि उपकरण"
+      },
+      "integrations": {
+        "title": "एकीकरण"
+      }
+    },
     "types": {
       "chat": {
         "title": "चैट",

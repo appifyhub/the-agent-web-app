@@ -36,12 +36,4 @@ interface GenericControlsProps {
 3. **Update all usages systematically** - Update each usage site with new prop names
 4. **Maintain backward compatibility** - Use sensible defaults for new props
 
-### File Update Pattern
-
-Key files that commonly use shared components:
-
-- [UserSettingsPage.tsx](mdc:src/pages/UserSettingsPage.tsx)
-- [ChatSettingsPage.tsx](mdc:src/pages/ChatSettingsPage.tsx)
-- [SponsorshipsPage.tsx](mdc:src/pages/SponsorshipsPage.tsx)
-
-Always search the entire codebase when changing shared component interfaces.
+Whatever you do, always run the lint and rebuild bun tasks to check what you did.

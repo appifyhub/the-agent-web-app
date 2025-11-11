@@ -4,12 +4,19 @@
   "sponsorships": "Sponzorstva",
   "close": "Zatvori",
   "help": "Pomoć",
-  "configure_title": "Podesite ponašanje {botName}a",
-  "configure_keys_title": "Pojačajte {botName}ovu Inteligenciju",
-  "preferred_language_label": "{botName} će pokušati da odgovori koristeći:",
-  "preferred_language_placeholder": "Izaberite jezik",
+  "configure_title": "Podesi ponašanje {botName}a",
+  "intelligence_card_title": "Unapredi {botName}ovu Inteligenciju",
+  "access": "Pristup",
+  "intelligence": "Inteligencija",
+  "access_card_title": "Učini {botName}a nezavisnim",
+  "profile_card_title": "Prilagodi {botName}a",
+  "profile_full_name_label": "{botName} me zna kao:",
+  "profile_full_name_placeholder": "Ime za prikaz",
+  "preferred_language_label": "{botName} odgovara koristeći:",
+  "preferred_language_placeholder": "Izaberi jezik",
   "your_chats": "Podesi četove",
   "loading_placeholder": "Učitavanje…",
+  "untitled": "Bez naslova",
   "notifications": {
     "releases_label": "{botName} treba da me obavesti o izdanjima:",
     "releases_placeholder": "Izaberite nivo",
@@ -18,18 +25,21 @@
     "releases_choice_minor": "Sve nove funkcije",
     "releases_choice_all": "Sve promene"
   },
-  "spontaneous_label": "{botName} će odgovarati bez taga:",
-  "spontaneous_placeholder": "Izaberite učestalost",
+  "spontaneous_label": "{botName} odgovara bez taga:",
+  "spontaneous_placeholder": "Izaberi učestalost",
   "never": "Nikada",
   "always": "Uvek",
   "reply_frequency": "{percent}% vremena",
   "sponsorship": {
-    "users_you_sponsor": "Korisnici koje sponzorišete:",
+    "users_you_sponsor": "Korisnici koje sponzorišem",
     "no_sponsorships_found": "Nisu pronađena sponzorstva",
+    "configure_ai_access_first": "Morate prvo da konfigurišete AI pristup, pre nego što možete da sponzorišete druge korisnike i profile.",
     "incognito": "Inkognito",
     "add_sponsorship": "Sponzoriši",
     "platform_handle_label": "Korisničko ime ili telefon korisnika koga želite da sponzorišete",
     "platform_handle_placeholder": "@korisnik ili +00-telefon",
+    "platform_handle_placeholder_telegram": "@korisničko_ime",
+    "platform_handle_placeholder_whatsapp": "+3811234567890",
     "you_are_sponsored": "Vi ste sponzorisani korisnik!",
     "unlink_message": "Sada možete postati autonomni korisnik. Ovo prekida vezu između vas i {sponsorName}. AI će prestati da radi dok ne podesite svoj Profil.",
     "unlink": "Prekini vezu"
@@ -37,14 +47,44 @@
   "save": "Sačuvaj",
   "saved": "Sačuvano!",
   "copied": "Kopirano!",
+  "connections": {
+    "page_title": "Povezivanje",
+    "card_title": "Poveži profile",
+    "show_my_key": "Prikaži moj ključ za povezivanje",
+    "hide_my_key": "Sakrij moj ključ za povezivanje",
+    "copy_key": "Kopiraj",
+    "regenerate_key": "Osveži",
+    "share_key": "Podeli",
+    "share_not_supported": "Deljenje nije podržano na ovom uređaju",
+    "share_failed": "Neuspešno deljenje",
+    "connect_to_another_label": "Poveži sa drugim profilom",
+    "paste_key": "Nalepi",
+    "clear_key": "Obriši",
+    "paste_permission_denied": "Molimo dozvolite pristup clipboard-u kada Safari zatraži",
+    "paste_chrome_permission": "Molimo dozvolite pristup clipboard-u u Chrome-u: Podešavanja > Privatnost i bezbednost > Podešavanja sajta > Clipboard",
+    "paste_failed": "Neuspešno lepljenje",
+    "connect_button": "Poveži",
+    "connecting": "Povezivanje...",
+    "main_info": "Možete povezati ovaj profil sa drugim profilom ako imate ključ za povezivanje tog profila. Na primer, ovo se može koristiti za spajanje vaših WhatsApp i Telegram profila. Ključ za povezivanje svakog profila je jedinstven i tajan! Da biste dobili ključ za povezivanje drugog profila, morate otvoriti ovu istu stranicu koristeći čet tog profila sa {botName}om. Povezivanje dva profila spaja ih u jedan profil.",
+    "my_key_info": "Ovo je vaš ključ za povezivanje. Ne delite svoj ključ za povezivanje sa bilo kim osim sa svojim drugim profilima!",
+    "command_info": "Takođe možete direktno poslati ovaj ključ {botName}u na jednoj od podržanih platformi, koristeći komandu za povezivanje. Ovo će automatski povezati ovaj profil sa profilom kome ga pošaljete:",
+    "chat_command_info": "Alternativno, možete zamoliti {botName}a da se poveže sa drugim profilom koristeći čet:",
+    "chat_command_example": "Molim te poveži me sa ovim profilom: {connectKey}.",
+    "cannot_connect_to_self": "Ne možete povezati ovaj profil sa samim sobom. Da biste povezali profile, morate otići na podešavanja Povezivanja drugog profila i uzeti ključ odatle!",
+    "invalid_format": "Nevažeći format. Ključ za povezivanje mora biti u ispravnom formatu.",
+    "connect_success": "Profili su uspešno povezani!",
+    "regenerate_success": "Ključ za povezivanje je uspešno regenerisan!",
+    "copy_failed": "Neuspešno kopiranje",
+    "generic_error": "Došlo je do greške"
+  },
   "token_info": {
     "profile_id": "ID profila",
     "platform": "Platforma",
-    "platform_user_id": "Platformski korisnički ID",
-    "platform_handle": "Platformsko korisničko ime",
+    "platform_user_id": "Plat. korisnički ID",
+    "platform_handle": "Plat. korisničko ime",
     "sponsored_by": "Sponzoriše",
     "version": "AI Verzija",
-    "reveal_placeholder": "Informacije koje prikupljamo o vama"
+    "reveal_placeholder": "Informacije koje prikupljamo"
   },
   "platforms": {
     "telegram": "Telegram",
@@ -53,16 +93,16 @@
   },
   "provider_needed_for": "{botName} ovo koristi za: {tools}",
   "where_is_my_key": "Gde je moj {providerName} ključ?",
+  "configure_intelligence": "Podesi inteligenciju",
   "errors": {
     "oh_no": "O ne!",
-    "expired": "Vaša sesija je istekla.",
-    "not_found": "Vaša sesija nije pronađena.",
-    "not_valid": "Vaša sesija nije validna.",
-    "misconfigured": "Vaša sesija je pogrešno podešena.",
+    "expired": "Ova sesija je istekla.",
+    "not_found": "Ova sesija nije pronađena.",
+    "not_valid": "Ova sesija nije validna.",
     "fetch_failed": "Neuspešno učitavanje podešavanja.",
     "save_failed": "Neuspešno čuvanje podešavanja.",
-    "check_link": "Proverite svoj pristupni link i pokušajte ponovo.",
-    "sponsored_user": "Vaše korišćenje sponzoriše {sponsorName}. Da postanete autonomni korisnik, idite na {sponsorshipsLink}."
+    "check_link": "Proveri svoj pristupni link i pokušaj ponovo.",
+    "sponsored_user": "Korišćenje sponzoriše {sponsorName}. Da postaneš autonomni korisnik, idi na {sponsorshipsLink}."
   },
   "features": {
     "header": "Mogućnosti",
@@ -70,7 +110,7 @@
     "items": {
       "language_intelligence": {
         "title": "Jezička inteligencija",
-        "description": "Asistent razume i odgovara na jeziku po vašem izboru, uz podršku više od 50 jezika, čineći razgovore prirodnim i pristupačnim korisnicima širom sveta. Pitajte bilo šta i brzo dobijajte pametne odgovore."
+        "description": "Agent razume i odgovara na jeziku po vašem izboru, uz podršku više od 50 jezika, čineći razgovore prirodnim i pristupačnim korisnicima širom sveta. Pitajte bilo šta i brzo dobijajte pametne odgovore."
       },
       "independent": {
         "title": "Nezavisnost",
@@ -111,12 +151,23 @@
     }
   },
   "tools": {
-    "show_options": "Prikaži napredne opcije",
-    "hide_options": "Sakrij napredne opcije",
-    "title": "Napredne opcije",
     "not_configured": "Podesi",
-    "select_tool": "Izaberite alat",
+    "select_tool": "Izaberi alat",
     "no_tools_available": "Nema dostupnih alata za ovaj tip",
+    "groups": {
+      "text_intelligence": {
+        "title": "Jezična inteligencija"
+      },
+      "content_analysis": {
+        "title": "Analiza sadržaja"
+      },
+      "image_tools": {
+        "title": "Alati za slike"
+      },
+      "integrations": {
+        "title": "Integracije"
+      }
+    },
     "types": {
       "chat": {
         "title": "Čet",
