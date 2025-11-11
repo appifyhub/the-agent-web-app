@@ -66,6 +66,20 @@ function searchKeyUsage(key: string): boolean {
       }
     }
 
+    // Check for dynamic tools.groups usage (e.g., tools.groups.${category}.title)
+    if (
+      key.startsWith("tools.groups.") &&
+      key.endsWith(".title")
+    ) {
+      const dynamicResult = execSync(
+        `grep -r --include="*.ts" --include="*.tsx" --include="*.js" --include="*.jsx" -E "tools\\.groups\\.\\\\\\$\\{.*\\}\\.title" "${SRC_DIR}" 2>/dev/null || true`,
+        { encoding: "utf8", maxBuffer: 10 * 1024 * 1024 }
+      );
+      if (dynamicResult.trim()) {
+        return true;
+      }
+    }
+
     // Check for dynamic features usage
     if (
       key.startsWith("features.items.") &&

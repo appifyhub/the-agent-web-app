@@ -11,7 +11,8 @@
     "preview": "vite preview",
     "lint:code": "eslint .",
     "lint:css": "stylelint \"**/*.css\" --ignore-path .gitignore",
-    "lint": "bun run lint:code && bun run lint:css",
+    "lint:i18n": "bun run i18n:keys && bun run i18n:check",
+    "lint": "bun run lint:i18n && bun run lint:code && bun run lint:css",
     "i18n:keys": "bunx ts-node scripts/generate-translation-keys.ts",
     "i18n:check": "bunx ts-node scripts/check-translation-usage.ts"
   },
