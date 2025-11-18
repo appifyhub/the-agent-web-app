@@ -13,8 +13,8 @@
     "lint:css": "stylelint \"**/*.css\" --ignore-path .gitignore",
     "lint:i18n": "bun run i18n:keys && bun run i18n:check",
     "lint": "bun run lint:i18n && bun run lint:code && bun run lint:css",
-    "i18n:keys": "bunx ts-node scripts/generate-translation-keys.ts",
-    "i18n:check": "bunx ts-node scripts/check-translation-usage.ts"
+    "i18n:keys": "bun scripts/generate-translation-keys.ts",
+    "i18n:check": "bun scripts/check-translation-usage.ts"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",
