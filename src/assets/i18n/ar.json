@@ -94,6 +94,7 @@
   "provider_needed_for": "يحتاج {botName} هذا من أجل {tools}",
   "where_is_my_key": "أين يوجد مفتاح {providerName} الخاص بي؟",
   "configure_intelligence": "تكوين الذكاء",
+  "configure_ai_providers": "تكوين مزودي الذكاء الاصطناعي",
   "errors": {
     "oh_no": "أوه لا!",
     "expired": "انتهت صلاحية جلستك.",

@@ -94,6 +94,7 @@
   "provider_needed_for": "{botName} 需要此用于: {tools}",
   "where_is_my_key": "我的 {providerName} 密钥在哪里？",
   "configure_intelligence": "配置智能",
+  "configure_ai_providers": "配置 AI 提供商",
   "errors": {
     "oh_no": "哦不！",
     "expired": "您的会话已过期。",

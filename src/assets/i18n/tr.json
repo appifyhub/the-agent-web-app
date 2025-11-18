@@ -94,6 +94,7 @@
   "provider_needed_for": "{botName} bunu {tools} için gerektirir",
   "where_is_my_key": "{providerName} anahtarım nerede?",
   "configure_intelligence": "Zeka yapılandır",
+  "configure_ai_providers": "AI sağlayıcılarını yapılandır",
   "errors": {
     "oh_no": "Ah hayır!",
     "expired": "Oturumunuzun süresi doldu.",

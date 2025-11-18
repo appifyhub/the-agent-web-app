@@ -94,6 +94,7 @@
   "provider_needed_for": "{botName} necesita esto para: {tools}",
   "where_is_my_key": "¿Dónde está mi clave de {providerName}?",
   "configure_intelligence": "Configurar inteligencia",
+  "configure_ai_providers": "Configurar proveedores de IA",
   "errors": {
     "oh_no": "¡Oh no!",
     "expired": "Tu sesión ha expirado.",

@@ -8,6 +8,7 @@ import { t } from "@/lib/translations";
 import { usePageSession } from "@/hooks/usePageSession";
 import { PageError } from "@/lib/utils";
 import { toast } from "sonner";
+import { ChevronsRight } from "lucide-react";
 import {
   fetchUserSettings,
   saveUserSettings,
@@ -15,23 +16,34 @@ import {
   buildChangedPayload,
   areSettingsChanged,
 } from "@/services/user-settings-service";
+import {
+  fetchExternalTools,
+  ExternalToolProviderResponse,
+} from "@/services/external-tools-service";
+import { useNavigation } from "@/hooks/useNavigation";
 
 const UserSettingsPage: React.FC = () => {
-  const { user_id } = useParams<{
+  const { user_id, lang_iso_code } = useParams<{
     user_id: string;
+    lang_iso_code: string;
   }>();
 
   const { error, accessToken, isLoadingState, setError, setIsLoadingState } =
     usePageSession();
 
+  const { navigateToAccess, navigateToIntelligence } = useNavigation();
+
   const [userSettings, setUserSettings] = useState<UserSettings | null>(null);
   const [remoteSettings, setRemoteSettings] = useState<UserSettings | null>(
     null
   );
+  const [externalToolProviders, setExternalToolProviders] = useState<
+    ExternalToolProviderResponse[]
+  >([]);
 
   const botName = import.meta.env.VITE_APP_NAME_SHORT;
 
-  // Fetch user settings when session is ready
+  // Fetch user settings and external tools when session is ready
   useEffect(() => {
     if (!accessToken || !user_id || error?.isBlocker) return;
 
@@ -40,14 +52,23 @@ const UserSettingsPage: React.FC = () => {
       setError(null);
       try {
         const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
-        const settings = await fetchUserSettings({
-          apiBaseUrl,
-          user_id,
-          rawToken: accessToken.raw,
-        });
+        const [settings, externalTools] = await Promise.all([
+          fetchUserSettings({
+            apiBaseUrl,
+            user_id,
+            rawToken: accessToken.raw,
+          }),
+          fetchExternalTools({
+            apiBaseUrl,
+            user_id,
+            rawToken: accessToken.raw,
+          }),
+        ]);
         console.info("Fetched settings!", settings);
+        console.info("Fetched external tools!", externalTools);
         setUserSettings(settings);
         setRemoteSettings(settings);
+        setExternalToolProviders(externalTools.providers);
       } catch (err) {
         console.error("Error fetching data!", err);
         setError(PageError.blocker("errors.fetch_failed"));
@@ -137,6 +158,57 @@ const UserSettingsPage: React.FC = () => {
           }}
         />
       </div>
+
+      {/* Provider configuration link */}
+      {(() => {
+        if (externalToolProviders.length === 0) return null;
+
+        const firstUnconfiguredProvider = externalToolProviders.find(
+          (p) => !p.is_configured
+        );
+        const allConfigured = !firstUnconfiguredProvider;
+
+        if (allConfigured) {
+          // All providers configured - show Customize Intelligence link
+          return (
+            <div className="flex items-center space-x-2 ps-2 text-sm text-muted-foreground mt-6">
+              <ChevronsRight className="h-4 w-4 text-accent-amber/70" />
+              <button
+                onClick={() => {
+                  if (user_id && lang_iso_code) {
+                    navigateToIntelligence(user_id, lang_iso_code);
+                  }
+                }}
+                className="underline underline-offset-3 decoration-accent-amber/70 text-accent-amber/70 hover:text-accent-amber cursor-pointer"
+              >
+                {t("configure_intelligence")}
+              </button>
+            </div>
+          );
+        } else {
+          // Has unconfigured providers - show Configure AI providers link
+          return (
+            <div className="flex items-center space-x-2 ps-2 text-sm text-muted-foreground mt-6">
+              <ChevronsRight className="h-4 w-4 text-accent-amber/70" />
+              <button
+                onClick={() => {
+                  if (user_id && lang_iso_code && firstUnconfiguredProvider) {
+                    // Store provider ID in sessionStorage so Access page can scroll to it
+                    sessionStorage.setItem(
+                      "scrollToProvider",
+                      firstUnconfiguredProvider.definition.id
+                    );
+                    navigateToAccess(user_id, lang_iso_code);
+                  }
+                }}
+                className="underline underline-offset-3 decoration-accent-amber/70 text-accent-amber/70 hover:text-accent-amber cursor-pointer"
+              >
+                {t("configure_ai_providers")}
+              </button>
+            </div>
+          );
+        }
+      })()}
     </BaseSettingsPage>
   );
 };

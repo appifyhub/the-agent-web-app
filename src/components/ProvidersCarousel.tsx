@@ -171,7 +171,7 @@ const ProvidersCarousel: React.FC<ProvidersCarouselProps> = ({
                     href={provider.token_management_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="underline underline-offset-3 decoration-accent-amber/70 text-accent-amber/70"
+                    className="underline underline-offset-3 decoration-accent-amber/70 text-accent-amber/70 hover:text-accent-amber cursor-pointer"
                   >
                     {t("where_is_my_key", {
                       providerName: provider.name,

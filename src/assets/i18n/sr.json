@@ -94,6 +94,7 @@
   "provider_needed_for": "{botName} ovo koristi za: {tools}",
   "where_is_my_key": "Gde je moj {providerName} ključ?",
   "configure_intelligence": "Podesi inteligenciju",
+  "configure_ai_providers": "Podesi AI provajdere",
   "errors": {
     "oh_no": "O ne!",
     "expired": "Ova sesija je istekla.",
