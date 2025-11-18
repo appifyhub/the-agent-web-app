@@ -94,6 +94,7 @@
   "provider_needed_for": "{botName} a besoin de ça pour: {tools}",
   "where_is_my_key": "Où est ma clé {providerName} ?",
   "configure_intelligence": "Configurer l'intelligence",
+  "configure_ai_providers": "Configurer les fournisseurs d'IA",
   "tools": {
     "not_configured": "Configurer",
     "select_tool": "Sélectionner un outil",

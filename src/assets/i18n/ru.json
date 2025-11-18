@@ -94,6 +94,7 @@
   "provider_needed_for": "{botName} нужен это для: {tools}",
   "where_is_my_key": "Где мой ключ {providerName}?",
   "configure_intelligence": "Настроить интеллект",
+  "configure_ai_providers": "Настроить AI-провайдеры",
   "errors": {
     "oh_no": "О нет!",
     "expired": "Ваша сессия истекла.",
