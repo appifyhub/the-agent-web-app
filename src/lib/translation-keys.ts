@@ -91,6 +91,7 @@ export type TranslationKey =
   | "provider_needed_for"
   | "where_is_my_key"
   | "configure_intelligence"
+  | "configure_ai_providers"
   | "tools.not_configured"
   | "tools.select_tool"
   | "tools.no_tools_available"
