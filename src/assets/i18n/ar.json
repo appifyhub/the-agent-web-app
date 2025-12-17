@@ -25,6 +25,13 @@
     "releases_choice_minor": "كل الميزات الجديدة",
     "releases_choice_all": "جميع التغييرات"
   },
+  "media": {
+    "mode_label": "يرسل {botName} الوسائط كـ:",
+    "mode_placeholder": "اختر وضع الوسائط",
+    "mode_choice_photo": "صورة",
+    "mode_choice_file": "ملف",
+    "mode_choice_all": "كلاهما (صورة وملف)"
+  },
   "spontaneous_label": "يرد {botName} دون أن يتم وضع علامة عليه:",
   "spontaneous_placeholder": "اختر التكرار",
   "never": "أبدًا",

@@ -25,6 +25,13 @@
     "releases_choice_minor": "Tutte le nuove funzionalità",
     "releases_choice_all": "Tutti i cambiamenti"
   },
+  "media": {
+    "mode_label": "{botName} invia i media come:",
+    "mode_placeholder": "Seleziona modalità media",
+    "mode_choice_photo": "Foto",
+    "mode_choice_file": "File",
+    "mode_choice_all": "Entrambi (foto e file)"
+  },
   "spontaneous_label": "{botName} risponde senza essere taggato:",
   "spontaneous_placeholder": "Seleziona la frequenza",
   "never": "Mai",

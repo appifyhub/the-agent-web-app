@@ -25,6 +25,13 @@
     "releases_choice_minor": "Sve nove funkcije",
     "releases_choice_all": "Sve promene"
   },
+  "media": {
+    "mode_label": "{botName} šalje medije kao:",
+    "mode_placeholder": "Izaberite režim medija",
+    "mode_choice_photo": "Fotografija",
+    "mode_choice_file": "Fajl",
+    "mode_choice_all": "Oba (fotografija i fajl)"
+  },
   "spontaneous_label": "{botName} odgovara bez taga:",
   "spontaneous_placeholder": "Izaberi učestalost",
   "never": "Nikada",
