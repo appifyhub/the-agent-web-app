@@ -1,6 +1,7 @@
 import { request } from "@/services/networking";
 
 export type ReleaseNotificationsSetting = "none" | "major" | "minor" | "all";
+export type MediaModeSetting = "photo" | "file" | "all";
 
 export interface ChatSettings {
   chat_id: string;
@@ -12,6 +13,7 @@ export interface ChatSettings {
   language_iso_code?: string;
   reply_chance_percent: number;
   release_notifications: ReleaseNotificationsSetting;
+  media_mode: MediaModeSetting;
 }
 
 export async function fetchChatSettings({
@@ -59,6 +61,7 @@ export async function saveChatSettings({
     language_iso_code: chatSettings.language_iso_code,
     reply_chance_percent: chatSettings.reply_chance_percent,
     release_notifications: chatSettings.release_notifications,
+    media_mode: chatSettings.media_mode,
   };
   const response = await request(`${apiBaseUrl}/settings/chat/${chat_id}`, {
     method: "PATCH",
