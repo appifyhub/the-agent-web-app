@@ -4,7 +4,10 @@ import { CardTitle } from "@/components/ui/card";
 import BaseSettingsPage, {
   BaseSettingsPageRef,
 } from "@/pages/BaseSettingsPage";
-import type { ReleaseNotificationsSetting } from "@/services/chat-settings-service";
+import type {
+  ReleaseNotificationsSetting,
+  MediaModeSetting,
+} from "@/services/chat-settings-service";
 import SettingSelector from "@/components/SettingSelector";
 import { toast } from "sonner";
 import { PageError } from "@/lib/utils";
@@ -72,15 +75,19 @@ const ChatSettingsPage: React.FC = () => {
     fetchSettings();
   }, [accessToken, chat_id, error, setError, setIsLoadingState]);
 
+  // prettier-ignore
   const areSettingsChanged = !!(
     chatSettings &&
     remoteSettings &&
-    (chatSettings.language_name !== remoteSettings.language_name ||
+    // @formatter:off
+    (
+      chatSettings.language_name !== remoteSettings.language_name ||
       chatSettings.language_iso_code !== remoteSettings.language_iso_code ||
-      chatSettings.reply_chance_percent !==
-        remoteSettings.reply_chance_percent ||
-      chatSettings.release_notifications !==
-        remoteSettings.release_notifications)
+      chatSettings.reply_chance_percent !== remoteSettings.reply_chance_percent ||
+      chatSettings.release_notifications !== remoteSettings.release_notifications ||
+      chatSettings.media_mode !== remoteSettings.media_mode
+    )
+    // @formatter:on
   );
 
   const handleSave = async () => {
@@ -220,6 +227,42 @@ const ChatSettingsPage: React.FC = () => {
         placeholder={
           error?.isBlocker ? "—" : t("notifications.releases_placeholder")
         }
+        className="mt-9"
+      />
+
+      {/* Media Mode Dropdown */}
+      <SettingSelector
+        label={t("media.mode_label", { botName })}
+        value={chatSettings?.media_mode || undefined}
+        onChange={(val) =>
+          setChatSettings((prev) =>
+            prev
+              ? {
+                  ...prev,
+                  media_mode: val as MediaModeSetting,
+                }
+              : prev
+          )
+        }
+        options={[
+          {
+            value: "photo",
+            label: t("media.mode_choice_photo"),
+            disabled: chatSettings?.media_mode === "photo",
+          },
+          {
+            value: "file",
+            label: t("media.mode_choice_file"),
+            disabled: chatSettings?.media_mode === "file",
+          },
+          {
+            value: "all",
+            label: t("media.mode_choice_all"),
+            disabled: chatSettings?.media_mode === "all",
+          },
+        ]}
+        disabled={!!error?.isBlocker}
+        placeholder={error?.isBlocker ? "—" : t("media.mode_placeholder")}
         className="mt-9"
       />
 

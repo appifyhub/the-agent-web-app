@@ -25,6 +25,13 @@
     "releases_choice_minor": "All new features",
     "releases_choice_all": "All changes"
   },
+  "media": {
+    "mode_label": "{botName} sends media as:",
+    "mode_placeholder": "Select media mode",
+    "mode_choice_photo": "Photo",
+    "mode_choice_file": "File",
+    "mode_choice_all": "Both (photo & file)"
+  },
   "spontaneous_label": "{botName} replies without being tagged:",
   "spontaneous_placeholder": "Select how often",
   "never": "Never",

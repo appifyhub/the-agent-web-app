@@ -25,6 +25,13 @@
     "releases_choice_minor": "सभी नई सुविधाएँ",
     "releases_choice_all": "सभी बदलाव"
   },
+  "media": {
+    "mode_label": "{botName} मीडिया भेजता है:",
+    "mode_placeholder": "मीडिया मोड चुनें",
+    "mode_choice_photo": "फोटो",
+    "mode_choice_file": "फ़ाइल",
+    "mode_choice_all": "दोनों (फोटो और फ़ाइल)"
+  },
   "spontaneous_label": "{botName} बिना टैग किए उत्तर देता है:",
   "spontaneous_placeholder": "आवृत्ति चुनें",
   "never": "कभी नहीं",

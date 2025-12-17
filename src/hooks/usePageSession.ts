@@ -56,21 +56,18 @@ export const usePageSession = (): PageSessionState => {
         }
       }
 
-      const token = rawToken ? new AccessToken(rawToken) : null;
-
-      // Check if token is expired
-      if (token && token.isExpired()) {
-        console.warn("Settings token expired");
-        tokenStorage.clearToken();
+      // If no token found in either location, return error
+      if (!rawToken) {
+        console.warn("No token found in sessionStorage or URL.");
         return {
           accessToken: null,
-          tokenError: PageError.blocker("errors.expired"),
+          tokenError: PageError.blocker("errors.not_found"),
         };
       }
 
-      if (token) {
-        console.info("Session parameters are available!", token.decoded);
-      }
+      const token = new AccessToken(rawToken);
+
+      console.info("Session parameters are available!", token.decoded);
 
       return { accessToken: token, tokenError: null };
     } catch (err) {

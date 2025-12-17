@@ -25,6 +25,13 @@
     "releases_choice_minor": "所有新功能",
     "releases_choice_all": "所有更改"
   },
+  "media": {
+    "mode_label": "{botName} 发送媒体为：",
+    "mode_placeholder": "选择媒体模式",
+    "mode_choice_photo": "照片",
+    "mode_choice_file": "文件",
+    "mode_choice_all": "两者（照片和文件）"
+  },
   "spontaneous_label": "{botName} 在未被提及时回复：",
   "spontaneous_placeholder": "请选择回复频率",
   "never": "从不",

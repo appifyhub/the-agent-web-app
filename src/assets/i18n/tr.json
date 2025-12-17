@@ -25,6 +25,13 @@
     "releases_choice_minor": "Tüm yeni özellikler",
     "releases_choice_all": "Tüm değişiklikler"
   },
+  "media": {
+    "mode_label": "{botName} medyayı şu şekilde gönderir:",
+    "mode_placeholder": "Medya modunu seçin",
+    "mode_choice_photo": "Fotoğraf",
+    "mode_choice_file": "Dosya",
+    "mode_choice_all": "Her ikisi (fotoğraf ve dosya)"
+  },
   "spontaneous_label": "{botName} etiketlenmeden yanıt verir:",
   "spontaneous_placeholder": "Ne sıklıkta seçin",
   "never": "Asla",

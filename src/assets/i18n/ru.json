@@ -25,6 +25,13 @@
     "releases_choice_minor": "Все новые функции",
     "releases_choice_all": "Все изменения"
   },
+  "media": {
+    "mode_label": "{botName} отправляет медиа как:",
+    "mode_placeholder": "Выберите режим медиа",
+    "mode_choice_photo": "Фото",
+    "mode_choice_file": "Файл",
+    "mode_choice_all": "Оба (фото и файл)"
+  },
   "spontaneous_label": "{botName} отвечает без упоминания:",
   "spontaneous_placeholder": "Выберите как часто",
   "never": "Никогда",
