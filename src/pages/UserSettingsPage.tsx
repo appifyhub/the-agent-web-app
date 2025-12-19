@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import BaseSettingsPage from "@/pages/BaseSettingsPage";
 import { t } from "@/lib/translations";
 import { usePageSession } from "@/hooks/usePageSession";
@@ -21,6 +19,8 @@ import {
   ExternalToolProviderResponse,
 } from "@/services/external-tools-service";
 import { useNavigation } from "@/hooks/useNavigation";
+import SettingTextarea from "@/components/SettingTextarea";
+import SettingInput from "@/components/SettingInput";
 
 const UserSettingsPage: React.FC = () => {
   const { user_id, lang_iso_code } = useParams<{
@@ -93,8 +93,21 @@ const UserSettingsPage: React.FC = () => {
     try {
       const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
+      // Trim whitespace from text fields on submit (don't mutate form state pre-request)
+      const trimmedSettings: UserSettings = {
+        ...userSettings,
+        full_name:
+          userSettings.full_name === undefined
+            ? undefined
+            : userSettings.full_name.trim(),
+        about_me:
+          userSettings.about_me === undefined
+            ? undefined
+            : userSettings.about_me.trim(),
+      };
+
       // Only send fields that have actually changed (smart diffing)
-      const payload = buildChangedPayload(userSettings, remoteSettings);
+      const payload = buildChangedPayload(trimmedSettings, remoteSettings);
 
       await saveUserSettings({
         apiBaseUrl,
@@ -103,7 +116,9 @@ const UserSettingsPage: React.FC = () => {
         payload,
       });
 
-      setRemoteSettings(userSettings);
+      // Sync UI state to what we actually saved (trimmed)
+      setUserSettings(trimmedSettings);
+      setRemoteSettings(trimmedSettings);
       toast(t("saved"));
     } catch (saveError) {
       console.error("Error saving settings!", saveError);
@@ -129,35 +144,75 @@ const UserSettingsPage: React.FC = () => {
       <div className="h-4" />
 
       {/* Full name input */}
-      <div className="space-y-4">
-        <Label className="ps-2 text-[1.05rem] font-light">
-          {t("profile_full_name_label", { botName })}
-        </Label>
-        <Input
-          id="full-name"
-          className="py-6 px-6 w-full sm:w-sm text-[1.05rem] glass rounded-xl"
-          placeholder={
-            error?.isBlocker ? "—" : t("profile_full_name_placeholder")
+      <SettingInput
+        id="full-name"
+        label={t("profile_full_name_label", { botName })}
+        value={userSettings?.full_name || ""}
+        onChange={(value) =>
+          setUserSettings((prev) =>
+            prev
+              ? {
+                  ...prev,
+                  full_name: value,
+                }
+              : prev
+          )
+        }
+        onClear={() =>
+          setUserSettings((prev) =>
+            prev
+              ? {
+                  ...prev,
+                  full_name: "",
+                }
+              : prev
+          )
+        }
+        disabled={!!error?.isBlocker}
+        placeholder={t("profile_full_name_placeholder")}
+        onKeyboardConfirm={() => {
+          if (!error?.isBlocker && hasSettingsChanged) {
+            handleSave();
           }
-          disabled={!!error?.isBlocker}
-          value={userSettings?.full_name || ""}
-          onChange={(e) =>
-            setUserSettings((prev) =>
-              prev
-                ? {
-                    ...prev,
-                    full_name: e.target.value,
-                  }
-                : prev
-            )
-          }
-          onKeyDown={(e) => {
-            if (e.key === "Enter" && !error?.isBlocker && hasSettingsChanged) {
-              handleSave();
-            }
-          }}
-        />
-      </div>
+        }}
+      />
+
+      {/* About me textarea */}
+      <SettingTextarea
+        id="about-me"
+        label={t("about_me_label", { botName })}
+        value={userSettings?.about_me || ""}
+        onChange={(value) =>
+          setUserSettings((prev) =>
+            prev
+              ? {
+                  ...prev,
+                  about_me: value,
+                }
+              : prev
+          )
+        }
+        onClear={() =>
+          setUserSettings((prev) =>
+            prev
+              ? {
+                  ...prev,
+                  about_me: "",
+                }
+              : prev
+          )
+        }
+        disabled={!!error?.isBlocker}
+        placeholder={
+          error?.isBlocker
+            ? "—"
+            : t("about_me_placeholder", {
+                name: userSettings?.full_name || "User",
+              })
+        }
+        minRows={1}
+        maxRows={10}
+      />
 
       {/* Provider configuration link */}
       {(() => {
