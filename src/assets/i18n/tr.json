@@ -84,6 +84,11 @@
     "copy_failed": "Kopyalama başarısız",
     "generic_error": "Bir hata oluştu"
   },
+  "about_me_label": "{botName} hakkımda şunu biliyor:",
+  "about_me_placeholder": "{name} …'de yaşayan bir roket bilimcisidir…",
+  "use_about_me_label": "Herkesin profil bilgisini kullan",
+  "use_about_me_helper": "Etkinleştirildiğinde, {botName} bu sohbette daha bağlamlı ve kişiselleştirilmiş yanıtlar sunmak için herkesin profilini kullanır.",
+  "use_about_me_which_information": "Hangi bilgiler?",
   "token_info": {
     "profile_id": "Profil ID",
     "platform": "Platform",

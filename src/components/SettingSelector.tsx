@@ -57,7 +57,7 @@ const SettingSelector: React.FC<SettingSelectorProps> = ({
       <Select value={selectValue} disabled={disabled} onValueChange={onChange}>
         <SelectTrigger
           className={cn(
-            "py-6 px-6 w-full sm:w-sm text-[1.05rem] overflow-hidden rounded-full cursor-pointer",
+            "py-6 px-6 w-full sm:w-md text-[1.05rem] overflow-hidden rounded-2xl cursor-pointer",
             disabled ? "text-muted-foreground/80 glass-static" : "glass",
             triggerClassName
           )}

@@ -23,9 +23,11 @@ import { useChats } from "@/hooks/useChats";
 import { ChevronsRight } from "lucide-react";
 import PlatformIcon from "@/components/PlatformIcon";
 import { Platform } from "@/lib/platform";
+import SettingToggle from "@/components/SettingToggle";
+import { useNavigation } from "@/hooks/useNavigation";
 
 const ChatSettingsPage: React.FC = () => {
-  const { chat_id, user_id } = useParams<{
+  const { chat_id, user_id, lang_iso_code } = useParams<{
     lang_iso_code: string;
     chat_id: string;
     user_id?: string;
@@ -33,6 +35,8 @@ const ChatSettingsPage: React.FC = () => {
 
   const { error, accessToken, isLoadingState, setError, setIsLoadingState } =
     usePageSession();
+
+  const { navigateToProfile } = useNavigation();
 
   const { chats } = useChats(
     user_id || accessToken?.decoded.sub,
@@ -85,7 +89,8 @@ const ChatSettingsPage: React.FC = () => {
       chatSettings.language_iso_code !== remoteSettings.language_iso_code ||
       chatSettings.reply_chance_percent !== remoteSettings.reply_chance_percent ||
       chatSettings.release_notifications !== remoteSettings.release_notifications ||
-      chatSettings.media_mode !== remoteSettings.media_mode
+      chatSettings.media_mode !== remoteSettings.media_mode ||
+      chatSettings.use_about_me !== remoteSettings.use_about_me
     )
     // @formatter:on
   );
@@ -293,6 +298,33 @@ const ChatSettingsPage: React.FC = () => {
         disabled={!!error?.isBlocker || chatSettings?.is_private}
         placeholder={error?.isBlocker ? "—" : t("spontaneous_placeholder")}
         className="mt-9"
+      />
+
+      {/* Use About Me toggle */}
+      <SettingToggle
+        id="use-about-me"
+        label={t("use_about_me_label", { botName })}
+        helperText={t("use_about_me_helper", { botName })}
+        checked={chatSettings?.use_about_me || false}
+        onChange={(checked) =>
+          setChatSettings((prev) =>
+            prev
+              ? {
+                  ...prev,
+                  use_about_me: checked,
+                }
+              : prev
+          )
+        }
+        disabled={!!error?.isBlocker}
+        className="mt-9 mx-1"
+        onProfileLinkClick={() => {
+          const resolvedUserId = user_id || accessToken?.decoded.sub;
+          if (resolvedUserId && lang_iso_code) {
+            navigateToProfile(resolvedUserId, lang_iso_code);
+          }
+        }}
+        profileLinkText={t("use_about_me_which_information")}
       />
     </BaseSettingsPage>
   );

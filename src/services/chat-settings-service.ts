@@ -14,6 +14,7 @@ export interface ChatSettings {
   reply_chance_percent: number;
   release_notifications: ReleaseNotificationsSetting;
   media_mode: MediaModeSetting;
+  use_about_me: boolean;
 }
 
 export async function fetchChatSettings({
@@ -62,6 +63,7 @@ export async function saveChatSettings({
     reply_chance_percent: chatSettings.reply_chance_percent,
     release_notifications: chatSettings.release_notifications,
     media_mode: chatSettings.media_mode,
+    use_about_me: chatSettings.use_about_me,
   };
   const response = await request(`${apiBaseUrl}/settings/chat/${chat_id}`, {
     method: "PATCH",

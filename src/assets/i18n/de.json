@@ -84,6 +84,11 @@
     "copy_failed": "Kopieren fehlgeschlagen",
     "generic_error": "Ein Fehler ist aufgetreten"
   },
+  "about_me_label": "{botName} weiß Folgendes über mich:",
+  "about_me_placeholder": "{name} ist Raketenwissenschaftler und lebt in…",
+  "use_about_me_label": "Profilinformationen von allen verwenden",
+  "use_about_me_helper": "Wenn aktiviert, verwendet {botName} die Profile von allen, um in diesem Chat kontextbezogenere und personalisiertere Antworten zu geben.",
+  "use_about_me_which_information": "Welche Informationen?",
   "token_info": {
     "profile_id": "Profil ID",
     "platform": "Plattform",

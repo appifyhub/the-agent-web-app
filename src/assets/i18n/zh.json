@@ -84,6 +84,11 @@
     "copy_failed": "复制失败",
     "generic_error": "发生错误"
   },
+  "about_me_label": "{botName} 知道关于我的这些：",
+  "about_me_placeholder": "{name} 是一位火箭科学家，住在…",
+  "use_about_me_label": "使用所有人的个人资料信息",
+  "use_about_me_helper": "启用后，{botName} 将使用所有人的个人资料，在此聊天中提供更具上下文和个性化的回复。",
+  "use_about_me_which_information": "哪些信息？",
   "token_info": {
     "profile_id": "个人资料ID",
     "platform": "平台",

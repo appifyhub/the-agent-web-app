@@ -84,6 +84,11 @@
     "copy_failed": "Neuspešno kopiranje",
     "generic_error": "Došlo je do greške"
   },
+  "about_me_label": "{botName} zna ovo o meni:",
+  "about_me_placeholder": "{name} je nastavnik koji živi u…",
+  "use_about_me_label": "Koristi informacije svih profila",
+  "use_about_me_helper": "Kada je omogućeno, {botName} će koristiti informacije iz profila svih učesnika kako bi pružio preciznije odgovore u ovom četu.",
+  "use_about_me_which_information": "Koje informacije?",
   "token_info": {
     "profile_id": "ID profila",
     "platform": "Platforma",

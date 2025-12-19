@@ -91,7 +91,7 @@ const ProvidersCarousel: React.FC<ProvidersCarouselProps> = ({
   const botName = import.meta.env.VITE_APP_NAME_SHORT;
 
   return (
-    <Carousel setApi={setApi} className="w-full max-w-sm sm:max-w-md mx-auto">
+    <Carousel setApi={setApi} className="w-full max-w-sm sm:max-w-lg mx-auto">
       <CarouselContent>
         {providers.map((provider) => (
           <CarouselItem key={provider.id} className="px-2 sm:px-0">
