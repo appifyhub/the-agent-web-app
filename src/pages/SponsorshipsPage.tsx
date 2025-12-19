@@ -13,7 +13,7 @@ import {
   AtSign,
   Link,
   UsersRound,
-  Unlink,
+  HeartMinus,
   ChevronDown,
   UserRound,
   Phone,
@@ -387,7 +387,7 @@ const SponsorshipsPage: React.FC = () => {
               />
               <Input
                 id="platform-handle"
-                className="py-6 px-6 w-full sm:w-sm text-[1.05rem] glass rounded-xl"
+                className="py-6 px-6 w-full sm:w-md text-[1.05rem] glass rounded-2xl"
                 placeholder={getPlatformPlaceholder()}
                 disabled={!!error?.isBlocker}
                 value={platformHandle}
@@ -454,7 +454,7 @@ const SponsorshipsPage: React.FC = () => {
                     <div
                       key={index}
                       className={cn(
-                        "flex items-center justify-between w-full sm:w-sm mx-auto",
+                        "flex items-center justify-between w-full sm:w-md mx-auto",
                         "transition-all duration-300 ease-in-out",
                         expandedItems.size > 0 ? "space-x-6" : "space-x-0"
                       )}
@@ -558,9 +558,9 @@ const SponsorshipsPage: React.FC = () => {
                               }
                             }}
                           >
-                            <Unlink
+                            <HeartMinus
                               className={cn(
-                                "text-destructive h-6 w-6",
+                                "text-destructive h-6 w-6 scale-120",
                                 error?.isBlocker && "text-muted-foreground"
                               )}
                             />

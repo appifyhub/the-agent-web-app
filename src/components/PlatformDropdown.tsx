@@ -49,7 +49,7 @@ const PlatformDropdown: React.FC<PlatformDropdownProps> = ({
         asChild
         className={cn("cursor-pointer", className)}
       >
-        <Button variant="outline" className="glass py-3 px-3 h-auto rounded-xl">
+        <Button variant="outline" className="glass py-3 px-3 h-auto rounded-2xl">
           {selectedPlatformInfo && (
             <selectedPlatformInfo.icon className="h-4 w-4" />
           )}

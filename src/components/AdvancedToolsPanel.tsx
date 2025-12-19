@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { t } from "@/lib/translations";
 import { TranslationKey } from "@/lib/translation-keys";
+import { cn } from "@/lib/utils";
 import {
   Accordion,
   AccordionContent,
@@ -311,17 +312,22 @@ const AdvancedToolsPanel: React.FC<AdvancedToolsPanelProps> = ({
               className="border-b border-muted-foreground/20 last:border-b-0"
             >
               <AccordionTrigger
-                className={`hover:no-underline py-4 px-0 text-[1.05rem] font-normal data-[state=open]:font-medium data-[state=open]:text-accent-amber data-[state=open]:text-xl text-left transition-opacity duration-200 cursor-pointer ${
+                className={cn(
+                  "py-4 px-0",
+                  "text-[1.05rem] font-normal text-left",
+                  "data-[state=open]:font-medium data-[state=open]:text-accent-amber data-[state=open]:underline underline-offset-4",
+                  "hover:no-underline cursor-pointer",
+                  "transition-opacity duration-200",
                   shouldReduceOpacity ? "opacity-30" : "opacity-100"
-                }`}
+                )}
               >
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-4">
                   <CategoryIcon className="h-5 w-5 shrink-0" />
                   <span>{categoryGroup.title}</span>
                 </div>
               </AccordionTrigger>
               <AccordionContent>
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <div className="h-2" />
                   {categoryGroup.toolTypes.map((toolTypeGroup) => {
                     const ToolIcon = toolTypeGroup.icon;
