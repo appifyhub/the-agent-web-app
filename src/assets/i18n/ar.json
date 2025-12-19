@@ -84,6 +84,11 @@
     "copy_failed": "فشل النسخ",
     "generic_error": "حدث خطأ"
   },
+  "about_me_label": "{botName} يعرف هذا عني:",
+  "about_me_placeholder": "{name} هو عالم صواريخ يعيش في…",
+  "use_about_me_label": "استخدم معلومات الملف الشخصي للجميع",
+  "use_about_me_helper": "عند التمكين، سيستخدم {botName} الملف الشخصي للجميع لتقديم ردود أكثر سياقية وتخصيصًا في هذه المحادثة.",
+  "use_about_me_which_information": "أي معلومات؟",
   "token_info": {
     "profile_id": "الملف الشخصي ID",
     "platform": "المنصة",

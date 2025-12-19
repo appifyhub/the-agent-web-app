@@ -84,6 +84,11 @@
     "copy_failed": "Error al copiar",
     "generic_error": "Ocurrió un error"
   },
+  "about_me_label": "{botName} sabe esto sobre mí:",
+  "about_me_placeholder": "{name} es un científico espacial que vive en…",
+  "use_about_me_label": "Usar la información del perfil de todos",
+  "use_about_me_helper": "Cuando está habilitado, {botName} usará el perfil de todos para ofrecer respuestas más contextuales y personalizadas en este chat.",
+  "use_about_me_which_information": "¿Qué información?",
   "token_info": {
     "profile_id": "Perfil ID",
     "platform": "Plataforma",

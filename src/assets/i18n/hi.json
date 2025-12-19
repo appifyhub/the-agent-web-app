@@ -84,6 +84,11 @@
     "copy_failed": "कॉपी करने में विफल",
     "generic_error": "एक त्रुटि हुई"
   },
+  "about_me_label": "{botName} मेरे बारे में यह जानता है:",
+  "about_me_placeholder": "{name} एक रॉकेट वैज्ञानिक है जो… में रहता है…",
+  "use_about_me_label": "सबकी प्रोफ़ाइल जानकारी का उपयोग करें",
+  "use_about_me_helper": "जब सक्षम हो, {botName} इस चैट में अधिक संदर्भपूर्ण और व्यक्तिगत प्रतिक्रियाएं देने के लिए सबकी प्रोफ़ाइल का उपयोग करेगा।",
+  "use_about_me_which_information": "कौन सी जानकारी?",
   "token_info": {
     "profile_id": "प्रोफ़ाइल ID",
     "platform": "प्लेटफॉर्म",
