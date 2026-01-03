@@ -34,7 +34,7 @@
     "input-otp": "^1.4.2",
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.562.0",
-    "make-plural": "^7.4.0",
+    "make-plural": "^8.1.0",
     "next-themes": "^0.4.6",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
