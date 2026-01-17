@@ -61,7 +61,7 @@
     "postcss-custom-properties": "^14.0.6",
     "postcss-custom-selectors": "^8.0.5",
     "postcss-import": "^16.1.1",
-    "postcss-nesting": "^13.0.2",
+    "postcss-nesting": "^14.0.0",
     "postcss-theme-ui": "^0.10.0",
     "shadcn": "^3.6.3",
     "stylelint": "^16.26.1",
