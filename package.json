@@ -63,7 +63,7 @@
     "postcss-import": "^16.1.1",
     "postcss-nesting": "^13.0.2",
     "postcss-theme-ui": "^0.10.0",
-    "shadcn": "^3.6.3",
+    "shadcn": "^3.7.0",
     "stylelint": "^16.26.1",
     "stylelint-config-standard": "^39.0.1",
     "stylelint-config-tailwindcss": "^1.0.1",
