@@ -1,0 +1,31 @@
+---
+description: 
+globs: *.ts,*.tsx,*.js,*.jsx
+alwaysApply: true
+---
+### MANDATORY PROJECT RULES
+
+#### Environment Management
+
+- ALWAYS use both `bun` and `npm` for dependency management
+- ALWAYS use `bun` for commands and task execution, you can ignore `npm` other than dependency management
+- ALL commands must be run from project root (where `package.json` exists)
+
+#### Development Workflow
+
+- Use tools from `package.json` for everything – linting, internationalization, translation keys, rebuilding, tests (if any), etc.
+- Always run lint using `bun` before commits and at the end of tasks / plan chapters
+- Bun scripts set up their environments, so there's nothing extra that you need to do
+
+#### Project Structure
+
+- Version is managed through the `version` property of the `package.json` file
+- You can see the CI/CD pipeline in `.github/workflows` directory
+- It's best to base API implementation on API docs. If you don't have any, ask for them
+
+#### LLM/AI Rules
+
+- Never write plans or walkthroughs unless the user specifically asks you to
+- Never assume anything. Ask validating questions. Sync with the user to validate your assumptions. Optimize for accuracy, not speed
+- Consistency is key. Look at coding patterns in and around the file you are editing as if you have OCD
+- If there are any tests, those must run offline. Write tests only if the unit is simply testable. If the unit requires extensive mocking, advise the user before proceeding

@@ -781,3 +781,14 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Custom
+
+.vscode/
+scratchpad.py
+GOAL.md
+goal.md
+TASK.md
+task.md
+PLAN.md
+plan.md
