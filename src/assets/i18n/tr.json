@@ -164,18 +164,6 @@
         "title": "Görüntü Düzenleme",
         "description": "Bu görüntü düzenleme için kullanılan bir modeldir, fotoğraf değiştirme, nesne kaldırma, özel efekt ekleme ve görüntülerin stilini değiştirme gibi."
       },
-      "images_restoration": {
-        "title": "Görüntü Onarımı",
-        "description": "Bu görüntü onarımı için kullanılan bir modeldir, gürültü kaldırma, bulanıklığı düzeltme ve fotoğrafik hasarı azaltma gibi."
-      },
-      "images_inpainting": {
-        "title": "Görüntü Doldurma",
-        "description": "Bu görüntü doldurma için kullanılan bir modeldir, yanlış yerleştirilmiş nesneleri kaldırma, üretken görüntüleme deliklerini düzeltme, anatomik deformiteleri düzeltme ve görüntüleri onarma gibi."
-      },
-      "images_background_removal": {
-        "title": "Görüntü Arka Plan Kaldırma",
-        "description": "Bu görüntü arka plan kaldırma için kullanılan bir modeldir, bir görüntünün arka planını kaldırma, bir görüntünün arka planını düzeltme ve bir görüntünün arka planını değiştirme gibi."
-      },
       "search": {
         "title": "Arama",
         "description": "Bu web araması için kullanılan bir modeldir, bilgi, haber, ürün, hizmet aramak veya sohbet arkadaşınızın bilmediği bir konu hakkında arka plan araştırması yapmak gibi."

@@ -154,18 +154,6 @@
         "title": "Bildbearbeitung",
         "description": "Dies ist ein Modell, das für die Bildbearbeitung verwendet wird, wie Foto-Ersetzungen, Objektentfernung, Hinzufügen von Spezialeffekten und Ändern des Bildstils."
       },
-      "images_restoration": {
-        "title": "Bildwiederherstellung",
-        "description": "Dies ist ein Modell, das für die Bildwiederherstellung verwendet wird, wie das Entfernen von Rauschen, Beheben von Unschärfe und Reduzieren von fotografischen Schäden."
-      },
-      "images_inpainting": {
-        "title": "Bildrekonstruktion",
-        "description": "Dies ist ein Modell, das für die Bildrekonstruktion verwendet wird, wie das Entfernen falsch platzierter Objekte, Beheben von generativen Bildlöchern, Korrigieren anatomischer Deformitäten und Wiederherstellen von Bildern."
-      },
-      "images_background_removal": {
-        "title": "Hintergrundentfernung",
-        "description": "Dies ist ein Modell, das für die Entfernung von Bildhintergründen verwendet wird, wie das Entfernen des Hintergrunds eines Bildes, Korrigieren des Hintergrunds eines Bildes und Ändern des Hintergrunds eines Bildes."
-      },
       "search": {
         "title": "Suche",
         "description": "Dies ist ein Modell, das für die Websuche verwendet wird, wie das Durchsuchen des Webs nach Informationen, Nachrichten, Produkten, Dienstleistungen oder Hintergrundrecherche zu einem Thema, das Ihrem Chat-Partner nicht bekannt ist."
