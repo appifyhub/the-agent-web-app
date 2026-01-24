@@ -210,18 +210,6 @@
         "title": "Modifica di immagini",
         "description": "Questo è un modello utilizzato per la modifica di immagini, come sostituzioni di foto, rimozione di oggetti, aggiunta di effetti speciali e cambio dello stile delle immagini."
       },
-      "images_restoration": {
-        "title": "Restauro di immagini",
-        "description": "Questo è un modello utilizzato per il restauro di immagini, come rimozione di rumore, correzione di sfocature e riduzione di danni fotografici."
-      },
-      "images_inpainting": {
-        "title": "Inpainting di immagini",
-        "description": "Questo è un modello utilizzato per l'inpainting di immagini, come rimozione di oggetti mal posizionati, correzione di buchi nell'imaging generativo, correzione di deformità anatomiche e restauro di immagini."
-      },
-      "images_background_removal": {
-        "title": "Rimozione sfondo immagini",
-        "description": "Questo è un modello utilizzato per la rimozione dello sfondo delle immagini, come rimuovere lo sfondo di un'immagine, correggere lo sfondo di un'immagine e cambiare lo sfondo di un'immagine."
-      },
       "search": {
         "title": "Ricerca",
         "description": "Questo è un modello utilizzato per la ricerca web, come cercare sul web informazioni, notizie, prodotti, servizi o ricerca di background su un argomento non noto al tuo compagno di chat."

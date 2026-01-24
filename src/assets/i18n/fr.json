@@ -154,18 +154,6 @@
         "title": "Édition d'images",
         "description": "C'est un modèle utilisé pour l'édition d'images, comme les remplacements de photos, la suppression d'objets, l'ajout d'effets spéciaux et le changement du style des images."
       },
-      "images_restoration": {
-        "title": "Restauration d'images",
-        "description": "C'est un modèle utilisé pour la restauration d'images, comme la suppression du bruit, la correction du flou et la réduction des dommages photographiques."
-      },
-      "images_inpainting": {
-        "title": "Inpainting d'images",
-        "description": "C'est un modèle utilisé pour l'inpainting d'images, comme la suppression d'objets mal placés, la correction de trous dans les images génératives, la correction de déformations anatomiques et la restauration d'images."
-      },
-      "images_background_removal": {
-        "title": "Suppression d'arrière-plan",
-        "description": "C'est un modèle utilisé pour la suppression d'arrière-plan d'images, comme supprimer l'arrière-plan d'une image, corriger l'arrière-plan d'une image et changer l'arrière-plan d'une image."
-      },
       "search": {
         "title": "Recherche",
         "description": "C'est un modèle utilisé pour la recherche web, comme chercher sur le web des informations, nouvelles, produits, services ou recherche de fond sur un sujet non connu de votre compagnon de discussion."

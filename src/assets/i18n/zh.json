@@ -208,19 +208,7 @@
       },
       "images_edit": {
         "title": "图像编辑",
-        "description": "这是一个用于图像编辑的模型，如照片替换、对象移除、添加特殊效果和更改图像样式。"
-      },
-      "images_restoration": {
-        "title": "图像修复",
-        "description": "这是一个用于图像修复的模型，如去除噪声、修复模糊和减少照片损坏。"
-      },
-      "images_inpainting": {
-        "title": "图像修补",
-        "description": "这是一个用于图像修补的模型，如移除错误放置的对象、修复生成图像的空洞、修正解剖变形和修复图像。"
-      },
-      "images_background_removal": {
-        "title": "图像背景移除",
-        "description": "这是一个用于图像背景移除的模型，如移除图像背景、修复图像背景和更改图像背景。"
+        "description": "这是一个用于图像编辑的模型,如照片替换、对象移除、添加特殊效果和更改图像样式。"
       },
       "search": {
         "title": "搜索",

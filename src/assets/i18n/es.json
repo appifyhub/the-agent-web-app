@@ -210,18 +210,6 @@
         "title": "Edición de imágenes",
         "description": "Este es un modelo que se usa para edición de imágenes, como reemplazos de fotos, eliminación de objetos, agregar efectos especiales y cambiar el estilo de las imágenes."
       },
-      "images_restoration": {
-        "title": "Restauración de imágenes",
-        "description": "Este es un modelo que se usa para restauración de imágenes, como eliminar ruido, arreglar desenfoque y reducir daños fotográficos."
-      },
-      "images_inpainting": {
-        "title": "Relleno de imágenes",
-        "description": "Este es un modelo que se usa para relleno de imágenes, como eliminar objetos mal ubicados, arreglar agujeros en imágenes generativas, corregir deformidades anatómicas y restaurar imágenes."
-      },
-      "images_background_removal": {
-        "title": "Eliminación de fondo",
-        "description": "Este es un modelo que se usa para eliminación de fondo de imágenes, como eliminar el fondo de una imagen, arreglar el fondo de una imagen y cambiar el fondo de una imagen."
-      },
       "search": {
         "title": "Búsqueda",
         "description": "Este es un modelo que se usa para búsqueda web, como buscar en la web información, noticias, productos, servicios o investigación de fondo sobre un tema no conocido por tu compañero de chat."

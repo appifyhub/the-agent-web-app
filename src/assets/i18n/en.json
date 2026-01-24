@@ -154,18 +154,6 @@
         "title": "Images Edit",
         "description": "This is a model that is used for image editing, such as photo replacements, object removal, adding special effects, and changing the style of images."
       },
-      "images_restoration": {
-        "title": "Images Restoration",
-        "description": "This is a model that is used for image restoration, such as removing noise, fixing blur, and reducing photographic damage."
-      },
-      "images_inpainting": {
-        "title": "Images Inpainting",
-        "description": "This is a model that is used for image inpainting, such as removing misplaced objects, fixing generative imaging holes, fixing anatomical deformities, and restoring images."
-      },
-      "images_background_removal": {
-        "title": "Images Background Removal",
-        "description": "This is a model that is used for image background removal, such as removing the background of an image, fixing the background of an image, and changing the background of an image."
-      },
       "search": {
         "title": "Search",
         "description": "This is a model that is used for web search, such as searching the web for information, news, products, services, or background research on a topic not known to your chat companion."
