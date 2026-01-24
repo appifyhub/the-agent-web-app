@@ -9,20 +9,29 @@ export type ToolType =
   | "hearing"
   | "images_gen"
   | "images_edit"
-  | "images_restoration"
-  | "images_inpainting"
-  | "images_background_removal"
   | "search"
   | "embedding"
   | "api_fiat_exchange"
   | "api_crypto_exchange"
   | "api_twitter";
 
+export interface CostEstimate {
+  input_1m_tokens?: number;
+  output_1m_tokens?: number;
+  search_1m_tokens?: number;
+  image_1k?: number;
+  image_2k?: number;
+  image_4k?: number;
+  api_call?: number;
+  second_of_runtime?: number;
+}
+
 export interface ExternalTool {
   id: string;
   name: string;
   provider: ExternalToolProvider;
   types: ToolType[];
+  cost_estimate: CostEstimate;
 }
 
 export interface ExternalToolProvider {
