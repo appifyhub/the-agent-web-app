@@ -158,7 +158,7 @@
       },
       "images_gen": {
         "title": "Görüntü Üretimi",
-        "description": "Bu görüntü üretimi için kullanılan bir modeldir, metinden görüntü üretme veya görüntülerden görüntü üretme gibi."
+        "description": "Bu sadece metin istemlerinden görüntü üretimi için kullanılan bir modeldir."
       },
       "images_edit": {
         "title": "Görüntü Düzenleme",

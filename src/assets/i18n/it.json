@@ -204,7 +204,7 @@
       },
       "images_gen": {
         "title": "Generazione di immagini",
-        "description": "Questo è un modello utilizzato per la generazione di immagini, come generare immagini da testo o immagini da immagini."
+        "description": "Questo è un modello utilizzato solo per la generazione di immagini da prompt testuali."
       },
       "images_edit": {
         "title": "Modifica di immagini",

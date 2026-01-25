@@ -204,7 +204,7 @@
       },
       "images_gen": {
         "title": "Generisanje slika",
-        "description": "Ovo je model koji se koristi za generisanje slika iz teksta, ili slika iz slika."
+        "description": "Ovo je model koji se koristi samo za generisanje slika iz tekstualnih upita."
       },
       "images_edit": {
         "title": "Uređivanje slika",

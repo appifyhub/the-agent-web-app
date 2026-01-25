@@ -148,7 +148,7 @@
       },
       "images_gen": {
         "title": "Images Generation",
-        "description": "This is a model that is used for image generation, such as generating images from text or images from images."
+        "description": "This is a model that is used for image generation from text prompts only."
       },
       "images_edit": {
         "title": "Images Edit",

@@ -148,7 +148,7 @@
       },
       "images_gen": {
         "title": "Génération d'images",
-        "description": "C'est un modèle utilisé pour la génération d'images, comme la génération d'images à partir de texte ou d'images à partir d'images."
+        "description": "C'est un modèle utilisé uniquement pour la génération d'images à partir d'invites textuelles."
       },
       "images_edit": {
         "title": "Édition d'images",

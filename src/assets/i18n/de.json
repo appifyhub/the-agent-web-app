@@ -148,7 +148,7 @@
       },
       "images_gen": {
         "title": "Bildgenerierung",
-        "description": "Dies ist ein Modell, das für die Bildgenerierung verwendet wird, wie das Generieren von Bildern aus Text oder Bildern aus Bildern."
+        "description": "Dies ist ein Modell, das nur für die Bildgenerierung aus Textaufforderungen verwendet wird."
       },
       "images_edit": {
         "title": "Bildbearbeitung",

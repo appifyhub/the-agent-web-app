@@ -204,7 +204,7 @@
       },
       "images_gen": {
         "title": "图像生成",
-        "description": "这是一个用于图像生成的模型，如从文本生成图像或从图像生成图像。"
+        "description": "这是一个仅用于从文本提示生成图像的模型。"
       },
       "images_edit": {
         "title": "图像编辑",
