@@ -24,9 +24,6 @@ export interface UserSettings {
   tool_choice_hearing?: string;
   tool_choice_images_gen?: string;
   tool_choice_images_edit?: string;
-  tool_choice_images_restoration?: string;
-  tool_choice_images_inpainting?: string;
-  tool_choice_images_background_removal?: string;
   tool_choice_search?: string;
   tool_choice_embedding?: string;
   tool_choice_api_fiat_exchange?: string;
@@ -74,9 +71,6 @@ export interface UserSettingsPayload {
   tool_choice_hearing?: string;
   tool_choice_images_gen?: string;
   tool_choice_images_edit?: string;
-  tool_choice_images_restoration?: string;
-  tool_choice_images_inpainting?: string;
-  tool_choice_images_background_removal?: string;
   tool_choice_search?: string;
   tool_choice_embedding?: string;
   tool_choice_api_fiat_exchange?: string;
@@ -104,9 +98,6 @@ const REGULAR_FIELDS: (keyof UserSettingsPayload)[] = [
   "tool_choice_hearing",
   "tool_choice_images_gen",
   "tool_choice_images_edit",
-  "tool_choice_images_restoration",
-  "tool_choice_images_inpainting",
-  "tool_choice_images_background_removal",
   "tool_choice_search",
   "tool_choice_embedding",
   "tool_choice_api_fiat_exchange",
