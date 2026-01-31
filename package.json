@@ -37,7 +37,7 @@
     "make-plural": "^8.1.0",
     "next-themes": "^0.4.6",
     "react": "^19.2.3",
-    "react-dom": "^19.2.3",
+    "react-dom": "^19.2.4",
     "react-router-dom": "^7.13.0",
     "rollup": "^4.57.1",
     "sonner": "^2.0.7",
