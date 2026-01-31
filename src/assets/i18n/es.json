@@ -204,23 +204,11 @@
       },
       "images_gen": {
         "title": "Generación de imágenes",
-        "description": "Este es un modelo que se usa para generación de imágenes, como generar imágenes a partir de texto o imágenes a partir de imágenes."
+        "description": "Este es un modelo que se usa solo para generación de imágenes a partir de indicaciones de texto."
       },
       "images_edit": {
         "title": "Edición de imágenes",
         "description": "Este es un modelo que se usa para edición de imágenes, como reemplazos de fotos, eliminación de objetos, agregar efectos especiales y cambiar el estilo de las imágenes."
-      },
-      "images_restoration": {
-        "title": "Restauración de imágenes",
-        "description": "Este es un modelo que se usa para restauración de imágenes, como eliminar ruido, arreglar desenfoque y reducir daños fotográficos."
-      },
-      "images_inpainting": {
-        "title": "Relleno de imágenes",
-        "description": "Este es un modelo que se usa para relleno de imágenes, como eliminar objetos mal ubicados, arreglar agujeros en imágenes generativas, corregir deformidades anatómicas y restaurar imágenes."
-      },
-      "images_background_removal": {
-        "title": "Eliminación de fondo",
-        "description": "Este es un modelo que se usa para eliminación de fondo de imágenes, como eliminar el fondo de una imagen, arreglar el fondo de una imagen y cambiar el fondo de una imagen."
       },
       "search": {
         "title": "Búsqueda",

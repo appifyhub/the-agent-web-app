@@ -204,23 +204,11 @@
       },
       "images_gen": {
         "title": "Generisanje slika",
-        "description": "Ovo je model koji se koristi za generisanje slika iz teksta, ili slika iz slika."
+        "description": "Ovo je model koji se koristi samo za generisanje slika iz tekstualnih upita."
       },
       "images_edit": {
         "title": "Uređivanje slika",
         "description": "Ovo je model koji se koristi za uređivanje slika, kao što su zamene delova fotografija, uklanjanje objekata, dodavanje specijalnih efekata i menjanje stila slika."
-      },
-      "images_restoration": {
-        "title": "Obnavljanje slika",
-        "description": "Ovo je model koji se koristi za obnavljanje slika, kao što je uklanjanje šuma, popravka zamućenosti i smanjenje fotografske štete."
-      },
-      "images_inpainting": {
-        "title": "Popunjavanje slika",
-        "description": "Ovo je model koji se koristi za popunjavanje slika, kao što je uklanjanje pogrešno nactanih objekata, popravka rupa u generativnom prikazivanju, ispravka anatomskih deformiteta i obnavljanje slika."
-      },
-      "images_background_removal": {
-        "title": "Uklanjanje pozadine slika",
-        "description": "Ovo je model koji se koristi za uklanjanje pozadine slika, kao što je uklanjanje pozadine slike, popravka pozadine slike i menjanje pozadine slike."
       },
       "search": {
         "title": "Pretraga",
