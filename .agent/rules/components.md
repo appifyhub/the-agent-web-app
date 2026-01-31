@@ -1,8 +1,9 @@
 ---
+trigger: model_decision
 description: Use when you are thinking of creating and editing React components
 globs: *.tsx
-alwaysApply: false
 ---
+
 # Component Guidelines
 
 ## Making Components Generic and Reusable
