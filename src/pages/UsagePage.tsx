@@ -16,7 +16,7 @@ import { DEFAULT_LANGUAGE, INTERFACE_LANGUAGES } from "@/lib/languages";
 import UsageRecordCard from "@/components/UsageRecordCard";
 import { Button } from "@/components/ui/button";
 
-const RECORDS_PER_PAGE = 2;
+const RECORDS_PER_PAGE = 50;
 
 const UsagePage: React.FC = () => {
   const { user_id, lang_iso_code } = useParams<{
