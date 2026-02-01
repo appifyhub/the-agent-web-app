@@ -51,6 +51,42 @@
     "unlink_message": "Sie können jetzt ein autonomer Benutzer werden. Dies bricht die Verbindung zwischen Ihnen und {sponsorName} und die KI wird nicht mehr funktionieren, bis Sie Ihr Profil konfigurieren.",
     "unlink": "Verknüpfung aufheben"
   },
+  "usage": {
+    "page_title": "Nutzung",
+    "card_title": "Ihre Nutzungshistorie",
+    "no_records_found": "Keine Nutzungsdaten gefunden",
+    "cost_breakdown": {
+      "title": "Kostenaufschlüsselung",
+      "model_cost": "Modellkosten",
+      "remote_cost": "Remote-Kosten",
+      "api_call_cost": "API-Aufrufkosten",
+      "maintenance_fee": "Wartungsgebühr",
+      "total": "Gesamt"
+    },
+    "token_stats": {
+      "title": "Token-Statistiken",
+      "input_tokens": "Eingabe-Token",
+      "output_tokens": "Ausgabe-Token",
+      "search_tokens": "Such-Token",
+      "total": "Gesamt"
+    },
+    "context_ids": {
+      "title": "Kontext",
+      "date_label": "Datum",
+      "time_label": "Uhrzeit",
+      "runtime_label": "Laufzeit",
+      "user_label": "Benutzer",
+      "user_me": "Ich",
+      "user_sponsored": "Gesponserter Benutzer",
+      "chat_label": "Chat",
+      "chat_in_chat": "Im Chat",
+      "chat_background": "Hintergrund",
+      "remote_runtime": "Remote-Laufzeit",
+      "output_image_sizes": "Ausgabebilder",
+      "input_image_sizes": "Eingabebilder"
+    },
+    "load_more": "Mehr laden"
+  },
   "save": "Speichern",
   "saved": "Gespeichert!",
   "copied": "Kopiert!",
@@ -113,7 +149,7 @@
     "no_tools_available": "Keine Tools für diesen Typ verfügbar",
     "groups": {
       "text_intelligence": {
-        "title": "Sprach-Intelligenz"
+        "title": "Sprachintelligenz"
       },
       "content_analysis": {
         "title": "Inhaltsanalyse"
@@ -163,16 +199,20 @@
         "description": "Dies ist ein Modell, das für Einbettungen verwendet wird, wie das Einbetten von Text, Bildern oder Audio in einen Vektorraum. Es wird für Ähnlichkeitssuchen in internen Datenbanken, Dokumenten und anderen semantischen Suchaufgaben verwendet. Dies wird verwendet, wenn Sie eine PDF-Datei zum Chat hochladen."
       },
       "api_fiat_exchange": {
-        "title": "API Fiat-Wechselkurs",
-        "description": "Dies ist eine API, die zur Überprüfung des Wechselkurses einer Fiat-Währung verwendet wird."
+        "title": "Fiat-Wechselkurs",
+        "description": "Zugang zu Echtzeit-Wechselkursen für traditionelle Währungen."
       },
       "api_crypto_exchange": {
-        "title": "API Krypto-Wechselkurs",
-        "description": "Dies ist eine API, die zur Überprüfung des Wechselkurses einer Kryptowährung verwendet wird."
+        "title": "Krypto-Wechselkurs",
+        "description": "Zugang zu Echtzeit-Wechselkursen für Kryptowährungen."
       },
       "api_twitter": {
-        "title": "API Twitter",
-        "description": "Dies ist eine API, die zum Lesen von Twitter-Inhalten verwendet wird."
+        "title": "Twitter",
+        "description": "Zugang zum Lesen und Analysieren von Twitter-Inhalten."
+      },
+      "deprecated": {
+        "title": "Veraltet",
+        "description": "Dieses Tool oder diese Funktion ist veraltet und kann in zukünftigen Versionen entfernt werden."
       }
     }
   },

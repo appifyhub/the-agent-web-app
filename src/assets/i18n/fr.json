@@ -51,6 +51,42 @@
     "unlink_message": "Vous pouvez maintenant devenir un utilisateur autonome. Cela rompt le lien entre vous et {sponsorName} et l'IA cessera de fonctionner jusqu'à ce que vous configuriez votre Profil.",
     "unlink": "Délier"
   },
+  "usage": {
+    "page_title": "Utilisation",
+    "card_title": "Votre historique d'utilisation",
+    "no_records_found": "Aucun enregistrement d'utilisation trouvé",
+    "cost_breakdown": {
+      "title": "Ventilation des coûts",
+      "model_cost": "Coût du modèle",
+      "remote_cost": "Coût distant",
+      "api_call_cost": "Coût d'appel API",
+      "maintenance_fee": "Frais de maintenance",
+      "total": "Total"
+    },
+    "token_stats": {
+      "title": "Statistiques des tokens",
+      "input_tokens": "Tokens d'entrée",
+      "output_tokens": "Tokens de sortie",
+      "search_tokens": "Tokens de recherche",
+      "total": "Total"
+    },
+    "context_ids": {
+      "title": "Contexte",
+      "date_label": "Date",
+      "time_label": "Heure",
+      "runtime_label": "Durée d'exécution",
+      "user_label": "Utilisateur",
+      "user_me": "Moi",
+      "user_sponsored": "Utilisateur parrainé",
+      "chat_label": "Chat",
+      "chat_in_chat": "Dans le chat",
+      "chat_background": "En arrière-plan",
+      "remote_runtime": "Temps d'exécution distant",
+      "output_image_sizes": "Images de sortie",
+      "input_image_sizes": "Images d'entrée"
+    },
+    "load_more": "Charger plus"
+  },
   "save": "Enregistrer",
   "saved": "Enregistré !",
   "copied": "Copié !",
@@ -163,16 +199,20 @@
         "description": "C'est un modèle utilisé pour l'intégration, comme intégrer du texte, des images ou de l'audio dans un espace vectoriel. Il est utilisé pour la recherche de similitude dans les bases de données internes, documents et autres tâches de recherche sémantique. C'est ce qui est utilisé lorsque vous téléchargez un fichier PDF dans la discussion."
       },
       "api_fiat_exchange": {
-        "title": "API de change de devises fiduciaires",
-        "description": "C'est une API utilisée pour vérifier le taux de change d'une devise fiduciaire."
+        "title": "Change de devises fiduciaires",
+        "description": "Accès aux taux de change en temps réel pour les devises traditionnelles."
       },
       "api_crypto_exchange": {
-        "title": "API de change de cryptomonnaies",
-        "description": "C'est une API utilisée pour vérifier le taux de change d'une cryptomonnaie."
+        "title": "Change de cryptomonnaies",
+        "description": "Accès aux taux de change en temps réel pour les cryptomonnaies."
       },
       "api_twitter": {
-        "title": "API Twitter",
-        "description": "C'est une API utilisée pour lire le contenu Twitter."
+        "title": "Twitter",
+        "description": "Accès pour lire et analyser le contenu Twitter."
+      },
+      "deprecated": {
+        "title": "Obsolète",
+        "description": "Cet outil ou cette fonctionnalité est obsolète et pourrait être supprimé dans les versions futures."
       }
     }
   },

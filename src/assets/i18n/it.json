@@ -51,6 +51,42 @@
     "unlink_message": "Ora puoi diventare un utente autonomo. Questo interrompe il collegamento tra te e {sponsorName} e l'IA smetterà di funzionare finché non configurerai il tuo Profilo.",
     "unlink": "Scollega"
   },
+  "usage": {
+    "page_title": "Utilizzo",
+    "card_title": "La tua cronologia di utilizzo",
+    "no_records_found": "Nessun record di utilizzo trovato",
+    "cost_breakdown": {
+      "title": "Dettaglio costi",
+      "model_cost": "Costo modello",
+      "remote_cost": "Costo remoto",
+      "api_call_cost": "Costo chiamata API",
+      "maintenance_fee": "Tariffa di manutenzione",
+      "total": "Totale"
+    },
+    "token_stats": {
+      "title": "Statistiche token",
+      "input_tokens": "Token di input",
+      "output_tokens": "Token di output",
+      "search_tokens": "Token di ricerca",
+      "total": "Totale"
+    },
+    "context_ids": {
+      "title": "Contesto",
+      "date_label": "Data",
+      "time_label": "Ora",
+      "runtime_label": "Durata",
+      "user_label": "Utente",
+      "user_me": "Io",
+      "user_sponsored": "Utente sponsorizzato",
+      "chat_label": "Chat",
+      "chat_in_chat": "In chat",
+      "chat_background": "In background",
+      "remote_runtime": "Tempo di esecuzione remoto",
+      "output_image_sizes": "Immagini di output",
+      "input_image_sizes": "Immagini di input"
+    },
+    "load_more": "Carica altro"
+  },
   "save": "Salva",
   "saved": "Salvato!",
   "copied": "Copiato!",
@@ -219,16 +255,20 @@
         "description": "Questo è un modello utilizzato per l'embedding, come incorporare testo, immagini o audio in uno spazio vettoriale. È utilizzato per la ricerca di similarità attraverso database interni, documenti e altri compiti di ricerca semantica. Questo è quello che viene utilizzato quando carichi un file PDF nella chat."
       },
       "api_fiat_exchange": {
-        "title": "API Cambio Valute Fiat",
-        "description": "Questa è un'API utilizzata per controllare il tasso di cambio di una valuta fiat."
+        "title": "Cambio valuta fiat",
+        "description": "Accesso ai tassi di cambio in tempo reale per le valute tradizionali."
       },
       "api_crypto_exchange": {
-        "title": "API Cambio Criptovalute",
-        "description": "Questa è un'API utilizzata per controllare il tasso di cambio di una criptovaluta."
+        "title": "Cambio criptovalute",
+        "description": "Accesso ai tassi di cambio in tempo reale per le criptovalute."
       },
       "api_twitter": {
-        "title": "API Twitter",
-        "description": "Questa è un'API utilizzata per leggere contenuti di Twitter."
+        "title": "Twitter",
+        "description": "Accesso per leggere e analizzare i contenuti di Twitter."
+      },
+      "deprecated": {
+        "title": "Obsoleto",
+        "description": "Questo strumento o funzionalità è obsoleto e potrebbe essere rimosso nelle versioni future."
       }
     }
   },

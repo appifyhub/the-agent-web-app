@@ -51,6 +51,42 @@
     "unlink_message": "Sada možete postati autonomni korisnik. Ovo prekida vezu između vas i {sponsorName}. AI će prestati da radi dok ne podesite svoj Profil.",
     "unlink": "Prekini vezu"
   },
+  "usage": {
+    "page_title": "Korišćenje",
+    "card_title": "Vaša istorija korišćenja",
+    "no_records_found": "Nema pronađenih zapisa o korišćenju",
+    "cost_breakdown": {
+      "title": "Pregled troškova",
+      "model_cost": "Cena modela",
+      "remote_cost": "Udaljena cena",
+      "api_call_cost": "Cena API poziva",
+      "maintenance_fee": "Naknada za održavanje",
+      "total": "Ukupno"
+    },
+    "token_stats": {
+      "title": "Statistika tokena",
+      "input_tokens": "Ulazni tokeni",
+      "output_tokens": "Izlazni tokeni",
+      "search_tokens": "Tokeni pretrage",
+      "total": "Ukupno"
+    },
+    "context_ids": {
+      "title": "Kontekst",
+      "date_label": "Datum",
+      "time_label": "Vreme",
+      "runtime_label": "Trajanje",
+      "user_label": "Korisnik",
+      "user_me": "Ja",
+      "user_sponsored": "Sponzorisani korisnik",
+      "chat_label": "Čet",
+      "chat_in_chat": "U četu",
+      "chat_background": "U pozadini",
+      "remote_runtime": "Udaljeno vreme izvršavanja",
+      "output_image_sizes": "Izlazne slike",
+      "input_image_sizes": "Ulazne slike"
+    },
+    "load_more": "Učitaj još"
+  },
   "save": "Sačuvaj",
   "saved": "Sačuvano!",
   "copied": "Kopirano!",
@@ -135,11 +171,11 @@
       },
       "web_search": {
         "title": "Web pretraga",
-        "description": "Dobijajte ažurirane informacije sa interneta, uključujući vesti, analize, kurseve valuta, cene kriptovaluta, hartije od vrednosti i još mnogo toga, direktno u ćaskanju."
+        "description": "Dobijajte ažurirane informacije sa interneta, uključujući vesti, analize, kurseve valuta, cene kriptovaluta, hartije od vrednosti i još mnogo toga, direktno u četu."
       },
       "media": {
         "title": "Prilozi i mediji",
-        "description": "Pošaljite slike, glasovne poruke i dokumente asistentu – on ih može obraditi i iskoristiti za kreiranje korisnih odgovora ili izvršavanje zadataka. Ćaskajte koristeći svoje fotografije ili dokumente, ne samo tekst."
+        "description": "Pošaljite slike, glasovne poruke i dokumente asistentu – on ih može obraditi i iskoristiti za kreiranje korisnih odgovora ili izvršavanje zadataka. Četujte koristeći svoje fotografije ili dokumente, ne samo tekst."
       },
       "imaging": {
         "title": "AI kreiranje slika",
@@ -169,7 +205,7 @@
     "no_tools_available": "Nema dostupnih alata za ovaj tip",
     "groups": {
       "text_intelligence": {
-        "title": "Jezična inteligencija"
+        "title": "Jezička inteligencija"
       },
       "content_analysis": {
         "title": "Analiza sadržaja"
@@ -219,16 +255,20 @@
         "description": "Ovo je model koji se koristi za ugradnju, kao što je ugrađivanje teksta, slika ili zvuka u vektorski prostor. Koristi se za pretragu sličnosti kroz interne baze podataka, dokumente i druge zadatke semantičke pretrage. Ovo se koristi kada pošaljete PDF fajl u čet."
       },
       "api_fiat_exchange": {
-        "title": "API: Fiat menjačnica",
-        "description": "Ovo je API koji se koristi za proveru kursa fiat valuta."
+        "title": "Fiat menjačnica",
+        "description": "Pristup kursevima fiat valuta u realnom vremenu."
       },
       "api_crypto_exchange": {
-        "title": "API: Kripto menjačnica",
-        "description": "Ovo je API koji se koristi za proveru kursa kripto valuta."
+        "title": "Kripto menjačnica",
+        "description": "Pristup kursevima kripto valuta u realnom vremenu."
       },
       "api_twitter": {
-        "title": "API: Twitter",
-        "description": "Ovo je API koji se koristi za čitanje Twitter sadržaja."
+        "title": "Twitter",
+        "description": "Pristup za čitanje i analizu Twitter sadržaja."
+      },
+      "deprecated": {
+        "title": "Zastarelo",
+        "description": "Ovaj alat ili funkcija je zastarela i može biti uklonjena u budućim verzijama."
       }
     }
   },

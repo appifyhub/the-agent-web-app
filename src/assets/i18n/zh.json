@@ -51,6 +51,42 @@
     "unlink_message": "您现在可以成为自主用户。这将断开您与{sponsorName}之间的链接, AI将停止工作, 直到您配置您的个人资料。",
     "unlink": "取消链接"
   },
+  "usage": {
+    "page_title": "使用情况",
+    "card_title": "您的使用历史",
+    "no_records_found": "未找到使用记录",
+    "cost_breakdown": {
+      "title": "费用明细",
+      "model_cost": "模型费用",
+      "remote_cost": "远程费用",
+      "api_call_cost": "API调用费用",
+      "maintenance_fee": "维护费",
+      "total": "总计"
+    },
+    "token_stats": {
+      "title": "Token统计",
+      "input_tokens": "输入Token",
+      "output_tokens": "输出Token",
+      "search_tokens": "搜索Token",
+      "total": "总计"
+    },
+    "context_ids": {
+      "title": "上下文",
+      "date_label": "日期",
+      "time_label": "时间",
+      "runtime_label": "运行时间",
+      "user_label": "用户",
+      "user_me": "我",
+      "user_sponsored": "被赞助用户",
+      "chat_label": "聊天",
+      "chat_in_chat": "在聊天中",
+      "chat_background": "后台",
+      "remote_runtime": "远程运行时间",
+      "output_image_sizes": "输出图像",
+      "input_image_sizes": "输入图像"
+    },
+    "load_more": "加载更多"
+  },
   "save": "保存",
   "saved": "已保存！",
   "copied": "已复制！",
@@ -219,16 +255,20 @@
         "description": "这是一个用于嵌入的模型，如将文本、图像或音频嵌入到向量空间中。它用于在内部数据库、文档和其他语义搜索任务中进行相似性搜索。这是您在聊天中上传PDF文件时使用的功能。"
       },
       "api_fiat_exchange": {
-        "title": "API 法定货币汇率",
-        "description": "这是一个用于检查法定货币汇率的API。"
+        "title": "法币汇率",
+        "description": "访问传统货币的实时汇率。"
       },
       "api_crypto_exchange": {
-        "title": "API 加密货币汇率",
-        "description": "这是一个用于检查加密货币汇率的API。"
+        "title": "加密货币汇率",
+        "description": "访问加密货币的实时汇率。"
       },
       "api_twitter": {
-        "title": "API Twitter",
-        "description": "这是一个用于读取Twitter内容的API。"
+        "title": "Twitter",
+        "description": "访问以读取和分析Twitter内容。"
+      },
+      "deprecated": {
+        "title": "已弃用",
+        "description": "此工具或功能已弃用，可能会在未来版本中移除。"
       }
     }
   },

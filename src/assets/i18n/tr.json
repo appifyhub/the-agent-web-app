@@ -51,6 +51,42 @@
     "unlink_message": "Artık bağımsız bir kullanıcı olabilirsiniz. Bu, siz ve {sponsorName} arasındaki bağlantıyı koparır ve Profilinizi yapılandırana kadar AI çalışmayı durdurur.",
     "unlink": "Bağlantıyı Kes"
   },
+  "usage": {
+    "page_title": "Kullanım",
+    "card_title": "Kullanım Geçmişiniz",
+    "no_records_found": "Kullanım kaydı bulunamadı",
+    "cost_breakdown": {
+      "title": "Maliyet Dökümü",
+      "model_cost": "Model Maliyeti",
+      "remote_cost": "Uzak Maliyet",
+      "api_call_cost": "API Çağrı Maliyeti",
+      "maintenance_fee": "Bakım Ücreti",
+      "total": "Toplam"
+    },
+    "token_stats": {
+      "title": "Token İstatistikleri",
+      "input_tokens": "Giriş Tokenleri",
+      "output_tokens": "Çıkış Tokenleri",
+      "search_tokens": "Arama Tokenleri",
+      "total": "Toplam"
+    },
+    "context_ids": {
+      "title": "Bağlam",
+      "date_label": "Tarih",
+      "time_label": "Saat",
+      "runtime_label": "Çalışma süresi",
+      "user_label": "Kullanıcı",
+      "user_me": "Ben",
+      "user_sponsored": "Sponsorlu Kullanıcı",
+      "chat_label": "Sohbet",
+      "chat_in_chat": "Sohbette",
+      "chat_background": "Arka planda",
+      "remote_runtime": "Uzak Çalışma Süresi",
+      "output_image_sizes": "Çıkış Görselleri",
+      "input_image_sizes": "Giriş Görselleri"
+    },
+    "load_more": "Daha fazla yükle"
+  },
   "save": "Kaydet",
   "saved": "Kaydedildi!",
   "copied": "Kopyalandı!",
@@ -173,16 +209,20 @@
         "description": "Bu gömme için kullanılan bir modeldir, metin, görüntü veya ses dosyalarını vektör uzayına gömmek gibi. Dahili veritabanları, belgeler ve diğer semantik arama görevlerinde benzerlik araması için kullanılır. Bu sohbete bir PDF dosyası yüklediğinizde kullanılan şeydir."
       },
       "api_fiat_exchange": {
-        "title": "API Fiat Döviz",
-        "description": "Bu bir fiat para biriminin döviz kurunu kontrol etmek için kullanılan bir API'dir."
+        "title": "Fiat Döviz Kuru",
+        "description": "Geleneksel para birimleri için gerçek zamanlı döviz kurlarına erişim."
       },
       "api_crypto_exchange": {
-        "title": "API Kripto Döviz",
-        "description": "Bu bir kripto para biriminin döviz kurunu kontrol etmek için kullanılan bir API'dir."
+        "title": "Kripto Döviz Kuru",
+        "description": "Kripto para birimleri için gerçek zamanlı döviz kurlarına erişim."
       },
       "api_twitter": {
-        "title": "API Twitter",
-        "description": "Bu Twitter içeriğini okumak için kullanılan bir API'dir."
+        "title": "Twitter",
+        "description": "Twitter içeriğini okumak ve analiz etmek için erişim."
+      },
+      "deprecated": {
+        "title": "Kullanımdan Kaldırıldı",
+        "description": "Bu araç veya özellik kullanımdan kaldırıldı ve gelecek sürümlerde kaldırılabilir."
       }
     }
   },

@@ -51,6 +51,42 @@
     "unlink_message": "You can now become an autonomous user. This breaks the link between you and {sponsorName} and AI will stop working until you configure your Profile.",
     "unlink": "Unlink"
   },
+  "usage": {
+    "page_title": "Usage",
+    "card_title": "Your Usage History",
+    "no_records_found": "No usage records found",
+    "cost_breakdown": {
+      "title": "Cost Breakdown",
+      "model_cost": "Model Cost",
+      "remote_cost": "Remote Cost",
+      "api_call_cost": "API Call Cost",
+      "maintenance_fee": "Maintenance Fee",
+      "total": "Total"
+    },
+    "token_stats": {
+      "title": "Token Stats",
+      "input_tokens": "Input Tokens",
+      "output_tokens": "Output Tokens",
+      "search_tokens": "Search Tokens",
+      "total": "Total"
+    },
+    "context_ids": {
+      "title": "Context",
+      "date_label": "Date",
+      "time_label": "Time",
+      "runtime_label": "Runtime",
+      "user_label": "User",
+      "user_me": "Me",
+      "user_sponsored": "Sponsored User",
+      "chat_label": "Chat",
+      "chat_in_chat": "In chat",
+      "chat_background": "Background",
+      "remote_runtime": "Remote Runtime",
+      "output_image_sizes": "Output Images",
+      "input_image_sizes": "Input Images"
+    },
+    "load_more": "Load more"
+  },
   "save": "Save",
   "saved": "Saved!",
   "copied": "Copied!",
@@ -163,16 +199,20 @@
         "description": "This is a model that is used for embedding, such as embedding text, images, or audio into a vector space. It's used for similarity search across internal databases, documents, and other semantic search tasks. This is used when you upload a PDF file to the chat."
       },
       "api_fiat_exchange": {
-        "title": "API Fiat Exchange",
-        "description": "This is an API that is used for checking the exchange rate of a fiat currency."
+        "title": "Fiat Exchange",
+        "description": "Access to real-time exchange rates for traditional currencies."
       },
       "api_crypto_exchange": {
-        "title": "API Crypto Exchange",
-        "description": "This is an API that is used for checking the exchange rate of a crypto currency."
+        "title": "Crypto Exchange",
+        "description": "Access to real-time exchange rates for cryptocurrencies."
       },
       "api_twitter": {
-        "title": "API Twitter",
-        "description": "This is an API that is used for reading Twitter content."
+        "title": "Twitter",
+        "description": "Access to read and analyze Twitter content."
+      },
+      "deprecated": {
+        "title": "Deprecated",
+        "description": "This tool or feature is deprecated and may be removed in future versions."
       }
     }
   },
