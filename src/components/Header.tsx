@@ -11,6 +11,7 @@ import {
   Brain,
   X,
   Merge,
+  ChartNoAxesCombined,
 } from "lucide-react";
 import {
   NavigationMenu,
@@ -43,7 +44,8 @@ type Page =
   | "features"
   | "access"
   | "intelligence"
-  | "connections";
+  | "connections"
+  | "usage";
 
 interface HeaderProps {
   page: Page;
@@ -95,8 +97,9 @@ const Header: React.FC<HeaderProps> = ({
     navigateToAccess,
     navigateToIntelligence,
     navigateToSponsorships,
-    navigateToFeatures,
     navigateToConnections,
+    navigateToUsage,
+    navigateToFeatures,
     navigateWithLanguageChange,
   } = useNavigation();
 
@@ -133,6 +136,8 @@ const Header: React.FC<HeaderProps> = ({
         return t("intelligence");
       case "connections":
         return t("connections.page_title");
+      case "usage":
+        return t("usage.page_title");
       default:
         return "";
     }
@@ -219,6 +224,17 @@ const Header: React.FC<HeaderProps> = ({
       setMenuOpen(false);
     } else {
       console.warn("Cannot navigate to connections without user_id");
+    }
+  };
+
+  const handleUsageClick = () => {
+    if (page === "usage") return;
+
+    if (lang_iso_code && effectiveUserId) {
+      navigateToUsage(effectiveUserId, lang_iso_code);
+      setMenuOpen(false);
+    } else {
+      console.warn("Cannot navigate to usage without user_id");
     }
   };
 
@@ -364,6 +380,20 @@ const Header: React.FC<HeaderProps> = ({
                       {t("sponsorships")}
                     </Button>
                   )}
+                  <Button
+                    variant="ghost"
+                    disabled={page === "usage"}
+                    className={cn(
+                      "justify-start gap-3 text-base h-12 rounded-xl font-normal",
+                      page === "usage"
+                        ? "bg-accent/70 cursor-default opacity-100"
+                        : "text-white hover:bg-white/10 cursor-pointer"
+                    )}
+                    onClick={handleUsageClick}
+                  >
+                    <ChartNoAxesCombined className="h-5 w-5 shrink-0" />
+                    {t("usage.page_title")}
+                  </Button>
                   {showHelpButton && (
                     <Button
                       variant="ghost"
@@ -590,6 +620,20 @@ const Header: React.FC<HeaderProps> = ({
                               {t("sponsorships")}
                             </Button>
                           )}
+                          <Button
+                            variant="ghost"
+                            disabled={page === "usage"}
+                            className={cn(
+                              "justify-start gap-3 text-base h-12 rounded-xl font-normal",
+                              page === "usage"
+                                ? "bg-accent/70 cursor-default opacity-100"
+                                : "text-white hover:bg-white/10 cursor-pointer"
+                            )}
+                            onClick={handleUsageClick}
+                          >
+                            <ChartNoAxesCombined className="h-5 w-5 shrink-0" />
+                            {t("usage.page_title")}
+                          </Button>
                           {showHelpButton && (
                             <Button
                               variant="ghost"

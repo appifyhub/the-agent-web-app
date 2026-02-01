@@ -15,7 +15,7 @@ import { useChats } from "@/hooks/useChats";
 import { ChatInfo } from "@/services/user-settings-service";
 import { PageError, cn } from "@/lib/utils";
 
-type Page = "sponsorships" | "profile" | "chat" | "access" | "intelligence" | "connections";
+type Page = "sponsorships" | "profile" | "chat" | "access" | "intelligence" | "connections" | "usage";
 
 export interface BaseSettingsPageRef {
   openDrawer: () => void;

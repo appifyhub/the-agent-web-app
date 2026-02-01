@@ -13,15 +13,21 @@ export type ToolType =
   | "embedding"
   | "api_fiat_exchange"
   | "api_crypto_exchange"
-  | "api_twitter";
+  | "api_twitter"
+  | "deprecated";
 
 export interface CostEstimate {
   input_1m_tokens?: number;
   output_1m_tokens?: number;
   search_1m_tokens?: number;
-  image_1k?: number;
-  image_2k?: number;
-  image_4k?: number;
+  input_image_1k?: number;
+  input_image_2k?: number;
+  input_image_4k?: number;
+  input_image_8k?: number;
+  input_image_12k?: number;
+  output_image_1k?: number;
+  output_image_2k?: number;
+  output_image_4k?: number;
   api_call?: number;
   second_of_runtime?: number;
 }

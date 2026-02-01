@@ -7,7 +7,7 @@ import {
   TooltipTrigger,
   TooltipContent,
 } from "@/components/ui/tooltip";
-import { Eraser } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { t } from "@/lib/translations";
 
@@ -80,7 +80,7 @@ const SettingInput: React.FC<SettingInputProps> = ({
                 onClick={handleClear}
                 disabled={disabled || !value}
               >
-                <Eraser className="h-4 w-4" />
+                <Trash2 className="h-4 w-4" />
               </Button>
             </TooltipTrigger>
             <TooltipContent>{t("connections.clear_key")}</TooltipContent>
