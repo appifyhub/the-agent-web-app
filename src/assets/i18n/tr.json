@@ -318,5 +318,28 @@
     "privacy": "Gizlilik Politikası",
     "powered_by": "Destekleyen",
     "rights_reserved": "Tüm hakları saklıdır"
+  },
+  "cost_estimate": {
+    "title": "Maliyet Tahmini:",
+    "description": " kullanım maliyeti tahmini. Tüm değerler kredi cinsindendir.",
+    "disclaimer": "Not: Tedarikçi fiyatlandırma değişiklikleri nedeniyle tahminler önceden haber verilmeksizin değişebilir.",
+    "no_data": "Bu araç için maliyet bilgisi mevcut değil.",
+    "token_costs": "Token Maliyetleri",
+    "input_tokens": "Milyon giriş tokeni başına",
+    "output_tokens": "Milyon çıkış tokeni başına",
+    "search_tokens": "Milyon arama tokeni başına",
+    "input_image_costs": "Giriş Görüntü Maliyetleri",
+    "input_image_1k": "1 Megapiksel",
+    "input_image_2k": "2 Megapiksel",
+    "input_image_4k": "4 Megapiksel",
+    "input_image_8k": "8 Megapiksel",
+    "input_image_12k": "12 Megapiksel",
+    "output_image_costs": "Çıkış Görüntü Maliyetleri",
+    "output_image_1k": "1 Megapiksel",
+    "output_image_2k": "2 Megapiksel",
+    "output_image_4k": "4 Megapiksel",
+    "other_costs": "Diğer Maliyetler",
+    "api_call": "Tek kullanım başına",
+    "second_of_runtime": "Çalışma süresi saniyesi başına"
   }
 }

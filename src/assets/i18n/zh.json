@@ -318,5 +318,28 @@
     "privacy": "隐私政策",
     "powered_by": "由以下提供支持",
     "rights_reserved": "保留所有权利"
+  },
+  "cost_estimate": {
+    "title": "成本估算：",
+    "description": "使用 的估算成本。所有值均以积分为单位。",
+    "disclaimer": "注意：由于供应商定价变动，估算值可能会在不另行通知的情况下更改。",
+    "no_data": "此工具没有可用的成本信息。",
+    "token_costs": "代币成本",
+    "input_tokens": "每百万输入代币",
+    "output_tokens": "每百万输出代币",
+    "search_tokens": "每百万搜索代币",
+    "input_image_costs": "输入图像成本",
+    "input_image_1k": "1 百万像素",
+    "input_image_2k": "2 百万像素",
+    "input_image_4k": "4 百万像素",
+    "input_image_8k": "8 百万像素",
+    "input_image_12k": "12 百万像素",
+    "output_image_costs": "输出图像成本",
+    "output_image_1k": "1 百万像素",
+    "output_image_2k": "2 百万像素",
+    "output_image_4k": "4 百万像素",
+    "other_costs": "其他成本",
+    "api_call": "每次使用",
+    "second_of_runtime": "每秒运行时间"
   }
 }

@@ -318,5 +318,28 @@
     "privacy": "Datenschutzrichtlinie",
     "powered_by": "Unterstützt von",
     "rights_reserved": "Alle Rechte vorbehalten"
+  },
+  "cost_estimate": {
+    "title": "Kostenschätzung:",
+    "description": "Geschätzte Kosten für die Verwendung von. Alle Werte sind in Credits.",
+    "disclaimer": "Hinweis: Schätzungen können sich ohne vorherige Ankündigung aufgrund von Änderungen der Anbieterpreise ändern.",
+    "no_data": "Keine Kosteninformationen für dieses Tool verfügbar.",
+    "token_costs": "Token-Kosten",
+    "input_tokens": "Pro Million Eingabe-Tokens",
+    "output_tokens": "Pro Million Ausgabe-Tokens",
+    "search_tokens": "Pro Million Such-Tokens",
+    "input_image_costs": "Eingabebildkosten",
+    "input_image_1k": "1 Megapixel",
+    "input_image_2k": "2 Megapixel",
+    "input_image_4k": "4 Megapixel",
+    "input_image_8k": "8 Megapixel",
+    "input_image_12k": "12 Megapixel",
+    "output_image_costs": "Ausgabebildkosten",
+    "output_image_1k": "1 Megapixel",
+    "output_image_2k": "2 Megapixel",
+    "output_image_4k": "4 Megapixel",
+    "other_costs": "Andere Kosten",
+    "api_call": "Pro einzelne Verwendung",
+    "second_of_runtime": "Pro Sekunde Laufzeit"
   }
 }

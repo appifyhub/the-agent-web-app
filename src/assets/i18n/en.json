@@ -311,6 +311,29 @@
       }
     }
   },
+  "cost_estimate": {
+    "title": "Cost Estimate",
+    "description": "Estimated costs for using. All values are in credits.",
+    "disclaimer": "Note: Estimates may change without notice due to vendor pricing changes.",
+    "no_data": "No cost information available for this tool.",
+    "token_costs": "Token Costs",
+    "input_tokens": "Per million input tokens",
+    "output_tokens": "Per million output tokens",
+    "search_tokens": "Per million search tokens",
+    "input_image_costs": "Input Image Costs",
+    "input_image_1k": "1 Megapixel",
+    "input_image_2k": "2 Megapixels",
+    "input_image_4k": "4 Megapixels",
+    "input_image_8k": "8 Megapixels",
+    "input_image_12k": "12 Megapixels",
+    "output_image_costs": "Output Image Costs",
+    "output_image_1k": "1 Megapixel",
+    "output_image_2k": "2 Megapixels",
+    "output_image_4k": "4 Megapixels",
+    "other_costs": "Other Costs",
+    "api_call": "Per single use",
+    "second_of_runtime": "Per second of runtime"
+  },
   "check_out_project": "Check out the project",
   "footer": {
     "logo_alt": "Logo",

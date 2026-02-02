@@ -318,5 +318,28 @@
     "privacy": "Politika privatnosti",
     "powered_by": "Pokreće",
     "rights_reserved": "Sva prava zadržana"
+  },
+  "cost_estimate": {
+    "title": "Procena troškova",
+    "description": "Procenjeni troškovi korišćenja. Sve vrednosti su u kreditima.",
+    "disclaimer": "Napomena: Procene se mogu promeniti bez prethodne najave zbog promena cena dobavljača.",
+    "no_data": "Nema dostupnih informacija o troškovima za ovaj alat.",
+    "token_costs": "Troškovi tokena",
+    "input_tokens": "Po milion ulaznih tokena",
+    "output_tokens": "Po milion izlaznih tokena",
+    "search_tokens": "Po milion tokena pretrage",
+    "input_image_costs": "Troškovi ulaznih slika",
+    "input_image_1k": "1 Megapiksel",
+    "input_image_2k": "2 Megapiksela",
+    "input_image_4k": "4 Megapiksela",
+    "input_image_8k": "8 Megapiksela",
+    "input_image_12k": "12 Megapiksela",
+    "output_image_costs": "Troškovi izlaznih slika",
+    "output_image_1k": "1 Megapiksel",
+    "output_image_2k": "2 Megapiksela",
+    "output_image_4k": "4 Megapiksela",
+    "other_costs": "Ostali troškovi",
+    "api_call": "Po jednoj upotrebi",
+    "second_of_runtime": "Po sekundi izvršavanja"
   }
 }

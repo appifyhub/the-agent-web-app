@@ -318,5 +318,28 @@
     "privacy": "سياسة الخصوصية",
     "powered_by": "مدعوم من",
     "rights_reserved": "جميع الحقوق محفوظة"
+  },
+  "cost_estimate": {
+    "title": "تقدير التكلفة:",
+    "description": "التكاليف المقدرة لاستخدام. جميع القيم بالنقاط.",
+    "disclaimer": "ملاحظة: قد تتغير التقديرات دون إشعار مسبق بسبب تغييرات أسعار المزودين.",
+    "no_data": "لا توجد معلومات تكلفة متاحة لهذه الأداة.",
+    "token_costs": "تكاليف الرموز",
+    "input_tokens": "لكل مليون رمز إدخال",
+    "output_tokens": "لكل مليون رمز إخراج",
+    "search_tokens": "لكل مليون رمز بحث",
+    "input_image_costs": "تكاليف صور الإدخال",
+    "input_image_1k": "1 ميجابكسل",
+    "input_image_2k": "2 ميجابكسل",
+    "input_image_4k": "4 ميجابكسل",
+    "input_image_8k": "8 ميجابكسل",
+    "input_image_12k": "12 ميجابكسل",
+    "output_image_costs": "تكاليف صور الإخراج",
+    "output_image_1k": "1 ميجابكسل",
+    "output_image_2k": "2 ميجابكسل",
+    "output_image_4k": "4 ميجابكسل",
+    "other_costs": "تكاليف أخرى",
+    "api_call": "لكل استخدام واحد",
+    "second_of_runtime": "لكل ثانية تشغيل"
   }
 }
