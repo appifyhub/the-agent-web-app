@@ -31,3 +31,4 @@ alwaysApply: true
 - Consistency is key. Look at coding patterns in and around the file you are editing as if you have OCD
 - If there are any tests, those must run offline. Write tests only if the unit is simply testable. If the unit requires extensive mocking, advise the user before proceeding
 - Unless explicitly asked, you should not build plans or walkthrough documents – default to keeping it short and simple, in the chat
+- All user-facing labels and messages must always be translated. Use the i18n directory for doing that. Never add any placeholders, and always manually update all translation files to ensure proper translation from day 0 across all languages
