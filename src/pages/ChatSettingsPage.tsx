@@ -303,8 +303,16 @@ const ChatSettingsPage: React.FC = () => {
       {/* Use About Me toggle */}
       <SettingToggle
         id="use-about-me"
-        label={t("use_about_me_label", { botName })}
-        helperText={t("use_about_me_helper", { botName })}
+        label={
+          chatSettings?.is_private
+            ? t("use_about_me_label_singular", { botName })
+            : t("use_about_me_label", { botName })
+        }
+        helperText={
+          chatSettings?.is_private
+            ? t("use_about_me_helper_singular", { botName })
+            : t("use_about_me_helper", { botName })
+        }
         checked={chatSettings?.use_about_me || false}
         onChange={(checked) =>
           setChatSettings((prev) =>

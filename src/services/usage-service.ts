@@ -181,3 +181,94 @@ export async function fetchUsageStats({
   }
   return response.json();
 }
+
+export type TimeRange =
+  | "all"
+  | "10min"
+  | "30min"
+  | "1h"
+  | "3h"
+  | "6h"
+  | "12h"
+  | "today"
+  | "yesterday"
+  | "week"
+  | "2weeks"
+  | "month";
+
+export function calculateDateRange(timeRange: TimeRange): {
+  start_date?: string;
+  end_date?: string;
+} {
+  if (timeRange === "all") {
+    return {};
+  }
+
+  const now = new Date();
+  let startDate: Date;
+  let endDate: Date = now;
+
+  switch (timeRange) {
+    case "10min":
+      startDate = new Date(now.getTime() - 10 * 60 * 1000);
+      break;
+    case "30min":
+      startDate = new Date(now.getTime() - 30 * 60 * 1000);
+      break;
+    case "1h":
+      startDate = new Date(now.getTime() - 60 * 60 * 1000);
+      break;
+    case "3h":
+      startDate = new Date(now.getTime() - 3 * 60 * 60 * 1000);
+      break;
+    case "6h":
+      startDate = new Date(now.getTime() - 6 * 60 * 60 * 1000);
+      break;
+    case "12h":
+      startDate = new Date(now.getTime() - 12 * 60 * 60 * 1000);
+      break;
+    case "today":
+      startDate = new Date(now);
+      startDate.setHours(0, 0, 0, 0);
+      break;
+    case "yesterday":
+      startDate = new Date(now);
+      startDate.setDate(startDate.getDate() - 1);
+      startDate.setHours(0, 0, 0, 0);
+      endDate = new Date(now);
+      endDate.setHours(0, 0, 0, 0);
+      break;
+    case "week": {
+      startDate = new Date(now);
+      const dayOfWeek = startDate.getDay();
+      const daysToMonday = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+      startDate.setDate(startDate.getDate() - daysToMonday);
+      startDate.setHours(0, 0, 0, 0);
+      break;
+    }
+    case "2weeks": {
+      startDate = new Date(now);
+      const dayOfWeek2w = startDate.getDay();
+      const daysToMonday2w = dayOfWeek2w === 0 ? 6 : dayOfWeek2w - 1;
+      startDate.setDate(startDate.getDate() - daysToMonday2w - 7);
+      startDate.setHours(0, 0, 0, 0);
+      break;
+    }
+    case "month":
+      startDate = new Date(now);
+      startDate.setMonth(startDate.getMonth() - 1);
+      startDate.setDate(1);
+      startDate.setHours(0, 0, 0, 0);
+      endDate = new Date(now);
+      endDate.setDate(1);
+      endDate.setHours(0, 0, 0, 0);
+      break;
+    default:
+      return {};
+  }
+
+  return {
+    start_date: startDate.toISOString(),
+    end_date: endDate.toISOString(),
+  };
+}

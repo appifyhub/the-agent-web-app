@@ -7,6 +7,7 @@ import { UsageRecord } from "@/services/usage-service";
 import { ChatInfo } from "@/services/user-settings-service";
 import { SponsorshipResponse } from "@/services/sponsorships-service";
 import { Badge } from "@/components/ui/badge";
+import ProviderIcon from "@/components/ProviderIcon";
 
 interface UsageRecordCardProps {
   record: UsageRecord;
@@ -151,26 +152,36 @@ const UsageRecordCard: React.FC<UsageRecordCardProps> = ({
     >
       {/* Collapsed view - always visible */}
       <div className="flex items-center w-full">
-        <div className="hidden md:flex flex-col items-start min-w-[60px] shrink-0">
-          <span className="text-sm font-medium">{timeStr}</span>
-          <span className="text-xs text-muted-foreground">{dateStr}</span>
+        <div className="hidden md:flex items-center justify-center w-6 h-6 shrink-0 mr-2">
+          <ProviderIcon
+            providerId={record.tool.provider.id}
+            alt={record.tool.provider.name}
+            className="w-6 h-6"
+          />
+        </div>
+
+        <div className="hidden md:block md:w-5 md:h-5" />
+
+        <div className="hidden md:flex flex-col justify-center items-start shrink-0">
+          <span className="text-md font-medium">{timeStr}</span>
+          <span className="text-sm text-muted-foreground">{dateStr}</span>
         </div>
 
         <div className="flex flex-col flex-1 min-w-0 pr-4 md:px-4">
-          <span className="text-sm font-medium truncate">
+          <span className="text-md font-medium truncate">
             {record.tool.name}
           </span>
-          <span className="text-xs text-muted-foreground truncate">
+          <span className="text-sm text-muted-foreground truncate">
             {getPurposeTitle()}
           </span>
         </div>
 
         <div className="flex items-center space-x-3 shrink-0">
-          <span className="hidden md:inline-block text-sm text-muted-foreground">
+          <span className="hidden md:inline-block text-md text-blue-300">
             {formatRuntime(record.runtime_seconds)}
           </span>
           <div className="flex items-center space-x-1">
-            <span className="text-sm font-medium text-accent-amber">
+            <span className="text-md font-medium text-accent-amber">
               {formatCredits(record.total_cost_credits)}
             </span>
             <BadgeCent className="h-4 w-4 text-accent-amber mb-0.5" />

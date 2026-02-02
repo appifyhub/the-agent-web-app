@@ -20,9 +20,88 @@ function flattenKeys(obj: any, prefix = ""): string[] {
   });
 }
 
+function validateJSONSyntax(filePath: string): void {
+  const content = fs.readFileSync(filePath, "utf8");
+  try {
+    JSON.parse(content);
+  } catch (error) {
+    throw new Error(
+      `Invalid JSON syntax in ${path.basename(filePath)}: ${error instanceof Error ? error.message : String(error)}`
+    );
+  }
+}
+
+function findDuplicateKeys(filePath: string): string[] {
+  const content = fs.readFileSync(filePath, "utf8");
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function findDuplicatesInObject(obj: any, path = ""): string[] {
+    const duplicates: string[] = [];
+    const keys = Object.keys(obj);
+    const seenKeys = new Map<string, number>();
+
+    for (const key of keys) {
+      const count = seenKeys.get(key) || 0;
+      seenKeys.set(key, count + 1);
+    }
+
+    for (const [key, count] of seenKeys.entries()) {
+      if (count > 1) {
+        const fullPath = path ? `${path}.${key}` : key;
+        duplicates.push(fullPath);
+      }
+    }
+
+    for (const key of keys) {
+      const value = obj[key];
+      if (value && typeof value === "object" && !Array.isArray(value)) {
+        const nestedPath = path ? `${path}.${key}` : key;
+        duplicates.push(...findDuplicatesInObject(value, nestedPath));
+      }
+    }
+
+    return duplicates;
+  }
+
+  try {
+    const parsed = JSON.parse(content);
+    return findDuplicatesInObject(parsed);
+  } catch {
+    return [];
+  }
+}
+
 import { INTERFACE_LANGUAGES } from "../src/lib/languages.ts";
 
 function main() {
+  console.log("Validating JSON files...\n");
+
+  const allLangCodes = INTERFACE_LANGUAGES.map((l) => l.isoCode);
+  const jsonFiles = allLangCodes.map((code) =>
+    path.join(I18N_DIR, `${code}.json`)
+  );
+
+  for (const filePath of jsonFiles) {
+    if (!fs.existsSync(filePath)) {
+      continue;
+    }
+
+    const fileName = path.basename(filePath);
+
+    validateJSONSyntax(filePath);
+
+    const duplicates = findDuplicateKeys(filePath);
+    if (duplicates.length > 0) {
+      console.error(`[${fileName}] Found duplicate keys:`);
+      duplicates.forEach((key) => console.error(`  - "${key}"`));
+      throw new Error(
+        `Duplicate keys found in ${fileName}. See above for details.`
+      );
+    }
+  }
+
+  console.log("✓ All JSON files are valid with no duplicate keys\n");
+
   const enPath = path.join(I18N_DIR, "en.json");
   if (!fs.existsSync(enPath)) {
     throw new Error("en.json not found");
@@ -30,7 +109,6 @@ function main() {
   const en = JSON.parse(fs.readFileSync(enPath, "utf8"));
   const keys = flattenKeys(en);
 
-  // Validate all INTERFACE_LANGUAGES have a translation file and all keys
   const missingLangs: string[] = [];
   const mismatchLangs: {
     isoCode: string;
@@ -38,19 +116,16 @@ function main() {
     extraKeys: string[];
   }[] = [];
 
-  // Helper to extract placeholders from a string
   function extractPlaceholders(str: string): Set<string> {
     const matches = str.match(/\{(\w+)\}/g);
     return new Set(matches ? matches.map((m) => m.slice(1, -1)) : []);
   }
 
-  // Helper to get value by flattened key from object
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function getValueByFlatKey(obj: any, flatKey: string): any {
     return flatKey.split(".").reduce((o, k) => (o ? o[k] : undefined), obj);
   }
 
-  // For each language, validate keys and placeholders
   for (const lang of INTERFACE_LANGUAGES) {
     const langPath = path.join(I18N_DIR, `${lang.isoCode}.json`);
     if (!fs.existsSync(langPath)) {
@@ -69,11 +144,9 @@ function main() {
       });
     }
 
-    // Placeholder consistency check
     for (const key of keys) {
       const enValue = getValueByFlatKey(en, key);
       const langValue = getValueByFlatKey(langJson, key);
-      // Only check if both values are strings (skip objects/plurals)
       if (typeof enValue === "string" && typeof langValue === "string") {
         const enPlaceholders = extractPlaceholders(enValue);
         const langPlaceholders = extractPlaceholders(langValue);
@@ -103,7 +176,6 @@ function main() {
         }
       }
 
-      // If value is an object (plural forms), check each plural form
       if (
         enValue &&
         typeof enValue === "object" &&
