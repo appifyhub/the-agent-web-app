@@ -9,6 +9,9 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
+import { CostEstimate } from "@/services/external-tools-service";
+import CostEstimateDialog from "@/components/CostEstimateDialog";
+import { CircleHelp } from "lucide-react";
 
 export interface SectionedSelectorSection {
   sectionTitle: string;
@@ -23,6 +26,8 @@ export interface SectionedSelectorOption {
   disabled?: boolean;
   isConfigured?: boolean;
   providerId?: string; // for provider logos
+  costEstimate?: CostEstimate;
+  toolName?: string;
 }
 
 interface SectionedSelectorProps {
@@ -55,6 +60,10 @@ const SectionedSelector: React.FC<SectionedSelectorProps> = ({
   contentClassName = "",
 }) => {
   const [isOpen, setIsOpen] = React.useState(false);
+  const [costEstimateTarget, setCostEstimateTarget] = React.useState<{
+    toolName: string;
+    estimate: CostEstimate;
+  } | null>(null);
 
   // Find if the current value exists in any section
   const validOption = sections
@@ -87,7 +96,27 @@ const SectionedSelector: React.FC<SectionedSelectorProps> = ({
             triggerClassName
           )}
         >
-          <SelectValue placeholder={placeholder} />
+          <div className="flex items-center justify-between w-full min-w-0 pr-2">
+            <SelectValue placeholder={placeholder} />
+            {validOption?.costEstimate && validOption.toolName && (
+              <div
+                className="flex items-center gap-2 z-50 pointer-events-auto ml-2 shrink-0 cursor-pointer"
+                onPointerDown={(e) => e.stopPropagation()}
+                onPointerUp={(e) => e.stopPropagation()}
+                onMouseDown={(e) => e.stopPropagation()}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setCostEstimateTarget({
+                    toolName: validOption.toolName!,
+                    estimate: validOption.costEstimate!
+                  });
+                }}
+              >
+                <CircleHelp className="size-5 text-blue-300 hover:text-blue-400 transition-colors" />
+              </div>
+            )}
+          </div>
         </SelectTrigger>
         <SelectContent
           className={cn(
@@ -145,33 +174,58 @@ const SectionedSelector: React.FC<SectionedSelectorProps> = ({
                   disabled={
                     opt.disabled ||
                     !section.isConfigured ||
-                    !opt.isConfigured ||
-                    opt.value === value
+                    (!opt.isConfigured && !opt.costEstimate) ||
+                    (opt.value === value && false)
                   }
                   className={cn(
-                    "py-4 px-8 pr-16! cursor-pointer text-foreground [&>span:first-child]:right-4!", // Extra left padding for indentation, override right padding and checkbox position
+                    "py-4 px-8 pr-12! cursor-pointer text-foreground", // Remove nested span width overrides as structure changed
                     opt.value === value ? "bg-accent/70" : "",
-                    !section.isConfigured || !opt.isConfigured
-                      ? "text-muted-foreground/50"
-                      : ""
+                    (!section.isConfigured || !opt.isConfigured) ? "text-muted-foreground/50" : ""
                   )}
-                >
-                  <div className="flex items-center justify-between w-full">
-                    <div className="flex items-center gap-3">
-                      {opt.providerId && (
-                        <ProviderIcon
-                          providerId={opt.providerId}
-                          className="w-4 h-4 opacity-70"
-                          alt="Provider logo"
-                        />
+                  addon={
+                    <>
+                      {opt.costEstimate && opt.toolName && (
+                        <div
+                          className={cn(
+                            "flex items-center gap-2 z-50 pointer-events-auto ml-auto shrink-0 mr-4",
+                            "cursor-pointer"
+                          )}
+                          onPointerDown={(e) => e.stopPropagation()}
+                          onPointerUp={(e) => e.stopPropagation()}
+                          onMouseDown={(e) => e.stopPropagation()}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            setIsOpen(false); // Close the selector
+                            setCostEstimateTarget({
+                              toolName: opt.toolName!,
+                              estimate: opt.costEstimate!
+                            });
+                          }}
+                        >
+                          <CircleHelp className="size-5 text-blue-300 hover:text-blue-400 transition-colors" />
+                        </div>
                       )}
-                      <span>{opt.label}</span>
-                    </div>
-                    {section.isConfigured && !opt.isConfigured && (
-                      <span className="text-xs text-muted-foreground/60 ml-2">
-                        {notConfiguredLabel}
-                      </span>
+
+                      {section.isConfigured && !opt.isConfigured && (
+                        <div className="flex items-center gap-2 ml-auto pl-2">
+                          <span className="text-xs text-muted-foreground/60 ml-2">
+                            {notConfiguredLabel}
+                          </span>
+                        </div>
+                      )}
+                    </>
+                  }
+                >
+                  <div className="flex items-center gap-3 flex-1 min-w-0">
+                    {opt.providerId && (
+                      <ProviderIcon
+                        providerId={opt.providerId}
+                        className="w-4 h-4 opacity-70 shrink-0"
+                        alt="Provider logo"
+                      />
                     )}
+                    <span className="truncate">{opt.label}</span>
                   </div>
                 </SelectItem>
               ))}
@@ -179,6 +233,16 @@ const SectionedSelector: React.FC<SectionedSelectorProps> = ({
           ))}
         </SelectContent>
       </Select>
+      {costEstimateTarget && (
+        <CostEstimateDialog
+          toolName={costEstimateTarget.toolName}
+          costEstimate={costEstimateTarget.estimate}
+          open={!!costEstimateTarget}
+          onOpenChange={(open) => {
+            if (!open) setCostEstimateTarget(null);
+          }}
+        />
+      )}
     </div>
   );
 };
