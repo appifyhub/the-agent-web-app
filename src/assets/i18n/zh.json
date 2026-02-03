@@ -51,6 +51,79 @@
     "unlink_message": "您现在可以成为自主用户。这将断开您与{sponsorName}之间的链接, AI将停止工作, 直到您配置您的个人资料。",
     "unlink": "取消链接"
   },
+  "usage": {
+    "page_title": "使用情况",
+    "card_title": "您的使用历史",
+    "no_records_found": "未找到使用记录",
+    "cost_breakdown": {
+      "title": "费用明细",
+      "model_cost": "模型费用",
+      "remote_cost": "远程费用",
+      "api_call_cost": "API调用费用",
+      "maintenance_fee": "维护费",
+      "total": "总计"
+    },
+    "token_stats": {
+      "title": "Token统计",
+      "input_tokens": "输入Token",
+      "output_tokens": "输出Token",
+      "search_tokens": "搜索Token",
+      "total": "总计"
+    },
+    "context_ids": {
+      "title": "上下文",
+      "date_label": "日期",
+      "time_label": "时间",
+      "runtime_label": "运行时间",
+      "user_label": "用户",
+      "user_me": "我",
+      "user_sponsored": "被赞助用户",
+      "chat_label": "聊天",
+      "chat_in_chat": "在聊天中",
+      "chat_background": "后台",
+      "remote_runtime": "远程运行时间",
+      "output_image_sizes": "输出图像",
+      "input_image_sizes": "输入图像"
+    },
+    "load_more": "加载更多",
+    "filters": {
+      "scope_section": "范围",
+      "filters_section": "筛选器",
+      "time_range_label": "时间",
+      "time_range_all": "所有时间",
+      "time_range_10min": "最近10分钟",
+      "time_range_30min": "最近30分钟",
+      "time_range_1h": "最近1小时",
+      "time_range_3h": "最近3小时",
+      "time_range_6h": "最近6小时",
+      "time_range_12h": "最近12小时",
+      "time_range_today": "今天",
+      "time_range_yesterday": "昨天",
+      "time_range_week": "上周",
+      "time_range_2weeks": "最近2周",
+      "time_range_month": "上个月",
+      "tool_label": "工具",
+      "tool_all": "所有 AI 工具",
+      "purpose_label": "用途",
+      "purpose_all": "所有用途",
+      "provider_label": "提供商",
+      "provider_all": "所有提供商",
+      "show_scope_and_filters": "显示范围和筛选器",
+      "hide_scope_and_filters": "隐藏范围和筛选器",
+      "include_sponsored_label": "包括赞助用户",
+      "exclude_self_label": "排除我的使用"
+    },
+    "stats": {
+      "total_records": "总记录数",
+      "total_cost": "总成本",
+      "total_runtime": "总时间",
+      "show_breakdowns": "查看详细分类",
+      "hide_breakdowns": "隐藏明细",
+      "by_tool": "按工具",
+      "by_purpose": "按用途",
+      "by_provider": "按提供商"
+    }
+  },
   "save": "保存",
   "saved": "已保存！",
   "copied": "已复制！",
@@ -87,7 +160,9 @@
   "about_me_label": "{botName} 知道关于我的这些：",
   "about_me_placeholder": "{name} 是一位火箭科学家，住在…",
   "use_about_me_label": "使用所有人的个人资料信息",
+  "use_about_me_label_singular": "使用我的个人资料信息",
   "use_about_me_helper": "启用后，{botName} 将使用所有人的个人资料，在此聊天中提供更具上下文和个性化的回复。",
+  "use_about_me_helper_singular": "启用后，{botName} 将使用您的个人资料在此聊天中提供更具上下文相关性和个性化的回复。",
   "use_about_me_which_information": "哪些信息？",
   "token_info": {
     "profile_id": "个人资料ID",
@@ -204,23 +279,11 @@
       },
       "images_gen": {
         "title": "图像生成",
-        "description": "这是一个用于图像生成的模型，如从文本生成图像或从图像生成图像。"
+        "description": "这是一个仅用于从文本提示生成图像的模型。"
       },
       "images_edit": {
         "title": "图像编辑",
-        "description": "这是一个用于图像编辑的模型，如照片替换、对象移除、添加特殊效果和更改图像样式。"
-      },
-      "images_restoration": {
-        "title": "图像修复",
-        "description": "这是一个用于图像修复的模型，如去除噪声、修复模糊和减少照片损坏。"
-      },
-      "images_inpainting": {
-        "title": "图像修补",
-        "description": "这是一个用于图像修补的模型，如移除错误放置的对象、修复生成图像的空洞、修正解剖变形和修复图像。"
-      },
-      "images_background_removal": {
-        "title": "图像背景移除",
-        "description": "这是一个用于图像背景移除的模型，如移除图像背景、修复图像背景和更改图像背景。"
+        "description": "这是一个用于图像编辑的模型,如照片替换、对象移除、添加特殊效果和更改图像样式。"
       },
       "search": {
         "title": "搜索",
@@ -231,16 +294,20 @@
         "description": "这是一个用于嵌入的模型，如将文本、图像或音频嵌入到向量空间中。它用于在内部数据库、文档和其他语义搜索任务中进行相似性搜索。这是您在聊天中上传PDF文件时使用的功能。"
       },
       "api_fiat_exchange": {
-        "title": "API 法定货币汇率",
-        "description": "这是一个用于检查法定货币汇率的API。"
+        "title": "法币汇率",
+        "description": "访问传统货币的实时汇率。"
       },
       "api_crypto_exchange": {
-        "title": "API 加密货币汇率",
-        "description": "这是一个用于检查加密货币汇率的API。"
+        "title": "加密货币汇率",
+        "description": "访问加密货币的实时汇率。"
       },
       "api_twitter": {
-        "title": "API Twitter",
-        "description": "这是一个用于读取Twitter内容的API。"
+        "title": "Twitter",
+        "description": "访问以读取和分析Twitter内容。"
+      },
+      "deprecated": {
+        "title": "已弃用",
+        "description": "此工具或功能已弃用，可能会在未来版本中移除。"
       }
     }
   },
@@ -251,5 +318,28 @@
     "privacy": "隐私政策",
     "powered_by": "由以下提供支持",
     "rights_reserved": "保留所有权利"
+  },
+  "cost_estimate": {
+    "title": "成本估算：",
+    "description": "使用 的估算成本。所有值均以积分为单位。",
+    "disclaimer": "注意：由于供应商定价变动，估算值可能会在不另行通知的情况下更改。",
+    "no_data": "此工具没有可用的成本信息。",
+    "token_costs": "代币成本",
+    "input_tokens": "每百万输入代币",
+    "output_tokens": "每百万输出代币",
+    "search_tokens": "每百万搜索代币",
+    "input_image_costs": "输入图像成本",
+    "input_image_1k": "1 百万像素",
+    "input_image_2k": "2 百万像素",
+    "input_image_4k": "4 百万像素",
+    "input_image_8k": "8 百万像素",
+    "input_image_12k": "12 百万像素",
+    "output_image_costs": "输出图像成本",
+    "output_image_1k": "1 百万像素",
+    "output_image_2k": "2 百万像素",
+    "output_image_4k": "4 百万像素",
+    "other_costs": "其他成本",
+    "api_call": "每次使用",
+    "second_of_runtime": "每秒运行时间"
   }
 }

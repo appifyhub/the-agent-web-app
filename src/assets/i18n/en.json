@@ -51,6 +51,79 @@
     "unlink_message": "You can now become an autonomous user. This breaks the link between you and {sponsorName} and AI will stop working until you configure your Profile.",
     "unlink": "Unlink"
   },
+  "usage": {
+    "page_title": "Usage",
+    "card_title": "Your Usage History",
+    "no_records_found": "No usage records found",
+    "filters": {
+      "scope_section": "SCOPE",
+      "filters_section": "FILTERS",
+      "time_range_label": "Time",
+      "time_range_all": "All time",
+      "time_range_10min": "Last 10 minutes",
+      "time_range_30min": "Last 30 minutes",
+      "time_range_1h": "Last hour",
+      "time_range_3h": "Last 3 hours",
+      "time_range_6h": "Last 6 hours",
+      "time_range_12h": "Last 12 hours",
+      "time_range_today": "Today",
+      "time_range_yesterday": "Yesterday",
+      "time_range_week": "Last week",
+      "time_range_2weeks": "Last 2 weeks",
+      "time_range_month": "Last month",
+      "tool_label": "Tool",
+      "tool_all": "All AI tools",
+      "purpose_label": "Purpose",
+      "purpose_all": "All purposes",
+      "provider_label": "Provider",
+      "provider_all": "All providers",
+      "show_scope_and_filters": "Show Scope & Filters",
+      "hide_scope_and_filters": "Hide Scope & Filters",
+      "include_sponsored_label": "Include sponsored users",
+      "exclude_self_label": "Exclude my usage"
+    },
+    "stats": {
+      "total_records": "Total Records",
+      "total_cost": "Total Cost",
+      "total_runtime": "Total time",
+      "show_breakdowns": "Show Breakdowns",
+      "hide_breakdowns": "Hide Breakdowns",
+      "by_tool": "By Tool",
+      "by_purpose": "By Purpose",
+      "by_provider": "By Provider"
+    },
+    "cost_breakdown": {
+      "title": "Cost Breakdown",
+      "model_cost": "Model Cost",
+      "remote_cost": "Remote Cost",
+      "api_call_cost": "API Call Cost",
+      "maintenance_fee": "Maintenance Fee",
+      "total": "Total"
+    },
+    "token_stats": {
+      "title": "Token Stats",
+      "input_tokens": "Input Tokens",
+      "output_tokens": "Output Tokens",
+      "search_tokens": "Search Tokens",
+      "total": "Total"
+    },
+    "context_ids": {
+      "title": "Context",
+      "date_label": "Date",
+      "time_label": "Time",
+      "runtime_label": "Runtime",
+      "user_label": "User",
+      "user_me": "Me",
+      "user_sponsored": "Sponsored User",
+      "chat_label": "Chat",
+      "chat_in_chat": "In chat",
+      "chat_background": "Background",
+      "remote_runtime": "Remote Runtime",
+      "output_image_sizes": "Output Images",
+      "input_image_sizes": "Input Images"
+    },
+    "load_more": "Load more"
+  },
   "save": "Save",
   "saved": "Saved!",
   "copied": "Copied!",
@@ -87,7 +160,9 @@
   "about_me_label": "{botName} knows this about me:",
   "about_me_placeholder": "{name} is a rocket scientist living in…",
   "use_about_me_label": "Use everyone's profile information",
+  "use_about_me_label_singular": "Use my profile information",
   "use_about_me_helper": "When enabled, {botName} will use everyone's profile to provide more contextual and personalized responses in this chat.",
+  "use_about_me_helper_singular": "When enabled, {botName} will use your profile to provide more contextual and personalized responses in this chat.",
   "use_about_me_which_information": "Which information?",
   "token_info": {
     "profile_id": "Profile ID",
@@ -148,23 +223,11 @@
       },
       "images_gen": {
         "title": "Images Generation",
-        "description": "This is a model that is used for image generation, such as generating images from text or images from images."
+        "description": "This is a model that is used for image generation from text prompts only."
       },
       "images_edit": {
         "title": "Images Edit",
         "description": "This is a model that is used for image editing, such as photo replacements, object removal, adding special effects, and changing the style of images."
-      },
-      "images_restoration": {
-        "title": "Images Restoration",
-        "description": "This is a model that is used for image restoration, such as removing noise, fixing blur, and reducing photographic damage."
-      },
-      "images_inpainting": {
-        "title": "Images Inpainting",
-        "description": "This is a model that is used for image inpainting, such as removing misplaced objects, fixing generative imaging holes, fixing anatomical deformities, and restoring images."
-      },
-      "images_background_removal": {
-        "title": "Images Background Removal",
-        "description": "This is a model that is used for image background removal, such as removing the background of an image, fixing the background of an image, and changing the background of an image."
       },
       "search": {
         "title": "Search",
@@ -175,16 +238,20 @@
         "description": "This is a model that is used for embedding, such as embedding text, images, or audio into a vector space. It's used for similarity search across internal databases, documents, and other semantic search tasks. This is used when you upload a PDF file to the chat."
       },
       "api_fiat_exchange": {
-        "title": "API Fiat Exchange",
-        "description": "This is an API that is used for checking the exchange rate of a fiat currency."
+        "title": "Fiat Exchange",
+        "description": "Access to real-time exchange rates for traditional currencies."
       },
       "api_crypto_exchange": {
-        "title": "API Crypto Exchange",
-        "description": "This is an API that is used for checking the exchange rate of a crypto currency."
+        "title": "Crypto Exchange",
+        "description": "Access to real-time exchange rates for cryptocurrencies."
       },
       "api_twitter": {
-        "title": "API Twitter",
-        "description": "This is an API that is used for reading Twitter content."
+        "title": "Twitter",
+        "description": "Access to read and analyze Twitter content."
+      },
+      "deprecated": {
+        "title": "Deprecated",
+        "description": "This tool or feature is deprecated and may be removed in future versions."
       }
     }
   },
@@ -243,6 +310,29 @@
         "description": "Share your access to the assistant with others, while keeping your and their usage private. Sponsorships let you extend your assistant's benefits to friends or family, and you can always manage them via the assistant or by typing `/settings` in chat."
       }
     }
+  },
+  "cost_estimate": {
+    "title": "Cost Estimate",
+    "description": "Estimated costs for using. All values are in credits.",
+    "disclaimer": "Note: Estimates may change without notice due to vendor pricing changes.",
+    "no_data": "No cost information available for this tool.",
+    "token_costs": "Token Costs",
+    "input_tokens": "Per million input tokens",
+    "output_tokens": "Per million output tokens",
+    "search_tokens": "Per million search tokens",
+    "input_image_costs": "Input Image Costs",
+    "input_image_1k": "1 Megapixel",
+    "input_image_2k": "2 Megapixels",
+    "input_image_4k": "4 Megapixels",
+    "input_image_8k": "8 Megapixels",
+    "input_image_12k": "12 Megapixels",
+    "output_image_costs": "Output Image Costs",
+    "output_image_1k": "1 Megapixel",
+    "output_image_2k": "2 Megapixels",
+    "output_image_4k": "4 Megapixels",
+    "other_costs": "Other Costs",
+    "api_call": "Per single use",
+    "second_of_runtime": "Per second of runtime"
   },
   "check_out_project": "Check out the project",
   "footer": {

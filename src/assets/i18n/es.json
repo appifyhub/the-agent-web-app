@@ -51,6 +51,79 @@
     "unlink_message": "Ahora puedes convertirte en un usuario autónomo. Esto rompe el vínculo entre tú y {sponsorName} y la IA dejará de funcionar hasta que configures tu Perfil.",
     "unlink": "Desvincular"
   },
+  "usage": {
+    "page_title": "Uso",
+    "card_title": "Tu historial de uso",
+    "no_records_found": "No se encontraron registros de uso",
+    "cost_breakdown": {
+      "title": "Desglose de costos",
+      "model_cost": "Costo del modelo",
+      "remote_cost": "Costo remoto",
+      "api_call_cost": "Costo de llamada API",
+      "maintenance_fee": "Tarifa de mantenimiento",
+      "total": "Total"
+    },
+    "token_stats": {
+      "title": "Estadísticas de tokens",
+      "input_tokens": "Tokens de entrada",
+      "output_tokens": "Tokens de salida",
+      "search_tokens": "Tokens de búsqueda",
+      "total": "Total"
+    },
+    "context_ids": {
+      "title": "Contexto",
+      "date_label": "Fecha",
+      "time_label": "Hora",
+      "runtime_label": "Duración",
+      "user_label": "Usuario",
+      "user_me": "Yo",
+      "user_sponsored": "Usuario patrocinado",
+      "chat_label": "Chat",
+      "chat_in_chat": "En chat",
+      "chat_background": "En segundo plano",
+      "remote_runtime": "Tiempo de ejecución remoto",
+      "output_image_sizes": "Imágenes de salida",
+      "input_image_sizes": "Imágenes de entrada"
+    },
+    "load_more": "Cargar más",
+    "filters": {
+      "scope_section": "ALCANCE",
+      "filters_section": "FILTROS",
+      "time_range_label": "Tiempo",
+      "time_range_all": "Todo el tiempo",
+      "time_range_10min": "Últimos 10 minutos",
+      "time_range_30min": "Últimos 30 minutos",
+      "time_range_1h": "Última hora",
+      "time_range_3h": "Últimas 3 horas",
+      "time_range_6h": "Últimas 6 horas",
+      "time_range_12h": "Últimas 12 horas",
+      "time_range_today": "Hoy",
+      "time_range_yesterday": "Ayer",
+      "time_range_week": "Última semana",
+      "time_range_2weeks": "Últimas 2 semanas",
+      "time_range_month": "Último mes",
+      "tool_label": "Herramienta",
+      "tool_all": "Todas las herramientas de IA",
+      "purpose_label": "Propósito",
+      "purpose_all": "Todos los propósitos",
+      "provider_label": "Proveedor",
+      "provider_all": "Todos los proveedores",
+      "show_scope_and_filters": "Mostrar alcance y filtros",
+      "hide_scope_and_filters": "Ocultar alcance y filtros",
+      "include_sponsored_label": "Incluir usuarios patrocinados",
+      "exclude_self_label": "Excluir mi uso"
+    },
+    "stats": {
+      "total_records": "Total de registros",
+      "total_cost": "Costo total",
+      "total_runtime": "Tiempo total",
+      "show_breakdowns": "Mostrar desglose",
+      "hide_breakdowns": "Ocultar desglose",
+      "by_tool": "Por herramienta",
+      "by_purpose": "Por propósito",
+      "by_provider": "Por proveedor"
+    }
+  },
   "save": "Guardar",
   "saved": "¡Guardado!",
   "copied": "¡Copiado!",
@@ -87,7 +160,9 @@
   "about_me_label": "{botName} sabe esto sobre mí:",
   "about_me_placeholder": "{name} es un científico espacial que vive en…",
   "use_about_me_label": "Usar la información del perfil de todos",
+  "use_about_me_label_singular": "Usar mi información de perfil",
   "use_about_me_helper": "Cuando está habilitado, {botName} usará el perfil de todos para ofrecer respuestas más contextuales y personalizadas en este chat.",
+  "use_about_me_helper_singular": "Cuando esté habilitado, {botName} usará tu perfil para proporcionar respuestas más contextuales y personalizadas en este chat.",
   "use_about_me_which_information": "¿Qué información?",
   "token_info": {
     "profile_id": "Perfil ID",
@@ -204,23 +279,11 @@
       },
       "images_gen": {
         "title": "Generación de imágenes",
-        "description": "Este es un modelo que se usa para generación de imágenes, como generar imágenes a partir de texto o imágenes a partir de imágenes."
+        "description": "Este es un modelo que se usa solo para generación de imágenes a partir de indicaciones de texto."
       },
       "images_edit": {
         "title": "Edición de imágenes",
         "description": "Este es un modelo que se usa para edición de imágenes, como reemplazos de fotos, eliminación de objetos, agregar efectos especiales y cambiar el estilo de las imágenes."
-      },
-      "images_restoration": {
-        "title": "Restauración de imágenes",
-        "description": "Este es un modelo que se usa para restauración de imágenes, como eliminar ruido, arreglar desenfoque y reducir daños fotográficos."
-      },
-      "images_inpainting": {
-        "title": "Relleno de imágenes",
-        "description": "Este es un modelo que se usa para relleno de imágenes, como eliminar objetos mal ubicados, arreglar agujeros en imágenes generativas, corregir deformidades anatómicas y restaurar imágenes."
-      },
-      "images_background_removal": {
-        "title": "Eliminación de fondo",
-        "description": "Este es un modelo que se usa para eliminación de fondo de imágenes, como eliminar el fondo de una imagen, arreglar el fondo de una imagen y cambiar el fondo de una imagen."
       },
       "search": {
         "title": "Búsqueda",
@@ -231,20 +294,47 @@
         "description": "Este es un modelo que se usa para incrustación, como incrustar texto, imágenes o audio en un espacio vectorial. Se usa para búsqueda de similitud en bases de datos internas, documentos y otras tareas de búsqueda semántica. Esto es lo que se usa cuando subes un archivo PDF al chat."
       },
       "api_fiat_exchange": {
-        "title": "API de cambio de moneda fiduciaria",
-        "description": "Esta es una API que se usa para verificar el tipo de cambio de una moneda fiduciaria."
+        "title": "Cambio de moneda fiduciaria",
+        "description": "Acceso a tipos de cambio en tiempo real para monedas tradicionales."
       },
       "api_crypto_exchange": {
-        "title": "API de cambio de criptomoneda",
-        "description": "Esta es una API que se usa para verificar el tipo de cambio de una criptomoneda."
+        "title": "Cambio de criptomoneda",
+        "description": "Acceso a tipos de cambio en tiempo real para criptomonedas."
       },
       "api_twitter": {
-        "title": "API de Twitter",
-        "description": "Esta es una API que se usa para leer contenido de Twitter."
+        "title": "Twitter",
+        "description": "Acceso para leer y analizar contenido de Twitter."
+      },
+      "deprecated": {
+        "title": "Obsoleto",
+        "description": "Esta herramienta o función está obsoleta y puede ser eliminada en versiones futuras."
       }
     }
   },
   "check_out_project": "Ver el proyecto",
+  "cost_estimate": {
+    "title": "Estimación de costo:",
+    "description": "Costos estimados por usar. Todos los valores están en créditos.",
+    "disclaimer": "Nota: Las estimaciones pueden cambiar sin previo aviso debido a cambios en los precios de los proveedores.",
+    "no_data": "No hay información de costos disponible para esta herramienta.",
+    "token_costs": "Costos de tokens",
+    "input_tokens": "Por millón de tokens de entrada",
+    "output_tokens": "Por millón de tokens de salida",
+    "search_tokens": "Por millón de tokens de búsqueda",
+    "input_image_costs": "Costos de imágenes de entrada",
+    "input_image_1k": "1 Megapíxel",
+    "input_image_2k": "2 Megapíxeles",
+    "input_image_4k": "4 Megapíxeles",
+    "input_image_8k": "8 Megapíxeles",
+    "input_image_12k": "12 Megapíxeles",
+    "output_image_costs": "Costos de imágenes de salida",
+    "output_image_1k": "1 Megapíxel",
+    "output_image_2k": "2 Megapíxeles",
+    "output_image_4k": "4 Megapíxeles",
+    "other_costs": "Otros costos",
+    "api_call": "Por uso único",
+    "second_of_runtime": "Por segundo de ejecución"
+  },
   "footer": {
     "logo_alt": "Logo",
     "terms": "Términos de Servicio",

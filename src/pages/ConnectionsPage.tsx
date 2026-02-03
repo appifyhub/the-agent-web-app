@@ -522,9 +522,9 @@ const ConnectionsPage: React.FC = () => {
           disabled={!!error?.isBlocker || !connectKey}
         >
           {isMyKeySectionOpen ? (
-            <Eye className="h-5 w-5 shrink-0 text-accent-amber group-hover:text-amber-100" />
-          ) : (
             <EyeOff className="h-5 w-5 shrink-0 text-accent-amber group-hover:text-amber-100" />
+          ) : (
+            <Eye className="h-5 w-5 shrink-0 text-accent-amber group-hover:text-amber-100" />
           )}
           {isMyKeySectionOpen
             ? t("connections.hide_my_key")

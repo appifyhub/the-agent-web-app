@@ -7,9 +7,6 @@ import {
   Ear,
   WandSparkles,
   ImageUp,
-  ImageOff,
-  PaintRoller,
-  Images,
   Binoculars,
   DatabaseZap,
   Euro,
@@ -46,6 +43,8 @@ interface AdvancedToolsPanelProps {
   onToolChoiceChange: (toolType: ToolType, toolId: string) => void;
   onProviderNavigate?: (providerId: string) => void;
   disabled?: boolean;
+  openSection?: string;
+  onOpenSectionChange?: (section: string) => void;
 }
 
 type ToolGroupCategory =
@@ -81,13 +80,11 @@ const getToolGroupCategory = (toolType: ToolType): ToolGroupCategory => {
     embedding: "content_analysis",
     images_gen: "image_tools",
     images_edit: "image_tools",
-    images_restoration: "image_tools",
-    images_inpainting: "image_tools",
-    images_background_removal: "image_tools",
     search: "integrations",
     api_fiat_exchange: "integrations",
     api_crypto_exchange: "integrations",
     api_twitter: "integrations",
+    deprecated: "integrations",
   };
   return categoryMap[toolType];
 };
@@ -115,8 +112,14 @@ const AdvancedToolsPanel: React.FC<AdvancedToolsPanelProps> = ({
   onToolChoiceChange,
   onProviderNavigate,
   disabled = false,
+  openSection: controlledOpenSection,
+  onOpenSectionChange: controlledOnOpenSectionChange,
 }) => {
-  const [openSection, setOpenSection] = useState<string>("");
+  const [internalOpenSection, setInternalOpenSection] = useState<string>("");
+
+  // Use controlled props if provided, otherwise use internal state
+  const openSection = controlledOpenSection !== undefined ? controlledOpenSection : internalOpenSection;
+  const setOpenSection = controlledOnOpenSectionChange !== undefined ? controlledOnOpenSectionChange : setInternalOpenSection;
 
   // Helper function to get the current tool choice value for a tool type
   const getCurrentToolChoice = (toolType: ToolType): string | undefined => {
@@ -153,9 +156,6 @@ const AdvancedToolsPanel: React.FC<AdvancedToolsPanelProps> = ({
       hearing: Ear,
       images_gen: WandSparkles,
       images_edit: ImageUp,
-      images_restoration: ImageOff,
-      images_inpainting: PaintRoller,
-      images_background_removal: Images,
       search: Binoculars,
       embedding: DatabaseZap,
       api_fiat_exchange: Euro,
@@ -218,6 +218,8 @@ const AdvancedToolsPanel: React.FC<AdvancedToolsPanelProps> = ({
               label: tool.definition.name,
               isConfigured: isToolConfigured(tool.definition.id),
               providerId: providerId, // for logo lookup
+              costEstimate: tool.definition.cost_estimate,
+              toolName: tool.definition.name,
             });
           }
         });

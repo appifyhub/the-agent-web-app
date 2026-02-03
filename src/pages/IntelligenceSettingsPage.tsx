@@ -38,6 +38,7 @@ const IntelligenceSettingsPage: React.FC = () => {
   );
   const [externalToolsData, setExternalToolsData] =
     useState<ExternalToolsResponse | null>(null);
+  const [openAccordionSection, setOpenAccordionSection] = useState<string>("");
 
   // Fetch user settings and external tools when session is ready
   useEffect(() => {
@@ -118,6 +119,9 @@ const IntelligenceSettingsPage: React.FC = () => {
   const handleSave = async () => {
     if (!userSettings || !remoteSettings || !user_id || !accessToken) return;
 
+    // Save current scroll position
+    const scrollPosition = window.scrollY;
+
     setIsLoadingState(true);
     setError(null);
     try {
@@ -143,6 +147,11 @@ const IntelligenceSettingsPage: React.FC = () => {
       setRemoteSettings(userSettings);
       setExternalToolsData(updatedExternalTools);
       toast(t("saved"));
+
+      // Restore scroll position after state updates
+      requestAnimationFrame(() => {
+        window.scrollTo(0, scrollPosition);
+      });
     } catch (saveError) {
       console.error("Error saving settings!", saveError);
       setError(PageError.simple("errors.save_failed"));
@@ -197,6 +206,8 @@ const IntelligenceSettingsPage: React.FC = () => {
           onToolChoiceChange={handleToolChoiceChange}
           disabled={!!error?.isBlocker}
           onProviderNavigate={handleProviderNavigate}
+          openSection={openAccordionSection}
+          onOpenSectionChange={setOpenAccordionSection}
         />
       )}
     </BaseSettingsPage>

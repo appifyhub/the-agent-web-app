@@ -13,7 +13,7 @@ import {
   AtSign,
   Link,
   UsersRound,
-  HeartMinus,
+  UserX,
   ChevronDown,
   UserRound,
   Phone,
@@ -387,7 +387,7 @@ const SponsorshipsPage: React.FC = () => {
               />
               <Input
                 id="platform-handle"
-                className="py-6 px-6 w-full sm:w-md text-[1.05rem] glass rounded-2xl"
+                className="py-6 px-6 w-full max-w-2xl text-[1.05rem] glass rounded-2xl"
                 placeholder={getPlatformPlaceholder()}
                 disabled={!!error?.isBlocker}
                 value={platformHandle}
@@ -450,82 +450,70 @@ const SponsorshipsPage: React.FC = () => {
                   }
 
                   return (
-                    // Full horizontal row - sponsorship item and delete button
                     <div
                       key={index}
                       className={cn(
-                        "flex items-center justify-between w-full sm:w-md mx-auto",
-                        "transition-all duration-300 ease-in-out",
-                        expandedItems.size > 0 ? "space-x-6" : "space-x-0"
+                        "flex flex-col px-5 items-start justify-center glass border cursor-pointer w-full max-w-2xl mx-auto",
+                        isExpanded ? "space-y-4 py-4" : "space-y-0 py-3",
+                        roundedClasses,
+                        borderClasses
                       )}
+                      onClick={toggleExpanded}
                     >
-                      {/* Expanded sponsorship stack (vertical) - display name row and dates */}
+                      {/* Display name row (horizontal) - display name block and status icon */}
+                      <div className="flex items-center w-full">
+                        <div className="flex items-center space-x-3 flex-1 min-w-0">
+                          <div className="min-w-0">
+                            {getDisplayName(sponsorship)}
+                          </div>
+                          {/* Sponsorship status icon */}
+                          {!isExpanded &&
+                            (sponsorship.accepted_at ? (
+                              <CheckCheck className="h-4 w-4 text-success shrink-0" />
+                            ) : (
+                              <Check className="h-4 w-4 text-success shrink-0" />
+                            ))}
+                        </div>
+                        {/* Right side: Chevron */}
+                        <ChevronDown
+                          className={cn(
+                            "h-5 w-5 text-muted-foreground shrink-0 transition-transform duration-300",
+                            isExpanded
+                              ? "text-foreground rotate-180"
+                              : "rotate-0"
+                          )}
+                        />
+                      </div>
+
                       <div
                         className={cn(
-                          "flex flex-col px-5 items-start justify-center glass border cursor-pointer w-full min-w-0",
-                          isExpanded ? "space-y-4 py-4" : "space-y-0 py-3",
-                          roundedClasses,
-                          borderClasses
+                          "flex items-center justify-between w-full",
+                          isExpanded ? "flex" : "hidden"
                         )}
-                        onClick={toggleExpanded}
                       >
-                        {/* Display name row (horizontal) - display name block and status icon */}
-                        <div className="flex items-center w-full">
-                          <div className="flex items-center space-x-3 flex-1 min-w-0">
-                            <div className="min-w-0">
-                              {getDisplayName(sponsorship)}
-                            </div>
-                            {/* Sponsorship status icon */}
-                            {!isExpanded &&
-                              (sponsorship.accepted_at ? (
-                                <CheckCheck className="h-4 w-4 text-success shrink-0" />
-                              ) : (
-                                <Check className="h-4 w-4 text-success shrink-0" />
-                              ))}
-                          </div>
-                          {/* Right side: Chevron */}
-                          <ChevronDown
-                            className={cn(
-                              "h-5 w-5 text-muted-foreground shrink-0 transition-transform duration-300",
-                              isExpanded
-                                ? "text-foreground rotate-180"
-                                : "rotate-0"
-                            )}
-                          />
-                        </div>
-
-                        {/* Bottom sponsorship stack (vertical) - platform, statuses and dates */}
-                        <div
-                          className={cn(
-                            "flex flex-col space-y-1 px-0.5",
-                            isExpanded ? "block" : "hidden"
-                          )}
-                        >
-                          {/* Platform row */}
-                          <div className="flex items-center space-x-3.5">
+                        <div className="flex flex-col space-y-1 px-0.5 flex-1 min-w-0">
+                          <div className="flex items-center space-x-3.5 min-w-0">
                             <PlatformIcon
                               platform={sponsorship.platform}
-                              className="h-4 w-4"
+                              className="h-4 w-4 shrink-0"
                             />
-                            <span className="text-sm text-muted-foreground">
+                            <span className="text-sm text-muted-foreground truncate">
                               {Platform.getName(sponsorship.platform)}
                             </span>
                           </div>
-                          {/* Sponsored-at row (horizontal) */}
-                          <div className="flex items-center space-x-3.5">
-                            <Check className="h-4 w-4 text-success" />
-                            <span className="text-sm text-muted-foreground">
+                          <div className="flex items-center space-x-3.5 min-w-0">
+                            <Check className="h-4 w-4 text-success shrink-0" />
+                            <span className="text-sm text-muted-foreground truncate">
                               {formatDate(
                                 sponsorship.sponsored_at,
                                 currentInterfaceLanguage.isoCode
                               )}
                             </span>
                           </div>
-                          {/* Accepted-at row (horizontal) */}
                           {sponsorship.accepted_at && (
-                            <div className="flex items-center space-x-3.5">
-                              <CheckCheck className="h-4 w-4 text-success" />
-                              <span className="text-sm text-muted-foreground">
+                            <div className="flex items-center space-x-3.5 min-w-0">
+                              <CheckCheck className="h-4 w-4 text-success shrink-0" />
+                              <span className="text-sm text-muted-foreground truncate">
                                 {formatDate(
                                   sponsorship.accepted_at,
                                   currentInterfaceLanguage.isoCode
@@ -534,52 +522,38 @@ const SponsorshipsPage: React.FC = () => {
                             </div>
                           )}
                         </div>
-                      </div>
-                      {/* Delete button */}
-                      {(() => {
-                        const deleteButton = (
-                          <Button
-                            variant="outline"
-                            size="icon"
-                            className={cn(
-                              "items-center justify-center glass rounded-full scale-130",
-                              "transition-all duration-300 ease-in-out",
-                              expandedItems.size > 0 ? "flex" : "hidden",
-                              isExpanded
-                                ? "opacity-100 text-destructive cursor-pointer"
-                                : "opacity-0 text-destructive cursor-default",
-                              error?.isBlocker &&
-                                "text-muted-foreground cursor-not-allowed glass-static"
-                            )}
-                            onClick={(e: React.MouseEvent) => {
-                              e.stopPropagation();
-                              if (isExpanded && !error?.isBlocker) {
-                                handleUnsponsor(sponsorship);
-                              }
-                            }}
-                          >
-                            <HeartMinus
-                              className={cn(
-                                "text-destructive h-6 w-6 scale-120",
-                                error?.isBlocker && "text-muted-foreground"
-                              )}
-                            />
-                          </Button>
-                        );
 
-                        return isExpanded ? (
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              {deleteButton}
-                            </TooltipTrigger>
-                            <TooltipContent>
-                              {t("sponsorship.unlink")}
-                            </TooltipContent>
-                          </Tooltip>
-                        ) : (
-                          deleteButton
-                        );
-                      })()}
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              variant="outline"
+                              size="icon"
+                              className={cn(
+                                "shrink-0 text-destructive rounded-full cursor-pointer",
+                                error?.isBlocker &&
+                                "text-muted-foreground cursor-not-allowed glass-static"
+                              )}
+                              onClick={(e: React.MouseEvent) => {
+                                e.stopPropagation();
+                                if (!error?.isBlocker) {
+                                  handleUnsponsor(sponsorship);
+                                }
+                              }}
+                              disabled={!!error?.isBlocker}
+                            >
+                              <UserX
+                                className={cn(
+                                  "h-5 w-5",
+                                  error?.isBlocker && "text-muted-foreground"
+                                )}
+                              />
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            {t("sponsorship.unlink")}
+                          </TooltipContent>
+                        </Tooltip>
+                      </div>
                     </div>
                   );
                 })}

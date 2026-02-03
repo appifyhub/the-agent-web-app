@@ -51,6 +51,79 @@
     "unlink_message": "Sada možete postati autonomni korisnik. Ovo prekida vezu između vas i {sponsorName}. AI će prestati da radi dok ne podesite svoj Profil.",
     "unlink": "Prekini vezu"
   },
+  "usage": {
+    "page_title": "Korišćenje",
+    "card_title": "Vaša istorija korišćenja",
+    "no_records_found": "Nema pronađenih zapisa o korišćenju",
+    "filters": {
+      "scope_section": "OPSEG",
+      "filters_section": "FILTERI",
+      "time_range_label": "Vreme",
+      "time_range_all": "Sve vreme",
+      "time_range_10min": "Poslednjih 10 minuta",
+      "time_range_30min": "Poslednjih 30 minuta",
+      "time_range_1h": "Poslednji sat",
+      "time_range_3h": "Poslednja 3 sata",
+      "time_range_6h": "Poslednjih 6 sati",
+      "time_range_12h": "Poslednjih 12 sati",
+      "time_range_today": "Danas",
+      "time_range_yesterday": "Juče",
+      "time_range_week": "Prošle nedelje",
+      "time_range_2weeks": "Poslednje 2 nedelje",
+      "time_range_month": "Prošlog meseca",
+      "tool_label": "Alat",
+      "tool_all": "Svi AI alati",
+      "purpose_label": "Svrha",
+      "purpose_all": "Sve svrhe",
+      "provider_label": "Provajder",
+      "provider_all": "Svi provajderi",
+      "show_scope_and_filters": "Prikaži opseg i filtere",
+      "hide_scope_and_filters": "Sakrij opseg i filtere",
+      "include_sponsored_label": "Uključi sponzorisane korisnike",
+      "exclude_self_label": "Isključi moje korišćenje"
+    },
+    "stats": {
+      "total_records": "Ukupno zapisa",
+      "total_cost": "Ukupan trošak",
+      "total_runtime": "Ukupno vreme",
+      "show_breakdowns": "Prikaži detalje",
+      "hide_breakdowns": "Sakrij detalje",
+      "by_tool": "Po alatu",
+      "by_purpose": "Po svrsi",
+      "by_provider": "Po provajderu"
+    },
+    "cost_breakdown": {
+      "title": "Pregled troškova",
+      "model_cost": "Cena modela",
+      "remote_cost": "Udaljena cena",
+      "api_call_cost": "Cena API poziva",
+      "maintenance_fee": "Naknada za održavanje",
+      "total": "Ukupno"
+    },
+    "token_stats": {
+      "title": "Statistika tokena",
+      "input_tokens": "Ulazni tokeni",
+      "output_tokens": "Izlazni tokeni",
+      "search_tokens": "Tokeni pretrage",
+      "total": "Ukupno"
+    },
+    "context_ids": {
+      "title": "Kontekst",
+      "date_label": "Datum",
+      "time_label": "Vreme",
+      "runtime_label": "Trajanje",
+      "user_label": "Korisnik",
+      "user_me": "Ja",
+      "user_sponsored": "Sponzorisani korisnik",
+      "chat_label": "Čet",
+      "chat_in_chat": "U četu",
+      "chat_background": "U pozadini",
+      "remote_runtime": "Udaljeno vreme izvršavanja",
+      "output_image_sizes": "Izlazne slike",
+      "input_image_sizes": "Ulazne slike"
+    },
+    "load_more": "Učitaj još"
+  },
   "save": "Sačuvaj",
   "saved": "Sačuvano!",
   "copied": "Kopirano!",
@@ -87,7 +160,9 @@
   "about_me_label": "{botName} zna ovo o meni:",
   "about_me_placeholder": "{name} je nastavnik koji živi u…",
   "use_about_me_label": "Koristi informacije svih profila",
+  "use_about_me_label_singular": "Koristi moje informacije o profilu",
   "use_about_me_helper": "Kada je omogućeno, {botName} će koristiti informacije iz profila svih učesnika kako bi pružio preciznije odgovore u ovom četu.",
+  "use_about_me_helper_singular": "Kada je omogućeno, {botName} će koristiti vaš profil da pruži kontekstualnije i personalizovanije odgovore u ovom četu.",
   "use_about_me_which_information": "Koje informacije?",
   "token_info": {
     "profile_id": "ID profila",
@@ -135,11 +210,11 @@
       },
       "web_search": {
         "title": "Web pretraga",
-        "description": "Dobijajte ažurirane informacije sa interneta, uključujući vesti, analize, kurseve valuta, cene kriptovaluta, hartije od vrednosti i još mnogo toga, direktno u ćaskanju."
+        "description": "Dobijajte ažurirane informacije sa interneta, uključujući vesti, analize, kurseve valuta, cene kriptovaluta, hartije od vrednosti i još mnogo toga, direktno u četu."
       },
       "media": {
         "title": "Prilozi i mediji",
-        "description": "Pošaljite slike, glasovne poruke i dokumente asistentu – on ih može obraditi i iskoristiti za kreiranje korisnih odgovora ili izvršavanje zadataka. Ćaskajte koristeći svoje fotografije ili dokumente, ne samo tekst."
+        "description": "Pošaljite slike, glasovne poruke i dokumente asistentu – on ih može obraditi i iskoristiti za kreiranje korisnih odgovora ili izvršavanje zadataka. Četujte koristeći svoje fotografije ili dokumente, ne samo tekst."
       },
       "imaging": {
         "title": "AI kreiranje slika",
@@ -169,7 +244,7 @@
     "no_tools_available": "Nema dostupnih alata za ovaj tip",
     "groups": {
       "text_intelligence": {
-        "title": "Jezična inteligencija"
+        "title": "Jezička inteligencija"
       },
       "content_analysis": {
         "title": "Analiza sadržaja"
@@ -204,23 +279,11 @@
       },
       "images_gen": {
         "title": "Generisanje slika",
-        "description": "Ovo je model koji se koristi za generisanje slika iz teksta, ili slika iz slika."
+        "description": "Ovo je model koji se koristi samo za generisanje slika iz tekstualnih upita."
       },
       "images_edit": {
         "title": "Uređivanje slika",
         "description": "Ovo je model koji se koristi za uređivanje slika, kao što su zamene delova fotografija, uklanjanje objekata, dodavanje specijalnih efekata i menjanje stila slika."
-      },
-      "images_restoration": {
-        "title": "Obnavljanje slika",
-        "description": "Ovo je model koji se koristi za obnavljanje slika, kao što je uklanjanje šuma, popravka zamućenosti i smanjenje fotografske štete."
-      },
-      "images_inpainting": {
-        "title": "Popunjavanje slika",
-        "description": "Ovo je model koji se koristi za popunjavanje slika, kao što je uklanjanje pogrešno nactanih objekata, popravka rupa u generativnom prikazivanju, ispravka anatomskih deformiteta i obnavljanje slika."
-      },
-      "images_background_removal": {
-        "title": "Uklanjanje pozadine slika",
-        "description": "Ovo je model koji se koristi za uklanjanje pozadine slika, kao što je uklanjanje pozadine slike, popravka pozadine slike i menjanje pozadine slike."
       },
       "search": {
         "title": "Pretraga",
@@ -231,16 +294,20 @@
         "description": "Ovo je model koji se koristi za ugradnju, kao što je ugrađivanje teksta, slika ili zvuka u vektorski prostor. Koristi se za pretragu sličnosti kroz interne baze podataka, dokumente i druge zadatke semantičke pretrage. Ovo se koristi kada pošaljete PDF fajl u čet."
       },
       "api_fiat_exchange": {
-        "title": "API: Fiat menjačnica",
-        "description": "Ovo je API koji se koristi za proveru kursa fiat valuta."
+        "title": "Fiat menjačnica",
+        "description": "Pristup kursevima fiat valuta u realnom vremenu."
       },
       "api_crypto_exchange": {
-        "title": "API: Kripto menjačnica",
-        "description": "Ovo je API koji se koristi za proveru kursa kripto valuta."
+        "title": "Kripto menjačnica",
+        "description": "Pristup kursevima kripto valuta u realnom vremenu."
       },
       "api_twitter": {
-        "title": "API: Twitter",
-        "description": "Ovo je API koji se koristi za čitanje Twitter sadržaja."
+        "title": "Twitter",
+        "description": "Pristup za čitanje i analizu Twitter sadržaja."
+      },
+      "deprecated": {
+        "title": "Zastarelo",
+        "description": "Ovaj alat ili funkcija je zastarela i može biti uklonjena u budućim verzijama."
       }
     }
   },
@@ -251,5 +318,28 @@
     "privacy": "Politika privatnosti",
     "powered_by": "Pokreće",
     "rights_reserved": "Sva prava zadržana"
+  },
+  "cost_estimate": {
+    "title": "Procena troškova",
+    "description": "Procenjeni troškovi korišćenja. Sve vrednosti su u kreditima.",
+    "disclaimer": "Napomena: Procene se mogu promeniti bez prethodne najave zbog promena cena dobavljača.",
+    "no_data": "Nema dostupnih informacija o troškovima za ovaj alat.",
+    "token_costs": "Troškovi tokena",
+    "input_tokens": "Po milion ulaznih tokena",
+    "output_tokens": "Po milion izlaznih tokena",
+    "search_tokens": "Po milion tokena pretrage",
+    "input_image_costs": "Troškovi ulaznih slika",
+    "input_image_1k": "1 Megapiksel",
+    "input_image_2k": "2 Megapiksela",
+    "input_image_4k": "4 Megapiksela",
+    "input_image_8k": "8 Megapiksela",
+    "input_image_12k": "12 Megapiksela",
+    "output_image_costs": "Troškovi izlaznih slika",
+    "output_image_1k": "1 Megapiksel",
+    "output_image_2k": "2 Megapiksela",
+    "output_image_4k": "4 Megapiksela",
+    "other_costs": "Ostali troškovi",
+    "api_call": "Po jednoj upotrebi",
+    "second_of_runtime": "Po sekundi izvršavanja"
   }
 }

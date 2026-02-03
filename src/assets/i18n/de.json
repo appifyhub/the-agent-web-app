@@ -51,6 +51,79 @@
     "unlink_message": "Sie können jetzt ein autonomer Benutzer werden. Dies bricht die Verbindung zwischen Ihnen und {sponsorName} und die KI wird nicht mehr funktionieren, bis Sie Ihr Profil konfigurieren.",
     "unlink": "Verknüpfung aufheben"
   },
+  "usage": {
+    "page_title": "Nutzung",
+    "card_title": "Ihre Nutzungshistorie",
+    "no_records_found": "Keine Nutzungsdaten gefunden",
+    "filters": {
+      "scope_section": "UMFANG",
+      "filters_section": "FILTER",
+      "time_range_label": "Zeitraum",
+      "time_range_all": "Gesamte Zeit",
+      "time_range_10min": "Letzte 10 Minuten",
+      "time_range_30min": "Letzte 30 Minuten",
+      "time_range_1h": "Letzte Stunde",
+      "time_range_3h": "Letzte 3 Stunden",
+      "time_range_6h": "Letzte 6 Stunden",
+      "time_range_12h": "Letzte 12 Stunden",
+      "time_range_today": "Heute",
+      "time_range_yesterday": "Gestern",
+      "time_range_week": "Letzte Woche",
+      "time_range_2weeks": "Letzte 2 Wochen",
+      "time_range_month": "Letzter Monat",
+      "tool_label": "Tool",
+      "tool_all": "Alle KI-Tools",
+      "purpose_label": "Zweck",
+      "purpose_all": "Alle Zwecke",
+      "provider_label": "Anbieter",
+      "provider_all": "Alle Anbieter",
+      "show_scope_and_filters": "Bereich und Filter anzeigen",
+      "hide_scope_and_filters": "Umfang und Filter ausblenden",
+      "include_sponsored_label": "Gesponserte Benutzer einbeziehen",
+      "exclude_self_label": "Meine Nutzung ausschließen"
+    },
+    "stats": {
+      "total_records": "Gesamt Einträge",
+      "total_cost": "Gesamtkosten",
+      "total_runtime": "Gesamtzeit",
+      "show_breakdowns": "Details anzeigen",
+      "hide_breakdowns": "Aufschlüsselungen ausblenden",
+      "by_tool": "Nach Tool",
+      "by_purpose": "Nach Zweck",
+      "by_provider": "Nach Anbieter"
+    },
+    "cost_breakdown": {
+      "title": "Kostenaufschlüsselung",
+      "model_cost": "Modellkosten",
+      "remote_cost": "Remote-Kosten",
+      "api_call_cost": "API-Aufrufkosten",
+      "maintenance_fee": "Wartungsgebühr",
+      "total": "Gesamt"
+    },
+    "token_stats": {
+      "title": "Token-Statistiken",
+      "input_tokens": "Eingabe-Token",
+      "output_tokens": "Ausgabe-Token",
+      "search_tokens": "Such-Token",
+      "total": "Gesamt"
+    },
+    "context_ids": {
+      "title": "Kontext",
+      "date_label": "Datum",
+      "time_label": "Uhrzeit",
+      "runtime_label": "Laufzeit",
+      "user_label": "Benutzer",
+      "user_me": "Ich",
+      "user_sponsored": "Gesponserter Benutzer",
+      "chat_label": "Chat",
+      "chat_in_chat": "Im Chat",
+      "chat_background": "Hintergrund",
+      "remote_runtime": "Remote-Laufzeit",
+      "output_image_sizes": "Ausgabebilder",
+      "input_image_sizes": "Eingabebilder"
+    },
+    "load_more": "Mehr laden"
+  },
   "save": "Speichern",
   "saved": "Gespeichert!",
   "copied": "Kopiert!",
@@ -87,7 +160,9 @@
   "about_me_label": "{botName} weiß Folgendes über mich:",
   "about_me_placeholder": "{name} ist Raketenwissenschaftler und lebt in…",
   "use_about_me_label": "Profilinformationen von allen verwenden",
+  "use_about_me_label_singular": "Meine Profilinformationen verwenden",
   "use_about_me_helper": "Wenn aktiviert, verwendet {botName} die Profile von allen, um in diesem Chat kontextbezogenere und personalisiertere Antworten zu geben.",
+  "use_about_me_helper_singular": "Wenn aktiviert, wird {botName} Ihr Profil verwenden, um kontextbezogenere und personalisiertere Antworten in diesem Chat zu geben.",
   "use_about_me_which_information": "Welche Informationen?",
   "token_info": {
     "profile_id": "Profil ID",
@@ -113,7 +188,7 @@
     "no_tools_available": "Keine Tools für diesen Typ verfügbar",
     "groups": {
       "text_intelligence": {
-        "title": "Sprach-Intelligenz"
+        "title": "Sprachintelligenz"
       },
       "content_analysis": {
         "title": "Inhaltsanalyse"
@@ -148,23 +223,11 @@
       },
       "images_gen": {
         "title": "Bildgenerierung",
-        "description": "Dies ist ein Modell, das für die Bildgenerierung verwendet wird, wie das Generieren von Bildern aus Text oder Bildern aus Bildern."
+        "description": "Dies ist ein Modell, das nur für die Bildgenerierung aus Textaufforderungen verwendet wird."
       },
       "images_edit": {
         "title": "Bildbearbeitung",
         "description": "Dies ist ein Modell, das für die Bildbearbeitung verwendet wird, wie Foto-Ersetzungen, Objektentfernung, Hinzufügen von Spezialeffekten und Ändern des Bildstils."
-      },
-      "images_restoration": {
-        "title": "Bildwiederherstellung",
-        "description": "Dies ist ein Modell, das für die Bildwiederherstellung verwendet wird, wie das Entfernen von Rauschen, Beheben von Unschärfe und Reduzieren von fotografischen Schäden."
-      },
-      "images_inpainting": {
-        "title": "Bildrekonstruktion",
-        "description": "Dies ist ein Modell, das für die Bildrekonstruktion verwendet wird, wie das Entfernen falsch platzierter Objekte, Beheben von generativen Bildlöchern, Korrigieren anatomischer Deformitäten und Wiederherstellen von Bildern."
-      },
-      "images_background_removal": {
-        "title": "Hintergrundentfernung",
-        "description": "Dies ist ein Modell, das für die Entfernung von Bildhintergründen verwendet wird, wie das Entfernen des Hintergrunds eines Bildes, Korrigieren des Hintergrunds eines Bildes und Ändern des Hintergrunds eines Bildes."
       },
       "search": {
         "title": "Suche",
@@ -175,16 +238,20 @@
         "description": "Dies ist ein Modell, das für Einbettungen verwendet wird, wie das Einbetten von Text, Bildern oder Audio in einen Vektorraum. Es wird für Ähnlichkeitssuchen in internen Datenbanken, Dokumenten und anderen semantischen Suchaufgaben verwendet. Dies wird verwendet, wenn Sie eine PDF-Datei zum Chat hochladen."
       },
       "api_fiat_exchange": {
-        "title": "API Fiat-Wechselkurs",
-        "description": "Dies ist eine API, die zur Überprüfung des Wechselkurses einer Fiat-Währung verwendet wird."
+        "title": "Fiat-Wechselkurs",
+        "description": "Zugang zu Echtzeit-Wechselkursen für traditionelle Währungen."
       },
       "api_crypto_exchange": {
-        "title": "API Krypto-Wechselkurs",
-        "description": "Dies ist eine API, die zur Überprüfung des Wechselkurses einer Kryptowährung verwendet wird."
+        "title": "Krypto-Wechselkurs",
+        "description": "Zugang zu Echtzeit-Wechselkursen für Kryptowährungen."
       },
       "api_twitter": {
-        "title": "API Twitter",
-        "description": "Dies ist eine API, die zum Lesen von Twitter-Inhalten verwendet wird."
+        "title": "Twitter",
+        "description": "Zugang zum Lesen und Analysieren von Twitter-Inhalten."
+      },
+      "deprecated": {
+        "title": "Veraltet",
+        "description": "Dieses Tool oder diese Funktion ist veraltet und kann in zukünftigen Versionen entfernt werden."
       }
     }
   },
@@ -251,5 +318,28 @@
     "privacy": "Datenschutzrichtlinie",
     "powered_by": "Unterstützt von",
     "rights_reserved": "Alle Rechte vorbehalten"
+  },
+  "cost_estimate": {
+    "title": "Kostenschätzung:",
+    "description": "Geschätzte Kosten für die Verwendung von. Alle Werte sind in Credits.",
+    "disclaimer": "Hinweis: Schätzungen können sich ohne vorherige Ankündigung aufgrund von Änderungen der Anbieterpreise ändern.",
+    "no_data": "Keine Kosteninformationen für dieses Tool verfügbar.",
+    "token_costs": "Token-Kosten",
+    "input_tokens": "Pro Million Eingabe-Tokens",
+    "output_tokens": "Pro Million Ausgabe-Tokens",
+    "search_tokens": "Pro Million Such-Tokens",
+    "input_image_costs": "Eingabebildkosten",
+    "input_image_1k": "1 Megapixel",
+    "input_image_2k": "2 Megapixel",
+    "input_image_4k": "4 Megapixel",
+    "input_image_8k": "8 Megapixel",
+    "input_image_12k": "12 Megapixel",
+    "output_image_costs": "Ausgabebildkosten",
+    "output_image_1k": "1 Megapixel",
+    "output_image_2k": "2 Megapixel",
+    "output_image_4k": "4 Megapixel",
+    "other_costs": "Andere Kosten",
+    "api_call": "Pro einzelne Verwendung",
+    "second_of_runtime": "Pro Sekunde Laufzeit"
   }
 }

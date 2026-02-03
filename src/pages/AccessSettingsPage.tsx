@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { PageError } from "@/lib/utils";
 import { t } from "@/lib/translations";
 import ProvidersCarousel from "@/components/ProvidersCarousel";
+import ProviderTabs from "@/components/ProviderTabs";
 import {
   fetchUserSettings,
   saveUserSettings,
@@ -44,6 +45,7 @@ const AccessSettingsPage: React.FC = () => {
     Map<string, boolean>
   >(new Map());
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
+  const [currentProviderIndex, setCurrentProviderIndex] = useState(0);
   const isRestoringPosition = useRef(false);
   const hasLoadedOnce = useRef(false);
   const indexToRestore = useRef<number | null>(null);
@@ -132,13 +134,18 @@ const AccessSettingsPage: React.FC = () => {
     if (!carouselApi) return;
 
     const updateIndex = () => {
+      const currentIndex = carouselApi.selectedScrollSnap();
+      setCurrentProviderIndex(currentIndex);
+
       if (!isRestoringPosition.current) {
-        const currentIndex = carouselApi.selectedScrollSnap();
         // Store index for potential restore after save
         indexToRestore.current = currentIndex;
       }
       isRestoringPosition.current = false;
     };
+
+    // Set initial index
+    updateIndex();
 
     carouselApi.on("select", updateIndex);
 
@@ -233,6 +240,12 @@ const AccessSettingsPage: React.FC = () => {
     }
   };
 
+  const handleProviderTabClick = (index: number) => {
+    if (carouselApi) {
+      carouselApi.scrollTo(index);
+    }
+  };
+
   const botName = import.meta.env.VITE_APP_NAME_SHORT;
 
   return (
@@ -249,7 +262,16 @@ const AccessSettingsPage: React.FC = () => {
         {t("access_card_title", { botName })}
       </CardTitle>
 
-      <div className="h-4" />
+      <div className="h-2" />
+
+      <ProviderTabs
+        providers={externalToolProviders}
+        selectedIndex={currentProviderIndex}
+        onProviderClick={handleProviderTabClick}
+        disabled={!!error?.isBlocker}
+      />
+
+      <div className="h-1" />
 
       <ProvidersCarousel
         providers={externalToolProviders}

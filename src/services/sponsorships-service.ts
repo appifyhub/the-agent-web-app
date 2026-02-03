@@ -3,6 +3,7 @@ import { Platform } from "@/lib/platform";
 import { cleanUsername } from "@/lib/utils";
 
 export interface SponsorshipResponse {
+  user_id_hex: string;
   full_name: string | null;
   platform_handle: string | null;
   platform: Platform;

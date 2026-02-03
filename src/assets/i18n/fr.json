@@ -51,6 +51,79 @@
     "unlink_message": "Vous pouvez maintenant devenir un utilisateur autonome. Cela rompt le lien entre vous et {sponsorName} et l'IA cessera de fonctionner jusqu'à ce que vous configuriez votre Profil.",
     "unlink": "Délier"
   },
+  "usage": {
+    "page_title": "Utilisation",
+    "card_title": "Votre historique d'utilisation",
+    "no_records_found": "Aucun enregistrement d'utilisation trouvé",
+    "cost_breakdown": {
+      "title": "Ventilation des coûts",
+      "model_cost": "Coût du modèle",
+      "remote_cost": "Coût distant",
+      "api_call_cost": "Coût d'appel API",
+      "maintenance_fee": "Frais de maintenance",
+      "total": "Total"
+    },
+    "token_stats": {
+      "title": "Statistiques des tokens",
+      "input_tokens": "Tokens d'entrée",
+      "output_tokens": "Tokens de sortie",
+      "search_tokens": "Tokens de recherche",
+      "total": "Total"
+    },
+    "context_ids": {
+      "title": "Contexte",
+      "date_label": "Date",
+      "time_label": "Heure",
+      "runtime_label": "Durée d'exécution",
+      "user_label": "Utilisateur",
+      "user_me": "Moi",
+      "user_sponsored": "Utilisateur parrainé",
+      "chat_label": "Chat",
+      "chat_in_chat": "Dans le chat",
+      "chat_background": "En arrière-plan",
+      "remote_runtime": "Temps d'exécution distant",
+      "output_image_sizes": "Images de sortie",
+      "input_image_sizes": "Images d'entrée"
+    },
+    "load_more": "Charger plus",
+    "filters": {
+      "scope_section": "PORTÉE",
+      "filters_section": "FILTRES",
+      "time_range_label": "Temps",
+      "time_range_all": "Toute période",
+      "time_range_10min": "10 dernières minutes",
+      "time_range_30min": "30 dernières minutes",
+      "time_range_1h": "Dernière heure",
+      "time_range_3h": "3 dernières heures",
+      "time_range_6h": "6 dernières heures",
+      "time_range_12h": "12 dernières heures",
+      "time_range_today": "Aujourd'hui",
+      "time_range_yesterday": "Hier",
+      "time_range_week": "Semaine dernière",
+      "time_range_2weeks": "2 dernières semaines",
+      "time_range_month": "Mois dernier",
+      "tool_label": "Outil",
+      "tool_all": "Tous les outils IA",
+      "purpose_label": "Objectif",
+      "purpose_all": "Tous les objectifs",
+      "provider_label": "Fournisseur",
+      "provider_all": "Tous les fournisseurs",
+      "show_scope_and_filters": "Afficher la portée et les filtres",
+      "hide_scope_and_filters": "Masquer la portée et les filtres",
+      "include_sponsored_label": "Inclure les utilisateurs sponsorisés",
+      "exclude_self_label": "Exclure mon utilisation"
+    },
+    "stats": {
+      "total_records": "Total d'enregistrements",
+      "total_cost": "Coût total",
+      "total_runtime": "Temps total",
+      "show_breakdowns": "Afficher les détails",
+      "hide_breakdowns": "Masquer les détails",
+      "by_tool": "Par outil",
+      "by_purpose": "Par objectif",
+      "by_provider": "Par fournisseur"
+    }
+  },
   "save": "Enregistrer",
   "saved": "Enregistré !",
   "copied": "Copié !",
@@ -87,7 +160,9 @@
   "about_me_label": "{botName} sait ceci sur moi :",
   "about_me_placeholder": "{name} est un scientifique spatial qui vit à…",
   "use_about_me_label": "Utiliser les informations de profil de tout le monde",
+  "use_about_me_label_singular": "Utiliser mes informations de profil",
   "use_about_me_helper": "Lorsqu'il est activé, {botName} utilisera le profil de tout le monde pour fournir des réponses plus contextuelles et personnalisées dans ce chat.",
+  "use_about_me_helper_singular": "Lorsque cette option est activée, {botName} utilisera votre profil pour fournir des réponses plus contextuelles et personnalisées dans ce chat.",
   "use_about_me_which_information": "Quelles informations ?",
   "token_info": {
     "profile_id": "Profil ID",
@@ -148,23 +223,11 @@
       },
       "images_gen": {
         "title": "Génération d'images",
-        "description": "C'est un modèle utilisé pour la génération d'images, comme la génération d'images à partir de texte ou d'images à partir d'images."
+        "description": "C'est un modèle utilisé uniquement pour la génération d'images à partir d'invites textuelles."
       },
       "images_edit": {
         "title": "Édition d'images",
         "description": "C'est un modèle utilisé pour l'édition d'images, comme les remplacements de photos, la suppression d'objets, l'ajout d'effets spéciaux et le changement du style des images."
-      },
-      "images_restoration": {
-        "title": "Restauration d'images",
-        "description": "C'est un modèle utilisé pour la restauration d'images, comme la suppression du bruit, la correction du flou et la réduction des dommages photographiques."
-      },
-      "images_inpainting": {
-        "title": "Inpainting d'images",
-        "description": "C'est un modèle utilisé pour l'inpainting d'images, comme la suppression d'objets mal placés, la correction de trous dans les images génératives, la correction de déformations anatomiques et la restauration d'images."
-      },
-      "images_background_removal": {
-        "title": "Suppression d'arrière-plan",
-        "description": "C'est un modèle utilisé pour la suppression d'arrière-plan d'images, comme supprimer l'arrière-plan d'une image, corriger l'arrière-plan d'une image et changer l'arrière-plan d'une image."
       },
       "search": {
         "title": "Recherche",
@@ -175,16 +238,20 @@
         "description": "C'est un modèle utilisé pour l'intégration, comme intégrer du texte, des images ou de l'audio dans un espace vectoriel. Il est utilisé pour la recherche de similitude dans les bases de données internes, documents et autres tâches de recherche sémantique. C'est ce qui est utilisé lorsque vous téléchargez un fichier PDF dans la discussion."
       },
       "api_fiat_exchange": {
-        "title": "API de change de devises fiduciaires",
-        "description": "C'est une API utilisée pour vérifier le taux de change d'une devise fiduciaire."
+        "title": "Change de devises fiduciaires",
+        "description": "Accès aux taux de change en temps réel pour les devises traditionnelles."
       },
       "api_crypto_exchange": {
-        "title": "API de change de cryptomonnaies",
-        "description": "C'est une API utilisée pour vérifier le taux de change d'une cryptomonnaie."
+        "title": "Change de cryptomonnaies",
+        "description": "Accès aux taux de change en temps réel pour les cryptomonnaies."
       },
       "api_twitter": {
-        "title": "API Twitter",
-        "description": "C'est une API utilisée pour lire le contenu Twitter."
+        "title": "Twitter",
+        "description": "Accès pour lire et analyser le contenu Twitter."
+      },
+      "deprecated": {
+        "title": "Obsolète",
+        "description": "Cet outil ou cette fonctionnalité est obsolète et pourrait être supprimé dans les versions futures."
       }
     }
   },
@@ -251,5 +318,28 @@
     "privacy": "Politique de confidentialité",
     "powered_by": "Propulsé par",
     "rights_reserved": "Tous droits réservés"
+  },
+  "cost_estimate": {
+    "title": "Estimation des coûts",
+    "description": "Coûts estimés pour utiliser. Toutes les valeurs sont en crédits.",
+    "disclaimer": "Remarque : Les estimations peuvent changer sans préavis en raison de modifications des tarifs des fournisseurs.",
+    "no_data": "Aucune information de coût disponible pour cet outil.",
+    "token_costs": "Coûts des tokens",
+    "input_tokens": "Par million de tokens en entrée",
+    "output_tokens": "Par million de tokens en sortie",
+    "search_tokens": "Par million de tokens de recherche",
+    "input_image_costs": "Coûts des images en entrée",
+    "input_image_1k": "1 Mégapixel",
+    "input_image_2k": "2 Mégapixels",
+    "input_image_4k": "4 Mégapixels",
+    "input_image_8k": "8 Mégapixels",
+    "input_image_12k": "12 Mégapixels",
+    "output_image_costs": "Coûts des images en sortie",
+    "output_image_1k": "1 Mégapixel",
+    "output_image_2k": "2 Mégapixels",
+    "output_image_4k": "4 Mégapixels",
+    "other_costs": "Autres coûts",
+    "api_call": "Par utilisation unique",
+    "second_of_runtime": "Par seconde d'exécution"
   }
 }

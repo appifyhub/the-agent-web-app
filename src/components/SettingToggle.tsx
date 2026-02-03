@@ -40,10 +40,11 @@ const SettingToggle: React.FC<SettingToggleProps> = ({
             onCheckedChange={onChange}
             disabled={disabled}
             className={cn(
-              "shrink-0",
+              "shrink-0 cursor-pointer",
               "data-[state=checked]:bg-accent-amber",
               "data-[state=checked]:shadow-[0_0_4px_rgba(147,197,253,0.3)]",
               "data-[state=unchecked]:bg-foreground/20",
+              disabled && "cursor-not-allowed",
               switchClassName
             )}
           />

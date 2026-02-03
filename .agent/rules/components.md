@@ -1,8 +1,9 @@
 ---
-description: 
+trigger: model_decision
+description: Use when you are thinking of creating and editing React components
 globs: *.tsx
-alwaysApply: false
 ---
+
 # Component Guidelines
 
 ## Making Components Generic and Reusable
@@ -13,7 +14,7 @@ alwaysApply: false
 - Use generic boolean flags (e.g., `showActionButton` instead of `showSaveButton`)
 - Add configurable text props with sensible defaults (e.g., `actionButtonText` with default `t("save")`)
 
-#### Example Pattern from
+#### Example Pattern from existing components
 
 ```typescript
 interface GenericControlsProps {

@@ -1,0 +1,34 @@
+---
+trigger: glob
+globs: *.ts,*.tsx,*.js,*.jsx
+---
+
+### MANDATORY PROJECT RULES
+
+#### Environment Management
+
+- ALWAYS use both `bun` and `npm` for dependency management
+- ALWAYS use `bun` for commands and task execution, you can ignore `npm` other than dependency management
+- ALL commands must be run from project root (where `package.json` exists)
+
+#### Development Workflow
+
+- Use tools from `package.json` for everything – linting, internationalization, translation keys, rebuilding, tests (if any), etc.
+- Always run lint using `bun` before commits and at the end of tasks / plan chapters
+- Bun scripts set up their environments, so there's nothing extra that you need to do
+
+#### Project Structure
+
+- Version is managed through the `version` property of the `package.json` file
+- You can see the CI/CD pipeline in `.github/workflows` directory
+- It's best to base API implementation on API docs. If you don't have any, ask for them
+
+#### LLM/AI Rules
+
+- Never write plans or walkthroughs unless the user specifically asks you to
+- Never assume anything. Ask validating questions. Sync with the user to validate your assumptions. Optimize for accuracy, not speed
+- Only operate on verified facts. For every code change or idea you want to introduce, verify via code search if it will make sense
+- Consistency is key. Look at coding patterns in and around the file you are editing as if you have OCD
+- If there are any tests, those must run offline. Write tests only if the unit is simply testable. If the unit requires extensive mocking, advise the user before proceeding
+- Unless explicitly asked, you should not build plans or walkthrough documents – default to keeping it short and simple, in the chat
+- All user-facing labels and messages must always be translated. Use the i18n directory for doing that. Never add any placeholders, and always manually update all translation files to ensure proper translation from day 0 across all languages
