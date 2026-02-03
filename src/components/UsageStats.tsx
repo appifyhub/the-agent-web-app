@@ -70,27 +70,43 @@ const UsageStats: React.FC<UsageStatsProps> = ({ stats, isLoading = false }) => 
           {title}
         </h4>
         <div className="flex flex-col space-y-1 text-sm">
-          {Object.entries(data).map(([name, aggregateStats]) => {
-            const displayName =
-              type === "purpose"
-                ? getPurposeLabel(name)
-                : type === "tool"
-                  ? getToolName(name)
-                  : getProviderName(name);
+          {Object.entries(data)
+            .sort(([nameA, statsA], [nameB, statsB]) => {
+              if (statsB.total_cost !== statsA.total_cost) {
+                return statsB.total_cost - statsA.total_cost;
+              }
+              if (statsB.record_count !== statsA.record_count) {
+                return statsB.record_count - statsA.record_count;
+              }
+              const getDisplayName = (name: string) =>
+                type === "purpose"
+                  ? getPurposeLabel(name)
+                  : type === "tool"
+                    ? getToolName(name)
+                    : getProviderName(name);
+              return getDisplayName(nameA).localeCompare(getDisplayName(nameB));
+            })
+            .map(([name, aggregateStats]) => {
+              const displayName =
+                type === "purpose"
+                  ? getPurposeLabel(name)
+                  : type === "tool"
+                    ? getToolName(name)
+                    : getProviderName(name);
 
-            return (
-              <div key={name} className="flex justify-between gap-4">
-                <span className="text-muted-foreground min-w-0 truncate">
-                  {displayName}
-                </span>
-                <span className="shrink-0 text-xs flex items-center gap-1">
-                  <span className="text-accent-amber">{formatCredits(aggregateStats.total_cost)}</span>
-                  <BadgeCent className="h-3 w-3 text-accent-amber inline" />
-                  <span className="text-muted-foreground">({aggregateStats.record_count})</span>
-                </span>
-              </div>
-            );
-          })}
+              return (
+                <div key={name} className="flex justify-between gap-4">
+                  <span className="text-muted-foreground min-w-0 truncate">
+                    {displayName}
+                  </span>
+                  <span className="shrink-0 text-xs flex items-center gap-1">
+                    <span className="text-accent-amber">{formatCredits(aggregateStats.total_cost)}</span>
+                    <BadgeCent className="h-3 w-3 text-accent-amber inline" />
+                    <span className="text-muted-foreground">({aggregateStats.record_count})</span>
+                  </span>
+                </div>
+              );
+            })}
         </div>
       </div>
     );
