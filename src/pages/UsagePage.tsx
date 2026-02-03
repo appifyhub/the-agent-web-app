@@ -63,6 +63,8 @@ const UsagePage: React.FC = () => {
       try {
         const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
+        const dateRange = getDateRange(timeRange);
+
         const [records, statsData, sponsorshipsData] = await Promise.all([
           fetchUsageRecords({
             apiBaseUrl,
@@ -74,8 +76,8 @@ const UsagePage: React.FC = () => {
             tool_id: selectedTool !== "all" ? selectedTool : undefined,
             purpose: selectedPurpose !== "all" ? selectedPurpose : undefined,
             provider_id: selectedProvider !== "all" ? selectedProvider : undefined,
-            start_date: timeRange !== "all" ? new Date(Date.now() - getTimeRangeMs(timeRange)).toISOString() : undefined,
-            end_date: timeRange !== "all" ? new Date().toISOString() : undefined,
+            start_date: dateRange.start?.toISOString(),
+            end_date: dateRange.end?.toISOString(),
           }),
           fetchUsageStats({
             apiBaseUrl,
@@ -86,8 +88,8 @@ const UsagePage: React.FC = () => {
             tool_id: selectedTool !== "all" ? selectedTool : undefined,
             purpose: selectedPurpose !== "all" ? selectedPurpose : undefined,
             provider_id: selectedProvider !== "all" ? selectedProvider : undefined,
-            start_date: timeRange !== "all" ? new Date(Date.now() - getTimeRangeMs(timeRange)).toISOString() : undefined,
-            end_date: timeRange !== "all" ? new Date().toISOString() : undefined,
+            start_date: dateRange.start?.toISOString(),
+            end_date: dateRange.end?.toISOString(),
           }),
           fetchUserSponsorships({
             apiBaseUrl,
@@ -133,21 +135,50 @@ const UsagePage: React.FC = () => {
     excludeSelf,
   ]);
 
-  const getTimeRangeMs = (range: string): number => {
-    const ranges: Record<string, number> = {
-      "10min": 10 * 60 * 1000,
-      "30min": 30 * 60 * 1000,
-      "1h": 60 * 60 * 1000,
-      "3h": 3 * 60 * 60 * 1000,
-      "6h": 6 * 60 * 60 * 1000,
-      "12h": 12 * 60 * 60 * 1000,
-      "today": new Date().setHours(0, 0, 0, 0) - Date.now(),
-      "yesterday": 24 * 60 * 60 * 1000,
-      "week": 7 * 24 * 60 * 60 * 1000,
-      "2weeks": 14 * 24 * 60 * 60 * 1000,
-      "month": 30 * 24 * 60 * 60 * 1000,
-    };
-    return ranges[range] || 0;
+  const getDateRange = (range: TimeRange): { start: Date | null; end: Date | null } => {
+    const now = new Date();
+
+    if (range === "all") {
+      return { start: null, end: null };
+    }
+
+    const msPerMinute = 60 * 1000;
+    const msPerHour = 60 * msPerMinute;
+    const msPerDay = 24 * msPerHour;
+
+    switch (range) {
+      case "10min":
+        return { start: new Date(Date.now() - 10 * msPerMinute), end: now };
+      case "30min":
+        return { start: new Date(Date.now() - 30 * msPerMinute), end: now };
+      case "1h":
+        return { start: new Date(Date.now() - msPerHour), end: now };
+      case "3h":
+        return { start: new Date(Date.now() - 3 * msPerHour), end: now };
+      case "6h":
+        return { start: new Date(Date.now() - 6 * msPerHour), end: now };
+      case "12h":
+        return { start: new Date(Date.now() - 12 * msPerHour), end: now };
+      case "today": {
+        const startOfToday = new Date();
+        startOfToday.setUTCHours(0, 0, 0, 0);
+        return { start: startOfToday, end: now };
+      }
+      case "yesterday": {
+        const startOfToday = new Date();
+        startOfToday.setUTCHours(0, 0, 0, 0);
+        const startOfYesterday = new Date(startOfToday.getTime() - msPerDay);
+        return { start: startOfYesterday, end: startOfToday };
+      }
+      case "week":
+        return { start: new Date(Date.now() - 7 * msPerDay), end: now };
+      case "2weeks":
+        return { start: new Date(Date.now() - 14 * msPerDay), end: now };
+      case "month":
+        return { start: new Date(Date.now() - 30 * msPerDay), end: now };
+      default:
+        return { start: null, end: null };
+    }
   };
 
   const handleLoadMore = async () => {
@@ -156,6 +187,7 @@ const UsagePage: React.FC = () => {
     setIsLoadingMore(true);
     try {
       const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+      const dateRange = getDateRange(timeRange);
       const records = await fetchUsageRecords({
         apiBaseUrl,
         user_id,
@@ -167,8 +199,8 @@ const UsagePage: React.FC = () => {
         tool_id: selectedTool !== "all" ? selectedTool : undefined,
         purpose: selectedPurpose !== "all" ? selectedPurpose : undefined,
         provider_id: selectedProvider !== "all" ? selectedProvider : undefined,
-        start_date: timeRange !== "all" ? new Date(Date.now() - getTimeRangeMs(timeRange)).toISOString() : undefined,
-        end_date: timeRange !== "all" ? new Date().toISOString() : undefined,
+        start_date: dateRange.start?.toISOString(),
+        end_date: dateRange.end?.toISOString(),
       });
 
       if (records.length > RECORDS_PER_PAGE) {
