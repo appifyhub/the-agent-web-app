@@ -219,7 +219,7 @@ const PurchasesPage: React.FC = () => {
       if (window.navigator?.clipboard?.readText && window.isSecureContext) {
         const text = await window.navigator.clipboard.readText();
         setLicenseKey(text.trim());
-        toast.success(t("copied"));
+        toast.success(t("pasted"));
       }
     } catch (err) {
       if (err instanceof Error && err.name === "NotAllowedError") {
@@ -266,6 +266,7 @@ const PurchasesPage: React.FC = () => {
       showCancelButton={shouldShowCancelButton}
       onCancelClicked={handleCancelEditing}
       isContentLoading={isLoadingState}
+      externalError={error}
     >
       {isEditing ? (
         <>
@@ -330,8 +331,9 @@ const PurchasesPage: React.FC = () => {
           <Button
             variant="outline"
             onClick={handleBuyMore}
+            disabled={!!error?.isBlocker}
             className="w-full mx-auto mt-[2rem] mb-[-1rem] py-[1.5rem] rounded-full
-              text-white !bg-indigo-500/50 hover:!bg-indigo-500/80 
+              text-white !bg-indigo-500/50 hover:!bg-indigo-500/80
               cursor-pointer"
           >
             <ShoppingCart className="h-4 w-4 mr-2" />

@@ -226,6 +226,7 @@ const UsagePage: React.FC = () => {
       page="usage"
       showActionButton={false}
       isContentLoading={isLoadingState}
+      externalError={error}
     >
       <CardTitle className="text-center mx-auto">
         {t("usage.card_title")}

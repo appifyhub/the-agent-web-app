@@ -152,6 +152,7 @@ export type TranslationKey =
   | "save"
   | "saved"
   | "copied"
+  | "pasted"
   | "connections.page_title"
   | "connections.card_title"
   | "connections.show_my_key"
