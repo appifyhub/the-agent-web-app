@@ -8,6 +8,7 @@ export interface NavigationHelpers {
   navigateToSponsorships: (userId: string, langIsoCode: string) => void;
   navigateToConnections: (userId: string, langIsoCode: string) => void;
   navigateToUsage: (userId: string, langIsoCode: string) => void;
+  navigateToPurchases: (userId: string, langIsoCode: string) => void;
   navigateToFeatures: (langIsoCode: string) => void;
   navigateWithLanguageChange: (
     langIsoCode: string,
@@ -62,6 +63,11 @@ export const useNavigation = (): NavigationHelpers => {
     navigate(`/${langIsoCode}/user/${userId}/usage${getPreservedSearchParams()}`);
   };
 
+  const navigateToPurchases = (userId: string, langIsoCode: string) => {
+    console.info("Navigating to purchases:", userId);
+    navigate(`/${langIsoCode}/user/${userId}/purchases${getPreservedSearchParams()}`);
+  };
+
   const navigateToFeatures = (langIsoCode: string) => {
     console.info("Navigating to features");
     navigate(`/${langIsoCode}/features${getPreservedSearchParams()}`);
@@ -92,6 +98,7 @@ export const useNavigation = (): NavigationHelpers => {
     navigateToSponsorships,
     navigateToConnections,
     navigateToUsage,
+    navigateToPurchases,
     navigateToFeatures,
     navigateWithLanguageChange,
   };

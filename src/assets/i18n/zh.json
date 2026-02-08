@@ -124,9 +124,54 @@
       "by_provider": "按提供商"
     }
   },
+  "purchases": {
+    "page_title": "购买",
+    "card_title": "您的购买历史",
+    "use_license": "使用许可证",
+    "license_key_label": "输入您的许可证密钥",
+    "license_key_placeholder": "粘贴或输入您的许可证密钥",
+    "bind_success": "许可证链接成功！",
+    "paste_failed": "粘贴失败",
+    "paste_permission_denied": "剪贴板访问被拒绝",
+    "no_records_found": "未找到购买",
+    "buy_more": "购买更多",
+    "filters": {
+      "time_range_label": "时间",
+      "product_label": "产品",
+      "product_all": "所有产品",
+      "show_filters": "显示筛选器",
+      "hide_filters": "隐藏筛选器"
+    },
+    "stats": {
+      "total_purchases": "总购买数",
+      "total_paid": "总支付金额",
+      "show_breakdowns": "显示详情",
+      "hide_breakdowns": "隐藏详情",
+      "by_product": "按产品"
+    },
+    "record": {
+      "test": "测试",
+      "pre": "预",
+      "product_details": "产品详情",
+      "product_name": "产品",
+      "quantity": "数量",
+      "price": "价格",
+      "refunded_label": "已退款",
+      "preorder_label": "预购",
+      "sale_date": "购买日期",
+      "purchase_info": "购买信息",
+      "license_key": "许可证密钥",
+      "gumroad_fee": "Gumroad 费用",
+      "discover_fee": "Discover 费用",
+      "affiliate_credit": "联盟信用",
+      "buy_again": "再次购买"
+    },
+    "load_more": "加载更多"
+  },
   "save": "保存",
   "saved": "已保存！",
   "copied": "已复制！",
+  "pasted": "已粘贴！",
   "connections": {
     "page_title": "连接",
     "card_title": "连接配置文件",

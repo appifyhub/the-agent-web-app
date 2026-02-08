@@ -124,9 +124,54 @@
     },
     "load_more": "Učitaj još"
   },
+  "purchases": {
+    "page_title": "Kupovine",
+    "card_title": "Vaše kupovine",
+    "use_license": "Unesite licencu",
+    "license_key_label": "Unesite vašu licencnu oznaku",
+    "license_key_placeholder": "Nalepite ili unesite vašu licencnu oznaku",
+    "bind_success": "Licenca uspešno povezana!",
+    "paste_failed": "Nalepljivanje nije uspelo",
+    "paste_permission_denied": "Pristup privremenoj memoriji odbijen",
+    "no_records_found": "Nema pronađenih kupovina",
+    "buy_more": "Kupi još",
+    "filters": {
+      "time_range_label": "Vreme",
+      "product_label": "Proizvod",
+      "product_all": "Svi proizvodi",
+      "show_filters": "Prikaz filtera",
+      "hide_filters": "Sakrij filtere"
+    },
+    "stats": {
+      "total_purchases": "Ukupno kupovina",
+      "total_paid": "Ukupno plaćeno",
+      "show_breakdowns": "Prikaz detalja",
+      "hide_breakdowns": "Sakrij detalje",
+      "by_product": "Po proizvodu"
+    },
+    "record": {
+      "test": "Test",
+      "pre": "Pred",
+      "product_details": "Detalji proizvoda",
+      "product_name": "Proizvod",
+      "quantity": "Količina",
+      "price": "Cena",
+      "refunded_label": "Refundirano",
+      "preorder_label": "Predkupovina",
+      "sale_date": "Datum kupovine",
+      "purchase_info": "Informacije o kupovini",
+      "license_key": "Licencni ključ",
+      "gumroad_fee": "Gumroad naknada",
+      "discover_fee": "Discover naknada",
+      "affiliate_credit": "Partnerski kredit",
+      "buy_again": "Kupi ponovo"
+    },
+    "load_more": "Učitaj više"
+  },
   "save": "Sačuvaj",
   "saved": "Sačuvano!",
   "copied": "Kopirano!",
+  "pasted": "Zalepljeno!",
   "connections": {
     "page_title": "Povezivanje",
     "card_title": "Poveži profile",

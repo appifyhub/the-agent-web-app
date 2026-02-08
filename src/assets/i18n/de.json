@@ -124,9 +124,54 @@
     },
     "load_more": "Mehr laden"
   },
+  "purchases": {
+    "page_title": "Käufe",
+    "card_title": "Ihr Kaufverlauf",
+    "use_license": "Lizenz verwenden",
+    "license_key_label": "Geben Sie Ihren Lizenzschlüssel ein",
+    "license_key_placeholder": "Fügen Sie Ihren Lizenzschlüssel ein oder geben Sie ihn ein",
+    "bind_success": "Lizenz erfolgreich verknüpft!",
+    "paste_failed": "Einfügen fehlgeschlagen",
+    "paste_permission_denied": "Zwischenablage-Zugriff verweigert",
+    "no_records_found": "Keine Käufe gefunden",
+    "buy_more": "Mehr kaufen",
+    "filters": {
+      "time_range_label": "Zeit",
+      "product_label": "Produkt",
+      "product_all": "Alle Produkte",
+      "show_filters": "Filter anzeigen",
+      "hide_filters": "Filter ausblenden"
+    },
+    "stats": {
+      "total_purchases": "Gesamtkäufe",
+      "total_paid": "Gesamt bezahlt",
+      "show_breakdowns": "Aufschlüsselungen anzeigen",
+      "hide_breakdowns": "Aufschlüsselungen ausblenden",
+      "by_product": "Nach Produkt"
+    },
+    "record": {
+      "test": "Test",
+      "pre": "Vor",
+      "product_details": "Produktdetails",
+      "product_name": "Produkt",
+      "quantity": "Menge",
+      "price": "Preis",
+      "refunded_label": "Erstattet",
+      "preorder_label": "Vorbestellung",
+      "sale_date": "Kaufdatum",
+      "purchase_info": "Kaufinformationen",
+      "license_key": "Lizenzschlüssel",
+      "gumroad_fee": "Gumroad-Gebühr",
+      "discover_fee": "Discover-Gebühr",
+      "affiliate_credit": "Affiliate-Guthaben",
+      "buy_again": "Erneut kaufen"
+    },
+    "load_more": "Mehr laden"
+  },
   "save": "Speichern",
   "saved": "Gespeichert!",
   "copied": "Kopiert!",
+  "pasted": "Eingefügt!",
   "connections": {
     "page_title": "Verbindungen",
     "card_title": "Profile verbinden",

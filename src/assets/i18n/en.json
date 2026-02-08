@@ -124,9 +124,54 @@
     },
     "load_more": "Load more"
   },
+  "purchases": {
+    "page_title": "Purchases",
+    "card_title": "Your Purchase History",
+    "use_license": "Use a License",
+    "license_key_label": "Enter your license key",
+    "license_key_placeholder": "Paste or type your license key",
+    "bind_success": "License linked successfully!",
+    "paste_failed": "Failed to paste",
+    "paste_permission_denied": "Clipboard access denied",
+    "no_records_found": "No purchases found",
+    "buy_more": "Buy more",
+    "filters": {
+      "time_range_label": "Time",
+      "product_label": "Product",
+      "product_all": "All products",
+      "show_filters": "Show Filters",
+      "hide_filters": "Hide Filters"
+    },
+    "stats": {
+      "total_purchases": "Total Purchases",
+      "total_paid": "Total Paid",
+      "show_breakdowns": "Show Breakdowns",
+      "hide_breakdowns": "Hide Breakdowns",
+      "by_product": "By Product"
+    },
+    "record": {
+      "test": "Test",
+      "pre": "Pre",
+      "product_details": "Product Details",
+      "product_name": "Product",
+      "quantity": "Quantity",
+      "price": "Price",
+      "refunded_label": "Refunded",
+      "preorder_label": "Preorder",
+      "sale_date": "Purchase Date",
+      "purchase_info": "Purchase Info",
+      "license_key": "License Key",
+      "gumroad_fee": "Gumroad Fee",
+      "discover_fee": "Discover Fee",
+      "affiliate_credit": "Affiliate Credit",
+      "buy_again": "Buy Again"
+    },
+    "load_more": "Load more"
+  },
   "save": "Save",
   "saved": "Saved!",
   "copied": "Copied!",
+  "pasted": "Pasted!",
   "connections": {
     "page_title": "Connections",
     "card_title": "Connect Profiles",

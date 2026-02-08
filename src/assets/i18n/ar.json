@@ -124,9 +124,54 @@
     },
     "load_more": "تحميل المزيد"
   },
+  "purchases": {
+    "page_title": "المشتريات",
+    "card_title": "سجل مشترياتك",
+    "use_license": "استخدم رخصة",
+    "license_key_label": "أدخل مفتاح الترخيص الخاص بك",
+    "license_key_placeholder": "الصق أو اكتب مفتاح الترخيص الخاص بك",
+    "bind_success": "تم ربط الترخيص بنجاح!",
+    "paste_failed": "فشل اللصق",
+    "paste_permission_denied": "تم رفض الوصول إلى الحافظة",
+    "no_records_found": "لم يتم العثور على مشتريات",
+    "buy_more": "اشتري المزيد",
+    "filters": {
+      "time_range_label": "الوقت",
+      "product_label": "المنتج",
+      "product_all": "جميع المنتجات",
+      "show_filters": "إظهار المرشحات",
+      "hide_filters": "إخفاء المرشحات"
+    },
+    "stats": {
+      "total_purchases": "إجمالي المشتريات",
+      "total_paid": "الإجمالي المدفوع",
+      "show_breakdowns": "إظهار التفاصيل",
+      "hide_breakdowns": "إخفاء التفاصيل",
+      "by_product": "حسب المنتج"
+    },
+    "record": {
+      "test": "اختبار",
+      "pre": "سابق",
+      "product_details": "تفاصيل المنتج",
+      "product_name": "المنتج",
+      "quantity": "الكمية",
+      "price": "السعر",
+      "refunded_label": "مسترد",
+      "preorder_label": "طلب مسبق",
+      "sale_date": "تاريخ الشراء",
+      "purchase_info": "معلومات الشراء",
+      "license_key": "مفتاح الترخيص",
+      "gumroad_fee": "رسوم جمرود",
+      "discover_fee": "رسوم ديسكفر",
+      "affiliate_credit": "رصيد الشريك",
+      "buy_again": "اشتري مرة أخرى"
+    },
+    "load_more": "تحميل المزيد"
+  },
   "save": "حفظ",
   "saved": "تم الحفظ!",
   "copied": "تم النسخ!",
+  "pasted": "تم اللصق!",
   "connections": {
     "page_title": "الاتصالات",
     "card_title": "ربط الملفات الشخصية",

@@ -124,9 +124,54 @@
       "by_provider": "Par fournisseur"
     }
   },
+  "purchases": {
+    "page_title": "Achats",
+    "card_title": "Votre Historique d'Achats",
+    "use_license": "Utiliser une Licence",
+    "license_key_label": "Entrez votre clé de licence",
+    "license_key_placeholder": "Collez ou tapez votre clé de licence",
+    "bind_success": "Licence liée avec succès!",
+    "paste_failed": "Échec du collage",
+    "paste_permission_denied": "Accès au presse-papiers refusé",
+    "no_records_found": "Aucun achat trouvé",
+    "buy_more": "Acheter plus",
+    "filters": {
+      "time_range_label": "Temps",
+      "product_label": "Produit",
+      "product_all": "Tous les produits",
+      "show_filters": "Afficher les Filtres",
+      "hide_filters": "Masquer les Filtres"
+    },
+    "stats": {
+      "total_purchases": "Total des Achats",
+      "total_paid": "Total Payé",
+      "show_breakdowns": "Afficher les Détails",
+      "hide_breakdowns": "Masquer les Détails",
+      "by_product": "Par Produit"
+    },
+    "record": {
+      "test": "Test",
+      "pre": "Pré",
+      "product_details": "Détails du Produit",
+      "product_name": "Produit",
+      "quantity": "Quantité",
+      "price": "Prix",
+      "refunded_label": "Remboursé",
+      "preorder_label": "Précommande",
+      "sale_date": "Date d'achat",
+      "purchase_info": "Informations d'Achat",
+      "license_key": "Clé de Licence",
+      "gumroad_fee": "Frais Gumroad",
+      "discover_fee": "Frais Discover",
+      "affiliate_credit": "Crédit Affilié",
+      "buy_again": "Racheter"
+    },
+    "load_more": "Charger plus"
+  },
   "save": "Enregistrer",
   "saved": "Enregistré !",
   "copied": "Copié !",
+  "pasted": "Collé !",
   "connections": {
     "page_title": "Connexions",
     "card_title": "Connecter les Profils",
