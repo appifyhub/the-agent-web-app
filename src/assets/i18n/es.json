@@ -171,6 +171,7 @@
   "save": "Guardar",
   "saved": "¡Guardado!",
   "copied": "¡Copiado!",
+  "pasted": "¡Pegado!",
   "connections": {
     "page_title": "Conexiones",
     "card_title": "Conectar Perfiles",
