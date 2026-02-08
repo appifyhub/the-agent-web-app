@@ -124,6 +124,50 @@
       "by_provider": "प्रदाता के अनुसार"
     }
   },
+  "purchases": {
+    "page_title": "खरीदें",
+    "card_title": "आपकी खरीद का इतिहास",
+    "use_license": "एक लाइसेंस का उपयोग करें",
+    "license_key_label": "अपनी लाइसेंस कुंजी दर्ज करें",
+    "license_key_placeholder": "अपनी लाइसेंस कुंजी को पेस्ट करें या टाइप करें",
+    "bind_success": "लाइसेंस सफलतापूर्वक जुड़ा गया!",
+    "paste_failed": "पेस्ट करने में विफल",
+    "paste_permission_denied": "क्लिपबोर्ड एक्सेस अस्वीकृत",
+    "no_records_found": "कोई खरीद नहीं मिली",
+    "buy_more": "अधिक खरीदें",
+    "filters": {
+      "time_range_label": "समय",
+      "product_label": "उत्पाद",
+      "product_all": "सभी उत्पाद",
+      "show_filters": "फ़िल्टर दिखाएं",
+      "hide_filters": "फ़िल्टर छिपाएं"
+    },
+    "stats": {
+      "total_purchases": "कुल खरीद",
+      "total_paid": "कुल भुगतान",
+      "show_breakdowns": "विवरण दिखाएं",
+      "hide_breakdowns": "विवरण छिपाएं",
+      "by_product": "उत्पाद द्वारा"
+    },
+    "record": {
+      "test": "परीक्षण",
+      "pre": "पूर्व",
+      "product_details": "उत्पाद विवरण",
+      "product_name": "उत्पाद",
+      "quantity": "मात्रा",
+      "price": "मूल्य",
+      "refunded_label": "वापसी की गई",
+      "preorder_label": "पूर्व-आदेश",
+      "sale_date": "खरीद तिथि",
+      "purchase_info": "खरीद जानकारी",
+      "license_key": "लाइसेंस कुंजी",
+      "gumroad_fee": "गुमरोड शुल्क",
+      "discover_fee": "डिस्कवर शुल्क",
+      "affiliate_credit": "संबद्ध क्रेडिट",
+      "buy_again": "फिर से खरीदें"
+    },
+    "load_more": "अधिक लोड करें"
+  },
   "save": "सहेजें",
   "saved": "सहेजा गया!",
   "copied": "कॉपी किया गया!",

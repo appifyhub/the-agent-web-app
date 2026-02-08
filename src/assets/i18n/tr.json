@@ -124,6 +124,50 @@
       "by_provider": "Sağlayıcıya Göre"
     }
   },
+  "purchases": {
+    "page_title": "Satın Almalar",
+    "card_title": "Satın Alma Geçmişiniz",
+    "use_license": "Lisans Kullan",
+    "license_key_label": "Lisans anahtarınızı girin",
+    "license_key_placeholder": "Lisans anahtarınızı yapıştırın veya yazın",
+    "bind_success": "Lisans başarıyla bağlandı!",
+    "paste_failed": "Yapıştırma başarısız",
+    "paste_permission_denied": "Pano erişimi reddedildi",
+    "no_records_found": "Satın alma bulunamadı",
+    "buy_more": "Daha fazla satın al",
+    "filters": {
+      "time_range_label": "Zaman",
+      "product_label": "Ürün",
+      "product_all": "Tüm ürünler",
+      "show_filters": "Filtreleri Göster",
+      "hide_filters": "Filtreleri Gizle"
+    },
+    "stats": {
+      "total_purchases": "Toplam Satın Almalar",
+      "total_paid": "Toplam Ödenen",
+      "show_breakdowns": "Detayları Göster",
+      "hide_breakdowns": "Detayları Gizle",
+      "by_product": "Ürüne Göre"
+    },
+    "record": {
+      "test": "Test",
+      "pre": "Ön",
+      "product_details": "Ürün Detayları",
+      "product_name": "Ürün",
+      "quantity": "Miktar",
+      "price": "Fiyat",
+      "refunded_label": "İade Edildi",
+      "preorder_label": "Ön Sipariş",
+      "sale_date": "Satın alma tarihi",
+      "purchase_info": "Satın Alma Bilgisi",
+      "license_key": "Lisans Anahtarı",
+      "gumroad_fee": "Gumroad Ücreti",
+      "discover_fee": "Discover Ücreti",
+      "affiliate_credit": "Afiliasyon Kredisi",
+      "buy_again": "Tekrar Satın Al"
+    },
+    "load_more": "Daha Fazla Yükle"
+  },
   "save": "Kaydet",
   "saved": "Kaydedildi!",
   "copied": "Kopyalandı!",

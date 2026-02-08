@@ -124,6 +124,50 @@
       "by_provider": "Por proveedor"
     }
   },
+  "purchases": {
+    "page_title": "Compras",
+    "card_title": "Su Historial de Compras",
+    "use_license": "Usar una Licencia",
+    "license_key_label": "Ingrese su clave de licencia",
+    "license_key_placeholder": "Pegue o escriba su clave de licencia",
+    "bind_success": "Licencia vinculada correctamente!",
+    "paste_failed": "Error al pegar",
+    "paste_permission_denied": "Acceso al portapapeles denegado",
+    "no_records_found": "No se encontraron compras",
+    "buy_more": "Comprar más",
+    "filters": {
+      "time_range_label": "Tiempo",
+      "product_label": "Producto",
+      "product_all": "Todos los productos",
+      "show_filters": "Mostrar Filtros",
+      "hide_filters": "Ocultar Filtros"
+    },
+    "stats": {
+      "total_purchases": "Total de Compras",
+      "total_paid": "Total Pagado",
+      "show_breakdowns": "Mostrar Detalles",
+      "hide_breakdowns": "Ocultar Detalles",
+      "by_product": "Por Producto"
+    },
+    "record": {
+      "test": "Prueba",
+      "pre": "Pre",
+      "product_details": "Detalles del Producto",
+      "product_name": "Producto",
+      "quantity": "Cantidad",
+      "price": "Precio",
+      "refunded_label": "Reembolsado",
+      "preorder_label": "Preventa",
+      "sale_date": "Fecha de Compra",
+      "purchase_info": "Información de Compra",
+      "license_key": "Clave de Licencia",
+      "gumroad_fee": "Tarifa de Gumroad",
+      "discover_fee": "Tarifa de Discover",
+      "affiliate_credit": "Crédito de Afiliado",
+      "buy_again": "Comprar de Nuevo"
+    },
+    "load_more": "Cargar más"
+  },
   "save": "Guardar",
   "saved": "¡Guardado!",
   "copied": "¡Copiado!",
