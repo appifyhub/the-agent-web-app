@@ -9,6 +9,7 @@
     "rebuild": "bun run clean && bun run build",
     "dev": "vite",
     "preview": "vite preview",
+    "lint": "bun run lint:i18n && bun run lint:code && bun run lint:css",
     "lint:code": "eslint .",
     "lint:css": "stylelint \"**/*.css\" --ignore-path .gitignore",
     "lint:i18n": "bun run i18n:keys && bun run i18n:check",
