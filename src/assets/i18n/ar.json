@@ -53,7 +53,7 @@
   },
   "usage": {
     "page_title": "الاستخدام",
-    "card_title": "سجل استخدامك",
+    "card_title": "سجل الاستخدام",
     "no_records_found": "لم يتم العثور على سجلات استخدام",
     "filters": {
       "scope_section": "النطاق",
@@ -122,11 +122,12 @@
       "output_image_sizes": "صور الإخراج",
       "input_image_sizes": "صور الإدخال"
     },
-    "load_more": "تحميل المزيد"
+    "load_more": "تحميل المزيد",
+    "credit_balance": "الأرصدة التي أملكها: {balance}"
   },
   "purchases": {
     "page_title": "المشتريات",
-    "card_title": "سجل مشترياتك",
+    "card_title": "سجل المشتريات",
     "use_license": "استخدم رخصة",
     "license_key_label": "أدخل مفتاح الترخيص الخاص بك",
     "license_key_placeholder": "الصق أو اكتب مفتاح الترخيص الخاص بك",
@@ -134,7 +135,7 @@
     "paste_failed": "فشل اللصق",
     "paste_permission_denied": "تم رفض الوصول إلى الحافظة",
     "no_records_found": "لم يتم العثور على مشتريات",
-    "buy_more": "اشتري المزيد",
+    "buy_credits": "شراء أرصدة",
     "filters": {
       "time_range_label": "الوقت",
       "product_label": "المنتج",

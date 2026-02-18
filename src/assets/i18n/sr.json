@@ -53,7 +53,7 @@
   },
   "usage": {
     "page_title": "Korišćenje",
-    "card_title": "Vaša istorija korišćenja",
+    "card_title": "Istorija korišćenja",
     "no_records_found": "Nema pronađenih zapisa o korišćenju",
     "filters": {
       "scope_section": "OPSEG",
@@ -122,11 +122,12 @@
       "output_image_sizes": "Izlazne slike",
       "input_image_sizes": "Ulazne slike"
     },
-    "load_more": "Učitaj još"
+    "load_more": "Učitaj još",
+    "credit_balance": "Krediti koje posjedujem: {balance}"
   },
   "purchases": {
     "page_title": "Kupovine",
-    "card_title": "Vaše kupovine",
+    "card_title": "Istorija kupovina",
     "use_license": "Unesite licencu",
     "license_key_label": "Unesite vašu licencnu oznaku",
     "license_key_placeholder": "Nalepite ili unesite vašu licencnu oznaku",
@@ -134,7 +135,7 @@
     "paste_failed": "Nalepljivanje nije uspelo",
     "paste_permission_denied": "Pristup privremenoj memoriji odbijen",
     "no_records_found": "Nema pronađenih kupovina",
-    "buy_more": "Kupi još",
+    "buy_credits": "Kupi kredite",
     "filters": {
       "time_range_label": "Vreme",
       "product_label": "Proizvod",

@@ -53,7 +53,7 @@
   },
   "usage": {
     "page_title": "Utilisation",
-    "card_title": "Votre historique d'utilisation",
+    "card_title": "Historique d'utilisation",
     "no_records_found": "Aucun enregistrement d'utilisation trouvé",
     "cost_breakdown": {
       "title": "Ventilation des coûts",
@@ -86,6 +86,7 @@
       "input_image_sizes": "Images d'entrée"
     },
     "load_more": "Charger plus",
+    "credit_balance": "Crédits que je possède : {balance}",
     "filters": {
       "scope_section": "PORTÉE",
       "filters_section": "FILTRES",
@@ -126,7 +127,7 @@
   },
   "purchases": {
     "page_title": "Achats",
-    "card_title": "Votre Historique d'Achats",
+    "card_title": "Historique d'Achats",
     "use_license": "Utiliser une Licence",
     "license_key_label": "Entrez votre clé de licence",
     "license_key_placeholder": "Collez ou tapez votre clé de licence",
@@ -134,7 +135,7 @@
     "paste_failed": "Échec du collage",
     "paste_permission_denied": "Accès au presse-papiers refusé",
     "no_records_found": "Aucun achat trouvé",
-    "buy_more": "Acheter plus",
+    "buy_credits": "Acheter des crédits",
     "filters": {
       "time_range_label": "Temps",
       "product_label": "Produit",

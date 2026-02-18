@@ -53,7 +53,7 @@
   },
   "usage": {
     "page_title": "Kullanım",
-    "card_title": "Kullanım Geçmişiniz",
+    "card_title": "Kullanım Geçmişi",
     "no_records_found": "Kullanım kaydı bulunamadı",
     "cost_breakdown": {
       "title": "Maliyet Dökümü",
@@ -86,6 +86,7 @@
       "input_image_sizes": "Giriş Görselleri"
     },
     "load_more": "Daha fazla yükle",
+    "credit_balance": "Sahip olduğum krediler: {balance}",
     "filters": {
       "scope_section": "KAPSAM",
       "filters_section": "FİLTRELER",
@@ -126,7 +127,7 @@
   },
   "purchases": {
     "page_title": "Satın Almalar",
-    "card_title": "Satın Alma Geçmişiniz",
+    "card_title": "Satın Alma Geçmişi",
     "use_license": "Lisans Kullan",
     "license_key_label": "Lisans anahtarınızı girin",
     "license_key_placeholder": "Lisans anahtarınızı yapıştırın veya yazın",
@@ -134,7 +135,7 @@
     "paste_failed": "Yapıştırma başarısız",
     "paste_permission_denied": "Pano erişimi reddedildi",
     "no_records_found": "Satın alma bulunamadı",
-    "buy_more": "Daha fazla satın al",
+    "buy_credits": "Kredi satın al",
     "filters": {
       "time_range_label": "Zaman",
       "product_label": "Ürün",

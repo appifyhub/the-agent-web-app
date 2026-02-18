@@ -53,7 +53,7 @@
   },
   "usage": {
     "page_title": "Nutzung",
-    "card_title": "Ihre Nutzungshistorie",
+    "card_title": "Nutzungshistorie",
     "no_records_found": "Keine Nutzungsdaten gefunden",
     "filters": {
       "scope_section": "UMFANG",
@@ -122,11 +122,12 @@
       "output_image_sizes": "Ausgabebilder",
       "input_image_sizes": "Eingabebilder"
     },
-    "load_more": "Mehr laden"
+    "load_more": "Mehr laden",
+    "credit_balance": "Guthaben, die ich besitze: {balance}"
   },
   "purchases": {
     "page_title": "Käufe",
-    "card_title": "Ihr Kaufverlauf",
+    "card_title": "Kaufverlauf",
     "use_license": "Lizenz verwenden",
     "license_key_label": "Geben Sie Ihren Lizenzschlüssel ein",
     "license_key_placeholder": "Fügen Sie Ihren Lizenzschlüssel ein oder geben Sie ihn ein",
@@ -134,7 +135,7 @@
     "paste_failed": "Einfügen fehlgeschlagen",
     "paste_permission_denied": "Zwischenablage-Zugriff verweigert",
     "no_records_found": "Keine Käufe gefunden",
-    "buy_more": "Mehr kaufen",
+    "buy_credits": "Guthaben kaufen",
     "filters": {
       "time_range_label": "Zeit",
       "product_label": "Produkt",

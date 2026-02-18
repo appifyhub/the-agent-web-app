@@ -53,7 +53,7 @@
   },
   "usage": {
     "page_title": "Usage",
-    "card_title": "Your Usage History",
+    "card_title": "Usage History",
     "no_records_found": "No usage records found",
     "filters": {
       "scope_section": "SCOPE",
@@ -122,11 +122,12 @@
       "output_image_sizes": "Output Images",
       "input_image_sizes": "Input Images"
     },
-    "load_more": "Load more"
+    "load_more": "Load more",
+    "credit_balance": "Credits I own: {balance}"
   },
   "purchases": {
     "page_title": "Purchases",
-    "card_title": "Your Purchase History",
+    "card_title": "Purchase History",
     "use_license": "Use a License",
     "license_key_label": "Enter your license key",
     "license_key_placeholder": "Paste or type your license key",
@@ -134,7 +135,7 @@
     "paste_failed": "Failed to paste",
     "paste_permission_denied": "Clipboard access denied",
     "no_records_found": "No purchases found",
-    "buy_more": "Buy more",
+    "buy_credits": "Buy credits",
     "filters": {
       "time_range_label": "Time",
       "product_label": "Product",

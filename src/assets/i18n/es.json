@@ -53,7 +53,7 @@
   },
   "usage": {
     "page_title": "Uso",
-    "card_title": "Tu historial de uso",
+    "card_title": "Historial de uso",
     "no_records_found": "No se encontraron registros de uso",
     "cost_breakdown": {
       "title": "Desglose de costos",
@@ -86,6 +86,7 @@
       "input_image_sizes": "Imágenes de entrada"
     },
     "load_more": "Cargar más",
+    "credit_balance": "Créditos que poseo: {balance}",
     "filters": {
       "scope_section": "ALCANCE",
       "filters_section": "FILTROS",
@@ -126,7 +127,7 @@
   },
   "purchases": {
     "page_title": "Compras",
-    "card_title": "Su Historial de Compras",
+    "card_title": "Historial de Compras",
     "use_license": "Usar una Licencia",
     "license_key_label": "Ingrese su clave de licencia",
     "license_key_placeholder": "Pegue o escriba su clave de licencia",
@@ -134,7 +135,7 @@
     "paste_failed": "Error al pegar",
     "paste_permission_denied": "Acceso al portapapeles denegado",
     "no_records_found": "No se encontraron compras",
-    "buy_more": "Comprar más",
+    "buy_credits": "Comprar créditos",
     "filters": {
       "time_range_label": "Tiempo",
       "product_label": "Producto",

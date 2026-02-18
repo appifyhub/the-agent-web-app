@@ -53,7 +53,7 @@
   },
   "usage": {
     "page_title": "उपयोग",
-    "card_title": "आपका उपयोग इतिहास",
+    "card_title": "उपयोग इतिहास",
     "no_records_found": "कोई उपयोग रिकॉर्ड नहीं मिला",
     "cost_breakdown": {
       "title": "लागत विश्लेषण",
@@ -86,6 +86,7 @@
       "input_image_sizes": "इनपुट छवियाँ"
     },
     "load_more": "और लोड करें",
+    "credit_balance": "मेरे पास क्रेडिट: {balance}",
     "filters": {
       "scope_section": "दायरा",
       "filters_section": "फ़िल्टर",
@@ -126,7 +127,7 @@
   },
   "purchases": {
     "page_title": "खरीदें",
-    "card_title": "आपकी खरीद का इतिहास",
+    "card_title": "खरीद का इतिहास",
     "use_license": "एक लाइसेंस का उपयोग करें",
     "license_key_label": "अपनी लाइसेंस कुंजी दर्ज करें",
     "license_key_placeholder": "अपनी लाइसेंस कुंजी को पेस्ट करें या टाइप करें",
@@ -134,7 +135,7 @@
     "paste_failed": "पेस्ट करने में विफल",
     "paste_permission_denied": "क्लिपबोर्ड एक्सेस अस्वीकृत",
     "no_records_found": "कोई खरीद नहीं मिली",
-    "buy_more": "अधिक खरीदें",
+    "buy_credits": "क्रेडिट खरीदें",
     "filters": {
       "time_range_label": "समय",
       "product_label": "उत्पाद",

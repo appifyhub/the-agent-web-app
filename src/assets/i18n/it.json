@@ -53,7 +53,7 @@
   },
   "usage": {
     "page_title": "Utilizzo",
-    "card_title": "La tua cronologia di utilizzo",
+    "card_title": "Cronologia di utilizzo",
     "no_records_found": "Nessun record di utilizzo trovato",
     "cost_breakdown": {
       "title": "Dettaglio costi",
@@ -86,6 +86,7 @@
       "input_image_sizes": "Immagini di input"
     },
     "load_more": "Carica altro",
+    "credit_balance": "Crediti che possiedo: {balance}",
     "filters": {
       "scope_section": "AMBITO",
       "filters_section": "FILTRI",
@@ -126,7 +127,7 @@
   },
   "purchases": {
     "page_title": "Acquisti",
-    "card_title": "La Tua Cronologia degli Acquisti",
+    "card_title": "Cronologia degli Acquisti",
     "use_license": "Usa una Licenza",
     "license_key_label": "Inserisci la tua chiave di licenza",
     "license_key_placeholder": "Incolla o digita la tua chiave di licenza",
@@ -134,7 +135,7 @@
     "paste_failed": "Incolla non riuscito",
     "paste_permission_denied": "Accesso agli appunti negato",
     "no_records_found": "Nessun acquisto trovato",
-    "buy_more": "Acquista di più",
+    "buy_credits": "Acquista crediti",
     "filters": {
       "time_range_label": "Tempo",
       "product_label": "Prodotto",
