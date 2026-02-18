@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-import { CardTitle } from "@/components/ui/card";
 import BaseSettingsPage from "@/pages/BaseSettingsPage";
 import { toast } from "sonner";
 import { PageError } from "@/lib/utils";
@@ -251,18 +250,12 @@ const AccessSettingsPage: React.FC = () => {
   return (
     <BaseSettingsPage
       page="access"
+      cardTitle={t("access_card_title", { botName })}
       onActionClicked={handleSave}
       actionDisabled={!hasSettingsChanged}
       isContentLoading={isLoadingState}
       externalError={error}
     >
-      <div className="h-2" />
-
-      <CardTitle className="text-center mx-auto">
-        {t("access_card_title", { botName })}
-      </CardTitle>
-
-      <div className="h-2" />
 
       <ProviderTabs
         providers={externalToolProviders}

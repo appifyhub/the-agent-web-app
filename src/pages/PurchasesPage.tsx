@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { CardTitle } from "@/components/ui/card";
-import { ReceiptCent, Clipboard, ShoppingCart } from "lucide-react";
+import { BadgeCent, Clipboard, ShoppingCart, ReceiptCent } from "lucide-react";
 import BaseSettingsPage from "@/pages/BaseSettingsPage";
 import { PageError } from "@/lib/utils";
 import { toast } from "sonner";
@@ -14,6 +13,7 @@ import {
   PurchaseAggregates,
 } from "@/services/purchase-service";
 import { usePageSession } from "@/hooks/usePageSession";
+import { useUserSettings } from "@/hooks/useUserSettings";
 import { DEFAULT_LANGUAGE, INTERFACE_LANGUAGES } from "@/lib/languages";
 import { TimeRange, calculateDateRange } from "@/services/usage-service";
 import PurchaseRecordCard from "@/components/PurchaseRecordCard";
@@ -33,6 +33,11 @@ const PurchasesPage: React.FC = () => {
 
   const { error, accessToken, isLoadingState, setError, setIsLoadingState } =
     usePageSession();
+
+  const { userSettings, refreshSettings } = useUserSettings(
+    accessToken?.decoded?.sub,
+    accessToken?.raw,
+  );
 
   const [purchaseRecords, setPurchaseRecords] = useState<PurchaseRecord[]>([]);
   const [stats, setStats] = useState<PurchaseAggregates | null>(null);
@@ -203,6 +208,8 @@ const PurchasesPage: React.FC = () => {
         setHasMore(false);
       }
 
+      await refreshSettings();
+
       setIsEditing(false);
       setLicenseKey("");
       toast(t("purchases.bind_success"));
@@ -260,6 +267,7 @@ const PurchasesPage: React.FC = () => {
   return (
     <BaseSettingsPage
       page="purchases"
+      cardTitle={isEditing ? t("purchases.use_license") : t("purchases.card_title")}
       onActionClicked={getActionHandler()}
       actionDisabled={isActionDisabled()}
       actionButtonText={getActionButtonText()}
@@ -270,11 +278,6 @@ const PurchasesPage: React.FC = () => {
     >
       {isEditing ? (
         <>
-          <CardTitle className="text-center mx-auto">
-            {t("purchases.use_license")}
-          </CardTitle>
-          <div className="h-4" />
-
           <div className="space-y-4">
             <div className="flex items-center justify-between w-full max-w-2xl">
               <Label className="ps-2 text-[1.05rem] font-light">
@@ -307,11 +310,33 @@ const PurchasesPage: React.FC = () => {
         </>
       ) : (
         <>
-          <CardTitle className="text-center mx-auto">
-            {t("purchases.card_title")}
-          </CardTitle>
+          {userSettings?.credit_balance !== undefined && (
+            <div className="flex items-center justify-center gap-2 text-lg mt-2">
+              <span className="text-muted-foreground font-light">
+                {t("usage.credit_balance", { balance: "" }).trim()}
+              </span>
+              <span className="text-accent-amber font-mono font-medium">
+                {userSettings.credit_balance.toFixed(2)}
+              </span>
+              <BadgeCent strokeWidth={1.5} className="h-5 w-5 text-accent-amber" />
+            </div>
+          )}
 
-          <div className="h-2" />
+          <div className="flex justify-center w-full">
+            <Button
+              variant="outline"
+              onClick={handleBuyMore}
+              disabled={!!error?.isBlocker}
+              className="w-full md:max-w-xs mt-6 py-[1.5rem] rounded-full
+                text-white glass-purple
+                cursor-pointer"
+            >
+              <ShoppingCart className="h-4 w-4 mr-2" />
+              {t("purchases.buy_credits")}
+            </Button>
+          </div>
+
+          <div className="h-8" />
 
           {stats && <PurchaseStats stats={stats} />}
 
@@ -327,18 +352,6 @@ const PurchasesPage: React.FC = () => {
               onExpandedChange={setFiltersExpanded}
             />
           )}
-
-          <Button
-            variant="outline"
-            onClick={handleBuyMore}
-            disabled={!!error?.isBlocker}
-            className="w-full mx-auto mt-[2rem] mb-[-1rem] py-[1.5rem] rounded-full
-              text-white !bg-indigo-500/50 hover:!bg-indigo-500/80
-              cursor-pointer"
-          >
-            <ShoppingCart className="h-4 w-4 mr-2" />
-            {t("purchases.buy_more")}
-          </Button>
 
           <div className="flex flex-col space-y-6">
             {purchaseRecords.length === 0 ? (

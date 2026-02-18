@@ -6,13 +6,13 @@ import {
   Gift,
   LifeBuoy,
   Menu as MenuIcon,
-  MoreHorizontal,
   Key,
   Brain,
   X,
   Merge,
   ChartNoAxesCombined,
   ReceiptCent,
+  BadgeCent,
 } from "lucide-react";
 import {
   NavigationMenu,
@@ -31,6 +31,7 @@ import ChatsCollapsible from "@/components/ChatsCollapsible";
 import { cn } from "@/lib/utils";
 import { Language } from "@/lib/languages";
 import { ChatInfo } from "@/services/user-settings-service";
+import { useUserSettings } from "@/hooks/useUserSettings";
 import LanguageDropdown from "@/components/LanguageDropdown";
 import ChatsDropdown from "@/components/ChatsDropdown";
 import logoVector from "@/assets/logo-vector.svg";
@@ -54,6 +55,7 @@ interface HeaderProps {
   selectedChat?: ChatInfo;
   chats?: ChatInfo[];
   userId?: string;
+  rawAccessToken?: string;
   selectedLanguage: Language;
   hasBlockerError?: boolean;
   showProfileButton?: boolean;
@@ -69,6 +71,7 @@ const Header: React.FC<HeaderProps> = ({
   selectedChat = undefined,
   chats: externalChats = [],
   userId: propUserId,
+  rawAccessToken,
   selectedLanguage,
   hasBlockerError = false,
   showProfileButton = true,
@@ -110,7 +113,13 @@ const Header: React.FC<HeaderProps> = ({
   const chats = externalChats;
 
   // Prefer URL param, fall back to prop (for navigation from non-user-specific pages)
-  const effectiveUserId = user_id || propUserId;
+  const effectiveUserId =
+    user_id || propUserId || localStorage.getItem("user_id");
+
+  const { userSettings } = useUserSettings(
+    effectiveUserId || undefined,
+    rawAccessToken,
+  );
 
   // Resolve selected chat from URL or prop
   const resolvedSelectedChat =
@@ -261,9 +270,28 @@ const Header: React.FC<HeaderProps> = ({
         className={cn(
           "absolute right-6 z-10 lg:hidden flex items-center",
           "top-6 md:top-12",
-          "gap-5 md:gap-2"
+          "gap-6 md:gap-2"
         )}
       >
+        {userSettings?.credit_balance !== undefined && (
+          <Button
+            variant="outline"
+            size="icon"
+            className={cn(
+              "rounded-full gap-2 w-auto px-4 scale-120 md:scale-100 touch-manipulation",
+              page === "purchases"
+                ? "glass-active text-accent-amber underline underline-offset-4 decoration-accent-amber cursor-default"
+                : "glass cursor-pointer"
+            )}
+            onClick={handlePurchasesClick}
+            disabled={page === "purchases"}
+          >
+            <BadgeCent className="h-5 w-5 text-accent-amber" />
+            <span className="font-mono">
+              {userSettings.credit_balance.toFixed(2)}
+            </span>
+          </Button>
+        )}
         <LanguageDropdown
           selectedLanguage={selectedLanguage}
           onLangChange={handleLangChange}
@@ -513,6 +541,27 @@ const Header: React.FC<HeaderProps> = ({
                   </Button>
                 </NavigationMenuItem>
               )}
+              {userSettings?.credit_balance !== undefined && (
+                <NavigationMenuItem>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className={cn(
+                      "gap-2 text-base w-auto px-4 rounded-full",
+                      page === "purchases"
+                        ? "glass-active text-accent-amber underline underline-offset-4 decoration-accent-amber cursor-default"
+                        : "glass cursor-pointer"
+                    )}
+                    onClick={handlePurchasesClick}
+                    disabled={page === "purchases"}
+                  >
+                    <BadgeCent className="h-5 w-5 text-accent-amber" />
+                    <span className="font-mono">
+                      {userSettings.credit_balance.toFixed(2)}
+                    </span>
+                  </Button>
+                </NavigationMenuItem>
+              )}
               <NavigationMenuItem>
                 <LanguageDropdown
                   selectedLanguage={selectedLanguage}
@@ -528,7 +577,7 @@ const Header: React.FC<HeaderProps> = ({
                         size="icon"
                         className="glass rounded-full cursor-pointer"
                       >
-                        <MoreHorizontal className="h-5 w-5" />
+                        <MenuIcon className="h-5 w-5" />
                       </Button>
                     </SheetTrigger>
                     <SheetContent

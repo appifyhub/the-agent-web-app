@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { CardTitle } from "@/components/ui/card";
 import {
   Tooltip,
   TooltipTrigger,
@@ -345,6 +344,13 @@ const SponsorshipsPage: React.FC = () => {
   return (
     <BaseSettingsPage
       page="sponsorships"
+      cardTitle={
+        accessToken?.decoded?.sponsored_by
+          ? t("sponsorship.you_are_sponsored")
+          : isEditing
+          ? t("sponsorship.add_sponsorship")
+          : t("sponsorship.users_you_sponsor")
+      }
       onActionClicked={getActionHandler()}
       actionDisabled={isActionDisabled()}
       actionButtonText={getActionButtonText()}
@@ -354,9 +360,6 @@ const SponsorshipsPage: React.FC = () => {
     >
       {accessToken?.decoded?.sponsored_by ? (
         <>
-          <CardTitle className="text-center mx-auto">
-            {t("sponsorship.you_are_sponsored")}
-          </CardTitle>
 
           {/* Sponsored user message */}
           <div className="flex flex-col items-center space-y-10 text-center mt-12">
@@ -370,11 +373,6 @@ const SponsorshipsPage: React.FC = () => {
         </>
       ) : isEditing ? (
         <>
-          <CardTitle className="text-center mx-auto">
-            {t("sponsorship.add_sponsorship")}
-          </CardTitle>
-          <div className="h-4" />
-
           {/* New sponsorship input with platform dropdown */}
           <div className="space-y-4">
             <Label className="ps-2 text-[1.05rem] font-light">
@@ -403,10 +401,6 @@ const SponsorshipsPage: React.FC = () => {
         </>
       ) : (
         <>
-          <CardTitle className="text-center mx-auto">
-            {t("sponsorship.users_you_sponsor")}
-          </CardTitle>
-
           {/* Sponsorships List */}
           <div className="flex flex-col space-y-0">
             {sponsorships.length === 0 ? (
@@ -453,7 +447,7 @@ const SponsorshipsPage: React.FC = () => {
                     <div
                       key={index}
                       className={cn(
-                        "flex flex-col px-5 items-start justify-center glass border cursor-pointer w-full max-w-2xl mx-auto",
+                        "flex flex-col px-5 items-start justify-center glass-muted border cursor-pointer w-full max-w-2xl mx-auto",
                         isExpanded ? "space-y-4 py-4" : "space-y-0 py-3",
                         roundedClasses,
                         borderClasses
@@ -529,9 +523,10 @@ const SponsorshipsPage: React.FC = () => {
                               variant="outline"
                               size="icon"
                               className={cn(
-                                "shrink-0 text-destructive rounded-full cursor-pointer",
-                                error?.isBlocker &&
-                                "text-muted-foreground cursor-not-allowed glass-static"
+                                "shrink-0 rounded-full cursor-pointer glass",
+                                error?.isBlocker
+                                  ? "text-muted-foreground cursor-not-allowed"
+                                  : "text-destructive"
                               )}
                               onClick={(e: React.MouseEvent) => {
                                 e.stopPropagation();

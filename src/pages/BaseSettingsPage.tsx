@@ -7,7 +7,7 @@ import TokenSummary from "@/components/TokenSummary";
 import ErrorMessage from "@/components/ErrorMessage";
 import SettingsPageSkeleton from "@/components/SettingsPageSkeleton";
 import GenericPageSkeleton from "@/components/GenericPageSkeleton";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { DEFAULT_LANGUAGE, INTERFACE_LANGUAGES } from "@/lib/languages";
 import { t } from "@/lib/translations";
 import { usePageSession } from "@/hooks/usePageSession";
@@ -15,7 +15,15 @@ import { useChats } from "@/hooks/useChats";
 import { ChatInfo } from "@/services/user-settings-service";
 import { PageError, cn } from "@/lib/utils";
 
-type Page = "sponsorships" | "profile" | "chat" | "access" | "intelligence" | "connections" | "usage" | "purchases";
+type Page =
+  | "sponsorships"
+  | "profile"
+  | "chat"
+  | "access"
+  | "intelligence"
+  | "connections"
+  | "usage"
+  | "purchases";
 
 export interface BaseSettingsPageRef {
   openDrawer: () => void;
@@ -24,6 +32,7 @@ export interface BaseSettingsPageRef {
 interface BaseSettingsPageProps {
   page: Page;
   children: React.ReactNode;
+  cardTitle?: string;
   onActionClicked?: () => void;
   actionDisabled?: boolean;
   showActionButton?: boolean;
@@ -44,6 +53,7 @@ const BaseSettingsPage = forwardRef<BaseSettingsPageRef, BaseSettingsPageProps>(
     {
       page,
       children,
+      cardTitle,
       onActionClicked = () => {},
       actionDisabled = false,
       showActionButton = true,
@@ -58,7 +68,7 @@ const BaseSettingsPage = forwardRef<BaseSettingsPageRef, BaseSettingsPageProps>(
       externalError = null,
       cardClassName,
     },
-    ref
+    ref,
   ) => {
     const { lang_iso_code } = useParams<{
       lang_iso_code: string;
@@ -81,7 +91,7 @@ const BaseSettingsPage = forwardRef<BaseSettingsPageRef, BaseSettingsPageProps>(
     // prioritize external error if provided
     const displayError = externalError || error;
     const getErrorText = (
-      error: PageError | null
+      error: PageError | null,
     ): string | React.ReactNode => {
       if (!error?.errorData) return "";
       if (error.errorData.htmlContent) {
@@ -111,9 +121,10 @@ const BaseSettingsPage = forwardRef<BaseSettingsPageRef, BaseSettingsPageProps>(
           selectedChat={selectedChat}
           chats={chats}
           userId={accessToken?.decoded?.sub}
+          rawAccessToken={accessToken?.raw}
           selectedLanguage={
             INTERFACE_LANGUAGES.find(
-              (lang) => lang.isoCode === lang_iso_code
+              (lang) => lang.isoCode === lang_iso_code,
             ) || DEFAULT_LANGUAGE
           }
           hasBlockerError={!!displayError?.isBlocker}
@@ -124,7 +135,7 @@ const BaseSettingsPage = forwardRef<BaseSettingsPageRef, BaseSettingsPageProps>(
         />
 
         {/* The Main content section */}
-        <div className="flex-1 mx-auto w-full max-w-3xl">
+        <div className="flex-1 mx-auto w-full max-w-4xl">
           <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <main>
               {/* The Session Expiry timer and Save button */}
@@ -148,14 +159,24 @@ const BaseSettingsPage = forwardRef<BaseSettingsPageRef, BaseSettingsPageProps>(
               <Card
                 className={cn(
                   "mt-4.5 md:px-6 px-2 md:py-12 py-8 glass-static rounded-3xl",
-                  cardClassName
+                  cardClassName,
                 )}
               >
                 <CardContent className="space-y-4">
                   {isLoadingState || isContentLoading ? (
                     <SettingsPageSkeleton />
                   ) : (
-                    children
+                    <>
+                      {cardTitle && (
+                        <>
+                          <CardTitle className="text-center mx-auto">
+                            {cardTitle}
+                          </CardTitle>
+                          <div className="h-4" />
+                        </>
+                      )}
+                      {children}
+                    </>
                   )}
                 </CardContent>
               </Card>
@@ -186,7 +207,7 @@ const BaseSettingsPage = forwardRef<BaseSettingsPageRef, BaseSettingsPageProps>(
         <Footer />
       </div>
     );
-  }
+  },
 );
 
 BaseSettingsPage.displayName = "BaseSettingsPage";

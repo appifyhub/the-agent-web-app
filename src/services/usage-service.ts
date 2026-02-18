@@ -3,6 +3,8 @@ import { ExternalTool, ToolType } from "@/services/external-tools-service";
 
 export interface UsageRecord {
   user_id: string;
+  payer_id?: string;
+  uses_credits?: boolean;
   chat_id?: string;
   tool: ExternalTool;
   tool_purpose: ToolType;

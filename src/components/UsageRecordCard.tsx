@@ -1,5 +1,5 @@
 import React from "react";
-import { ChevronDown, BadgeCent } from "lucide-react";
+import { ChevronDown, BadgeCent, Gift, Key, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { t } from "@/lib/translations";
 import { TranslationKey } from "@/lib/translation-keys";
@@ -59,6 +59,14 @@ const UsageRecordCard: React.FC<UsageRecordCardProps> = ({
     day: "numeric",
   });
 
+  // Calculate sponsorship type
+  const normalizedCurrentId = currentUserId.replace(/-/g, "");
+  const normalizedUserId = record.user_id.replace(/-/g, "");
+  const normalizedPayerId = record.payer_id?.replace(/-/g, "");
+
+  const isSponsoredByOthersForMe = normalizedPayerId !== normalizedUserId && normalizedUserId === normalizedCurrentId;
+  const isSponsoredByMeForOthers = normalizedPayerId === normalizedCurrentId && normalizedUserId !== normalizedCurrentId;
+
   // Get translated purpose title
   const getPurposeTitle = (): string => {
     const key = `tools.types.${record.tool_purpose}.title` as TranslationKey;
@@ -70,30 +78,33 @@ const UsageRecordCard: React.FC<UsageRecordCardProps> = ({
     return translated;
   };
 
-  const getUserDisplayName = (): string => {
+  const getUserDisplayName = (): React.ReactNode => {
     const normalizedRecordId = record.user_id.replace(/-/g, "");
-    const normalizedCurrentId = currentUserId.replace(/-/g, "");
+    const isCurrentUserRecord = normalizedRecordId === normalizedCurrentId;
 
-    if (normalizedRecordId === normalizedCurrentId) {
-      return t("usage.context_ids.user_me");
-    }
-
-    if (sponsorships) {
-      const sponsorship = sponsorships.find(
+    let displayName = t("usage.context_ids.user_me");
+    if (!isCurrentUserRecord) {
+      displayName = t("usage.context_ids.user_sponsored");
+      const sponsorship = sponsorships?.find(
         (s) => s.user_id_hex.replace(/-/g, "") === normalizedRecordId
       );
+
       if (sponsorship) {
-        const { full_name, platform_handle } = sponsorship;
-        if (full_name) {
-          return full_name;
-        }
-        if (platform_handle) {
-          return platform_handle;
-        }
+        displayName = sponsorship.full_name || sponsorship.platform_handle || displayName;
       }
     }
 
-    return t("usage.context_ids.user_sponsored");
+    return (
+      <span className="flex items-center gap-1.5">
+        {isSponsoredByMeForOthers && (
+          <Gift className="h-3.5 w-3.5 text-blue-300 mb-0.5" />
+        )}
+        {displayName}
+        {isSponsoredByOthersForMe && (
+          <Gift className="h-3.5 w-3.5 text-blue-300 mb-0.5" />
+        )}
+      </span>
+    );
   };
 
   // Get chat display - try to find chat name from chats list
@@ -115,12 +126,12 @@ const UsageRecordCard: React.FC<UsageRecordCardProps> = ({
 
   // Format runtime
   const formatRuntime = (seconds: number): string => {
-    return `${seconds.toFixed(seconds % 1 === 0 ? 0 : 1)}s`;
+    return `${seconds.toFixed(1)}s`;
   };
 
   // Format credits
   const formatCredits = (credits: number): string => {
-    return credits.toFixed(credits % 1 === 0 ? 0 : 1);
+    return credits.toFixed(1);
   };
 
   // Check if cost breakdown has any non-zero values
@@ -143,7 +154,7 @@ const UsageRecordCard: React.FC<UsageRecordCardProps> = ({
   return (
     <div
       className={cn(
-        "flex flex-col px-5 glass border cursor-pointer w-full space-y-4",
+        "flex flex-col px-5 glass-muted border cursor-pointer w-full space-y-4",
         isExpanded ? "py-8" : "py-3",
         roundedClasses,
         borderClasses
@@ -177,14 +188,37 @@ const UsageRecordCard: React.FC<UsageRecordCardProps> = ({
         </div>
 
         <div className="flex items-center space-x-3 shrink-0">
-          <span className="hidden md:inline-block text-md text-blue-300">
-            {formatRuntime(record.runtime_seconds)}
-          </span>
-          <div className="flex items-center space-x-1">
-            <span className="text-md font-medium text-accent-amber">
-              {formatCredits(record.total_cost_credits)}
+          <div className={cn(
+            "flex items-center min-w-[4rem] justify-end",
+            !isSponsoredByOthersForMe && "space-x-1"
+          )}>
+            {isSponsoredByOthersForMe ? (
+              <Gift className="h-4 w-4 text-blue-300" />
+            ) : (
+              <>
+                {record.uses_credits !== false ? (
+                  <BadgeCent className="h-4 w-4 text-accent-amber" />
+                ) : (
+                  <Key className="h-4 w-4 text-accent-amber" />
+                )}
+                <span
+                  className={cn(
+                    "text-base font-medium font-mono",
+                    record.uses_credits === false
+                      ? "text-accent-amber line-through"
+                      : "text-accent-amber"
+                  )}
+                >
+                  {formatCredits(record.total_cost_credits)}
+                </span>
+              </>
+            )}
+          </div>
+          <div className="hidden md:flex items-center space-x-1 min-w-[4.5rem] justify-end">
+            <Clock className="h-4 w-4 text-blue-300" />
+            <span className="text-base font-mono text-blue-300">
+              {formatRuntime(record.runtime_seconds)}
             </span>
-            <BadgeCent className="h-4 w-4 text-accent-amber mb-0.5" />
           </div>
           <ChevronDown
             className={cn(
@@ -240,8 +274,32 @@ const UsageRecordCard: React.FC<UsageRecordCardProps> = ({
                   </div>
                 )}
                 <div className="flex justify-between gap-4 font-medium pt-[0.4rem] border-t border-muted-foreground/20">
-                  <span className="min-w-0 truncate">{t("usage.cost_breakdown.total")}</span>
-                  <span className="shrink-0">{formatCredits(record.total_cost_credits)}</span>
+                  <span className={cn(
+                    "min-w-0 truncate",
+                    record.uses_credits === false && "line-through"
+                  )}>
+                    {t("usage.cost_breakdown.total")}
+                  </span>
+                  <span className="shrink-0 flex items-center gap-1">
+                    <span className={cn(
+                      "font-mono",
+                      record.uses_credits === false && "line-through",
+                      isSponsoredByOthersForMe ? "text-blue-300" : "text-accent-amber"
+                    )}>
+                      {formatCredits(record.total_cost_credits)}
+                    </span>
+                    {record.uses_credits !== false ? (
+                      <BadgeCent className={cn(
+                        "h-3.5 w-3.5",
+                        isSponsoredByOthersForMe ? "text-blue-300" : "text-accent-amber"
+                      )} />
+                    ) : (
+                      <Key className={cn(
+                        "h-3.5 w-3.5",
+                        isSponsoredByOthersForMe ? "text-blue-300" : "text-accent-amber"
+                      )} />
+                    )}
+                  </span>
                 </div>
               </div>
             </div>

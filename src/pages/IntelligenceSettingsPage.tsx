@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { CardTitle } from "@/components/ui/card";
 import BaseSettingsPage from "@/pages/BaseSettingsPage";
 import { toast } from "sonner";
 import { PageError } from "@/lib/utils";
@@ -186,17 +185,12 @@ const IntelligenceSettingsPage: React.FC = () => {
   return (
     <BaseSettingsPage
       page="intelligence"
+      cardTitle={t("intelligence_card_title", { botName })}
       onActionClicked={handleSave}
       actionDisabled={!hasSettingsChanged}
       isContentLoading={isLoadingState}
       externalError={error}
     >
-      <div className="h-2" />
-      <CardTitle className="text-center mx-auto">
-        {t("intelligence_card_title", { botName })}
-      </CardTitle>
-
-      <div className="h-4" />
 
       {externalToolsData && (
         <AdvancedToolsPanel

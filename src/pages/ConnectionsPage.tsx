@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-import { CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import {
@@ -389,6 +388,7 @@ const ConnectionsPage: React.FC = () => {
   return (
     <BaseSettingsPage
       page="connections"
+      cardTitle={t("connections.card_title")}
       onActionClicked={handleConnect}
       actionDisabled={!!error?.isBlocker || !isInputValid || isConnecting}
       actionButtonText={
@@ -399,10 +399,6 @@ const ConnectionsPage: React.FC = () => {
       isContentLoading={isLoadingState}
       externalError={error}
     >
-      <div className="h-2" />
-      <CardTitle className="text-center mx-auto">
-        {t("connections.card_title")}
-      </CardTitle>
 
       {/* Main section - info and OTP input */}
       {!isMyKeySectionOpen && (

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { CardTitle } from "@/components/ui/card";
-import { ChartNoAxesCombined } from "lucide-react";
+import { ChartNoAxesCombined, BadgeCent, ShoppingCart } from "lucide-react";
 import BaseSettingsPage from "@/pages/BaseSettingsPage";
 import { PageError } from "@/lib/utils";
 import { t } from "@/lib/translations";
@@ -17,6 +16,7 @@ import {
 } from "@/services/sponsorships-service";
 import { usePageSession } from "@/hooks/usePageSession";
 import { useChats } from "@/hooks/useChats";
+import { useUserSettings } from "@/hooks/useUserSettings";
 import { DEFAULT_LANGUAGE, INTERFACE_LANGUAGES } from "@/lib/languages";
 import UsageRecordCard from "@/components/UsageRecordCard";
 import UsageFilters, { TimeRange } from "@/components/UsageFilters";
@@ -35,6 +35,11 @@ const UsagePage: React.FC = () => {
     usePageSession();
 
   const { chats } = useChats(accessToken?.decoded?.sub, accessToken?.raw);
+
+  const { userSettings } = useUserSettings(
+    accessToken?.decoded?.sub,
+    accessToken?.raw,
+  );
 
   const [usageRecords, setUsageRecords] = useState<UsageRecord[]>([]);
   const [sponsorships, setSponsorships] = useState<SponsorshipResponse[]>([]);
@@ -221,18 +226,48 @@ const UsagePage: React.FC = () => {
     }
   };
 
+  const handleBuyMore = () => {
+    if (!user_id || !lang_iso_code) return;
+
+    const buyUrl = import.meta.env.VITE_BUY_URL;
+    window.open(buyUrl, "_blank");
+  };
+
   return (
     <BaseSettingsPage
       page="usage"
+      cardTitle={t("usage.card_title")}
       showActionButton={false}
       isContentLoading={isLoadingState}
       externalError={error}
     >
-      <CardTitle className="text-center mx-auto">
-        {t("usage.card_title")}
-      </CardTitle>
+      {userSettings?.credit_balance !== undefined && (
+        <div className="flex items-center justify-center gap-2 text-lg mt-2">
+          <span className="text-muted-foreground font-light">
+            {t("usage.credit_balance", { balance: "" }).trim()}
+          </span>
+          <span className="text-accent-amber font-mono font-medium">
+            {userSettings.credit_balance.toFixed(2)}
+          </span>
+          <BadgeCent strokeWidth={1.5} className="h-5 w-5 text-accent-amber" />
+        </div>
+      )}
 
-      <div className="h-2" />
+      <div className="flex justify-center w-full">
+        <Button
+          variant="outline"
+          onClick={handleBuyMore}
+          disabled={!!error?.isBlocker}
+          className="w-full md:max-w-xs mt-6 py-[1.5rem] rounded-full
+            text-white glass-purple
+            cursor-pointer"
+        >
+          <ShoppingCart className="h-4 w-4 mr-2" />
+          {t("purchases.buy_credits")}
+        </Button>
+      </div>
+
+      <div className="h-8" />
 
       {stats && <UsageStats stats={stats} />}
 
