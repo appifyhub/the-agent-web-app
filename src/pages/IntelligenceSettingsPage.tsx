@@ -197,6 +197,7 @@ const IntelligenceSettingsPage: React.FC = () => {
           tools={externalToolsData.tools}
           providers={externalToolsData.providers}
           userSettings={userSettings}
+          remoteSettings={remoteSettings}
           onToolChoiceChange={handleToolChoiceChange}
           disabled={!!error?.isBlocker}
           onProviderNavigate={handleProviderNavigate}

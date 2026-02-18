@@ -1,9 +1,10 @@
 import React from "react";
-import { Info } from "lucide-react";
+import { Info, X } from "lucide-react";
 import { t } from "@/lib/translations";
 import { CostEstimate } from "@/services/external-tools-service";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogHeader,
   DialogTitle,
@@ -15,12 +16,15 @@ import {
   DrawerTitle,
 } from "@/components/ui/drawer";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import ProviderIcon from "@/components/ProviderIcon";
 
 // ... imports
 
 interface CostEstimateDialogProps {
   toolName: string;
   costEstimate: CostEstimate;
+  providerId?: string;
+  providerName?: string;
   children?: React.ReactNode;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
@@ -118,7 +122,7 @@ const CostEstimateContent: React.FC<{
     otherCosts.length > 0;
 
   return (
-    <div className="space-y-8 p-[1rem] mt-[1rem]">
+    <div className="space-y-8 mt-[1rem]">
       <div className="space-y-2">
         <p className="text-sm text-muted-foreground">
           {t("cost_estimate.description", { toolName })}
@@ -216,6 +220,8 @@ const CostEstimateContent: React.FC<{
 const CostEstimateDialog: React.FC<CostEstimateDialogProps> = ({
   toolName,
   costEstimate,
+  providerId,
+  providerName,
   children,
   open,
   onOpenChange,
@@ -237,7 +243,7 @@ const CostEstimateDialog: React.FC<CostEstimateDialogProps> = ({
     handleOpenChange(true);
   };
 
-  const trigger = children ? (
+  const trigger = isControlled && !children ? null : children ? (
     <span
       onClick={handleClick}
       onPointerDown={(e) => { e.stopPropagation(); }}
@@ -270,9 +276,26 @@ const CostEstimateDialog: React.FC<CostEstimateDialogProps> = ({
       <>
         {trigger}
         <Dialog open={show} onOpenChange={handleOpenChange}>
-          <DialogContent className="sm:max-w-[500px] glass-dark-static p-[2.5rem]">
+          <DialogContent className="sm:max-w-[500px] glass-dark-static p-[2.5rem] rounded-3xl" showCloseButton={false}>
+            <DialogClose className="absolute top-8 right-8 glass rounded-full cursor-pointer h-7 w-7 flex items-center justify-center">
+              <X className="h-4 w-4" />
+              <span className="sr-only">Close</span>
+            </DialogClose>
             <DialogHeader>
-              <DialogTitle>{t("cost_estimate.title")}</DialogTitle>
+              <div className="flex items-center gap-3">
+                {providerId && (
+                  <ProviderIcon providerId={providerId} className="w-5 h-5 opacity-80 shrink-0" />
+                )}
+                <DialogTitle className="text-white">{t("cost_estimate.title")}</DialogTitle>
+              </div>
+              {(toolName || providerName) && (
+                <div className="flex items-center gap-1.5">
+                  <span className="text-sm font-medium text-accent-amber">{toolName}</span>
+                  {providerName && (
+                    <span className="text-sm text-accent-amber/70">· {providerName}</span>
+                  )}
+                </div>
+              )}
             </DialogHeader>
             <CostEstimateContent toolName={toolName} costEstimate={costEstimate} />
           </DialogContent>
@@ -285,9 +308,22 @@ const CostEstimateDialog: React.FC<CostEstimateDialogProps> = ({
     <>
       {trigger}
       <Drawer open={show} onOpenChange={handleOpenChange}>
-        <DrawerContent className="glass-dark-static p-[1rem]">
+        <DrawerContent className="glass-dark-static p-[1rem] pb-[max(2rem,env(safe-area-inset-bottom))] rounded-t-3xl">
           <DrawerHeader className="mt-[2rem]">
-            <DrawerTitle>{t("cost_estimate.title")}</DrawerTitle>
+            <div className="flex items-center gap-3">
+              {providerId && (
+                <ProviderIcon providerId={providerId} className="w-5 h-5 opacity-80 shrink-0" />
+              )}
+              <DrawerTitle className="text-white">{t("cost_estimate.title")}</DrawerTitle>
+            </div>
+            {(toolName || providerName) && (
+              <div className="flex items-center gap-1.5">
+                <span className="text-sm font-medium text-accent-amber">{toolName}</span>
+                {providerName && (
+                  <span className="text-sm text-accent-amber/70">· {providerName}</span>
+                )}
+              </div>
+            )}
           </DrawerHeader>
           <CostEstimateContent toolName={toolName} costEstimate={costEstimate} />
         </DrawerContent>
