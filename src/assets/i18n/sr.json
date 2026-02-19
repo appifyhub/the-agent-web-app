@@ -383,6 +383,23 @@
     "powered_by": "Pokreće",
     "rights_reserved": "Sva prava zadržana"
   },
+  "products": {
+    "shop": {
+      "title": "Izaberi proizvod",
+      "pack_100": "Pakovanje od 100",
+      "pack_200": "Pakovanje od 200",
+      "pack_300": "Pakovanje od 300",
+      "pack_500": "Pakovanje od 500",
+      "pack_1000": "Pakovanje od 1.000",
+      "pack_2000": "Pakovanje od 2.000",
+      "pack_3000": "Pakovanje od 3.000",
+      "pack_5000": "Pakovanje od 5.000",
+      "pack_10000": "Pakovanje od 10.000",
+      "donation": "Zeleni čaj (Donacija)",
+      "credit_packs": "Paketi kredita",
+      "open_shop": "Otvori prodavnicu"
+    }
+  },
   "cost_estimate": {
     "title": "Procena troškova",
     "description": "Procenjeni troškovi korišćenja. Sve vrednosti su u kreditima.",

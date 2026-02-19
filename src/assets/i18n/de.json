@@ -383,6 +383,23 @@
     "powered_by": "Unterstützt von",
     "rights_reserved": "Alle Rechte vorbehalten"
   },
+  "products": {
+    "shop": {
+      "title": "Produkt auswählen",
+      "pack_100": "Paket mit 100",
+      "pack_200": "Paket mit 200",
+      "pack_300": "Paket mit 300",
+      "pack_500": "Paket mit 500",
+      "pack_1000": "Paket mit 1.000",
+      "pack_2000": "Paket mit 2.000",
+      "pack_3000": "Paket mit 3.000",
+      "pack_5000": "Paket mit 5.000",
+      "pack_10000": "Paket mit 10.000",
+      "donation": "Grüner Tee (Spende)",
+      "credit_packs": "Kredit-Pakete",
+      "open_shop": "Shop öffnen"
+    }
+  },
   "cost_estimate": {
     "title": "Kostenschätzung:",
     "description": "Geschätzte Kosten für die Verwendung von. Alle Werte sind in Credits.",

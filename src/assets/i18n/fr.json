@@ -383,6 +383,23 @@
     "powered_by": "Propulsé par",
     "rights_reserved": "Tous droits réservés"
   },
+  "products": {
+    "shop": {
+      "title": "Choisir un produit",
+      "pack_100": "Pack de 100",
+      "pack_200": "Pack de 200",
+      "pack_300": "Pack de 300",
+      "pack_500": "Pack de 500",
+      "pack_1000": "Pack de 1 000",
+      "pack_2000": "Pack de 2 000",
+      "pack_3000": "Pack de 3 000",
+      "pack_5000": "Pack de 5 000",
+      "pack_10000": "Pack de 10 000",
+      "donation": "Thé Vert (Don)",
+      "credit_packs": "Packs de crédits",
+      "open_shop": "Ouvrir la boutique"
+    }
+  },
   "cost_estimate": {
     "title": "Estimation des coûts",
     "description": "Coûts estimés pour utiliser. Toutes les valeurs sont en crédits.",

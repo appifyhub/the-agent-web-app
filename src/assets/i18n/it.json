@@ -383,6 +383,23 @@
     "powered_by": "Alimentato da",
     "rights_reserved": "Tutti i diritti riservati"
   },
+  "products": {
+    "shop": {
+      "title": "Scegli un prodotto",
+      "pack_100": "Pacchetto da 100",
+      "pack_200": "Pacchetto da 200",
+      "pack_300": "Pacchetto da 300",
+      "pack_500": "Pacchetto da 500",
+      "pack_1000": "Pacchetto da 1.000",
+      "pack_2000": "Pacchetto da 2.000",
+      "pack_3000": "Pacchetto da 3.000",
+      "pack_5000": "Pacchetto da 5.000",
+      "pack_10000": "Pacchetto da 10.000",
+      "donation": "Tè Verde (Donazione)",
+      "credit_packs": "Pacchetti crediti",
+      "open_shop": "Apri il negozio"
+    }
+  },
   "cost_estimate": {
     "title": "Stima dei costi",
     "description": "Costi stimati per l'uso di. Tutti i valori sono in crediti.",

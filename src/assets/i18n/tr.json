@@ -383,6 +383,23 @@
     "powered_by": "Destekleyen",
     "rights_reserved": "Tüm hakları saklıdır"
   },
+  "products": {
+    "shop": {
+      "title": "Bir ürün seçin",
+      "pack_100": "100'lük Paket",
+      "pack_200": "200'lük Paket",
+      "pack_300": "300'lük Paket",
+      "pack_500": "500'lük Paket",
+      "pack_1000": "1.000'lik Paket",
+      "pack_2000": "2.000'lik Paket",
+      "pack_3000": "3.000'lik Paket",
+      "pack_5000": "5.000'lik Paket",
+      "pack_10000": "10.000'lik Paket",
+      "donation": "Yeşil Çay (Bağış)",
+      "credit_packs": "Kredi paketleri",
+      "open_shop": "Mağazayı aç"
+    }
+  },
   "cost_estimate": {
     "title": "Maliyet Tahmini:",
     "description": " kullanım maliyeti tahmini. Tüm değerler kredi cinsindendir.",
