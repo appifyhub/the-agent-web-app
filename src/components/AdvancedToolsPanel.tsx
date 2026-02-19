@@ -46,6 +46,7 @@ interface AdvancedToolsPanelProps {
   remoteSettings?: UserSettings | null;
   onToolChoiceChange: (toolType: ToolType, toolId: string) => void;
   onProviderNavigate?: (providerId: string) => void;
+  hasCredits?: boolean;
   disabled?: boolean;
   openSection?: string;
   onOpenSectionChange?: (section: string) => void;
@@ -116,6 +117,7 @@ const AdvancedToolsPanel: React.FC<AdvancedToolsPanelProps> = ({
   remoteSettings,
   onToolChoiceChange,
   onProviderNavigate,
+  hasCredits = false,
   disabled = false,
   openSection: controlledOpenSection,
   onOpenSectionChange: controlledOnOpenSectionChange,
@@ -446,6 +448,7 @@ const AdvancedToolsPanel: React.FC<AdvancedToolsPanelProps> = ({
                             placeholder={t("tools.select_tool")}
                             notConfiguredLabel={t("tools.not_configured")}
                             onProviderNavigate={onProviderNavigate}
+                            hasCredits={hasCredits}
                             labelClassName="text-base"
                             hideCostEstimateButton={isSingleOption}
                           />

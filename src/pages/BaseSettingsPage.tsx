@@ -2,7 +2,7 @@ import React, { useState, useImperativeHandle, forwardRef } from "react";
 import { useParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import SettingControls from "@/components/SettingControls";
+import SettingActionBar from "@/components/SettingActionBar";
 import TokenSummary from "@/components/TokenSummary";
 import ErrorMessage from "@/components/ErrorMessage";
 import SettingsPageSkeleton from "@/components/SettingsPageSkeleton";
@@ -36,10 +36,20 @@ interface BaseSettingsPageProps {
   onActionClicked?: () => void;
   actionDisabled?: boolean;
   showActionButton?: boolean;
+  actionIcon?: React.ReactNode;
   actionButtonText?: string;
+  showSecondaryButton?: boolean;
+  onSecondaryClicked?: () => void;
+  secondaryDisabled?: boolean;
+  secondaryIcon?: React.ReactNode;
+  secondaryText?: string;
+  secondaryTooltipText?: string;
+  secondaryClassName?: string;
   showCancelButton?: boolean;
   onCancelClicked?: () => void;
   cancelDisabled?: boolean;
+  cancelIcon?: React.ReactNode;
+  cancelTooltipText?: string;
   isContentLoading?: boolean;
   selectedChat?: ChatInfo;
   showProfileButton?: boolean;
@@ -57,10 +67,20 @@ const BaseSettingsPage = forwardRef<BaseSettingsPageRef, BaseSettingsPageProps>(
       onActionClicked = () => {},
       actionDisabled = false,
       showActionButton = true,
+      actionIcon,
       actionButtonText,
+      showSecondaryButton = false,
+      onSecondaryClicked = () => {},
+      secondaryDisabled = false,
+      secondaryIcon,
+      secondaryText,
+      secondaryTooltipText,
+      secondaryClassName,
       showCancelButton = false,
       onCancelClicked = () => {},
       cancelDisabled = false,
+      cancelIcon,
+      cancelTooltipText,
       isContentLoading = false,
       selectedChat,
       showProfileButton = true,
@@ -138,8 +158,8 @@ const BaseSettingsPage = forwardRef<BaseSettingsPageRef, BaseSettingsPageProps>(
         <div className="flex-1 mx-auto w-full max-w-4xl">
           <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <main>
-              {/* The Session Expiry timer and Save button */}
-              <SettingControls
+              {/* The Session Expiry timer and Action buttons */}
+              <SettingActionBar
                 expiryTimestamp={accessToken?.decoded?.exp || 0}
                 onTokenExpired={handleTokenExpired}
                 onActionClicked={onActionClicked}
@@ -147,12 +167,24 @@ const BaseSettingsPage = forwardRef<BaseSettingsPageRef, BaseSettingsPageProps>(
                   actionDisabled || isLoadingState || !!displayError?.isBlocker
                 }
                 showActionButton={showActionButton}
+                actionIcon={actionIcon}
                 actionButtonText={actionButtonText}
+                showSecondaryButton={showSecondaryButton}
+                onSecondaryClicked={onSecondaryClicked}
+                secondaryDisabled={
+                  secondaryDisabled || isLoadingState || !!displayError?.isBlocker
+                }
+                secondaryIcon={secondaryIcon}
+                secondaryText={secondaryText}
+                secondaryTooltipText={secondaryTooltipText}
+                secondaryClassName={secondaryClassName}
                 showCancelButton={showCancelButton}
                 onCancelClicked={onCancelClicked}
                 cancelDisabled={
                   cancelDisabled || isLoadingState || !!displayError?.isBlocker
                 }
+                cancelIcon={cancelIcon}
+                cancelTooltipText={cancelTooltipText}
               />
 
               {/* The Settings card */}

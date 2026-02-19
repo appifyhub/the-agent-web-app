@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { BadgeCent, Clipboard, ShoppingCart, ReceiptCent } from "lucide-react";
+import { BadgeCent, Clipboard, ShoppingCart, ReceiptCent, X, Plus } from "lucide-react";
 import BaseSettingsPage from "@/pages/BaseSettingsPage";
 import { PageError } from "@/lib/utils";
 import { toast } from "sonner";
@@ -154,6 +154,28 @@ const PurchasesPage: React.FC = () => {
   };
 
   const handleStartEditing = () => {
+    const isSponsored = !!accessToken?.decoded.sponsored_by;
+    if (isSponsored) {
+      const sponsorName = accessToken!.decoded.sponsored_by!;
+      const sponsorshipsUrl = `/${lang_iso_code}/user/${user_id}/sponsorships${window.location.search}`;
+      const sponsorshipsTitle = t("sponsorships");
+
+      const boldSponsorNameHtml = `<span class="font-bold font-mono">${sponsorName}</span>`;
+      const linkStyle = "underline text-amber-100 hover:text-white";
+      const sponsorshipsLinkHtml = `<a href="${sponsorshipsUrl}" class="${linkStyle}" >${sponsorshipsTitle}</a>`;
+
+      const htmlMessage = t("errors.sponsored_user", {
+        sponsorName: boldSponsorNameHtml,
+        sponsorshipsLink: sponsorshipsLinkHtml,
+      });
+
+      const errorMessage = (
+        <span dangerouslySetInnerHTML={{ __html: htmlMessage }} />
+      );
+
+      setError(PageError.blockerWithHtml(errorMessage, false));
+      return;
+    }
     setIsEditing(true);
     setLicenseKey("");
   };
@@ -237,12 +259,16 @@ const PurchasesPage: React.FC = () => {
     }
   };
 
+  const getActionIcon = () => {
+    return isEditing ? undefined : <ShoppingCart className="h-5 w-5" />;
+  };
+
   const getActionButtonText = () => {
-    return isEditing ? t("save") : t("purchases.use_license");
+    return isEditing ? t("save") : t("purchases.buy");
   };
 
   const getActionHandler = () => {
-    return isEditing ? handleSaveLicenseKey : handleStartEditing;
+    return isEditing ? handleSaveLicenseKey : handleBuyMore;
   };
 
   const isActionDisabled = () => {
@@ -253,8 +279,31 @@ const PurchasesPage: React.FC = () => {
   };
 
   const shouldShowCancelButton = isEditing;
+  const shouldShowSecondaryButton = !isEditing;
 
   const handleBuyMore = () => {
+    const isSponsored = !!accessToken?.decoded.sponsored_by;
+    if (isSponsored) {
+      const sponsorName = accessToken!.decoded.sponsored_by!;
+      const sponsorshipsUrl = `/${lang_iso_code}/user/${user_id}/sponsorships${window.location.search}`;
+      const sponsorshipsTitle = t("sponsorships");
+
+      const boldSponsorNameHtml = `<span class="font-bold font-mono">${sponsorName}</span>`;
+      const linkStyle = "underline text-amber-100 hover:text-white";
+      const sponsorshipsLinkHtml = `<a href="${sponsorshipsUrl}" class="${linkStyle}" >${sponsorshipsTitle}</a>`;
+
+      const htmlMessage = t("errors.sponsored_user", {
+        sponsorName: boldSponsorNameHtml,
+        sponsorshipsLink: sponsorshipsLinkHtml,
+      });
+
+      const errorMessage = (
+        <span dangerouslySetInnerHTML={{ __html: htmlMessage }} />
+      );
+
+      setError(PageError.blockerWithHtml(errorMessage, false));
+      return;
+    }
     if (!user_id) return;
     const storeUrl = import.meta.env.VITE_STORE_URL;
     if (!storeUrl) return;
@@ -270,9 +319,17 @@ const PurchasesPage: React.FC = () => {
       cardTitle={isEditing ? t("purchases.use_license") : t("purchases.card_title")}
       onActionClicked={getActionHandler()}
       actionDisabled={isActionDisabled()}
+      actionIcon={getActionIcon()}
       actionButtonText={getActionButtonText()}
+      showSecondaryButton={shouldShowSecondaryButton}
+      onSecondaryClicked={handleStartEditing}
+      secondaryIcon={<Plus className="h-5 w-5" />}
+      secondaryText={t("purchases.license")}
+      secondaryTooltipText={t("purchases.use_license")}
+      secondaryClassName="glass-purple text-white"
       showCancelButton={shouldShowCancelButton}
       onCancelClicked={handleCancelEditing}
+      cancelIcon={<X className="h-6 w-6" />}
       isContentLoading={isLoadingState}
       externalError={error}
     >
@@ -322,21 +379,7 @@ const PurchasesPage: React.FC = () => {
             </div>
           )}
 
-          <div className="flex justify-center w-full">
-            <Button
-              variant="outline"
-              onClick={handleBuyMore}
-              disabled={!!error?.isBlocker}
-              className="w-full md:max-w-xs mt-6 py-[1.5rem] rounded-full
-                text-white glass-purple
-                cursor-pointer"
-            >
-              <ShoppingCart className="h-4 w-4 mr-2" />
-              {t("purchases.buy_credits")}
-            </Button>
-          </div>
-
-          <div className="h-8" />
+          <div className="h-2" />
 
           {stats && <PurchaseStats stats={stats} />}
 

@@ -447,7 +447,7 @@ const SponsorshipsPage: React.FC = () => {
                     <div
                       key={index}
                       className={cn(
-                        "flex flex-col px-5 items-start justify-center glass-muted border cursor-pointer w-full max-w-2xl mx-auto",
+                        "flex flex-col px-5 items-start justify-center glass-muted border cursor-pointer w-full",
                         isExpanded ? "space-y-4 py-4" : "space-y-0 py-3",
                         roundedClasses,
                         borderClasses

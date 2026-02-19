@@ -227,17 +227,44 @@ const UsagePage: React.FC = () => {
   };
 
   const handleBuyMore = () => {
-    if (!user_id || !lang_iso_code) return;
+    const isSponsored = !!accessToken?.decoded.sponsored_by;
+    if (isSponsored) {
+      const sponsorName = accessToken!.decoded.sponsored_by!;
+      const sponsorshipsUrl = `/${lang_iso_code}/user/${user_id}/sponsorships${window.location.search}`;
+      const sponsorshipsTitle = t("sponsorships");
 
-    const buyUrl = import.meta.env.VITE_BUY_URL;
-    window.open(buyUrl, "_blank");
+      const boldSponsorNameHtml = `<span class="font-bold font-mono">${sponsorName}</span>`;
+      const linkStyle = "underline text-amber-100 hover:text-white";
+      const sponsorshipsLinkHtml = `<a href="${sponsorshipsUrl}" class="${linkStyle}" >${sponsorshipsTitle}</a>`;
+
+      const htmlMessage = t("errors.sponsored_user", {
+        sponsorName: boldSponsorNameHtml,
+        sponsorshipsLink: sponsorshipsLinkHtml,
+      });
+
+      const errorMessage = (
+        <span dangerouslySetInnerHTML={{ __html: htmlMessage }} />
+      );
+
+      setError(PageError.blockerWithHtml(errorMessage, false));
+      return;
+    }
+    if (!user_id) return;
+    const storeUrl = import.meta.env.VITE_STORE_URL;
+    if (!storeUrl) return;
+    const url = new URL(storeUrl);
+    url.searchParams.set("user_id", user_id.replace(/-/g, ""));
+    url.searchParams.set("origin", "agent_settings_buy_more_usage");
+    window.open(url.toString(), "_blank", "noopener,noreferrer");
   };
 
   return (
     <BaseSettingsPage
       page="usage"
       cardTitle={t("usage.card_title")}
-      showActionButton={false}
+      onActionClicked={handleBuyMore}
+      actionIcon={<ShoppingCart className="h-5 w-5" />}
+      actionButtonText={t("purchases.buy_credits")}
       isContentLoading={isLoadingState}
       externalError={error}
     >
@@ -253,21 +280,7 @@ const UsagePage: React.FC = () => {
         </div>
       )}
 
-      <div className="flex justify-center w-full">
-        <Button
-          variant="outline"
-          onClick={handleBuyMore}
-          disabled={!!error?.isBlocker}
-          className="w-full md:max-w-xs mt-6 py-[1.5rem] rounded-full
-            text-white glass-purple
-            cursor-pointer"
-        >
-          <ShoppingCart className="h-4 w-4 mr-2" />
-          {t("purchases.buy_credits")}
-        </Button>
-      </div>
-
-      <div className="h-8" />
+      <div className="h-2" />
 
       {stats && <UsageStats stats={stats} />}
 
@@ -303,7 +316,7 @@ const UsagePage: React.FC = () => {
         ) : (
           <>
             <div className="h-2" />
-            <div className="w-full max-w-2xl mx-auto">
+            <div className="w-full mx-auto">
               {usageRecords.map((record, index) => {
                 const isExpanded = expandedItems.has(index);
                 const toggleExpanded = () => {

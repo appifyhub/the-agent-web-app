@@ -403,8 +403,6 @@ const ConnectionsPage: React.FC = () => {
       {/* Main section - info and OTP input */}
       {!isMyKeySectionOpen && (
         <div className="space-y-6 animate-in slide-in-from-bottom-2 duration-300">
-          <div className="h-3" />
-
           {/* Main info box */}
           <p className="text-[1.05rem] font-light text-justify md:text-left [hyphens:auto] opacity-80">
             {t("connections.main_info", { botName })}

@@ -39,6 +39,7 @@ interface SectionedSelectorProps {
   placeholder?: string;
   notConfiguredLabel?: string;
   onProviderNavigate?: (providerId: string) => void;
+  hasCredits?: boolean;
   className?: string;
   labelClassName?: string;
   triggerClassName?: string;
@@ -55,6 +56,7 @@ const SectionedSelector: React.FC<SectionedSelectorProps> = ({
   placeholder = "Select...",
   notConfiguredLabel = "– Not Configured",
   onProviderNavigate,
+  hasCredits = false,
   className = "",
   labelClassName = "",
   triggerClassName = "",
@@ -138,7 +140,7 @@ const SectionedSelector: React.FC<SectionedSelectorProps> = ({
               {/* Section Header */}
               <div className="py-2 px-4 text-sm font-medium text-muted-foreground/90 flex items-center justify-between pointer-events-auto">
                 <span>{section.sectionTitle}</span>
-                {!section.isConfigured && (
+                {!section.isConfigured && !hasCredits && (
                   <button
                     onClick={(e) => {
                       e.preventDefault();

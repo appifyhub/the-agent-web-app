@@ -4,6 +4,7 @@ import BaseSettingsPage from "@/pages/BaseSettingsPage";
 import { toast } from "sonner";
 import { PageError } from "@/lib/utils";
 import { t } from "@/lib/translations";
+import WarningBanner from "@/components/WarningBanner";
 import ProvidersCarousel from "@/components/ProvidersCarousel";
 import ProviderTabs from "@/components/ProviderTabs";
 import {
@@ -45,6 +46,7 @@ const AccessSettingsPage: React.FC = () => {
   >(new Map());
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
   const [currentProviderIndex, setCurrentProviderIndex] = useState(0);
+  const [isWarningDismissed, setIsWarningDismissed] = useState(false);
   const isRestoringPosition = useRef(false);
   const hasLoadedOnce = useRef(false);
   const indexToRestore = useRef<number | null>(null);
@@ -247,6 +249,40 @@ const AccessSettingsPage: React.FC = () => {
 
   const botName = import.meta.env.VITE_APP_NAME_SHORT;
 
+  // Check if any API keys are configured in local state
+  const hasAnyApiKey = !!(
+    userSettings?.open_ai_key ||
+    userSettings?.anthropic_key ||
+    userSettings?.google_ai_key ||
+    userSettings?.perplexity_key ||
+    userSettings?.replicate_key ||
+    userSettings?.rapid_api_key ||
+    userSettings?.coinmarketcap_key
+  );
+
+  // Check if user has credits
+  const hasCredits = (userSettings?.credit_balance ?? 0) > 0;
+
+  // Show warning only if user has credits AND API keys AND hasn't dismissed it
+  const showCreditsWarning = hasCredits && hasAnyApiKey && !isWarningDismissed;
+
+  const handleRemoveAllApiKeys = () => {
+    if (!userSettings) return;
+
+    const clearedSettings = { ...userSettings };
+    // Clear all API keys
+    delete clearedSettings.open_ai_key;
+    delete clearedSettings.anthropic_key;
+    delete clearedSettings.google_ai_key;
+    delete clearedSettings.perplexity_key;
+    delete clearedSettings.replicate_key;
+    delete clearedSettings.rapid_api_key;
+    delete clearedSettings.coinmarketcap_key;
+
+    setUserSettings(clearedSettings);
+    toast(t("access_keys_cleared_message"));
+  };
+
   return (
     <BaseSettingsPage
       page="access"
@@ -256,6 +292,15 @@ const AccessSettingsPage: React.FC = () => {
       isContentLoading={isLoadingState}
       externalError={error}
     >
+      {showCreditsWarning && (
+        <WarningBanner
+          message={t("access_use_credits_warning_prefix")}
+          destructiveLabel={t("access_remove_all_keys")}
+          destructiveOnClick={handleRemoveAllApiKeys}
+          onDismiss={() => setIsWarningDismissed(true)}
+        />
+      )}
+      {showCreditsWarning && <div className="h-7" />}
 
       <ProviderTabs
         providers={externalToolProviders}
@@ -263,8 +308,6 @@ const AccessSettingsPage: React.FC = () => {
         onProviderClick={handleProviderTabClick}
         disabled={!!error?.isBlocker}
       />
-
-      <div className="h-1" />
 
       <ProvidersCarousel
         providers={externalToolProviders}
@@ -279,7 +322,7 @@ const AccessSettingsPage: React.FC = () => {
                   ...prev,
                   [key]: value,
                 }
-              : prev
+              : prev,
           );
         }}
         disabled={!!error?.isBlocker}

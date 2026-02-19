@@ -211,50 +211,6 @@
   backdrop-filter: blur(10px);
 }
 
-.glass-muted {
-  @apply transition-all duration-200 ease-in-out;
-
-  border-color: rgb(255 255 255 / 7%);
-  background: linear-gradient(
-    to bottom right,
-    rgb(255 255 255 / 2%) 0%,
-    rgb(255 255 255 / 5%) 100%
-  );
-  backdrop-filter: blur(10px);
-}
-
-.glass-muted:hover {
-  background: linear-gradient(
-    to bottom right,
-    rgb(255 255 255 / 4%) 0%,
-    rgb(255 255 255 / 8%) 100%
-  );
-  backdrop-filter: blur(10px);
-}
-
-.glass-purple {
-  @apply transition-all duration-200 ease-in-out;
-
-  border-color: oklch(0.7 0.12 280 / 20%);
-  background: linear-gradient(
-    to bottom right,
-    oklch(62.539% 0.1719 290.717 / 5%) -10%,
-    oklch(61.943% 0.1637 277.367 / 15%) -10%,
-    oklch(62.231% 0.2541 304.019 / 25%) 80%
-  );
-  backdrop-filter: blur(10px);
-}
-
-.glass-purple:hover {
-  background: linear-gradient(
-    to bottom right,
-    oklch(70.493% 0.1937 322.027 / 5%) -10%,
-    oklch(61.943% 0.1637 277.367 / 15%) -10%,
-    oklch(69.835% 0.2733 322.014 / 25%) 80%
-  );
-  backdrop-filter: blur(10px);
-}
-
 .glass-active {
   @apply transition-all duration-200 ease-in-out;
 
@@ -343,4 +299,71 @@
   text-decoration-thickness: 2px;
   text-underline-offset: 4px;
   /* stylelint-enable declaration-block-no-redundant-longhand-properties */
+}
+
+.glass-muted {
+  @apply transition-all duration-200 ease-in-out;
+
+  border-color: rgb(255 255 255 / 7%);
+  background: linear-gradient(
+    to bottom right,
+    rgb(255 255 255 / 2%) 0%,
+    rgb(255 255 255 / 5%) 100%
+  );
+  backdrop-filter: blur(10px);
+}
+
+.glass-muted:hover {
+  background: linear-gradient(
+    to bottom right,
+    rgb(255 255 255 / 4%) 0%,
+    rgb(255 255 255 / 8%) 100%
+  );
+  backdrop-filter: blur(10px);
+}
+
+.glass-purple {
+  @apply transition-all duration-200 ease-in-out;
+
+  border-color: oklch(0.7 0.12 280 / 20%);
+  background: linear-gradient(
+    to bottom right,
+    oklch(62.539% 0.1719 290.717 / 5%) -10%,
+    oklch(61.943% 0.1637 277.367 / 15%) -10%,
+    oklch(62.231% 0.2541 304.019 / 25%) 80%
+  );
+  backdrop-filter: blur(10px);
+}
+
+.glass-purple:hover {
+  background: linear-gradient(
+    to bottom right,
+    oklch(70.493% 0.1937 322.027 / 5%) -10%,
+    oklch(61.943% 0.1637 277.367 / 15%) -10%,
+    oklch(69.835% 0.2733 322.014 / 25%) 80%
+  );
+  backdrop-filter: blur(10px);
+}
+
+.glass-red {
+  @apply transition-all duration-200 ease-in-out;
+
+  border-color: oklch(0.7 0.12 280 / 20%);
+  background: linear-gradient(
+    to bottom right,
+    oklch(69.951% 0.1587 351.697 / 5%) -10%,
+    oklch(68.75% 0.1467 13.248 / 15%) -10%,
+    oklch(67.725% 0.2165 11.701 / 25%) 80%
+  );
+  backdrop-filter: blur(10px);
+}
+
+.glass-red:hover {
+  background: linear-gradient(
+    to bottom right,
+    oklch(74.8% 0.1432 350.571 / 5%) -10%,
+    oklch(75.207% 0.1389 12.598 / 15%) -10%,
+    oklch(71.782% 0.1831 8.404 / 25%) 80%
+  );
+  backdrop-filter: blur(10px);
 }
