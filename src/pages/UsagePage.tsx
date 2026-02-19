@@ -306,7 +306,7 @@ const UsagePage: React.FC = () => {
       isContentLoading={isLoadingState}
       externalError={error}
     >
-      {userSettings?.credit_balance !== undefined && (
+      {userSettings && (
         <div className="flex items-center justify-center gap-2 text-lg mt-2">
           <span className="text-muted-foreground font-light">
             {t("usage.credit_balance", { balance: "" }).trim()}

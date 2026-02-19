@@ -174,7 +174,7 @@ const SponsorshipsPage: React.FC = () => {
   };
 
   const handleUnsponsor = async (sponsorship: SponsorshipResponse) => {
-    if (!sponsorship.platform_handle || !user_id || !accessToken) return;
+    if (!sponsorship.platform_handle || !sponsorship.platform || !user_id || !accessToken) return;
 
     setIsLoadingState(true);
     setError(null);
@@ -488,11 +488,11 @@ const SponsorshipsPage: React.FC = () => {
                         <div className="flex flex-col space-y-1 px-0.5 flex-1 min-w-0">
                           <div className="flex items-center space-x-3.5 min-w-0">
                             <PlatformIcon
-                              platform={sponsorship.platform}
+                              platform={sponsorship.platform ?? Platform.UNKNOWN}
                               className="h-4 w-4 shrink-0"
                             />
                             <span className="text-sm text-muted-foreground truncate">
-                              {Platform.getName(sponsorship.platform)}
+                              {Platform.getName(sponsorship.platform ?? Platform.UNKNOWN)}
                             </span>
                           </div>
                           <div className="flex items-center space-x-3.5 min-w-0">

@@ -1,5 +1,5 @@
 import React from "react";
-import { ChevronDown, BadgeCent, Gift, Key, Clock } from "lucide-react";
+import { ChevronDown, BadgeCent, Gift, Key, Clock, XCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { t } from "@/lib/translations";
 import { TranslationKey } from "@/lib/translation-keys";
@@ -62,7 +62,7 @@ const UsageRecordCard: React.FC<UsageRecordCardProps> = ({
   // Calculate sponsorship type
   const normalizedCurrentId = currentUserId.replace(/-/g, "");
   const normalizedUserId = record.user_id.replace(/-/g, "");
-  const normalizedPayerId = record.payer_id?.replace(/-/g, "");
+  const normalizedPayerId = record.payer_id.replace(/-/g, "");
 
   const isSponsoredByOthersForMe = normalizedPayerId !== normalizedUserId && normalizedUserId === normalizedCurrentId;
   const isSponsoredByMeForOthers = normalizedPayerId === normalizedCurrentId && normalizedUserId !== normalizedCurrentId;
@@ -179,10 +179,10 @@ const UsageRecordCard: React.FC<UsageRecordCardProps> = ({
         </div>
 
         <div className="flex flex-col flex-1 min-w-0 pr-4 md:px-4">
-          <span className="text-md font-medium truncate">
+          <span className={cn("text-md font-medium truncate", record.is_failed && "line-through")}>
             {record.tool.name}
           </span>
-          <span className="text-sm text-muted-foreground truncate">
+          <span className={cn("text-sm text-muted-foreground truncate", record.is_failed && "line-through")}>
             {getPurposeTitle()}
           </span>
         </div>
@@ -194,9 +194,16 @@ const UsageRecordCard: React.FC<UsageRecordCardProps> = ({
           )}>
             {isSponsoredByOthersForMe ? (
               <Gift className="h-4 w-4 text-blue-300" />
+            ) : record.is_failed ? (
+              <>
+                <XCircle className="h-4 w-4 text-red-400" />
+                <span className="text-base font-medium font-mono text-red-400 line-through">
+                  {formatCredits(record.total_cost_credits)}
+                </span>
+              </>
             ) : (
               <>
-                {record.uses_credits !== false ? (
+                {record.uses_credits ? (
                   <BadgeCent className="h-4 w-4 text-accent-amber" />
                 ) : (
                   <Key className="h-4 w-4 text-accent-amber" />
@@ -204,7 +211,7 @@ const UsageRecordCard: React.FC<UsageRecordCardProps> = ({
                 <span
                   className={cn(
                     "text-base font-medium font-mono",
-                    record.uses_credits === false
+                    !record.uses_credits
                       ? "text-accent-amber line-through"
                       : "text-accent-amber"
                   )}
@@ -276,19 +283,19 @@ const UsageRecordCard: React.FC<UsageRecordCardProps> = ({
                 <div className="flex justify-between gap-4 font-medium pt-[0.4rem] border-t border-muted-foreground/20">
                   <span className={cn(
                     "min-w-0 truncate",
-                    record.uses_credits === false && "line-through"
+                    !record.uses_credits && "line-through"
                   )}>
                     {t("usage.cost_breakdown.total")}
                   </span>
                   <span className="shrink-0 flex items-center gap-1">
                     <span className={cn(
                       "font-mono",
-                      record.uses_credits === false && "line-through",
+                      !record.uses_credits && "line-through",
                       isSponsoredByOthersForMe ? "text-blue-300" : "text-accent-amber"
                     )}>
                       {formatCredits(record.total_cost_credits)}
                     </span>
-                    {record.uses_credits !== false ? (
+                    {record.uses_credits ? (
                       <BadgeCent className={cn(
                         "h-3.5 w-3.5",
                         isSponsoredByOthersForMe ? "text-blue-300" : "text-accent-amber"
@@ -369,6 +376,14 @@ const UsageRecordCard: React.FC<UsageRecordCardProps> = ({
                   {t("usage.context_ids.runtime_label")}
                 </span>
                 <span className="shrink-0">{formatRuntime(record.runtime_seconds)}</span>
+              </div>
+              <div className="flex justify-between gap-4">
+                <span className="text-muted-foreground min-w-0 truncate">
+                  {t("usage.context_ids.status_label")}
+                </span>
+                <span className={cn("shrink-0", record.is_failed ? "text-red-400" : "text-green-200")}>
+                  {record.is_failed ? t("usage.context_ids.status_failed") : t("usage.context_ids.status_completed")}
+                </span>
               </div>
               <div className="flex justify-between gap-4">
                 <span className="text-muted-foreground min-w-0 truncate">
