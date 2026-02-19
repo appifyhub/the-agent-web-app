@@ -3,12 +3,16 @@
   "profile": "Profile",
   "sponsorships": "Sponsorships",
   "close": "Close",
+  "restore": "Restore",
   "help": "Help",
   "configure_title": "Configure {botName}'s Behavior",
   "intelligence_card_title": "Boost {botName}'s Intelligence",
   "access": "Access",
   "intelligence": "Intelligence",
   "access_card_title": "Make {botName} independent",
+  "access_use_credits_warning_prefix": "To use credits, remove all API keys",
+  "access_remove_all_keys": "Remove All",
+  "access_keys_cleared_message": "API keys cleared. Press Save to confirm.",
   "profile_card_title": "Customize {botName}",
   "profile_full_name_label": "{botName} knows me as:",
   "profile_full_name_placeholder": "Your display name",
@@ -129,6 +133,8 @@
     "page_title": "Purchases",
     "card_title": "Purchase History",
     "use_license": "Use a License",
+    "license": "License",
+    "buy": "Buy",
     "license_key_label": "Enter your license key",
     "license_key_placeholder": "Paste or type your license key",
     "bind_success": "License linked successfully!",
@@ -217,7 +223,7 @@
     "platform_handle": "Platform Handle",
     "sponsored_by": "Sponsored by",
     "version": "AI Version",
-    "reveal_placeholder": "Information we collect about you"
+    "reveal_placeholder": "Information that identifies you"
   },
   "platforms": {
     "telegram": "Telegram",
@@ -301,6 +307,21 @@
       }
     }
   },
+  "intelligence_warnings": {
+    "no_access_message": "You need either your own private API keys or purchased credits to use AI tools."
+  },
+  "intelligence_presets": {
+    "label": "Intelligence Mode",
+    "lowest_price": "Lowest cost",
+    "lowest_price_description": "The cheapest available tool in each category.",
+    "highest_price": "Highest quality",
+    "highest_price_description": "The most capable (and expensive) tool in each category.",
+    "agent_choice": "Balanced",
+    "agent_choice_description": "Recommended balance between cost and quality.",
+    "custom": "Custom",
+    "custom_description": "Individually customized tool selection."
+  },
+  "detailed_tool_choices": "My tool choices",
   "errors": {
     "oh_no": "Oh no!",
     "expired": "Your session has expired.",

@@ -3,12 +3,16 @@
   "profile": "Profil",
   "sponsorships": "Sponsorluklar",
   "close": "Kapat",
+  "restore": "Geri yükle",
   "help": "Yardım",
   "configure_title": "{botName}'ın Davranışını Yapılandır",
   "intelligence_card_title": "{botName}'ın Zekasını Güçlendir",
   "access": "Erişim",
   "intelligence": "Zeka",
   "access_card_title": "{botName}'ı bağımsız yapın",
+  "access_use_credits_warning_prefix": "Kredi kullanmak için tüm API anahtarlarını kaldırın",
+  "access_remove_all_keys": "Tümünü Kaldır",
+  "access_keys_cleared_message": "API anahtarları temizlendi. Onaylamak için Kaydet'e basın.",
   "profile_card_title": "{botName}'ı Özelleştir",
   "profile_full_name_label": "{botName} beni şöyle tanıyor:",
   "profile_full_name_placeholder": "Görünen adınız",
@@ -129,6 +133,8 @@
     "page_title": "Satın Almalar",
     "card_title": "Satın Alma Geçmişi",
     "use_license": "Lisans Kullan",
+    "license": "Lisans",
+    "buy": "Satın Al",
     "license_key_label": "Lisans anahtarınızı girin",
     "license_key_placeholder": "Lisans anahtarınızı yapıştırın veya yazın",
     "bind_success": "Lisans başarıyla bağlandı!",
@@ -217,7 +223,7 @@
     "platform_handle": "Platform Kullanıcı Adı",
     "sponsored_by": "Sponsor:",
     "version": "AI Sürümü",
-    "reveal_placeholder": "Hakkınızda topladığımız bilgiler"
+    "reveal_placeholder": "Sizi tanımlayan bilgiler"
   },
   "platforms": {
     "telegram": "Telegram",
@@ -228,6 +234,18 @@
   "where_is_my_key": "{providerName} anahtarım nerede?",
   "configure_intelligence": "Zeka yapılandır",
   "configure_ai_providers": "AI sağlayıcılarını yapılandır",
+  "intelligence_presets": {
+    "label": "Zeka Modu",
+    "lowest_price": "En düşük maliyet",
+    "lowest_price_description": "Her kategorideki en ucuz mevcut araç.",
+    "highest_price": "En yüksek kalite",
+    "highest_price_description": "Her kategorideki en yetenekli (ve en pahalı) araç.",
+    "agent_choice": "Dengeli",
+    "agent_choice_description": "Maliyet ve kalite arasında önerilen denge.",
+    "custom": "Özel",
+    "custom_description": "Bireysel olarak özelleştirilmiş araç seçimi."
+  },
+  "detailed_tool_choices": "Araç seçimlerim",
   "errors": {
     "oh_no": "Ah hayır!",
     "expired": "Oturumunuzun süresi doldu.",
@@ -387,5 +405,8 @@
     "other_costs": "Diğer Maliyetler",
     "api_call": "Tek kullanım başına",
     "second_of_runtime": "Çalışma süresi saniyesi başına"
+  },
+  "intelligence_warnings": {
+    "no_access_message": "AI araçlarını kullanmak için kendi özel API anahtarlarınıza veya satın alınmış kredilere ihtiyacınız var."
   }
 }

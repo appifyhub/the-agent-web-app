@@ -3,12 +3,16 @@
   "profile": "Profil",
   "sponsorships": "Parrainages",
   "close": "Fermer",
+  "restore": "Restaurer",
   "help": "Aide",
   "configure_title": "Configurer le comportement de {botName}",
   "intelligence_card_title": "Boostez l'Intelligence de {botName}",
   "access": "Accès",
   "intelligence": "Intelligence",
   "access_card_title": "Rendez {botName} indépendant",
+  "access_use_credits_warning_prefix": "Pour utiliser des crédits, supprimez toutes les clés API",
+  "access_remove_all_keys": "Tout Supprimer",
+  "access_keys_cleared_message": "Clés API effacées. Appuyez sur Enregistrer pour confirmer.",
   "profile_card_title": "Personnalisez {botName}",
   "profile_full_name_label": "{botName} me connaît comme :",
   "profile_full_name_placeholder": "Votre nom d'affichage",
@@ -129,6 +133,8 @@
     "page_title": "Achats",
     "card_title": "Historique d'Achats",
     "use_license": "Utiliser une Licence",
+    "license": "Licence",
+    "buy": "Acheter",
     "license_key_label": "Entrez votre clé de licence",
     "license_key_placeholder": "Collez ou tapez votre clé de licence",
     "bind_success": "Licence liée avec succès!",
@@ -217,7 +223,7 @@
     "platform_handle": "Nom d'utilisateur de plateforme",
     "sponsored_by": "Parrainé par",
     "version": "Version IA",
-    "reveal_placeholder": "Informations que nous collectons sur vous"
+    "reveal_placeholder": "Informations qui vous identifient"
   },
   "platforms": {
     "telegram": "Telegram",
@@ -347,6 +353,18 @@
       }
     }
   },
+  "intelligence_presets": {
+    "label": "Mode d'Intelligence",
+    "lowest_price": "Coût le plus bas",
+    "lowest_price_description": "L'outil le moins cher disponible dans chaque catégorie.",
+    "highest_price": "Qualité la plus élevée",
+    "highest_price_description": "L'outil le plus performant (et coûteux) dans chaque catégorie.",
+    "agent_choice": "Équilibré",
+    "agent_choice_description": "Équilibre recommandé entre coût et qualité.",
+    "custom": "Personnalisé",
+    "custom_description": "Sélection d'outils personnalisée individuellement."
+  },
+  "detailed_tool_choices": "Mes sélections d'outils",
   "errors": {
     "oh_no": "Oh non !",
     "expired": "Votre session a expiré.",
@@ -387,5 +405,8 @@
     "other_costs": "Autres coûts",
     "api_call": "Par utilisation unique",
     "second_of_runtime": "Par seconde d'exécution"
+  },
+  "intelligence_warnings": {
+    "no_access_message": "Vous avez besoin de vos propres clés API privées ou de crédits achetés pour utiliser les outils d'IA."
   }
 }

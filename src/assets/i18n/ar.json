@@ -3,12 +3,16 @@
   "profile": "الملف الشخصي",
   "sponsorships": "الرعايات",
   "close": "إغلاق",
+  "restore": "استعادة",
   "help": "مساعدة",
   "configure_title": "تكوين سلوك {botName}",
   "intelligence_card_title": "تعزيز ذكاء {botName}",
   "access": "الوصول",
   "intelligence": "الذكاء",
   "access_card_title": "اجعل {botName} مستقلاً",
+  "access_use_credits_warning_prefix": "لاستخدام الاعتمادات، قم بإزالة جميع مفاتيح API",
+  "access_remove_all_keys": "إزالة الكل",
+  "access_keys_cleared_message": "تم مسح مفاتيح API. اضغط على حفظ للتأكيد.",
   "profile_card_title": "تخصيص {botName}",
   "profile_full_name_label": "{botName} يعرفني كـ:",
   "profile_full_name_placeholder": "اسم العرض الخاص بك",
@@ -129,6 +133,8 @@
     "page_title": "المشتريات",
     "card_title": "سجل المشتريات",
     "use_license": "استخدم رخصة",
+    "license": "رخصة",
+    "buy": "شراء",
     "license_key_label": "أدخل مفتاح الترخيص الخاص بك",
     "license_key_placeholder": "الصق أو اكتب مفتاح الترخيص الخاص بك",
     "bind_success": "تم ربط الترخيص بنجاح!",
@@ -217,7 +223,7 @@
     "platform_handle": "اسم مستخدم المنصة",
     "sponsored_by": "برعاية",
     "version": "إصدار الذكاء الاصطناعي",
-    "reveal_placeholder": "المعلومات التي نجمعها عنك"
+    "reveal_placeholder": "المعلومات التي تحددك"
   },
   "platforms": {
     "telegram": "تيليجرام",
@@ -228,6 +234,18 @@
   "where_is_my_key": "أين يوجد مفتاح {providerName} الخاص بي؟",
   "configure_intelligence": "تكوين الذكاء",
   "configure_ai_providers": "تكوين مزودي الذكاء الاصطناعي",
+  "intelligence_presets": {
+    "label": "وضع الذكاء",
+    "lowest_price": "أقل تكلفة",
+    "lowest_price_description": "الأداة الأرخص المتاحة في كل فئة.",
+    "highest_price": "أعلى جودة",
+    "highest_price_description": "الأداة الأكثر قدرةً (والأكثر تكلفةً) في كل فئة.",
+    "agent_choice": "متوازن",
+    "agent_choice_description": "توازن موصى به بين التكلفة والجودة.",
+    "custom": "مخصص",
+    "custom_description": "اختيار أدوات مخصص بشكل فردي."
+  },
+  "detailed_tool_choices": "اختياراتي للأدوات",
   "errors": {
     "oh_no": "أوه لا!",
     "expired": "انتهت صلاحية جلستك.",
@@ -387,5 +405,8 @@
     "other_costs": "تكاليف أخرى",
     "api_call": "لكل استخدام واحد",
     "second_of_runtime": "لكل ثانية تشغيل"
+  },
+  "intelligence_warnings": {
+    "no_access_message": "تحتاج إما إلى مفاتيح API الخاصة بك أو الاعتمادات المشتراة لاستخدام أدوات الذكاء الاصطناعي."
   }
 }

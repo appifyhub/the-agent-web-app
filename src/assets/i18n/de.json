@@ -3,12 +3,16 @@
   "profile": "Profil",
   "sponsorships": "Sponsoring",
   "close": "Schließen",
+  "restore": "Wiederherstellen",
   "help": "Hilfe",
   "configure_title": "{botName}s Verhalten konfigurieren",
   "intelligence_card_title": "Verstärke {botName}s Intelligenz",
   "access": "Zugang",
   "intelligence": "Intelligenz",
   "access_card_title": "Machen Sie {botName} unabhängig",
+  "access_use_credits_warning_prefix": "Um Credits zu verwenden, entfernen Sie alle API-Schlüssel",
+  "access_remove_all_keys": "Alle Entfernen",
+  "access_keys_cleared_message": "API-Schlüssel gelöscht. Drücken Sie Speichern zur Bestätigung.",
   "profile_card_title": "Passen Sie {botName} an",
   "profile_full_name_label": "{botName} kennt mich als:",
   "profile_full_name_placeholder": "Ihr Anzeigename",
@@ -129,6 +133,8 @@
     "page_title": "Käufe",
     "card_title": "Kaufverlauf",
     "use_license": "Lizenz verwenden",
+    "license": "Lizenz",
+    "buy": "Kaufen",
     "license_key_label": "Geben Sie Ihren Lizenzschlüssel ein",
     "license_key_placeholder": "Fügen Sie Ihren Lizenzschlüssel ein oder geben Sie ihn ein",
     "bind_success": "Lizenz erfolgreich verknüpft!",
@@ -217,7 +223,7 @@
     "platform_handle": "Plattform-Benutzername",
     "sponsored_by": "Gesponsert von",
     "version": "KI-Version",
-    "reveal_placeholder": "Informationen, die wir über Sie sammeln"
+    "reveal_placeholder": "Informationen, die Sie identifizieren"
   },
   "platforms": {
     "telegram": "Telegram",
@@ -347,6 +353,18 @@
       }
     }
   },
+  "intelligence_presets": {
+    "label": "Intelligenzmodus",
+    "lowest_price": "Niedrigste kosten",
+    "lowest_price_description": "Das günstigste verfügbare Tool in jeder Kategorie.",
+    "highest_price": "Höchste qualität",
+    "highest_price_description": "Das leistungsstärkste (und teuerste) Tool in jeder Kategorie.",
+    "agent_choice": "Ausgewogen",
+    "agent_choice_description": "Empfohlene Balance zwischen Kosten und Qualität.",
+    "custom": "Benutzerdefiniert",
+    "custom_description": "Individuell angepasste Tool-Auswahl."
+  },
+  "detailed_tool_choices": "Meine Tool-Auswahl",
   "errors": {
     "oh_no": "Oh nein!",
     "expired": "Ihre Sitzung ist abgelaufen.",
@@ -387,5 +405,8 @@
     "other_costs": "Andere Kosten",
     "api_call": "Pro einzelne Verwendung",
     "second_of_runtime": "Pro Sekunde Laufzeit"
+  },
+  "intelligence_warnings": {
+    "no_access_message": "Sie benötigen entweder Ihre eigenen privaten API-Schlüssel oder gekaufte Credits, um KI-Tools zu verwenden."
   }
 }

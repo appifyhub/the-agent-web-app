@@ -3,12 +3,16 @@
   "profile": "प्रोफ़ाइल",
   "sponsorships": "प्रायोजन",
   "close": "बंद करें",
+  "restore": "पुनर्स्थापित करें",
   "help": "सहायता",
   "configure_title": "{botName} का व्यवहार कॉन्फ़िगर करें",
   "intelligence_card_title": "{botName} की बुद्धिमत्ता बढ़ाएं",
   "access": "पहुंच",
   "intelligence": "बुद्धिमत्ता",
   "access_card_title": "{botName} को स्वतंत्र बनाएं",
+  "access_use_credits_warning_prefix": "क्रेडिट का उपयोग करने के लिए, सभी API कुंजियां हटाएं",
+  "access_remove_all_keys": "सभी हटाएं",
+  "access_keys_cleared_message": "API कुंजियां साफ़ कर दी गईं। पुष्टि करने के लिए सहेजें दबाएं।",
   "profile_card_title": "{botName} को अनुकूलित करें",
   "profile_full_name_label": "{botName} मुझे इस नाम से जानता है:",
   "profile_full_name_placeholder": "आपका प्रदर्शन नाम",
@@ -129,6 +133,8 @@
     "page_title": "खरीदें",
     "card_title": "खरीद का इतिहास",
     "use_license": "एक लाइसेंस का उपयोग करें",
+    "license": "लाइसेंस",
+    "buy": "खरीदें",
     "license_key_label": "अपनी लाइसेंस कुंजी दर्ज करें",
     "license_key_placeholder": "अपनी लाइसेंस कुंजी को पेस्ट करें या टाइप करें",
     "bind_success": "लाइसेंस सफलतापूर्वक जुड़ा गया!",
@@ -217,7 +223,7 @@
     "platform_handle": "प्लेटफॉर्म उपयोगकर्ता नाम",
     "sponsored_by": "प्रायोजित द्वारा",
     "version": "AI संस्करण",
-    "reveal_placeholder": "आपके बारे में हमारे द्वारा एकत्रित जानकारी"
+    "reveal_placeholder": "जानकारी जो आपकी पहचान करती है"
   },
   "platforms": {
     "telegram": "टेलीग्राम",
@@ -228,6 +234,18 @@
   "where_is_my_key": "मेरा {providerName} कुंजी कहाँ है?",
   "configure_intelligence": "बुद्धिमत्ता कॉन्फ़िगर करें",
   "configure_ai_providers": "AI प्रदाता कॉन्फ़िगर करें",
+  "intelligence_presets": {
+    "label": "इंटेलिजेंस मोड",
+    "lowest_price": "सबसे कम लागत",
+    "lowest_price_description": "प्रत्येक श्रेणी में सबसे सस्ता उपलब्ध टूल।",
+    "highest_price": "सर्वोच्च गुणवत्ता",
+    "highest_price_description": "प्रत्येक श्रेणी में सबसे सक्षम (और महंगा) टूल।",
+    "agent_choice": "संतुलित",
+    "agent_choice_description": "लागत और गुणवत्ता के बीच अनुशंसित संतुलन।",
+    "custom": "कस्टम",
+    "custom_description": "व्यक्तिगत रूप से अनुकूलित टूल चयन।"
+  },
+  "detailed_tool_choices": "मेरे टूल विकल्प",
   "errors": {
     "oh_no": "ओह नहीं!",
     "expired": "आपका सत्र समाप्त हो गया है।",
@@ -387,5 +405,8 @@
     "other_costs": "अन्य लागत",
     "api_call": "प्रति एकल उपयोग",
     "second_of_runtime": "प्रति सेकंड रनटाइम"
+  },
+  "intelligence_warnings": {
+    "no_access_message": "AI टूल्स का उपयोग करने के लिए आपको अपनी निजी API कुंजी या खरीदे गए क्रेडिट की आवश्यकता है।"
   }
 }

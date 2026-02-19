@@ -3,12 +3,16 @@
   "profile": "Profil",
   "sponsorships": "Sponzorstva",
   "close": "Zatvori",
+  "restore": "Vrati",
   "help": "Pomoć",
   "configure_title": "Podesi ponašanje {botName}a",
   "intelligence_card_title": "Unapredi {botName}ovu Inteligenciju",
   "access": "Pristup",
   "intelligence": "Inteligencija",
   "access_card_title": "Učini {botName}a nezavisnim",
+  "access_use_credits_warning_prefix": "Da biste koristili kredite, uklonite sve API ključeve",
+  "access_remove_all_keys": "Ukloni Sve",
+  "access_keys_cleared_message": "API ključevi su obrisani. Pritisnite Sačuvaj za potvrdu.",
   "profile_card_title": "Prilagodi {botName}a",
   "profile_full_name_label": "{botName} me zna kao:",
   "profile_full_name_placeholder": "Ime za prikaz",
@@ -123,12 +127,14 @@
       "input_image_sizes": "Ulazne slike"
     },
     "load_more": "Učitaj još",
-    "credit_balance": "Krediti koje posjedujem: {balance}"
+    "credit_balance": "Krediti koje posedujem: {balance}"
   },
   "purchases": {
     "page_title": "Kupovine",
     "card_title": "Istorija kupovina",
     "use_license": "Unesite licencu",
+    "license": "Licenca",
+    "buy": "Kupi",
     "license_key_label": "Unesite vašu licencnu oznaku",
     "license_key_placeholder": "Nalepite ili unesite vašu licencnu oznaku",
     "bind_success": "Licenca uspešno povezana!",
@@ -217,7 +223,7 @@
     "platform_handle": "Plat. korisničko ime",
     "sponsored_by": "Sponzoriše",
     "version": "AI Verzija",
-    "reveal_placeholder": "Informacije koje prikupljamo"
+    "reveal_placeholder": "Informacije koje vas identifikuju"
   },
   "platforms": {
     "telegram": "Telegram",
@@ -228,6 +234,18 @@
   "where_is_my_key": "Gde je moj {providerName} ključ?",
   "configure_intelligence": "Podesi inteligenciju",
   "configure_ai_providers": "Podesi AI provajdere",
+  "intelligence_presets": {
+    "label": "Režim inteligencije",
+    "lowest_price": "Najniža cena",
+    "lowest_price_description": "Najjeftiniji dostupni alat u svakoj kategoriji.",
+    "highest_price": "Najviši kvalitet",
+    "highest_price_description": "Najmoćniji (i najskuplji) alat u svakoj kategoriji.",
+    "agent_choice": "Balansiran",
+    "agent_choice_description": "Preporučeni balans između cene i kvaliteta.",
+    "custom": "Prilagođen",
+    "custom_description": "Individualno prilagođen izbor alata."
+  },
+  "detailed_tool_choices": "Moji izbori alata",
   "errors": {
     "oh_no": "O ne!",
     "expired": "Ova sesija je istekla.",
@@ -387,5 +405,8 @@
     "other_costs": "Ostali troškovi",
     "api_call": "Po jednoj upotrebi",
     "second_of_runtime": "Po sekundi izvršavanja"
+  },
+  "intelligence_warnings": {
+    "no_access_message": "Potrebni su vam ili vaši privatni API ključevi ili kupljeni krediti da biste koristili AI alate."
   }
 }

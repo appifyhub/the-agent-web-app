@@ -3,12 +3,16 @@
   "profile": "Профиль",
   "sponsorships": "Спонсорство",
   "close": "Закрыть",
+  "restore": "Восстановить",
   "help": "Помощь",
   "configure_title": "Настроить поведение {botName}а",
   "intelligence_card_title": "Усильте Интеллект {botName}а",
   "access": "Доступ",
   "intelligence": "Интеллект",
   "access_card_title": "Сделайте {botName}а независимым",
+  "access_use_credits_warning_prefix": "Чтобы использовать кредиты, удалите все ключи API",
+  "access_remove_all_keys": "Удалить Все",
+  "access_keys_cleared_message": "Ключи API очищены. Нажмите Сохранить для подтверждения.",
   "profile_card_title": "Настройте {botName}а",
   "profile_full_name_label": "{botName} знает меня как:",
   "profile_full_name_placeholder": "Ваше отображаемое имя",
@@ -129,6 +133,8 @@
     "page_title": "Покупки",
     "card_title": "История покупок",
     "use_license": "Использовать лицензию",
+    "license": "Лицензия",
+    "buy": "Купить",
     "license_key_label": "Введите ключ лицензии",
     "license_key_placeholder": "Вставьте или введите ключ лицензии",
     "bind_success": "Лицензия успешно связана!",
@@ -217,7 +223,7 @@
     "platform_handle": "Имя пользователя платформы",
     "sponsored_by": "Спонсируется",
     "version": "Версия ИИ",
-    "reveal_placeholder": "Информация, которую мы собираем о вас"
+    "reveal_placeholder": "Информация, которая вас идентифицирует"
   },
   "platforms": {
     "telegram": "Телеграм",
@@ -228,6 +234,18 @@
   "where_is_my_key": "Где мой ключ {providerName}?",
   "configure_intelligence": "Настроить интеллект",
   "configure_ai_providers": "Настроить AI-провайдеры",
+  "intelligence_presets": {
+    "label": "Режим интеллекта",
+    "lowest_price": "Наименьшая стоимость",
+    "lowest_price_description": "Самый дешёвый доступный инструмент в каждой категории.",
+    "highest_price": "Наивысшее качество",
+    "highest_price_description": "Самый мощный (и дорогой) инструмент в каждой категории.",
+    "agent_choice": "Сбалансированный",
+    "agent_choice_description": "Рекомендуемый баланс между стоимостью и качеством.",
+    "custom": "Настраиваемый",
+    "custom_description": "Индивидуально настроенный выбор инструментов."
+  },
+  "detailed_tool_choices": "Мой выбор инструментов",
   "errors": {
     "oh_no": "О нет!",
     "expired": "Ваша сессия истекла.",
@@ -387,5 +405,8 @@
     "other_costs": "Прочие расходы",
     "api_call": "За одно использование",
     "second_of_runtime": "За секунду работы"
+  },
+  "intelligence_warnings": {
+    "no_access_message": "Вам нужны либо ваши собственные приватные API-ключи, либо купленные кредиты для использования инструментов ИИ."
   }
 }

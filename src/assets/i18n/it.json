@@ -3,12 +3,16 @@
   "profile": "Profilo",
   "sponsorships": "Sponsorizzazioni",
   "close": "Chiudi",
+  "restore": "Ripristina",
   "help": "Aiuto",
   "configure_title": "Configura il comportamento di {botName}",
   "intelligence_card_title": "Potenzia l'Intelligenza di {botName}",
   "access": "Accesso",
   "intelligence": "Intelligenza",
   "access_card_title": "Rendi {botName} indipendente",
+  "access_use_credits_warning_prefix": "Per utilizzare i crediti, rimuovi tutte le chiavi API",
+  "access_remove_all_keys": "Rimuovi Tutto",
+  "access_keys_cleared_message": "Chiavi API cancellate. Premi Salva per confermare.",
   "profile_card_title": "Personalizza {botName}",
   "profile_full_name_label": "{botName} mi conosce come:",
   "profile_full_name_placeholder": "Il tuo nome visualizzato",
@@ -129,6 +133,8 @@
     "page_title": "Acquisti",
     "card_title": "Cronologia degli Acquisti",
     "use_license": "Usa una Licenza",
+    "license": "Licenza",
+    "buy": "Compra",
     "license_key_label": "Inserisci la tua chiave di licenza",
     "license_key_placeholder": "Incolla o digita la tua chiave di licenza",
     "bind_success": "Licenza collegata con successo!",
@@ -217,7 +223,7 @@
     "platform_handle": "Nome utente piattaforma",
     "sponsored_by": "Sponsorizzato da",
     "version": "Versione AI",
-    "reveal_placeholder": "Informazioni che raccogliamo su di te"
+    "reveal_placeholder": "Informazioni che ti identificano"
   },
   "platforms": {
     "telegram": "Telegram",
@@ -228,6 +234,18 @@
   "where_is_my_key": "Dove si trova la mia chiave {providerName}?",
   "configure_intelligence": "Configura intelligenza",
   "configure_ai_providers": "Configura provider AI",
+  "intelligence_presets": {
+    "label": "Modalità di Intelligenza",
+    "lowest_price": "Costo più basso",
+    "lowest_price_description": "Lo strumento più economico disponibile in ogni categoria.",
+    "highest_price": "Qualità più alta",
+    "highest_price_description": "Lo strumento più capace (e costoso) in ogni categoria.",
+    "agent_choice": "Bilanciato",
+    "agent_choice_description": "Equilibrio consigliato tra costo e qualità.",
+    "custom": "Personalizzato",
+    "custom_description": "Selezione di strumenti personalizzata individualmente."
+  },
+  "detailed_tool_choices": "Le mie scelte di strumenti",
   "errors": {
     "oh_no": "Oh no!",
     "expired": "La tua sessione è scaduta.",
@@ -387,5 +405,8 @@
     "other_costs": "Altri costi",
     "api_call": "Per singolo uso",
     "second_of_runtime": "Per secondo di esecuzione"
+  },
+  "intelligence_warnings": {
+    "no_access_message": "Hai bisogno delle tue chiavi API private o crediti acquistati per utilizzare gli strumenti AI."
   }
 }

@@ -3,12 +3,16 @@
   "profile": "个人资料",
   "sponsorships": "赞助",
   "close": "关闭",
+  "restore": "恢复",
   "help": "帮助",
   "configure_title": "配置{botName}的行为",
   "intelligence_card_title": "提升 {botName} 的智能",
   "access": "访问",
   "intelligence": "智能",
   "access_card_title": "让 {botName} 独立",
+  "access_use_credits_warning_prefix": "要使用积分，请删除所有API密钥",
+  "access_remove_all_keys": "全部删除",
+  "access_keys_cleared_message": "API密钥已清除。按保存以确认。",
   "profile_card_title": "自定义 {botName}",
   "profile_full_name_label": "{botName} 认识我为：",
   "profile_full_name_placeholder": "您的显示名称",
@@ -129,6 +133,8 @@
     "page_title": "购买",
     "card_title": "购买历史",
     "use_license": "使用许可证",
+    "license": "许可证",
+    "buy": "购买",
     "license_key_label": "输入您的许可证密钥",
     "license_key_placeholder": "粘贴或输入您的许可证密钥",
     "bind_success": "许可证链接成功！",
@@ -217,7 +223,7 @@
     "platform_handle": "平台用户名",
     "sponsored_by": "赞助者",
     "version": "AI 版本",
-    "reveal_placeholder": "我们收集的关于您的信息"
+    "reveal_placeholder": "识别您的信息"
   },
   "platforms": {
     "telegram": "电报",
@@ -228,6 +234,18 @@
   "where_is_my_key": "我的 {providerName} 密钥在哪里？",
   "configure_intelligence": "配置智能",
   "configure_ai_providers": "配置 AI 提供商",
+  "intelligence_presets": {
+    "label": "智能模式",
+    "lowest_price": "最低成本",
+    "lowest_price_description": "每个类别中最便宜的可用工具。",
+    "highest_price": "最高质量",
+    "highest_price_description": "每个类别中功能最强（也最昂贵）的工具。",
+    "agent_choice": "均衡",
+    "agent_choice_description": "在成本与质量之间推荐的平衡。",
+    "custom": "自定义",
+    "custom_description": "个性化定制的工具选择。"
+  },
+  "detailed_tool_choices": "我的工具选择",
   "errors": {
     "oh_no": "哦不！",
     "expired": "您的会话已过期。",
@@ -387,5 +405,8 @@
     "other_costs": "其他成本",
     "api_call": "每次使用",
     "second_of_runtime": "每秒运行时间"
+  },
+  "intelligence_warnings": {
+    "no_access_message": "您需要自己的私有 API 密钥或购买的积分才能使用 AI 工具。"
   }
 }
