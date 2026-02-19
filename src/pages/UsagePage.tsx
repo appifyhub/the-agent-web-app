@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ChartNoAxesCombined, BadgeCent, ShoppingCart } from "lucide-react";
 import BaseSettingsPage from "@/pages/BaseSettingsPage";
@@ -10,6 +10,8 @@ import {
   UsageRecord,
   UsageAggregatesResponse,
 } from "@/services/usage-service";
+import { fetchProducts, Product } from "@/services/purchase-service";
+import ProductPickerDialog from "@/components/ProductPickerDialog";
 import {
   fetchUserSponsorships,
   SponsorshipResponse,
@@ -41,6 +43,22 @@ const UsagePage: React.FC = () => {
     accessToken?.raw,
   );
 
+  const [shopOpen, setShopOpen] = useState<boolean>(false);
+  const [shopProducts, setShopProducts] = useState<Product[]>([]);
+
+  const shopUrl = useMemo(() => {
+    if (!user_id) return undefined;
+    const storeUrl = import.meta.env.VITE_STORE_URL;
+    if (!storeUrl) return undefined;
+    try {
+      const url = new URL(storeUrl);
+      url.searchParams.set("user_id", user_id.replace(/-/g, ""));
+      return url.toString();
+    } catch {
+      return undefined;
+    }
+  }, [user_id]);
+
   const [usageRecords, setUsageRecords] = useState<UsageRecord[]>([]);
   const [sponsorships, setSponsorships] = useState<SponsorshipResponse[]>([]);
   const [stats, setStats] = useState<UsageAggregatesResponse | null>(null);
@@ -59,6 +77,25 @@ const UsagePage: React.FC = () => {
   const currentInterfaceLanguage =
     INTERFACE_LANGUAGES.find((lang) => lang.isoCode === lang_iso_code) ||
     DEFAULT_LANGUAGE;
+
+  useEffect(() => {
+    if (!accessToken || !user_id) return;
+
+    const loadProducts = async () => {
+      try {
+        const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+        const { products } = await fetchProducts({
+          apiBaseUrl,
+          user_id,
+          rawToken: accessToken.raw,
+        });
+        setShopProducts(products);
+      } catch (err) {
+        console.error("Error fetching products!", err);
+      }
+    };
+    loadProducts();
+  }, [accessToken, user_id]);
 
   useEffect(() => {
     if (!accessToken || !user_id || error?.isBlocker) return;
@@ -249,18 +286,19 @@ const UsagePage: React.FC = () => {
       setError(PageError.blockerWithHtml(errorMessage, false));
       return;
     }
-    if (!user_id) return;
-    const storeUrl = import.meta.env.VITE_STORE_URL;
-    if (!storeUrl) return;
-    const url = new URL(storeUrl);
-    url.searchParams.set("user_id", user_id.replace(/-/g, ""));
-    url.searchParams.set("origin", "agent_settings_buy_more_usage");
-    window.open(url.toString(), "_blank", "noopener,noreferrer");
+    setShopOpen(true);
   };
 
   return (
-    <BaseSettingsPage
-      page="usage"
+    <>
+      <ProductPickerDialog
+        products={shopProducts}
+        open={shopOpen}
+        onOpenChange={setShopOpen}
+        shopUrl={shopUrl}
+      />
+      <BaseSettingsPage
+        page="usage"
       cardTitle={t("usage.card_title")}
       onActionClicked={handleBuyMore}
       actionIcon={<ShoppingCart className="h-5 w-5" />}
@@ -362,6 +400,7 @@ const UsagePage: React.FC = () => {
         )}
       </div>
     </BaseSettingsPage>
+    </>
   );
 };
 

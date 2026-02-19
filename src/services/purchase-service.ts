@@ -1,5 +1,44 @@
 import { request } from "@/services/networking";
 
+export interface Product {
+  id: string;
+  credits: number;
+  name: string;
+  url: string;
+}
+
+export interface ProductsResponse {
+  products: Product[];
+}
+
+export async function fetchProducts({
+  apiBaseUrl,
+  user_id,
+  rawToken,
+}: {
+  apiBaseUrl: string;
+  user_id: string;
+  rawToken: string;
+}): Promise<ProductsResponse> {
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${rawToken}`,
+  };
+  const response = await request(
+    `${apiBaseUrl}/settings/user/${user_id}/products`,
+    {
+      method: "GET",
+      headers: headers,
+    },
+  );
+  if (!response.ok) {
+    throw new Error(
+      `Network error!\n\tStatus: ${response.status}\n\tError: ${response.statusText}`,
+    );
+  }
+  return response.json();
+}
+
 export interface PurchaseRecord {
   id: string;
   user_id: string | null;

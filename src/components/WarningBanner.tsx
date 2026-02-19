@@ -83,23 +83,29 @@ const WarningBanner: React.FC<WarningBannerProps> = ({
         </button>
         <div className="w-0" />
       </div>
-      <div className="flex">
-        {buttons.map((button, index) => (
-          <button
-            key={button.type}
-            onClick={button.onClick}
-            className={cn(
-              "flex items-center justify-center gap-2 px-3 py-2.5 text-xs font-medium border cursor-pointer flex-1",
-              index === 0 && "rounded-bl-xl",
-              index === buttons.length - 1 && "rounded-br-xl",
-              button.className,
-            )}
-            type="button"
-          >
-            {button.icon}
-            {button.label}
-          </button>
-        ))}
+      <div className="flex flex-col sm:flex-row">
+        {buttons.map((button, index) => {
+          const isSingle = buttons.length === 1;
+          const isFirst = index === 0;
+          const isLast = index === buttons.length - 1;
+          return (
+            <button
+              key={button.type}
+              onClick={button.onClick}
+              className={cn(
+                "flex items-center justify-center gap-2 px-3 py-2.5 text-xs font-medium border cursor-pointer flex-1",
+                isSingle && "rounded-b-xl",
+                !isSingle && isFirst && "sm:rounded-bl-xl",
+                !isSingle && isLast && "rounded-b-xl sm:rounded-bl-none",
+                button.className,
+              )}
+              type="button"
+            >
+              {button.icon}
+              {button.label}
+            </button>
+          );
+        })}
       </div>
     </div>
   );
