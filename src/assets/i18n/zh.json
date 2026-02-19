@@ -87,7 +87,10 @@
       "chat_background": "后台",
       "remote_runtime": "远程运行时间",
       "output_image_sizes": "输出图像",
-      "input_image_sizes": "输入图像"
+      "input_image_sizes": "输入图像",
+      "status_label": "状态",
+      "status_completed": "已完成",
+      "status_failed": "失败"
     },
     "load_more": "加载更多",
     "credit_balance": "我拥有的积分：{balance}",

@@ -124,7 +124,10 @@
       "chat_background": "في الخلفية",
       "remote_runtime": "وقت التشغيل عن بُعد",
       "output_image_sizes": "صور الإخراج",
-      "input_image_sizes": "صور الإدخال"
+      "input_image_sizes": "صور الإدخال",
+      "status_label": "الحالة",
+      "status_completed": "مكتمل",
+      "status_failed": "فشل"
     },
     "load_more": "تحميل المزيد",
     "credit_balance": "الأرصدة التي أملكها: {balance}"

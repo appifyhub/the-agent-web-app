@@ -124,7 +124,10 @@
       "chat_background": "U pozadini",
       "remote_runtime": "Udaljeno vreme izvršavanja",
       "output_image_sizes": "Izlazne slike",
-      "input_image_sizes": "Ulazne slike"
+      "input_image_sizes": "Ulazne slike",
+      "status_label": "Status",
+      "status_completed": "Uspešno",
+      "status_failed": "Neuspešno"
     },
     "load_more": "Učitaj još",
     "credit_balance": "Krediti koje posedujem: {balance}"

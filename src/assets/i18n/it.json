@@ -87,7 +87,10 @@
       "chat_background": "In background",
       "remote_runtime": "Tempo di esecuzione remoto",
       "output_image_sizes": "Immagini di output",
-      "input_image_sizes": "Immagini di input"
+      "input_image_sizes": "Immagini di input",
+      "status_label": "Stato",
+      "status_completed": "Completato",
+      "status_failed": "Fallito"
     },
     "load_more": "Carica altro",
     "credit_balance": "Crediti che possiedo: {balance}",

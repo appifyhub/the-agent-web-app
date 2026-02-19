@@ -124,7 +124,10 @@
       "chat_background": "Hintergrund",
       "remote_runtime": "Remote-Laufzeit",
       "output_image_sizes": "Ausgabebilder",
-      "input_image_sizes": "Eingabebilder"
+      "input_image_sizes": "Eingabebilder",
+      "status_label": "Status",
+      "status_completed": "Abgeschlossen",
+      "status_failed": "Fehlgeschlagen"
     },
     "load_more": "Mehr laden",
     "credit_balance": "Guthaben, die ich besitze: {balance}"

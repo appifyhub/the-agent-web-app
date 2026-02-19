@@ -87,7 +87,10 @@
       "chat_background": "В фоне",
       "remote_runtime": "Удалённое время выполнения",
       "output_image_sizes": "Выходные изображения",
-      "input_image_sizes": "Входные изображения"
+      "input_image_sizes": "Входные изображения",
+      "status_label": "Статус",
+      "status_completed": "Выполнено",
+      "status_failed": "Ошибка"
     },
     "load_more": "Загрузить ещё",
     "credit_balance": "Кредиты, которыми я владею: {balance}",

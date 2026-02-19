@@ -87,7 +87,10 @@
       "chat_background": "Arka planda",
       "remote_runtime": "Uzak Çalışma Süresi",
       "output_image_sizes": "Çıkış Görselleri",
-      "input_image_sizes": "Giriş Görselleri"
+      "input_image_sizes": "Giriş Görselleri",
+      "status_label": "Durum",
+      "status_completed": "Tamamlandı",
+      "status_failed": "Başarısız"
     },
     "load_more": "Daha fazla yükle",
     "credit_balance": "Sahip olduğum krediler: {balance}",

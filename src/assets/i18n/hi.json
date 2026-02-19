@@ -87,7 +87,10 @@
       "chat_background": "पृष्ठभूमि में",
       "remote_runtime": "रिमोट रनटाइम",
       "output_image_sizes": "आउटपुट छवियाँ",
-      "input_image_sizes": "इनपुट छवियाँ"
+      "input_image_sizes": "इनपुट छवियाँ",
+      "status_label": "स्थिति",
+      "status_completed": "पूर्ण",
+      "status_failed": "विफल"
     },
     "load_more": "और लोड करें",
     "credit_balance": "मेरे पास क्रेडिट: {balance}",
