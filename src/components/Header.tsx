@@ -7,11 +7,10 @@ import {
   LifeBuoy,
   Menu as MenuIcon,
   Key,
-  Brain,
+  Sparkles,
   X,
   Merge,
-  ChartNoAxesCombined,
-  ReceiptCent,
+  ShoppingCart,
   BadgeCent,
 } from "lucide-react";
 import {
@@ -279,12 +278,12 @@ const Header: React.FC<HeaderProps> = ({
             size="icon"
             className={cn(
               "rounded-full gap-2 w-auto px-4 scale-120 md:scale-100 touch-manipulation",
-              page === "purchases"
+              page === "usage"
                 ? "glass-active text-accent-amber underline underline-offset-4 decoration-accent-amber cursor-default"
                 : "glass cursor-pointer"
             )}
-            onClick={handlePurchasesClick}
-            disabled={page === "purchases"}
+            onClick={handleUsageClick}
+            disabled={page === "usage"}
           >
             <BadgeCent className="h-5 w-5 text-accent-amber" />
             <span className="font-mono">
@@ -391,7 +390,7 @@ const Header: React.FC<HeaderProps> = ({
                     )}
                     onClick={handleIntelligenceClick}
                   >
-                    <Brain className="h-5 w-5 shrink-0" />
+                    <Sparkles className="h-5 w-5 shrink-0" />
                     {t("intelligence")}
                   </Button>
                   <Button
@@ -435,7 +434,7 @@ const Header: React.FC<HeaderProps> = ({
                     )}
                     onClick={handleUsageClick}
                   >
-                    <ChartNoAxesCombined className="h-5 w-5 shrink-0" />
+                    <BadgeCent className="h-5 w-5 shrink-0" />
                     {t("usage.page_title")}
                   </Button>
                   <Button
@@ -449,7 +448,7 @@ const Header: React.FC<HeaderProps> = ({
                     )}
                     onClick={handlePurchasesClick}
                   >
-                    <ReceiptCent className="h-5 w-5 shrink-0" />
+                    <ShoppingCart className="h-5 w-5 shrink-0" />
                     {t("purchases.page_title")}
                   </Button>
                   {showHelpButton && (
@@ -548,12 +547,12 @@ const Header: React.FC<HeaderProps> = ({
                     size="icon"
                     className={cn(
                       "gap-2 text-base w-auto px-4 rounded-full",
-                      page === "purchases"
+                      page === "usage"
                         ? "glass-active text-accent-amber underline underline-offset-4 decoration-accent-amber cursor-default"
                         : "glass cursor-pointer"
                     )}
-                    onClick={handlePurchasesClick}
-                    disabled={page === "purchases"}
+                    onClick={handleUsageClick}
+                    disabled={page === "usage"}
                   >
                     <BadgeCent className="h-5 w-5 text-accent-amber" />
                     <span className="font-mono">
@@ -666,7 +665,7 @@ const Header: React.FC<HeaderProps> = ({
                             )}
                             onClick={handleIntelligenceClick}
                           >
-                            <Brain className="h-5 w-5 shrink-0" />
+                            <Sparkles className="h-5 w-5 shrink-0" />
                             {t("intelligence")}
                           </Button>
                           <Button
@@ -710,7 +709,7 @@ const Header: React.FC<HeaderProps> = ({
                             )}
                             onClick={handleUsageClick}
                           >
-                            <ChartNoAxesCombined className="h-5 w-5 shrink-0" />
+                            <BadgeCent className="h-5 w-5 shrink-0" />
                             {t("usage.page_title")}
                           </Button>
                           <Button
@@ -724,7 +723,7 @@ const Header: React.FC<HeaderProps> = ({
                             )}
                             onClick={handlePurchasesClick}
                           >
-                            <ReceiptCent className="h-5 w-5 shrink-0" />
+                            <ShoppingCart className="h-5 w-5 shrink-0" />
                             {t("purchases.page_title")}
                           </Button>
                           {showHelpButton && (

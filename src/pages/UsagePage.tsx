@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ChartNoAxesCombined, BadgeCent, ShoppingCart } from "lucide-react";
 import BaseSettingsPage from "@/pages/BaseSettingsPage";
-import { PageError } from "@/lib/utils";
+import { PageError, buildSponsoredBlockerError } from "@/lib/utils";
 import { t } from "@/lib/translations";
 import {
   fetchUsageRecords,
@@ -39,7 +39,7 @@ const UsagePage: React.FC = () => {
   const { chats } = useChats(accessToken?.decoded?.sub, accessToken?.raw);
 
   const { userSettings } = useUserSettings(
-    accessToken?.decoded?.sub,
+    user_id,
     accessToken?.raw,
   );
 
@@ -265,17 +265,7 @@ const UsagePage: React.FC = () => {
 
   const handleBuyMore = () => {
     if (userSettings?.is_sponsored) {
-      const sponsorshipsUrl = `/${lang_iso_code}/user/${user_id}/sponsorships${window.location.search}`;
-      const sponsorshipsTitle = t("sponsorships");
-      const linkStyle = "underline text-amber-100 hover:text-white";
-      const sponsorshipsLinkHtml = `<a href="${sponsorshipsUrl}" class="${linkStyle}" >${sponsorshipsTitle}</a>`;
-      const htmlMessage = t("errors.sponsored_user", {
-        sponsorshipsLink: sponsorshipsLinkHtml,
-      });
-      const errorMessage = (
-        <span dangerouslySetInnerHTML={{ __html: htmlMessage }} />
-      );
-      setError(PageError.blockerWithHtml(errorMessage, false));
+      setError(buildSponsoredBlockerError(lang_iso_code!, user_id!));
       return;
     }
     setShopOpen(true);

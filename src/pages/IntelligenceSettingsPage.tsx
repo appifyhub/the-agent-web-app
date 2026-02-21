@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import BaseSettingsPage from "@/pages/BaseSettingsPage";
 import { toast } from "sonner";
-import { PageError } from "@/lib/utils";
+import { PageError, buildSponsoredBlockerError } from "@/lib/utils";
 import { t } from "@/lib/translations";
 import AdvancedToolsPanel from "@/components/AdvancedToolsPanel";
 import SettingSelector from "@/components/SettingSelector";
@@ -64,17 +64,7 @@ const IntelligenceSettingsPage: React.FC = () => {
     if (!accessToken || !user_id || error?.isBlocker || !remoteSettings) return;
 
     if (remoteSettings.is_sponsored) {
-      const sponsorshipsUrl = `/${lang_iso_code}/user/${user_id}/sponsorships${window.location.search}`;
-      const sponsorshipsTitle = t("sponsorships");
-      const linkStyle = "underline text-amber-100 hover:text-white";
-      const sponsorshipsLinkHtml = `<a href="${sponsorshipsUrl}" class="${linkStyle}" >${sponsorshipsTitle}</a>`;
-      const htmlMessage = t("errors.sponsored_user", {
-        sponsorshipsLink: sponsorshipsLinkHtml,
-      });
-      const errorMessage = (
-        <span dangerouslySetInnerHTML={{ __html: htmlMessage }} />
-      );
-      setError(PageError.blockerWithHtml(errorMessage, false));
+      setError(buildSponsoredBlockerError(lang_iso_code!, user_id!));
       return;
     }
 
@@ -208,7 +198,7 @@ const IntelligenceSettingsPage: React.FC = () => {
       isContentLoading={isLoadingState}
       externalError={error}
     >
-      {externalToolsData && (
+      {externalToolsData ? (
         <>
           {showNoAccessWarning && (
             <WarningBanner
@@ -297,7 +287,14 @@ const IntelligenceSettingsPage: React.FC = () => {
             onOpenSectionChange={setOpenAccordionSection}
           />
         </>
-      )}
+      ) : !isLoadingState ? (
+        <div className="flex flex-col items-center space-y-10 text-center mt-12">
+          <Sparkles className="h-12 w-12 text-accent-amber" />
+          <p className="text-foreground/80 font-light">
+            {t("intelligence_warnings.no_settings")}
+          </p>
+        </div>
+      ) : null}
     </BaseSettingsPage>
   );
 };

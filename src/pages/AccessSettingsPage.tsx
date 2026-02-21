@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import BaseSettingsPage from "@/pages/BaseSettingsPage";
 import { toast } from "sonner";
-import { PageError } from "@/lib/utils";
+import { PageError, buildSponsoredBlockerError } from "@/lib/utils";
 import { t } from "@/lib/translations";
 import WarningBanner from "@/components/WarningBanner";
 import ProvidersCarousel from "@/components/ProvidersCarousel";
@@ -65,17 +65,7 @@ const AccessSettingsPage: React.FC = () => {
     if (!accessToken || !user_id || error?.isBlocker || !remoteSettings) return;
 
     if (remoteSettings.is_sponsored) {
-      const sponsorshipsUrl = `/${lang_iso_code}/user/${user_id}/sponsorships${window.location.search}`;
-      const sponsorshipsTitle = t("sponsorships");
-      const linkStyle = "underline text-amber-100 hover:text-white";
-      const sponsorshipsLinkHtml = `<a href="${sponsorshipsUrl}" class="${linkStyle}" >${sponsorshipsTitle}</a>`;
-      const htmlMessage = t("errors.sponsored_user", {
-        sponsorshipsLink: sponsorshipsLinkHtml,
-      });
-      const errorMessage = (
-        <span dangerouslySetInnerHTML={{ __html: htmlMessage }} />
-      );
-      setError(PageError.blockerWithHtml(errorMessage, false));
+      setError(buildSponsoredBlockerError(lang_iso_code!, user_id!));
       return;
     }
 

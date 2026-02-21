@@ -2,6 +2,7 @@ import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import React from "react";
 import { TranslationKey } from "@/lib/translation-keys";
+import { t } from "@/lib/translations";
 
 export interface ErrorData {
   translationKey: TranslationKey;
@@ -111,4 +112,18 @@ export function cleanUsername(username: string): string {
     .replace(/^[@+]+/, "") // remove leading @ or + signs
     .replace(/^\++/, "") // remove leading + signs
     .trim(); // remove any remaining leading/trailing whitespace
+}
+
+export function buildSponsoredBlockerError(
+  lang_iso_code: string,
+  user_id: string,
+): PageError {
+  const sponsorshipsUrl = `/${lang_iso_code}/user/${user_id}/sponsorships${window.location.search}`;
+  const linkStyle = "underline text-amber-100 hover:text-white";
+  const sponsorshipsLinkHtml = `<a href="${sponsorshipsUrl}" class="${linkStyle}">${t("sponsorships")}</a>`;
+  const htmlMessage = t("errors.sponsored_user", { sponsorshipsLink: sponsorshipsLinkHtml });
+  return PageError.blockerWithHtml(
+    React.createElement("span", { dangerouslySetInnerHTML: { __html: htmlMessage } }),
+    false,
+  );
 }

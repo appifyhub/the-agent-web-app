@@ -245,6 +245,7 @@ export type TranslationKey =
   | "tools.types.deprecated.title"
   | "tools.types.deprecated.description"
   | "intelligence_warnings.no_access_message"
+  | "intelligence_warnings.no_settings"
   | "intelligence_presets.label"
   | "intelligence_presets.lowest_price"
   | "intelligence_presets.lowest_price_description"

@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BadgeCent, Clipboard, ShoppingCart, ReceiptCent, X, Plus } from "lucide-react";
 import BaseSettingsPage from "@/pages/BaseSettingsPage";
-import { PageError } from "@/lib/utils";
+import { PageError, buildSponsoredBlockerError } from "@/lib/utils";
 import { toast } from "sonner";
 import { t } from "@/lib/translations";
 import {
@@ -38,7 +38,7 @@ const PurchasesPage: React.FC = () => {
     usePageSession();
 
   const { userSettings, refreshSettings } = useUserSettings(
-    accessToken?.decoded?.sub,
+    user_id,
     accessToken?.raw,
   );
 
@@ -193,17 +193,7 @@ const PurchasesPage: React.FC = () => {
 
   const handleStartEditing = () => {
     if (userSettings?.is_sponsored) {
-      const sponsorshipsUrl = `/${lang_iso_code}/user/${user_id}/sponsorships${window.location.search}`;
-      const sponsorshipsTitle = t("sponsorships");
-      const linkStyle = "underline text-amber-100 hover:text-white";
-      const sponsorshipsLinkHtml = `<a href="${sponsorshipsUrl}" class="${linkStyle}" >${sponsorshipsTitle}</a>`;
-      const htmlMessage = t("errors.sponsored_user", {
-        sponsorshipsLink: sponsorshipsLinkHtml,
-      });
-      const errorMessage = (
-        <span dangerouslySetInnerHTML={{ __html: htmlMessage }} />
-      );
-      setError(PageError.blockerWithHtml(errorMessage, false));
+      setError(buildSponsoredBlockerError(lang_iso_code!, user_id!));
       return;
     }
     setIsEditing(true);
@@ -313,17 +303,7 @@ const PurchasesPage: React.FC = () => {
 
   const handleBuyMore = () => {
     if (userSettings?.is_sponsored) {
-      const sponsorshipsUrl = `/${lang_iso_code}/user/${user_id}/sponsorships${window.location.search}`;
-      const sponsorshipsTitle = t("sponsorships");
-      const linkStyle = "underline text-amber-100 hover:text-white";
-      const sponsorshipsLinkHtml = `<a href="${sponsorshipsUrl}" class="${linkStyle}" >${sponsorshipsTitle}</a>`;
-      const htmlMessage = t("errors.sponsored_user", {
-        sponsorshipsLink: sponsorshipsLinkHtml,
-      });
-      const errorMessage = (
-        <span dangerouslySetInnerHTML={{ __html: htmlMessage }} />
-      );
-      setError(PageError.blockerWithHtml(errorMessage, false));
+      setError(buildSponsoredBlockerError(lang_iso_code!, user_id!));
       return;
     }
     setShopOpen(true);
