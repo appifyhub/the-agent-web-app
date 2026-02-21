@@ -426,6 +426,7 @@
     "second_of_runtime": "每秒运行时间"
   },
   "intelligence_warnings": {
-    "no_access_message": "您需要自己的私有 API 密钥或购买的积分才能使用 AI 工具。"
+    "no_access_message": "您需要自己的私有 API 密钥或购买的积分才能使用 AI 工具。",
+    "no_settings": "没有需要配置的AI设置。"
   }
 }

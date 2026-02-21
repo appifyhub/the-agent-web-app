@@ -426,6 +426,7 @@
     "second_of_runtime": "Par seconde d'exécution"
   },
   "intelligence_warnings": {
-    "no_access_message": "Vous avez besoin de vos propres clés API privées ou de crédits achetés pour utiliser les outils d'IA."
+    "no_access_message": "Vous avez besoin de vos propres clés API privées ou de crédits achetés pour utiliser les outils d'IA.",
+    "no_settings": "Aucun paramètre d'IA à configurer."
   }
 }

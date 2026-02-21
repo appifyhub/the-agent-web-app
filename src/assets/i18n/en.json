@@ -310,7 +310,8 @@
     }
   },
   "intelligence_warnings": {
-    "no_access_message": "You need either your own private API keys or purchased credits to use AI tools."
+    "no_access_message": "You need either your own private API keys or purchased credits to use AI tools.",
+    "no_settings": "No AI settings to configure."
   },
   "intelligence_presets": {
     "label": "Intelligence Mode",

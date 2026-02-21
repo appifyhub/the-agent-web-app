@@ -426,6 +426,7 @@
     "second_of_runtime": "Per secondo di esecuzione"
   },
   "intelligence_warnings": {
-    "no_access_message": "Hai bisogno delle tue chiavi API private o crediti acquistati per utilizzare gli strumenti AI."
+    "no_access_message": "Hai bisogno delle tue chiavi API private o crediti acquistati per utilizzare gli strumenti AI.",
+    "no_settings": "Nessuna impostazione AI da configurare."
   }
 }

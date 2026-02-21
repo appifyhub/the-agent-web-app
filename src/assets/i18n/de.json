@@ -426,6 +426,7 @@
     "second_of_runtime": "Pro Sekunde Laufzeit"
   },
   "intelligence_warnings": {
-    "no_access_message": "Sie benötigen entweder Ihre eigenen privaten API-Schlüssel oder gekaufte Credits, um KI-Tools zu verwenden."
+    "no_access_message": "Sie benötigen entweder Ihre eigenen privaten API-Schlüssel oder gekaufte Credits, um KI-Tools zu verwenden.",
+    "no_settings": "Keine KI-Einstellungen zu konfigurieren."
   }
 }

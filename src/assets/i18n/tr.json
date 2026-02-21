@@ -426,6 +426,7 @@
     "second_of_runtime": "Çalışma süresi saniyesi başına"
   },
   "intelligence_warnings": {
-    "no_access_message": "AI araçlarını kullanmak için kendi özel API anahtarlarınıza veya satın alınmış kredilere ihtiyacınız var."
+    "no_access_message": "AI araçlarını kullanmak için kendi özel API anahtarlarınıza veya satın alınmış kredilere ihtiyacınız var.",
+    "no_settings": "Yapılandırılacak AI ayarı yok."
   }
 }

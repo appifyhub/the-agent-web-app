@@ -426,6 +426,7 @@
     "second_of_runtime": "Po sekundi izvršavanja"
   },
   "intelligence_warnings": {
-    "no_access_message": "Potrebni su vam ili vaši privatni API ključevi ili kupljeni krediti da biste koristili AI alate."
+    "no_access_message": "Potrebni su vam ili vaši privatni API ključevi ili kupljeni krediti da biste koristili AI alate.",
+    "no_settings": "Nema AI podešavanja za konfigurisanje."
   }
 }

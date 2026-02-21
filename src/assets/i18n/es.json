@@ -426,6 +426,7 @@
     "rights_reserved": "Todos los derechos reservados"
   },
   "intelligence_warnings": {
-    "no_access_message": "Necesitas tus propias claves API privadas o créditos comprados para usar herramientas de IA."
+    "no_access_message": "Necesitas tus propias claves API privadas o créditos comprados para usar herramientas de IA.",
+    "no_settings": "No hay configuraciones de IA para configurar."
   }
 }
