@@ -52,7 +52,7 @@
     "platform_handle_placeholder_telegram": "@اسم_المستخدم",
     "platform_handle_placeholder_whatsapp": "+9661234567890",
     "you_are_sponsored": "أنت مستخدم مُرعى!",
-    "unlink_message": "يمكنك الآن أن تصبح مستخدماً مستقلاً. هذا يقطع الرابط بينك وبين {sponsorName} وسيتوقف الذكاء الاصطناعي عن العمل حتى تقوم بتكوين ملفك الشخصي.",
+    "unlink_message": "يمكنك أن تصبح مستخدماً مستقلاً. هذا يقطع رابط الرعاية وسيتوقف الذكاء الاصطناعي عن العمل حتى تقوم بتكوين ملفك الشخصي.",
     "unlink": "إلغاء الربط"
   },
   "usage": {
@@ -224,7 +224,6 @@
     "platform": "المنصة",
     "platform_user_id": "معرّف مستخدم المنصة",
     "platform_handle": "اسم مستخدم المنصة",
-    "sponsored_by": "برعاية",
     "version": "إصدار الذكاء الاصطناعي",
     "reveal_placeholder": "المعلومات التي تحددك"
   },
@@ -257,7 +256,7 @@
     "fetch_failed": "فشل في تحميل الإعدادات.",
     "save_failed": "فشل في حفظ الإعدادات.",
     "check_link": "تحقق من رابط الوصول الخاص بك وحاول مرة أخرى.",
-    "sponsored_user": "استخدامك مرعى من قبل {sponsorName}. لتصبح مستخدماً مستقلاً، اذهب إلى {sponsorshipsLink}."
+    "sponsored_user": "استخدامك مرعى. لتصبح مستخدماً مستقلاً، اذهب إلى {sponsorshipsLink}."
   },
   "tools": {
     "not_configured": "كوِّن",

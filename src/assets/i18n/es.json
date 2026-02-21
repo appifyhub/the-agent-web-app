@@ -52,7 +52,7 @@
     "platform_handle_placeholder_telegram": "@nombre_usuario",
     "platform_handle_placeholder_whatsapp": "+341234567890",
     "you_are_sponsored": "¡Eres un usuario patrocinado!",
-    "unlink_message": "Ahora puedes convertirte en un usuario autónomo. Esto rompe el vínculo entre tú y {sponsorName} y la IA dejará de funcionar hasta que configures tu Perfil.",
+    "unlink_message": "Puedes convertirte en un usuario autónomo. Esto rompe el vínculo de patrocinio y la IA dejará de funcionar hasta que configures tu Perfil.",
     "unlink": "Desvincular"
   },
   "usage": {
@@ -224,7 +224,6 @@
     "platform": "Plataforma",
     "platform_user_id": "ID de usuario de plataforma",
     "platform_handle": "Nombre de usuario de plataforma",
-    "sponsored_by": "Patrocinado por",
     "version": "Versión de IA",
     "reveal_placeholder": "Información que te identifica"
   },
@@ -257,7 +256,7 @@
     "fetch_failed": "Error al cargar la configuración.",
     "save_failed": "Error al guardar la configuración.",
     "check_link": "Verifica tu enlace de acceso e inténtalo de nuevo.",
-    "sponsored_user": "Tu uso está patrocinado por {sponsorName}. Para convertirte en un usuario autónomo, ve a {sponsorshipsLink}."
+    "sponsored_user": "Tu uso está patrocinado. Para convertirte en un usuario autónomo, ve a {sponsorshipsLink}."
   },
   "features": {
     "header": "Funciones",

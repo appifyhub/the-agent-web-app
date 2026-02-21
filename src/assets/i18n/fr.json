@@ -52,7 +52,7 @@
     "platform_handle_placeholder_telegram": "@nom_utilisateur",
     "platform_handle_placeholder_whatsapp": "+331234567890",
     "you_are_sponsored": "Vous êtes un utilisateur parrainé !",
-    "unlink_message": "Vous pouvez maintenant devenir un utilisateur autonome. Cela rompt le lien entre vous et {sponsorName} et l'IA cessera de fonctionner jusqu'à ce que vous configuriez votre Profil.",
+    "unlink_message": "Vous pouvez devenir un utilisateur autonome. Cela rompt le lien de parrainage et l'IA cessera de fonctionner jusqu'à ce que vous configuriez votre Profil.",
     "unlink": "Délier"
   },
   "usage": {
@@ -224,7 +224,6 @@
     "platform": "Plateforme",
     "platform_user_id": "ID utilisateur de plateforme",
     "platform_handle": "Nom d'utilisateur de plateforme",
-    "sponsored_by": "Parrainé par",
     "version": "Version IA",
     "reveal_placeholder": "Informations qui vous identifient"
   },
@@ -376,7 +375,7 @@
     "fetch_failed": "Échec du chargement des paramètres.",
     "save_failed": "Échec de l'enregistrement des paramètres.",
     "check_link": "Vérifiez votre lien d'accès et réessayez.",
-    "sponsored_user": "Votre utilisation est parrainée par {sponsorName}. Pour devenir un utilisateur autonome, allez à {sponsorshipsLink}."
+    "sponsored_user": "Votre utilisation est parrainée. Pour devenir un utilisateur autonome, allez à {sponsorshipsLink}."
   },
   "check_out_project": "Découvrir le projet",
   "footer": {

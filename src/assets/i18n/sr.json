@@ -52,7 +52,7 @@
     "platform_handle_placeholder_telegram": "@korisničko_ime",
     "platform_handle_placeholder_whatsapp": "+3811234567890",
     "you_are_sponsored": "Vi ste sponzorisani korisnik!",
-    "unlink_message": "Sada možete postati autonomni korisnik. Ovo prekida vezu između vas i {sponsorName}. AI će prestati da radi dok ne podesite svoj Profil.",
+    "unlink_message": "Možete postati autonomni korisnik. Ovo prekida sponzorsku vezu. AI će prestati da radi dok ne podesite svoj Profil.",
     "unlink": "Prekini vezu"
   },
   "usage": {
@@ -224,7 +224,6 @@
     "platform": "Platforma",
     "platform_user_id": "Plat. korisnički ID",
     "platform_handle": "Plat. korisničko ime",
-    "sponsored_by": "Sponzoriše",
     "version": "AI Verzija",
     "reveal_placeholder": "Informacije koje vas identifikuju"
   },
@@ -257,7 +256,7 @@
     "fetch_failed": "Neuspešno učitavanje podešavanja.",
     "save_failed": "Neuspešno čuvanje podešavanja.",
     "check_link": "Proveri svoj pristupni link i pokušaj ponovo.",
-    "sponsored_user": "Korišćenje sponzoriše {sponsorName}. Da postaneš autonomni korisnik, idi na {sponsorshipsLink}."
+    "sponsored_user": "Vaše korišćenje je sponzorisano. Da postanete autonomni korisnik, idite na {sponsorshipsLink}."
   },
   "features": {
     "header": "Mogućnosti",

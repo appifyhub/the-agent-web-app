@@ -52,7 +52,7 @@
     "platform_handle_placeholder_telegram": "@username",
     "platform_handle_placeholder_whatsapp": "+441234567890",
     "you_are_sponsored": "You are a sponsored user!",
-    "unlink_message": "You can now become an autonomous user. This breaks the link between you and {sponsorName} and AI will stop working until you configure your Profile.",
+    "unlink_message": "You can become an autonomous user. This breaks the sponsorship link and AI will stop working until you configure your Profile.",
     "unlink": "Unlink"
   },
   "usage": {
@@ -224,7 +224,6 @@
     "platform": "Platform",
     "platform_user_id": "Platform User ID",
     "platform_handle": "Platform Handle",
-    "sponsored_by": "Sponsored by",
     "version": "AI Version",
     "reveal_placeholder": "Information that identifies you"
   },
@@ -333,7 +332,7 @@
     "fetch_failed": "Failed to load the settings.",
     "save_failed": "Failed to save settings.",
     "check_link": "Check your access link and try again.",
-    "sponsored_user": "Your usage is sponsored by {sponsorName}. To become an autonomous user, go to {sponsorshipsLink}."
+    "sponsored_user": "Your usage is sponsored. To become an autonomous user, go to {sponsorshipsLink}."
   },
   "features": {
     "header": "Features",

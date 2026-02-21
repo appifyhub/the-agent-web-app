@@ -52,7 +52,7 @@
     "platform_handle_placeholder_telegram": "@用户名",
     "platform_handle_placeholder_whatsapp": "+861234567890",
     "you_are_sponsored": "您是被赞助的用户！",
-    "unlink_message": "您现在可以成为自主用户。这将断开您与{sponsorName}之间的链接, AI将停止工作, 直到您配置您的个人资料。",
+    "unlink_message": "您可以成为自主用户。这将断开赞助链接，AI将停止工作，直到您配置您的个人资料。",
     "unlink": "取消链接"
   },
   "usage": {
@@ -224,7 +224,6 @@
     "platform": "平台",
     "platform_user_id": "平台用户ID",
     "platform_handle": "平台用户名",
-    "sponsored_by": "赞助者",
     "version": "AI 版本",
     "reveal_placeholder": "识别您的信息"
   },
@@ -257,7 +256,7 @@
     "fetch_failed": "加载设置失败。",
     "save_failed": "保存设置失败。",
     "check_link": "请检查您的访问链接并重试。",
-    "sponsored_user": "您的使用由{sponsorName}赞助。要成为自主用户，请前往{sponsorshipsLink}。"
+    "sponsored_user": "您的使用受到赞助。要成为自主用户，请前往{sponsorshipsLink}。"
   },
   "features": {
     "header": "功能",

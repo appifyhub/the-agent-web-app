@@ -52,7 +52,7 @@
     "platform_handle_placeholder_telegram": "@kullanıcı_adı",
     "platform_handle_placeholder_whatsapp": "+901234567890",
     "you_are_sponsored": "Sponsorlu bir kullanıcısınız!",
-    "unlink_message": "Artık bağımsız bir kullanıcı olabilirsiniz. Bu, siz ve {sponsorName} arasındaki bağlantıyı koparır ve Profilinizi yapılandırana kadar AI çalışmayı durdurur.",
+    "unlink_message": "Bağımsız bir kullanıcı olabilirsiniz. Bu, sponsorluk bağlantısını koparır ve Profilinizi yapılandırana kadar AI çalışmayı durdurur.",
     "unlink": "Bağlantıyı Kes"
   },
   "usage": {
@@ -224,7 +224,6 @@
     "platform": "Platform",
     "platform_user_id": "Platform Kullanıcı ID",
     "platform_handle": "Platform Kullanıcı Adı",
-    "sponsored_by": "Sponsor:",
     "version": "AI Sürümü",
     "reveal_placeholder": "Sizi tanımlayan bilgiler"
   },
@@ -257,7 +256,7 @@
     "fetch_failed": "Ayarlar yüklenemedi.",
     "save_failed": "Ayarlar kaydedilemedi.",
     "check_link": "Erişim bağlantınızı kontrol edin ve tekrar deneyin.",
-    "sponsored_user": "Kullanımınız {sponsorName} tarafından sponsorlanıyor. Bağımsız bir kullanıcı olmak için {sponsorshipsLink} sayfasına gidin."
+    "sponsored_user": "Kullanımınız sponsorlanıyor. Bağımsız bir kullanıcı olmak için {sponsorshipsLink} sayfasına gidin."
   },
   "tools": {
     "not_configured": "Yapılandır",

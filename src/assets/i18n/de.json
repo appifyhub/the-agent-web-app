@@ -52,7 +52,7 @@
     "platform_handle_placeholder_telegram": "@benutzername",
     "platform_handle_placeholder_whatsapp": "+491234567890",
     "you_are_sponsored": "Sie sind ein gesponserter Benutzer!",
-    "unlink_message": "Sie können jetzt ein autonomer Benutzer werden. Dies bricht die Verbindung zwischen Ihnen und {sponsorName} und die KI wird nicht mehr funktionieren, bis Sie Ihr Profil konfigurieren.",
+    "unlink_message": "Sie können ein autonomer Benutzer werden. Dies bricht die Sponsoring-Verbindung und die KI wird nicht mehr funktionieren, bis Sie Ihr Profil konfigurieren.",
     "unlink": "Verknüpfung aufheben"
   },
   "usage": {
@@ -224,7 +224,6 @@
     "platform": "Plattform",
     "platform_user_id": "Plattform-Benutzer-ID",
     "platform_handle": "Plattform-Benutzername",
-    "sponsored_by": "Gesponsert von",
     "version": "KI-Version",
     "reveal_placeholder": "Informationen, die Sie identifizieren"
   },
@@ -376,7 +375,7 @@
     "fetch_failed": "Laden der Einstellungen fehlgeschlagen.",
     "save_failed": "Speichern der Einstellungen fehlgeschlagen.",
     "check_link": "Überprüfen Sie Ihren Zugangslink und versuchen Sie es erneut.",
-    "sponsored_user": "Ihre Nutzung wird von {sponsorName} gesponsert. Um ein autonomer Benutzer zu werden, gehen Sie zu {sponsorshipsLink}."
+    "sponsored_user": "Ihre Nutzung wird gesponsert. Um ein autonomer Benutzer zu werden, gehen Sie zu {sponsorshipsLink}."
   },
   "check_out_project": "Projekt ansehen",
   "footer": {
