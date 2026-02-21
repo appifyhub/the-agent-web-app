@@ -1,7 +1,7 @@
 {
   "name": "the-agent-web-app",
   "private": true,
-  "version": "5.0.6",
+  "version": "5.0.7",
   "type": "module",
   "scripts": {
     "clean": "rm -rf dist .vite node_modules/.vite",
