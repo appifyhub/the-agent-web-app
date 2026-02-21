@@ -72,6 +72,7 @@ export default function FeaturesPage() {
         page="features"
         chats={chats}
         userId={accessToken?.decoded?.sub}
+        rawAccessToken={accessToken?.raw}
         selectedLanguage={language}
         showProfileButton={showNav}
         showSponsorshipsButton={showNav}

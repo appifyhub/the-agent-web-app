@@ -3,12 +3,16 @@
   "profile": "个人资料",
   "sponsorships": "赞助",
   "close": "关闭",
+  "restore": "恢复",
   "help": "帮助",
   "configure_title": "配置{botName}的行为",
   "intelligence_card_title": "提升 {botName} 的智能",
   "access": "访问",
   "intelligence": "智能",
   "access_card_title": "让 {botName} 独立",
+  "access_use_credits_warning_prefix": "要使用积分，请删除所有API密钥",
+  "access_remove_all_keys": "全部删除",
+  "access_keys_cleared_message": "API密钥已清除。按保存以确认。",
   "profile_card_title": "自定义 {botName}",
   "profile_full_name_label": "{botName} 认识我为：",
   "profile_full_name_placeholder": "您的显示名称",
@@ -48,12 +52,12 @@
     "platform_handle_placeholder_telegram": "@用户名",
     "platform_handle_placeholder_whatsapp": "+861234567890",
     "you_are_sponsored": "您是被赞助的用户！",
-    "unlink_message": "您现在可以成为自主用户。这将断开您与{sponsorName}之间的链接, AI将停止工作, 直到您配置您的个人资料。",
+    "unlink_message": "您可以成为自主用户。这将断开赞助链接，AI将停止工作，直到您配置您的个人资料。",
     "unlink": "取消链接"
   },
   "usage": {
     "page_title": "使用情况",
-    "card_title": "您的使用历史",
+    "card_title": "使用历史",
     "no_records_found": "未找到使用记录",
     "cost_breakdown": {
       "title": "费用明细",
@@ -83,9 +87,13 @@
       "chat_background": "后台",
       "remote_runtime": "远程运行时间",
       "output_image_sizes": "输出图像",
-      "input_image_sizes": "输入图像"
+      "input_image_sizes": "输入图像",
+      "status_label": "状态",
+      "status_completed": "已完成",
+      "status_failed": "失败"
     },
     "load_more": "加载更多",
+    "credit_balance": "我拥有的积分：{balance}",
     "filters": {
       "scope_section": "范围",
       "filters_section": "筛选器",
@@ -126,15 +134,17 @@
   },
   "purchases": {
     "page_title": "购买",
-    "card_title": "您的购买历史",
+    "card_title": "购买历史",
     "use_license": "使用许可证",
+    "license": "许可证",
+    "buy": "购买",
     "license_key_label": "输入您的许可证密钥",
     "license_key_placeholder": "粘贴或输入您的许可证密钥",
     "bind_success": "许可证链接成功！",
     "paste_failed": "粘贴失败",
     "paste_permission_denied": "剪贴板访问被拒绝",
     "no_records_found": "未找到购买",
-    "buy_more": "购买更多",
+    "buy_credits": "购买积分",
     "filters": {
       "time_range_label": "时间",
       "product_label": "产品",
@@ -172,8 +182,14 @@
   "saved": "已保存！",
   "copied": "已复制！",
   "pasted": "已粘贴！",
-  "connections": {
-    "page_title": "连接",
+  "menu_section": {
+    "personal": "个人",
+    "agent": "助手",
+    "resources": "资源",
+    "people": "联系人"
+  },
+  "linked_profiles": {
+    "page_title": "关联的配置文件",
     "card_title": "连接配置文件",
     "show_my_key": "显示我的连接密钥",
     "hide_my_key": "隐藏我的连接密钥",
@@ -195,7 +211,7 @@
     "command_info": "您也可以使用连接命令在支持的平台之一中直接将此密钥发送给 {botName}。这将自动将此配置文件与您发送到的配置文件连接：",
     "chat_command_info": "或者，您可以要求 {botName} 使用聊天连接到另一个配置文件：",
     "chat_command_example": "请将我连接到此配置文件：{connectKey}。",
-    "cannot_connect_to_self": "您不能将此配置文件连接到自身。要进行连接，您必须转到另一个配置文件的连接设置并从那里获取密钥！",
+    "cannot_connect_to_self": "您不能将此配置文件连接到自身。要进行连接，您必须转到另一个配置文件的关联的配置文件设置并从那里获取密钥！",
     "invalid_format": "格式无效。连接密钥必须采用正确的格式。",
     "connect_success": "配置文件连接成功！",
     "regenerate_success": "连接密钥重新生成成功！",
@@ -214,9 +230,8 @@
     "platform": "平台",
     "platform_user_id": "平台用户ID",
     "platform_handle": "平台用户名",
-    "sponsored_by": "赞助者",
     "version": "AI 版本",
-    "reveal_placeholder": "我们收集的关于您的信息"
+    "reveal_placeholder": "识别您的信息"
   },
   "platforms": {
     "telegram": "电报",
@@ -227,6 +242,18 @@
   "where_is_my_key": "我的 {providerName} 密钥在哪里？",
   "configure_intelligence": "配置智能",
   "configure_ai_providers": "配置 AI 提供商",
+  "intelligence_presets": {
+    "label": "智能模式",
+    "lowest_price": "最低成本",
+    "lowest_price_description": "每个类别中最便宜的可用工具。",
+    "highest_price": "最高质量",
+    "highest_price_description": "每个类别中功能最强（也最昂贵）的工具。",
+    "agent_choice": "均衡",
+    "agent_choice_description": "在成本与质量之间推荐的平衡。",
+    "custom": "自定义",
+    "custom_description": "个性化定制的工具选择。"
+  },
+  "detailed_tool_choices": "我的工具选择",
   "errors": {
     "oh_no": "哦不！",
     "expired": "您的会话已过期。",
@@ -235,7 +262,7 @@
     "fetch_failed": "加载设置失败。",
     "save_failed": "保存设置失败。",
     "check_link": "请检查您的访问链接并重试。",
-    "sponsored_user": "您的使用由{sponsorName}赞助。要成为自主用户，请前往{sponsorshipsLink}。"
+    "sponsored_user": "您的使用受到赞助。要成为自主用户，请前往{sponsorshipsLink}。"
   },
   "features": {
     "header": "功能",
@@ -364,6 +391,23 @@
     "powered_by": "由以下提供支持",
     "rights_reserved": "保留所有权利"
   },
+  "products": {
+    "shop": {
+      "title": "选择产品",
+      "pack_100": "100积分包",
+      "pack_200": "200积分包",
+      "pack_300": "300积分包",
+      "pack_500": "500积分包",
+      "pack_1000": "1,000积分包",
+      "pack_2000": "2,000积分包",
+      "pack_3000": "3,000积分包",
+      "pack_5000": "5,000积分包",
+      "pack_10000": "10,000积分包",
+      "donation": "绿茶（捐赠）",
+      "credit_packs": "积分包",
+      "open_shop": "打开商店"
+    }
+  },
   "cost_estimate": {
     "title": "成本估算：",
     "description": "使用 的估算成本。所有值均以积分为单位。",
@@ -386,5 +430,9 @@
     "other_costs": "其他成本",
     "api_call": "每次使用",
     "second_of_runtime": "每秒运行时间"
+  },
+  "intelligence_warnings": {
+    "no_access_message": "您需要自己的私有 API 密钥或购买的积分才能使用 AI 工具。",
+    "no_settings": "没有需要配置的AI设置。"
   }
 }

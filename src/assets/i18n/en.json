@@ -3,12 +3,16 @@
   "profile": "Profile",
   "sponsorships": "Sponsorships",
   "close": "Close",
+  "restore": "Restore",
   "help": "Help",
   "configure_title": "Configure {botName}'s Behavior",
   "intelligence_card_title": "Boost {botName}'s Intelligence",
   "access": "Access",
   "intelligence": "Intelligence",
   "access_card_title": "Make {botName} independent",
+  "access_use_credits_warning_prefix": "To use credits, remove all API keys",
+  "access_remove_all_keys": "Remove All",
+  "access_keys_cleared_message": "API keys cleared. Press Save to confirm.",
   "profile_card_title": "Customize {botName}",
   "profile_full_name_label": "{botName} knows me as:",
   "profile_full_name_placeholder": "Your display name",
@@ -48,12 +52,12 @@
     "platform_handle_placeholder_telegram": "@username",
     "platform_handle_placeholder_whatsapp": "+441234567890",
     "you_are_sponsored": "You are a sponsored user!",
-    "unlink_message": "You can now become an autonomous user. This breaks the link between you and {sponsorName} and AI will stop working until you configure your Profile.",
+    "unlink_message": "You can become an autonomous user. This breaks the sponsorship link and AI will stop working until you configure your Profile.",
     "unlink": "Unlink"
   },
   "usage": {
     "page_title": "Usage",
-    "card_title": "Your Usage History",
+    "card_title": "Usage History",
     "no_records_found": "No usage records found",
     "filters": {
       "scope_section": "SCOPE",
@@ -120,21 +124,27 @@
       "chat_background": "Background",
       "remote_runtime": "Remote Runtime",
       "output_image_sizes": "Output Images",
-      "input_image_sizes": "Input Images"
+      "input_image_sizes": "Input Images",
+      "status_label": "Status",
+      "status_completed": "Completed",
+      "status_failed": "Failed"
     },
-    "load_more": "Load more"
+    "load_more": "Load more",
+    "credit_balance": "Credits I own: {balance}"
   },
   "purchases": {
     "page_title": "Purchases",
-    "card_title": "Your Purchase History",
+    "card_title": "Purchase History",
     "use_license": "Use a License",
+    "license": "License",
+    "buy": "Buy",
     "license_key_label": "Enter your license key",
     "license_key_placeholder": "Paste or type your license key",
     "bind_success": "License linked successfully!",
     "paste_failed": "Failed to paste",
     "paste_permission_denied": "Clipboard access denied",
     "no_records_found": "No purchases found",
-    "buy_more": "Buy more",
+    "buy_credits": "Buy credits",
     "filters": {
       "time_range_label": "Time",
       "product_label": "Product",
@@ -172,9 +182,15 @@
   "saved": "Saved!",
   "copied": "Copied!",
   "pasted": "Pasted!",
-  "connections": {
-    "page_title": "Connections",
-    "card_title": "Connect Profiles",
+  "menu_section": {
+    "personal": "Personal",
+    "agent": "Agent",
+    "resources": "Resources",
+    "people": "People"
+  },
+  "linked_profiles": {
+    "page_title": "Linked Profiles",
+    "card_title": "Link Profiles",
     "show_my_key": "Show my Connect Key",
     "hide_my_key": "Hide my Connect Key",
     "copy_key": "Copy",
@@ -195,7 +211,7 @@
     "command_info": "You can also directly send this key to {botName} in one of the supported platforms, using a Connect command. This will automatically connect this profile with the profile you send it to:",
     "chat_command_info": "Alternatively, you can ask {botName} to connect to another profile using chat:",
     "chat_command_example": "Please connect me to this profile: {connectKey}.",
-    "cannot_connect_to_self": "You cannot connect this profile to itself. To make connections, you must go to the other profile's Connections settings and take the key from there!",
+    "cannot_connect_to_self": "You cannot connect this profile to itself. To make connections, you must go to the other profile's Linked Profiles settings and take the key from there!",
     "invalid_format": "Invalid format. Connect key must be in the correct format.",
     "connect_success": "Profiles connected successfully!",
     "regenerate_success": "Connect key regenerated successfully!",
@@ -214,9 +230,8 @@
     "platform": "Platform",
     "platform_user_id": "Platform User ID",
     "platform_handle": "Platform Handle",
-    "sponsored_by": "Sponsored by",
     "version": "AI Version",
-    "reveal_placeholder": "Information we collect about you"
+    "reveal_placeholder": "Information that identifies you"
   },
   "platforms": {
     "telegram": "Telegram",
@@ -300,6 +315,22 @@
       }
     }
   },
+  "intelligence_warnings": {
+    "no_access_message": "You need either your own private API keys or purchased credits to use AI tools.",
+    "no_settings": "No AI settings to configure."
+  },
+  "intelligence_presets": {
+    "label": "Intelligence Mode",
+    "lowest_price": "Lowest cost",
+    "lowest_price_description": "The cheapest available tool in each category.",
+    "highest_price": "Highest quality",
+    "highest_price_description": "The most capable (and expensive) tool in each category.",
+    "agent_choice": "Balanced",
+    "agent_choice_description": "Recommended balance between cost and quality.",
+    "custom": "Custom",
+    "custom_description": "Individually customized tool selection."
+  },
+  "detailed_tool_choices": "My tool choices",
   "errors": {
     "oh_no": "Oh no!",
     "expired": "Your session has expired.",
@@ -308,7 +339,7 @@
     "fetch_failed": "Failed to load the settings.",
     "save_failed": "Failed to save settings.",
     "check_link": "Check your access link and try again.",
-    "sponsored_user": "Your usage is sponsored by {sponsorName}. To become an autonomous user, go to {sponsorshipsLink}."
+    "sponsored_user": "Your usage is sponsored. To become an autonomous user, go to {sponsorshipsLink}."
   },
   "features": {
     "header": "Features",
@@ -354,6 +385,23 @@
         "title": "Sponsorships",
         "description": "Share your access to the assistant with others, while keeping your and their usage private. Sponsorships let you extend your assistant's benefits to friends or family, and you can always manage them via the assistant or by typing `/settings` in chat."
       }
+    }
+  },
+  "products": {
+    "shop": {
+      "title": "Pick a Product",
+      "pack_100": "Pack of 100",
+      "pack_200": "Pack of 200",
+      "pack_300": "Pack of 300",
+      "pack_500": "Pack of 500",
+      "pack_1000": "Pack of 1,000",
+      "pack_2000": "Pack of 2,000",
+      "pack_3000": "Pack of 3,000",
+      "pack_5000": "Pack of 5,000",
+      "pack_10000": "Pack of 10,000",
+      "donation": "Green Tea (Donation)",
+      "credit_packs": "Credit packs",
+      "open_shop": "Open the shop"
     }
   },
   "cost_estimate": {

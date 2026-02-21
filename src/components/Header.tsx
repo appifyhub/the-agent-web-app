@@ -6,13 +6,12 @@ import {
   Gift,
   LifeBuoy,
   Menu as MenuIcon,
-  MoreHorizontal,
   Key,
-  Brain,
+  Sparkles,
   X,
   Merge,
-  ChartNoAxesCombined,
-  ReceiptCent,
+  ShoppingCart,
+  BadgeCent,
 } from "lucide-react";
 import {
   NavigationMenu,
@@ -31,6 +30,7 @@ import ChatsCollapsible from "@/components/ChatsCollapsible";
 import { cn } from "@/lib/utils";
 import { Language } from "@/lib/languages";
 import { ChatInfo } from "@/services/user-settings-service";
+import { useUserSettings } from "@/hooks/useUserSettings";
 import LanguageDropdown from "@/components/LanguageDropdown";
 import ChatsDropdown from "@/components/ChatsDropdown";
 import logoVector from "@/assets/logo-vector.svg";
@@ -45,7 +45,7 @@ type Page =
   | "features"
   | "access"
   | "intelligence"
-  | "connections"
+  | "linked_profiles"
   | "usage"
   | "purchases";
 
@@ -54,6 +54,7 @@ interface HeaderProps {
   selectedChat?: ChatInfo;
   chats?: ChatInfo[];
   userId?: string;
+  rawAccessToken?: string;
   selectedLanguage: Language;
   hasBlockerError?: boolean;
   showProfileButton?: boolean;
@@ -69,6 +70,7 @@ const Header: React.FC<HeaderProps> = ({
   selectedChat = undefined,
   chats: externalChats = [],
   userId: propUserId,
+  rawAccessToken,
   selectedLanguage,
   hasBlockerError = false,
   showProfileButton = true,
@@ -99,7 +101,7 @@ const Header: React.FC<HeaderProps> = ({
     navigateToAccess,
     navigateToIntelligence,
     navigateToSponsorships,
-    navigateToConnections,
+    navigateToLinkedProfiles,
     navigateToUsage,
     navigateToPurchases,
     navigateToFeatures,
@@ -110,7 +112,13 @@ const Header: React.FC<HeaderProps> = ({
   const chats = externalChats;
 
   // Prefer URL param, fall back to prop (for navigation from non-user-specific pages)
-  const effectiveUserId = user_id || propUserId;
+  const effectiveUserId =
+    user_id || propUserId || localStorage.getItem("user_id");
+
+  const { userSettings } = useUserSettings(
+    effectiveUserId || undefined,
+    rawAccessToken,
+  );
 
   // Resolve selected chat from URL or prop
   const resolvedSelectedChat =
@@ -137,8 +145,8 @@ const Header: React.FC<HeaderProps> = ({
         return t("access");
       case "intelligence":
         return t("intelligence");
-      case "connections":
-        return t("connections.page_title");
+      case "linked_profiles":
+        return t("linked_profiles.page_title");
       case "usage":
         return t("usage.page_title");
       case "purchases":
@@ -221,14 +229,14 @@ const Header: React.FC<HeaderProps> = ({
     }
   };
 
-  const handleConnectionsClick = () => {
-    if (page === "connections") return;
+  const handleLinkedProfilesClick = () => {
+    if (page === "linked_profiles") return;
 
     if (lang_iso_code && effectiveUserId) {
-      navigateToConnections(effectiveUserId, lang_iso_code);
+      navigateToLinkedProfiles(effectiveUserId, lang_iso_code);
       setMenuOpen(false);
     } else {
-      console.warn("Cannot navigate to connections without user_id");
+      console.warn("Cannot navigate to linked profiles without user_id");
     }
   };
 
@@ -261,189 +269,42 @@ const Header: React.FC<HeaderProps> = ({
         className={cn(
           "absolute right-6 z-10 lg:hidden flex items-center",
           "top-6 md:top-12",
-          "gap-5 md:gap-2"
+          "gap-6 md:gap-2",
         )}
       >
+        {userSettings?.credit_balance !== undefined && (
+          <Button
+            variant="outline"
+            size="icon"
+            className={cn(
+              "rounded-full gap-2 w-auto px-4 scale-120 md:scale-100 touch-manipulation",
+              page === "usage"
+                ? "glass-active text-accent-amber underline underline-offset-4 decoration-accent-amber cursor-default"
+                : "glass cursor-pointer",
+            )}
+            onClick={handleUsageClick}
+            disabled={page === "usage"}
+          >
+            <BadgeCent className="h-5 w-5 text-accent-amber" />
+            <span className="font-mono">
+              {userSettings.credit_balance.toFixed(2)}
+            </span>
+          </Button>
+        )}
         <LanguageDropdown
           selectedLanguage={selectedLanguage}
           onLangChange={handleLangChange}
           className="scale-120 md:scale-100"
         />
         {hasAnyNavItems && (
-          <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
-            <SheetTrigger asChild>
-              <Button
-                variant="outline"
-                size="icon"
-                className={cn("glass rounded-full", "scale-120 md:scale-100")}
-              >
-                <MenuIcon className="h-6 w-6" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent
-              side="right"
-              className="w-full! sm:max-w-sm glass-dark-static border-l border-white/20 px-2 [&>button]:hidden"
-            >
-              <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
-              <SheetDescription className="sr-only">
-                Access your chats, profile, sponsorships, help, and other
-              </SheetDescription>
-              <div className="flex flex-col gap-1 h-full">
-                <div className="h-6" />
-                {/* Custom close button */}
-                <div className="px-3 flex items-center justify-end gap-4">
-                  <div className="flex-1 h-px bg-blue-300/30" />
-                  <SheetClose asChild>
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      className={cn("glass rounded-full cursor-pointer", "scale-120 md:scale-100")}
-                    >
-                      <X className="h-6 w-6" />
-                    </Button>
-                  </SheetClose>
-                </div>
-
-                <div className="h-4" />
-
-                {/* Chats collapsible in drawer */}
-                {showChatsDropdown && chats.length > 0 && (
-                  <>
-                    <ChatsCollapsible
-                      chats={chats}
-                      selectedChat={resolvedSelectedChat}
-                      onChatChange={handleChatChange}
-                      defaultOpen={page === "chat"}
-                      onOpenChange={setChatsCollapsibleOpen}
-                    />
-                    {chatsCollapsibleOpen && <div className="h-2" />}
-                  </>
-                )}
-
-                {/* Navigation items */}
-                <div className="flex flex-col gap-1 border-white/10">
-                  {showProfileButton && (
-                    <Button
-                      variant="ghost"
-                      disabled={page === "profile"}
-                      className={cn(
-                        "justify-start gap-3 text-base h-12 rounded-xl font-normal",
-                        page === "profile"
-                          ? "bg-accent/70 cursor-default opacity-100"
-                          : "text-white hover:bg-white/10 cursor-pointer"
-                      )}
-                      onClick={handleProfileClick}
-                    >
-                      <UserRound className="h-5 w-5 shrink-0" />
-                      {t("profile")}
-                    </Button>
-                  )}
-                  <Button
-                    variant="ghost"
-                    disabled={page === "access"}
-                    className={cn(
-                      "justify-start gap-3 text-base h-12 rounded-xl font-normal",
-                      page === "access"
-                        ? "bg-accent/70 cursor-default opacity-100"
-                        : "text-white hover:bg-white/10 cursor-pointer"
-                    )}
-                    onClick={handleAccessClick}
-                  >
-                    <Key className="h-5 w-5 shrink-0" />
-                    {t("access")}
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    disabled={page === "intelligence"}
-                    className={cn(
-                      "justify-start gap-3 text-base h-12 rounded-xl font-normal",
-                      page === "intelligence"
-                        ? "bg-accent/70 cursor-default opacity-100"
-                        : "text-white hover:bg-white/10 cursor-pointer"
-                    )}
-                    onClick={handleIntelligenceClick}
-                  >
-                    <Brain className="h-5 w-5 shrink-0" />
-                    {t("intelligence")}
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    disabled={page === "connections"}
-                    className={cn(
-                      "justify-start gap-3 text-base h-12 rounded-xl font-normal",
-                      page === "connections"
-                        ? "bg-accent/70 cursor-default opacity-100"
-                        : "text-white hover:bg-white/10 cursor-pointer"
-                    )}
-                    onClick={handleConnectionsClick}
-                  >
-                    <Merge className="h-5 w-5 shrink-0" />
-                    {t("connections.page_title")}
-                  </Button>
-                  {showSponsorshipsButton && (
-                    <Button
-                      variant="ghost"
-                      disabled={page === "sponsorships"}
-                      className={cn(
-                        "justify-start gap-3 text-base h-12 rounded-xl font-normal",
-                        page === "sponsorships"
-                          ? "bg-accent/70 cursor-default opacity-100"
-                          : "text-white hover:bg-white/10 cursor-pointer"
-                      )}
-                      onClick={handleSponsorshipsClick}
-                    >
-                      <Gift className="h-5 w-5 shrink-0" />
-                      {t("sponsorships")}
-                    </Button>
-                  )}
-                  <Button
-                    variant="ghost"
-                    disabled={page === "usage"}
-                    className={cn(
-                      "justify-start gap-3 text-base h-12 rounded-xl font-normal",
-                      page === "usage"
-                        ? "bg-accent/70 cursor-default opacity-100"
-                        : "text-white hover:bg-white/10 cursor-pointer"
-                    )}
-                    onClick={handleUsageClick}
-                  >
-                    <ChartNoAxesCombined className="h-5 w-5 shrink-0" />
-                    {t("usage.page_title")}
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    disabled={page === "purchases"}
-                    className={cn(
-                      "justify-start gap-3 text-base h-12 rounded-xl font-normal",
-                      page === "purchases"
-                        ? "bg-accent/70 cursor-default opacity-100"
-                        : "text-white hover:bg-white/10 cursor-pointer"
-                    )}
-                    onClick={handlePurchasesClick}
-                  >
-                    <ReceiptCent className="h-5 w-5 shrink-0" />
-                    {t("purchases.page_title")}
-                  </Button>
-                  {showHelpButton && (
-                    <Button
-                      variant="ghost"
-                      disabled={page === "features"}
-                      className={cn(
-                        "justify-start gap-3 text-base h-12 rounded-xl font-normal",
-                        page === "features"
-                          ? "bg-accent/70 cursor-default opacity-100"
-                          : "text-white hover:bg-white/10 cursor-pointer"
-                      )}
-                      onClick={handleHelpClick}
-                    >
-                      <LifeBuoy className="h-5 w-5 shrink-0" />
-                      {t("help")}
-                    </Button>
-                  )}
-                </div>
-              </div>
-            </SheetContent>
-          </Sheet>
+          <Button
+            variant="outline"
+            size="icon"
+            className={cn("glass rounded-full", "scale-120 md:scale-100")}
+            onClick={() => setMenuOpen(true)}
+          >
+            <MenuIcon className="h-6 w-6" />
+          </Button>
         )}
       </div>
 
@@ -454,14 +315,14 @@ const Header: React.FC<HeaderProps> = ({
           "md:flex-row md:justify-between md:items-center md:space-y-0",
           "px-4 pt-30 pb-12",
           "md:px-10 md:pt-10 md:pb-24",
-          "max-w-7xl mx-auto text-white"
+          "max-w-7xl mx-auto text-white",
         )}
       >
         {/* Page title & Icon */}
         <div
           className={cn(
             "flex flex-col items-center space-y-6",
-            "md:flex-row md:items-center md:space-y-0"
+            "md:flex-row md:items-center md:space-y-0",
           )}
         >
           <a href={import.meta.env.VITE_LANDING_PAGE_URL}>
@@ -504,12 +365,33 @@ const Header: React.FC<HeaderProps> = ({
                       "gap-2 text-base w-auto px-4 rounded-full",
                       page === "profile"
                         ? "glass-active text-accent-amber underline underline-offset-4 decoration-accent-amber cursor-default"
-                        : "glass cursor-pointer"
+                        : "glass cursor-pointer",
                     )}
                     onClick={handleProfileClick}
                   >
                     <UserRound className="h-5 w-5" />
                     {t("profile")}
+                  </Button>
+                </NavigationMenuItem>
+              )}
+              {userSettings?.credit_balance !== undefined && (
+                <NavigationMenuItem>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className={cn(
+                      "gap-2 text-base w-auto px-4 rounded-full",
+                      page === "usage"
+                        ? "glass-active text-accent-amber underline underline-offset-4 decoration-accent-amber cursor-default"
+                        : "glass cursor-pointer",
+                    )}
+                    onClick={handleUsageClick}
+                    disabled={page === "usage"}
+                  >
+                    <BadgeCent className="h-5 w-5 text-accent-amber" />
+                    <span className="font-mono">
+                      {userSettings.credit_balance.toFixed(2)}
+                    </span>
                   </Button>
                 </NavigationMenuItem>
               )}
@@ -528,7 +410,7 @@ const Header: React.FC<HeaderProps> = ({
                         size="icon"
                         className="glass rounded-full cursor-pointer"
                       >
-                        <MoreHorizontal className="h-5 w-5" />
+                        <MenuIcon className="h-5 w-5" />
                       </Button>
                     </SheetTrigger>
                     <SheetContent
@@ -539,10 +421,11 @@ const Header: React.FC<HeaderProps> = ({
                         Navigation Menu
                       </SheetTitle>
                       <SheetDescription className="sr-only">
-                        Access your chats, profile, access, intelligence,
-                        sponsorships, help, and other
+                        Access your chats, profile, intelligence, usage,
+                        purchases, access, sponsorships, linked profiles, help,
+                        and other
                       </SheetDescription>
-                      <div className="flex flex-col gap-1 h-full">
+                      <div className="flex flex-col h-full overflow-y-auto">
                         <div className="h-6" />
                         {/* Custom close button */}
                         <div className="px-1 flex items-center justify-end gap-6">
@@ -551,7 +434,10 @@ const Header: React.FC<HeaderProps> = ({
                             <Button
                               variant="outline"
                               size="icon"
-                              className={cn("glass rounded-full cursor-pointer", "scale-120 md:scale-100")}
+                              className={cn(
+                                "glass rounded-full cursor-pointer",
+                                "scale-120 md:scale-100",
+                              )}
                             >
                               <X className="h-6 w-6" />
                             </Button>
@@ -560,22 +446,27 @@ const Header: React.FC<HeaderProps> = ({
 
                         <div className="h-4" />
 
-                        {/* Chats collapsible in drawer */}
-                        {showChatsDropdown && chats.length > 0 && (
-                          <>
-                            <ChatsCollapsible
-                              chats={chats}
-                              selectedChat={resolvedSelectedChat}
-                              onChatChange={handleChatChange}
-                              defaultOpen={page === "chat"}
-                              onOpenChange={setChatsCollapsibleOpen}
-                            />
-                            {chatsCollapsibleOpen && <div className="h-4" />}
-                          </>
-                        )}
-
                         {/* Navigation items */}
-                        <div className="flex flex-col gap-1 border-white/10">
+                        <div className="flex flex-col border-white/10">
+                          {/* Personal Section */}
+                          <div className="px-3 pt-2 pb-1">
+                            <span className="text-xs uppercase font-medium text-blue-300">
+                              {t("menu_section.personal")}
+                            </span>
+                          </div>
+                          {/* Chats collapsible in Personal section */}
+                          {showChatsDropdown && chats.length > 0 && (
+                            <>
+                              <ChatsCollapsible
+                                chats={chats}
+                                selectedChat={resolvedSelectedChat}
+                                onChatChange={handleChatChange}
+                                defaultOpen={page === "chat"}
+                                onOpenChange={setChatsCollapsibleOpen}
+                              />
+                              {chatsCollapsibleOpen && <div className="h-4" />}
+                            </>
+                          )}
                           {showProfileButton && (
                             <Button
                               variant="ghost"
@@ -584,7 +475,7 @@ const Header: React.FC<HeaderProps> = ({
                                 "justify-start gap-3 text-base h-12 rounded-xl font-normal",
                                 page === "profile"
                                   ? "bg-accent/70 cursor-default opacity-100"
-                                  : "text-white hover:bg-white/10 cursor-pointer"
+                                  : "text-white hover:bg-white/10 cursor-pointer",
                               )}
                               onClick={handleProfileClick}
                             >
@@ -592,20 +483,14 @@ const Header: React.FC<HeaderProps> = ({
                               {t("profile")}
                             </Button>
                           )}
-                          <Button
-                            variant="ghost"
-                            disabled={page === "access"}
-                            className={cn(
-                              "justify-start gap-3 text-base h-12 rounded-xl font-normal",
-                              page === "access"
-                                ? "bg-accent/70 cursor-default opacity-100"
-                                : "text-white hover:bg-white/10 cursor-pointer"
-                            )}
-                            onClick={handleAccessClick}
-                          >
-                            <Key className="h-5 w-5 shrink-0" />
-                            {t("access")}
-                          </Button>
+                          <div className="h-4" />
+
+                          {/* Agent Section */}
+                          <div className="px-3 pt-4 pb-1">
+                            <span className="text-xs uppercase font-medium text-blue-300">
+                              {t("menu_section.agent")}
+                            </span>
+                          </div>
                           <Button
                             variant="ghost"
                             disabled={page === "intelligence"}
@@ -613,70 +498,12 @@ const Header: React.FC<HeaderProps> = ({
                               "justify-start gap-3 text-base h-12 rounded-xl font-normal",
                               page === "intelligence"
                                 ? "bg-accent/70 cursor-default opacity-100"
-                                : "text-white hover:bg-white/10 cursor-pointer"
+                                : "text-white hover:bg-white/10 cursor-pointer",
                             )}
                             onClick={handleIntelligenceClick}
                           >
-                            <Brain className="h-5 w-5 shrink-0" />
+                            <Sparkles className="h-5 w-5 shrink-0" />
                             {t("intelligence")}
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            disabled={page === "connections"}
-                            className={cn(
-                              "justify-start gap-3 text-base h-12 rounded-xl font-normal",
-                              page === "connections"
-                                ? "bg-accent/70 cursor-default opacity-100"
-                                : "text-white hover:bg-white/10 cursor-pointer"
-                            )}
-                            onClick={handleConnectionsClick}
-                          >
-                            <Merge className="h-5 w-5 shrink-0" />
-                            {t("connections.page_title")}
-                          </Button>
-                          {showSponsorshipsButton && (
-                            <Button
-                              variant="ghost"
-                              disabled={page === "sponsorships"}
-                              className={cn(
-                                "justify-start gap-3 text-base h-12 rounded-xl font-normal",
-                                page === "sponsorships"
-                                  ? "bg-accent/70 cursor-default opacity-100"
-                                  : "text-white hover:bg-white/10 cursor-pointer"
-                              )}
-                              onClick={handleSponsorshipsClick}
-                            >
-                              <Gift className="h-5 w-5 shrink-0" />
-                              {t("sponsorships")}
-                            </Button>
-                          )}
-                          <Button
-                            variant="ghost"
-                            disabled={page === "usage"}
-                            className={cn(
-                              "justify-start gap-3 text-base h-12 rounded-xl font-normal",
-                              page === "usage"
-                                ? "bg-accent/70 cursor-default opacity-100"
-                                : "text-white hover:bg-white/10 cursor-pointer"
-                            )}
-                            onClick={handleUsageClick}
-                          >
-                            <ChartNoAxesCombined className="h-5 w-5 shrink-0" />
-                            {t("usage.page_title")}
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            disabled={page === "purchases"}
-                            className={cn(
-                              "justify-start gap-3 text-base h-12 rounded-xl font-normal",
-                              page === "purchases"
-                                ? "bg-accent/70 cursor-default opacity-100"
-                                : "text-white hover:bg-white/10 cursor-pointer"
-                            )}
-                            onClick={handlePurchasesClick}
-                          >
-                            <ReceiptCent className="h-5 w-5 shrink-0" />
-                            {t("purchases.page_title")}
                           </Button>
                           {showHelpButton && (
                             <Button
@@ -686,7 +513,7 @@ const Header: React.FC<HeaderProps> = ({
                                 "justify-start gap-3 text-base h-12 rounded-xl font-normal",
                                 page === "features"
                                   ? "bg-accent/70 cursor-default opacity-100"
-                                  : "text-white hover:bg-white/10 cursor-pointer"
+                                  : "text-white hover:bg-white/10 cursor-pointer",
                               )}
                               onClick={handleHelpClick}
                             >
@@ -694,6 +521,95 @@ const Header: React.FC<HeaderProps> = ({
                               {t("help")}
                             </Button>
                           )}
+                          <div className="h-4" />
+
+                          {/* Resources Section */}
+                          <div className="px-3 pt-4 pb-1">
+                            <span className="text-xs uppercase font-medium text-blue-300">
+                              {t("menu_section.resources")}
+                            </span>
+                          </div>
+                          <Button
+                            variant="ghost"
+                            disabled={page === "usage"}
+                            className={cn(
+                              "justify-start gap-3 text-base h-12 rounded-xl font-normal",
+                              page === "usage"
+                                ? "bg-accent/70 cursor-default opacity-100"
+                                : "text-white hover:bg-white/10 cursor-pointer",
+                            )}
+                            onClick={handleUsageClick}
+                          >
+                            <BadgeCent className="h-5 w-5 shrink-0" />
+                            {t("usage.page_title")}
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            disabled={page === "purchases"}
+                            className={cn(
+                              "justify-start gap-3 text-base h-12 rounded-xl font-normal",
+                              page === "purchases"
+                                ? "bg-accent/70 cursor-default opacity-100"
+                                : "text-white hover:bg-white/10 cursor-pointer",
+                            )}
+                            onClick={handlePurchasesClick}
+                          >
+                            <ShoppingCart className="h-5 w-5 shrink-0" />
+                            {t("purchases.page_title")}
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            disabled={page === "access"}
+                            className={cn(
+                              "justify-start gap-3 text-base h-12 rounded-xl font-normal",
+                              page === "access"
+                                ? "bg-accent/70 cursor-default opacity-100"
+                                : "text-white hover:bg-white/10 cursor-pointer",
+                            )}
+                            onClick={handleAccessClick}
+                          >
+                            <Key className="h-5 w-5 shrink-0" />
+                            {t("access")}
+                          </Button>
+                          <div className="h-4" />
+
+                          {/* People Section */}
+                          <div className="px-3 pt-4 pb-1">
+                            <span className="text-xs uppercase font-medium text-blue-300">
+                              {t("menu_section.people")}
+                            </span>
+                          </div>
+                          {showSponsorshipsButton && (
+                            <Button
+                              variant="ghost"
+                              disabled={page === "sponsorships"}
+                              className={cn(
+                                "justify-start gap-3 text-base h-12 rounded-xl font-normal",
+                                page === "sponsorships"
+                                  ? "bg-accent/70 cursor-default opacity-100"
+                                  : "text-white hover:bg-white/10 cursor-pointer",
+                              )}
+                              onClick={handleSponsorshipsClick}
+                            >
+                              <Gift className="h-5 w-5 shrink-0" />
+                              {t("sponsorships")}
+                            </Button>
+                          )}
+                          <Button
+                            variant="ghost"
+                            disabled={page === "linked_profiles"}
+                            className={cn(
+                              "justify-start gap-3 text-base h-12 rounded-xl font-normal",
+                              page === "linked_profiles"
+                                ? "bg-accent/70 cursor-default opacity-100"
+                                : "text-white hover:bg-white/10 cursor-pointer",
+                            )}
+                            onClick={handleLinkedProfilesClick}
+                          >
+                            <Merge className="h-5 w-5 shrink-0" />
+                            {t("linked_profiles.page_title")}
+                          </Button>
+                          <div className="h-4" />
                         </div>
                       </div>
                     </SheetContent>

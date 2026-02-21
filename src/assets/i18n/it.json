@@ -3,12 +3,16 @@
   "profile": "Profilo",
   "sponsorships": "Sponsorizzazioni",
   "close": "Chiudi",
+  "restore": "Ripristina",
   "help": "Aiuto",
   "configure_title": "Configura il comportamento di {botName}",
   "intelligence_card_title": "Potenzia l'Intelligenza di {botName}",
   "access": "Accesso",
   "intelligence": "Intelligenza",
   "access_card_title": "Rendi {botName} indipendente",
+  "access_use_credits_warning_prefix": "Per utilizzare i crediti, rimuovi tutte le chiavi API",
+  "access_remove_all_keys": "Rimuovi Tutto",
+  "access_keys_cleared_message": "Chiavi API cancellate. Premi Salva per confermare.",
   "profile_card_title": "Personalizza {botName}",
   "profile_full_name_label": "{botName} mi conosce come:",
   "profile_full_name_placeholder": "Il tuo nome visualizzato",
@@ -48,12 +52,12 @@
     "platform_handle_placeholder_telegram": "@nome_utente",
     "platform_handle_placeholder_whatsapp": "+391234567890",
     "you_are_sponsored": "Sei un utente sponsorizzato!",
-    "unlink_message": "Ora puoi diventare un utente autonomo. Questo interrompe il collegamento tra te e {sponsorName} e l'IA smetterà di funzionare finché non configurerai il tuo Profilo.",
+    "unlink_message": "Puoi diventare un utente autonomo. Questo interrompe il collegamento di sponsorizzazione e l'IA smetterà di funzionare finché non configurerai il tuo Profilo.",
     "unlink": "Scollega"
   },
   "usage": {
     "page_title": "Utilizzo",
-    "card_title": "La tua cronologia di utilizzo",
+    "card_title": "Cronologia di utilizzo",
     "no_records_found": "Nessun record di utilizzo trovato",
     "cost_breakdown": {
       "title": "Dettaglio costi",
@@ -83,9 +87,13 @@
       "chat_background": "In background",
       "remote_runtime": "Tempo di esecuzione remoto",
       "output_image_sizes": "Immagini di output",
-      "input_image_sizes": "Immagini di input"
+      "input_image_sizes": "Immagini di input",
+      "status_label": "Stato",
+      "status_completed": "Completato",
+      "status_failed": "Fallito"
     },
     "load_more": "Carica altro",
+    "credit_balance": "Crediti che possiedo: {balance}",
     "filters": {
       "scope_section": "AMBITO",
       "filters_section": "FILTRI",
@@ -126,15 +134,17 @@
   },
   "purchases": {
     "page_title": "Acquisti",
-    "card_title": "La Tua Cronologia degli Acquisti",
+    "card_title": "Cronologia degli Acquisti",
     "use_license": "Usa una Licenza",
+    "license": "Licenza",
+    "buy": "Compra",
     "license_key_label": "Inserisci la tua chiave di licenza",
     "license_key_placeholder": "Incolla o digita la tua chiave di licenza",
     "bind_success": "Licenza collegata con successo!",
     "paste_failed": "Incolla non riuscito",
     "paste_permission_denied": "Accesso agli appunti negato",
     "no_records_found": "Nessun acquisto trovato",
-    "buy_more": "Acquista di più",
+    "buy_credits": "Acquista crediti",
     "filters": {
       "time_range_label": "Tempo",
       "product_label": "Prodotto",
@@ -172,8 +182,14 @@
   "saved": "Salvato!",
   "copied": "Copiato!",
   "pasted": "Incollato!",
-  "connections": {
-    "page_title": "Connessioni",
+  "menu_section": {
+    "personal": "Personale",
+    "agent": "Assistente",
+    "resources": "Risorse",
+    "people": "Persone"
+  },
+  "linked_profiles": {
+    "page_title": "Profili Collegati",
     "card_title": "Connetti Profili",
     "show_my_key": "Mostra la mia Chiave di Connessione",
     "hide_my_key": "Nascondi la mia Chiave di Connessione",
@@ -195,7 +211,7 @@
     "command_info": "Puoi anche inviare direttamente questa chiave a {botName} su una delle piattaforme supportate, usando un comando di Connessione. Questo collegherà automaticamente questo profilo con il profilo a cui lo invii:",
     "chat_command_info": "In alternativa, puoi chiedere a {botName} di connettersi a un altro profilo usando la chat:",
     "chat_command_example": "Per favore connettimi a questo profilo: {connectKey}.",
-    "cannot_connect_to_self": "Non puoi connettere questo profilo a se stesso. Per fare connessioni, devi andare alle impostazioni Connessioni dell'altro profilo e prendere la chiave da lì!",
+    "cannot_connect_to_self": "Non puoi connettere questo profilo a se stesso. Per fare connessioni, devi andare alle impostazioni Profili Collegati dell'altro profilo e prendere la chiave da lì!",
     "invalid_format": "Formato non valido. La chiave di connessione deve essere nel formato corretto.",
     "connect_success": "Profili connessi con successo!",
     "regenerate_success": "Chiave di connessione rigenerata con successo!",
@@ -214,9 +230,8 @@
     "platform": "Piattaforma",
     "platform_user_id": "ID utente piattaforma",
     "platform_handle": "Nome utente piattaforma",
-    "sponsored_by": "Sponsorizzato da",
     "version": "Versione AI",
-    "reveal_placeholder": "Informazioni che raccogliamo su di te"
+    "reveal_placeholder": "Informazioni che ti identificano"
   },
   "platforms": {
     "telegram": "Telegram",
@@ -227,6 +242,18 @@
   "where_is_my_key": "Dove si trova la mia chiave {providerName}?",
   "configure_intelligence": "Configura intelligenza",
   "configure_ai_providers": "Configura provider AI",
+  "intelligence_presets": {
+    "label": "Modalità di Intelligenza",
+    "lowest_price": "Costo più basso",
+    "lowest_price_description": "Lo strumento più economico disponibile in ogni categoria.",
+    "highest_price": "Qualità più alta",
+    "highest_price_description": "Lo strumento più capace (e costoso) in ogni categoria.",
+    "agent_choice": "Bilanciato",
+    "agent_choice_description": "Equilibrio consigliato tra costo e qualità.",
+    "custom": "Personalizzato",
+    "custom_description": "Selezione di strumenti personalizzata individualmente."
+  },
+  "detailed_tool_choices": "Le mie scelte di strumenti",
   "errors": {
     "oh_no": "Oh no!",
     "expired": "La tua sessione è scaduta.",
@@ -235,7 +262,7 @@
     "fetch_failed": "Impossibile caricare le impostazioni.",
     "save_failed": "Impossibile salvare le impostazioni.",
     "check_link": "Controlla il tuo link di accesso e riprova.",
-    "sponsored_user": "Il tuo utilizzo è sponsorizzato da {sponsorName}. Per diventare un utente autonomo, vai a {sponsorshipsLink}."
+    "sponsored_user": "Il tuo utilizzo è sponsorizzato. Per diventare un utente autonomo, vai a {sponsorshipsLink}."
   },
   "features": {
     "header": "Funzionalità",
@@ -364,6 +391,23 @@
     "powered_by": "Alimentato da",
     "rights_reserved": "Tutti i diritti riservati"
   },
+  "products": {
+    "shop": {
+      "title": "Scegli un prodotto",
+      "pack_100": "Pacchetto da 100",
+      "pack_200": "Pacchetto da 200",
+      "pack_300": "Pacchetto da 300",
+      "pack_500": "Pacchetto da 500",
+      "pack_1000": "Pacchetto da 1.000",
+      "pack_2000": "Pacchetto da 2.000",
+      "pack_3000": "Pacchetto da 3.000",
+      "pack_5000": "Pacchetto da 5.000",
+      "pack_10000": "Pacchetto da 10.000",
+      "donation": "Tè Verde (Donazione)",
+      "credit_packs": "Pacchetti crediti",
+      "open_shop": "Apri il negozio"
+    }
+  },
   "cost_estimate": {
     "title": "Stima dei costi",
     "description": "Costi stimati per l'uso di. Tutti i valori sono in crediti.",
@@ -386,5 +430,9 @@
     "other_costs": "Altri costi",
     "api_call": "Per singolo uso",
     "second_of_runtime": "Per secondo di esecuzione"
+  },
+  "intelligence_warnings": {
+    "no_access_message": "Hai bisogno delle tue chiavi API private o crediti acquistati per utilizzare gli strumenti AI.",
+    "no_settings": "Nessuna impostazione AI da configurare."
   }
 }

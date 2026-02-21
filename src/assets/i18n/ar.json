@@ -3,12 +3,16 @@
   "profile": "الملف الشخصي",
   "sponsorships": "الرعايات",
   "close": "إغلاق",
+  "restore": "استعادة",
   "help": "مساعدة",
   "configure_title": "تكوين سلوك {botName}",
   "intelligence_card_title": "تعزيز ذكاء {botName}",
   "access": "الوصول",
   "intelligence": "الذكاء",
   "access_card_title": "اجعل {botName} مستقلاً",
+  "access_use_credits_warning_prefix": "لاستخدام الاعتمادات، قم بإزالة جميع مفاتيح API",
+  "access_remove_all_keys": "إزالة الكل",
+  "access_keys_cleared_message": "تم مسح مفاتيح API. اضغط على حفظ للتأكيد.",
   "profile_card_title": "تخصيص {botName}",
   "profile_full_name_label": "{botName} يعرفني كـ:",
   "profile_full_name_placeholder": "اسم العرض الخاص بك",
@@ -48,12 +52,12 @@
     "platform_handle_placeholder_telegram": "@اسم_المستخدم",
     "platform_handle_placeholder_whatsapp": "+9661234567890",
     "you_are_sponsored": "أنت مستخدم مُرعى!",
-    "unlink_message": "يمكنك الآن أن تصبح مستخدماً مستقلاً. هذا يقطع الرابط بينك وبين {sponsorName} وسيتوقف الذكاء الاصطناعي عن العمل حتى تقوم بتكوين ملفك الشخصي.",
+    "unlink_message": "يمكنك أن تصبح مستخدماً مستقلاً. هذا يقطع رابط الرعاية وسيتوقف الذكاء الاصطناعي عن العمل حتى تقوم بتكوين ملفك الشخصي.",
     "unlink": "إلغاء الربط"
   },
   "usage": {
     "page_title": "الاستخدام",
-    "card_title": "سجل استخدامك",
+    "card_title": "سجل الاستخدام",
     "no_records_found": "لم يتم العثور على سجلات استخدام",
     "filters": {
       "scope_section": "النطاق",
@@ -120,21 +124,27 @@
       "chat_background": "في الخلفية",
       "remote_runtime": "وقت التشغيل عن بُعد",
       "output_image_sizes": "صور الإخراج",
-      "input_image_sizes": "صور الإدخال"
+      "input_image_sizes": "صور الإدخال",
+      "status_label": "الحالة",
+      "status_completed": "مكتمل",
+      "status_failed": "فشل"
     },
-    "load_more": "تحميل المزيد"
+    "load_more": "تحميل المزيد",
+    "credit_balance": "الأرصدة التي أملكها: {balance}"
   },
   "purchases": {
     "page_title": "المشتريات",
-    "card_title": "سجل مشترياتك",
+    "card_title": "سجل المشتريات",
     "use_license": "استخدم رخصة",
+    "license": "رخصة",
+    "buy": "شراء",
     "license_key_label": "أدخل مفتاح الترخيص الخاص بك",
     "license_key_placeholder": "الصق أو اكتب مفتاح الترخيص الخاص بك",
     "bind_success": "تم ربط الترخيص بنجاح!",
     "paste_failed": "فشل اللصق",
     "paste_permission_denied": "تم رفض الوصول إلى الحافظة",
     "no_records_found": "لم يتم العثور على مشتريات",
-    "buy_more": "اشتري المزيد",
+    "buy_credits": "شراء أرصدة",
     "filters": {
       "time_range_label": "الوقت",
       "product_label": "المنتج",
@@ -172,8 +182,14 @@
   "saved": "تم الحفظ!",
   "copied": "تم النسخ!",
   "pasted": "تم اللصق!",
-  "connections": {
-    "page_title": "الاتصالات",
+  "menu_section": {
+    "personal": "شخصي",
+    "agent": "الوكيل",
+    "resources": "الموارد",
+    "people": "الأشخاص"
+  },
+  "linked_profiles": {
+    "page_title": "الملفات المرتبطة",
     "card_title": "ربط الملفات الشخصية",
     "show_my_key": "إظهار مفتاح الاتصال الخاص بي",
     "hide_my_key": "إخفاء مفتاح الاتصال الخاص بي",
@@ -195,7 +211,7 @@
     "command_info": "يمكنك أيضًا إرسال هذا المفتاح مباشرة إلى {botName} في إحدى المنصات المدعومة، باستخدام أمر الاتصال. سيؤدي هذا تلقائيًا إلى ربط هذا الملف الشخصي بالملف الشخصي الذي ترسله إليه:",
     "chat_command_info": "بدلاً من ذلك، يمكنك أن تطلب من {botName} الاتصال بملف شخصي آخر باستخدام الدردشة:",
     "chat_command_example": "يرجى ربطي بهذا الملف الشخصي: {connectKey}.",
-    "cannot_connect_to_self": "لا يمكنك ربط هذا الملف الشخصي بنفسه. لإجراء الاتصالات، يجب عليك الانتقال إلى إعدادات الاتصالات للملف الشخصي الآخر وأخذ المفتاح من هناك!",
+    "cannot_connect_to_self": "لا يمكنك ربط هذا الملف الشخصي بنفسه. لإجراء الاتصالات، يجب عليك الانتقال إلى إعدادات الملفات المرتبطة للملف الشخصي الآخر وأخذ المفتاح من هناك!",
     "invalid_format": "تنسيق غير صالح. يجب أن يكون مفتاح الاتصال بالتنسيق الصحيح.",
     "connect_success": "تم ربط الملفات الشخصية بنجاح!",
     "regenerate_success": "تم إعادة إنشاء مفتاح الاتصال بنجاح!",
@@ -214,9 +230,8 @@
     "platform": "المنصة",
     "platform_user_id": "معرّف مستخدم المنصة",
     "platform_handle": "اسم مستخدم المنصة",
-    "sponsored_by": "برعاية",
     "version": "إصدار الذكاء الاصطناعي",
-    "reveal_placeholder": "المعلومات التي نجمعها عنك"
+    "reveal_placeholder": "المعلومات التي تحددك"
   },
   "platforms": {
     "telegram": "تيليجرام",
@@ -227,6 +242,18 @@
   "where_is_my_key": "أين يوجد مفتاح {providerName} الخاص بي؟",
   "configure_intelligence": "تكوين الذكاء",
   "configure_ai_providers": "تكوين مزودي الذكاء الاصطناعي",
+  "intelligence_presets": {
+    "label": "وضع الذكاء",
+    "lowest_price": "أقل تكلفة",
+    "lowest_price_description": "الأداة الأرخص المتاحة في كل فئة.",
+    "highest_price": "أعلى جودة",
+    "highest_price_description": "الأداة الأكثر قدرةً (والأكثر تكلفةً) في كل فئة.",
+    "agent_choice": "متوازن",
+    "agent_choice_description": "توازن موصى به بين التكلفة والجودة.",
+    "custom": "مخصص",
+    "custom_description": "اختيار أدوات مخصص بشكل فردي."
+  },
+  "detailed_tool_choices": "اختياراتي للأدوات",
   "errors": {
     "oh_no": "أوه لا!",
     "expired": "انتهت صلاحية جلستك.",
@@ -235,7 +262,7 @@
     "fetch_failed": "فشل في تحميل الإعدادات.",
     "save_failed": "فشل في حفظ الإعدادات.",
     "check_link": "تحقق من رابط الوصول الخاص بك وحاول مرة أخرى.",
-    "sponsored_user": "استخدامك مرعى من قبل {sponsorName}. لتصبح مستخدماً مستقلاً، اذهب إلى {sponsorshipsLink}."
+    "sponsored_user": "استخدامك مرعى. لتصبح مستخدماً مستقلاً، اذهب إلى {sponsorshipsLink}."
   },
   "tools": {
     "not_configured": "كوِّن",
@@ -364,6 +391,23 @@
     "powered_by": "مدعوم من",
     "rights_reserved": "جميع الحقوق محفوظة"
   },
+  "products": {
+    "shop": {
+      "title": "اختر منتجًا",
+      "pack_100": "حزمة 100",
+      "pack_200": "حزمة 200",
+      "pack_300": "حزمة 300",
+      "pack_500": "حزمة 500",
+      "pack_1000": "حزمة 1٬000",
+      "pack_2000": "حزمة 2٬000",
+      "pack_3000": "حزمة 3٬000",
+      "pack_5000": "حزمة 5٬000",
+      "pack_10000": "حزمة 10٬000",
+      "donation": "شاي أخضر (تبرع)",
+      "credit_packs": "حزم الرصيد",
+      "open_shop": "افتح المتجر"
+    }
+  },
   "cost_estimate": {
     "title": "تقدير التكلفة:",
     "description": "التكاليف المقدرة لاستخدام. جميع القيم بالنقاط.",
@@ -386,5 +430,9 @@
     "other_costs": "تكاليف أخرى",
     "api_call": "لكل استخدام واحد",
     "second_of_runtime": "لكل ثانية تشغيل"
+  },
+  "intelligence_warnings": {
+    "no_access_message": "تحتاج إما إلى مفاتيح API الخاصة بك أو الاعتمادات المشتراة لاستخدام أدوات الذكاء الاصطناعي.",
+    "no_settings": "لا توجد إعدادات ذكاء اصطناعي للتهيئة."
   }
 }

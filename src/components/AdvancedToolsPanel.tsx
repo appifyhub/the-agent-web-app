@@ -16,7 +16,9 @@ import {
   BrainCog,
   Image,
   Blocks,
+  CircleHelp,
 } from "lucide-react";
+import CostEstimateDialog from "@/components/CostEstimateDialog";
 import { t } from "@/lib/translations";
 import { TranslationKey } from "@/lib/translation-keys";
 import { cn } from "@/lib/utils";
@@ -33,6 +35,7 @@ import {
   ExternalToolResponse,
   ExternalToolProviderResponse,
   ToolType,
+  CostEstimate,
 } from "@/services/external-tools-service";
 import { UserSettings } from "@/services/user-settings-service";
 
@@ -40,8 +43,10 @@ interface AdvancedToolsPanelProps {
   tools: ExternalToolResponse[];
   providers: ExternalToolProviderResponse[];
   userSettings: UserSettings | null;
+  remoteSettings?: UserSettings | null;
   onToolChoiceChange: (toolType: ToolType, toolId: string) => void;
   onProviderNavigate?: (providerId: string) => void;
+  hasCredits?: boolean;
   disabled?: boolean;
   openSection?: string;
   onOpenSectionChange?: (section: string) => void;
@@ -109,13 +114,21 @@ const AdvancedToolsPanel: React.FC<AdvancedToolsPanelProps> = ({
   tools,
   providers,
   userSettings,
+  remoteSettings,
   onToolChoiceChange,
   onProviderNavigate,
+  hasCredits = false,
   disabled = false,
   openSection: controlledOpenSection,
   onOpenSectionChange: controlledOnOpenSectionChange,
 }) => {
   const [internalOpenSection, setInternalOpenSection] = useState<string>("");
+  const [costEstimateTarget, setCostEstimateTarget] = useState<{
+    toolName: string;
+    estimate: CostEstimate;
+    providerId?: string;
+    providerName?: string;
+  } | null>(null);
 
   // Use controlled props if provided, otherwise use internal state
   const openSection = controlledOpenSection !== undefined ? controlledOpenSection : internalOpenSection;
@@ -139,6 +152,32 @@ const AdvancedToolsPanel: React.FC<AdvancedToolsPanelProps> = ({
   const isToolConfigured = (toolId: string): boolean => {
     const toolResponse = tools.find((t) => t.definition.id === toolId);
     return toolResponse?.is_configured ?? false;
+  };
+
+  const isToolTypeChanged = (toolType: ToolType): boolean => {
+    if (!remoteSettings) return false;
+    const fieldName = `tool_choice_${toolType}` as keyof UserSettings;
+    return userSettings?.[fieldName] !== remoteSettings[fieldName];
+  };
+
+  const isCategoryChanged = (category: ToolGroupCategory): boolean => {
+    const categoryToolTypes = Object.entries({
+      chat: "text_intelligence",
+      reasoning: "text_intelligence",
+      copywriting: "text_intelligence",
+      vision: "content_analysis",
+      hearing: "content_analysis",
+      embedding: "content_analysis",
+      images_gen: "image_tools",
+      images_edit: "image_tools",
+      search: "integrations",
+      api_fiat_exchange: "integrations",
+      api_crypto_exchange: "integrations",
+      api_twitter: "integrations",
+    } as Record<ToolType, ToolGroupCategory>)
+      .filter(([, cat]) => cat === category)
+      .map(([type]) => type as ToolType);
+    return categoryToolTypes.some(isToolTypeChanged);
   };
 
   // Icon mapping for tool types
@@ -306,6 +345,11 @@ const AdvancedToolsPanel: React.FC<AdvancedToolsPanelProps> = ({
           const CategoryIcon = categoryGroup.icon;
           const isCurrentlyOpen = openSection === categoryGroup.category;
           const shouldReduceOpacity = openSection && !isCurrentlyOpen;
+          const categoryChanged = isCategoryChanged(categoryGroup.category);
+          const headerAsteriskColor =
+            isCurrentlyOpen || shouldReduceOpacity
+              ? "text-white"
+              : "text-accent-amber";
 
           return (
             <AccordionItem
@@ -325,7 +369,14 @@ const AdvancedToolsPanel: React.FC<AdvancedToolsPanelProps> = ({
               >
                 <div className="flex items-center gap-4">
                   <CategoryIcon className="h-5 w-5 shrink-0" />
-                  <span>{categoryGroup.title}</span>
+                  <span>
+                    {categoryGroup.title}
+                    {categoryChanged && (
+                      <span className={cn("text-sm leading-none inline-block no-underline ml-0.5", headerAsteriskColor)}>
+                        *
+                      </span>
+                    )}
+                  </span>
                 </div>
               </AccordionTrigger>
               <AccordionContent>
@@ -333,6 +384,16 @@ const AdvancedToolsPanel: React.FC<AdvancedToolsPanelProps> = ({
                   <div className="h-2" />
                   {categoryGroup.toolTypes.map((toolTypeGroup) => {
                     const ToolIcon = toolTypeGroup.icon;
+                    const toolTypeChanged = isToolTypeChanged(toolTypeGroup.type);
+                    const totalOptions = toolTypeGroup.sections.reduce(
+                      (count, section) => count + section.options.length,
+                      0
+                    );
+                    const isSingleOption = totalOptions === 1;
+                    const singleOption = isSingleOption
+                      ? toolTypeGroup.sections[0].options[0]
+                      : null;
+
                     return (
                       <div key={toolTypeGroup.type} className="space-y-2">
                         <div className="flex items-center gap-2">
@@ -341,45 +402,56 @@ const AdvancedToolsPanel: React.FC<AdvancedToolsPanelProps> = ({
                           )}
                           <h4 className="text-base font-medium text-blue-100 underline underline-offset-4">
                             {toolTypeGroup.title}
+                            {toolTypeChanged && (
+                              <span className="text-sm leading-none inline-block no-underline ml-0.5 text-accent-amber">
+                                *
+                              </span>
+                            )}
                           </h4>
+                          {isSingleOption &&
+                            singleOption?.costEstimate &&
+                            singleOption.toolName && (
+                              <div
+                                className="cursor-pointer text-blue-300 hover:text-blue-400 transition-colors"
+                                onClick={() =>
+                                  setCostEstimateTarget({
+                                    toolName: singleOption.toolName!,
+                                    estimate: singleOption.costEstimate!,
+                                    providerId: singleOption.providerId,
+                                    providerName: providers.find(
+                                      (p) => p.definition.id === singleOption.providerId
+                                    )?.definition.name,
+                                  })
+                                }
+                              >
+                                <CircleHelp className="size-4" />
+                              </div>
+                            )}
                         </div>
                         <p className="text-sm text-muted-foreground leading-tight">
                           {toolTypeGroup.description}
                         </p>
 
                         {toolTypeGroup.sections.length > 0 ? (
-                          (() => {
-                            // Count total available options across all sections
-                            const totalOptions = toolTypeGroup.sections.reduce(
-                              (count, section) =>
-                                count + section.options.length,
-                              0
-                            );
-                            const isSingleOption = totalOptions === 1;
-                            const singleOption = isSingleOption
-                              ? toolTypeGroup.sections[0].options[0]
-                              : null;
-
-                            return (
-                              <SectionedSelector
-                                label={t("tools.select_tool")}
-                                value={
-                                  isSingleOption && singleOption
-                                    ? singleOption.value
-                                    : toolTypeGroup.currentValue
-                                }
-                                onChange={(toolId) =>
-                                  onToolChoiceChange(toolTypeGroup.type, toolId)
-                                }
-                                sections={toolTypeGroup.sections}
-                                disabled={disabled || isSingleOption}
-                                placeholder={t("tools.select_tool")}
-                                notConfiguredLabel={t("tools.not_configured")}
-                                onProviderNavigate={onProviderNavigate}
-                                labelClassName="text-base"
-                              />
-                            );
-                          })()
+                          <SectionedSelector
+                            label={t("tools.select_tool")}
+                            value={
+                              isSingleOption && singleOption
+                                ? singleOption.value
+                                : toolTypeGroup.currentValue
+                            }
+                            onChange={(toolId) =>
+                              onToolChoiceChange(toolTypeGroup.type, toolId)
+                            }
+                            sections={toolTypeGroup.sections}
+                            disabled={disabled || isSingleOption}
+                            placeholder={t("tools.select_tool")}
+                            notConfiguredLabel={t("tools.not_configured")}
+                            onProviderNavigate={onProviderNavigate}
+                            hasCredits={hasCredits}
+                            labelClassName="text-base"
+                            hideCostEstimateButton={isSingleOption}
+                          />
                         ) : (
                           <div className="text-sm text-muted-foreground text-center py-4">
                             {t("tools.no_tools_available")}
@@ -396,6 +468,18 @@ const AdvancedToolsPanel: React.FC<AdvancedToolsPanelProps> = ({
           );
         })}
       </Accordion>
+      {costEstimateTarget && (
+        <CostEstimateDialog
+          toolName={costEstimateTarget.toolName}
+          costEstimate={costEstimateTarget.estimate}
+          providerId={costEstimateTarget.providerId}
+          providerName={costEstimateTarget.providerName}
+          open={!!costEstimateTarget}
+          onOpenChange={(open) => {
+            if (!open) setCostEstimateTarget(null);
+          }}
+        />
+      )}
     </div>
   );
 };

@@ -3,12 +3,16 @@
   "profile": "प्रोफ़ाइल",
   "sponsorships": "प्रायोजन",
   "close": "बंद करें",
+  "restore": "पुनर्स्थापित करें",
   "help": "सहायता",
   "configure_title": "{botName} का व्यवहार कॉन्फ़िगर करें",
   "intelligence_card_title": "{botName} की बुद्धिमत्ता बढ़ाएं",
   "access": "पहुंच",
   "intelligence": "बुद्धिमत्ता",
   "access_card_title": "{botName} को स्वतंत्र बनाएं",
+  "access_use_credits_warning_prefix": "क्रेडिट का उपयोग करने के लिए, सभी API कुंजियां हटाएं",
+  "access_remove_all_keys": "सभी हटाएं",
+  "access_keys_cleared_message": "API कुंजियां साफ़ कर दी गईं। पुष्टि करने के लिए सहेजें दबाएं।",
   "profile_card_title": "{botName} को अनुकूलित करें",
   "profile_full_name_label": "{botName} मुझे इस नाम से जानता है:",
   "profile_full_name_placeholder": "आपका प्रदर्शन नाम",
@@ -48,12 +52,12 @@
     "platform_handle_placeholder_telegram": "@उपयोगकर्ता_नाम",
     "platform_handle_placeholder_whatsapp": "+911234567890",
     "you_are_sponsored": "आप एक प्रायोजित उपयोगकर्ता हैं!",
-    "unlink_message": "अब आप एक स्वायत्त उपयोगकर्ता बन सकते हैं। यह आपके और {sponsorName} के बीच की कड़ी तोड़ देता है और जब तक आप अपनी प्रोफाइल कॉन्फ़िगर नहीं करते तब तक AI काम करना बंद कर देगा।",
+    "unlink_message": "आप एक स्वायत्त उपयोगकर्ता बन सकते हैं। यह प्रायोजन लिंक तोड़ देता है और जब तक आप अपनी प्रोफाइल कॉन्फ़िगर नहीं करते तब तक AI काम करना बंद कर देगा।",
     "unlink": "लिंक हटाएं"
   },
   "usage": {
     "page_title": "उपयोग",
-    "card_title": "आपका उपयोग इतिहास",
+    "card_title": "उपयोग इतिहास",
     "no_records_found": "कोई उपयोग रिकॉर्ड नहीं मिला",
     "cost_breakdown": {
       "title": "लागत विश्लेषण",
@@ -83,9 +87,13 @@
       "chat_background": "पृष्ठभूमि में",
       "remote_runtime": "रिमोट रनटाइम",
       "output_image_sizes": "आउटपुट छवियाँ",
-      "input_image_sizes": "इनपुट छवियाँ"
+      "input_image_sizes": "इनपुट छवियाँ",
+      "status_label": "स्थिति",
+      "status_completed": "पूर्ण",
+      "status_failed": "विफल"
     },
     "load_more": "और लोड करें",
+    "credit_balance": "मेरे पास क्रेडिट: {balance}",
     "filters": {
       "scope_section": "दायरा",
       "filters_section": "फ़िल्टर",
@@ -126,15 +134,17 @@
   },
   "purchases": {
     "page_title": "खरीदें",
-    "card_title": "आपकी खरीद का इतिहास",
+    "card_title": "खरीद का इतिहास",
     "use_license": "एक लाइसेंस का उपयोग करें",
+    "license": "लाइसेंस",
+    "buy": "खरीदें",
     "license_key_label": "अपनी लाइसेंस कुंजी दर्ज करें",
     "license_key_placeholder": "अपनी लाइसेंस कुंजी को पेस्ट करें या टाइप करें",
     "bind_success": "लाइसेंस सफलतापूर्वक जुड़ा गया!",
     "paste_failed": "पेस्ट करने में विफल",
     "paste_permission_denied": "क्लिपबोर्ड एक्सेस अस्वीकृत",
     "no_records_found": "कोई खरीद नहीं मिली",
-    "buy_more": "अधिक खरीदें",
+    "buy_credits": "क्रेडिट खरीदें",
     "filters": {
       "time_range_label": "समय",
       "product_label": "उत्पाद",
@@ -172,8 +182,14 @@
   "saved": "सहेजा गया!",
   "copied": "कॉपी किया गया!",
   "pasted": "चिपकाया गया!",
-  "connections": {
-    "page_title": "कनेक्शन",
+  "menu_section": {
+    "personal": "व्यक्तिगत",
+    "agent": "सहायक",
+    "resources": "संसाधन",
+    "people": "लोग"
+  },
+  "linked_profiles": {
+    "page_title": "लिंक किए गए प्रोफाइल",
     "card_title": "प्रोफाइल कनेक्ट करें",
     "show_my_key": "मेरी कनेक्ट कुंजी दिखाएं",
     "hide_my_key": "मेरी कनेक्ट कुंजी छुपाएं",
@@ -195,7 +211,7 @@
     "command_info": "आप इस कुंजी को सीधे {botName} को समर्थित प्लेटफॉर्म में से एक में कनेक्ट कमांड का उपयोग करके भेज सकते हैं। यह स्वचालित रूप से इस प्रोफाइल को उस प्रोफाइल से कनेक्ट कर देगा जिसे आप इसे भेजते हैं:",
     "chat_command_info": "वैकल्पिक रूप से, आप {botName} से चैट का उपयोग करके दूसरे प्रोफाइल से कनेक्ट करने के लिए कह सकते हैं:",
     "chat_command_example": "कृपया मुझे इस प्रोफाइल से कनेक्ट करें: {connectKey}।",
-    "cannot_connect_to_self": "आप इस प्रोफाइल को स्वयं से कनेक्ट नहीं कर सकते। कनेक्शन बनाने के लिए, आपको दूसरे प्रोफाइल की कनेक्शन सेटिंग्स पर जाना होगा और वहां से कुंजी लेनी होगी!",
+    "cannot_connect_to_self": "आप इस प्रोफाइल को स्वयं से कनेक्ट नहीं कर सकते। कनेक्शन बनाने के लिए, आपको दूसरे प्रोफाइल की लिंक किए गए प्रोफाइल सेटिंग्स पर जाना होगा और वहां से कुंजी लेनी होगी!",
     "invalid_format": "अमान्य प्रारूप। कनेक्ट कुंजी सही प्रारूप में होनी चाहिए।",
     "connect_success": "प्रोफाइल सफलतापूर्वक कनेक्ट हो गए!",
     "regenerate_success": "कनेक्ट कुंजी सफलतापूर्वक पुनर्जीवित हो गई!",
@@ -214,9 +230,8 @@
     "platform": "प्लेटफॉर्म",
     "platform_user_id": "प्लेटफॉर्म उपयोगकर्ता आईडी",
     "platform_handle": "प्लेटफॉर्म उपयोगकर्ता नाम",
-    "sponsored_by": "प्रायोजित द्वारा",
     "version": "AI संस्करण",
-    "reveal_placeholder": "आपके बारे में हमारे द्वारा एकत्रित जानकारी"
+    "reveal_placeholder": "जानकारी जो आपकी पहचान करती है"
   },
   "platforms": {
     "telegram": "टेलीग्राम",
@@ -227,6 +242,18 @@
   "where_is_my_key": "मेरा {providerName} कुंजी कहाँ है?",
   "configure_intelligence": "बुद्धिमत्ता कॉन्फ़िगर करें",
   "configure_ai_providers": "AI प्रदाता कॉन्फ़िगर करें",
+  "intelligence_presets": {
+    "label": "इंटेलिजेंस मोड",
+    "lowest_price": "सबसे कम लागत",
+    "lowest_price_description": "प्रत्येक श्रेणी में सबसे सस्ता उपलब्ध टूल।",
+    "highest_price": "सर्वोच्च गुणवत्ता",
+    "highest_price_description": "प्रत्येक श्रेणी में सबसे सक्षम (और महंगा) टूल।",
+    "agent_choice": "संतुलित",
+    "agent_choice_description": "लागत और गुणवत्ता के बीच अनुशंसित संतुलन।",
+    "custom": "कस्टम",
+    "custom_description": "व्यक्तिगत रूप से अनुकूलित टूल चयन।"
+  },
+  "detailed_tool_choices": "मेरे टूल विकल्प",
   "errors": {
     "oh_no": "ओह नहीं!",
     "expired": "आपका सत्र समाप्त हो गया है।",
@@ -235,7 +262,7 @@
     "fetch_failed": "सेटिंग्स लोड करने में विफल।",
     "save_failed": "सेटिंग्स सहेजने में विफल।",
     "check_link": "अपना एक्सेस लिंक जांचें और पुनः प्रयास करें।",
-    "sponsored_user": "आपका उपयोग {sponsorName} द्वारा प्रायोजित है। स्वायत्त उपयोगकर्ता बनने के लिए, {sponsorshipsLink} पर जाएं।"
+    "sponsored_user": "आपका उपयोग प्रायोजित है। स्वायत्त उपयोगकर्ता बनने के लिए, {sponsorshipsLink} पर जाएं।"
   },
   "tools": {
     "not_configured": "कॉन्फ़िगर करें",
@@ -364,6 +391,23 @@
     "powered_by": "द्वारा संचालित",
     "rights_reserved": "सभी अधिकार सुरक्षित"
   },
+  "products": {
+    "shop": {
+      "title": "एक उत्पाद चुनें",
+      "pack_100": "100 का पैक",
+      "pack_200": "200 का पैक",
+      "pack_300": "300 का पैक",
+      "pack_500": "500 का पैक",
+      "pack_1000": "1,000 का पैक",
+      "pack_2000": "2,000 का पैक",
+      "pack_3000": "3,000 का पैक",
+      "pack_5000": "5,000 का पैक",
+      "pack_10000": "10,000 का पैक",
+      "donation": "ग्रीन टी (दान)",
+      "credit_packs": "क्रेडिट पैक",
+      "open_shop": "शॉप खोलें"
+    }
+  },
   "cost_estimate": {
     "title": "लागत अनुमान:",
     "description": " का उपयोग करने की अनुमानित लागत। सभी मान क्रेडिट में हैं।",
@@ -386,5 +430,9 @@
     "other_costs": "अन्य लागत",
     "api_call": "प्रति एकल उपयोग",
     "second_of_runtime": "प्रति सेकंड रनटाइम"
+  },
+  "intelligence_warnings": {
+    "no_access_message": "AI टूल्स का उपयोग करने के लिए आपको अपनी निजी API कुंजी या खरीदे गए क्रेडिट की आवश्यकता है।",
+    "no_settings": "कॉन्फ़िगर करने के लिए कोई AI सेटिंग नहीं है।"
   }
 }

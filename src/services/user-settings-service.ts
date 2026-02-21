@@ -29,7 +29,9 @@ export interface UserSettings {
   tool_choice_api_fiat_exchange?: string;
   tool_choice_api_crypto_exchange?: string;
   tool_choice_api_twitter?: string;
+  credit_balance: number;
   group?: string;
+  is_sponsored: boolean;
   created_at?: string;
 }
 
