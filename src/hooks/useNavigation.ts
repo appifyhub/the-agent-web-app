@@ -6,7 +6,7 @@ export interface NavigationHelpers {
   navigateToAccess: (userId: string, langIsoCode: string) => void;
   navigateToIntelligence: (userId: string, langIsoCode: string) => void;
   navigateToSponsorships: (userId: string, langIsoCode: string) => void;
-  navigateToConnections: (userId: string, langIsoCode: string) => void;
+  navigateToLinkedProfiles: (userId: string, langIsoCode: string) => void;
   navigateToUsage: (userId: string, langIsoCode: string) => void;
   navigateToPurchases: (userId: string, langIsoCode: string) => void;
   navigateToFeatures: (langIsoCode: string) => void;
@@ -53,9 +53,9 @@ export const useNavigation = (): NavigationHelpers => {
     navigate(`/${langIsoCode}/user/${userId}/sponsorships${getPreservedSearchParams()}`);
   };
 
-  const navigateToConnections = (userId: string, langIsoCode: string) => {
-    console.info("Navigating to connections:", userId);
-    navigate(`/${langIsoCode}/user/${userId}/connections${getPreservedSearchParams()}`);
+  const navigateToLinkedProfiles = (userId: string, langIsoCode: string) => {
+    console.info("Navigating to linked profiles:", userId);
+    navigate(`/${langIsoCode}/user/${userId}/linked-profiles${getPreservedSearchParams()}`);
   };
 
   const navigateToUsage = (userId: string, langIsoCode: string) => {
@@ -96,7 +96,7 @@ export const useNavigation = (): NavigationHelpers => {
     navigateToAccess,
     navigateToIntelligence,
     navigateToSponsorships,
-    navigateToConnections,
+    navigateToLinkedProfiles,
     navigateToUsage,
     navigateToPurchases,
     navigateToFeatures,

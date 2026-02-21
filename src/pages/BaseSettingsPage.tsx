@@ -21,7 +21,7 @@ type Page =
   | "chat"
   | "access"
   | "intelligence"
-  | "connections"
+  | "linked_profiles"
   | "usage"
   | "purchases";
 
@@ -201,6 +201,7 @@ const BaseSettingsPage = forwardRef<BaseSettingsPageRef, BaseSettingsPageProps>(
                     <>
                       {cardTitle && (
                         <>
+                          <div className="h-2" />
                           <CardTitle className="text-center mx-auto">
                             {cardTitle}
                           </CardTitle>

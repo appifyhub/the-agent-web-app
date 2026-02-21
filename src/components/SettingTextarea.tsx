@@ -103,7 +103,7 @@ const SettingTextarea: React.FC<SettingTextareaProps> = ({
                   <Trash2 className="h-4 w-4" />
                 </Button>
               </TooltipTrigger>
-              <TooltipContent>{t("connections.clear_key")}</TooltipContent>
+              <TooltipContent>{t("linked_profiles.clear_key")}</TooltipContent>
             </Tooltip>
           )}
         </div>

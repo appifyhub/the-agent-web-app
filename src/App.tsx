@@ -5,7 +5,7 @@ import UserSettingsPage from "@/pages/UserSettingsPage";
 import AccessSettingsPage from "@/pages/AccessSettingsPage";
 import IntelligenceSettingsPage from "@/pages/IntelligenceSettingsPage";
 import SponsorshipsPage from "@/pages/SponsorshipsPage";
-import ConnectionsPage from "@/pages/ConnectionsPage";
+import LinkedProfilesPage from "@/pages/LinkedProfilesPage";
 import UsagePage from "@/pages/UsagePage";
 import PurchasesPage from "@/pages/PurchasesPage";
 import FeaturesPage from "@/pages/FeaturesPage";
@@ -38,8 +38,8 @@ function App() {
           element={<SponsorshipsPage />}
         />
         <Route
-          path="/:lang_iso_code/user/:user_id/connections"
-          element={<ConnectionsPage />}
+          path="/:lang_iso_code/user/:user_id/linked-profiles"
+          element={<LinkedProfilesPage />}
         />
         <Route
           path="/:lang_iso_code/user/:user_id/usage"
