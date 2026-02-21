@@ -137,7 +137,7 @@ export async function removeSelfSponsorship({
   apiBaseUrl: string;
   resource_id: string;
   rawToken: string;
-}): Promise<{ settings_link: string }> {
+}): Promise<void> {
   const headers = {
     "Content-Type": "application/json",
     Authorization: `Bearer ${rawToken}`,
@@ -159,5 +159,4 @@ export async function removeSelfSponsorship({
     }
     throw new Error(`Failed to remove self-sponsorship. ${reason}`);
   }
-  return response.json();
 }

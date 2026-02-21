@@ -31,6 +31,7 @@ export interface UserSettings {
   tool_choice_api_twitter?: string;
   credit_balance: number;
   group?: string;
+  is_sponsored: boolean;
   created_at?: string;
 }
 

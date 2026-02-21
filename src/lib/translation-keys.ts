@@ -202,7 +202,6 @@ export type TranslationKey =
   | "token_info.platform"
   | "token_info.platform_user_id"
   | "token_info.platform_handle"
-  | "token_info.sponsored_by"
   | "token_info.version"
   | "token_info.reveal_placeholder"
   | "platforms.telegram"

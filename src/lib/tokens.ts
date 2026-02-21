@@ -21,7 +21,6 @@ export interface DecodedToken {
   platform: Platform; // platform where the token was issued
   platform_id?: string; // platform-specific user ID
   platform_handle?: string; // platform-specific user handle (username)
-  sponsored_by?: string; // name of the user who sponsors this user (if any)
   exp: number; // token expiration timestamp (Unix epoch)
   iat: number; // token issued at timestamp (Unix epoch)
   version: string; // version of the app that issued the token

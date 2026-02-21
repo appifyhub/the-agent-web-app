@@ -9,12 +9,12 @@ import SettingSelector from "@/components/SettingSelector";
 import WarningBanner from "@/components/WarningBanner";
 import { Wallet, Sparkles, Scale, Settings, Undo2, Key, ShoppingCart, Lightbulb } from "lucide-react";
 import {
-  fetchUserSettings,
   saveUserSettings,
   UserSettings,
   buildChangedPayload,
   areSettingsChanged,
 } from "@/services/user-settings-service";
+import { useUserSettings } from "@/hooks/useUserSettings";
 import {
   fetchExternalTools,
   ExternalToolsResponse,
@@ -39,46 +39,42 @@ const IntelligenceSettingsPage: React.FC = () => {
 
   const { navigateToAccess, navigateToPurchases } = useNavigation();
 
+  const {
+    userSettings: remoteSettings,
+    updateSettingsCache,
+  } = useUserSettings(user_id, accessToken?.raw);
+
   const [userSettings, setUserSettings] = useState<UserSettings | null>(null);
-  const [remoteSettings, setRemoteSettings] = useState<UserSettings | null>(
-    null
-  );
   const [externalToolsData, setExternalToolsData] =
     useState<ExternalToolsResponse | null>(null);
   const [openAccordionSection, setOpenAccordionSection] = useState<string>("");
   const [selectedPreset, setSelectedPreset] = useState<ToolPreset>("custom");
   const [isWarningDismissed, setIsWarningDismissed] = useState(false);
 
-  // Fetch user settings and external tools when session is ready
+  // Initialize local editing state when remote settings first load
   useEffect(() => {
-    if (!accessToken || !user_id || error?.isBlocker) return;
+    if (remoteSettings && !userSettings) {
+      setUserSettings(remoteSettings);
+      setSelectedPreset(detectCurrentPreset(remoteSettings));
+    }
+  }, [remoteSettings, userSettings]);
 
-    const isSponsored = !!accessToken.decoded.sponsored_by;
+  // Fetch external tools and check sponsorship when session and settings are ready
+  useEffect(() => {
+    if (!accessToken || !user_id || error?.isBlocker || !remoteSettings) return;
 
-    if (isSponsored) {
-      // Handle sponsored user with error after session is established
-      const handleSponsoredUser = (sponsorName: string) => {
-        console.warn("User is sponsored by:", sponsorName);
-        const sponsorshipsUrl = `/${lang_iso_code}/user/${user_id}/sponsorships${window.location.search}`;
-        const sponsorshipsTitle = t("sponsorships");
-
-        const boldSponsorNameHtml = `<span class="font-bold font-mono">${sponsorName}</span>`;
-        const linkStyle = "underline text-amber-100 hover:text-white";
-        const sponsorshipsLinkHtml = `<a href="${sponsorshipsUrl}" class="${linkStyle}" >${sponsorshipsTitle}</a>`;
-
-        const htmlMessage = t("errors.sponsored_user", {
-          sponsorName: boldSponsorNameHtml,
-          sponsorshipsLink: sponsorshipsLinkHtml,
-        });
-
-        const errorMessage = (
-          <span dangerouslySetInnerHTML={{ __html: htmlMessage }} />
-        );
-
-        setError(PageError.blockerWithHtml(errorMessage, false));
-      };
-
-      handleSponsoredUser(accessToken.decoded.sponsored_by!);
+    if (remoteSettings.is_sponsored) {
+      const sponsorshipsUrl = `/${lang_iso_code}/user/${user_id}/sponsorships${window.location.search}`;
+      const sponsorshipsTitle = t("sponsorships");
+      const linkStyle = "underline text-amber-100 hover:text-white";
+      const sponsorshipsLinkHtml = `<a href="${sponsorshipsUrl}" class="${linkStyle}" >${sponsorshipsTitle}</a>`;
+      const htmlMessage = t("errors.sponsored_user", {
+        sponsorshipsLink: sponsorshipsLinkHtml,
+      });
+      const errorMessage = (
+        <span dangerouslySetInnerHTML={{ __html: htmlMessage }} />
+      );
+      setError(PageError.blockerWithHtml(errorMessage, false));
       return;
     }
 
@@ -87,28 +83,13 @@ const IntelligenceSettingsPage: React.FC = () => {
       setError(null);
       try {
         const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
-
-        // Fetch both user settings and external tools in parallel
-        const [settings, externalTools] = await Promise.all([
-          fetchUserSettings({
-            apiBaseUrl,
-            user_id,
-            rawToken: accessToken.raw,
-          }),
-          fetchExternalTools({
-            apiBaseUrl,
-            user_id,
-            rawToken: accessToken.raw,
-          }),
-        ]);
-
-        console.info("Fetched settings!", settings);
+        const externalTools = await fetchExternalTools({
+          apiBaseUrl,
+          user_id,
+          rawToken: accessToken.raw,
+        });
         console.info("Fetched external tools!", externalTools);
-
-        setUserSettings(settings);
-        setRemoteSettings(settings);
         setExternalToolsData(externalTools);
-        setSelectedPreset(detectCurrentPreset(settings));
       } catch (err) {
         console.error("Error fetching data!", err);
         setError(PageError.blocker("errors.fetch_failed"));
@@ -118,7 +99,7 @@ const IntelligenceSettingsPage: React.FC = () => {
     };
 
     fetchData();
-  }, [accessToken, user_id, lang_iso_code, error, setError, setIsLoadingState]);
+  }, [accessToken, user_id, lang_iso_code, error, setError, setIsLoadingState, remoteSettings]);
 
   const hasSettingsChanged = !!(
     userSettings &&
@@ -154,7 +135,7 @@ const IntelligenceSettingsPage: React.FC = () => {
         rawToken: accessToken.raw,
       });
 
-      setRemoteSettings(userSettings);
+      updateSettingsCache(userSettings!);
       setExternalToolsData(updatedExternalTools);
       setSelectedPreset(detectCurrentPreset(userSettings));
       toast(t("saved"));

@@ -8,13 +8,13 @@ import WarningBanner from "@/components/WarningBanner";
 import ProvidersCarousel from "@/components/ProvidersCarousel";
 import ProviderTabs from "@/components/ProviderTabs";
 import {
-  fetchUserSettings,
   saveUserSettings,
   UserSettings,
   getSettingsFieldName,
   buildChangedPayload,
   areSettingsChanged,
 } from "@/services/user-settings-service";
+import { useUserSettings } from "@/hooks/useUserSettings";
 import {
   fetchExternalTools,
   ExternalToolProvider,
@@ -34,10 +34,12 @@ const AccessSettingsPage: React.FC = () => {
 
   const { navigateToIntelligence } = useNavigation();
 
+  const {
+    userSettings: remoteSettings,
+    updateSettingsCache,
+  } = useUserSettings(user_id, accessToken?.raw);
+
   const [userSettings, setUserSettings] = useState<UserSettings | null>(null);
-  const [remoteSettings, setRemoteSettings] = useState<UserSettings | null>(
-    null
-  );
   const [externalToolProviders, setExternalToolProviders] = useState<
     ExternalToolProvider[]
   >([]);
@@ -51,36 +53,29 @@ const AccessSettingsPage: React.FC = () => {
   const hasLoadedOnce = useRef(false);
   const indexToRestore = useRef<number | null>(null);
 
-  // Fetch user settings and service providers when session is ready
+  // Initialize local editing state when remote settings first load
   useEffect(() => {
-    if (!accessToken || !user_id || error?.isBlocker) return;
+    if (remoteSettings && !userSettings) {
+      setUserSettings(remoteSettings);
+    }
+  }, [remoteSettings, userSettings]);
 
-    const isSponsored = !!accessToken.decoded.sponsored_by;
+  // Fetch external tools and check sponsorship when session and settings are ready
+  useEffect(() => {
+    if (!accessToken || !user_id || error?.isBlocker || !remoteSettings) return;
 
-    if (isSponsored) {
-      // Handle sponsored user with error after session is established
-      const handleSponsoredUser = (sponsorName: string) => {
-        console.warn("User is sponsored by:", sponsorName);
-        const sponsorshipsUrl = `/${lang_iso_code}/user/${user_id}/sponsorships${window.location.search}`;
-        const sponsorshipsTitle = t("sponsorships");
-
-        const boldSponsorNameHtml = `<span class="font-bold font-mono">${sponsorName}</span>`;
-        const linkStyle = "underline text-amber-100 hover:text-white";
-        const sponsorshipsLinkHtml = `<a href="${sponsorshipsUrl}" class="${linkStyle}" >${sponsorshipsTitle}</a>`;
-
-        const htmlMessage = t("errors.sponsored_user", {
-          sponsorName: boldSponsorNameHtml,
-          sponsorshipsLink: sponsorshipsLinkHtml,
-        });
-
-        const errorMessage = (
-          <span dangerouslySetInnerHTML={{ __html: htmlMessage }} />
-        );
-
-        setError(PageError.blockerWithHtml(errorMessage, false));
-      };
-
-      handleSponsoredUser(accessToken.decoded.sponsored_by!);
+    if (remoteSettings.is_sponsored) {
+      const sponsorshipsUrl = `/${lang_iso_code}/user/${user_id}/sponsorships${window.location.search}`;
+      const sponsorshipsTitle = t("sponsorships");
+      const linkStyle = "underline text-amber-100 hover:text-white";
+      const sponsorshipsLinkHtml = `<a href="${sponsorshipsUrl}" class="${linkStyle}" >${sponsorshipsTitle}</a>`;
+      const htmlMessage = t("errors.sponsored_user", {
+        sponsorshipsLink: sponsorshipsLinkHtml,
+      });
+      const errorMessage = (
+        <span dangerouslySetInnerHTML={{ __html: htmlMessage }} />
+      );
+      setError(PageError.blockerWithHtml(errorMessage, false));
       return;
     }
 
@@ -89,30 +84,15 @@ const AccessSettingsPage: React.FC = () => {
       setError(null);
       try {
         const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
-
-        // Fetch both user settings and external tools in parallel
-        const [settings, externalTools] = await Promise.all([
-          fetchUserSettings({
-            apiBaseUrl,
-            user_id,
-            rawToken: accessToken.raw,
-          }),
-          fetchExternalTools({
-            apiBaseUrl,
-            user_id,
-            rawToken: accessToken.raw,
-          }),
-        ]);
-
-        console.info("Fetched settings!", settings);
+        const externalTools = await fetchExternalTools({
+          apiBaseUrl,
+          user_id,
+          rawToken: accessToken.raw,
+        });
         console.info("Fetched external tools!", externalTools);
-
-        setUserSettings(settings);
-        setRemoteSettings(settings);
         setExternalToolProviders(
           externalTools.providers.map((p) => p.definition)
         );
-        // Store provider configuration status
         const statusMap = new Map<string, boolean>();
         externalTools.providers.forEach((p) => {
           statusMap.set(p.definition.id, p.is_configured);
@@ -128,7 +108,7 @@ const AccessSettingsPage: React.FC = () => {
     };
 
     fetchData();
-  }, [accessToken, user_id, lang_iso_code, error, setError, setIsLoadingState]);
+  }, [accessToken, user_id, lang_iso_code, error, setError, setIsLoadingState, remoteSettings]);
 
   // Track carousel position (only on user interaction, not programmatic scrolls)
   useEffect(() => {
@@ -222,7 +202,7 @@ const AccessSettingsPage: React.FC = () => {
         rawToken: accessToken.raw,
       });
 
-      setRemoteSettings(userSettings);
+      updateSettingsCache(userSettings!);
       setExternalToolProviders(
         updatedExternalTools.providers.map((p) => p.definition)
       );

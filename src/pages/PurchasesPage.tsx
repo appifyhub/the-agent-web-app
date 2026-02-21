@@ -192,25 +192,17 @@ const PurchasesPage: React.FC = () => {
   };
 
   const handleStartEditing = () => {
-    const isSponsored = !!accessToken?.decoded.sponsored_by;
-    if (isSponsored) {
-      const sponsorName = accessToken!.decoded.sponsored_by!;
+    if (userSettings?.is_sponsored) {
       const sponsorshipsUrl = `/${lang_iso_code}/user/${user_id}/sponsorships${window.location.search}`;
       const sponsorshipsTitle = t("sponsorships");
-
-      const boldSponsorNameHtml = `<span class="font-bold font-mono">${sponsorName}</span>`;
       const linkStyle = "underline text-amber-100 hover:text-white";
       const sponsorshipsLinkHtml = `<a href="${sponsorshipsUrl}" class="${linkStyle}" >${sponsorshipsTitle}</a>`;
-
       const htmlMessage = t("errors.sponsored_user", {
-        sponsorName: boldSponsorNameHtml,
         sponsorshipsLink: sponsorshipsLinkHtml,
       });
-
       const errorMessage = (
         <span dangerouslySetInnerHTML={{ __html: htmlMessage }} />
       );
-
       setError(PageError.blockerWithHtml(errorMessage, false));
       return;
     }
@@ -320,25 +312,17 @@ const PurchasesPage: React.FC = () => {
   const shouldShowSecondaryButton = !isEditing;
 
   const handleBuyMore = () => {
-    const isSponsored = !!accessToken?.decoded.sponsored_by;
-    if (isSponsored) {
-      const sponsorName = accessToken!.decoded.sponsored_by!;
+    if (userSettings?.is_sponsored) {
       const sponsorshipsUrl = `/${lang_iso_code}/user/${user_id}/sponsorships${window.location.search}`;
       const sponsorshipsTitle = t("sponsorships");
-
-      const boldSponsorNameHtml = `<span class="font-bold font-mono">${sponsorName}</span>`;
       const linkStyle = "underline text-amber-100 hover:text-white";
       const sponsorshipsLinkHtml = `<a href="${sponsorshipsUrl}" class="${linkStyle}" >${sponsorshipsTitle}</a>`;
-
       const htmlMessage = t("errors.sponsored_user", {
-        sponsorName: boldSponsorNameHtml,
         sponsorshipsLink: sponsorshipsLinkHtml,
       });
-
       const errorMessage = (
         <span dangerouslySetInnerHTML={{ __html: htmlMessage }} />
       );
-
       setError(PageError.blockerWithHtml(errorMessage, false));
       return;
     }
