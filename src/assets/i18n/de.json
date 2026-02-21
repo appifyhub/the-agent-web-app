@@ -182,8 +182,14 @@
   "saved": "Gespeichert!",
   "copied": "Kopiert!",
   "pasted": "Eingefügt!",
-  "connections": {
-    "page_title": "Verbindungen",
+  "menu_section": {
+    "personal": "Persönlich",
+    "agent": "Assistent",
+    "resources": "Ressourcen",
+    "people": "Personen"
+  },
+  "linked_profiles": {
+    "page_title": "Verknüpfte Profile",
     "card_title": "Profile verbinden",
     "show_my_key": "Meinen Verbindungsschlüssel anzeigen",
     "hide_my_key": "Meinen Verbindungsschlüssel ausblenden",
@@ -205,7 +211,7 @@
     "command_info": "Sie können diesen Schlüssel auch direkt an {botName} auf einer der unterstützten Plattformen senden, indem Sie einen Verbindungsbefehl verwenden. Dies verbindet automatisch dieses Profil mit dem Profil, an das Sie es senden:",
     "chat_command_info": "Alternativ können Sie {botName} bitten, sich über den Chat mit einem anderen Profil zu verbinden:",
     "chat_command_example": "Bitte verbinde mich mit diesem Profil: {connectKey}.",
-    "cannot_connect_to_self": "Sie können dieses Profil nicht mit sich selbst verbinden. Um Verbindungen herzustellen, müssen Sie zu den Verbindungseinstellungen des anderen Profils gehen und den Schlüssel von dort nehmen!",
+    "cannot_connect_to_self": "Sie können dieses Profil nicht mit sich selbst verbinden. Um Verbindungen herzustellen, müssen Sie zu den Einstellungen für verknüpfte Profile des anderen Profils gehen und den Schlüssel von dort nehmen!",
     "invalid_format": "Ungültiges Format. Der Verbindungsschlüssel muss im richtigen Format sein.",
     "connect_success": "Profile erfolgreich verbunden!",
     "regenerate_success": "Verbindungsschlüssel erfolgreich erneuert!",

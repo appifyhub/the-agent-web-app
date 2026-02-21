@@ -182,8 +182,14 @@
   "saved": "¡Guardado!",
   "copied": "¡Copiado!",
   "pasted": "¡Pegado!",
-  "connections": {
-    "page_title": "Conexiones",
+  "menu_section": {
+    "personal": "Personal",
+    "agent": "Asistente",
+    "resources": "Recursos",
+    "people": "Personas"
+  },
+  "linked_profiles": {
+    "page_title": "Perfiles Vinculados",
     "card_title": "Conectar Perfiles",
     "show_my_key": "Mostrar mi Clave de Conexión",
     "hide_my_key": "Ocultar mi Clave de Conexión",
@@ -205,7 +211,7 @@
     "command_info": "También puedes enviar directamente esta clave a {botName} en una de las plataformas compatibles, usando un comando de Conexión. Esto conectará automáticamente este perfil con el perfil al que se la envíes:",
     "chat_command_info": "Alternativamente, puedes pedirle a {botName} que se conecte a otro perfil usando el chat:",
     "chat_command_example": "Por favor, conéctame a este perfil: {connectKey}.",
-    "cannot_connect_to_self": "No puedes conectar este perfil consigo mismo. Para hacer conexiones, debes ir a la configuración de Conexiones del otro perfil y tomar la clave desde allí!",
+    "cannot_connect_to_self": "No puedes conectar este perfil consigo mismo. Para hacer conexiones, debes ir a la configuración de Perfiles Vinculados del otro perfil y tomar la clave desde allí!",
     "invalid_format": "Formato inválido. La clave de conexión debe estar en el formato correcto.",
     "connect_success": "¡Perfiles conectados exitosamente!",
     "regenerate_success": "¡Clave de conexión regenerada exitosamente!",

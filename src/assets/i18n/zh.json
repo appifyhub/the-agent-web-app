@@ -182,8 +182,14 @@
   "saved": "已保存！",
   "copied": "已复制！",
   "pasted": "已粘贴！",
-  "connections": {
-    "page_title": "连接",
+  "menu_section": {
+    "personal": "个人",
+    "agent": "助手",
+    "resources": "资源",
+    "people": "联系人"
+  },
+  "linked_profiles": {
+    "page_title": "关联的配置文件",
     "card_title": "连接配置文件",
     "show_my_key": "显示我的连接密钥",
     "hide_my_key": "隐藏我的连接密钥",
@@ -205,7 +211,7 @@
     "command_info": "您也可以使用连接命令在支持的平台之一中直接将此密钥发送给 {botName}。这将自动将此配置文件与您发送到的配置文件连接：",
     "chat_command_info": "或者，您可以要求 {botName} 使用聊天连接到另一个配置文件：",
     "chat_command_example": "请将我连接到此配置文件：{connectKey}。",
-    "cannot_connect_to_self": "您不能将此配置文件连接到自身。要进行连接，您必须转到另一个配置文件的连接设置并从那里获取密钥！",
+    "cannot_connect_to_self": "您不能将此配置文件连接到自身。要进行连接，您必须转到另一个配置文件的关联的配置文件设置并从那里获取密钥！",
     "invalid_format": "格式无效。连接密钥必须采用正确的格式。",
     "connect_success": "配置文件连接成功！",
     "regenerate_success": "连接密钥重新生成成功！",
