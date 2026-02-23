@@ -3,9 +3,10 @@ import { twMerge } from "tailwind-merge";
 import React from "react";
 import { TranslationKey } from "@/lib/translation-keys";
 import { t } from "@/lib/translations";
+import { ApiError, getErrorTranslationKey } from "@/lib/api-error";
 
 export interface ErrorData {
-  translationKey: TranslationKey;
+  translationKey?: TranslationKey;
   variables?: Record<string, string | number>;
   htmlContent?: React.ReactNode;
 }
@@ -54,8 +55,25 @@ export class PageError {
     showGenericAppendix: boolean = false
   ) {
     return new PageError(
-      { translationKey: "" as TranslationKey, htmlContent },
+      { htmlContent },
       true,
+      showGenericAppendix
+    );
+  }
+
+  public static fromApiError(
+    apiError: ApiError,
+    isBlocker: boolean = false,
+    showGenericAppendix: boolean = true
+  ) {
+    const translationKey = getErrorTranslationKey(apiError.errorCode) || "errors.unknown";
+    const variables = translationKey === "errors.unknown"
+      ? { message: apiError.serverMessage }
+      : undefined;
+
+    return new PageError(
+      { translationKey, variables },
+      isBlocker,
       showGenericAppendix
     );
   }

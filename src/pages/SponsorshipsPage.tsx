@@ -88,7 +88,7 @@ const SponsorshipsPage: React.FC = () => {
 
   // Fetch sponsorships and external tools when session is ready
   useEffect(() => {
-    if (!accessToken || !user_id || error?.isBlocker) return;
+    if (!accessToken || !user_id || error) return;
 
     const fetchData = async () => {
       setIsLoadingState(true);

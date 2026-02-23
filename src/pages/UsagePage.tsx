@@ -98,7 +98,7 @@ const UsagePage: React.FC = () => {
   }, [accessToken, user_id]);
 
   useEffect(() => {
-    if (!accessToken || !user_id || error?.isBlocker) return;
+    if (!accessToken || !user_id || error) return;
 
     const fetchData = async () => {
       setError(null);

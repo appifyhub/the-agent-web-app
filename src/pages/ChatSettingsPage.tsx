@@ -52,7 +52,7 @@ const ChatSettingsPage: React.FC = () => {
 
   // Fetch chat settings when session is ready
   useEffect(() => {
-    if (!accessToken || !chat_id || error?.isBlocker) return;
+    if (!accessToken || !chat_id || error) return;
 
     const fetchSettings = async () => {
       setIsLoadingState(true);

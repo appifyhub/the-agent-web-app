@@ -1,6 +1,7 @@
 import { request } from "@/services/networking";
 import { Platform } from "@/lib/platform";
 import { cleanUsername } from "@/lib/utils";
+import { parseApiError } from "@/lib/api-error";
 
 export interface SponsorshipResponse {
   user_id_hex: string;
@@ -37,9 +38,7 @@ export async function fetchUserSponsorships({
     }
   );
   if (!response.ok) {
-    throw new Error(
-      `Network error!\n\tStatus: ${response.status}\n\tError: ${response.statusText}`
-    );
+    throw await parseApiError(response);
   }
   const rawData = await response.json() as Omit<UserSponsorshipsResponse, "sponsorships"> & {
     sponsorships: (Omit<SponsorshipResponse, "platform"> & { platform: string | null })[];
@@ -82,14 +81,7 @@ export async function createSponsorship({
     }
   );
   if (!response.ok) {
-    let reason = "";
-    try {
-      const data = await response.json();
-      reason = data.reason || "";
-    } catch (e) {
-      console.error("Failed to parse response!", e);
-    }
-    throw new Error(`Failed to create sponsorship. ${reason}`);
+    throw await parseApiError(response);
   }
 }
 
@@ -118,14 +110,7 @@ export async function removeSponsorship({
     }
   );
   if (!response.ok) {
-    let reason = "";
-    try {
-      const data = await response.json();
-      reason = data.reason || "";
-    } catch (e) {
-      console.error("Failed to parse response!", e);
-    }
-    throw new Error(`Failed to remove sponsorship. ${reason}`);
+    throw await parseApiError(response);
   }
 }
 
@@ -150,13 +135,6 @@ export async function removeSelfSponsorship({
     }
   );
   if (!response.ok) {
-    let reason = "";
-    try {
-      const data = await response.json();
-      reason = data.detail?.reason || "";
-    } catch (e) {
-      console.error("Failed to parse response!", e);
-    }
-    throw new Error(`Failed to remove self-sponsorship. ${reason}`);
+    throw await parseApiError(response);
   }
 }

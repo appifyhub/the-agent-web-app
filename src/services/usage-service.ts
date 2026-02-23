@@ -1,5 +1,6 @@
 import { request } from "@/services/networking";
 import { ExternalTool, ToolType } from "@/services/external-tools-service";
+import { parseApiError } from "@/lib/api-error";
 
 export interface UsageRecord {
   user_id: string;
@@ -128,14 +129,7 @@ export async function fetchUsageRecords({
     }
   );
   if (!response.ok) {
-    let reason = "";
-    try {
-      const data = await response.json();
-      reason = data.reason || data.detail?.reason || "";
-    } catch (e) {
-      console.error("Failed to parse response!", e);
-    }
-    throw new Error(`Failed to fetch usage records. ${reason}`);
+    throw await parseApiError(response);
   }
   return response.json();
 }
@@ -173,14 +167,7 @@ export async function fetchUsageStats({
     }
   );
   if (!response.ok) {
-    let reason = "";
-    try {
-      const data = await response.json();
-      reason = data.reason || data.detail?.reason || "";
-    } catch (e) {
-      console.error("Failed to parse response!", e);
-    }
-    throw new Error(`Failed to fetch usage stats. ${reason}`);
+    throw await parseApiError(response);
   }
   return response.json();
 }

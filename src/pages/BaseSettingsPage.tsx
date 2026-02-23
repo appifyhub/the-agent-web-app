@@ -117,7 +117,10 @@ const BaseSettingsPage = forwardRef<BaseSettingsPageRef, BaseSettingsPageProps>(
       if (error.errorData.htmlContent) {
         return error.errorData.htmlContent;
       }
-      return t(error.errorData.translationKey, error.errorData.variables || {});
+      if (error.errorData.translationKey) {
+        return t(error.errorData.translationKey, error.errorData.variables || {});
+      }
+      return "";
     };
 
     // show the early loading state

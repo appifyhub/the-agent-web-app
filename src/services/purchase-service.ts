@@ -1,4 +1,5 @@
 import { request } from "@/services/networking";
+import { parseApiError } from "@/lib/api-error";
 
 export interface Product {
   id: string;
@@ -32,9 +33,7 @@ export async function fetchProducts({
     },
   );
   if (!response.ok) {
-    throw new Error(
-      `Network error!\n\tStatus: ${response.status}\n\tError: ${response.statusText}`,
-    );
+    throw await parseApiError(response);
   }
   return response.json();
 }
@@ -148,14 +147,7 @@ export async function fetchPurchaseRecords({
     }
   );
   if (!response.ok) {
-    let reason = "";
-    try {
-      const data = await response.json();
-      reason = data.reason || data.detail?.reason || "";
-    } catch (e) {
-      console.error("Failed to parse response!", e);
-    }
-    throw new Error(`Failed to fetch purchase records. ${reason}`);
+    throw await parseApiError(response);
   }
   return response.json();
 }
@@ -185,14 +177,7 @@ export async function fetchPurchaseStats({
     }
   );
   if (!response.ok) {
-    let reason = "";
-    try {
-      const data = await response.json();
-      reason = data.reason || data.detail?.reason || "";
-    } catch (e) {
-      console.error("Failed to parse response!", e);
-    }
-    throw new Error(`Failed to fetch purchase stats. ${reason}`);
+    throw await parseApiError(response);
   }
   return response.json();
 }
@@ -216,14 +201,7 @@ export async function bindLicenseKey({
     }
   );
   if (!response.ok) {
-    let reason = "";
-    try {
-      const data = await response.json();
-      reason = data.reason || data.detail?.reason || "";
-    } catch (e) {
-      console.error("Failed to parse response!", e);
-    }
-    throw new Error(`Failed to bind license key. ${reason}`);
+    throw await parseApiError(response);
   }
   return response.json();
 }

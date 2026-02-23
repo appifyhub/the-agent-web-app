@@ -69,7 +69,7 @@ const LinkedProfilesPage: React.FC = () => {
 
   // Fetch connect key when session is ready
   useEffect(() => {
-    if (!accessToken || !user_id || error?.isBlocker) return;
+    if (!accessToken || !user_id || error) return;
 
     const fetchData = async () => {
       setIsLoadingState(true);

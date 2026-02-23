@@ -103,6 +103,28 @@ function searchKeyUsage(key: string): boolean {
       if (errorResult.trim()) {
         return true;
       }
+
+      // Check for errors.unknown used as fallback in fromApiError()
+      if (key === "errors.unknown") {
+        const fallbackResult = execSync(
+          `grep -r --include="*.ts" --include="*.tsx" --include="*.js" --include="*.jsx" -E "\\"errors\\.unknown\\"|'errors\\.unknown'" "${SRC_DIR}" 2>/dev/null || true`,
+          { encoding: "utf8", maxBuffer: 10 * 1024 * 1024 }
+        );
+        if (fallbackResult.trim()) {
+          return true;
+        }
+      }
+    }
+
+    // Check for error_codes usage via getErrorTranslationKey()
+    if (key.startsWith("error_codes.")) {
+      const errorCodeResult = execSync(
+        `grep -r --include="*.ts" --include="*.tsx" --include="*.js" --include="*.jsx" -E "getErrorTranslationKey" "${SRC_DIR}" 2>/dev/null || true`,
+        { encoding: "utf8", maxBuffer: 10 * 1024 * 1024 }
+      );
+      if (errorCodeResult.trim()) {
+        return true;
+      }
     }
 
     return false;
