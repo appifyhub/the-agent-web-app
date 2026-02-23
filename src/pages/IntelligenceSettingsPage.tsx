@@ -197,6 +197,7 @@ const IntelligenceSettingsPage: React.FC = () => {
       cancelTooltipText={t("restore")}
       isContentLoading={isLoadingState}
       externalError={error}
+      onExternalErrorDismiss={() => setError(null)}
     >
       {externalToolsData ? (
         <>

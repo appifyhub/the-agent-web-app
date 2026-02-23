@@ -55,6 +55,7 @@ interface BaseSettingsPageProps {
   showProfileButton?: boolean;
   showSponsorshipsButton?: boolean;
   externalError?: PageError | null;
+  onExternalErrorDismiss?: () => void;
   cardClassName?: string;
 }
 
@@ -86,6 +87,7 @@ const BaseSettingsPage = forwardRef<BaseSettingsPageRef, BaseSettingsPageProps>(
       showProfileButton = true,
       showSponsorshipsButton = true,
       externalError = null,
+      onExternalErrorDismiss,
       cardClassName,
     },
     ref,
@@ -96,7 +98,7 @@ const BaseSettingsPage = forwardRef<BaseSettingsPageRef, BaseSettingsPageProps>(
       chat_id?: string;
     }>();
 
-    const { error, accessToken, isLoadingState, handleTokenExpired } =
+    const { error, accessToken, isLoadingState, handleTokenExpired, setError } =
       usePageSession();
 
     // Fetch chats once at this level to avoid duplicate calls
@@ -236,6 +238,14 @@ const BaseSettingsPage = forwardRef<BaseSettingsPageRef, BaseSettingsPageProps>(
               displayError?.showGenericAppendix
                 ? t("errors.check_link")
                 : undefined
+            }
+            isBlocker={displayError.isBlocker}
+            onDismiss={
+              externalError && onExternalErrorDismiss
+                ? onExternalErrorDismiss
+                : !displayError.isBlocker
+                  ? () => setError(null)
+                  : undefined
             }
           />
         )}

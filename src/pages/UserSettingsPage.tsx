@@ -135,6 +135,7 @@ const UserSettingsPage: React.FC = () => {
       actionDisabled={!hasSettingsChanged}
       isContentLoading={isLoadingState}
       externalError={error}
+      onExternalErrorDismiss={() => setError(null)}
     >
 
       {/* Full name input */}

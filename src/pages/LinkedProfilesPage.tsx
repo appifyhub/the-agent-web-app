@@ -17,6 +17,7 @@ import BaseSettingsPage from "@/pages/BaseSettingsPage";
 import { t } from "@/lib/translations";
 import { usePageSession } from "@/hooks/usePageSession";
 import { PageError } from "@/lib/utils";
+import { ApiError } from "@/lib/api-error";
 import { toast } from "sonner";
 import {
   getConnectKey,
@@ -281,8 +282,10 @@ const LinkedProfilesPage: React.FC = () => {
       toast.success(t("linked_profiles.regenerate_success"));
     } catch (err) {
       console.error("Error regenerating connect key!", err);
-      toast.error(
-        err instanceof Error ? err.message : t("linked_profiles.generic_error")
+      setError(
+        err instanceof ApiError
+          ? PageError.fromApiError(err)
+          : PageError.simple("linked_profiles.generic_error")
       );
     } finally {
       setIsRegenerating(false);
@@ -370,8 +373,10 @@ const LinkedProfilesPage: React.FC = () => {
       }
     } catch (err) {
       console.error("Error connecting profiles!", err);
-      toast.error(
-        err instanceof Error ? err.message : t("linked_profiles.generic_error")
+      setError(
+        err instanceof ApiError
+          ? PageError.fromApiError(err)
+          : PageError.simple("linked_profiles.generic_error")
       );
     } finally {
       setIsConnecting(false);
@@ -398,6 +403,7 @@ const LinkedProfilesPage: React.FC = () => {
       }
       isContentLoading={isLoadingState}
       externalError={error}
+      onExternalErrorDismiss={() => setError(null)}
     >
 
       {/* Main section - info and OTP input */}

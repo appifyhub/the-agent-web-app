@@ -350,6 +350,7 @@ const PurchasesPage: React.FC = () => {
         cancelIcon={<X className="h-6 w-6" />}
         isContentLoading={isLoadingState}
         externalError={error}
+        onExternalErrorDismiss={() => setError(null)}
       >
         {isEditing ? (
           <>

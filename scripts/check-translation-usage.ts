@@ -95,24 +95,22 @@ function searchKeyUsage(key: string): boolean {
     }
 
     // Check for PageError.blocker() and PageError.simple() usage
-    if (key.startsWith("errors.")) {
-      const errorResult = execSync(
-        `grep -r --include="*.ts" --include="*.tsx" --include="*.js" --include="*.jsx" -E "PageError\\.(blocker|simple)\\(\\"${escapedKey}\\"|PageError\\.(blocker|simple)\\(\\'${escapedKey}\\'" "${SRC_DIR}" 2>/dev/null || true`,
+    const pageErrorResult = execSync(
+      `grep -r --include="*.ts" --include="*.tsx" --include="*.js" --include="*.jsx" -E "PageError\\.(blocker|simple)\\(\\"${escapedKey}\\"|PageError\\.(blocker|simple)\\(\\'${escapedKey}\\'" "${SRC_DIR}" 2>/dev/null || true`,
+      { encoding: "utf8", maxBuffer: 10 * 1024 * 1024 }
+    );
+    if (pageErrorResult.trim()) {
+      return true;
+    }
+
+    // Check for errors.unknown used as fallback in fromApiError()
+    if (key === "errors.unknown") {
+      const fallbackResult = execSync(
+        `grep -r --include="*.ts" --include="*.tsx" --include="*.js" --include="*.jsx" -E "\\"errors\\.unknown\\"|'errors\\.unknown'" "${SRC_DIR}" 2>/dev/null || true`,
         { encoding: "utf8", maxBuffer: 10 * 1024 * 1024 }
       );
-      if (errorResult.trim()) {
+      if (fallbackResult.trim()) {
         return true;
-      }
-
-      // Check for errors.unknown used as fallback in fromApiError()
-      if (key === "errors.unknown") {
-        const fallbackResult = execSync(
-          `grep -r --include="*.ts" --include="*.tsx" --include="*.js" --include="*.jsx" -E "\\"errors\\.unknown\\"|'errors\\.unknown'" "${SRC_DIR}" 2>/dev/null || true`,
-          { encoding: "utf8", maxBuffer: 10 * 1024 * 1024 }
-        );
-        if (fallbackResult.trim()) {
-          return true;
-        }
       }
     }
 

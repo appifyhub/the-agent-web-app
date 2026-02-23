@@ -128,6 +128,7 @@ const ChatSettingsPage: React.FC = () => {
       actionDisabled={!areSettingsChanged}
       isContentLoading={isLoadingState}
       externalError={error}
+      onExternalErrorDismiss={() => setError(null)}
     >
 
       {/* Chat name link for opening drawer - mobile only */}

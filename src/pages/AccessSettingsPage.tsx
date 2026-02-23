@@ -261,6 +261,7 @@ const AccessSettingsPage: React.FC = () => {
       actionDisabled={!hasSettingsChanged}
       isContentLoading={isLoadingState}
       externalError={error}
+      onExternalErrorDismiss={() => setError(null)}
     >
       {showCreditsWarning && (
         <WarningBanner
