@@ -16,7 +16,7 @@ const PRESET_CHOICES: Record<ToolPreset, Partial<Record<ToolType, string>>> = {
     embedding: "text-embedding-3-small",
   },
   highest_price: {
-    chat: "gemini-3.1-pro-preview",
+    chat: "gemini-pro-latest",
     copywriting: "claude-opus-4-6",
     reasoning: "claude-opus-4-6",
     vision: "gpt-5.2",
@@ -27,7 +27,7 @@ const PRESET_CHOICES: Record<ToolPreset, Partial<Record<ToolType, string>>> = {
     embedding: "text-embedding-3-large",
   },
   agent_choice: {
-    chat: "gemini-3.1-pro-preview",
+    chat: "gpt-5.2",
     copywriting: "gpt-5.2",
     reasoning: "claude-sonnet-4-6",
     vision: "gpt-5.2",
