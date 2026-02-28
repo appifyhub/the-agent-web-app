@@ -1,5 +1,6 @@
 import { request } from "@/services/networking";
 import { maskSecret } from "@/lib/utils";
+import { parseApiError } from "@/lib/api-error";
 
 export interface UserSettings {
   id: string;
@@ -29,7 +30,9 @@ export interface UserSettings {
   tool_choice_api_fiat_exchange?: string;
   tool_choice_api_crypto_exchange?: string;
   tool_choice_api_twitter?: string;
+  credit_balance: number;
   group?: string;
+  is_sponsored: boolean;
   created_at?: string;
 }
 
@@ -174,9 +177,7 @@ export async function fetchUserChats({
     headers: headers,
   });
   if (!response.ok) {
-    throw new Error(
-      `Network error!\n\tStatus: ${response.status}\n\tError: ${response.statusText}`
-    );
+    throw await parseApiError(response);
   }
   return response.json();
 }
@@ -199,9 +200,7 @@ export async function fetchUserSettings({
     headers: headers,
   });
   if (!response.ok) {
-    throw new Error(
-      `Network error!\n\tStatus: ${response.status}\n\tError: ${response.statusText}`
-    );
+    throw await parseApiError(response);
   }
   return response.json();
 }
@@ -227,13 +226,6 @@ export async function saveUserSettings({
     body: JSON.stringify(payload),
   });
   if (!response.ok) {
-    let reason = "";
-    try {
-      const data = await response.json();
-      reason = data.reason || "";
-    } catch (e) {
-      console.error("Failed to parse response!", e);
-    }
-    throw new Error(`Failed to save settings. ${reason}`);
+    throw await parseApiError(response);
   }
 }

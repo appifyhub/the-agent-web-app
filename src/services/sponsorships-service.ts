@@ -1,12 +1,13 @@
 import { request } from "@/services/networking";
 import { Platform } from "@/lib/platform";
 import { cleanUsername } from "@/lib/utils";
+import { parseApiError } from "@/lib/api-error";
 
 export interface SponsorshipResponse {
   user_id_hex: string;
   full_name: string | null;
   platform_handle: string | null;
-  platform: Platform;
+  platform: Platform | null;
   sponsored_at: string;
   accepted_at: string | null;
 }
@@ -37,19 +38,17 @@ export async function fetchUserSponsorships({
     }
   );
   if (!response.ok) {
-    throw new Error(
-      `Network error!\n\tStatus: ${response.status}\n\tError: ${response.statusText}`
-    );
+    throw await parseApiError(response);
   }
   const rawData = await response.json() as Omit<UserSponsorshipsResponse, "sponsorships"> & {
-    sponsorships: (Omit<SponsorshipResponse, "platform"> & { platform: string })[];
+    sponsorships: (Omit<SponsorshipResponse, "platform"> & { platform: string | null })[];
   };
 
   return {
     ...rawData,
     sponsorships: rawData.sponsorships.map(sponsorship => ({
       ...sponsorship,
-      platform: Platform.fromString(sponsorship.platform),
+      platform: sponsorship.platform ? Platform.fromString(sponsorship.platform) : null,
       platform_handle: sponsorship.platform_handle ? cleanUsername(sponsorship.platform_handle) : null, // Clean handle on fetch
     })),
   };
@@ -82,14 +81,7 @@ export async function createSponsorship({
     }
   );
   if (!response.ok) {
-    let reason = "";
-    try {
-      const data = await response.json();
-      reason = data.reason || "";
-    } catch (e) {
-      console.error("Failed to parse response!", e);
-    }
-    throw new Error(`Failed to create sponsorship. ${reason}`);
+    throw await parseApiError(response);
   }
 }
 
@@ -118,14 +110,7 @@ export async function removeSponsorship({
     }
   );
   if (!response.ok) {
-    let reason = "";
-    try {
-      const data = await response.json();
-      reason = data.reason || "";
-    } catch (e) {
-      console.error("Failed to parse response!", e);
-    }
-    throw new Error(`Failed to remove sponsorship. ${reason}`);
+    throw await parseApiError(response);
   }
 }
 
@@ -137,7 +122,7 @@ export async function removeSelfSponsorship({
   apiBaseUrl: string;
   resource_id: string;
   rawToken: string;
-}): Promise<{ settings_link: string }> {
+}): Promise<void> {
   const headers = {
     "Content-Type": "application/json",
     Authorization: `Bearer ${rawToken}`,
@@ -150,14 +135,6 @@ export async function removeSelfSponsorship({
     }
   );
   if (!response.ok) {
-    let reason = "";
-    try {
-      const data = await response.json();
-      reason = data.detail?.reason || "";
-    } catch (e) {
-      console.error("Failed to parse response!", e);
-    }
-    throw new Error(`Failed to remove self-sponsorship. ${reason}`);
+    throw await parseApiError(response);
   }
-  return response.json();
 }

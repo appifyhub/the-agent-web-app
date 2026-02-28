@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-import { CardTitle } from "@/components/ui/card";
 import BaseSettingsPage, {
   BaseSettingsPageRef,
 } from "@/pages/BaseSettingsPage";
@@ -53,7 +52,7 @@ const ChatSettingsPage: React.FC = () => {
 
   // Fetch chat settings when session is ready
   useEffect(() => {
-    if (!accessToken || !chat_id || error?.isBlocker) return;
+    if (!accessToken || !chat_id || error) return;
 
     const fetchSettings = async () => {
       setIsLoadingState(true);
@@ -124,15 +123,13 @@ const ChatSettingsPage: React.FC = () => {
     <BaseSettingsPage
       ref={basePageRef}
       page="chat"
+      cardTitle={t("configure_title", { botName })}
       onActionClicked={handleSave}
       actionDisabled={!areSettingsChanged}
       isContentLoading={isLoadingState}
       externalError={error}
+      onExternalErrorDismiss={() => setError(null)}
     >
-      <div className="h-2" />
-      <CardTitle className="text-center mx-auto">
-        {t("configure_title", { botName })}
-      </CardTitle>
 
       {/* Chat name link for opening drawer - mobile only */}
       {selectedChat && (

@@ -161,6 +161,7 @@ const ProvidersCarousel: React.FC<ProvidersCarouselProps> = ({
                 spellCheck={false}
                 inputClassName="font-mono"
                 labelClassName="flex items-center leading-tight"
+                onClear={() => onSettingChange(provider.id, "")}
               />
 
               {/* Info links */}

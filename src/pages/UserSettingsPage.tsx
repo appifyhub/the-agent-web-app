@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { CardTitle } from "@/components/ui/card";
 import BaseSettingsPage from "@/pages/BaseSettingsPage";
 import { t } from "@/lib/translations";
 import { usePageSession } from "@/hooks/usePageSession";
@@ -45,7 +44,7 @@ const UserSettingsPage: React.FC = () => {
 
   // Fetch user settings and external tools when session is ready
   useEffect(() => {
-    if (!accessToken || !user_id || error?.isBlocker) return;
+    if (!accessToken || !user_id || error) return;
 
     const fetchData = async () => {
       setIsLoadingState(true);
@@ -131,17 +130,13 @@ const UserSettingsPage: React.FC = () => {
   return (
     <BaseSettingsPage
       page="profile"
+      cardTitle={t("profile_card_title", { botName })}
       onActionClicked={handleSave}
       actionDisabled={!hasSettingsChanged}
       isContentLoading={isLoadingState}
       externalError={error}
+      onExternalErrorDismiss={() => setError(null)}
     >
-      <div className="h-2" />
-      <CardTitle className="text-center mx-auto">
-        {t("profile_card_title", { botName })}
-      </CardTitle>
-
-      <div className="h-4" />
 
       {/* Full name input */}
       <SettingInput

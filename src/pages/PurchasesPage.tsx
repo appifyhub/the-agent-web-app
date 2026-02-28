@@ -1,19 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
-import { CardTitle } from "@/components/ui/card";
-import { ReceiptCent, Clipboard, ShoppingCart } from "lucide-react";
+import { BadgeCent, Clipboard, ShoppingCart, ReceiptCent, X, Plus } from "lucide-react";
 import BaseSettingsPage from "@/pages/BaseSettingsPage";
-import { PageError } from "@/lib/utils";
+import { PageError, buildSponsoredBlockerError } from "@/lib/utils";
 import { toast } from "sonner";
 import { t } from "@/lib/translations";
+import { ApiError } from "@/lib/api-error";
 import {
   fetchPurchaseRecords,
   fetchPurchaseStats,
   bindLicenseKey,
+  fetchProducts,
   PurchaseRecord,
   PurchaseAggregates,
+  Product,
 } from "@/services/purchase-service";
+import ProductPickerDialog from "@/components/ProductPickerDialog";
 import { usePageSession } from "@/hooks/usePageSession";
+import { useUserSettings } from "@/hooks/useUserSettings";
 import { DEFAULT_LANGUAGE, INTERFACE_LANGUAGES } from "@/lib/languages";
 import { TimeRange, calculateDateRange } from "@/services/usage-service";
 import PurchaseRecordCard from "@/components/PurchaseRecordCard";
@@ -34,6 +38,11 @@ const PurchasesPage: React.FC = () => {
   const { error, accessToken, isLoadingState, setError, setIsLoadingState } =
     usePageSession();
 
+  const { userSettings, refreshSettings } = useUserSettings(
+    user_id,
+    accessToken?.raw,
+  );
+
   const [purchaseRecords, setPurchaseRecords] = useState<PurchaseRecord[]>([]);
   const [stats, setStats] = useState<PurchaseAggregates | null>(null);
   const [expandedItems, setExpandedItems] = useState<Set<number>>(new Set());
@@ -47,12 +56,47 @@ const PurchasesPage: React.FC = () => {
   const [selectedProduct, setSelectedProduct] = useState<string>("all");
   const [filtersExpanded, setFiltersExpanded] = useState<boolean>(false);
 
+  const [shopOpen, setShopOpen] = useState<boolean>(false);
+  const [shopProducts, setShopProducts] = useState<Product[]>([]);
+
+  const shopUrl = useMemo(() => {
+    if (!user_id) return undefined;
+    const storeUrl = import.meta.env.VITE_STORE_URL;
+    if (!storeUrl) return undefined;
+    try {
+      const url = new URL(storeUrl);
+      url.searchParams.set("user_id", user_id.replace(/-/g, ""));
+      return url.toString();
+    } catch {
+      return undefined;
+    }
+  }, [user_id]);
+
   const currentInterfaceLanguage =
     INTERFACE_LANGUAGES.find((lang) => lang.isoCode === lang_iso_code) ||
     DEFAULT_LANGUAGE;
 
   useEffect(() => {
-    if (!accessToken || !user_id || error?.isBlocker) return;
+    if (!accessToken || !user_id) return;
+
+    const loadProducts = async () => {
+      try {
+        const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+        const { products } = await fetchProducts({
+          apiBaseUrl,
+          user_id,
+          rawToken: accessToken.raw,
+        });
+        setShopProducts(products);
+      } catch (err) {
+        console.error("Error fetching products!", err);
+      }
+    };
+    loadProducts();
+  }, [accessToken, user_id]);
+
+  useEffect(() => {
+    if (!accessToken || !user_id || error) return;
 
     const fetchData = async () => {
       setError(null);
@@ -99,7 +143,11 @@ const PurchasesPage: React.FC = () => {
         }
       } catch (err) {
         console.error("Error fetching data!", err);
-        setError(PageError.blocker("errors.fetch_failed"));
+        setError(
+          err instanceof ApiError
+            ? PageError.fromApiError(err, true)
+            : PageError.blocker("errors.fetch_failed"),
+        );
       }
     };
     fetchData();
@@ -142,13 +190,21 @@ const PurchasesPage: React.FC = () => {
       }
     } catch (err) {
       console.error("Error loading more records!", err);
-      setError(PageError.simple("errors.fetch_failed"));
+      setError(
+        err instanceof ApiError
+          ? PageError.fromApiError(err)
+          : PageError.simple("errors.fetch_failed"),
+      );
     } finally {
       setIsLoadingMore(false);
     }
   };
 
   const handleStartEditing = () => {
+    if (userSettings?.is_sponsored) {
+      setError(buildSponsoredBlockerError(lang_iso_code!, user_id!));
+      return;
+    }
     setIsEditing(true);
     setLicenseKey("");
   };
@@ -203,12 +259,18 @@ const PurchasesPage: React.FC = () => {
         setHasMore(false);
       }
 
+      await refreshSettings();
+
       setIsEditing(false);
       setLicenseKey("");
       toast(t("purchases.bind_success"));
     } catch (err) {
       console.error("Error binding license key!", err);
-      setError(PageError.simple("errors.save_failed"));
+      setError(
+        err instanceof ApiError
+          ? PageError.fromApiError(err)
+          : PageError.simple("errors.save_failed"),
+      );
     } finally {
       setIsLoadingState(false);
     }
@@ -230,12 +292,16 @@ const PurchasesPage: React.FC = () => {
     }
   };
 
+  const getActionIcon = () => {
+    return isEditing ? undefined : <ShoppingCart className="h-5 w-5" />;
+  };
+
   const getActionButtonText = () => {
-    return isEditing ? t("save") : t("purchases.use_license");
+    return isEditing ? t("save") : t("purchases.buy");
   };
 
   const getActionHandler = () => {
-    return isEditing ? handleSaveLicenseKey : handleStartEditing;
+    return isEditing ? handleSaveLicenseKey : handleBuyMore;
   };
 
   const isActionDisabled = () => {
@@ -246,157 +312,172 @@ const PurchasesPage: React.FC = () => {
   };
 
   const shouldShowCancelButton = isEditing;
+  const shouldShowSecondaryButton = !isEditing;
 
   const handleBuyMore = () => {
-    if (!user_id) return;
-    const storeUrl = import.meta.env.VITE_STORE_URL;
-    if (!storeUrl) return;
-    const url = new URL(storeUrl);
-    url.searchParams.set("user_id", user_id.replace(/-/g, ""));
-    url.searchParams.set("origin", "agent_settings_buy_more_list");
-    window.open(url.toString(), "_blank", "noopener,noreferrer");
+    if (userSettings?.is_sponsored) {
+      setError(buildSponsoredBlockerError(lang_iso_code!, user_id!));
+      return;
+    }
+    setShopOpen(true);
   };
 
   return (
-    <BaseSettingsPage
-      page="purchases"
-      onActionClicked={getActionHandler()}
-      actionDisabled={isActionDisabled()}
-      actionButtonText={getActionButtonText()}
-      showCancelButton={shouldShowCancelButton}
-      onCancelClicked={handleCancelEditing}
-      isContentLoading={isLoadingState}
-      externalError={error}
-    >
-      {isEditing ? (
-        <>
-          <CardTitle className="text-center mx-auto">
-            {t("purchases.use_license")}
-          </CardTitle>
-          <div className="h-4" />
-
-          <div className="space-y-4">
-            <div className="flex items-center justify-between w-full max-w-2xl">
-              <Label className="ps-2 text-[1.05rem] font-light">
-                {t("purchases.license_key_label")}
-              </Label>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handlePaste}
-                disabled={!!error?.isBlocker}
-                className="glass rounded-full cursor-pointer h-8 w-8 p-0 shrink-0"
-              >
-                <Clipboard className="h-4 w-4" />
-              </Button>
-            </div>
-            <Input
-              id="license-key"
-              className="py-6 px-6 w-full max-w-2xl text-[1.05rem] glass rounded-2xl"
-              placeholder={t("purchases.license_key_placeholder")}
-              disabled={!!error?.isBlocker}
-              value={licenseKey}
-              onChange={(e) => setLicenseKey(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && !error?.isBlocker) {
-                  handleSaveLicenseKey();
-                }
-              }}
-            />
-          </div>
-        </>
-      ) : (
-        <>
-          <CardTitle className="text-center mx-auto">
-            {t("purchases.card_title")}
-          </CardTitle>
-
-          <div className="h-2" />
-
-          {stats && <PurchaseStats stats={stats} />}
-
-          {stats && (
-            <PurchaseFilters
-              timeRange={timeRange}
-              selectedProduct={selectedProduct}
-              onTimeRangeChange={setTimeRange}
-              onProductChange={setSelectedProduct}
-              stats={stats}
-              disabled={isLoadingState}
-              isExpanded={filtersExpanded}
-              onExpandedChange={setFiltersExpanded}
-            />
-          )}
-
-          <Button
-            variant="outline"
-            onClick={handleBuyMore}
-            disabled={!!error?.isBlocker}
-            className="w-full mx-auto mt-[2rem] mb-[-1rem] py-[1.5rem] rounded-full
-              text-white !bg-indigo-500/50 hover:!bg-indigo-500/80
-              cursor-pointer"
-          >
-            <ShoppingCart className="h-4 w-4 mr-2" />
-            {t("purchases.buy_more")}
-          </Button>
-
-          <div className="flex flex-col space-y-6">
-            {purchaseRecords.length === 0 ? (
-              <div className="flex flex-col items-center space-y-10 text-center mt-12">
-                <ReceiptCent className="h-12 w-12 text-accent-amber" />
-                <p className="text-foreground/80 font-light">
-                  {t("purchases.no_records_found")}
-                </p>
+    <>
+      <ProductPickerDialog
+        products={shopProducts}
+        open={shopOpen}
+        onOpenChange={setShopOpen}
+        shopUrl={shopUrl}
+      />
+      <BaseSettingsPage
+        page="purchases"
+        cardTitle={
+          isEditing ? t("purchases.use_license") : t("purchases.card_title")
+        }
+        onActionClicked={getActionHandler()}
+        actionDisabled={isActionDisabled()}
+        actionIcon={getActionIcon()}
+        actionButtonText={getActionButtonText()}
+        showSecondaryButton={shouldShowSecondaryButton}
+        onSecondaryClicked={handleStartEditing}
+        secondaryIcon={<Plus className="h-5 w-5" />}
+        secondaryText={t("purchases.license")}
+        secondaryTooltipText={t("purchases.use_license")}
+        secondaryClassName="glass-purple text-white"
+        showCancelButton={shouldShowCancelButton}
+        onCancelClicked={handleCancelEditing}
+        cancelIcon={<X className="h-6 w-6" />}
+        isContentLoading={isLoadingState}
+        externalError={error}
+        onExternalErrorDismiss={() => setError(null)}
+      >
+        {isEditing ? (
+          <>
+            <div className="space-y-4">
+              <div className="flex items-center justify-between w-full max-w-2xl">
+                <Label className="ps-2 text-[1.05rem] font-light">
+                  {t("purchases.license_key_label")}
+                </Label>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handlePaste}
+                  disabled={!!error?.isBlocker}
+                  className="glass rounded-full cursor-pointer h-8 w-8 p-0 shrink-0"
+                >
+                  <Clipboard className="h-4 w-4" />
+                </Button>
               </div>
-            ) : (
-              <>
-                <div className="h-2" />
-                <div className="w-full mx-auto">
-                  {purchaseRecords.map((record, index) => {
-                    const isExpanded = expandedItems.has(index);
-                    const toggleExpanded = () => {
-                      const newExpandedItems = new Set(expandedItems);
-                      if (isExpanded) {
-                        newExpandedItems.delete(index);
-                      } else {
-                        newExpandedItems.add(index);
-                      }
-                      setExpandedItems(newExpandedItems);
-                    };
-
-                    return (
-                      <PurchaseRecordCard
-                        key={index}
-                        record={record}
-                        isExpanded={isExpanded}
-                        onToggleExpand={toggleExpanded}
-                        isFirst={index === 0}
-                        isLast={index === purchaseRecords.length - 1}
-                        isSingleItem={purchaseRecords.length === 1}
-                        locale={currentInterfaceLanguage.isoCode}
-                        userId={user_id!}
-                      />
-                    );
-                  })}
-                </div>
-
-                {hasMore && (
-                  <div className="flex justify-center">
-                    <Button
-                      variant="outline"
-                      onClick={handleLoadMore}
-                      disabled={isLoadingMore}
-                    >
-                      {isLoadingMore ? t("loading_placeholder") : t("purchases.load_more")}
-                    </Button>
-                  </div>
-                )}
-              </>
+              <Input
+                id="license-key"
+                className="py-6 px-6 w-full max-w-2xl text-[1.05rem] glass rounded-2xl"
+                placeholder={t("purchases.license_key_placeholder")}
+                disabled={!!error?.isBlocker}
+                value={licenseKey}
+                onChange={(e) => setLicenseKey(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && !error?.isBlocker) {
+                    handleSaveLicenseKey();
+                  }
+                }}
+              />
+            </div>
+          </>
+        ) : (
+          <>
+            {userSettings?.credit_balance !== undefined && (
+              <div className="flex items-center justify-center gap-2 text-lg mt-2">
+                <span className="text-muted-foreground font-light">
+                  {t("usage.credit_balance", { balance: "" }).trim()}
+                </span>
+                <span className="text-accent-amber font-mono font-medium">
+                  {userSettings.credit_balance.toFixed(2)}
+                </span>
+                <BadgeCent
+                  strokeWidth={1.5}
+                  className="h-5 w-5 text-accent-amber"
+                />
+              </div>
             )}
-          </div>
-        </>
-      )}
-    </BaseSettingsPage>
+
+            <div className="h-2" />
+
+            {stats && <PurchaseStats stats={stats} />}
+
+            {stats && (
+              <PurchaseFilters
+                timeRange={timeRange}
+                selectedProduct={selectedProduct}
+                onTimeRangeChange={setTimeRange}
+                onProductChange={setSelectedProduct}
+                stats={stats}
+                disabled={isLoadingState}
+                isExpanded={filtersExpanded}
+                onExpandedChange={setFiltersExpanded}
+              />
+            )}
+
+            <div className="flex flex-col space-y-6">
+              {purchaseRecords.length === 0 ? (
+                <div className="flex flex-col items-center space-y-10 text-center mt-12">
+                  <ReceiptCent className="h-12 w-12 text-accent-amber" />
+                  <p className="text-foreground/80 font-light">
+                    {t("purchases.no_records_found")}
+                  </p>
+                </div>
+              ) : (
+                <>
+                  <div className="h-2" />
+                  <div className="w-full mx-auto">
+                    {purchaseRecords.map((record, index) => {
+                      const isExpanded = expandedItems.has(index);
+                      const toggleExpanded = () => {
+                        const newExpandedItems = new Set(expandedItems);
+                        if (isExpanded) {
+                          newExpandedItems.delete(index);
+                        } else {
+                          newExpandedItems.add(index);
+                        }
+                        setExpandedItems(newExpandedItems);
+                      };
+
+                      return (
+                        <PurchaseRecordCard
+                          key={index}
+                          record={record}
+                          isExpanded={isExpanded}
+                          onToggleExpand={toggleExpanded}
+                          isFirst={index === 0}
+                          isLast={index === purchaseRecords.length - 1}
+                          isSingleItem={purchaseRecords.length === 1}
+                          locale={currentInterfaceLanguage.isoCode}
+                          userId={user_id!}
+                        />
+                      );
+                    })}
+                  </div>
+
+                  {hasMore && (
+                    <div className="flex justify-center">
+                      <Button
+                        variant="outline"
+                        onClick={handleLoadMore}
+                        disabled={isLoadingMore}
+                      >
+                        {isLoadingMore
+                          ? t("loading_placeholder")
+                          : t("purchases.load_more")}
+                      </Button>
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
+          </>
+        )}
+      </BaseSettingsPage>
+    </>
   );
 };
 

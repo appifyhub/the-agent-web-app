@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { CardTitle } from "@/components/ui/card";
 import {
   Tooltip,
   TooltipTrigger,
@@ -31,6 +30,7 @@ import {
 } from "@/services/sponsorships-service";
 import { Platform } from "@/lib/platform";
 import { usePageSession } from "@/hooks/usePageSession";
+import { useUserSettings } from "@/hooks/useUserSettings";
 import PlatformDropdown from "@/components/PlatformDropdown";
 import PlatformIcon from "@/components/PlatformIcon";
 import { Button } from "@/components/ui/button";
@@ -47,6 +47,8 @@ const SponsorshipsPage: React.FC = () => {
 
   const { error, accessToken, isLoadingState, setError, setIsLoadingState } =
     usePageSession();
+
+  const { userSettings, refreshSettings } = useUserSettings(user_id, accessToken?.raw);
 
   const [sponsorships, setSponsorships] = useState<SponsorshipResponse[]>([]);
   const [maxSponsorships, setMaxSponsorships] = useState<number>(0);
@@ -86,7 +88,7 @@ const SponsorshipsPage: React.FC = () => {
 
   // Fetch sponsorships and external tools when session is ready
   useEffect(() => {
-    if (!accessToken || !user_id || error?.isBlocker) return;
+    if (!accessToken || !user_id || error) return;
 
     const fetchData = async () => {
       setIsLoadingState(true);
@@ -175,7 +177,7 @@ const SponsorshipsPage: React.FC = () => {
   };
 
   const handleUnsponsor = async (sponsorship: SponsorshipResponse) => {
-    if (!sponsorship.platform_handle || !user_id || !accessToken) return;
+    if (!sponsorship.platform_handle || !sponsorship.platform || !user_id || !accessToken) return;
 
     setIsLoadingState(true);
     setError(null);
@@ -212,15 +214,13 @@ const SponsorshipsPage: React.FC = () => {
     setError(null);
     try {
       const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
-      const response = await removeSelfSponsorship({
+      await removeSelfSponsorship({
         apiBaseUrl,
         resource_id: user_id,
         rawToken: accessToken.raw,
       });
-
-      // Redirect to the settings link provided by the API
       toast(t("saved"));
-      window.location.href = response.settings_link;
+      await refreshSettings();
     } catch (err) {
       console.error("Error saving sponsorship!", err);
       setError(PageError.simple("errors.save_failed"));
@@ -286,14 +286,14 @@ const SponsorshipsPage: React.FC = () => {
 
   // Action button logic
   const getActionButtonText = () => {
-    if (accessToken?.decoded?.sponsored_by) {
+    if (userSettings?.is_sponsored) {
       return t("sponsorship.unlink");
     }
     return isEditing ? t("save") : t("sponsorship.add_sponsorship");
   };
 
   const getActionHandler = () => {
-    if (accessToken?.decoded?.sponsored_by) {
+    if (userSettings?.is_sponsored) {
       return handleUnlinkSelf;
     }
     return isEditing ? handleSaveSponsorship : handleStartEditing;
@@ -302,21 +302,21 @@ const SponsorshipsPage: React.FC = () => {
   const isActionDisabled = () => {
     // Disable if no API keys configured (only when trying to sponsor, not when unlinking)
     if (
-      !accessToken?.decoded?.sponsored_by &&
+      !userSettings?.is_sponsored &&
       !isEditing &&
       !hasApiKeysConfigured
     ) {
       return true;
     }
     if (
-      !accessToken?.decoded?.sponsored_by &&
+      !userSettings?.is_sponsored &&
       !isEditing &&
       sponsorships.length >= maxSponsorships
     ) {
       return true;
     }
     if (
-      !accessToken?.decoded?.sponsored_by &&
+      !userSettings?.is_sponsored &&
       isEditing &&
       !cleanUsername(platformHandle).length
     ) {
@@ -326,7 +326,7 @@ const SponsorshipsPage: React.FC = () => {
   };
 
   const shouldShowCancelButton =
-    isEditing && !accessToken?.decoded?.sponsored_by;
+    isEditing && !userSettings?.is_sponsored;
 
   // Get platform-specific placeholder
   const getPlatformPlaceholder = (): string => {
@@ -345,6 +345,13 @@ const SponsorshipsPage: React.FC = () => {
   return (
     <BaseSettingsPage
       page="sponsorships"
+      cardTitle={
+        userSettings?.is_sponsored
+          ? t("sponsorship.you_are_sponsored")
+          : isEditing
+          ? t("sponsorship.add_sponsorship")
+          : t("sponsorship.users_you_sponsor")
+      }
       onActionClicked={getActionHandler()}
       actionDisabled={isActionDisabled()}
       actionButtonText={getActionButtonText()}
@@ -352,29 +359,18 @@ const SponsorshipsPage: React.FC = () => {
       onCancelClicked={handleCancelEditing}
       isContentLoading={isLoadingState}
     >
-      {accessToken?.decoded?.sponsored_by ? (
+      {userSettings?.is_sponsored ? (
         <>
-          <CardTitle className="text-center mx-auto">
-            {t("sponsorship.you_are_sponsored")}
-          </CardTitle>
-
           {/* Sponsored user message */}
           <div className="flex flex-col items-center space-y-10 text-center mt-12">
             <Link className="h-12 w-12 text-accent-amber" />
             <p className="text-[1.05rem] font-light text-justify md:text-left [hyphens:auto] opacity-80">
-              {t("sponsorship.unlink_message", {
-                sponsorName: accessToken.decoded.sponsored_by,
-              })}
+              {t("sponsorship.unlink_message")}
             </p>
           </div>
         </>
       ) : isEditing ? (
         <>
-          <CardTitle className="text-center mx-auto">
-            {t("sponsorship.add_sponsorship")}
-          </CardTitle>
-          <div className="h-4" />
-
           {/* New sponsorship input with platform dropdown */}
           <div className="space-y-4">
             <Label className="ps-2 text-[1.05rem] font-light">
@@ -403,10 +399,6 @@ const SponsorshipsPage: React.FC = () => {
         </>
       ) : (
         <>
-          <CardTitle className="text-center mx-auto">
-            {t("sponsorship.users_you_sponsor")}
-          </CardTitle>
-
           {/* Sponsorships List */}
           <div className="flex flex-col space-y-0">
             {sponsorships.length === 0 ? (
@@ -453,7 +445,7 @@ const SponsorshipsPage: React.FC = () => {
                     <div
                       key={index}
                       className={cn(
-                        "flex flex-col px-5 items-start justify-center glass border cursor-pointer w-full max-w-2xl mx-auto",
+                        "flex flex-col px-5 items-start justify-center glass-muted border cursor-pointer w-full",
                         isExpanded ? "space-y-4 py-4" : "space-y-0 py-3",
                         roundedClasses,
                         borderClasses
@@ -494,11 +486,11 @@ const SponsorshipsPage: React.FC = () => {
                         <div className="flex flex-col space-y-1 px-0.5 flex-1 min-w-0">
                           <div className="flex items-center space-x-3.5 min-w-0">
                             <PlatformIcon
-                              platform={sponsorship.platform}
+                              platform={sponsorship.platform ?? Platform.UNKNOWN}
                               className="h-4 w-4 shrink-0"
                             />
                             <span className="text-sm text-muted-foreground truncate">
-                              {Platform.getName(sponsorship.platform)}
+                              {Platform.getName(sponsorship.platform ?? Platform.UNKNOWN)}
                             </span>
                           </div>
                           <div className="flex items-center space-x-3.5 min-w-0">
@@ -529,9 +521,10 @@ const SponsorshipsPage: React.FC = () => {
                               variant="outline"
                               size="icon"
                               className={cn(
-                                "shrink-0 text-destructive rounded-full cursor-pointer",
-                                error?.isBlocker &&
-                                "text-muted-foreground cursor-not-allowed glass-static"
+                                "shrink-0 rounded-full cursor-pointer glass",
+                                error?.isBlocker
+                                  ? "text-muted-foreground cursor-not-allowed"
+                                  : "text-destructive"
                               )}
                               onClick={(e: React.MouseEvent) => {
                                 e.stopPropagation();

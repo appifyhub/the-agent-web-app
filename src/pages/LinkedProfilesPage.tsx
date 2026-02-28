@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-import { CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import {
@@ -18,6 +17,7 @@ import BaseSettingsPage from "@/pages/BaseSettingsPage";
 import { t } from "@/lib/translations";
 import { usePageSession } from "@/hooks/usePageSession";
 import { PageError } from "@/lib/utils";
+import { ApiError } from "@/lib/api-error";
 import { toast } from "sonner";
 import {
   getConnectKey,
@@ -40,7 +40,7 @@ const ALLOWED_CONNECT_KEY_CHARS = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 const MOBILE_USER_AGENT_PATTERN =
   /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
 
-const ConnectionsPage: React.FC = () => {
+const LinkedProfilesPage: React.FC = () => {
   const { user_id } = useParams<{
     user_id: string;
   }>();
@@ -70,7 +70,7 @@ const ConnectionsPage: React.FC = () => {
 
   // Fetch connect key when session is ready
   useEffect(() => {
-    if (!accessToken || !user_id || error?.isBlocker) return;
+    if (!accessToken || !user_id || error) return;
 
     const fetchData = async () => {
       setIsLoadingState(true);
@@ -129,7 +129,7 @@ const ConnectionsPage: React.FC = () => {
     } catch (err) {
       console.error("Failed to copy", err);
       setIsCopyDisabled(true);
-      toast.error(t("connections.copy_failed"));
+      toast.error(t("linked_profiles.copy_failed"));
     }
   };
 
@@ -166,7 +166,7 @@ const ConnectionsPage: React.FC = () => {
         if (limited.length > 0) {
           toast.success(t("copied"));
         } else {
-          toast.error(t("connections.invalid_format"));
+          toast.error(t("linked_profiles.invalid_format"));
         }
       } else {
         // Fallback: Try to use a temporary textarea with paste event
@@ -191,7 +191,7 @@ const ConnectionsPage: React.FC = () => {
           if (limited.length > 0) {
             toast.success(t("copied"));
           } else {
-            toast.error(t("connections.invalid_format"));
+            toast.error(t("linked_profiles.invalid_format"));
           }
         } else {
           throw new Error("execCommand('paste') not supported or failed");
@@ -242,12 +242,12 @@ const ConnectionsPage: React.FC = () => {
           /Chrome/.test(navigator.userAgent) &&
           /Google Inc/.test(navigator.vendor);
         if (isChrome) {
-          toast.error(t("connections.paste_chrome_permission"));
+          toast.error(t("linked_profiles.paste_chrome_permission"));
         } else {
-          toast.error(t("connections.paste_permission_denied"));
+          toast.error(t("linked_profiles.paste_permission_denied"));
         }
       } else {
-        toast.error(t("connections.paste_failed"));
+        toast.error(t("linked_profiles.paste_failed"));
       }
     }
   };
@@ -260,7 +260,7 @@ const ConnectionsPage: React.FC = () => {
   const handleCopyChat = () => {
     if (!connectKey) return;
     handleCopy(
-      t("connections.chat_command_example", {
+      t("linked_profiles.chat_command_example", {
         connectKey: formatDisplayKey(connectKey),
       })
     );
@@ -279,11 +279,13 @@ const ConnectionsPage: React.FC = () => {
       });
       console.info("Regenerated connect key!");
       setConnectKey(response.connect_key);
-      toast.success(t("connections.regenerate_success"));
+      toast.success(t("linked_profiles.regenerate_success"));
     } catch (err) {
       console.error("Error regenerating connect key!", err);
-      toast.error(
-        err instanceof Error ? err.message : t("connections.generic_error")
+      setError(
+        err instanceof ApiError
+          ? PageError.fromApiError(err)
+          : PageError.simple("linked_profiles.generic_error")
       );
     } finally {
       setIsRegenerating(false);
@@ -293,7 +295,7 @@ const ConnectionsPage: React.FC = () => {
   const handleShareKey = async (text: string) => {
     if (!navigator.share) {
       setIsShareDisabled(true);
-      toast.error(t("connections.share_not_supported"));
+      toast.error(t("linked_profiles.share_not_supported"));
       return;
     }
 
@@ -307,7 +309,7 @@ const ConnectionsPage: React.FC = () => {
       }
       console.error("Error sharing", err);
       setIsShareDisabled(true);
-      toast.error(t("connections.share_failed"));
+      toast.error(t("linked_profiles.share_failed"));
     }
   };
 
@@ -319,7 +321,7 @@ const ConnectionsPage: React.FC = () => {
   const handleShareChat = () => {
     if (!connectKey) return;
     handleShareKey(
-      t("connections.chat_command_example", {
+      t("linked_profiles.chat_command_example", {
         connectKey: formatDisplayKey(connectKey),
       })
     );
@@ -330,7 +332,7 @@ const ConnectionsPage: React.FC = () => {
 
     // Use already validated cleanInputKey
     if (!isInputValid) {
-      toast.error(t("connections.invalid_format"));
+      toast.error(t("linked_profiles.invalid_format"));
       return;
     }
 
@@ -338,7 +340,7 @@ const ConnectionsPage: React.FC = () => {
     if (connectKey) {
       const currentKeyClean = connectKey.replace(/-/g, "").toUpperCase();
       if (cleanInputKey === currentKeyClean) {
-        toast.error(t("connections.cannot_connect_to_self"));
+        toast.error(t("linked_profiles.cannot_connect_to_self"));
         return;
       }
     }
@@ -361,7 +363,7 @@ const ConnectionsPage: React.FC = () => {
       });
 
       console.info("Profiles connected successfully!");
-      toast.success(t("connections.connect_success"));
+      toast.success(t("linked_profiles.connect_success"));
 
       // Redirect to the new settings link if provided
       if (response.settings_link) {
@@ -371,8 +373,10 @@ const ConnectionsPage: React.FC = () => {
       }
     } catch (err) {
       console.error("Error connecting profiles!", err);
-      toast.error(
-        err instanceof Error ? err.message : t("connections.generic_error")
+      setError(
+        err instanceof ApiError
+          ? PageError.fromApiError(err)
+          : PageError.simple("linked_profiles.generic_error")
       );
     } finally {
       setIsConnecting(false);
@@ -388,30 +392,26 @@ const ConnectionsPage: React.FC = () => {
 
   return (
     <BaseSettingsPage
-      page="connections"
+      page="linked_profiles"
+      cardTitle={t("linked_profiles.card_title")}
       onActionClicked={handleConnect}
       actionDisabled={!!error?.isBlocker || !isInputValid || isConnecting}
       actionButtonText={
         isConnecting
-          ? t("connections.connecting")
-          : t("connections.connect_button")
+          ? t("linked_profiles.connecting")
+          : t("linked_profiles.connect_button")
       }
       isContentLoading={isLoadingState}
       externalError={error}
+      onExternalErrorDismiss={() => setError(null)}
     >
-      <div className="h-2" />
-      <CardTitle className="text-center mx-auto">
-        {t("connections.card_title")}
-      </CardTitle>
 
       {/* Main section - info and OTP input */}
       {!isMyKeySectionOpen && (
         <div className="space-y-6 animate-in slide-in-from-bottom-2 duration-300">
-          <div className="h-3" />
-
           {/* Main info box */}
           <p className="text-[1.05rem] font-light text-justify md:text-left [hyphens:auto] opacity-80">
-            {t("connections.main_info", { botName })}
+            {t("linked_profiles.main_info", { botName })}
           </p>
 
           <div className="h-px" />
@@ -420,7 +420,7 @@ const ConnectionsPage: React.FC = () => {
           <div className="space-y-8">
             <div className="flex items-center justify-center gap-3">
               <Label className="text-[1.05rem] font-medium">
-                {t("connections.connect_to_another_label")}
+                {t("linked_profiles.connect_to_another_label")}
               </Label>
               <div className="flex items-center gap-2">
                 <Tooltip>
@@ -434,7 +434,7 @@ const ConnectionsPage: React.FC = () => {
                       <ClipboardPaste className="h-4 w-4" />
                     </Button>
                   </TooltipTrigger>
-                  <TooltipContent>{t("connections.paste_key")}</TooltipContent>
+                  <TooltipContent>{t("linked_profiles.paste_key")}</TooltipContent>
                 </Tooltip>
                 <Tooltip>
                   <TooltipTrigger asChild>
@@ -449,7 +449,7 @@ const ConnectionsPage: React.FC = () => {
                       <X className="h-4 w-4" />
                     </Button>
                   </TooltipTrigger>
-                  <TooltipContent>{t("connections.clear_key")}</TooltipContent>
+                  <TooltipContent>{t("linked_profiles.clear_key")}</TooltipContent>
                 </Tooltip>
               </div>
             </div>
@@ -527,8 +527,8 @@ const ConnectionsPage: React.FC = () => {
             <Eye className="h-5 w-5 shrink-0 text-accent-amber group-hover:text-amber-100" />
           )}
           {isMyKeySectionOpen
-            ? t("connections.hide_my_key")
-            : t("connections.show_my_key")}
+            ? t("linked_profiles.hide_my_key")
+            : t("linked_profiles.show_my_key")}
         </Button>
 
         <div className="h-1" />
@@ -537,7 +537,7 @@ const ConnectionsPage: React.FC = () => {
           <div className="space-y-6 animate-in slide-in-from-top-2 duration-300">
             {/* Info box */}
             <p className="text-[1.05rem] font-light text-justify md:text-left [hyphens:auto] opacity-80">
-              {t("connections.my_key_info")}
+              {t("linked_profiles.my_key_info")}
             </p>
 
             {/* Connect key display */}
@@ -564,7 +564,7 @@ const ConnectionsPage: React.FC = () => {
                     <Copy className="h-4 w-4" />
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent>{t("connections.copy_key")}</TooltipContent>
+                <TooltipContent>{t("linked_profiles.copy_key")}</TooltipContent>
               </Tooltip>
               {isMobile && (
                 <Tooltip>
@@ -583,7 +583,7 @@ const ConnectionsPage: React.FC = () => {
                       <Share2 className="h-4 w-4" />
                     </Button>
                   </TooltipTrigger>
-                  <TooltipContent>{t("connections.share_key")}</TooltipContent>
+                  <TooltipContent>{t("linked_profiles.share_key")}</TooltipContent>
                 </Tooltip>
               )}
               <Tooltip>
@@ -608,14 +608,14 @@ const ConnectionsPage: React.FC = () => {
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
-                  {t("connections.regenerate_key")}
+                  {t("linked_profiles.regenerate_key")}
                 </TooltipContent>
               </Tooltip>
             </div>
 
             {/* Info box about /connect command */}
             <p className="text-[1.05rem] font-light text-justify md:text-left [hyphens:auto] opacity-80">
-              {t("connections.command_info", { botName })}
+              {t("linked_profiles.command_info", { botName })}
             </p>
 
             {/* Code block for /connect command */}
@@ -639,7 +639,7 @@ const ConnectionsPage: React.FC = () => {
                       <Share2 className="h-4 w-4" />
                     </Button>
                   </TooltipTrigger>
-                  <TooltipContent>{t("connections.share_key")}</TooltipContent>
+                  <TooltipContent>{t("linked_profiles.share_key")}</TooltipContent>
                 </Tooltip>
               )}
               <Tooltip>
@@ -654,13 +654,13 @@ const ConnectionsPage: React.FC = () => {
                     <Copy className="h-4 w-4" />
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent>{t("connections.copy_key")}</TooltipContent>
+                <TooltipContent>{t("linked_profiles.copy_key")}</TooltipContent>
               </Tooltip>
             </div>
 
             {/* Info box about chat command */}
             <p className="text-[1.05rem] font-light text-justify md:text-left [hyphens:auto] opacity-80">
-              {t("connections.chat_command_info", { botName })}
+              {t("linked_profiles.chat_command_info", { botName })}
             </p>
 
             {/* Code block for chat command */}
@@ -669,7 +669,7 @@ const ConnectionsPage: React.FC = () => {
                 ref={copyChatRef}
                 className="flex-1 h-12 min-h-12 px-4 flex items-center font-mono text-sm glass-dark-static rounded-xl select-all overflow-x-auto overflow-y-hidden whitespace-nowrap"
               >
-                {t("connections.chat_command_example", {
+                {t("linked_profiles.chat_command_example", {
                   connectKey: formatDisplayKey(connectKey),
                 })}
               </span>
@@ -686,7 +686,7 @@ const ConnectionsPage: React.FC = () => {
                       <Share2 className="h-4 w-4" />
                     </Button>
                   </TooltipTrigger>
-                  <TooltipContent>{t("connections.share_key")}</TooltipContent>
+                  <TooltipContent>{t("linked_profiles.share_key")}</TooltipContent>
                 </Tooltip>
               )}
               <Tooltip>
@@ -701,7 +701,7 @@ const ConnectionsPage: React.FC = () => {
                     <Copy className="h-4 w-4" />
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent>{t("connections.copy_key")}</TooltipContent>
+                <TooltipContent>{t("linked_profiles.copy_key")}</TooltipContent>
               </Tooltip>
             </div>
           </div>
@@ -711,4 +711,4 @@ const ConnectionsPage: React.FC = () => {
   );
 };
 
-export default ConnectionsPage;
+export default LinkedProfilesPage;

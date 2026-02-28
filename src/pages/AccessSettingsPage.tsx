@@ -1,20 +1,20 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-import { CardTitle } from "@/components/ui/card";
 import BaseSettingsPage from "@/pages/BaseSettingsPage";
 import { toast } from "sonner";
-import { PageError } from "@/lib/utils";
+import { PageError, buildSponsoredBlockerError } from "@/lib/utils";
 import { t } from "@/lib/translations";
+import WarningBanner from "@/components/WarningBanner";
 import ProvidersCarousel from "@/components/ProvidersCarousel";
 import ProviderTabs from "@/components/ProviderTabs";
 import {
-  fetchUserSettings,
   saveUserSettings,
   UserSettings,
   getSettingsFieldName,
   buildChangedPayload,
   areSettingsChanged,
 } from "@/services/user-settings-service";
+import { useUserSettings } from "@/hooks/useUserSettings";
 import {
   fetchExternalTools,
   ExternalToolProvider,
@@ -34,10 +34,12 @@ const AccessSettingsPage: React.FC = () => {
 
   const { navigateToIntelligence } = useNavigation();
 
+  const {
+    userSettings: remoteSettings,
+    updateSettingsCache,
+  } = useUserSettings(user_id, accessToken?.raw);
+
   const [userSettings, setUserSettings] = useState<UserSettings | null>(null);
-  const [remoteSettings, setRemoteSettings] = useState<UserSettings | null>(
-    null
-  );
   const [externalToolProviders, setExternalToolProviders] = useState<
     ExternalToolProvider[]
   >([]);
@@ -46,40 +48,24 @@ const AccessSettingsPage: React.FC = () => {
   >(new Map());
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
   const [currentProviderIndex, setCurrentProviderIndex] = useState(0);
+  const [isWarningDismissed, setIsWarningDismissed] = useState(false);
   const isRestoringPosition = useRef(false);
   const hasLoadedOnce = useRef(false);
   const indexToRestore = useRef<number | null>(null);
 
-  // Fetch user settings and service providers when session is ready
+  // Initialize local editing state when remote settings first load
   useEffect(() => {
-    if (!accessToken || !user_id || error?.isBlocker) return;
+    if (remoteSettings && !userSettings) {
+      setUserSettings(remoteSettings);
+    }
+  }, [remoteSettings, userSettings]);
 
-    const isSponsored = !!accessToken.decoded.sponsored_by;
+  // Fetch external tools and check sponsorship when session and settings are ready
+  useEffect(() => {
+    if (!accessToken || !user_id || error?.isBlocker || !remoteSettings) return;
 
-    if (isSponsored) {
-      // Handle sponsored user with error after session is established
-      const handleSponsoredUser = (sponsorName: string) => {
-        console.warn("User is sponsored by:", sponsorName);
-        const sponsorshipsUrl = `/${lang_iso_code}/user/${user_id}/sponsorships${window.location.search}`;
-        const sponsorshipsTitle = t("sponsorships");
-
-        const boldSponsorNameHtml = `<span class="font-bold font-mono">${sponsorName}</span>`;
-        const linkStyle = "underline text-amber-100 hover:text-white";
-        const sponsorshipsLinkHtml = `<a href="${sponsorshipsUrl}" class="${linkStyle}" >${sponsorshipsTitle}</a>`;
-
-        const htmlMessage = t("errors.sponsored_user", {
-          sponsorName: boldSponsorNameHtml,
-          sponsorshipsLink: sponsorshipsLinkHtml,
-        });
-
-        const errorMessage = (
-          <span dangerouslySetInnerHTML={{ __html: htmlMessage }} />
-        );
-
-        setError(PageError.blockerWithHtml(errorMessage, false));
-      };
-
-      handleSponsoredUser(accessToken.decoded.sponsored_by!);
+    if (remoteSettings.is_sponsored) {
+      setError(buildSponsoredBlockerError(lang_iso_code!, user_id!));
       return;
     }
 
@@ -88,30 +74,15 @@ const AccessSettingsPage: React.FC = () => {
       setError(null);
       try {
         const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
-
-        // Fetch both user settings and external tools in parallel
-        const [settings, externalTools] = await Promise.all([
-          fetchUserSettings({
-            apiBaseUrl,
-            user_id,
-            rawToken: accessToken.raw,
-          }),
-          fetchExternalTools({
-            apiBaseUrl,
-            user_id,
-            rawToken: accessToken.raw,
-          }),
-        ]);
-
-        console.info("Fetched settings!", settings);
+        const externalTools = await fetchExternalTools({
+          apiBaseUrl,
+          user_id,
+          rawToken: accessToken.raw,
+        });
         console.info("Fetched external tools!", externalTools);
-
-        setUserSettings(settings);
-        setRemoteSettings(settings);
         setExternalToolProviders(
           externalTools.providers.map((p) => p.definition)
         );
-        // Store provider configuration status
         const statusMap = new Map<string, boolean>();
         externalTools.providers.forEach((p) => {
           statusMap.set(p.definition.id, p.is_configured);
@@ -127,7 +98,7 @@ const AccessSettingsPage: React.FC = () => {
     };
 
     fetchData();
-  }, [accessToken, user_id, lang_iso_code, error, setError, setIsLoadingState]);
+  }, [accessToken, user_id, lang_iso_code, error, setError, setIsLoadingState, remoteSettings]);
 
   // Track carousel position (only on user interaction, not programmatic scrolls)
   useEffect(() => {
@@ -221,7 +192,7 @@ const AccessSettingsPage: React.FC = () => {
         rawToken: accessToken.raw,
       });
 
-      setRemoteSettings(userSettings);
+      updateSettingsCache(userSettings!);
       setExternalToolProviders(
         updatedExternalTools.providers.map((p) => p.definition)
       );
@@ -248,21 +219,59 @@ const AccessSettingsPage: React.FC = () => {
 
   const botName = import.meta.env.VITE_APP_NAME_SHORT;
 
+  // Check if any API keys are configured in local state
+  const hasAnyApiKey = !!(
+    userSettings?.open_ai_key ||
+    userSettings?.anthropic_key ||
+    userSettings?.google_ai_key ||
+    userSettings?.perplexity_key ||
+    userSettings?.replicate_key ||
+    userSettings?.rapid_api_key ||
+    userSettings?.coinmarketcap_key
+  );
+
+  // Check if user has credits
+  const hasCredits = (userSettings?.credit_balance ?? 0) > 0;
+
+  // Show warning only if user has credits AND API keys AND hasn't dismissed it
+  const showCreditsWarning = hasCredits && hasAnyApiKey && !isWarningDismissed;
+
+  const handleRemoveAllApiKeys = () => {
+    if (!userSettings) return;
+
+    const clearedSettings = { ...userSettings };
+    // Clear all API keys
+    delete clearedSettings.open_ai_key;
+    delete clearedSettings.anthropic_key;
+    delete clearedSettings.google_ai_key;
+    delete clearedSettings.perplexity_key;
+    delete clearedSettings.replicate_key;
+    delete clearedSettings.rapid_api_key;
+    delete clearedSettings.coinmarketcap_key;
+
+    setUserSettings(clearedSettings);
+    toast(t("access_keys_cleared_message"));
+  };
+
   return (
     <BaseSettingsPage
       page="access"
+      cardTitle={t("access_card_title", { botName })}
       onActionClicked={handleSave}
       actionDisabled={!hasSettingsChanged}
       isContentLoading={isLoadingState}
       externalError={error}
+      onExternalErrorDismiss={() => setError(null)}
     >
-      <div className="h-2" />
-
-      <CardTitle className="text-center mx-auto">
-        {t("access_card_title", { botName })}
-      </CardTitle>
-
-      <div className="h-2" />
+      {showCreditsWarning && (
+        <WarningBanner
+          message={t("access_use_credits_warning_prefix")}
+          destructiveLabel={t("access_remove_all_keys")}
+          destructiveOnClick={handleRemoveAllApiKeys}
+          onDismiss={() => setIsWarningDismissed(true)}
+        />
+      )}
+      {showCreditsWarning && <div className="h-7" />}
 
       <ProviderTabs
         providers={externalToolProviders}
@@ -270,8 +279,6 @@ const AccessSettingsPage: React.FC = () => {
         onProviderClick={handleProviderTabClick}
         disabled={!!error?.isBlocker}
       />
-
-      <div className="h-1" />
 
       <ProvidersCarousel
         providers={externalToolProviders}
@@ -286,7 +293,7 @@ const AccessSettingsPage: React.FC = () => {
                   ...prev,
                   [key]: value,
                 }
-              : prev
+              : prev,
           );
         }}
         disabled={!!error?.isBlocker}

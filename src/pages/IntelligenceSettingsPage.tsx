@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { CardTitle } from "@/components/ui/card";
 import BaseSettingsPage from "@/pages/BaseSettingsPage";
 import { toast } from "sonner";
-import { PageError } from "@/lib/utils";
+import { PageError, buildSponsoredBlockerError } from "@/lib/utils";
 import { t } from "@/lib/translations";
 import AdvancedToolsPanel from "@/components/AdvancedToolsPanel";
+import SettingSelector from "@/components/SettingSelector";
+import WarningBanner from "@/components/WarningBanner";
+import { Wallet, Sparkles, Scale, Settings, Undo2, Key, ShoppingCart, Lightbulb } from "lucide-react";
 import {
-  fetchUserSettings,
   saveUserSettings,
   UserSettings,
   buildChangedPayload,
   areSettingsChanged,
 } from "@/services/user-settings-service";
+import { useUserSettings } from "@/hooks/useUserSettings";
 import {
   fetchExternalTools,
   ExternalToolsResponse,
@@ -20,6 +22,11 @@ import {
 } from "@/services/external-tools-service";
 import { usePageSession } from "@/hooks/usePageSession";
 import { useNavigation } from "@/hooks/useNavigation";
+import {
+  ToolPreset,
+  computePresetChoices,
+  detectCurrentPreset,
+} from "@/lib/tool-presets";
 
 const IntelligenceSettingsPage: React.FC = () => {
   const { user_id, lang_iso_code } = useParams<{
@@ -30,46 +37,34 @@ const IntelligenceSettingsPage: React.FC = () => {
   const { error, accessToken, isLoadingState, setError, setIsLoadingState } =
     usePageSession();
 
-  const { navigateToAccess } = useNavigation();
+  const { navigateToAccess, navigateToPurchases } = useNavigation();
+
+  const {
+    userSettings: remoteSettings,
+    updateSettingsCache,
+  } = useUserSettings(user_id, accessToken?.raw);
 
   const [userSettings, setUserSettings] = useState<UserSettings | null>(null);
-  const [remoteSettings, setRemoteSettings] = useState<UserSettings | null>(
-    null
-  );
   const [externalToolsData, setExternalToolsData] =
     useState<ExternalToolsResponse | null>(null);
   const [openAccordionSection, setOpenAccordionSection] = useState<string>("");
+  const [selectedPreset, setSelectedPreset] = useState<ToolPreset>("custom");
+  const [isWarningDismissed, setIsWarningDismissed] = useState(false);
 
-  // Fetch user settings and external tools when session is ready
+  // Initialize local editing state when remote settings first load
   useEffect(() => {
-    if (!accessToken || !user_id || error?.isBlocker) return;
+    if (remoteSettings && !userSettings) {
+      setUserSettings(remoteSettings);
+      setSelectedPreset(detectCurrentPreset(remoteSettings));
+    }
+  }, [remoteSettings, userSettings]);
 
-    const isSponsored = !!accessToken.decoded.sponsored_by;
+  // Fetch external tools and check sponsorship when session and settings are ready
+  useEffect(() => {
+    if (!accessToken || !user_id || error?.isBlocker || !remoteSettings) return;
 
-    if (isSponsored) {
-      // Handle sponsored user with error after session is established
-      const handleSponsoredUser = (sponsorName: string) => {
-        console.warn("User is sponsored by:", sponsorName);
-        const sponsorshipsUrl = `/${lang_iso_code}/user/${user_id}/sponsorships${window.location.search}`;
-        const sponsorshipsTitle = t("sponsorships");
-
-        const boldSponsorNameHtml = `<span class="font-bold font-mono">${sponsorName}</span>`;
-        const linkStyle = "underline text-amber-100 hover:text-white";
-        const sponsorshipsLinkHtml = `<a href="${sponsorshipsUrl}" class="${linkStyle}" >${sponsorshipsTitle}</a>`;
-
-        const htmlMessage = t("errors.sponsored_user", {
-          sponsorName: boldSponsorNameHtml,
-          sponsorshipsLink: sponsorshipsLinkHtml,
-        });
-
-        const errorMessage = (
-          <span dangerouslySetInnerHTML={{ __html: htmlMessage }} />
-        );
-
-        setError(PageError.blockerWithHtml(errorMessage, false));
-      };
-
-      handleSponsoredUser(accessToken.decoded.sponsored_by!);
+    if (remoteSettings.is_sponsored) {
+      setError(buildSponsoredBlockerError(lang_iso_code!, user_id!));
       return;
     }
 
@@ -78,26 +73,12 @@ const IntelligenceSettingsPage: React.FC = () => {
       setError(null);
       try {
         const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
-
-        // Fetch both user settings and external tools in parallel
-        const [settings, externalTools] = await Promise.all([
-          fetchUserSettings({
-            apiBaseUrl,
-            user_id,
-            rawToken: accessToken.raw,
-          }),
-          fetchExternalTools({
-            apiBaseUrl,
-            user_id,
-            rawToken: accessToken.raw,
-          }),
-        ]);
-
-        console.info("Fetched settings!", settings);
+        const externalTools = await fetchExternalTools({
+          apiBaseUrl,
+          user_id,
+          rawToken: accessToken.raw,
+        });
         console.info("Fetched external tools!", externalTools);
-
-        setUserSettings(settings);
-        setRemoteSettings(settings);
         setExternalToolsData(externalTools);
       } catch (err) {
         console.error("Error fetching data!", err);
@@ -108,7 +89,7 @@ const IntelligenceSettingsPage: React.FC = () => {
     };
 
     fetchData();
-  }, [accessToken, user_id, lang_iso_code, error, setError, setIsLoadingState]);
+  }, [accessToken, user_id, lang_iso_code, error, setError, setIsLoadingState, remoteSettings]);
 
   const hasSettingsChanged = !!(
     userSettings &&
@@ -144,8 +125,9 @@ const IntelligenceSettingsPage: React.FC = () => {
         rawToken: accessToken.raw,
       });
 
-      setRemoteSettings(userSettings);
+      updateSettingsCache(userSettings!);
       setExternalToolsData(updatedExternalTools);
+      setSelectedPreset(detectCurrentPreset(userSettings));
       toast(t("saved"));
 
       // Restore scroll position after state updates
@@ -160,16 +142,31 @@ const IntelligenceSettingsPage: React.FC = () => {
     }
   };
 
+  const handlePresetChange = (preset: string) => {
+    const typedPreset = preset as ToolPreset;
+    setSelectedPreset(typedPreset);
+    if (typedPreset === "custom" || !userSettings || !externalToolsData) return;
+    const choices = computePresetChoices(typedPreset);
+    const newSettings = { ...userSettings };
+    for (const [toolType, toolId] of Object.entries(choices)) {
+      const fieldName = `tool_choice_${toolType}` as keyof UserSettings;
+      (newSettings as Record<string, unknown>)[fieldName] = toolId;
+    }
+    setUserSettings(newSettings);
+  };
+
   const handleToolChoiceChange = (toolType: ToolType, toolId: string) => {
+    if (!userSettings || !externalToolsData) return;
     const fieldName = `tool_choice_${toolType}` as keyof UserSettings;
-    setUserSettings((prev) =>
-      prev
-        ? {
-            ...prev,
-            [fieldName]: toolId,
-          }
-        : prev
-    );
+    const newSettings = { ...userSettings, [fieldName]: toolId };
+    setUserSettings(newSettings);
+    setSelectedPreset(detectCurrentPreset(newSettings));
+  };
+
+  const handleRestoreSettings = () => {
+    if (!remoteSettings || !externalToolsData) return;
+    setUserSettings(remoteSettings);
+    setSelectedPreset(detectCurrentPreset(remoteSettings));
   };
 
   const handleProviderNavigate = (providerId: string) => {
@@ -183,33 +180,122 @@ const IntelligenceSettingsPage: React.FC = () => {
 
   const botName = import.meta.env.VITE_APP_NAME_SHORT;
 
+  // Check if user has credits or API keys configured
+  const hasCredits = (userSettings?.credit_balance ?? 0) > 0;
+  const hasAnyApiKey = externalToolsData?.providers.some(p => p.is_configured) ?? false;
+  const showNoAccessWarning = !hasCredits && !hasAnyApiKey && !isWarningDismissed;
+
   return (
     <BaseSettingsPage
       page="intelligence"
+      cardTitle={t("intelligence_card_title", { botName })}
       onActionClicked={handleSave}
       actionDisabled={!hasSettingsChanged}
+      showCancelButton={hasSettingsChanged}
+      onCancelClicked={handleRestoreSettings}
+      cancelIcon={<Undo2 className="h-6 w-6" />}
+      cancelTooltipText={t("restore")}
       isContentLoading={isLoadingState}
       externalError={error}
+      onExternalErrorDismiss={() => setError(null)}
     >
-      <div className="h-2" />
-      <CardTitle className="text-center mx-auto">
-        {t("intelligence_card_title", { botName })}
-      </CardTitle>
+      {externalToolsData ? (
+        <>
+          {showNoAccessWarning && (
+            <WarningBanner
+              message={t("intelligence_warnings.no_access_message")}
+              icon={<Lightbulb className="h-5 w-5 text-blue-300/60 shrink-0" />}
+              borderColor="border-blue-300/40"
+              onDismiss={() => setIsWarningDismissed(true)}
+              secondaryLabel={t("configure_ai_providers")}
+              secondaryOnClick={() =>
+                navigateToAccess(user_id!, lang_iso_code!)
+              }
+              secondaryIcon={<Key className="h-3.5 w-3.5 mb-0.5" />}
+              primaryLabel={t("purchases.buy_credits")}
+              primaryOnClick={() =>
+                navigateToPurchases(user_id!, lang_iso_code!)
+              }
+              primaryIcon={<ShoppingCart className="h-3.5 w-3.5 mb-0.5" />}
+            />
+          )}
+          {showNoAccessWarning && <div className="h-8" />}
 
-      <div className="h-4" />
-
-      {externalToolsData && (
-        <AdvancedToolsPanel
-          tools={externalToolsData.tools}
-          providers={externalToolsData.providers}
-          userSettings={userSettings}
-          onToolChoiceChange={handleToolChoiceChange}
-          disabled={!!error?.isBlocker}
-          onProviderNavigate={handleProviderNavigate}
-          openSection={openAccordionSection}
-          onOpenSectionChange={setOpenAccordionSection}
-        />
-      )}
+          <SettingSelector
+            label={t("intelligence_presets.label")}
+            value={selectedPreset}
+            onChange={handlePresetChange}
+            disabled={!!error?.isBlocker}
+            options={[
+              {
+                value: "lowest_price",
+                label: (
+                  <span className="flex items-center gap-3">
+                    <Wallet className="h-4 w-4 shrink-0 text-blue-300" />
+                    {t("intelligence_presets.lowest_price")}
+                  </span>
+                ),
+              },
+              {
+                value: "highest_price",
+                label: (
+                  <span className="flex items-center gap-3">
+                    <Sparkles className="h-4 w-4 shrink-0 text-blue-300" />
+                    {t("intelligence_presets.highest_price")}
+                  </span>
+                ),
+              },
+              {
+                value: "agent_choice",
+                label: (
+                  <span className="flex items-center gap-3">
+                    <Scale className="h-4 w-4 shrink-0 text-blue-300" />
+                    {t("intelligence_presets.agent_choice")}
+                  </span>
+                ),
+              },
+              {
+                value: "custom",
+                label: (
+                  <span className="flex items-center gap-3">
+                    <Settings className="h-4 w-4 shrink-0 text-blue-300" />
+                    {t("intelligence_presets.custom")}
+                  </span>
+                ),
+              },
+            ]}
+          />
+          <p className="text-sm text-muted-foreground mx-1">
+            {selectedPreset === "lowest_price" && t("intelligence_presets.lowest_price_description")}
+            {selectedPreset === "highest_price" && t("intelligence_presets.highest_price_description")}
+            {selectedPreset === "agent_choice" && t("intelligence_presets.agent_choice_description")}
+            {selectedPreset === "custom" && t("intelligence_presets.custom_description")}
+          </p>
+          <div className="h-4" />
+          <h3 className="leading-none font-semibold text-center mx-auto mt-14 text-bas text-blue-300">
+            {t("detailed_tool_choices")}
+          </h3>
+          <AdvancedToolsPanel
+            tools={externalToolsData.tools}
+            providers={externalToolsData.providers}
+            userSettings={userSettings}
+            remoteSettings={remoteSettings}
+            onToolChoiceChange={handleToolChoiceChange}
+            disabled={!!error?.isBlocker}
+            onProviderNavigate={handleProviderNavigate}
+            hasCredits={hasCredits}
+            openSection={openAccordionSection}
+            onOpenSectionChange={setOpenAccordionSection}
+          />
+        </>
+      ) : !isLoadingState ? (
+        <div className="flex flex-col items-center space-y-10 text-center mt-12">
+          <Sparkles className="h-12 w-12 text-accent-amber" />
+          <p className="text-foreground/80 font-light">
+            {t("intelligence_warnings.no_settings")}
+          </p>
+        </div>
+      ) : null}
     </BaseSettingsPage>
   );
 };
