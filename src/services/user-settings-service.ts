@@ -31,6 +31,9 @@ export interface UserSettings {
   tool_choice_api_crypto_exchange?: string;
   tool_choice_api_twitter?: string;
   credit_balance: number;
+  is_on_waitlist: boolean;
+  is_invited_to_start: boolean;
+  are_policies_accepted: boolean;
   group?: string;
   is_sponsored: boolean;
   created_at?: string;
@@ -79,9 +82,10 @@ export interface UserSettingsPayload {
   tool_choice_api_fiat_exchange?: string;
   tool_choice_api_crypto_exchange?: string;
   tool_choice_api_twitter?: string;
+  are_policies_accepted?: boolean;
 }
 
-const MASKED_FIELDS: (keyof UserSettingsPayload)[] = [
+const MASKED_FIELDS = [
   "open_ai_key",
   "anthropic_key",
   "google_ai_key",
@@ -89,9 +93,9 @@ const MASKED_FIELDS: (keyof UserSettingsPayload)[] = [
   "replicate_key",
   "rapid_api_key",
   "coinmarketcap_key",
-];
+] as const satisfies readonly (keyof UserSettingsPayload)[];
 
-const REGULAR_FIELDS: (keyof UserSettingsPayload)[] = [
+const STRING_FIELDS = [
   "full_name",
   "about_me",
   "tool_choice_chat",
@@ -106,7 +110,11 @@ const REGULAR_FIELDS: (keyof UserSettingsPayload)[] = [
   "tool_choice_api_fiat_exchange",
   "tool_choice_api_crypto_exchange",
   "tool_choice_api_twitter",
-];
+] as const satisfies readonly (keyof UserSettingsPayload)[];
+
+const BOOLEAN_FIELDS = [
+  "are_policies_accepted",
+] as const satisfies readonly (keyof UserSettingsPayload)[];
 
 /**
  * Checks if a masked property (like an API key) has been changed.
@@ -137,9 +145,14 @@ export function buildChangedPayload(
       payload[field] = userSettings[field] ?? "";
     }
   });
-  REGULAR_FIELDS.forEach((field) => {
+  STRING_FIELDS.forEach((field) => {
     if (userSettings[field] !== remoteSettings[field]) {
       payload[field] = userSettings[field] ?? "";
+    }
+  });
+  BOOLEAN_FIELDS.forEach((field) => {
+    if (userSettings[field] !== remoteSettings[field]) {
+      payload[field] = userSettings[field];
     }
   });
   return payload;
@@ -153,10 +166,14 @@ export function areSettingsChanged(
     isMaskedPropertyChanged(userSettings[field], remoteSettings[field])
   );
   if (maskedChanged) return true;
-  const regularChanged = REGULAR_FIELDS.some(
+  const stringChanged = STRING_FIELDS.some(
     (field) => userSettings[field] !== remoteSettings[field]
   );
-  return regularChanged;
+  if (stringChanged) return true;
+  const booleanChanged = BOOLEAN_FIELDS.some(
+    (field) => userSettings[field] !== remoteSettings[field]
+  );
+  return booleanChanged;
 }
 
 export async function fetchUserChats({

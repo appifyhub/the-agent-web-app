@@ -10,11 +10,20 @@ export interface SponsorshipResponse {
   platform: Platform | null;
   sponsored_at: string;
   accepted_at: string | null;
+  is_on_waitlist: boolean;
+  is_invited_to_start: boolean;
+  are_policies_accepted: boolean;
 }
 
 export interface UserSponsorshipsResponse {
   sponsorships: SponsorshipResponse[];
   max_sponsorships: number;
+}
+
+export interface SponsorshipCreateResponse {
+  status: "OK";
+  message: string;
+  sponsorship: SponsorshipResponse;
 }
 
 export async function fetchUserSponsorships({
@@ -66,7 +75,7 @@ export async function createSponsorship({
   rawToken: string;
   platform_handle: string;
   platform: Platform;
-}): Promise<void> {
+}): Promise<SponsorshipCreateResponse> {
   const headers = {
     "Content-Type": "application/json",
     Authorization: `Bearer ${rawToken}`,
@@ -83,6 +92,23 @@ export async function createSponsorship({
   if (!response.ok) {
     throw await parseApiError(response);
   }
+
+  const rawData = await response.json() as Omit<SponsorshipCreateResponse, "sponsorship"> & {
+    sponsorship: Omit<SponsorshipResponse, "platform"> & { platform: string | null };
+  };
+
+  return {
+    ...rawData,
+    sponsorship: {
+      ...rawData.sponsorship,
+      platform: rawData.sponsorship.platform
+        ? Platform.fromString(rawData.sponsorship.platform)
+        : null,
+      platform_handle: rawData.sponsorship.platform_handle
+        ? cleanUsername(rawData.sponsorship.platform_handle)
+        : null,
+    },
+  };
 }
 
 export async function removeSponsorship({
