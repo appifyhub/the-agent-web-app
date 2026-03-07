@@ -17,6 +17,8 @@ import {
 } from "lucide-react";
 import { usePageSession } from "@/hooks/usePageSession";
 import { useChats } from "@/hooks/useChats";
+import { useUserSettings } from "@/hooks/useUserSettings";
+import { useNavigation } from "@/hooks/useNavigation";
 import { DEFAULT_LANGUAGE, INTERFACE_LANGUAGES } from "@/lib/languages";
 import { Card } from "@/components/ui/card";
 import { t } from "@/lib/translations";
@@ -55,12 +57,19 @@ export default function FeaturesPage() {
   const { lang_iso_code } = useParams<{ lang_iso_code: string }>();
   const { accessToken } = usePageSession();
   const { chats } = useChats(accessToken?.decoded.sub, accessToken?.raw);
+  const { userSettings } = useUserSettings(
+    accessToken?.decoded?.sub,
+    accessToken?.raw,
+  );
+  const { navigateToOnboarding } = useNavigation();
   const language =
     INTERFACE_LANGUAGES.find((lang) => lang.isoCode === lang_iso_code) ||
     DEFAULT_LANGUAGE;
   const botName = import.meta.env.VITE_APP_NAME_SHORT;
 
   const showNav = Boolean(accessToken);
+  const isLocked =
+    showNav && userSettings !== null && !userSettings?.are_policies_accepted;
 
   const handleProjectClick = () => {
     window.open(import.meta.env.VITE_LANDING_PAGE_URL, "_blank");
@@ -72,12 +81,19 @@ export default function FeaturesPage() {
         page="features"
         chats={chats}
         userId={accessToken?.decoded?.sub}
+        rawAccessToken={accessToken?.raw}
         selectedLanguage={language}
         showProfileButton={showNav}
         showSponsorshipsButton={showNav}
         showChatsDropdown={showNav}
         showHelpButton={showNav}
         hasBlockerError={false}
+        isLocked={isLocked}
+        onGoToOnboarding={
+          isLocked && accessToken?.decoded?.sub && lang_iso_code
+            ? () => navigateToOnboarding(accessToken.decoded.sub, lang_iso_code)
+            : undefined
+        }
       />
 
       <main className="flex-1">

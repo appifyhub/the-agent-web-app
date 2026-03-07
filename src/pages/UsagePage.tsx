@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
-import { CardTitle } from "@/components/ui/card";
-import { ChartNoAxesCombined } from "lucide-react";
+import { ChartNoAxesCombined, BadgeCent, ShoppingCart } from "lucide-react";
 import BaseSettingsPage from "@/pages/BaseSettingsPage";
-import { PageError } from "@/lib/utils";
+import { PageError, buildSponsoredBlockerError } from "@/lib/utils";
 import { t } from "@/lib/translations";
 import {
   fetchUsageRecords,
@@ -11,12 +10,15 @@ import {
   UsageRecord,
   UsageAggregatesResponse,
 } from "@/services/usage-service";
+import { fetchProducts, Product } from "@/services/purchase-service";
+import ProductPickerDialog from "@/components/ProductPickerDialog";
 import {
   fetchUserSponsorships,
   SponsorshipResponse,
 } from "@/services/sponsorships-service";
 import { usePageSession } from "@/hooks/usePageSession";
 import { useChats } from "@/hooks/useChats";
+import { useUserSettings } from "@/hooks/useUserSettings";
 import { DEFAULT_LANGUAGE, INTERFACE_LANGUAGES } from "@/lib/languages";
 import UsageRecordCard from "@/components/UsageRecordCard";
 import UsageFilters, { TimeRange } from "@/components/UsageFilters";
@@ -35,6 +37,27 @@ const UsagePage: React.FC = () => {
     usePageSession();
 
   const { chats } = useChats(accessToken?.decoded?.sub, accessToken?.raw);
+
+  const { userSettings } = useUserSettings(
+    user_id,
+    accessToken?.raw,
+  );
+
+  const [shopOpen, setShopOpen] = useState<boolean>(false);
+  const [shopProducts, setShopProducts] = useState<Product[]>([]);
+
+  const shopUrl = useMemo(() => {
+    if (!user_id) return undefined;
+    const storeUrl = import.meta.env.VITE_STORE_URL;
+    if (!storeUrl) return undefined;
+    try {
+      const url = new URL(storeUrl);
+      url.searchParams.set("user_id", user_id.replace(/-/g, ""));
+      return url.toString();
+    } catch {
+      return undefined;
+    }
+  }, [user_id]);
 
   const [usageRecords, setUsageRecords] = useState<UsageRecord[]>([]);
   const [sponsorships, setSponsorships] = useState<SponsorshipResponse[]>([]);
@@ -56,7 +79,26 @@ const UsagePage: React.FC = () => {
     DEFAULT_LANGUAGE;
 
   useEffect(() => {
-    if (!accessToken || !user_id || error?.isBlocker) return;
+    if (!accessToken || !user_id) return;
+
+    const loadProducts = async () => {
+      try {
+        const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+        const { products } = await fetchProducts({
+          apiBaseUrl,
+          user_id,
+          rawToken: accessToken.raw,
+        });
+        setShopProducts(products);
+      } catch (err) {
+        console.error("Error fetching products!", err);
+      }
+    };
+    loadProducts();
+  }, [accessToken, user_id]);
+
+  useEffect(() => {
+    if (!accessToken || !user_id || error) return;
 
     const fetchData = async () => {
       setError(null);
@@ -221,16 +263,43 @@ const UsagePage: React.FC = () => {
     }
   };
 
+  const handleBuyMore = () => {
+    if (userSettings?.is_sponsored) {
+      setError(buildSponsoredBlockerError(lang_iso_code!, user_id!));
+      return;
+    }
+    setShopOpen(true);
+  };
+
   return (
-    <BaseSettingsPage
-      page="usage"
-      showActionButton={false}
+    <>
+      <ProductPickerDialog
+        products={shopProducts}
+        open={shopOpen}
+        onOpenChange={setShopOpen}
+        shopUrl={shopUrl}
+      />
+      <BaseSettingsPage
+        page="usage"
+      cardTitle={t("usage.card_title")}
+      onActionClicked={handleBuyMore}
+      actionIcon={<ShoppingCart className="h-5 w-5" />}
+      actionButtonText={t("purchases.buy_credits")}
       isContentLoading={isLoadingState}
       externalError={error}
+      onExternalErrorDismiss={() => setError(null)}
     >
-      <CardTitle className="text-center mx-auto">
-        {t("usage.card_title")}
-      </CardTitle>
+      {userSettings && (
+        <div className="flex items-center justify-center gap-2 text-lg mt-2">
+          <span className="text-muted-foreground font-light">
+            {t("usage.credit_balance", { balance: "" }).trim()}
+          </span>
+          <span className="text-accent-amber font-mono font-medium">
+            {userSettings.credit_balance.toFixed(2)}
+          </span>
+          <BadgeCent strokeWidth={1.5} className="h-5 w-5 text-accent-amber" />
+        </div>
+      )}
 
       <div className="h-2" />
 
@@ -268,7 +337,7 @@ const UsagePage: React.FC = () => {
         ) : (
           <>
             <div className="h-2" />
-            <div className="w-full max-w-2xl mx-auto">
+            <div className="w-full mx-auto">
               {usageRecords.map((record, index) => {
                 const isExpanded = expandedItems.has(index);
                 const toggleExpanded = () => {
@@ -314,6 +383,7 @@ const UsagePage: React.FC = () => {
         )}
       </div>
     </BaseSettingsPage>
+    </>
   );
 };
 

@@ -1,4 +1,5 @@
 import { request } from "@/services/networking";
+import { parseApiError } from "@/lib/api-error";
 
 // Tool types that correspond to the tool_choice_* fields in UserSettings
 export type ToolType =
@@ -84,9 +85,7 @@ export async function fetchExternalTools({
     }
   );
   if (!response.ok) {
-    throw new Error(
-      `Network error!\n\tStatus: ${response.status}\n\tError: ${response.statusText}`
-    );
+    throw await parseApiError(response);
   }
   return response.json();
 }

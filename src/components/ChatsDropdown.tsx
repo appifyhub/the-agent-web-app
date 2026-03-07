@@ -85,7 +85,7 @@ const ChatsDropdown: React.FC<ChatsDropdownProps> = ({
             chats.length === 0 || disabled
               ? "glass-dark-static"
               : isValidChatSelected
-              ? "glass-active text-orange-200 font-normal underline underline-offset-4 decoration-accent-amber hover:decoration-white"
+              ? "glass text-orange-200 font-normal underline underline-offset-4 decoration-accent-amber hover:decoration-white"
               : "glass font-light",
             "w-auto min-w-0 whitespace-nowrap overflow-hidden md:w-auto md:max-w-md text-base"
           )}

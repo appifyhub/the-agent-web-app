@@ -49,7 +49,7 @@ const PurchaseRecordCard: React.FC<PurchaseRecordCardProps> = ({
   return (
     <div
       className={cn(
-        "flex flex-col px-5 glass border cursor-pointer w-full space-y-4",
+        "flex flex-col px-5 glass-muted border cursor-pointer w-full space-y-4",
         isExpanded ? "py-8" : "py-3",
         roundedClasses,
         borderClasses
@@ -199,7 +199,7 @@ const PurchaseRecordCard: React.FC<PurchaseRecordCardProps> = ({
               <Button
                 variant="outline"
                 size="sm"
-                className="w-full border-accent-amber text-accent-amber hover:bg-accent-amber/10 cursor-pointer"
+                className="w-full text-white glass-purple cursor-pointer"
                 onClick={(e) => {
                   e.stopPropagation();
                   const url = new URL(record.product_permalink);

@@ -1,4 +1,5 @@
 import { request } from "@/services/networking";
+import { parseApiError } from "@/lib/api-error";
 
 export interface ConnectKeyResponse {
   connect_key: string;
@@ -26,9 +27,7 @@ export async function getConnectKey({
     headers: headers,
   });
   if (!response.ok) {
-    throw new Error(
-      `Network error!\n\tStatus: ${response.status}\n\tError: ${response.statusText}`
-    );
+    throw await parseApiError(response);
   }
   return response.json();
 }
@@ -54,14 +53,7 @@ export async function regenerateConnectKey({
     }
   );
   if (!response.ok) {
-    let reason = "";
-    try {
-      const data = await response.json();
-      reason = data.reason || "";
-    } catch (e) {
-      console.error("Failed to parse response!", e);
-    }
-    throw new Error(`Failed to regenerate connect key. ${reason}`);
+    throw await parseApiError(response);
   }
   return response.json();
 }
@@ -89,14 +81,7 @@ export async function connectProfiles({
     }
   );
   if (!response.ok) {
-    let reason = "";
-    try {
-      const data = await response.json();
-      reason = data.reason || "";
-    } catch (e) {
-      console.error("Failed to parse response!", e);
-    }
-    throw new Error(`Failed to connect profiles. ${reason}`);
+    throw await parseApiError(response);
   }
   return response.json();
 }
