@@ -137,128 +137,131 @@ const UserSettingsPage: React.FC = () => {
       externalError={error}
       onExternalErrorDismiss={() => setError(null)}
     >
-
-      {/* Full name input */}
-      <SettingInput
-        id="full-name"
-        label={t("profile_full_name_label", { botName })}
-        value={userSettings?.full_name || ""}
-        onChange={(value) =>
-          setUserSettings((prev) =>
-            prev
-              ? {
-                  ...prev,
-                  full_name: value,
-                }
-              : prev
-          )
-        }
-        onClear={() =>
-          setUserSettings((prev) =>
-            prev
-              ? {
-                  ...prev,
-                  full_name: "",
-                }
-              : prev
-          )
-        }
-        disabled={!!error?.isBlocker}
-        placeholder={t("profile_full_name_placeholder")}
-        onKeyboardConfirm={() => {
-          if (!error?.isBlocker && hasSettingsChanged) {
-            handleSave();
+      <div className="flex flex-col items-center gap-6">
+        {/* Full name input */}
+        <SettingInput
+          id="full-name"
+          label={t("profile_full_name_label", { botName })}
+          value={userSettings?.full_name || ""}
+          onChange={(value) =>
+            setUserSettings((prev) =>
+              prev
+                ? {
+                    ...prev,
+                    full_name: value,
+                  }
+                : prev
+            )
           }
-        }}
-      />
-
-      {/* About me textarea */}
-      <SettingTextarea
-        id="about-me"
-        label={t("about_me_label", { botName })}
-        value={userSettings?.about_me || ""}
-        onChange={(value) =>
-          setUserSettings((prev) =>
-            prev
-              ? {
-                  ...prev,
-                  about_me: value,
-                }
-              : prev
-          )
-        }
-        onClear={() =>
-          setUserSettings((prev) =>
-            prev
-              ? {
-                  ...prev,
-                  about_me: "",
-                }
-              : prev
-          )
-        }
-        disabled={!!error?.isBlocker}
-        placeholder={
-          error?.isBlocker
-            ? "—"
-            : t("about_me_placeholder", {
-                name: userSettings?.full_name || t("about_me_name_fallback"),
-              })
-        }
-        minRows={1}
-        maxRows={10}
-      />
-
-      {/* Provider configuration link */}
-      {(() => {
-        if (externalToolProviders.length === 0) return null;
-
-        const firstUnconfiguredProvider = externalToolProviders.find(
-          (p) => !p.is_configured
-        );
-        const allConfigured = !firstUnconfiguredProvider;
-
-        if (allConfigured) {
-          // All providers configured - show Customize Intelligence link
-          return (
-            <div className="flex items-center space-x-2 ps-2 text-sm text-muted-foreground mt-6">
-              <ChevronsRight className="h-4 w-4 text-accent-amber/70" />
-              <button
-                onClick={() => {
-                  if (user_id && lang_iso_code) {
-                    navigateToIntelligence(user_id, lang_iso_code);
+          onClear={() =>
+            setUserSettings((prev) =>
+              prev
+                ? {
+                    ...prev,
+                    full_name: "",
                   }
-                }}
-                className="underline underline-offset-3 decoration-accent-amber/70 text-accent-amber/70 hover:text-accent-amber cursor-pointer"
-              >
-                {t("configure_intelligence")}
-              </button>
-            </div>
-          );
-        } else {
-          // Has unconfigured providers - show Configure AI providers link
-          return (
-            <div className="flex items-center space-x-2 ps-2 text-sm text-muted-foreground mt-6">
-              <ChevronsRight className="h-4 w-4 text-accent-amber/70" />
-              <button
-                onClick={() => {
-                  if (user_id && lang_iso_code && firstUnconfiguredProvider) {
-                    // Store provider ID in sessionStorage so Access page can scroll to it
-                    sessionStorage.setItem(
-                      "scrollToProvider",
-                      firstUnconfiguredProvider.definition.id
-                    );
-                    navigateToAccess(user_id, lang_iso_code);
+                : prev
+            )
+          }
+          disabled={!!error?.isBlocker}
+          placeholder={t("profile_full_name_placeholder")}
+          className="w-full sm:w-auto"
+          onKeyboardConfirm={() => {
+            if (!error?.isBlocker && hasSettingsChanged) {
+              handleSave();
+            }
+          }}
+        />
+
+        {/* About me textarea */}
+        <SettingTextarea
+          id="about-me"
+          label={t("about_me_label", { botName })}
+          value={userSettings?.about_me || ""}
+          onChange={(value) =>
+            setUserSettings((prev) =>
+              prev
+                ? {
+                    ...prev,
+                    about_me: value,
                   }
-                }}
-                className="underline underline-offset-3 decoration-accent-amber/70 text-accent-amber/70 hover:text-accent-amber cursor-pointer"
-              >
-                {t("configure_ai_providers")}
-              </button>
-            </div>
+                : prev
+            )
+          }
+          onClear={() =>
+            setUserSettings((prev) =>
+              prev
+                ? {
+                    ...prev,
+                    about_me: "",
+                  }
+                : prev
+            )
+          }
+          disabled={!!error?.isBlocker}
+          placeholder={
+            error?.isBlocker
+              ? "—"
+              : t("about_me_placeholder", {
+                  name: userSettings?.full_name || t("about_me_name_fallback"),
+                })
+          }
+          minRows={1}
+          maxRows={10}
+          className="w-full sm:w-auto"
+        />
+
+        {/* Provider configuration link */}
+        {(() => {
+          if (externalToolProviders.length === 0) return null;
+
+          const firstUnconfiguredProvider = externalToolProviders.find(
+            (p) => !p.is_configured
           );
-        }
-      })()}
+          const allConfigured = !firstUnconfiguredProvider;
+
+          if (allConfigured) {
+            // All providers configured - show Customize Intelligence link
+            return (
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <ChevronsRight className="h-4 w-4 text-accent-amber/70" />
+                <button
+                  onClick={() => {
+                    if (user_id && lang_iso_code) {
+                      navigateToIntelligence(user_id, lang_iso_code);
+                    }
+                  }}
+                  className="underline underline-offset-3 decoration-accent-amber/70 text-accent-amber/70 hover:text-accent-amber cursor-pointer"
+                >
+                  {t("configure_intelligence")}
+                </button>
+              </div>
+            );
+          } else {
+            // Has unconfigured providers - show Configure AI providers link
+            return (
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <ChevronsRight className="h-4 w-4 text-accent-amber/70" />
+                <button
+                  onClick={() => {
+                    if (user_id && lang_iso_code && firstUnconfiguredProvider) {
+                      // Store provider ID in sessionStorage so Access page can scroll to it
+                      sessionStorage.setItem(
+                        "scrollToProvider",
+                        firstUnconfiguredProvider.definition.id
+                      );
+                      navigateToAccess(user_id, lang_iso_code);
+                    }
+                  }}
+                  className="underline underline-offset-3 decoration-accent-amber/70 text-accent-amber/70 hover:text-accent-amber cursor-pointer"
+                >
+                  {t("configure_ai_providers")}
+                </button>
+              </div>
+            );
+          }
+        })()}
+      </div>
     </BaseSettingsPage>
   );
 };

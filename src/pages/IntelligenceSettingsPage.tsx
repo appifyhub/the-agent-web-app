@@ -234,60 +234,63 @@ const IntelligenceSettingsPage: React.FC = () => {
     >
       {externalToolsData ? (
         <>
-          <SettingSelector
-            label={t("intelligence_presets.label")}
-            value={selectedPreset}
-            onChange={handlePresetChange}
-            disabled={!!error?.isBlocker}
-            options={[
-              {
-                value: "lowest_price",
-                label: (
-                  <span className="flex items-center gap-3">
-                    <Wallet className="h-4 w-4 shrink-0 text-blue-300" />
-                    {t("intelligence_presets.lowest_price")}
-                  </span>
-                ),
-              },
-              {
-                value: "highest_price",
-                label: (
-                  <span className="flex items-center gap-3">
-                    <Sparkles className="h-4 w-4 shrink-0 text-blue-300" />
-                    {t("intelligence_presets.highest_price")}
-                  </span>
-                ),
-              },
-              {
-                value: "agent_choice",
-                label: (
-                  <span className="flex items-center gap-3">
-                    <Scale className="h-4 w-4 shrink-0 text-blue-300" />
-                    {t("intelligence_presets.agent_choice")}
-                  </span>
-                ),
-              },
-              {
-                value: "custom",
-                label: (
-                  <span className="flex items-center gap-3">
-                    <Settings className="h-4 w-4 shrink-0 text-blue-300" />
-                    {t("intelligence_presets.custom")}
-                  </span>
-                ),
-              },
-            ]}
-          />
-          <p className="text-sm text-muted-foreground mx-1">
-            {selectedPreset === "lowest_price" &&
-              t("intelligence_presets.lowest_price_description")}
-            {selectedPreset === "highest_price" &&
-              t("intelligence_presets.highest_price_description")}
-            {selectedPreset === "agent_choice" &&
-              t("intelligence_presets.agent_choice_description")}
-            {selectedPreset === "custom" &&
-              t("intelligence_presets.custom_description")}
-          </p>
+          <div className="flex flex-col items-center gap-4">
+            <SettingSelector
+              label={t("intelligence_presets.label")}
+              value={selectedPreset}
+              onChange={handlePresetChange}
+              disabled={!!error?.isBlocker}
+              options={[
+                {
+                  value: "lowest_price",
+                  label: (
+                    <span className="flex items-center gap-3">
+                      <Wallet className="h-4 w-4 shrink-0 text-blue-300" />
+                      {t("intelligence_presets.lowest_price")}
+                    </span>
+                  ),
+                },
+                {
+                  value: "highest_price",
+                  label: (
+                    <span className="flex items-center gap-3">
+                      <Sparkles className="h-4 w-4 shrink-0 text-blue-300" />
+                      {t("intelligence_presets.highest_price")}
+                    </span>
+                  ),
+                },
+                {
+                  value: "agent_choice",
+                  label: (
+                    <span className="flex items-center gap-3">
+                      <Scale className="h-4 w-4 shrink-0 text-blue-300" />
+                      {t("intelligence_presets.agent_choice")}
+                    </span>
+                  ),
+                },
+                {
+                  value: "custom",
+                  label: (
+                    <span className="flex items-center gap-3">
+                      <Settings className="h-4 w-4 shrink-0 text-blue-300" />
+                      {t("intelligence_presets.custom")}
+                    </span>
+                  ),
+                },
+              ]}
+              className="w-full sm:w-md"
+            />
+            <p className="text-sm text-muted-foreground w-full sm:w-md">
+              {selectedPreset === "lowest_price" &&
+                t("intelligence_presets.lowest_price_description")}
+              {selectedPreset === "highest_price" &&
+                t("intelligence_presets.highest_price_description")}
+              {selectedPreset === "agent_choice" &&
+                t("intelligence_presets.agent_choice_description")}
+              {selectedPreset === "custom" &&
+                t("intelligence_presets.custom_description")}
+            </p>
+          </div>
           <div className="h-4" />
           <h3 className="leading-none font-semibold text-center mx-auto mt-14 text-bas text-blue-300">
             {t("detailed_tool_choices")}

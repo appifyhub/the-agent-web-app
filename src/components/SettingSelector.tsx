@@ -1,6 +1,7 @@
 import React from "react";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
+import { t } from "@/lib/translations";
 import {
   Select,
   SelectTrigger,
@@ -34,7 +35,7 @@ const SettingSelector: React.FC<SettingSelectorProps> = ({
   onChange,
   options,
   disabled = false,
-  placeholder = "Select...",
+  placeholder = t("select_placeholder"),
   className = "",
   labelClassName = "",
   triggerClassName = "",

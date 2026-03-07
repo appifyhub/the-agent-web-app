@@ -1,6 +1,7 @@
 import React from "react";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
+import { t } from "@/lib/translations";
 import ProviderIcon from "@/components/ProviderIcon";
 import {
   Select,
@@ -53,8 +54,8 @@ const SectionedSelector: React.FC<SectionedSelectorProps> = ({
   onChange,
   sections,
   disabled = false,
-  placeholder = "Select...",
-  notConfiguredLabel = "– Not Configured",
+  placeholder = t("select_placeholder"),
+  notConfiguredLabel = t("tools.not_configured_with_prefix"),
   onProviderNavigate,
   hasCredits = false,
   className = "",
