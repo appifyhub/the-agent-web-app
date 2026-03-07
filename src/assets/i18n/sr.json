@@ -56,7 +56,20 @@
     "platform_handle_placeholder_whatsapp": "+3811234567890",
     "you_are_sponsored": "Vi ste sponzorisani korisnik!",
     "unlink_message": "Možete postati autonomni korisnik. Ovo prekida sponzorsku vezu. AI će prestati da radi dok ne podesite svoj Profil.",
-    "unlink": "Prekini vezu"
+    "unlink": "Prekini vezu",
+    "details": {
+      "identity_title": "Identitet",
+      "account_title": "Nalog",
+      "platform": "Platforma",
+      "status": "Status",
+      "received": "Poslato",
+      "accepted": "Prihvaćeno",
+      "policies": "Aktivirano",
+      "invited": "Pozvan/a da počne",
+      "waitlist": "Na čekanju",
+      "yes": "Da",
+      "no": "Ne"
+    }
   },
   "usage": {
     "page_title": "Korišćenje",

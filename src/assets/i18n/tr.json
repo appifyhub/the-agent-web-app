@@ -56,7 +56,20 @@
     "platform_handle_placeholder_whatsapp": "+901234567890",
     "you_are_sponsored": "Sponsorlu bir kullanıcısınız!",
     "unlink_message": "Bağımsız bir kullanıcı olabilirsiniz. Bu, sponsorluk bağlantısını koparır ve Profilinizi yapılandırana kadar AI çalışmayı durdurur.",
-    "unlink": "Bağlantıyı Kes"
+    "unlink": "Bağlantıyı Kes",
+    "details": {
+      "identity_title": "Kimlik",
+      "account_title": "Hesap",
+      "platform": "Platform",
+      "status": "Durum",
+      "received": "Gönderildi",
+      "accepted": "Kabul edildi",
+      "policies": "Etkinleştirildi",
+      "invited": "Başlamaya davet edildi",
+      "waitlist": "Bekleme listesinde",
+      "yes": "Evet",
+      "no": "Hayır"
+    }
   },
   "usage": {
     "page_title": "Kullanım",

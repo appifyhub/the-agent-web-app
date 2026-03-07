@@ -56,7 +56,20 @@
     "platform_handle_placeholder_whatsapp": "+861234567890",
     "you_are_sponsored": "您是被赞助的用户！",
     "unlink_message": "您可以成为自主用户。这将断开赞助链接，AI将停止工作，直到您配置您的个人资料。",
-    "unlink": "取消链接"
+    "unlink": "取消链接",
+    "details": {
+      "identity_title": "身份",
+      "account_title": "账户",
+      "platform": "平台",
+      "status": "状态",
+      "received": "已发送",
+      "accepted": "已接受",
+      "policies": "已激活",
+      "invited": "已受邀开始",
+      "waitlist": "等待名单中",
+      "yes": "是",
+      "no": "否"
+    }
   },
   "usage": {
     "page_title": "使用情况",

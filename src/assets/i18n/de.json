@@ -56,7 +56,20 @@
     "platform_handle_placeholder_whatsapp": "+491234567890",
     "you_are_sponsored": "Sie sind ein gesponserter Benutzer!",
     "unlink_message": "Sie können ein autonomer Benutzer werden. Dies bricht die Sponsoring-Verbindung und die KI wird nicht mehr funktionieren, bis Sie Ihr Profil konfigurieren.",
-    "unlink": "Verknüpfung aufheben"
+    "unlink": "Verknüpfung aufheben",
+    "details": {
+      "identity_title": "Identität",
+      "account_title": "Konto",
+      "platform": "Plattform",
+      "status": "Status",
+      "received": "Gesendet",
+      "accepted": "Akzeptiert",
+      "policies": "Aktiviert",
+      "invited": "Zum Start eingeladen",
+      "waitlist": "Auf der Warteliste",
+      "yes": "Ja",
+      "no": "Nein"
+    }
   },
   "usage": {
     "page_title": "Nutzung",

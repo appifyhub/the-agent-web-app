@@ -56,7 +56,20 @@
     "platform_handle_placeholder_whatsapp": "+441234567890",
     "you_are_sponsored": "You are a sponsored user!",
     "unlink_message": "You can become an autonomous user. This breaks the sponsorship link and AI will stop working until you configure your Profile.",
-    "unlink": "Unlink"
+    "unlink": "Unlink",
+    "details": {
+      "identity_title": "Identity",
+      "account_title": "Account",
+      "platform": "Platform",
+      "status": "Status",
+      "received": "Sent",
+      "accepted": "Accepted",
+      "policies": "Activated",
+      "invited": "Invited to start",
+      "waitlist": "On Waitlist",
+      "yes": "Yes",
+      "no": "No"
+    }
   },
   "usage": {
     "page_title": "Usage",

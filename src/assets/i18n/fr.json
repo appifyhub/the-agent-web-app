@@ -56,7 +56,20 @@
     "platform_handle_placeholder_whatsapp": "+331234567890",
     "you_are_sponsored": "Vous êtes un utilisateur parrainé !",
     "unlink_message": "Vous pouvez devenir un utilisateur autonome. Cela rompt le lien de parrainage et l'IA cessera de fonctionner jusqu'à ce que vous configuriez votre Profil.",
-    "unlink": "Délier"
+    "unlink": "Délier",
+    "details": {
+      "identity_title": "Identité",
+      "account_title": "Compte",
+      "platform": "Plateforme",
+      "status": "Statut",
+      "received": "Envoyé",
+      "accepted": "Accepté",
+      "policies": "Activé",
+      "invited": "Invité à démarrer",
+      "waitlist": "En liste d'attente",
+      "yes": "Oui",
+      "no": "Non"
+    }
   },
   "usage": {
     "page_title": "Utilisation",

@@ -56,7 +56,20 @@
     "platform_handle_placeholder_whatsapp": "+391234567890",
     "you_are_sponsored": "Sei un utente sponsorizzato!",
     "unlink_message": "Puoi diventare un utente autonomo. Questo interrompe il collegamento di sponsorizzazione e l'IA smetterà di funzionare finché non configurerai il tuo Profilo.",
-    "unlink": "Scollega"
+    "unlink": "Scollega",
+    "details": {
+      "identity_title": "Identità",
+      "account_title": "Account",
+      "platform": "Piattaforma",
+      "status": "Stato",
+      "received": "Inviato",
+      "accepted": "Accettato",
+      "policies": "Attivato",
+      "invited": "Invitato ad iniziare",
+      "waitlist": "In lista d'attesa",
+      "yes": "Sì",
+      "no": "No"
+    }
   },
   "usage": {
     "page_title": "Utilizzo",
