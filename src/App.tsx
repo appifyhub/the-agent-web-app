@@ -9,6 +9,7 @@ import LinkedProfilesPage from "@/pages/LinkedProfilesPage";
 import UsagePage from "@/pages/UsagePage";
 import PurchasesPage from "@/pages/PurchasesPage";
 import FeaturesPage from "@/pages/FeaturesPage";
+import OnboardingPage from "@/pages/OnboardingPage";
 import logoVector from "@/assets/logo-vector.svg";
 import { DEFAULT_LANGUAGE } from "@/lib/languages";
 
@@ -50,6 +51,10 @@ function App() {
           element={<PurchasesPage />}
         />
         <Route path="/:lang_iso_code/features" element={<FeaturesPage />} />
+        <Route
+          path="/:lang_iso_code/user/:user_id/onboarding"
+          element={<OnboardingPage />}
+        />
         {/* Edge-cases */}
         <Route
           path="*"
@@ -67,7 +72,7 @@ function App() {
                 >
                   {import.meta.env.VITE_LANDING_PAGE_URL.replace(
                     "https://",
-                    "www."
+                    "www.",
                   )}
                 </a>
               </span>

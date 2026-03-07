@@ -34,10 +34,10 @@ const AccessSettingsPage: React.FC = () => {
 
   const { navigateToIntelligence } = useNavigation();
 
-  const {
-    userSettings: remoteSettings,
-    updateSettingsCache,
-  } = useUserSettings(user_id, accessToken?.raw);
+  const { userSettings: remoteSettings, updateSettingsCache } = useUserSettings(
+    user_id,
+    accessToken?.raw,
+  );
 
   const [userSettings, setUserSettings] = useState<UserSettings | null>(null);
   const [externalToolProviders, setExternalToolProviders] = useState<
@@ -81,7 +81,7 @@ const AccessSettingsPage: React.FC = () => {
         });
         console.info("Fetched external tools!", externalTools);
         setExternalToolProviders(
-          externalTools.providers.map((p) => p.definition)
+          externalTools.providers.map((p) => p.definition),
         );
         const statusMap = new Map<string, boolean>();
         externalTools.providers.forEach((p) => {
@@ -98,7 +98,15 @@ const AccessSettingsPage: React.FC = () => {
     };
 
     fetchData();
-  }, [accessToken, user_id, lang_iso_code, error, setError, setIsLoadingState, remoteSettings]);
+  }, [
+    accessToken,
+    user_id,
+    lang_iso_code,
+    error,
+    setError,
+    setIsLoadingState,
+    remoteSettings,
+  ]);
 
   // Track carousel position (only on user interaction, not programmatic scrolls)
   useEffect(() => {
@@ -133,7 +141,7 @@ const AccessSettingsPage: React.FC = () => {
     if (scrollToProviderId) {
       // Navigation from Intelligence page - scroll to that provider (works on first load too)
       const index = externalToolProviders.findIndex(
-        (p) => p.id === scrollToProviderId
+        (p) => p.id === scrollToProviderId,
       );
       if (index !== -1) {
         isRestoringPosition.current = true;
@@ -150,7 +158,7 @@ const AccessSettingsPage: React.FC = () => {
       // Use jump=true to restore instantly without animation
       const targetIndex = Math.min(
         indexToRestore.current,
-        externalToolProviders.length - 1
+        externalToolProviders.length - 1,
       );
       if (targetIndex >= 0 && targetIndex < externalToolProviders.length) {
         isRestoringPosition.current = true;
@@ -194,7 +202,7 @@ const AccessSettingsPage: React.FC = () => {
 
       updateSettingsCache(userSettings!);
       setExternalToolProviders(
-        updatedExternalTools.providers.map((p) => p.definition)
+        updatedExternalTools.providers.map((p) => p.definition),
       );
       // Update provider configuration status
       const statusMap = new Map<string, boolean>();
@@ -262,17 +270,17 @@ const AccessSettingsPage: React.FC = () => {
       isContentLoading={isLoadingState}
       externalError={error}
       onExternalErrorDismiss={() => setError(null)}
+      topBanner={
+        showCreditsWarning ? (
+          <WarningBanner
+            message={t("access_use_credits_warning_prefix")}
+            destructiveLabel={t("access_remove_all_keys")}
+            destructiveOnClick={handleRemoveAllApiKeys}
+            onDismiss={() => setIsWarningDismissed(true)}
+          />
+        ) : undefined
+      }
     >
-      {showCreditsWarning && (
-        <WarningBanner
-          message={t("access_use_credits_warning_prefix")}
-          destructiveLabel={t("access_remove_all_keys")}
-          destructiveOnClick={handleRemoveAllApiKeys}
-          onDismiss={() => setIsWarningDismissed(true)}
-        />
-      )}
-      {showCreditsWarning && <div className="h-7" />}
-
       <ProviderTabs
         providers={externalToolProviders}
         selectedIndex={currentProviderIndex}

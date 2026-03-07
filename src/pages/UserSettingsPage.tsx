@@ -202,7 +202,7 @@ const UserSettingsPage: React.FC = () => {
           error?.isBlocker
             ? "—"
             : t("about_me_placeholder", {
-                name: userSettings?.full_name || "User",
+                name: userSettings?.full_name || t("about_me_name_fallback"),
               })
         }
         minRows={1}

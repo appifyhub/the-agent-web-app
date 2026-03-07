@@ -7,7 +7,16 @@ import { t } from "@/lib/translations";
 import AdvancedToolsPanel from "@/components/AdvancedToolsPanel";
 import SettingSelector from "@/components/SettingSelector";
 import WarningBanner from "@/components/WarningBanner";
-import { Wallet, Sparkles, Scale, Settings, Undo2, Key, ShoppingCart, Lightbulb } from "lucide-react";
+import {
+  Wallet,
+  Sparkles,
+  Scale,
+  Settings,
+  Undo2,
+  Key,
+  ShoppingCart,
+  Lightbulb,
+} from "lucide-react";
 import {
   saveUserSettings,
   UserSettings,
@@ -39,10 +48,10 @@ const IntelligenceSettingsPage: React.FC = () => {
 
   const { navigateToAccess, navigateToPurchases } = useNavigation();
 
-  const {
-    userSettings: remoteSettings,
-    updateSettingsCache,
-  } = useUserSettings(user_id, accessToken?.raw);
+  const { userSettings: remoteSettings, updateSettingsCache } = useUserSettings(
+    user_id,
+    accessToken?.raw,
+  );
 
   const [userSettings, setUserSettings] = useState<UserSettings | null>(null);
   const [externalToolsData, setExternalToolsData] =
@@ -89,7 +98,15 @@ const IntelligenceSettingsPage: React.FC = () => {
     };
 
     fetchData();
-  }, [accessToken, user_id, lang_iso_code, error, setError, setIsLoadingState, remoteSettings]);
+  }, [
+    accessToken,
+    user_id,
+    lang_iso_code,
+    error,
+    setError,
+    setIsLoadingState,
+    remoteSettings,
+  ]);
 
   const hasSettingsChanged = !!(
     userSettings &&
@@ -182,7 +199,7 @@ const IntelligenceSettingsPage: React.FC = () => {
 
   // Check if user has credits or API keys configured
   const hasCredits = (userSettings?.credit_balance ?? 0) > 0;
-  const hasAnyApiKey = externalToolsData?.providers.some(p => p.is_configured) ?? false;
+  const hasAnyApiKey = externalToolsData?.providers.some((p) => p.is_configured) ?? false;
   const showNoAccessWarning = !hasCredits && !hasAnyApiKey && !isWarningDismissed;
 
   return (
@@ -198,29 +215,25 @@ const IntelligenceSettingsPage: React.FC = () => {
       isContentLoading={isLoadingState}
       externalError={error}
       onExternalErrorDismiss={() => setError(null)}
+      topBanner={
+        showNoAccessWarning ? (
+          <WarningBanner
+            message={t("intelligence_warnings.no_access_message")}
+            icon={<Lightbulb className="h-5 w-5 text-purple-300/70 shrink-0" />}
+            borderColor="border-purple-300/40"
+            onDismiss={() => setIsWarningDismissed(true)}
+            secondaryLabel={t("configure_ai_providers")}
+            secondaryOnClick={() => navigateToAccess(user_id!, lang_iso_code!)}
+            secondaryIcon={<Key className="h-3.5 w-3.5 mb-0.5" />}
+            primaryLabel={t("purchases.buy_credits")}
+            primaryOnClick={() => navigateToPurchases(user_id!, lang_iso_code!)}
+            primaryIcon={<ShoppingCart className="h-3.5 w-3.5 mb-0.5" />}
+          />
+        ) : undefined
+      }
     >
       {externalToolsData ? (
         <>
-          {showNoAccessWarning && (
-            <WarningBanner
-              message={t("intelligence_warnings.no_access_message")}
-              icon={<Lightbulb className="h-5 w-5 text-blue-300/60 shrink-0" />}
-              borderColor="border-blue-300/40"
-              onDismiss={() => setIsWarningDismissed(true)}
-              secondaryLabel={t("configure_ai_providers")}
-              secondaryOnClick={() =>
-                navigateToAccess(user_id!, lang_iso_code!)
-              }
-              secondaryIcon={<Key className="h-3.5 w-3.5 mb-0.5" />}
-              primaryLabel={t("purchases.buy_credits")}
-              primaryOnClick={() =>
-                navigateToPurchases(user_id!, lang_iso_code!)
-              }
-              primaryIcon={<ShoppingCart className="h-3.5 w-3.5 mb-0.5" />}
-            />
-          )}
-          {showNoAccessWarning && <div className="h-8" />}
-
           <SettingSelector
             label={t("intelligence_presets.label")}
             value={selectedPreset}
@@ -266,10 +279,14 @@ const IntelligenceSettingsPage: React.FC = () => {
             ]}
           />
           <p className="text-sm text-muted-foreground mx-1">
-            {selectedPreset === "lowest_price" && t("intelligence_presets.lowest_price_description")}
-            {selectedPreset === "highest_price" && t("intelligence_presets.highest_price_description")}
-            {selectedPreset === "agent_choice" && t("intelligence_presets.agent_choice_description")}
-            {selectedPreset === "custom" && t("intelligence_presets.custom_description")}
+            {selectedPreset === "lowest_price" &&
+              t("intelligence_presets.lowest_price_description")}
+            {selectedPreset === "highest_price" &&
+              t("intelligence_presets.highest_price_description")}
+            {selectedPreset === "agent_choice" &&
+              t("intelligence_presets.agent_choice_description")}
+            {selectedPreset === "custom" &&
+              t("intelligence_presets.custom_description")}
           </p>
           <div className="h-4" />
           <h3 className="leading-none font-semibold text-center mx-auto mt-14 text-bas text-blue-300">

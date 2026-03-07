@@ -122,7 +122,7 @@ const BOOLEAN_FIELDS = [
  */
 function isMaskedPropertyChanged(
   localProperty: string | null | undefined,
-  remoteProperty: string | null | undefined
+  remoteProperty: string | null | undefined,
 ): boolean {
   if (!!localProperty !== !!remoteProperty) return true;
   if (!localProperty || !remoteProperty) return false;
@@ -137,7 +137,7 @@ function isMaskedPropertyChanged(
  */
 export function buildChangedPayload(
   userSettings: UserSettings,
-  remoteSettings: UserSettings
+  remoteSettings: UserSettings,
 ): UserSettingsPayload {
   const payload: UserSettingsPayload = {};
   MASKED_FIELDS.forEach((field) => {
@@ -160,18 +160,20 @@ export function buildChangedPayload(
 
 export function areSettingsChanged(
   userSettings: UserSettings,
-  remoteSettings: UserSettings
+  remoteSettings: UserSettings,
 ): boolean {
   const maskedChanged = MASKED_FIELDS.some((field) =>
-    isMaskedPropertyChanged(userSettings[field], remoteSettings[field])
+    isMaskedPropertyChanged(userSettings[field], remoteSettings[field]),
   );
   if (maskedChanged) return true;
+
   const stringChanged = STRING_FIELDS.some(
-    (field) => userSettings[field] !== remoteSettings[field]
+    (field) => userSettings[field] !== remoteSettings[field],
   );
   if (stringChanged) return true;
+
   const booleanChanged = BOOLEAN_FIELDS.some(
-    (field) => userSettings[field] !== remoteSettings[field]
+    (field) => userSettings[field] !== remoteSettings[field],
   );
   return booleanChanged;
 }
@@ -219,7 +221,8 @@ export async function fetchUserSettings({
   if (!response.ok) {
     throw await parseApiError(response);
   }
-  return response.json();
+  const settings: UserSettings = await response.json();
+  return settings;
 }
 
 export async function saveUserSettings({

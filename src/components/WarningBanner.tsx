@@ -21,7 +21,7 @@ interface WarningBannerProps {
 const WarningBanner: React.FC<WarningBannerProps> = ({
   message,
   icon,
-  borderColor = "border-red-300/40",
+  borderColor = "border-red-300/60",
   onDismiss,
   destructiveLabel,
   destructiveOnClick,
@@ -33,7 +33,9 @@ const WarningBanner: React.FC<WarningBannerProps> = ({
   secondaryOnClick,
   secondaryIcon,
 }) => {
-  const defaultIcon = <AlertTriangle className="h-5 w-5 text-red-300/60 shrink-0" />;
+  const defaultIcon = (
+    <AlertTriangle className="h-5.5 w-5.5 text-red-300/70 shrink-0" />
+  );
   const buttons = [
     {
       type: "destructive" as const,
@@ -61,17 +63,19 @@ const WarningBanner: React.FC<WarningBannerProps> = ({
   return (
     <div
       className={cn(
-        "w-full max-w-xl mx-auto mb-6 flex flex-col gap-4 border rounded-xl",
+        "w-full max-w-2xl mx-auto flex flex-col gap-4 border rounded-xl",
         borderColor,
       )}
     >
-      <div className="h-0" />
+      <div className="h-1" />
       <div className="flex items-start gap-3">
         <div className="w-1" />
-        {icon ?? defaultIcon}
-        <p className="text-sm text-foreground/80 leading-relaxed flex-1">
-          {message}
-        </p>
+        <div className="flex items-center gap-3 flex-1">
+          {icon ?? defaultIcon}
+          <p className="text-base font-light text-foreground/90 leading-relaxed flex-1">
+            {message}
+          </p>
+        </div>
         <div className="w-1" />
         <button
           onClick={onDismiss}
@@ -93,7 +97,7 @@ const WarningBanner: React.FC<WarningBannerProps> = ({
               key={button.type}
               onClick={button.onClick}
               className={cn(
-                "flex items-center justify-center gap-2 px-3 py-2.5 text-xs font-medium border cursor-pointer flex-1",
+                "flex items-center justify-center gap-3 px-3 py-2.5 text-sm font-medium border cursor-pointer flex-1",
                 isSingle && "rounded-b-xl",
                 !isSingle && isFirst && "sm:rounded-bl-xl",
                 !isSingle && isLast && "rounded-b-xl sm:rounded-bl-none",

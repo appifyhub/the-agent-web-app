@@ -1,4 +1,9 @@
-import React, { useState, useImperativeHandle, forwardRef } from "react";
+import React, {
+  useState,
+  useImperativeHandle,
+  forwardRef,
+  useEffect,
+} from "react";
 import { useParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -12,6 +17,8 @@ import { DEFAULT_LANGUAGE, INTERFACE_LANGUAGES } from "@/lib/languages";
 import { t } from "@/lib/translations";
 import { usePageSession } from "@/hooks/usePageSession";
 import { useChats } from "@/hooks/useChats";
+import { useUserSettings } from "@/hooks/useUserSettings";
+import { useNavigation } from "@/hooks/useNavigation";
 import { ChatInfo } from "@/services/user-settings-service";
 import { PageError, cn } from "@/lib/utils";
 
@@ -23,7 +30,8 @@ type Page =
   | "intelligence"
   | "linked_profiles"
   | "usage"
-  | "purchases";
+  | "purchases"
+  | "onboarding";
 
 export interface BaseSettingsPageRef {
   openDrawer: () => void;
@@ -57,6 +65,7 @@ interface BaseSettingsPageProps {
   externalError?: PageError | null;
   onExternalErrorDismiss?: () => void;
   cardClassName?: string;
+  topBanner?: React.ReactNode;
 }
 
 const BaseSettingsPage = forwardRef<BaseSettingsPageRef, BaseSettingsPageProps>(
@@ -89,17 +98,44 @@ const BaseSettingsPage = forwardRef<BaseSettingsPageRef, BaseSettingsPageProps>(
       externalError = null,
       onExternalErrorDismiss,
       cardClassName,
+      topBanner,
     },
     ref,
   ) => {
     const { lang_iso_code } = useParams<{
       lang_iso_code: string;
-      user_id?: string;
-      chat_id?: string;
     }>();
 
     const { error, accessToken, isLoadingState, handleTokenExpired, setError } =
       usePageSession();
+
+    const { navigateToOnboarding, navigateToProfile } = useNavigation();
+
+    const effectiveUserId = accessToken?.decoded?.sub;
+
+    // Fetch user settings for gate check (uses cache, so child pages avoid duplicate network calls)
+    const { userSettings: gateSettings, isLoading: isGateLoading } =
+      useUserSettings(effectiveUserId, accessToken?.raw);
+
+    // Gate: redirect based on policies accepted state
+    useEffect(() => {
+      if (!accessToken || !effectiveUserId || !lang_iso_code || !gateSettings)
+        return;
+
+      if (page !== "onboarding" && !gateSettings.are_policies_accepted) {
+        navigateToOnboarding(effectiveUserId, lang_iso_code);
+      } else if (page === "onboarding" && gateSettings.are_policies_accepted) {
+        navigateToProfile(effectiveUserId, lang_iso_code);
+      }
+    }, [
+      page,
+      gateSettings,
+      effectiveUserId,
+      lang_iso_code,
+      accessToken,
+      navigateToOnboarding,
+      navigateToProfile,
+    ]);
 
     // Fetch chats once at this level to avoid duplicate calls
     const { chats } = useChats(accessToken?.decoded?.sub, accessToken?.raw);
@@ -120,13 +156,16 @@ const BaseSettingsPage = forwardRef<BaseSettingsPageRef, BaseSettingsPageProps>(
         return error.errorData.htmlContent;
       }
       if (error.errorData.translationKey) {
-        return t(error.errorData.translationKey, error.errorData.variables || {});
+        return t(
+          error.errorData.translationKey,
+          error.errorData.variables || {},
+        );
       }
       return "";
     };
 
-    // show the early loading state
-    if (!accessToken && !error) {
+    // show the early loading state (before token or during gate check)
+    if ((!accessToken && !error) || isGateLoading) {
       console.info("Rendering the loading state!");
       return (
         <div className="container mx-auto p-4 h-screen">
@@ -155,6 +194,7 @@ const BaseSettingsPage = forwardRef<BaseSettingsPageRef, BaseSettingsPageProps>(
           hasBlockerError={!!displayError?.isBlocker}
           showProfileButton={showProfileButton}
           showSponsorshipsButton={showSponsorshipsButton}
+          isLocked={page === "onboarding"}
           drawerOpen={drawerOpen}
           onDrawerOpenChange={setDrawerOpen}
         />
@@ -163,6 +203,10 @@ const BaseSettingsPage = forwardRef<BaseSettingsPageRef, BaseSettingsPageProps>(
         <div className="flex-1 mx-auto w-full max-w-4xl">
           <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <main>
+              {/* Top banner slot (above action bar) */}
+              {topBanner}
+              {topBanner && <div className="h-8" />}
+
               {/* The Session Expiry timer and Action buttons */}
               <SettingActionBar
                 expiryTimestamp={accessToken?.decoded?.exp || 0}
@@ -177,7 +221,9 @@ const BaseSettingsPage = forwardRef<BaseSettingsPageRef, BaseSettingsPageProps>(
                 showSecondaryButton={showSecondaryButton}
                 onSecondaryClicked={onSecondaryClicked}
                 secondaryDisabled={
-                  secondaryDisabled || isLoadingState || !!displayError?.isBlocker
+                  secondaryDisabled ||
+                  isLoadingState ||
+                  !!displayError?.isBlocker
                 }
                 secondaryIcon={secondaryIcon}
                 secondaryText={secondaryText}

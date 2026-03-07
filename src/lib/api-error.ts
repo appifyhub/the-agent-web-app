@@ -25,6 +25,7 @@ export async function parseApiError(response: Response): Promise<ApiError> {
 }
 
 export function getErrorTranslationKey(errorCode: number): TranslationKey | null {
+  // @formatter:off
   switch (errorCode) {
     case 1001: return "error_codes.invalid_settings_type";
     case 1002: return "error_codes.invalid_language_settings";
@@ -56,6 +57,7 @@ export function getErrorTranslationKey(errorCode: number): TranslationKey | null
     case 1028: return "error_codes.unsupported_currency_pair";
     case 1029: return "error_codes.malformed_user_id";
     case 1030: return "error_codes.malformed_chat_id";
+    case 1031: return "error_codes.policy_acceptance_revocation_forbidden";
     case 2001: return "error_codes.user_not_found";
     case 2002: return "error_codes.chat_not_found";
     case 2003: return "error_codes.attachment_not_found";
@@ -74,6 +76,8 @@ export function getErrorTranslationKey(errorCode: number): TranslationKey | null
     case 3004: return "error_codes.no_private_chat";
     case 3005: return "error_codes.bot_cannot_set_alerts";
     case 3006: return "error_codes.unauthorized_seller";
+    case 3007: return "error_codes.waitlist_account_not_active";
+    case 3008: return "error_codes.waitlist_invited_policies_required";
     case 4001: return "error_codes.empty_token";
     case 4002: return "error_codes.no_user_id_in_token";
     case 5001: return "error_codes.image_generation_failed";
@@ -108,4 +112,5 @@ export function getErrorTranslationKey(errorCode: number): TranslationKey | null
     case 8999: return "error_codes.unexpected_error";
     default: return null;
   }
+  // @formatter:on
 }
