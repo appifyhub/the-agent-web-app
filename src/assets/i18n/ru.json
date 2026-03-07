@@ -22,6 +22,7 @@
   "preferred_language_placeholder": "Выберите язык",
   "your_chats": "Настроить чаты",
   "loading_placeholder": "Загрузка…",
+  "select_placeholder": "Выберите…",
   "untitled": "Без названия",
   "notifications": {
     "releases_label": "{botName} должен уведомлять меня о релизах:",
@@ -256,7 +257,7 @@
     "custom": "Настраиваемый",
     "custom_description": "Индивидуально настроенный выбор инструментов."
   },
-  "detailed_tool_choices": "Мой выбор инструментов",
+  "detailed_tool_choices": "Настроить выбор инструментов",
   "errors": {
     "oh_no": "О нет!",
     "expired": "Ваша сессия истекла.",
@@ -354,7 +355,7 @@
     "waitlist_invited_policies_required": "Примите политики для активации приглашённого аккаунта"
   },
   "tools": {
-    "not_configured": "Настроить",
+    "not_configured_with_prefix": "– Настроить",
     "select_tool": "Выберите инструмент",
     "no_tools_available": "Нет доступных инструментов для этого типа",
     "groups": {

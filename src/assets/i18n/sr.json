@@ -22,6 +22,7 @@
   "preferred_language_placeholder": "Izaberi jezik",
   "your_chats": "Podesi četove",
   "loading_placeholder": "Učitavanje…",
+  "select_placeholder": "Izaberi…",
   "untitled": "Bez naslova",
   "notifications": {
     "releases_label": "{botName} treba da me obavesti o izdanjima:",
@@ -256,7 +257,7 @@
     "custom": "Prilagođen",
     "custom_description": "Individualno prilagođen izbor alata."
   },
-  "detailed_tool_choices": "Moji izbori alata",
+  "detailed_tool_choices": "Prilagodi izbore alata",
   "errors": {
     "oh_no": "O ne!",
     "expired": "Ova sesija je istekla.",
@@ -400,7 +401,7 @@
     }
   },
   "tools": {
-    "not_configured": "Podesi",
+    "not_configured_with_prefix": "– Podesi",
     "select_tool": "Izaberi alat",
     "no_tools_available": "Nema dostupnih alata za ovaj tip",
     "groups": {

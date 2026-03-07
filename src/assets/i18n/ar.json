@@ -22,6 +22,7 @@
   "preferred_language_placeholder": "اختر لغة",
   "your_chats": "إعداد المحادثات",
   "loading_placeholder": "جاري التحميل…",
+  "select_placeholder": "اختر…",
   "untitled": "بدون عنوان",
   "notifications": {
     "releases_label": "يجب أن يُخطِرني {botName} بالإصدارات:",
@@ -256,7 +257,7 @@
     "custom": "مخصص",
     "custom_description": "اختيار أدوات مخصص بشكل فردي."
   },
-  "detailed_tool_choices": "اختياراتي للأدوات",
+  "detailed_tool_choices": "تخصيص اختيارات الأدوات",
   "errors": {
     "oh_no": "أوه لا!",
     "expired": "انتهت صلاحية جلستك.",
@@ -354,7 +355,7 @@
     "waitlist_invited_policies_required": "يرجى قبول السياسات لتفعيل حسابك المدعو"
   },
   "tools": {
-    "not_configured": "كوِّن",
+    "not_configured_with_prefix": "كوِّن –",
     "select_tool": "اختر أداة",
     "no_tools_available": "لا توجد أدوات متاحة لهذا النوع",
     "groups": {

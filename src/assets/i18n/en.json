@@ -22,6 +22,7 @@
   "preferred_language_placeholder": "Select a language",
   "your_chats": "Configure chats",
   "loading_placeholder": "Loading…",
+  "select_placeholder": "Select…",
   "untitled": "Untitled",
   "notifications": {
     "releases_label": "{botName} should notify me of releases:",
@@ -246,7 +247,7 @@
   "configure_intelligence": "Configure intelligence",
   "configure_ai_providers": "Configure AI providers",
   "tools": {
-    "not_configured": "Configure",
+    "not_configured_with_prefix": "– Configure",
     "select_tool": "Select a tool",
     "no_tools_available": "No tools available for this type",
     "groups": {
@@ -333,7 +334,7 @@
     "custom": "Custom",
     "custom_description": "Individually customized tool selection."
   },
-  "detailed_tool_choices": "My tool choices",
+  "detailed_tool_choices": "Customize tool choices",
   "errors": {
     "oh_no": "Oh no!",
     "expired": "Your session has expired.",

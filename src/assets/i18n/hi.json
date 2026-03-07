@@ -22,6 +22,7 @@
   "preferred_language_placeholder": "भाषा चुनें",
   "your_chats": "चैट सेट करें",
   "loading_placeholder": "लोड हो रहा है...",
+  "select_placeholder": "चुनें…",
   "untitled": "अनामित",
   "notifications": {
     "releases_label": "{botName} मुझे रिलीज़ के बारे में सूचित करे:",
@@ -256,7 +257,7 @@
     "custom": "कस्टम",
     "custom_description": "व्यक्तिगत रूप से अनुकूलित टूल चयन।"
   },
-  "detailed_tool_choices": "मेरे टूल विकल्प",
+  "detailed_tool_choices": "टूल विकल्प अनुकूलित करें",
   "errors": {
     "oh_no": "ओह नहीं!",
     "expired": "आपका सत्र समाप्त हो गया है।",
@@ -354,7 +355,7 @@
     "waitlist_invited_policies_required": "अपने आमंत्रित खाते को सक्रिय करने के लिए नीतियाँ स्वीकार करें"
   },
   "tools": {
-    "not_configured": "कॉन्फ़िगर करें",
+    "not_configured_with_prefix": "– कॉन्फ़िगर करें",
     "select_tool": "एक उपकरण चुनें",
     "no_tools_available": "इस प्रकार के लिए कोई उपकरण उपलब्ध नहीं",
     "groups": {

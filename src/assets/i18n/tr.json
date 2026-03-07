@@ -22,6 +22,7 @@
   "preferred_language_placeholder": "Bir dil seçin",
   "your_chats": "Sohbetleri yapılandır",
   "loading_placeholder": "Yükleniyor…",
+  "select_placeholder": "Seçin…",
   "untitled": "Başlıksız",
   "notifications": {
     "releases_label": "{botName} beni sürümlerden haberdar etsin:",
@@ -256,7 +257,7 @@
     "custom": "Özel",
     "custom_description": "Bireysel olarak özelleştirilmiş araç seçimi."
   },
-  "detailed_tool_choices": "Araç seçimlerim",
+  "detailed_tool_choices": "Araç seçimlerini özelleştir",
   "errors": {
     "oh_no": "Ah hayır!",
     "expired": "Oturumunuzun süresi doldu.",
@@ -354,7 +355,7 @@
     "waitlist_invited_policies_required": "Davet hesabınızı etkinleştirmek için politikaları kabul edin"
   },
   "tools": {
-    "not_configured": "Yapılandır",
+    "not_configured_with_prefix": "– Yapılandır",
     "select_tool": "Bir araç seçin",
     "no_tools_available": "Bu tür için mevcut araç yok",
     "groups": {

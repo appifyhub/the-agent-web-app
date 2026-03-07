@@ -22,6 +22,7 @@
   "preferred_language_placeholder": "Selecciona un idioma",
   "your_chats": "Configurar chats",
   "loading_placeholder": "Cargando…",
+  "select_placeholder": "Seleccionar…",
   "untitled": "Sin título",
   "notifications": {
     "releases_label": "{botName} debe notificarme de lanzamientos:",
@@ -256,7 +257,7 @@
     "custom": "Personalizado",
     "custom_description": "Selección de herramientas personalizada individualmente."
   },
-  "detailed_tool_choices": "Mis selecciones de herramientas",
+  "detailed_tool_choices": "Personalizar selecciones de herramientas",
   "errors": {
     "oh_no": "¡Oh no!",
     "expired": "Tu sesión ha expirado.",
@@ -400,7 +401,7 @@
     }
   },
   "tools": {
-    "not_configured": "Configurar",
+    "not_configured_with_prefix": "– Configurar",
     "select_tool": "Seleccionar una herramienta",
     "no_tools_available": "No hay herramientas disponibles para este tipo",
     "groups": {
