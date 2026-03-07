@@ -4,6 +4,8 @@
   "sponsorships": "Sponsoring",
   "close": "Schließen",
   "restore": "Wiederherstellen",
+  "next": "Weiter",
+  "back": "Zurück",
   "help": "Hilfe",
   "configure_title": "{botName}s Verhalten konfigurieren",
   "intelligence_card_title": "Verstärke {botName}s Intelligenz",
@@ -219,6 +221,7 @@
     "generic_error": "Ein Fehler ist aufgetreten"
   },
   "about_me_label": "{botName} weiß Folgendes über mich:",
+  "about_me_name_fallback": "Nutzer",
   "about_me_placeholder": "{name} ist Raketenwissenschaftler und lebt in…",
   "use_about_me_label": "Profilinformationen von allen verwenden",
   "use_about_me_label_singular": "Meine Profilinformationen verwenden",
@@ -464,7 +467,24 @@
     "sponsorship_operation_failed": "Sponsoring-Operation fehlgeschlagen",
     "unsponsor_self_failed": "Entfernen des Selbst-Sponsorings fehlgeschlagen",
     "profile_connect_failed": "Profilverbindung fehlgeschlagen",
-    "unexpected_error": "Ein unerwarteter Fehler ist aufgetreten"
+    "unexpected_error": "Ein unerwarteter Fehler ist aufgetreten",
+    "policy_acceptance_revocation_forbidden": "Die Annahme der Richtlinien kann nicht widerrufen werden",
+    "waitlist_account_not_active": "Ihr Konto ist noch nicht aktiv",
+    "waitlist_invited_policies_required": "Bitte akzeptieren Sie die Richtlinien, um Ihr eingeladenes Konto zu aktivieren"
+  },
+  "onboarding": {
+    "page_title": "Loslegen",
+    "policy_prefix": "Sie müssen diese Richtlinien akzeptieren, um {botName} zu nutzen:",
+    "policy_label": "Ich akzeptiere",
+    "access_api_keys_title": "Eigene API-Schlüssel verwenden",
+    "access_api_keys_description": "Verbinden Sie Ihre eigenen API-Schlüssel des KI-Anbieters. Sie zahlen direkt an die Anbieter und haben volle Kontrolle über Ihre KI-Tools.",
+    "access_credits_title": "Credits kaufen",
+    "access_credits_description": "Nutzen Sie Prepaid-Credits für Ihre KI-Interaktionen. Keine API-Schlüssel erforderlich.",
+    "finish": "Los geht's!",
+    "start": "Starten",
+    "waitlist_title": "Sie stehen auf der Warteliste",
+    "waitlist_message": "Wir benachrichtigen Sie, sobald eine Kontoaktivierung wieder möglich ist.",
+    "success": "{botName} ist jetzt bereit! Gehe zurück in deinen Chat und stelle eine Frage."
   },
   "check_out_project": "Projekt ansehen",
   "footer": {

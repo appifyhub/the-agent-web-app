@@ -4,6 +4,8 @@
   "sponsorships": "Parrainages",
   "close": "Fermer",
   "restore": "Restaurer",
+  "next": "Suivant",
+  "back": "Retour",
   "help": "Aide",
   "configure_title": "Configurer le comportement de {botName}",
   "intelligence_card_title": "Boostez l'Intelligence de {botName}",
@@ -219,6 +221,7 @@
     "generic_error": "Une erreur s'est produite"
   },
   "about_me_label": "{botName} sait ceci sur moi :",
+  "about_me_name_fallback": "Utilisateur",
   "about_me_placeholder": "{name} est un scientifique spatial qui vit à…",
   "use_about_me_label": "Utiliser les informations de profil de tout le monde",
   "use_about_me_label_singular": "Utiliser mes informations de profil",
@@ -464,7 +467,24 @@
     "sponsorship_operation_failed": "Échec de l'opération de parrainage",
     "unsponsor_self_failed": "Échec de la suppression de l'auto-parrainage",
     "profile_connect_failed": "Échec de la connexion du profil",
-    "unexpected_error": "Une erreur inattendue s'est produite"
+    "unexpected_error": "Une erreur inattendue s'est produite",
+    "policy_acceptance_revocation_forbidden": "L'acceptation des politiques ne peut pas être révoquée",
+    "waitlist_account_not_active": "Votre compte n'est pas encore actif",
+    "waitlist_invited_policies_required": "Veuillez accepter les politiques pour activer votre compte invité"
+  },
+  "onboarding": {
+    "page_title": "Commencer",
+    "policy_prefix": "Vous devez accepter ces politiques pour commencer à utiliser {botName} :",
+    "policy_label": "J'accepte",
+    "access_api_keys_title": "Utiliser mes propres clés API",
+    "access_api_keys_description": "Connectez vos propres clés API de fournisseur d'IA. Vous payez les fournisseurs directement, avec un contrôle total sur vos outils d'IA.",
+    "access_credits_title": "Acheter des crédits",
+    "access_credits_description": "Utilisez des crédits prépayés pour vos interactions IA. Aucune clé API requise.",
+    "finish": "C'est parti !",
+    "start": "Commencer",
+    "waitlist_title": "Vous êtes sur la liste d'attente",
+    "waitlist_message": "Nous vous notifierons dès que l'activation de votre compte sera à nouveau possible.",
+    "success": "{botName} est maintenant prêt ! Retourne dans ton chat et pose n'importe quelle question."
   },
   "check_out_project": "Découvrir le projet",
   "footer": {

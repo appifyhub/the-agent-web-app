@@ -4,6 +4,8 @@
   "sponsorships": "赞助",
   "close": "关闭",
   "restore": "恢复",
+  "next": "下一步",
+  "back": "返回",
   "help": "帮助",
   "configure_title": "配置{botName}的行为",
   "intelligence_card_title": "提升 {botName} 的智能",
@@ -219,6 +221,7 @@
     "generic_error": "发生错误"
   },
   "about_me_label": "{botName} 知道关于我的这些：",
+  "about_me_name_fallback": "用户",
   "about_me_placeholder": "{name} 是一位火箭科学家，住在…",
   "use_about_me_label": "使用所有人的个人资料信息",
   "use_about_me_label_singular": "使用我的个人资料信息",
@@ -345,7 +348,10 @@
     "sponsorship_operation_failed": "赞助操作失败",
     "unsponsor_self_failed": "移除自我赞助失败",
     "profile_connect_failed": "配置文件连接失败",
-    "unexpected_error": "发生意外错误"
+    "unexpected_error": "发生意外错误",
+    "policy_acceptance_revocation_forbidden": "无法撤销政策接受",
+    "waitlist_account_not_active": "您的账户尚未激活",
+    "waitlist_invited_policies_required": "请接受政策以激活您的受邀账户"
   },
   "features": {
     "header": "功能",
@@ -465,6 +471,20 @@
         "description": "此工具或功能已弃用，可能会在未来版本中移除。"
       }
     }
+  },
+  "onboarding": {
+    "page_title": "开始使用",
+    "policy_prefix": "您必须接受这些政策才能开始使用 {botName}：",
+    "policy_label": "我接受",
+    "access_api_keys_title": "使用我自己的 API 密钥",
+    "access_api_keys_description": "连接您自己的 AI 服务商 API 密钥，直接向提供商付款，完全掌控您的 AI 工具。",
+    "access_credits_title": "购买积分",
+    "access_credits_description": "使用预付积分驱动 AI 交互，无需 API 密钥。",
+    "finish": "出发吧！",
+    "start": "开始",
+    "waitlist_title": "您已加入等待列表",
+    "waitlist_message": "当再次可以激活您的账户时，我们会通知您。",
+    "success": "{botName} 现在已就绪！返回您的对话，提出任何问题。"
   },
   "check_out_project": "查看项目",
   "footer": {

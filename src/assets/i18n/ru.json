@@ -4,6 +4,8 @@
   "sponsorships": "Спонсорство",
   "close": "Закрыть",
   "restore": "Восстановить",
+  "next": "Далее",
+  "back": "Назад",
   "help": "Помощь",
   "configure_title": "Настроить поведение {botName}а",
   "intelligence_card_title": "Усильте Интеллект {botName}а",
@@ -219,6 +221,7 @@
     "generic_error": "Произошла ошибка"
   },
   "about_me_label": "{botName} знает это обо мне:",
+  "about_me_name_fallback": "Пользователь",
   "about_me_placeholder": "{name} — ракетный учёный, живущий в…",
   "use_about_me_label": "Использовать информацию всех профилей",
   "use_about_me_label_singular": "Использовать мою информацию профиля",
@@ -345,7 +348,10 @@
     "sponsorship_operation_failed": "Не удалось выполнить операцию спонсорства",
     "unsponsor_self_failed": "Не удалось отменить само-спонсорство",
     "profile_connect_failed": "Не удалось подключить профиль",
-    "unexpected_error": "Произошла неожиданная ошибка"
+    "unexpected_error": "Произошла неожиданная ошибка",
+    "policy_acceptance_revocation_forbidden": "Принятие политик не может быть отозвано",
+    "waitlist_account_not_active": "Ваш аккаунт ещё не активен",
+    "waitlist_invited_policies_required": "Примите политики для активации приглашённого аккаунта"
   },
   "tools": {
     "not_configured": "Настроить",
@@ -465,6 +471,20 @@
         "description": "Делитесь доступом к ассистенту с другими, сохраняя конфиденциальность вашего и их использования. Спонсорство позволяет вам расширить преимущества ассистента для друзей или семьи, и вы всегда можете управлять им через ассистента или введя `/settings` в чате."
       }
     }
+  },
+  "onboarding": {
+    "page_title": "Начать",
+    "policy_prefix": "Необходимо принять эти политики перед началом использования {botName}а:",
+    "policy_label": "Принимаю",
+    "access_api_keys_title": "Использую собственные ключи API (расширенный режим)",
+    "access_api_keys_description": "Подключу собственные ключи API провайдера ИИ.",
+    "access_credits_title": "Покупаю кредиты",
+    "access_credits_description": "Буду использовать предоплаченные кредиты для взаимодействий с ИИ, без настройки ключей.",
+    "finish": "Начнём!",
+    "start": "Начать",
+    "waitlist_title": "Вы в списке ожидания",
+    "waitlist_message": "Мы уведомим вас, когда активация аккаунта снова станет возможной.",
+    "success": "{botName} готов! Вернитесь в чат и задайте любой вопрос."
   },
   "check_out_project": "Посмотреть проект",
   "footer": {

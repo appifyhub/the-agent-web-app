@@ -4,6 +4,8 @@
   "sponsorships": "Sponsorizzazioni",
   "close": "Chiudi",
   "restore": "Ripristina",
+  "next": "Avanti",
+  "back": "Indietro",
   "help": "Aiuto",
   "configure_title": "Configura il comportamento di {botName}",
   "intelligence_card_title": "Potenzia l'Intelligenza di {botName}",
@@ -219,6 +221,7 @@
     "generic_error": "Si è verificato un errore"
   },
   "about_me_label": "{botName} sa questo su di me:",
+  "about_me_name_fallback": "Utente",
   "about_me_placeholder": "{name} è uno scienziato spaziale che vive a…",
   "use_about_me_label": "Usa le informazioni del profilo di tutti",
   "use_about_me_label_singular": "Usa le mie informazioni del profilo",
@@ -345,7 +348,10 @@
     "sponsorship_operation_failed": "Operazione di sponsorizzazione non riuscita",
     "unsponsor_self_failed": "Impossibile rimuovere l'auto-sponsorizzazione",
     "profile_connect_failed": "Connessione del profilo non riuscita",
-    "unexpected_error": "Si è verificato un errore imprevisto"
+    "unexpected_error": "Si è verificato un errore imprevisto",
+    "policy_acceptance_revocation_forbidden": "L'accettazione delle politiche non può essere revocata",
+    "waitlist_account_not_active": "Il tuo account non è ancora attivo",
+    "waitlist_invited_policies_required": "Accetta le politiche per attivare il tuo account invitato"
   },
   "features": {
     "header": "Funzionalità",
@@ -465,6 +471,20 @@
         "description": "Questo strumento o funzionalità è obsoleto e potrebbe essere rimosso nelle versioni future."
       }
     }
+  },
+  "onboarding": {
+    "page_title": "Inizia",
+    "policy_prefix": "Devi accettare queste politiche per iniziare a usare {botName}:",
+    "policy_label": "Accetto",
+    "access_api_keys_title": "Usa le mie chiavi API",
+    "access_api_keys_description": "Connetti le tue chiavi API del fornitore AI. Paghi direttamente i fornitori, con pieno controllo sui tuoi strumenti AI.",
+    "access_credits_title": "Acquista crediti",
+    "access_credits_description": "Usa crediti prepagati per le interazioni AI. Non sono necessarie chiavi API.",
+    "finish": "Andiamo!",
+    "start": "Inizia",
+    "waitlist_title": "Sei in lista d'attesa",
+    "waitlist_message": "Ti avviseremo quando sarà di nuovo possibile attivare il tuo account.",
+    "success": "{botName} è ora pronto! Torna nella tua chat e chiedi qualsiasi cosa."
   },
   "check_out_project": "Scopri il progetto",
   "footer": {

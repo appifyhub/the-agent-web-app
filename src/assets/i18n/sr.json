@@ -4,6 +4,8 @@
   "sponsorships": "Sponzorstva",
   "close": "Zatvori",
   "restore": "Vrati",
+  "next": "Dalje",
+  "back": "Nazad",
   "help": "Pomoć",
   "configure_title": "Podesi ponašanje {botName}a",
   "intelligence_card_title": "Unapredi {botName}ovu Inteligenciju",
@@ -219,6 +221,7 @@
     "generic_error": "Došlo je do greške"
   },
   "about_me_label": "{botName} zna ovo o meni:",
+  "about_me_name_fallback": "Korisnik",
   "about_me_placeholder": "{name} je nastavnik koji živi u…",
   "use_about_me_label": "Koristi informacije svih profila",
   "use_about_me_label_singular": "Koristi moje informacije o profilu",
@@ -345,7 +348,10 @@
     "sponsorship_operation_failed": "Operacija sponzorstva nije uspela",
     "unsponsor_self_failed": "Uklanjanje sponzorstva nije uspelo",
     "profile_connect_failed": "Povezivanje profila nije uspelo",
-    "unexpected_error": "Došlo je do neočekivane greške"
+    "unexpected_error": "Došlo je do neočekivane greške",
+    "policy_acceptance_revocation_forbidden": "Prihvatanje politika se ne može opozvati",
+    "waitlist_account_not_active": "Vaš nalog još nije aktivan",
+    "waitlist_invited_policies_required": "Prihvatite politike da biste aktivirali pozvani nalog"
   },
   "features": {
     "header": "Mogućnosti",
@@ -465,6 +471,20 @@
         "description": "Ovaj alat ili funkcija je zastarela i može biti uklonjena u budućim verzijama."
       }
     }
+  },
+  "onboarding": {
+    "page_title": "Početak",
+    "policy_prefix": "Neophodno je prihvatiti ove polise pre početka korišćenja {botName}a:",
+    "policy_label": "Prihvatam",
+    "access_api_keys_title": "Koristim sopstvene ključeve (napredno)",
+    "access_api_keys_description": "Povezaću sopstvene API ključeve AI provajdera.",
+    "access_credits_title": "Kupujem kredite",
+    "access_credits_description": "Koristiću unapred plaćene kredite za AI interakcije, bez podešavanja ključeva.",
+    "finish": "Počnimo!",
+    "start": "Počni",
+    "waitlist_title": "Na listi čekanja ste",
+    "waitlist_message": "Obavestićemo vas kada opet bude moguće aktivirati nalog.",
+    "success": "{botName} je sada spreman! Vrati se u chat i postavi bilo koje pitanje."
   },
   "check_out_project": "Pogledaj projekat",
   "footer": {

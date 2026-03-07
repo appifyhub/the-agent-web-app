@@ -4,6 +4,8 @@
   "sponsorships": "Patrocinios",
   "close": "Cerrar",
   "restore": "Restaurar",
+  "next": "Siguiente",
+  "back": "Atrás",
   "help": "Ayuda",
   "configure_title": "Configurar el comportamiento de {botName}",
   "intelligence_card_title": "Potencia la Inteligencia de {botName}",
@@ -219,6 +221,7 @@
     "generic_error": "Ocurrió un error"
   },
   "about_me_label": "{botName} sabe esto sobre mí:",
+  "about_me_name_fallback": "Usuario",
   "about_me_placeholder": "{name} es un científico espacial que vive en…",
   "use_about_me_label": "Usar la información del perfil de todos",
   "use_about_me_label_singular": "Usar mi información de perfil",
@@ -345,7 +348,10 @@
     "sponsorship_operation_failed": "Error en la operación de patrocinio",
     "unsponsor_self_failed": "Error al eliminar auto-patrocinio",
     "profile_connect_failed": "Error al conectar perfil",
-    "unexpected_error": "Ocurrió un error inesperado"
+    "unexpected_error": "Ocurrió un error inesperado",
+    "policy_acceptance_revocation_forbidden": "La aceptación de políticas no puede revocarse",
+    "waitlist_account_not_active": "Tu cuenta aún no está activa",
+    "waitlist_invited_policies_required": "Acepta las políticas para activar tu cuenta invitada"
   },
   "features": {
     "header": "Funciones",
@@ -465,6 +471,20 @@
         "description": "Esta herramienta o función está obsoleta y puede ser eliminada en versiones futuras."
       }
     }
+  },
+  "onboarding": {
+    "page_title": "Comenzar",
+    "policy_prefix": "Debes aceptar estas políticas para comenzar a usar {botName}:",
+    "policy_label": "Acepto",
+    "access_api_keys_title": "Usar mis propias claves API",
+    "access_api_keys_description": "Conecta tus propias claves API de proveedor de IA. Pagas directamente a los proveedores, con control total sobre tus herramientas de IA.",
+    "access_credits_title": "Comprar créditos",
+    "access_credits_description": "Usa créditos de prepago para tus interacciones de IA. No se necesitan claves API.",
+    "finish": "¡Vamos!",
+    "start": "Empezar",
+    "waitlist_title": "Estás en la lista de espera",
+    "waitlist_message": "Te notificaremos cuando sea posible activar tu cuenta de nuevo.",
+    "success": "¡{botName} ya está listo! Vuelve a tu chat y pregunta lo que quieras."
   },
   "check_out_project": "Ver el proyecto",
   "products": {

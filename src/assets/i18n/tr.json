@@ -4,6 +4,8 @@
   "sponsorships": "Sponsorluklar",
   "close": "Kapat",
   "restore": "Geri yükle",
+  "next": "İleri",
+  "back": "Geri",
   "help": "Yardım",
   "configure_title": "{botName}'ın Davranışını Yapılandır",
   "intelligence_card_title": "{botName}'ın Zekasını Güçlendir",
@@ -219,6 +221,7 @@
     "generic_error": "Bir hata oluştu"
   },
   "about_me_label": "{botName} hakkımda şunu biliyor:",
+  "about_me_name_fallback": "Kullanıcı",
   "about_me_placeholder": "{name} …'de yaşayan bir roket bilimcisidir…",
   "use_about_me_label": "Herkesin profil bilgisini kullan",
   "use_about_me_label_singular": "Profil bilgilerimi kullan",
@@ -345,7 +348,10 @@
     "sponsorship_operation_failed": "Sponsorluk işlemi başarısız",
     "unsponsor_self_failed": "Kendi sponsorluğu kaldırma başarısız",
     "profile_connect_failed": "Profil bağlantısı başarısız",
-    "unexpected_error": "Beklenmeyen bir hata oluştu"
+    "unexpected_error": "Beklenmeyen bir hata oluştu",
+    "policy_acceptance_revocation_forbidden": "Politika kabulü iptal edilemez",
+    "waitlist_account_not_active": "Hesabınız henüz aktif değil",
+    "waitlist_invited_policies_required": "Davet hesabınızı etkinleştirmek için politikaları kabul edin"
   },
   "tools": {
     "not_configured": "Yapılandır",
@@ -465,6 +471,20 @@
         "description": "Erişiminizi başkalarıyla paylaşın ve sizin ve onların kullanımını gizli tutun. Sponsorluklar, asistanın avantajlarını arkadaşlarınızla veya ailenizle paylaşmanıza olanak tanır ve bunları her zaman asistan üzerinden veya sohbette `/settings` yazarak yönetebilirsiniz."
       }
     }
+  },
+  "onboarding": {
+    "page_title": "Başlayın",
+    "policy_prefix": "{botName} kullanmaya başlamak için bu politikaları kabul etmelisiniz:",
+    "policy_label": "Kabul ediyorum",
+    "access_api_keys_title": "Kendi API anahtarlarımı kullan",
+    "access_api_keys_description": "Kendi AI sağlayıcı API anahtarlarınızı bağlayın. Sağlayıcılara doğrudan ödeme yaparsınız ve AI araçlarınız üzerinde tam kontrole sahip olursunuz.",
+    "access_credits_title": "Kredi satın al",
+    "access_credits_description": "AI etkileşimleri için ön ödemeli kredi kullanın. API anahtarı gerekmez.",
+    "finish": "Hadi başlayalım!",
+    "start": "Başla",
+    "waitlist_title": "Bekleme listindesiniz",
+    "waitlist_message": "Hesabınızı tekrar aktive etmek mümkün olduğunda sizi bilgilendireceğiz.",
+    "success": "{botName} artık hazır! Sohbetine geri dön ve istediğini sor."
   },
   "check_out_project": "Projeyi incele",
   "footer": {

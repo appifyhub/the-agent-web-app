@@ -4,6 +4,8 @@
   "sponsorships": "الرعايات",
   "close": "إغلاق",
   "restore": "استعادة",
+  "next": "التالي",
+  "back": "السابق",
   "help": "مساعدة",
   "configure_title": "تكوين سلوك {botName}",
   "intelligence_card_title": "تعزيز ذكاء {botName}",
@@ -219,6 +221,7 @@
     "generic_error": "حدث خطأ"
   },
   "about_me_label": "{botName} يعرف هذا عني:",
+  "about_me_name_fallback": "المستخدم",
   "about_me_placeholder": "{name} هو عالم صواريخ يعيش في…",
   "use_about_me_label": "استخدم معلومات الملف الشخصي للجميع",
   "use_about_me_label_singular": "استخدم معلومات ملفي الشخصي",
@@ -345,7 +348,10 @@
     "sponsorship_operation_failed": "فشلت عملية الرعاية",
     "unsponsor_self_failed": "فشل في إزالة الرعاية الذاتية",
     "profile_connect_failed": "فشل في ربط الملف الشخصي",
-    "unexpected_error": "حدث خطأ غير متوقع"
+    "unexpected_error": "حدث خطأ غير متوقع",
+    "policy_acceptance_revocation_forbidden": "لا يمكن إلغاء قبول السياسات",
+    "waitlist_account_not_active": "حسابك غير نشط بعد",
+    "waitlist_invited_policies_required": "يرجى قبول السياسات لتفعيل حسابك المدعو"
   },
   "tools": {
     "not_configured": "كوِّن",
@@ -465,6 +471,20 @@
         "description": "شارك وصولك إلى المساعد مع الآخرين مع الحفاظ على خصوصية استخدامك واستخدامهم. تتيح لك الرعايات تمديد فوائد المساعد إلى الأصدقاء أو العائلة، ويمكنك دائمًا إدارتها عبر المساعد أو عن طريق كتابة `/settings` في الدردشة."
       }
     }
+  },
+  "onboarding": {
+    "page_title": "ابدأ الآن",
+    "policy_prefix": "يجب عليك قبول هذه السياسات للبدء باستخدام {botName}:",
+    "policy_label": "أوافق",
+    "access_api_keys_title": "استخدام مفاتيح API الخاصة بي",
+    "access_api_keys_description": "قم بتوصيل مفاتيح API الخاصة بمزودي الذكاء الاصطناعي. تدفع للمزودين مباشرة مع تحكم كامل في أدوات الذكاء الاصطناعي.",
+    "access_credits_title": "شراء رصيد",
+    "access_credits_description": "استخدم رصيدًا مدفوعًا مسبقًا لتشغيل تفاعلات الذكاء الاصطناعي. لا تحتاج إلى مفاتيح API.",
+    "finish": "هيا نبدأ!",
+    "start": "ابدأ",
+    "waitlist_title": "أنت على قائمة الانتظار",
+    "waitlist_message": "سنُعلمك عندما يصبح بالإمكان تفعيل حسابك مجدداً.",
+    "success": "{botName} جاهز الآن! عُد إلى محادثتك واسأل أي شيء."
   },
   "check_out_project": "تحقق من المشروع",
   "footer": {

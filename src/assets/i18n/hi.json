@@ -4,6 +4,8 @@
   "sponsorships": "प्रायोजन",
   "close": "बंद करें",
   "restore": "पुनर्स्थापित करें",
+  "next": "अगला",
+  "back": "वापस",
   "help": "सहायता",
   "configure_title": "{botName} का व्यवहार कॉन्फ़िगर करें",
   "intelligence_card_title": "{botName} की बुद्धिमत्ता बढ़ाएं",
@@ -219,6 +221,7 @@
     "generic_error": "एक त्रुटि हुई"
   },
   "about_me_label": "{botName} मेरे बारे में यह जानता है:",
+  "about_me_name_fallback": "उपयोगकर्ता",
   "about_me_placeholder": "{name} एक रॉकेट वैज्ञानिक है जो… में रहता है…",
   "use_about_me_label": "सबकी प्रोफ़ाइल जानकारी का उपयोग करें",
   "use_about_me_label_singular": "मेरी प्रोफ़ाइल जानकारी का उपयोग करें",
@@ -345,7 +348,10 @@
     "sponsorship_operation_failed": "प्रायोजन ऑपरेशन में विफल",
     "unsponsor_self_failed": "स्व-प्रायोजन हटाने में विफल",
     "profile_connect_failed": "प्रोफाइल कनेक्शन में विफल",
-    "unexpected_error": "एक अप्रत्याशित त्रुटि हुई"
+    "unexpected_error": "एक अप्रत्याशित त्रुटि हुई",
+    "policy_acceptance_revocation_forbidden": "नीति स्वीकृति को रद्द नहीं किया जा सकता",
+    "waitlist_account_not_active": "आपका खाता अभी सक्रिय नहीं है",
+    "waitlist_invited_policies_required": "अपने आमंत्रित खाते को सक्रिय करने के लिए नीतियाँ स्वीकार करें"
   },
   "tools": {
     "not_configured": "कॉन्फ़िगर करें",
@@ -465,6 +471,20 @@
         "description": "दूसरों के साथ अपने सहायक तक पहुंच साझा करें जबकि आपकी और उनकी उपयोग गोपनीय बने रहे। पैसदान आपको सहायक के लाभ दोस्तों या परिवार के साथ साझा करने देता है, और आप हमेशा `/settings` टाइप करके या सहायक के माध्यम से इन्हें प्रबंधित कर सकते हैं।"
       }
     }
+  },
+  "onboarding": {
+    "page_title": "शुरू करें",
+    "policy_prefix": "{botName} का उपयोग शुरू करने के लिए आपको इन नीतियों को स्वीकार करना होगा:",
+    "policy_label": "मैं स्वीकार करता/करती हूँ",
+    "access_api_keys_title": "मेरी अपनी API कुंजियाँ उपयोग करें",
+    "access_api_keys_description": "अपने AI प्रदाता की API कुंजियाँ कनेक्ट करें। आप सीधे प्रदाताओं को भुगतान करते हैं, अपने AI टूल पर पूरा नियंत्रण रखते हुए।",
+    "access_credits_title": "क्रेडिट खरीदें",
+    "access_credits_description": "AI इंटरैक्शन के लिए प्रीपेड क्रेडिट उपयोग करें। कोई API कुंजी की आवश्यकता नहीं।",
+    "finish": "चलो शुरू करें!",
+    "start": "शुरू करें",
+    "waitlist_title": "आप प्रतीक्षा सूची पर हैं",
+    "waitlist_message": "जब आपके खाते को फिर से सक्रिय करना संभव होगा, हम आपको सूचित करेंगे।",
+    "success": "{botName} अब तैयार है! अपनी चैट पर वापस जाएं और कुछ भी पूछें।"
   },
   "check_out_project": "प्रोजेक्ट देखें",
   "footer": {

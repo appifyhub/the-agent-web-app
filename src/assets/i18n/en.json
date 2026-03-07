@@ -4,6 +4,8 @@
   "sponsorships": "Sponsorships",
   "close": "Close",
   "restore": "Restore",
+  "next": "Next",
+  "back": "Back",
   "help": "Help",
   "configure_title": "Configure {botName}'s Behavior",
   "intelligence_card_title": "Boost {botName}'s Intelligence",
@@ -219,6 +221,7 @@
     "generic_error": "An error occurred"
   },
   "about_me_label": "{botName} knows this about me:",
+  "about_me_name_fallback": "User",
   "about_me_placeholder": "{name} is a rocket scientist living in…",
   "use_about_me_label": "Use everyone's profile information",
   "use_about_me_label_singular": "Use my profile information",
@@ -422,7 +425,10 @@
     "sponsorship_operation_failed": "Sponsorship operation failed",
     "unsponsor_self_failed": "Failed to remove self-sponsorship",
     "profile_connect_failed": "Profile connection failed",
-    "unexpected_error": "An unexpected error occurred"
+    "unexpected_error": "An unexpected error occurred",
+    "policy_acceptance_revocation_forbidden": "Policy acceptance cannot be revoked",
+    "waitlist_account_not_active": "Your account is not yet active",
+    "waitlist_invited_policies_required": "Please accept the policies to activate your invited account"
   },
   "features": {
     "header": "Features",
@@ -509,6 +515,20 @@
     "other_costs": "Other Costs",
     "api_call": "Per single use",
     "second_of_runtime": "Per second of runtime"
+  },
+  "onboarding": {
+    "page_title": "Get Started",
+    "policy_prefix": "You must accept these policies to start using {botName}:",
+    "policy_label": "I accept",
+    "access_api_keys_title": "Use my own API keys",
+    "access_api_keys_description": "Connect your own AI provider API keys. You pay providers directly, with full control over your AI tools.",
+    "access_credits_title": "Buy credits",
+    "access_credits_description": "Use prepaid credits to power your AI interactions. No API keys needed.",
+    "finish": "Let's Go!",
+    "start": "Start",
+    "waitlist_title": "You're on the waitlist",
+    "waitlist_message": "We'll notify you when it's possible to activate your account again.",
+    "success": "{botName} is now ready! Go back to your chat and ask anything."
   },
   "check_out_project": "Check out the project",
   "footer": {
