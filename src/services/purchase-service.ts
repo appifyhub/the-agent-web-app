@@ -1,4 +1,42 @@
 import { request } from "@/services/networking";
+import { parseApiError } from "@/lib/api-error";
+
+export interface Product {
+  id: string;
+  credits: number;
+  name: string;
+  url: string;
+}
+
+export interface ProductsResponse {
+  products: Product[];
+}
+
+export async function fetchProducts({
+  apiBaseUrl,
+  user_id,
+  rawToken,
+}: {
+  apiBaseUrl: string;
+  user_id: string;
+  rawToken: string;
+}): Promise<ProductsResponse> {
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${rawToken}`,
+  };
+  const response = await request(
+    `${apiBaseUrl}/settings/user/${user_id}/products`,
+    {
+      method: "GET",
+      headers: headers,
+    },
+  );
+  if (!response.ok) {
+    throw await parseApiError(response);
+  }
+  return response.json();
+}
 
 export interface PurchaseRecord {
   id: string;
@@ -109,14 +147,7 @@ export async function fetchPurchaseRecords({
     }
   );
   if (!response.ok) {
-    let reason = "";
-    try {
-      const data = await response.json();
-      reason = data.reason || data.detail?.reason || "";
-    } catch (e) {
-      console.error("Failed to parse response!", e);
-    }
-    throw new Error(`Failed to fetch purchase records. ${reason}`);
+    throw await parseApiError(response);
   }
   return response.json();
 }
@@ -146,14 +177,7 @@ export async function fetchPurchaseStats({
     }
   );
   if (!response.ok) {
-    let reason = "";
-    try {
-      const data = await response.json();
-      reason = data.reason || data.detail?.reason || "";
-    } catch (e) {
-      console.error("Failed to parse response!", e);
-    }
-    throw new Error(`Failed to fetch purchase stats. ${reason}`);
+    throw await parseApiError(response);
   }
   return response.json();
 }
@@ -177,14 +201,7 @@ export async function bindLicenseKey({
     }
   );
   if (!response.ok) {
-    let reason = "";
-    try {
-      const data = await response.json();
-      reason = data.reason || data.detail?.reason || "";
-    } catch (e) {
-      console.error("Failed to parse response!", e);
-    }
-    throw new Error(`Failed to bind license key. ${reason}`);
+    throw await parseApiError(response);
   }
   return response.json();
 }

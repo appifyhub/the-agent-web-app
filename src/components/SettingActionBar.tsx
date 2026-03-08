@@ -10,28 +10,48 @@ import { X as CloseIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { t } from "@/lib/translations";
 
-interface SettingControlsProps {
+interface SettingActionBarProps {
   expiryTimestamp: number;
   onTokenExpired: () => void;
   onActionClicked: () => void;
   actionDisabled: boolean;
   showActionButton?: boolean;
+  actionIcon?: React.ReactNode;
   actionButtonText?: string;
+  showSecondaryButton?: boolean;
+  onSecondaryClicked?: () => void;
+  secondaryDisabled?: boolean;
+  secondaryIcon?: React.ReactNode;
+  secondaryText?: string;
+  secondaryTooltipText?: string;
+  secondaryClassName?: string;
   showCancelButton?: boolean;
   onCancelClicked?: () => void;
   cancelDisabled?: boolean;
+  cancelIcon?: React.ReactNode;
+  cancelTooltipText?: string;
 }
 
-const SettingControls: React.FC<SettingControlsProps> = ({
+const SettingActionBar: React.FC<SettingActionBarProps> = ({
   expiryTimestamp,
   onTokenExpired,
   onActionClicked,
   actionDisabled,
   showActionButton = true,
+  actionIcon,
   actionButtonText = t("save"),
+  showSecondaryButton = false,
+  onSecondaryClicked = () => {},
+  secondaryDisabled = false,
+  secondaryIcon,
+  secondaryText,
+  secondaryTooltipText,
+  secondaryClassName = "",
   showCancelButton = false,
   onCancelClicked = () => {},
   cancelDisabled = false,
+  cancelIcon,
+  cancelTooltipText = t("close"),
 }) => (
   <div className="flex justify-between items-center gap-2">
     <CountdownTimer
@@ -39,6 +59,29 @@ const SettingControls: React.FC<SettingControlsProps> = ({
       onExpire={onTokenExpired}
     />
     <div className="flex items-center space-x-2">
+      {showSecondaryButton && (
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              variant={secondaryDisabled ? "default" : "outline"}
+              size={secondaryText ? "default" : "icon"}
+              className={cn(
+                secondaryDisabled
+                  ? "text-muted-foreground bg-foreground/20 border border-foreground/20 rounded-full cursor-pointer"
+                  : "glass rounded-full cursor-pointer",
+                secondaryText ? "h-10 px-6 text-[1.05rem]" : "h-10 w-10",
+                secondaryClassName
+              )}
+              disabled={secondaryDisabled}
+              onClick={onSecondaryClicked}
+            >
+              {secondaryIcon}
+              {secondaryText && <span className="ml-2">{secondaryText}</span>}
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>{secondaryTooltipText}</TooltipContent>
+        </Tooltip>
+      )}
       {showActionButton && (
         <Button
           className={cn(
@@ -50,7 +93,9 @@ const SettingControls: React.FC<SettingControlsProps> = ({
           disabled={actionDisabled}
           onClick={onActionClicked}
         >
-          {actionButtonText}
+          {actionIcon}
+          {actionIcon && actionButtonText && <span className="ml-2">{actionButtonText}</span>}
+          {!actionIcon && actionButtonText}
         </Button>
       )}
       {showCancelButton && (
@@ -67,14 +112,14 @@ const SettingControls: React.FC<SettingControlsProps> = ({
               disabled={cancelDisabled}
               onClick={onCancelClicked}
             >
-              <CloseIcon className="h-6 w-6" />
+              {cancelIcon ?? <CloseIcon className="h-6 w-6" />}
             </Button>
           </TooltipTrigger>
-          <TooltipContent>{t("close")}</TooltipContent>
+          <TooltipContent>{cancelTooltipText}</TooltipContent>
         </Tooltip>
       )}
     </div>
   </div>
 );
 
-export default SettingControls;
+export default SettingActionBar;

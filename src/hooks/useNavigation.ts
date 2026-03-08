@@ -6,13 +6,14 @@ export interface NavigationHelpers {
   navigateToAccess: (userId: string, langIsoCode: string) => void;
   navigateToIntelligence: (userId: string, langIsoCode: string) => void;
   navigateToSponsorships: (userId: string, langIsoCode: string) => void;
-  navigateToConnections: (userId: string, langIsoCode: string) => void;
+  navigateToLinkedProfiles: (userId: string, langIsoCode: string) => void;
   navigateToUsage: (userId: string, langIsoCode: string) => void;
   navigateToPurchases: (userId: string, langIsoCode: string) => void;
   navigateToFeatures: (langIsoCode: string) => void;
+  navigateToOnboarding: (userId: string, langIsoCode: string) => void;
   navigateWithLanguageChange: (
     langIsoCode: string,
-    currentPath: string
+    currentPath: string,
   ) => void;
 }
 
@@ -30,42 +31,58 @@ export const useNavigation = (): NavigationHelpers => {
 
   const navigateToChat = (chatId: string, langIsoCode: string) => {
     console.info("Navigating to chat:", chatId);
-    navigate(`/${langIsoCode}/chat/${chatId}/settings${getPreservedSearchParams()}`);
+    navigate(
+      `/${langIsoCode}/chat/${chatId}/settings${getPreservedSearchParams()}`,
+    );
   };
 
   const navigateToProfile = (userId: string, langIsoCode: string) => {
     console.info("Navigating to profile:", userId);
-    navigate(`/${langIsoCode}/user/${userId}/settings${getPreservedSearchParams()}`);
+    navigate(
+      `/${langIsoCode}/user/${userId}/settings${getPreservedSearchParams()}`,
+    );
   };
 
   const navigateToAccess = (userId: string, langIsoCode: string) => {
     console.info("Navigating to access:", userId);
-    navigate(`/${langIsoCode}/user/${userId}/access${getPreservedSearchParams()}`);
+    navigate(
+      `/${langIsoCode}/user/${userId}/access${getPreservedSearchParams()}`,
+    );
   };
 
   const navigateToIntelligence = (userId: string, langIsoCode: string) => {
     console.info("Navigating to intelligence:", userId);
-    navigate(`/${langIsoCode}/user/${userId}/intelligence${getPreservedSearchParams()}`);
+    navigate(
+      `/${langIsoCode}/user/${userId}/intelligence${getPreservedSearchParams()}`,
+    );
   };
 
   const navigateToSponsorships = (userId: string, langIsoCode: string) => {
     console.info("Navigating to sponsorships:", userId);
-    navigate(`/${langIsoCode}/user/${userId}/sponsorships${getPreservedSearchParams()}`);
+    navigate(
+      `/${langIsoCode}/user/${userId}/sponsorships${getPreservedSearchParams()}`,
+    );
   };
 
-  const navigateToConnections = (userId: string, langIsoCode: string) => {
-    console.info("Navigating to connections:", userId);
-    navigate(`/${langIsoCode}/user/${userId}/connections${getPreservedSearchParams()}`);
+  const navigateToLinkedProfiles = (userId: string, langIsoCode: string) => {
+    console.info("Navigating to linked profiles:", userId);
+    navigate(
+      `/${langIsoCode}/user/${userId}/linked-profiles${getPreservedSearchParams()}`,
+    );
   };
 
   const navigateToUsage = (userId: string, langIsoCode: string) => {
     console.info("Navigating to usage:", userId);
-    navigate(`/${langIsoCode}/user/${userId}/usage${getPreservedSearchParams()}`);
+    navigate(
+      `/${langIsoCode}/user/${userId}/usage${getPreservedSearchParams()}`,
+    );
   };
 
   const navigateToPurchases = (userId: string, langIsoCode: string) => {
     console.info("Navigating to purchases:", userId);
-    navigate(`/${langIsoCode}/user/${userId}/purchases${getPreservedSearchParams()}`);
+    navigate(
+      `/${langIsoCode}/user/${userId}/purchases${getPreservedSearchParams()}`,
+    );
   };
 
   const navigateToFeatures = (langIsoCode: string) => {
@@ -73,9 +90,16 @@ export const useNavigation = (): NavigationHelpers => {
     navigate(`/${langIsoCode}/features${getPreservedSearchParams()}`);
   };
 
+  const navigateToOnboarding = (userId: string, langIsoCode: string) => {
+    console.info("Navigating to onboarding:", userId);
+    navigate(
+      `/${langIsoCode}/user/${userId}/onboarding${getPreservedSearchParams()}`,
+    );
+  };
+
   const navigateWithLanguageChange = (
     langIsoCode: string,
-    currentPath: string
+    currentPath: string,
   ) => {
     console.info("Interface language changed to:", langIsoCode);
 
@@ -96,10 +120,11 @@ export const useNavigation = (): NavigationHelpers => {
     navigateToAccess,
     navigateToIntelligence,
     navigateToSponsorships,
-    navigateToConnections,
+    navigateToLinkedProfiles,
     navigateToUsage,
     navigateToPurchases,
     navigateToFeatures,
+    navigateToOnboarding,
     navigateWithLanguageChange,
   };
 };

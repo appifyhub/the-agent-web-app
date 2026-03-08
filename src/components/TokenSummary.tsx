@@ -7,7 +7,6 @@ import {
   Rocket,
   ChevronDown,
   ChevronRight,
-  Gift,
   Radio,
 } from "lucide-react";
 import type { DecodedToken } from "@/lib/tokens";
@@ -39,11 +38,6 @@ const TokenSummary: React.FC<TokenSummaryProps> = ({ decoded }) => {
       label: t("token_info.platform_handle"),
       value: decoded.platform_handle,
       icon: AtSign,
-    },
-    decoded.sponsored_by && {
-      label: t("token_info.sponsored_by"),
-      value: decoded.sponsored_by,
-      icon: Gift,
     },
     { label: t("token_info.version"), value: decoded.version, icon: Rocket },
   ].filter(Boolean) as TokenSummaryItem[];

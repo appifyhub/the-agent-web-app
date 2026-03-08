@@ -1,4 +1,5 @@
 import { request } from "@/services/networking";
+import { parseApiError } from "@/lib/api-error";
 
 export type ReleaseNotificationsSetting = "none" | "major" | "minor" | "all";
 export type MediaModeSetting = "photo" | "file" | "all";
@@ -35,9 +36,7 @@ export async function fetchChatSettings({
     headers: headers,
   });
   if (!response.ok) {
-    throw new Error(
-      `Network error!\n\tStatus: ${response.status}\n\tError: ${response.statusText}`
-    );
+    throw await parseApiError(response);
   }
   return response.json();
 }
@@ -71,13 +70,6 @@ export async function saveChatSettings({
     body: JSON.stringify(payload),
   });
   if (!response.ok) {
-    let reason = "";
-    try {
-      const data = await response.json();
-      reason = data.reason || "";
-    } catch (e) {
-      console.error("Failed to parse response!", e);
-    }
-    throw new Error(`Failed to save settings. ${reason}`);
+    throw await parseApiError(response);
   }
 }

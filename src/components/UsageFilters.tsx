@@ -90,7 +90,7 @@ const UsageFilters: React.FC<UsageFiltersProps> = ({
 
   const filtersContent = (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div className="border-1 border-muted-foreground/30 rounded-xl space-y-4 p-[1rem]">
+      <div className="border-1 border-muted-foreground/30 rounded-xl space-y-4.5 p-[1rem]">
         <h3 className="text-md font-medium text-blue-300/80 uppercase truncate">
           {t("usage.filters.scope_section")}
         </h3>

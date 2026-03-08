@@ -1,6 +1,7 @@
 import React from "react";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
+import { t } from "@/lib/translations";
 import ProviderIcon from "@/components/ProviderIcon";
 import {
   Select,
@@ -39,10 +40,12 @@ interface SectionedSelectorProps {
   placeholder?: string;
   notConfiguredLabel?: string;
   onProviderNavigate?: (providerId: string) => void;
+  hasCredits?: boolean;
   className?: string;
   labelClassName?: string;
   triggerClassName?: string;
   contentClassName?: string;
+  hideCostEstimateButton?: boolean;
 }
 
 const SectionedSelector: React.FC<SectionedSelectorProps> = ({
@@ -51,18 +54,22 @@ const SectionedSelector: React.FC<SectionedSelectorProps> = ({
   onChange,
   sections,
   disabled = false,
-  placeholder = "Select...",
-  notConfiguredLabel = "– Not Configured",
+  placeholder = t("select_placeholder"),
+  notConfiguredLabel = t("tools.not_configured_with_prefix"),
   onProviderNavigate,
+  hasCredits = false,
   className = "",
   labelClassName = "",
   triggerClassName = "",
   contentClassName = "",
+  hideCostEstimateButton = false,
 }) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [costEstimateTarget, setCostEstimateTarget] = React.useState<{
     toolName: string;
     estimate: CostEstimate;
+    providerId?: string;
+    providerName?: string;
   } | null>(null);
 
   // Find if the current value exists in any section
@@ -98,7 +105,7 @@ const SectionedSelector: React.FC<SectionedSelectorProps> = ({
         >
           <div className="flex items-center justify-between w-full min-w-0 pr-2">
             <SelectValue placeholder={placeholder} />
-            {validOption?.costEstimate && validOption.toolName && (
+            {!hideCostEstimateButton && validOption?.costEstimate && validOption.toolName && (
               <div
                 className="flex items-center gap-2 z-50 pointer-events-auto ml-2 shrink-0 cursor-pointer"
                 onPointerDown={(e) => e.stopPropagation()}
@@ -107,9 +114,14 @@ const SectionedSelector: React.FC<SectionedSelectorProps> = ({
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
+                  const validOptionSection = sections.find((s) =>
+                    s.options.some((o) => o.value === value)
+                  );
                   setCostEstimateTarget({
                     toolName: validOption.toolName!,
-                    estimate: validOption.costEstimate!
+                    estimate: validOption.costEstimate!,
+                    providerId: validOption.providerId,
+                    providerName: validOptionSection?.sectionTitle,
                   });
                 }}
               >
@@ -129,7 +141,7 @@ const SectionedSelector: React.FC<SectionedSelectorProps> = ({
               {/* Section Header */}
               <div className="py-2 px-4 text-sm font-medium text-muted-foreground/90 flex items-center justify-between pointer-events-auto">
                 <span>{section.sectionTitle}</span>
-                {!section.isConfigured && (
+                {!section.isConfigured && !hasCredits && (
                   <button
                     onClick={(e) => {
                       e.preventDefault();
@@ -196,10 +208,12 @@ const SectionedSelector: React.FC<SectionedSelectorProps> = ({
                           onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
-                            setIsOpen(false); // Close the selector
+                            setIsOpen(false);
                             setCostEstimateTarget({
                               toolName: opt.toolName!,
-                              estimate: opt.costEstimate!
+                              estimate: opt.costEstimate!,
+                              providerId: opt.providerId,
+                              providerName: section.sectionTitle,
                             });
                           }}
                         >
@@ -237,6 +251,8 @@ const SectionedSelector: React.FC<SectionedSelectorProps> = ({
         <CostEstimateDialog
           toolName={costEstimateTarget.toolName}
           costEstimate={costEstimateTarget.estimate}
+          providerId={costEstimateTarget.providerId}
+          providerName={costEstimateTarget.providerName}
           open={!!costEstimateTarget}
           onOpenChange={(open) => {
             if (!open) setCostEstimateTarget(null);
