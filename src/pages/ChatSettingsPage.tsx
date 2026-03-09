@@ -170,6 +170,20 @@ const ChatSettingsPage: React.FC = () => {
                 : prev
             );
           }}
+          onUndo={
+            chatSettings?.language_iso_code !== remoteSettings?.language_iso_code
+              ? () =>
+                  setChatSettings((prev) =>
+                    prev && remoteSettings
+                      ? {
+                          ...prev,
+                          language_iso_code: remoteSettings.language_iso_code,
+                          language_name: remoteSettings.language_name,
+                        }
+                      : prev
+                  )
+              : undefined
+          }
           options={LLM_LANGUAGES.map((lang) => ({
             value: lang.isoCode,
             label: (
@@ -203,6 +217,16 @@ const ChatSettingsPage: React.FC = () => {
                   }
                 : prev
             )
+          }
+          onUndo={
+            chatSettings?.release_notifications !== remoteSettings?.release_notifications
+              ? () =>
+                  setChatSettings((prev) =>
+                    prev && remoteSettings
+                      ? { ...prev, release_notifications: remoteSettings.release_notifications }
+                      : prev
+                  )
+              : undefined
           }
           options={[
             {
@@ -247,6 +271,16 @@ const ChatSettingsPage: React.FC = () => {
                 : prev
             )
           }
+          onUndo={
+            chatSettings?.media_mode !== remoteSettings?.media_mode
+              ? () =>
+                  setChatSettings((prev) =>
+                    prev && remoteSettings
+                      ? { ...prev, media_mode: remoteSettings.media_mode }
+                      : prev
+                  )
+              : undefined
+          }
           options={[
             {
               value: "photo",
@@ -281,6 +315,16 @@ const ChatSettingsPage: React.FC = () => {
             setChatSettings((prev) =>
               prev ? { ...prev, reply_chance_percent: Number(val) } : prev
             )
+          }
+          onUndo={
+            chatSettings?.reply_chance_percent !== remoteSettings?.reply_chance_percent
+              ? () =>
+                  setChatSettings((prev) =>
+                    prev && remoteSettings
+                      ? { ...prev, reply_chance_percent: remoteSettings.reply_chance_percent }
+                      : prev
+                  )
+              : undefined
           }
           options={Array.from({ length: 11 }, (_, i) => ({
             value: String(i * 10),
