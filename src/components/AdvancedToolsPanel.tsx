@@ -160,6 +160,12 @@ const AdvancedToolsPanel: React.FC<AdvancedToolsPanelProps> = ({
     return userSettings?.[fieldName] !== remoteSettings[fieldName];
   };
 
+  const getRemoteToolChoice = (toolType: ToolType): string | undefined => {
+    if (!remoteSettings) return undefined;
+    const fieldName = `tool_choice_${toolType}` as keyof UserSettings;
+    return remoteSettings[fieldName] as string | undefined;
+  };
+
   const isCategoryChanged = (category: ToolGroupCategory): boolean => {
     const categoryToolTypes = Object.entries({
       chat: "text_intelligence",
@@ -442,6 +448,11 @@ const AdvancedToolsPanel: React.FC<AdvancedToolsPanelProps> = ({
                             }
                             onChange={(toolId) =>
                               onToolChoiceChange(toolTypeGroup.type, toolId)
+                            }
+                            onUndo={
+                              isToolTypeChanged(toolTypeGroup.type) && getRemoteToolChoice(toolTypeGroup.type)
+                                ? () => onToolChoiceChange(toolTypeGroup.type, getRemoteToolChoice(toolTypeGroup.type)!)
+                                : undefined
                             }
                             sections={toolTypeGroup.sections}
                             disabled={disabled || isSingleOption}

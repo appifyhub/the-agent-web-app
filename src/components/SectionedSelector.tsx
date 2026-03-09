@@ -1,5 +1,12 @@
 import React from "react";
 import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+} from "@/components/ui/tooltip";
+import { Undo2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { t } from "@/lib/translations";
 import ProviderIcon from "@/components/ProviderIcon";
@@ -35,6 +42,7 @@ interface SectionedSelectorProps {
   label: string;
   value: string | undefined;
   onChange: (value: string) => void;
+  onUndo?: () => void;
   sections: SectionedSelectorSection[];
   disabled?: boolean;
   placeholder?: string;
@@ -52,6 +60,7 @@ const SectionedSelector: React.FC<SectionedSelectorProps> = ({
   label,
   value,
   onChange,
+  onUndo,
   sections,
   disabled = false,
   placeholder = t("select_placeholder"),
@@ -80,15 +89,32 @@ const SectionedSelector: React.FC<SectionedSelectorProps> = ({
 
   return (
     <div className={cn("space-y-2", className)}>
-      <Label
-        className={cn(
-          "text-[1.05rem] font-light",
-          disabled ? "text-muted-foreground/50" : "",
-          labelClassName
+      <div className="flex items-center justify-between w-full sm:w-md">
+        <Label
+          className={cn(
+            "text-[1.05rem] font-light",
+            disabled ? "text-muted-foreground/50" : "",
+            labelClassName
+          )}
+        >
+          {label}
+        </Label>
+        {onUndo !== undefined && (
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="outline"
+                className="glass rounded-full cursor-pointer h-8 w-8 p-1.5 shrink-0"
+                onClick={onUndo}
+                disabled={disabled || !selectValue}
+              >
+                <Undo2 className="h-4 w-4" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>{t("restore")}</TooltipContent>
+          </Tooltip>
         )}
-      >
-        {label}
-      </Label>
+      </div>
       <Select
         value={selectValue}
         disabled={disabled}

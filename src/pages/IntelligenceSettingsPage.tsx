@@ -239,6 +239,11 @@ const IntelligenceSettingsPage: React.FC = () => {
               label={t("intelligence_presets.label")}
               value={selectedPreset}
               onChange={handlePresetChange}
+              onUndo={
+                remoteSettings && selectedPreset !== detectCurrentPreset(remoteSettings)
+                  ? handleRestoreSettings
+                  : undefined
+              }
               disabled={!!error?.isBlocker}
               options={[
                 {
