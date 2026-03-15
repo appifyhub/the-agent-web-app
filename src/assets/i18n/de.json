@@ -323,7 +323,7 @@
         "description": "Zugang zu Echtzeit-Wechselkursen für Kryptowährungen."
       },
       "api_twitter": {
-        "title": "Twitter",
+        "title": "X / Twitter",
         "description": "Zugang zum Lesen und Analysieren von Twitter-Inhalten."
       },
       "deprecated": {

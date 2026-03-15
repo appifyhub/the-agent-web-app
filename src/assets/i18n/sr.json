@@ -477,7 +477,7 @@
         "description": "Pristup kursevima kripto valuta u realnom vremenu."
       },
       "api_twitter": {
-        "title": "Twitter",
+        "title": "X / Twitter",
         "description": "Pristup za čitanje i analizu Twitter sadržaja."
       },
       "deprecated": {

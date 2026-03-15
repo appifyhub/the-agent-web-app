@@ -6,6 +6,7 @@ import PerplexityLogo from "@/assets/svg/perplexity-white.svg";
 import RapidAPILogo from "@/assets/svg/rapidapi-white.svg";
 import CoinMarketCapLogo from "@/assets/svg/coinmarketcap-white.svg";
 import ReplicateLogo from "@/assets/svg/replicate-white.svg";
+import XLogo from "@/assets/svg/x-logo.svg";
 import PlatformIcon from "@/components/PlatformIcon";
 import { Platform } from "@/lib/platform";
 
@@ -29,6 +30,7 @@ const ProviderIcon: React.FC<ProviderIconProps> = ({
       "rapid-api": RapidAPILogo,
       "coinmarketcap-api": CoinMarketCapLogo,
       replicate: ReplicateLogo,
+      x: XLogo,
     };
     return logoMap[id] || null;
   };

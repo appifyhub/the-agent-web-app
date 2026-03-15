@@ -323,7 +323,7 @@
         "description": "Access to real-time exchange rates for cryptocurrencies."
       },
       "api_twitter": {
-        "title": "Twitter",
+        "title": "X / Twitter",
         "description": "Access to read and analyze Twitter content."
       },
       "deprecated": {

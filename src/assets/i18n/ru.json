@@ -431,7 +431,7 @@
         "description": "Доступ к курсам обмена криптовалют в реальном времени."
       },
       "api_twitter": {
-        "title": "Twitter",
+        "title": "X / Twitter",
         "description": "Доступ для чтения и анализа контента Twitter."
       },
       "deprecated": {

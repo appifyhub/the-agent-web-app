@@ -431,7 +431,7 @@
         "description": "Kripto para birimleri için gerçek zamanlı döviz kurlarına erişim."
       },
       "api_twitter": {
-        "title": "Twitter",
+        "title": "X / Twitter",
         "description": "Twitter içeriğini okumak ve analiz etmek için erişim."
       },
       "deprecated": {

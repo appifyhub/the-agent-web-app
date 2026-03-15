@@ -477,7 +477,7 @@
         "description": "Accesso ai tassi di cambio in tempo reale per le criptovalute."
       },
       "api_twitter": {
-        "title": "Twitter",
+        "title": "X / Twitter",
         "description": "Accesso per leggere e analizzare i contenuti di Twitter."
       },
       "deprecated": {

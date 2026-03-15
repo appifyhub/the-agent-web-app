@@ -431,7 +431,7 @@
         "description": "क्रिप्टोकरेंसी के लिए वास्तविक समय विनिमय दरों तक पहुंच।"
       },
       "api_twitter": {
-        "title": "Twitter",
+        "title": "X / Twitter",
         "description": "Twitter सामग्री पढ़ने और विश्लेषण करने के लिए पहुंच।"
       },
       "deprecated": {
