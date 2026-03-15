@@ -22,7 +22,7 @@ const ProviderTabs: React.FC<ProviderTabsProps> = ({
   if (providers.length === 1) return null;
 
   return (
-    <div className="flex items-center justify-center gap-1 flex-wrap px-2">
+    <div className="flex flex-wrap items-center justify-center gap-2 px-2 pb-[2rem] max-w-50 sm:max-w-none mx-auto">
       {providers.map((provider, index) => (
         <button
           key={provider.id}
