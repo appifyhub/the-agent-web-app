@@ -130,8 +130,8 @@ const UsageRecordCard: React.FC<UsageRecordCardProps> = ({
   };
 
   // Format credits
-  const formatCredits = (credits: number): string => {
-    return credits.toFixed(1);
+  const formatCredits = (credits: number, decimals: number = 1): string => {
+    return credits.toFixed(decimals);
   };
 
   // Check if cost breakdown has any non-zero values
@@ -277,7 +277,7 @@ const UsageRecordCard: React.FC<UsageRecordCardProps> = ({
                     <span className="text-muted-foreground min-w-0 truncate">
                       {t("usage.cost_breakdown.maintenance_fee")}
                     </span>
-                    <span className="shrink-0">{formatCredits(record.maintenance_fee_credits)}</span>
+                    <span className="shrink-0">{formatCredits(record.maintenance_fee_credits, 2)}</span>
                   </div>
                 )}
                 <div className="flex justify-between gap-4 font-medium pt-[0.4rem] border-t border-muted-foreground/20">
