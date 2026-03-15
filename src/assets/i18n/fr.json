@@ -323,7 +323,7 @@
         "description": "Accès aux taux de change en temps réel pour les cryptomonnaies."
       },
       "api_twitter": {
-        "title": "Twitter",
+        "title": "X / Twitter",
         "description": "Accès pour lire et analyser le contenu Twitter."
       },
       "deprecated": {

@@ -477,7 +477,7 @@
         "description": "访问加密货币的实时汇率。"
       },
       "api_twitter": {
-        "title": "Twitter",
+        "title": "X / Twitter",
         "description": "访问以读取和分析Twitter内容。"
       },
       "deprecated": {

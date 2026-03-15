@@ -477,7 +477,7 @@
         "description": "Acceso a tipos de cambio en tiempo real para criptomonedas."
       },
       "api_twitter": {
-        "title": "Twitter",
+        "title": "X / Twitter",
         "description": "Acceso para leer y analizar contenido de Twitter."
       },
       "deprecated": {
