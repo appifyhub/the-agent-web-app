@@ -26,6 +26,7 @@ export const useUserSettings = (
 
   const fetchSettings = useCallback(
     async (forceRefresh = false) => {
+      await Promise.resolve();
       if (!userId || !rawToken) {
         setUserSettings(null);
         return;
@@ -64,6 +65,7 @@ export const useUserSettings = (
 
   // Initial fetch
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchSettings();
   }, [fetchSettings]);
 

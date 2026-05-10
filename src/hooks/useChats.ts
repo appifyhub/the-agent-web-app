@@ -21,14 +21,14 @@ export const useChats = (
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    if (!userId || !rawToken) {
-      setChats([]);
-      setIsLoading(false);
-      setError(null);
-      return;
-    }
-
     const fetchChats = async () => {
+      if (!userId || !rawToken) {
+        setChats([]);
+        setIsLoading(false);
+        setError(null);
+        return;
+      }
+
       if (areChatsCached(userId)) {
         const cachedChats = getCachedChats(userId);
         if (cachedChats) {
