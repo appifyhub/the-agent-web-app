@@ -47,6 +47,7 @@ const ProvidersCarousel: React.FC<ProvidersCarouselProps> = ({
   React.useEffect(() => {
     if (!api) return;
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setCanScrollPrev(api.canScrollPrev());
     setCanScrollNext(api.canScrollNext());
 

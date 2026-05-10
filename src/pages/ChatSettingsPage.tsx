@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import BaseSettingsPage, {
   BaseSettingsPageRef,
@@ -53,18 +53,16 @@ const ChatSettingsPage: React.FC = () => {
     null,
   );
 
-  // Seed form state from the chat list once it resolves
-  useEffect(() => {
-    if (!accessToken || isChatsLoading || !chat_id || error?.isBlocker) return;
-    if (chatSettings && chatSettings.chat_config.chat_id === chat_id) return;
-    const found = chats.find((chat) => chat.chat_config.chat_id === chat_id);
-    if (!found) {
-      setError(PageError.blocker("error_codes.chat_not_found"));
-      return;
+  if (accessToken && !isChatsLoading && chat_id && !error?.isBlocker) {
+    if (!(chatSettings?.chat_config.chat_id === chat_id)) {
+      if (selectedChat) {
+        setChatSettings(selectedChat);
+        setRemoteSettings(selectedChat);
+      } else {
+        setError(PageError.blocker("error_codes.chat_not_found"));
+      }
     }
-    setChatSettings(found);
-    setRemoteSettings(found);
-  }, [accessToken, isChatsLoading, chats, chat_id, chatSettings, error, setError]);
+  }
 
   // prettier-ignore
   const areSettingsChanged = !!(

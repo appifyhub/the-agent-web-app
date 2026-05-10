@@ -55,12 +55,9 @@ const AccessSettingsPage: React.FC = () => {
   const hasLoadedOnce = useRef(false);
   const indexToRestore = useRef<number | null>(null);
 
-  // Initialize local editing state when remote settings first load
-  useEffect(() => {
-    if (remoteSettings && !userSettings) {
-      setUserSettings(remoteSettings);
-    }
-  }, [remoteSettings, userSettings]);
+  if (remoteSettings && !userSettings) {
+    setUserSettings(remoteSettings);
+  }
 
   // Fetch external tools and check sponsorship when session and settings are ready
   useEffect(() => {

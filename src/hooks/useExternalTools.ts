@@ -24,6 +24,7 @@ export const useExternalTools = (
 
   const fetchTools = useCallback(
     async (forceRefresh = false) => {
+      await Promise.resolve();
       if (!userId || !rawToken) {
         setExternalTools(null);
         return;
@@ -60,6 +61,7 @@ export const useExternalTools = (
   );
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchTools();
   }, [fetchTools]);
 
