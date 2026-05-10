@@ -62,19 +62,9 @@ const IntelligenceSettingsPage: React.FC = () => {
   const [selectedPreset, setSelectedPreset] = useState<ToolPreset | null>(null);
   const [isWarningDismissed, setIsWarningDismissed] = useState(false);
 
-  // Initialize local editing state when remote settings first load
-  useEffect(() => {
-    if (remoteSettings && !userSettings) {
-      setUserSettings(remoteSettings);
-    }
-  }, [remoteSettings, userSettings]);
-
-  // Detect current preset when both settings and presets are available (only on initial load)
-  useEffect(() => {
-    if (remoteSettings && externalToolsData?.presets && selectedPreset === null) {
-      setSelectedPreset(detectCurrentPreset(remoteSettings, externalToolsData.presets));
-    }
-  }, [remoteSettings, externalToolsData, selectedPreset]);
+  if (remoteSettings && !userSettings) {
+    setUserSettings(remoteSettings);
+  }
 
   // Check sponsorship and set blocker error if sponsored
   useEffect(() => {
@@ -89,10 +79,15 @@ const IntelligenceSettingsPage: React.FC = () => {
     areSettingsChanged(userSettings, remoteSettings)
   );
 
+  const presets = externalToolsData?.presets;
+
+  if (remoteSettings && presets && selectedPreset === null) {
+    setSelectedPreset(detectCurrentPreset(remoteSettings, presets));
+  }
   const remotePreset = useMemo(() => {
-    if (!remoteSettings || !externalToolsData?.presets) return null;
-    return detectCurrentPreset(remoteSettings, externalToolsData.presets);
-  }, [remoteSettings, externalToolsData?.presets]);
+    if (!remoteSettings || !presets) return null;
+    return detectCurrentPreset(remoteSettings, presets);
+  }, [remoteSettings, presets]);
 
   const handleSave = async () => {
     if (!userSettings || !remoteSettings || !user_id || !accessToken || !externalToolsData) return;
