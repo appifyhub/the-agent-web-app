@@ -110,6 +110,52 @@ const UsagePage: React.FC = () => {
     loadProducts();
   }, [accessToken, user_id]);
 
+  const getDateRange = (range: TimeRange): { start: Date | null; end: Date | null } => {
+    const now = new Date();
+
+    if (range === "all") {
+      return { start: null, end: null };
+    }
+
+    const msPerMinute = 60 * 1000;
+    const msPerHour = 60 * msPerMinute;
+    const msPerDay = 24 * msPerHour;
+
+    switch (range) {
+      case "10min":
+        return { start: new Date(Date.now() - 10 * msPerMinute), end: now };
+      case "30min":
+        return { start: new Date(Date.now() - 30 * msPerMinute), end: now };
+      case "1h":
+        return { start: new Date(Date.now() - msPerHour), end: now };
+      case "3h":
+        return { start: new Date(Date.now() - 3 * msPerHour), end: now };
+      case "6h":
+        return { start: new Date(Date.now() - 6 * msPerHour), end: now };
+      case "12h":
+        return { start: new Date(Date.now() - 12 * msPerHour), end: now };
+      case "today": {
+        const startOfToday = new Date();
+        startOfToday.setUTCHours(0, 0, 0, 0);
+        return { start: startOfToday, end: now };
+      }
+      case "yesterday": {
+        const startOfToday = new Date();
+        startOfToday.setUTCHours(0, 0, 0, 0);
+        const startOfYesterday = new Date(startOfToday.getTime() - msPerDay);
+        return { start: startOfYesterday, end: startOfToday };
+      }
+      case "week":
+        return { start: new Date(Date.now() - 7 * msPerDay), end: now };
+      case "2weeks":
+        return { start: new Date(Date.now() - 14 * msPerDay), end: now };
+      case "month":
+        return { start: new Date(Date.now() - 30 * msPerDay), end: now };
+      default:
+        return { start: null, end: null };
+    }
+  };
+
   useEffect(() => {
     if (!accessToken || !user_id || error) return;
 
@@ -193,52 +239,6 @@ const UsagePage: React.FC = () => {
     onlyTransfers,
     dataRefreshCounter,
   ]);
-
-  const getDateRange = (range: TimeRange): { start: Date | null; end: Date | null } => {
-    const now = new Date();
-
-    if (range === "all") {
-      return { start: null, end: null };
-    }
-
-    const msPerMinute = 60 * 1000;
-    const msPerHour = 60 * msPerMinute;
-    const msPerDay = 24 * msPerHour;
-
-    switch (range) {
-      case "10min":
-        return { start: new Date(Date.now() - 10 * msPerMinute), end: now };
-      case "30min":
-        return { start: new Date(Date.now() - 30 * msPerMinute), end: now };
-      case "1h":
-        return { start: new Date(Date.now() - msPerHour), end: now };
-      case "3h":
-        return { start: new Date(Date.now() - 3 * msPerHour), end: now };
-      case "6h":
-        return { start: new Date(Date.now() - 6 * msPerHour), end: now };
-      case "12h":
-        return { start: new Date(Date.now() - 12 * msPerHour), end: now };
-      case "today": {
-        const startOfToday = new Date();
-        startOfToday.setUTCHours(0, 0, 0, 0);
-        return { start: startOfToday, end: now };
-      }
-      case "yesterday": {
-        const startOfToday = new Date();
-        startOfToday.setUTCHours(0, 0, 0, 0);
-        const startOfYesterday = new Date(startOfToday.getTime() - msPerDay);
-        return { start: startOfYesterday, end: startOfToday };
-      }
-      case "week":
-        return { start: new Date(Date.now() - 7 * msPerDay), end: now };
-      case "2weeks":
-        return { start: new Date(Date.now() - 14 * msPerDay), end: now };
-      case "month":
-        return { start: new Date(Date.now() - 30 * msPerDay), end: now };
-      default:
-        return { start: null, end: null };
-    }
-  };
 
   const handleLoadMore = async () => {
     if (!accessToken || !user_id || isLoadingMore) return;

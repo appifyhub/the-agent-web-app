@@ -89,10 +89,11 @@ const IntelligenceSettingsPage: React.FC = () => {
     areSettingsChanged(userSettings, remoteSettings)
   );
 
+  const presets = externalToolsData?.presets;
   const remotePreset = useMemo(() => {
-    if (!remoteSettings || !externalToolsData?.presets) return null;
-    return detectCurrentPreset(remoteSettings, externalToolsData.presets);
-  }, [remoteSettings, externalToolsData?.presets]);
+    if (!remoteSettings || !presets) return null;
+    return detectCurrentPreset(remoteSettings, presets);
+  }, [remoteSettings, presets]);
 
   const handleSave = async () => {
     if (!userSettings || !remoteSettings || !user_id || !accessToken || !externalToolsData) return;

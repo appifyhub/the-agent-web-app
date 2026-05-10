@@ -78,6 +78,7 @@ const OnboardingPage: React.FC = () => {
   const [fullName, setFullName] = useState("");
   const [aboutMe, setAboutMe] = useState("");
   const [customPrompt, setCustomPrompt] = useState("");
+  const [hasSyncedRemote, setHasSyncedRemote] = useState(false);
   const [selectedPreset, setSelectedPreset] = useState<IntelligencePreset | null>(
     "agent_choice",
   );
@@ -85,13 +86,12 @@ const OnboardingPage: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [carouselApi, setCarouselApi] = useState<CarouselApi | undefined>();
 
-  useEffect(() => {
-    if (remoteSettings) {
-      setFullName(remoteSettings.full_name || "");
-      setAboutMe(remoteSettings.about_me || "");
-      setCustomPrompt(remoteSettings.custom_prompt || "");
-    }
-  }, [remoteSettings]);
+  if (remoteSettings && !hasSyncedRemote) {
+    setFullName(remoteSettings.full_name || "");
+    setAboutMe(remoteSettings.about_me || "");
+    setCustomPrompt(remoteSettings.custom_prompt || "");
+    setHasSyncedRemote(true);
+  }
 
   useEffect(() => {
     if (!carouselApi) return;
