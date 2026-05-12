@@ -471,7 +471,8 @@
     "waitlist_invited_policies_required": "Davet hesabınızı etkinleştirmek için politikaları kabul edin",
     "too_many_input_images": "Çok fazla giriş görüntüsü sağlandı",
     "not_chat_member": "Bu sohbetin üyesi değilsiniz.",
-    "empty_chat_settings_payload": "Kaydedilecek ayar yok — önce bir şeyi değiştirin."
+    "empty_chat_settings_payload": "Kaydedilecek ayar yok — önce bir şeyi değiştirin.",
+    "unsupported_media_type": "Desteklenmeyen medya türü"
   },
   "features": {
     "header": "Özellikler",

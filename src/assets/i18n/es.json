@@ -471,7 +471,8 @@
     "waitlist_invited_policies_required": "Acepta las políticas para activar tu cuenta invitada",
     "too_many_input_images": "Se proporcionaron demasiadas imágenes de entrada",
     "not_chat_member": "No eres miembro de este chat.",
-    "empty_chat_settings_payload": "El guardado de configuración estaba vacío — cambia algo primero."
+    "empty_chat_settings_payload": "El guardado de configuración estaba vacío — cambia algo primero.",
+    "unsupported_media_type": "Tipo de medio no compatible"
   },
   "features": {
     "header": "Funciones",

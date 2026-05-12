@@ -471,7 +471,8 @@
     "waitlist_invited_policies_required": "Veuillez accepter les politiques pour activer votre compte invité",
     "too_many_input_images": "Trop d'images d'entrée fournies",
     "not_chat_member": "Vous n'êtes pas membre de cette discussion.",
-    "empty_chat_settings_payload": "Aucune modification détectée — effectuez un changement d'abord."
+    "empty_chat_settings_payload": "Aucune modification détectée — effectuez un changement d'abord.",
+    "unsupported_media_type": "Type de média non pris en charge"
   },
   "features": {
     "header": "Fonctionnalités",

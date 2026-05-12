@@ -471,7 +471,8 @@
     "waitlist_invited_policies_required": "Prihvatite politike da biste aktivirali pozvani nalog",
     "too_many_input_images": "Previše ulaznih slika je dostavljeno",
     "not_chat_member": "Nisi član ovog četa.",
-    "empty_chat_settings_payload": "Čuvanje podešavanja je bilo prazno — prvo promenite nešto."
+    "empty_chat_settings_payload": "Čuvanje podešavanja je bilo prazno — prvo promenite nešto.",
+    "unsupported_media_type": "Nepodržan tip medija"
   },
   "features": {
     "header": "Mogućnosti",

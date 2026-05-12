@@ -471,7 +471,8 @@
     "waitlist_invited_policies_required": "يرجى قبول السياسات لتفعيل حسابك المدعو",
     "too_many_input_images": "تم تقديم عدد كبير جدًا من الصور المدخلة",
     "not_chat_member": "أنت لست عضواً في هذه المحادثة.",
-    "empty_chat_settings_payload": "لم يتم تغيير أي شيء — قم بإجراء تعديل أولاً."
+    "empty_chat_settings_payload": "لم يتم تغيير أي شيء — قم بإجراء تعديل أولاً.",
+    "unsupported_media_type": "نوع الوسائط غير مدعوم"
   },
   "features": {
     "header": "الميزات",

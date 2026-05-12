@@ -392,6 +392,7 @@ export type TranslationKey =
   | "error_codes.too_many_input_images"
   | "error_codes.not_chat_member"
   | "error_codes.empty_chat_settings_payload"
+  | "error_codes.unsupported_media_type"
   | "features.header"
   | "features.title"
   | "features.items.language_intelligence.title"
