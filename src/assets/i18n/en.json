@@ -471,7 +471,8 @@
     "waitlist_invited_policies_required": "Please accept the policies to activate your invited account",
     "too_many_input_images": "Too many input images provided",
     "not_chat_member": "You are not a member of this chat.",
-    "empty_chat_settings_payload": "Settings save was empty — change something first."
+    "empty_chat_settings_payload": "Settings save was empty — change something first.",
+    "unsupported_media_type": "Unsupported media type"
   },
   "features": {
     "header": "Features",

@@ -471,7 +471,8 @@
     "waitlist_invited_policies_required": "请接受政策以激活您的受邀账户",
     "too_many_input_images": "提供了过多的输入图片",
     "not_chat_member": "您不是此聊天的成员。",
-    "empty_chat_settings_payload": "未检测到任何更改 — 请先修改设置。"
+    "empty_chat_settings_payload": "未检测到任何更改 — 请先修改设置。",
+    "unsupported_media_type": "不支持的媒体类型"
   },
   "features": {
     "header": "功能",

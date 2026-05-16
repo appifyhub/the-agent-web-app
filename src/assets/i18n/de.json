@@ -471,7 +471,8 @@
     "waitlist_invited_policies_required": "Bitte akzeptieren Sie die Richtlinien, um Ihr eingeladenes Konto zu aktivieren",
     "too_many_input_images": "Zu viele Eingabebilder angegeben",
     "not_chat_member": "Du bist kein Mitglied dieses Chats.",
-    "empty_chat_settings_payload": "Die Einstellungen waren leer — bitte zuerst etwas ändern."
+    "empty_chat_settings_payload": "Die Einstellungen waren leer — bitte zuerst etwas ändern.",
+    "unsupported_media_type": "Nicht unterstützter Medientyp"
   },
   "features": {
     "header": "Funktionen",

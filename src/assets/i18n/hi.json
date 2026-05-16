@@ -471,7 +471,8 @@
     "waitlist_invited_policies_required": "अपने आमंत्रित खाते को सक्रिय करने के लिए नीतियाँ स्वीकार करें",
     "too_many_input_images": "बहुत अधिक इनपुट छवियाँ प्रदान की गईं",
     "not_chat_member": "आप इस चैट के सदस्य नहीं हैं.",
-    "empty_chat_settings_payload": "सेटिंग्स सेव खाली था — पहले कुछ बदलें."
+    "empty_chat_settings_payload": "सेटिंग्स सेव खाली था — पहले कुछ बदलें.",
+    "unsupported_media_type": "असमर्थित मीडिया प्रकार"
   },
   "features": {
     "header": "विशेषताएं",
